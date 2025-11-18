@@ -28,7 +28,7 @@ export const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/home" className="font-anton text-h3 hover:text-gray-700 transition-colors">
+          <Link href="/home" className="font-anton text-h2 hover:text-ghxst-accent transition-colors tracking-tight">
             GVTEWAY
           </Link>
 
@@ -38,7 +38,7 @@ export const Navigation: React.FC = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-bebas text-h6 hover:text-gray-700 transition-colors uppercase"
+                className="font-bebas text-h5 hover:text-ghxst-accent transition-colors uppercase tracking-wide"
               >
                 {item.label}
               </Link>
@@ -49,7 +49,8 @@ export const Navigation: React.FC = () => {
           <div className="hidden lg:flex items-center gap-4">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 hover:bg-gray-100 rounded transition-colors"
+              className="p-2 hover:bg-ghxst-surface rounded-lg transition-colors"
+              aria-label="Search"
             >
               <Search className="w-5 h-5" />
             </button>
