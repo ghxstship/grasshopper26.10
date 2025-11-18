@@ -13,7 +13,7 @@ const config: Config = {
         // Title/H1
         anton: ['var(--font-anton)', 'sans-serif'],
         // H2-H6
-        bebas: ['var(--font-bebas-neue)', 'sans-serif'],
+        bebas: ['var(--font-bebas)', 'sans-serif'],
         // Subtitle
         oswald: ['var(--font-oswald)', 'sans-serif'],
         // Body

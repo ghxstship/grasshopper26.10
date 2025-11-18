@@ -9,13 +9,13 @@ export const Navigation: React.FC = () => {
   const [searchOpen, setSearchOpen] = React.useState(false);
 
   const mainNav = [
-    { label: "Events", href: "/events" },
-    { label: "Music", href: "/music" },
-    { label: "Brands", href: "/brands" },
-    { label: "Destinations", href: "/destinations" },
-    { label: "Adventures", href: "/adventures" },
-    { label: "Community", href: "/community" },
-    { label: "Membership", href: "/membership" },
+    { label: "Events", href: "/gvteway/events" },
+    { label: "Music", href: "/gvteway/music" },
+    { label: "Brands", href: "/gvteway/brands" },
+    { label: "Destinations", href: "/gvteway/destinations" },
+    { label: "Adventures", href: "/gvteway/adventures" },
+    { label: "Community", href: "/gvteway/social" },
+    { label: "Membership", href: "/gvteway/memberships" },
   ];
 
   const industryNav = [
@@ -28,7 +28,7 @@ export const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="font-anton text-h3 hover:text-gray-700 transition-colors">
+          <Link href="/landing" className="font-anton text-h3 hover:text-gray-700 transition-colors">
             GVTEWAY
           </Link>
 
