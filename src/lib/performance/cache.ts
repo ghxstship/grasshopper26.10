@@ -5,10 +5,24 @@
 
 import { Redis } from '@upstash/redis';
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-});
+let redis: Redis | null = null;
+
+function getRedisClient(): Redis | null {
+  // Return null if Redis is not configured
+  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+    console.warn('[Upstash Redis] Redis is not configured. Caching will be disabled.');
+    return null;
+  }
+
+  if (!redis) {
+    redis = new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    });
+  }
+
+  return redis;
+}
 
 /**
  * Cache configuration
@@ -37,7 +51,10 @@ export const CACHE_PREFIX = {
  */
 export async function getCached<T>(key: string): Promise<T | null> {
   try {
-    const cached = await redis.get(key);
+    const client = getRedisClient();
+    if (!client) return null;
+    
+    const cached = await client.get(key);
     return cached as T | null;
   } catch (error) {
     console.error('Cache get error:', error);
@@ -54,7 +71,10 @@ export async function setCached<T>(
   ttl: number = CACHE_TTL.MEDIUM
 ): Promise<void> {
   try {
-    await redis.setex(key, ttl, JSON.stringify(value));
+    const client = getRedisClient();
+    if (!client) return;
+    
+    await client.setex(key, ttl, JSON.stringify(value));
   } catch (error) {
     console.error('Cache set error:', error);
   }
@@ -65,7 +85,10 @@ export async function setCached<T>(
  */
 export async function deleteCached(key: string): Promise<void> {
   try {
-    await redis.del(key);
+    const client = getRedisClient();
+    if (!client) return;
+    
+    await client.del(key);
   } catch (error) {
     console.error('Cache delete error:', error);
   }
@@ -76,9 +99,12 @@ export async function deleteCached(key: string): Promise<void> {
  */
 export async function deleteCachedPattern(pattern: string): Promise<void> {
   try {
-    const keys = await redis.keys(pattern);
+    const client = getRedisClient();
+    if (!client) return;
+    
+    const keys = await client.keys(pattern);
     if (keys.length > 0) {
-      await redis.del(...keys);
+      await client.del(...keys);
     }
   } catch (error) {
     console.error('Cache pattern delete error:', error);
@@ -137,7 +163,10 @@ export async function getCacheStats(): Promise<{
   keys: number;
 }> {
   try {
-    const keys = await redis.dbsize();
+    const client = getRedisClient();
+    if (!client) return { keys: 0 };
+    
+    const keys = await client.dbsize();
     
     return {
       keys,

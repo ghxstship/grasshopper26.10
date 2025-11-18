@@ -1,8 +1,20 @@
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-10-29.clover',
-});
+let stripe: Stripe | null = null;
+
+function getStripeClient(): Stripe {
+  if (!stripe) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error('STRIPE_SECRET_KEY is not configured');
+    }
+    
+    stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-10-29.clover',
+    });
+  }
+  
+  return stripe;
+}
 
 export interface CheckoutSessionParams {
   items: Array<{
@@ -17,8 +29,9 @@ export interface CheckoutSessionParams {
 
 export async function createCheckoutSession(params: CheckoutSessionParams) {
   const { items, customerId, successUrl, cancelUrl, metadata } = params;
+  const client = getStripeClient();
 
-  const session = await stripe.checkout.sessions.create({
+  const session = await client.checkout.sessions.create({
     mode: 'payment',
     customer: customerId,
     line_items: items.map((item) => ({
@@ -36,30 +49,35 @@ export async function createCheckoutSession(params: CheckoutSessionParams) {
 }
 
 export async function retrieveCheckoutSession(sessionId: string) {
-  return await stripe.checkout.sessions.retrieve(sessionId);
+  const client = getStripeClient();
+  return await client.checkout.sessions.retrieve(sessionId);
 }
 
 export async function createRefund(paymentIntentId: string, amount?: number) {
-  return await stripe.refunds.create({
+  const client = getStripeClient();
+  return await client.refunds.create({
     payment_intent: paymentIntentId,
     amount,
   });
 }
 
 export async function createCustomer(email: string, name?: string) {
-  return await stripe.customers.create({
+  const client = getStripeClient();
+  return await client.customers.create({
     email,
     name,
   });
 }
 
 export async function createSubscription(customerId: string, priceId: string) {
-  return await stripe.subscriptions.create({
+  const client = getStripeClient();
+  return await client.subscriptions.create({
     customer: customerId,
     items: [{ price: priceId }],
   });
 }
 
 export async function cancelSubscription(subscriptionId: string) {
-  return await stripe.subscriptions.cancel(subscriptionId);
+  const client = getStripeClient();
+  return await client.subscriptions.cancel(subscriptionId);
 }

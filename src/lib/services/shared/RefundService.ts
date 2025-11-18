@@ -6,10 +6,7 @@
 import Stripe from 'stripe';
 import { BaseService } from '../base/BaseService';
 import { ServiceResult } from '../base/BaseService';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-10-29.clover',
-});
+import { getStripeClient } from '@/lib/integrations/stripe';
 
 export interface RefundRequest {
   paymentIntentId: string;
@@ -32,6 +29,8 @@ export class RefundService extends BaseService {
   async processRefund(request: RefundRequest): Promise<ServiceResult<RefundResult>> {
     return this.execute(async () => {
       try {
+        const stripe = getStripeClient();
+        
         // Create refund in Stripe
         const refund = await stripe.refunds.create({
           payment_intent: request.paymentIntentId,
@@ -66,6 +65,7 @@ export class RefundService extends BaseService {
   async getRefundStatus(refundId: string): Promise<ServiceResult<Stripe.Refund>> {
     return this.execute(async () => {
       try {
+        const stripe = getStripeClient();
         const refund = await stripe.refunds.retrieve(refundId);
         return refund;
       } catch (error) {
@@ -81,6 +81,7 @@ export class RefundService extends BaseService {
   async listRefunds(paymentIntentId: string): Promise<ServiceResult<Stripe.Refund[]>> {
     return this.execute(async () => {
       try {
+        const stripe = getStripeClient();
         const refunds = await stripe.refunds.list({
           payment_intent: paymentIntentId,
           limit: 100,
@@ -99,6 +100,7 @@ export class RefundService extends BaseService {
   async cancelRefund(refundId: string): Promise<ServiceResult<Stripe.Refund>> {
     return this.execute(async () => {
       try {
+        const stripe = getStripeClient();
         const refund = await stripe.refunds.cancel(refundId);
         return refund;
       } catch (error) {

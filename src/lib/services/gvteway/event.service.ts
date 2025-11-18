@@ -7,11 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { EventStatus, Prisma, TicketStatus } from '@prisma/client';
 import { AuditService } from '../shared/audit.service';
 import { NotificationService } from '../shared/NotificationService';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-10-29.clover',
-});
+import { getStripeClient } from '@/lib/integrations/stripe';
 
 const notificationService = new NotificationService();
 
@@ -320,6 +316,7 @@ export class EventService {
 
     // Process refunds for each unique order
     const processedOrders = new Set<string>();
+    const stripe = getStripeClient();
     for (const ticket of tickets) {
       if (ticket.order?.paymentIntent && !processedOrders.has(ticket.orderId)) {
         processedOrders.add(ticket.orderId);

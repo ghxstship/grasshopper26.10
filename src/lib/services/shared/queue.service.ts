@@ -6,11 +6,18 @@
 import { Queue, Worker, Job } from 'bullmq';
 import { Redis } from 'ioredis';
 
-const connection = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: parseInt(process.env.REDIS_PORT || '6379'),
-  maxRetriesPerRequest: null,
-});
+let connection: Redis | null = null;
+
+function getRedisConnection(): Redis {
+  if (!connection) {
+    connection = new Redis({
+      host: process.env.REDIS_HOST || 'localhost',
+      port: parseInt(process.env.REDIS_PORT || '6379'),
+      maxRetriesPerRequest: null,
+    });
+  }
+  return connection;
+}
 
 interface JobData {
   type: string;
@@ -26,7 +33,7 @@ export class QueueService {
    */
   getQueue(name: string): Queue {
     if (!this.queues.has(name)) {
-      const queue = new Queue(name, { connection });
+      const queue = new Queue(name, { connection: getRedisConnection() });
       this.queues.set(name, queue);
     }
     return this.queues.get(name)!;
@@ -83,7 +90,7 @@ export class QueueService {
       return this.workers.get(queueName)!;
     }
 
-    const worker = new Worker(queueName, processor, { connection });
+    const worker = new Worker(queueName, processor, { connection: getRedisConnection() });
 
     worker.on('completed', (job) => {
       console.log(`Job ${job.id} completed in queue ${queueName}`);

@@ -9,11 +9,7 @@ import { AuditService } from '../shared/audit.service';
 import { TicketService } from './ticket.service';
 import { EmailService } from '../shared/email.service';
 import { NotificationService } from '../shared/NotificationService';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-10-29.clover',
-});
+import { getStripeClient } from '@/lib/integrations/stripe';
 
 const notificationService = new NotificationService();
 
@@ -372,6 +368,7 @@ export class OrderService {
     // Process refund if payment was made
     if (order.paymentIntent) {
       try {
+        const stripe = getStripeClient();
         const refund = await stripe.refunds.create({
           payment_intent: order.paymentIntent,
           reason: 'requested_by_customer',

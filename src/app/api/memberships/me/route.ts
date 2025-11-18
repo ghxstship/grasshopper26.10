@@ -119,10 +119,8 @@ export async function POST(request: NextRequest) {
 
     // Process payment with Stripe for paid memberships
     if (Number(tier.price) > 0) {
-      const Stripe = (await import('stripe')).default;
-      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-        apiVersion: '2025-10-29.clover',
-      });
+      const { getStripeClient } = await import('@/lib/integrations/stripe');
+      const stripe = getStripeClient();
 
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Number(tier.price) * 100, // Convert to cents

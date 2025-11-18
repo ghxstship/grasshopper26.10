@@ -198,10 +198,8 @@ export async function POST(request: NextRequest) {
     });
 
     // Create Stripe payment intent
-    const Stripe = (await import('stripe')).default;
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-      apiVersion: '2025-10-29.clover',
-    });
+    const { getStripeClient } = await import('@/lib/integrations/stripe');
+    const stripe = getStripeClient();
     
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(total.toNumber() * 100), // Convert to cents

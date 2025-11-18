@@ -8,11 +8,7 @@ import { TicketStatus, Prisma } from '@prisma/client';
 import { AuditService } from '../shared/audit.service';
 import { NotificationService } from '../shared/NotificationService';
 import { PermissionService } from '../shared/permission.service';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-10-29.clover',
-});
+import { getStripeClient } from '@/lib/integrations/stripe';
 
 const notificationService = new NotificationService();
 
@@ -407,6 +403,7 @@ export class TicketService {
 
     if (order?.paymentIntent) {
       try {
+        const stripe = getStripeClient();
         // Calculate refund amount (ticket type price)
         const refundAmount = Number(ticket.ticketType.price) * 100; // Convert to cents
 

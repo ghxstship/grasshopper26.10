@@ -4,10 +4,7 @@
  */
 
 import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2025-10-29.clover',
-});
+import { getStripeClient } from '@/lib/integrations/stripe';
 
 export class PaymentService {
   /**
@@ -19,6 +16,7 @@ export class PaymentService {
     metadata?: Record<string, string>
   ) {
     try {
+      const stripe = getStripeClient();
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount * 100), // Convert to cents
         currency: currency.toLowerCase(),
@@ -47,6 +45,7 @@ export class PaymentService {
    */
   async confirmPaymentIntent(paymentIntentId: string) {
     try {
+      const stripe = getStripeClient();
       const paymentIntent = await stripe.paymentIntents.confirm(paymentIntentId);
 
       return {
@@ -68,6 +67,7 @@ export class PaymentService {
    */
   async getPaymentIntent(paymentIntentId: string) {
     try {
+      const stripe = getStripeClient();
       const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
 
       return {
@@ -88,6 +88,7 @@ export class PaymentService {
    */
   async cancelPaymentIntent(paymentIntentId: string) {
     try {
+      const stripe = getStripeClient();
       const paymentIntent = await stripe.paymentIntents.cancel(paymentIntentId);
 
       return {
@@ -108,6 +109,7 @@ export class PaymentService {
    */
   async createCustomer(email: string, name?: string, metadata?: Record<string, string>) {
     try {
+      const stripe = getStripeClient();
       const customer = await stripe.customers.create({
         email,
         name,
@@ -133,6 +135,7 @@ export class PaymentService {
    */
   async getCustomer(customerId: string) {
     try {
+      const stripe = getStripeClient();
       const customer = await stripe.customers.retrieve(customerId);
 
       return {
@@ -157,6 +160,7 @@ export class PaymentService {
     metadata?: Record<string, string>
   ) {
     try {
+      const stripe = getStripeClient();
       const subscription = await stripe.subscriptions.create({
         customer: customerId,
         items: [{ price: priceId }],
@@ -191,6 +195,7 @@ export class PaymentService {
    */
   async cancelSubscription(subscriptionId: string, immediately = false) {
     try {
+      const stripe = getStripeClient();
       const subscription = immediately
         ? await stripe.subscriptions.cancel(subscriptionId)
         : await stripe.subscriptions.update(subscriptionId, {
@@ -215,6 +220,7 @@ export class PaymentService {
    */
   async createRefund(paymentIntentId: string, amount?: number, reason?: string) {
     try {
+      const stripe = getStripeClient();
       const refund = await stripe.refunds.create({
         payment_intent: paymentIntentId,
         amount: amount ? Math.round(amount * 100) : undefined,
@@ -240,6 +246,7 @@ export class PaymentService {
    */
   async getRefund(refundId: string) {
     try {
+      const stripe = getStripeClient();
       const refund = await stripe.refunds.retrieve(refundId);
 
       return {
@@ -265,6 +272,7 @@ export class PaymentService {
     metadata?: Record<string, string>
   ) {
     try {
+      const stripe = getStripeClient();
       const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         mode: 'payment',
@@ -292,6 +300,7 @@ export class PaymentService {
    */
   constructWebhookEvent(payload: string, signature: string, secret: string) {
     try {
+      const stripe = getStripeClient();
       const event = stripe.webhooks.constructEvent(payload, signature, secret);
       return { success: true, event };
     } catch (error) {
