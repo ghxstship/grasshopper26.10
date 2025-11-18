@@ -23,14 +23,14 @@ const buttonVariants = cva(
         "atlvs-outline": "border-2 border-atlvs-green-500 text-atlvs-green-500 hover:bg-atlvs-green-500 hover:text-black",
         "atlvs-ghost": "text-atlvs-green-500 hover:bg-atlvs-green-500/10",
         
-        // Standard variants
-        default: "bg-white text-black hover:bg-gray-100",
-        primary: "bg-black text-white hover:bg-gray-900",
-        secondary: "bg-gray-200 text-black hover:bg-gray-300",
+        // Standard variants (theme-aware)
+        default: "bg-ghxst-white text-ghxst-black border-2 border-ghxst-black hover:bg-ghxst-black hover:text-ghxst-white",
+        primary: "bg-ghxst-black text-ghxst-white border-2 border-ghxst-black hover:bg-ghxst-accent hover:border-ghxst-accent",
+        secondary: "bg-ghxst-surface text-ghxst-black border-2 border-ghxst-border hover:bg-ghxst-black hover:text-ghxst-white hover:border-ghxst-black",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-gray-300 bg-transparent hover:bg-gray-100",
-        ghost: "hover:bg-gray-100",
-        link: "text-black underline-offset-4 hover:underline",
+        outline: "border-2 border-ghxst-black bg-transparent hover:bg-ghxst-black hover:text-ghxst-white",
+        ghost: "hover:bg-ghxst-surface text-ghxst-black",
+        link: "text-ghxst-black underline-offset-4 hover:underline hover:text-ghxst-accent",
       },
       size: {
         sm: "h-9 px-4 text-body-sm",
