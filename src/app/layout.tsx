@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Oswald, Share_Tech, Anton } from "next/font/google";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -41,7 +42,7 @@ export default function RootLayout({
       <body
         className={`${bebasNeue.variable} ${oswald.variable} ${shareTech.variable} ${anton.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
