@@ -24,7 +24,7 @@ export const Navigation: React.FC = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-ghxst-white border-b-2 border-ghxst-black">
+    <nav className="sticky top-0 z-50 bg-ghxst-white/95 backdrop-blur-md border-b-2 border-ghxst-black">
       <div className="max-w-7xl mx-auto px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}

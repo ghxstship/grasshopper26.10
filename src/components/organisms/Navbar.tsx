@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 flex h-16 items-center gap-4 border-b px-4 lg:px-6",
+        "sticky top-0 z-40 flex h-16 items-center gap-4 border-b px-4 lg:px-6 backdrop-blur-md",
         variantStyles[variant],
         className
       )}
