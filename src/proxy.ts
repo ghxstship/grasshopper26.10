@@ -6,6 +6,9 @@ import { addSecurityHeaders, addCorsHeaders, handleCorsPreflightRequest } from "
 // Define public routes that don't require authentication
 const publicRoutes = [
   "/",
+  "/gvteway", // GVTEWAY landing page (marketing)
+  "/atlvs", // ATLVS landing page (marketing)
+  "/compvss", // COMPVSS landing page (marketing)
   "/auth/login",
   "/auth/register",
   "/auth/forgot-password",
