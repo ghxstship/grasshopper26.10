@@ -48,7 +48,7 @@ export default function CheckInSystemPage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-blue-500" />
@@ -61,11 +61,11 @@ export default function CheckInSystemPage() {
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Check-Ins</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Check-Ins</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
@@ -93,7 +93,7 @@ export default function CheckInSystemPage() {
   };
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="min-h-screen bg-black text-white px-4 sm:px-6 lg:px-8 py-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -102,7 +102,7 @@ export default function CheckInSystemPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <div className="mb-8">
               <Link href="/compvss/operations/dashboard">
-                <h1 className="compvss-text-gradient text-4xl font-anton mb-2 cursor-pointer">
+                <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
                   Check-In System
                 </h1>
               </Link>
@@ -113,26 +113,26 @@ export default function CheckInSystemPage() {
             <div className="grid grid-cols-4 gap-4 mb-6">
               <Card variant="compvss" className="bg-gray-900/80 border-compvss-cyan-500/20">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-3xl font-bebas text-white">{stats.total}</p>
-                  <p className="text-sm text-gray-400 font-oswald">Total</p>
+                  <p className="text-h3 font-bebas text-white">{stats.total}</p>
+                  <p className="text-body-sm text-gray-400 font-oswald">Total</p>
                 </CardContent>
               </Card>
-              <Card variant="compvss" className="bg-green-500/10 border-green-500/30">
+              <Card variant="compvss" className="bg-success-light0/10 border-success/30">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-3xl font-bebas text-success">{stats.checkedIn}</p>
-                  <p className="text-sm text-gray-400 font-oswald">Checked In</p>
+                  <p className="text-h3 font-bebas text-success">{stats.checkedIn}</p>
+                  <p className="text-body-sm text-gray-400 font-oswald">Checked In</p>
                 </CardContent>
               </Card>
               <Card variant="compvss" className="bg-gray-900/80 border-gray-700">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-3xl font-bebas text-gray-400">{stats.notCheckedIn}</p>
-                  <p className="text-sm text-gray-400 font-oswald">Pending</p>
+                  <p className="text-h3 font-bebas text-gray-400">{stats.notCheckedIn}</p>
+                  <p className="text-body-sm text-gray-400 font-oswald">Pending</p>
                 </CardContent>
               </Card>
-              <Card variant="compvss" className="bg-error/10 border-red-500/30">
+              <Card variant="compvss" className="bg-error/10 border-destructive/30">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-3xl font-bebas text-error">{stats.late}</p>
-                  <p className="text-sm text-gray-400 font-oswald">Late</p>
+                  <p className="text-h3 font-bebas text-error">{stats.late}</p>
+                  <p className="text-body-sm text-gray-400 font-oswald">Late</p>
                 </CardContent>
               </Card>
             </div>
@@ -164,11 +164,11 @@ export default function CheckInSystemPage() {
                         </div>
                         <div>
                           <h3 className="font-oswald text-white">{checkIn.user?.name || 'Unknown'}</h3>
-                          <p className="text-sm text-gray-400 font-share-tech">
+                          <p className="text-body-sm text-gray-400 font-share-tech">
                             {checkIn.location}
                           </p>
                           {checkIn.checkedInAt && (
-                            <p className="text-xs text-gray-500 font-share-tech mt-1">
+                            <p className="text-caption text-gray-500 font-share-tech mt-1">
                               Checked in at {new Date(checkIn.checkedInAt).toLocaleTimeString()}
                             </p>
                           )}

@@ -208,8 +208,8 @@ export default function NewTaskPage() {
             </Card>
 
             {error && (
-              <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-                <p className="text-red-400 text-sm">{error.message}</p>
+              <div className="p-4 bg-destructive/100/10 border border-destructive/30 rounded-lg">
+                <p className="text-destructive text-body-sm">{error.message}</p>
               </div>
             )}
 

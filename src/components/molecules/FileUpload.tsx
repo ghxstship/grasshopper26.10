@@ -222,7 +222,7 @@ export function FileUpload({
           relative border-2 border-dashed rounded-xl p-8 text-center cursor-pointer
           transition-all duration-200
           ${isDragging
-            ? 'border-blue-500 bg-blue-500/10'
+            ? 'border-info bg-info-light0/10'
             : 'border-gray-700 hover:border-gray-600 bg-gray-900/50'
           }
         `}
@@ -250,10 +250,10 @@ export function FileUpload({
           </div>
 
           <div>
-            <p className="text-white font-medium mb-1">
+            <p className="text-white mb-1">
               {isDragging ? 'Drop files here' : 'Click to upload or drag and drop'}
             </p>
-            <p className="text-sm text-gray-400">
+            <p className="text-body-sm text-gray-400">
               {accept || 'Any file type'} • Max {formatFileSize(maxSize)} • Up to {maxFiles} files
             </p>
           </div>
@@ -281,10 +281,10 @@ export function FileUpload({
 
                 {/* File Info */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">
+                  <p className="text-body-sm text-white truncate">
                     {uploadedFile.file.name}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-caption text-gray-400">
                     {formatFileSize(uploadedFile.file.size)}
                   </p>
 
@@ -304,20 +304,20 @@ export function FileUpload({
 
                   {/* Error Message */}
                   {uploadedFile.status === 'error' && uploadedFile.error && (
-                    <p className="text-xs text-red-400 mt-1">{uploadedFile.error}</p>
+                    <p className="text-caption text-destructive mt-1">{uploadedFile.error}</p>
                   )}
                 </div>
 
                 {/* Status Icon */}
                 <div className="flex-shrink-0">
                   {uploadedFile.status === 'uploading' && (
-                    <Loader2 className="w-5 h-5 text-blue-400 animate-spin" />
+                    <Loader2 className="w-5 h-5 text-info animate-spin" />
                   )}
                   {uploadedFile.status === 'success' && (
-                    <CheckCircle className="w-5 h-5 text-green-400" />
+                    <CheckCircle className="w-5 h-5 text-success" />
                   )}
                   {uploadedFile.status === 'error' && (
-                    <AlertCircle className="w-5 h-5 text-red-400" />
+                    <AlertCircle className="w-5 h-5 text-destructive" />
                   )}
                 </div>
               </div>

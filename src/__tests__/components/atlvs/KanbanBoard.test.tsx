@@ -38,7 +38,7 @@ describe('KanbanBoard', () => {
       id: 'todo',
       title: 'To Do',
       tasks: [mockTasks[0]],
-      color: 'bg-blue-500',
+      color: 'bg-info-light0',
     },
     {
       id: 'inprogress',
@@ -97,7 +97,7 @@ describe('KanbanBoard', () => {
     it('applies custom column colors', () => {
       render(<KanbanBoard columns={mockColumns} />);
       
-      const colorDivs = document.querySelectorAll('.bg-blue-500');
+      const colorDivs = document.querySelectorAll('.bg-info-light0');
       expect(colorDivs.length).toBeGreaterThan(0);
     });
   });

@@ -24,10 +24,7 @@ export default function QRAccessControlPage() {
           description="Loading access zones..."
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'QR Codes', href: '/compvss/qr/dashboard' },
-            { label: 'Access Control' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -48,15 +45,12 @@ export default function QRAccessControlPage() {
           description="Error loading zones"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'QR Codes', href: '/compvss/qr/dashboard' },
-            { label: 'Access Control' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Access Control</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Access Control</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -69,11 +63,11 @@ export default function QRAccessControlPage() {
   const getAccessBadge = (level: string) => {
     switch (level) {
       case 'exclusive':
-        return <Badge variant="compvss" className="bg-purple-500/20 text-atlvs-purple-500 border-purple-500/30">Exclusive</Badge>;
+        return <Badge variant="compvss" className="bg-accent/100/20 text-atlvs-purple-500 border-accent/30">Exclusive</Badge>;
       case 'restricted':
-        return <Badge variant="compvss" className="bg-orange-500/20 text-atlvs-orange-500 border-orange-500/30">Restricted</Badge>;
+        return <Badge variant="compvss" className="bg-warning-light0/20 text-atlvs-orange-500 border-warning/30">Restricted</Badge>;
       case 'public':
-        return <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">Public</Badge>;
+        return <Badge variant="compvss" className="bg-success-light text-success border-success/30">Public</Badge>;
       default:
         return null;
     }
@@ -86,10 +80,7 @@ export default function QRAccessControlPage() {
         description="Manage zone access and permissions"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'QR System', href: '/compvss/qr/hub' },
-          { label: 'Access Control' }
-        ]}
+        
       >
         <div className="grid md:grid-cols-2 gap-6">
           {zones.map((zone, index) => (
@@ -114,11 +105,11 @@ export default function QRAccessControlPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Users2 className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-400 font-share-tech">
+                        <span className="text-body-sm text-gray-400 font-share-tech">
                           {zone.activeUsers} / {zone.capacity}
                         </span>
                       </div>
-                      <div className="text-sm font-share-tech">
+                      <div className="text-body-sm font-share-tech">
                         <span className="text-compvss-cyan-500">{Math.round((zone.activeUsers / zone.capacity) * 100)}%</span>
                         <span className="text-gray-500"> capacity</span>
                       </div>

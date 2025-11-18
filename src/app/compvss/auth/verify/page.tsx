@@ -56,7 +56,7 @@ function VerifyEmailContent() {
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <Link href="/compvss">
-              <h1 className="compvss-text-gradient text-5xl font-anton mb-2 cursor-pointer">
+              <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
                 COMPVSS
               </h1>
             </Link>
@@ -89,12 +89,12 @@ function VerifyEmailContent() {
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error font-share-tech">{error}</p>
                   </div>
                 )}
 
                 {/* Instructions */}
-                <div className="space-y-3 text-sm text-gray-400 font-share-tech">
+                <div className="space-y-3 text-body-sm text-gray-400 font-share-tech">
                   <p className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-compvss-cyan-500 mt-0.5 flex-shrink-0" />
                     <span>Click the verification link in the email</span>
@@ -112,7 +112,7 @@ function VerifyEmailContent() {
                 {/* Resend Button */}
                 <div className="pt-4">
                   {resent ? (
-                    <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/30 text-center">
+                    <div className="p-4 rounded-lg bg-success-light0/10 border border-success/30 text-center">
                       <p className="text-success font-oswald">
                         ✓ Verification email resent!
                       </p>
@@ -154,7 +154,7 @@ function VerifyEmailContent() {
 
           {/* Footer */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500 font-share-tech">
+            <p className="text-body-sm text-gray-500 font-share-tech">
               Need help? <Link href="/contact" className="text-compvss-cyan-500 hover:text-compvss-teal-500">Contact Support</Link>
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function CompvssVerifyPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-        <RefreshCw className="w-8 h-8 animate-spin text-blue-500" />
+        <RefreshCw className="w-8 h-8 animate-spin text-info" />
       </div>
     }>
       <VerifyEmailContent />

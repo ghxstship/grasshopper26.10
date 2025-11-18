@@ -27,21 +27,21 @@ const categoryIcons = {
 };
 
 const categoryColors = {
-  financial: 'text-green-600',
-  tickets: 'text-blue-600',
-  operational: 'text-purple-600',
-  marketing: 'text-orange-600',
+  financial: 'text-success',
+  tickets: 'text-info',
+  operational: 'text-accent',
+  marketing: 'text-warning',
 };
 
 // Memoized metric card component
 const MetricCard = memo(({ metric }: { metric: KPIMetric }) => (
   <Card className="p-6 hover:shadow-lg transition-shadow">
     <div className="flex items-start justify-between mb-2">
-      <p className="text-sm text-gray-600 font-medium">{metric.name}</p>
+      <p className="text-body-sm text-gray-600">{metric.name}</p>
       {metric.trend && (
-        <div className={`flex items-center gap-1 text-xs ${
-          metric.trend === 'up' ? 'text-green-600' : 
-          metric.trend === 'down' ? 'text-red-600' : 
+        <div className={`flex items-center gap-1 text-caption ${
+          metric.trend === 'up' ? 'text-success' : 
+          metric.trend === 'down' ? 'text-destructive' : 
           'text-gray-600'
         }`}>
           {metric.trend === 'up' ? (
@@ -55,13 +55,13 @@ const MetricCard = memo(({ metric }: { metric: KPIMetric }) => (
     </div>
     
     <div className="flex items-baseline gap-2">
-      <span className="text-3xl font-bold">
+      <span className="text-h3">
         {metric.value.toLocaleString(undefined, { 
           maximumFractionDigits: 2,
           minimumFractionDigits: metric.unit === 'USD' ? 2 : 0
         })}
       </span>
-      <span className="text-sm text-gray-500">{metric.unit}</span>
+      <span className="text-body-sm text-gray-500">{metric.unit}</span>
     </div>
   </Card>
 ));
@@ -102,7 +102,7 @@ function KPIDashboardComponent({ metrics, loading }: KPIDashboardProps) {
           <div key={category}>
             <div className="flex items-center gap-2 mb-4">
               <Icon className={`h-5 w-5 ${colorClass}`} />
-              <h3 className="text-lg font-semibold capitalize">{category} Metrics</h3>
+              <h3 className="text-h6 capitalize">{category} Metrics</h3>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

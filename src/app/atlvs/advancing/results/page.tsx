@@ -76,7 +76,7 @@ export default function AdvancingResultsPage() {
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load Results</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load Results</h3>
                 <p className="text-gray-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
@@ -87,20 +87,20 @@ export default function AdvancingResultsPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <div className="text-sm text-gray-400 mb-1">Approved</div>
-                  <div className="text-3xl font-bebas text-atlvs-green-500">{metrics.approved}</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Approved</div>
+                  <div className="text-h3 font-bebas text-atlvs-green-500">{metrics.approved}</div>
                 </CardHeader>
               </Card>
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <div className="text-sm text-gray-400 mb-1">Pending</div>
-                  <div className="text-3xl font-bebas text-warning">{metrics.pending}</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Pending</div>
+                  <div className="text-h3 font-bebas text-warning">{metrics.pending}</div>
                 </CardHeader>
               </Card>
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <div className="text-sm text-gray-400 mb-1">Rejected</div>
-                  <div className="text-3xl font-bebas text-error">{metrics.rejected}</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Rejected</div>
+                  <div className="text-h3 font-bebas text-error">{metrics.rejected}</div>
                 </CardHeader>
               </Card>
             </div>
@@ -121,11 +121,11 @@ export default function AdvancingResultsPage() {
                           {getStatusIcon(result.status)}
                           <div className="flex-1">
                             <div className="font-medium mb-1">{result.title}</div>
-                            <div className="text-sm text-gray-400">{result.description || 'No notes'}</div>
+                            <div className="text-body-sm text-gray-400">{result.description || 'No notes'}</div>
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="text-sm text-gray-400">{result.requestedAt ? new Date(result.requestedAt).toLocaleDateString() : 'N/A'}</div>
+                          <div className="text-body-sm text-gray-400">{result.requestedAt ? new Date(result.requestedAt).toLocaleDateString() : 'N/A'}</div>
                           <Badge variant="atlvs-outline" className={getStatusColor(result.status)}>
                             {result.status}
                           </Badge>

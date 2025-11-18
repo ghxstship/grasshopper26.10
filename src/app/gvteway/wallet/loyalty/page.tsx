@@ -6,7 +6,7 @@ export const runtime = 'edge';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { TrendingUp, Gift, Star, Award, Calendar, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -77,10 +77,10 @@ export default function LoyaltyPointsPage() {
                     ← Back to Wallet
                   </Button>
                 </Link>
-                <h1 className="text-5xl sm:text-6xl font-bebas mb-4 gvteway-text-gradient">
+                <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">
                   LOYALTY REWARDS
                 </h1>
-                <p className="text-xl text-gray-400 font-oswald">
+                <p className="text-h5 text-gray-400 font-oswald">
                   Earn points and unlock exclusive rewards
                 </p>
               </div>
@@ -92,16 +92,16 @@ export default function LoyaltyPointsPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 rounded-full mb-4">
                       <TrendingUp className="w-10 h-10 text-white" />
                     </div>
-                    <p className="text-gray-300 text-sm mb-2">Your Balance</p>
-                    <p className="text-6xl font-bebas text-white mb-1">{currentPoints.toLocaleString()}</p>
+                    <p className="text-gray-300 text-body-sm mb-2">Your Balance</p>
+                    <p className="text-h1 font-bebas text-white mb-1">{currentPoints.toLocaleString()}</p>
                     <p className="text-gray-300">Loyalty Points</p>
                   </div>
 
                   {/* Progress to Next Tier */}
                   <div className="max-w-md mx-auto">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-gray-300">Progress to Gold Tier</span>
-                      <span className="text-sm text-gray-300">{Math.round(progress)}%</span>
+                      <span className="text-body-sm text-gray-300">Progress to Gold Tier</span>
+                      <span className="text-body-sm text-gray-300">{Math.round(progress)}%</span>
                     </div>
                     <div className="h-3 bg-gray-800 rounded-full overflow-hidden">
                       <motion.div
@@ -111,7 +111,7 @@ export default function LoyaltyPointsPage() {
                         transition={{ duration: 1, delay: 0.5 }}
                       />
                     </div>
-                    <p className="text-center text-gray-400 text-sm mt-2">
+                    <p className="text-center text-gray-400 text-body-sm mt-2">
                       {nextTier - currentPoints} points to Gold Tier
                     </p>
                   </div>
@@ -121,7 +121,7 @@ export default function LoyaltyPointsPage() {
               <div className="grid lg:grid-cols-3 gap-8">
                 {/* Available Rewards */}
                 <div className="lg:col-span-2">
-                  <h2 className="text-3xl font-bebas text-white mb-6" id="rewards-heading">Available Rewards</h2>
+                  <h2 className="text-h3 font-bebas text-white mb-6" id="rewards-heading">Available Rewards</h2>
                   <div className="space-y-4" role="list" aria-labelledby="rewards-heading">
                     {REWARDS.map((reward) => (
                       <Card key={reward.id} variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm" role="listitem">
@@ -132,8 +132,8 @@ export default function LoyaltyPointsPage() {
                                 <Gift className="w-6 h-6 text-gvteway-red-500" aria-hidden="true" />
                               </div>
                               <div>
-                                <h3 className="text-lg font-bebas text-white mb-1">{reward.name}</h3>
-                                <p className="text-gray-400 text-sm">{reward.points} points</p>
+                                <h3 className="text-h6 font-bebas text-white mb-1">{reward.name}</h3>
+                                <p className="text-gray-400 text-body-sm">{reward.points} points</p>
                               </div>
                             </div>
                             <Button
@@ -151,7 +151,7 @@ export default function LoyaltyPointsPage() {
                   </div>
 
                   {/* Points History */}
-                  <h2 className="text-3xl font-bebas text-white mb-6 mt-12" id="history-heading">Points History</h2>
+                  <h2 className="text-h3 font-bebas text-white mb-6 mt-12" id="history-heading">Points History</h2>
                   <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                     <CardContent className="p-6">
                       <div className="space-y-4" role="list" aria-labelledby="history-heading">
@@ -159,17 +159,17 @@ export default function LoyaltyPointsPage() {
                           <div key={index} className="flex items-center justify-between py-3 border-b border-gray-800 last:border-0" role="listitem">
                             <div className="flex items-center gap-3">
                               <div className={`w-2 h-2 rounded-full ${
-                                item.type === 'earned' ? 'bg-green-500' : 'bg-error'
+                                item.type === 'earned' ? 'bg-success-light0' : 'bg-error'
                               }`} aria-hidden="true" />
                               <div>
-                                <p className="text-white font-medium">{item.action}</p>
-                                <p className="text-gray-400 text-sm flex items-center">
+                                <p className="text-white">{item.action}</p>
+                                <p className="text-gray-400 text-body-sm flex items-center">
                                   <Calendar className="w-3 h-3 mr-1" aria-hidden="true" />
                                   {item.date}
                                 </p>
                               </div>
                             </div>
-                            <span className={`text-lg font-bebas ${
+                            <span className={`text-h6 font-bebas ${
                               item.type === 'earned' ? 'text-success' : 'text-error'
                             }`}>
                               {item.points}
@@ -193,10 +193,10 @@ export default function LoyaltyPointsPage() {
                         <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-700 rounded-full mb-3" aria-hidden="true">
                           <Star className="w-8 h-8 text-gray-400" aria-hidden="true" />
                         </div>
-                        <h3 className="text-2xl font-bebas text-white mb-1">Silver</h3>
+                        <h3 className="text-h4 font-bebas text-white mb-1">Silver</h3>
                         <Badge variant="default">Member</Badge>
                       </div>
-                      <div className="space-y-2 text-sm text-gray-400">
+                      <div className="space-y-2 text-body-sm text-gray-400">
                         <div className="flex items-center">
                           <span className="text-success mr-2">✓</span>
                           <span>5% points bonus</span>
@@ -219,25 +219,25 @@ export default function LoyaltyPointsPage() {
                       <CardTitle className="text-white">How to Earn Points</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-3 text-sm">
+                      <div className="space-y-3 text-body-sm">
                         <div className="flex items-start">
                           <Award className="w-4 h-4 text-gvteway-red-500 mr-2 mt-1 flex-shrink-0" />
                           <div>
-                            <p className="text-white font-medium">Purchase Tickets</p>
+                            <p className="text-white">Purchase Tickets</p>
                             <p className="text-gray-400">Earn 1 point per $1 spent</p>
                           </div>
                         </div>
                         <div className="flex items-start">
                           <Award className="w-4 h-4 text-gvteway-red-500 mr-2 mt-1 flex-shrink-0" />
                           <div>
-                            <p className="text-white font-medium">Attend Events</p>
+                            <p className="text-white">Attend Events</p>
                             <p className="text-gray-400">+100 points per check-in</p>
                           </div>
                         </div>
                         <div className="flex items-start">
                           <Award className="w-4 h-4 text-gvteway-red-500 mr-2 mt-1 flex-shrink-0" />
                           <div>
-                            <p className="text-white font-medium">Refer Friends</p>
+                            <p className="text-white">Refer Friends</p>
                             <p className="text-gray-400">+500 points per referral</p>
                           </div>
                         </div>
@@ -249,10 +249,10 @@ export default function LoyaltyPointsPage() {
                   <Card variant="gvteway" className="bg-gradient-to-br from-gvteway-red-500/20 to-gvteway-blue-500/20 backdrop-blur-sm">
                     <CardContent className="p-6 text-center">
                       <Award className="w-12 h-12 text-gvteway-red-500 mx-auto mb-3" />
-                      <h3 className="text-xl font-bebas text-white mb-2">
+                      <h3 className="text-h5 font-bebas text-white mb-2">
                         Upgrade to Premium
                       </h3>
-                      <p className="text-gray-300 text-sm mb-4">
+                      <p className="text-gray-300 text-body-sm mb-4">
                         Get 2x points on all purchases
                       </p>
                       <Button variant="gvteway" className="w-full">

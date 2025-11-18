@@ -1,9 +1,10 @@
 'use client';
 
-
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
+
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 
 import { motion } from 'framer-motion';
 import { TrendingUp, DollarSign, Link as LinkIcon, BarChart2, Copy, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
@@ -16,6 +17,11 @@ import { useMemo } from 'react';
 
 export default function AffiliateDashboardPage() {
   const { data: affiliateData, isLoading, error, refetch } = useAffiliates();
+  
+  const breadcrumbs = [
+    { label: 'Dashboard', href: '/compvss/dashboard' },
+    { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
+  ];
   
   const stats = useMemo(() => {
     if (!affiliateData) return [
@@ -43,12 +49,20 @@ export default function AffiliateDashboardPage() {
   if (isLoading) {
     return (
       <CompvssLayout>
-        <div className="min-h-screen bg-black text-white flex items-center justify-center">
-          <div className="text-center">
-            <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading affiliate data...</p>
+        <ContentLayout
+          title="Affiliate Dashboard"
+          description="Track your affiliate performance"
+          variant="compvss"
+          breadcrumbs={breadcrumbs}
+          showToolbar={false}
+        >
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-center">
+              <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
+              <p className="text-gray-400">Loading affiliate data...</p>
+            </div>
           </div>
-        </div>
+        </ContentLayout>
       </CompvssLayout>
     );
   }
@@ -56,45 +70,37 @@ export default function AffiliateDashboardPage() {
   if (error) {
     return (
       <CompvssLayout>
-        <div className="min-h-screen bg-black text-white flex items-center justify-center">
-          <div className="text-center">
-            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Affiliate Data</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
-            <Button variant="compvss" onClick={() => refetch()}>
-              Try Again
-            </Button>
+        <ContentLayout
+          title="Affiliate Dashboard"
+          description="Track your affiliate performance"
+          variant="compvss"
+          breadcrumbs={breadcrumbs}
+          showToolbar={false}
+        >
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-center">
+              <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Affiliate Data</h2>
+              <p className="text-gray-400 mb-4">{error.message}</p>
+              <Button variant="compvss" onClick={() => refetch()}>
+                Try Again
+              </Button>
+            </div>
           </div>
-        </div>
+        </ContentLayout>
       </CompvssLayout>
     );
   }
 
-  const breadcrumbs = [
-    { label: 'Dashboard', href: '/compvss/dashboard' },
-    { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
-  ];
-
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">Affiliate Dashboard</h1>
-              <p className="text-gray-400 font-oswald mt-1">Track your affiliate performance and earnings</p>
-            </div>
-            <Link href="/compvss/affiliates/links/new">
-              <Button variant="compvss" size="lg">
-                <LinkIcon className="w-5 h-5 mr-2" />
-                Create Link
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <CompvssLayout>
+      <ContentLayout
+        title="Affiliate Dashboard"
+        description="Track your affiliate performance and earnings"
+        variant="compvss"
+        breadcrumbs={breadcrumbs}
+        showToolbar={false}
+      >
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {stats.map((stat, index) => (
@@ -110,12 +116,12 @@ export default function AffiliateDashboardPage() {
                     <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500">
                       {stat.icon}
                     </div>
-                    <Badge variant="compvss-outline" className="text-xs text-success border-green-500/30">
+                    <Badge variant="compvss-outline" className="text-caption text-success border-success/30">
                       {stat.change}
                     </Badge>
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -153,7 +159,7 @@ export default function AffiliateDashboardPage() {
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <h3 className="font-oswald text-white mb-1">{link.name}</h3>
-                          <div className="flex items-center gap-2 text-sm text-gray-400 font-share-tech">
+                          <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
                             <span>{link.url}</span>
                             <Button variant="ghost" size="sm" className="p-0 h-auto hover:text-compvss-cyan-500">
                               <Copy className="w-3 h-3" />
@@ -163,22 +169,22 @@ export default function AffiliateDashboardPage() {
                             </Button>
                           </div>
                         </div>
-                        <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">
+                        <Badge variant="compvss" className="bg-success-light text-success border-success/30">
                           {link.status}
                         </Badge>
                       </div>
                       <div className="grid grid-cols-3 gap-4 text-center">
                         <div>
-                          <div className="text-lg font-bebas text-white">{link.clicks}</div>
-                          <div className="text-xs text-gray-400 font-share-tech">Clicks</div>
+                          <div className="text-h6 font-bebas text-white">{link.clicks}</div>
+                          <div className="text-caption text-gray-400 font-share-tech">Clicks</div>
                         </div>
                         <div>
-                          <div className="text-lg font-bebas text-compvss-cyan-500">{link.conversions}</div>
-                          <div className="text-xs text-gray-400 font-share-tech">Conversions</div>
+                          <div className="text-h6 font-bebas text-compvss-cyan-500">{link.conversions}</div>
+                          <div className="text-caption text-gray-400 font-share-tech">Conversions</div>
                         </div>
                         <div>
-                          <div className="text-lg font-bebas text-success">{link.earnings}</div>
-                          <div className="text-xs text-gray-400 font-share-tech">Earned</div>
+                          <div className="text-h6 font-bebas text-success">{link.earnings}</div>
+                          <div className="text-caption text-gray-400 font-share-tech">Earned</div>
                         </div>
                       </div>
                     </div>
@@ -211,11 +217,11 @@ export default function AffiliateDashboardPage() {
                       <div className="w-2 h-2 bg-compvss-cyan-500 rounded-full mt-2" />
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
-                          <p className="text-white font-oswald text-sm">{activity.event}</p>
-                          <span className="text-success font-bebas text-lg">{activity.amount}</span>
+                          <p className="text-white font-oswald text-body-sm">{activity.event}</p>
+                          <span className="text-success font-bebas text-h6">{activity.amount}</span>
                         </div>
-                        <p className="text-sm text-gray-400 font-share-tech">{activity.link}</p>
-                        <p className="text-xs text-gray-500 font-share-tech mt-1">{activity.date}</p>
+                        <p className="text-body-sm text-gray-400 font-share-tech">{activity.link}</p>
+                        <p className="text-caption text-gray-500 font-share-tech mt-1">{activity.date}</p>
                       </div>
                     </div>
                   ))}
@@ -226,8 +232,8 @@ export default function AffiliateDashboardPage() {
             {/* Commission Info */}
             <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm mt-6">
               <CardContent className="pt-6">
-                <h3 className="text-lg font-bebas text-white mb-3">Commission Structure</h3>
-                <div className="space-y-2 text-sm text-gray-400 font-share-tech">
+                <h3 className="text-h6 font-bebas text-white mb-3">Commission Structure</h3>
+                <div className="space-y-2 text-body-sm text-gray-400 font-share-tech">
                   <div className="flex items-center justify-between p-2 rounded bg-black/50">
                     <span>Standard Tickets</span>
                     <span className="text-compvss-cyan-500">10%</span>
@@ -245,7 +251,7 @@ export default function AffiliateDashboardPage() {
             </Card>
           </motion.div>
         </div>
-      </div>
+      </ContentLayout>
     </CompvssLayout>
   );
 }

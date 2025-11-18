@@ -112,7 +112,7 @@ export default function DocumentDetailPage({ params }: { params: { id: string } 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Description</CardTitle>
-                <p className="text-gray-300 leading-relaxed">{document.description}</p>
+                <p className="text-gray-300">{document.description}</p>
               </CardHeader>
             </Card>
 
@@ -123,7 +123,7 @@ export default function DocumentDetailPage({ params }: { params: { id: string } 
                 <div className="space-y-3">
                   {document.versions?.map((version, index) => (
                     <div key={version.id} className="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-lg flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h6 flex-shrink-0">
                         {version.author.split(' ').map((n: string) => n[0]).join('')}
                       </div>
                       <div className="flex-1">
@@ -135,10 +135,10 @@ export default function DocumentDetailPage({ params }: { params: { id: string } 
                             </Badge>
                           )}
                         </div>
-                        <div className="text-sm text-gray-400 mb-1">
+                        <div className="text-body-sm text-gray-400 mb-1">
                           {version.author} • {new Date(version.date).toLocaleDateString()}
                         </div>
-                        <div className="text-sm text-gray-300">{version.changes}</div>
+                        <div className="text-body-sm text-gray-300">{version.changes}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <Button variant="ghost" size="sm">
@@ -175,7 +175,7 @@ export default function DocumentDetailPage({ params }: { params: { id: string } 
                         </div>
                         <div>
                           <div className="font-medium">{person.name}</div>
-                          <div className="text-sm text-gray-400">{person.role}</div>
+                          <div className="text-body-sm text-gray-400">{person.role}</div>
                         </div>
                       </div>
                       <Badge variant="atlvs-outline" className="bg-gray-700/50">
@@ -197,10 +197,10 @@ export default function DocumentDetailPage({ params }: { params: { id: string } 
                       <div className="w-2 h-2 rounded-full bg-atlvs-green-500 mt-2" />
                       <div className="flex-1">
                         <div className="text-gray-300">
-                          <span className="text-white font-medium">{item.user}</span>
+                          <span className="text-white">{item.user}</span>
                           {' '}{item.action}
                         </div>
-                        <div className="text-sm text-gray-500">{item.time}</div>
+                        <div className="text-body-sm text-gray-500">{item.time}</div>
                       </div>
                     </div>
                   ))}
@@ -217,25 +217,25 @@ export default function DocumentDetailPage({ params }: { params: { id: string } 
                 <CardTitle className="mb-4">Document Info</CardTitle>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-sm text-gray-400 mb-1">Project</div>
+                    <div className="text-body-sm text-gray-400 mb-1">Project</div>
                     <div className="font-medium">{document.project}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <User className="w-4 h-4" />
                       Uploaded By
                     </div>
                     <div className="font-medium">{document.uploadedBy}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       Uploaded
                     </div>
                     <div className="font-medium">{new Date(document.uploadedDate).toLocaleString()}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1">Last Modified</div>
+                    <div className="text-body-sm text-gray-400 mb-1">Last Modified</div>
                     <div className="font-medium">{document.updatedAt ? new Date(document.updatedAt).toLocaleString() : 'N/A'}</div>
                   </div>
                 </div>

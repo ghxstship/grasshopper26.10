@@ -25,11 +25,7 @@ export default function SiteInfrastructureAdvancingPage() {
       <ContentLayout
         title="Site Infrastructure Request"
         description="Site infrastructure and facilities"
-        breadcrumbs={[
-          { label: 'Advancing', href: '/compvss/advancing' },
-          { label: 'New Request', href: '/compvss/advancing/new' },
-          { label: 'Site Infrastructure' }
-        ]}
+        
         variant="compvss"
         showToolbar={false}
       >
@@ -50,7 +46,7 @@ export default function SiteInfrastructureAdvancingPage() {
                   {errors.submit && (
                     <div className="p-4 bg-error/10 border border-error/30 rounded-lg flex items-start gap-3">
                       <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-error">{errors.submit}</p>
+                      <p className="text-body-sm text-error">{errors.submit}</p>
                     </div>
                   )}
 

@@ -56,8 +56,8 @@ export default function TimeTrackingPage() {
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-600 mb-1">Today&apos;s Total</div>
-              <div className="text-2xl font-bold text-gray-900">{formatDuration(totalToday)}</div>
+              <div className="text-body-sm text-gray-600 mb-1">Today&apos;s Total</div>
+              <div className="text-h4 text-gray-900">{formatDuration(totalToday)}</div>
             </div>
             <Clock className="w-8 h-8 text-info" />
           </div>
@@ -65,17 +65,17 @@ export default function TimeTrackingPage() {
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-600 mb-1">This Week</div>
-              <div className="text-2xl font-bold text-gray-900">28h 45m</div>
+              <div className="text-body-sm text-gray-600 mb-1">This Week</div>
+              <div className="text-h4 text-gray-900">28h 45m</div>
             </div>
-            <Calendar className="w-8 h-8 text-green-400" />
+            <Calendar className="w-8 h-8 text-success" />
           </div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-600 mb-1">Avg Per Day</div>
-              <div className="text-2xl font-bold text-gray-900">5h 45m</div>
+              <div className="text-body-sm text-gray-600 mb-1">Avg Per Day</div>
+              <div className="text-h4 text-gray-900">5h 45m</div>
             </div>
             <TrendingUp className="w-8 h-8 text-atlvs-purple-500" />
           </div>
@@ -85,7 +85,7 @@ export default function TimeTrackingPage() {
       {/* Time Entries */}
       <div className="bg-white rounded-lg border border-gray-200">
         <div className="p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Recent Entries</h2>
+          <h2 className="text-h6 text-gray-900">Recent Entries</h2>
         </div>
         <div className="divide-y divide-gray-200">
           {timeEntries.map(entry => (
@@ -93,21 +93,21 @@ export default function TimeTrackingPage() {
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <div className="font-semibold text-gray-900 mb-1">{entry.taskName}</div>
-                  <div className="text-sm text-gray-600">{new Date(entry.date).toLocaleDateString()}</div>
+                  <div className="text-body-sm text-gray-600">{new Date(entry.date).toLocaleDateString()}</div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="text-right">
                     <div className="font-semibold text-gray-900">{formatDuration(entry.duration)}</div>
                     {entry.status === 'running' && (
-                      <div className="text-xs text-success">Running</div>
+                      <div className="text-caption text-success">Running</div>
                     )}
                   </div>
                   {entry.status === 'running' ? (
-                    <Button variant="ghost" size="sm" className="p-2 bg-red-100 text-red-600 hover:bg-red-200">
+                    <Button variant="ghost" size="sm" className="p-2 bg-destructive/20 text-destructive hover:bg-destructive/30">
                       <Pause className="w-5 h-5" />
                     </Button>
                   ) : (
-                    <Button variant="ghost" size="sm" className="p-2 bg-green-100 text-green-600 hover:bg-green-200">
+                    <Button variant="ghost" size="sm" className="p-2 bg-success-light text-success hover:bg-success/30">
                       <Play className="w-5 h-5" />
                     </Button>
                   )}

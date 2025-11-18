@@ -70,25 +70,25 @@ describe('Badge Component', () => {
     it('renders success variant correctly', () => {
       render(<Badge variant="success">Success</Badge>)
       const badge = screen.getByText('Success')
-      expect(badge).toHaveClass('bg-green-500', 'text-white')
+      expect(badge).toHaveClass('bg-success-light0', 'text-white')
     })
 
     it('renders warning variant correctly', () => {
       render(<Badge variant="warning">Warning</Badge>)
       const badge = screen.getByText('Warning')
-      expect(badge).toHaveClass('bg-yellow-500', 'text-black')
+      expect(badge).toHaveClass('bg-warning-light0', 'text-black')
     })
 
     it('renders error variant correctly', () => {
       render(<Badge variant="error">Error</Badge>)
       const badge = screen.getByText('Error')
-      expect(badge).toHaveClass('bg-red-500', 'text-white')
+      expect(badge).toHaveClass('bg-destructive/100', 'text-white')
     })
 
     it('renders info variant correctly', () => {
       render(<Badge variant="info">Info</Badge>)
       const badge = screen.getByText('Info')
-      expect(badge).toHaveClass('bg-blue-500', 'text-white')
+      expect(badge).toHaveClass('bg-info-light0', 'text-white')
     })
   })
 
@@ -103,7 +103,7 @@ describe('Badge Component', () => {
         'px-3',
         'py-1',
         'font-share-tech',
-        'text-xs',
+        'text-caption',
         'font-medium',
         'transition-colors'
       )

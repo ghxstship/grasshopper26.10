@@ -157,7 +157,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   style={{ width: column.width }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="font-bebas text-sm text-gray-400 uppercase">
+                    <span className="font-bebas text-body-sm text-gray-400 uppercase">
                       {column.header}
                     </span>
                     {column.sortable && (
@@ -196,7 +196,7 @@ export function DataTable<T extends Record<string, unknown>>({
               >
                 {columns.map((column) => (
                   <td key={String(column.key)} className="px-6 py-4">
-                    <div className="text-sm text-white font-oswald">
+                    <div className="text-body-sm text-white font-oswald">
                       {column.render 
                         ? column.render(row[column.key as keyof T], row)
                         : String(row[column.key as keyof T] || '-')
@@ -218,7 +218,7 @@ export function DataTable<T extends Record<string, unknown>>({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="p-4 border-t border-gray-800 flex items-center justify-between">
-          <div className="text-sm text-gray-400 font-oswald">
+          <div className="text-body-sm text-gray-400 font-oswald">
             Page {currentPage} of {totalPages}
           </div>
           <div className="flex items-center gap-2">

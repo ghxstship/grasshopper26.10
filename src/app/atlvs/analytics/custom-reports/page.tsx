@@ -117,7 +117,7 @@ export default function CustomReportsPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Report Name */}
           <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Report Configuration</h2>
+            <h2 className="text-h6 text-gray-900 mb-4">Report Configuration</h2>
             <div className="space-y-4">
               <FormField label="Report Name">
                 <Input
@@ -162,7 +162,7 @@ export default function CustomReportsPage() {
                       className="flex flex-col items-center gap-2 h-auto p-3"
                     >
                       <Icon className="w-6 h-6" />
-                      <span className="text-xs">{label}</span>
+                      <span className="text-caption">{label}</span>
                     </Button>
                   ))}
                 </div>
@@ -172,18 +172,18 @@ export default function CustomReportsPage() {
 
           {/* Field Selection */}
           <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Select Fields</h2>
+            <h2 className="text-h6 text-gray-900 mb-4">Select Fields</h2>
             <div className="space-y-4">
               {categories.map(category => (
                 <div key={category}>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">{category}</h3>
+                  <h3 className="text-body-sm text-gray-700 mb-2">{category}</h3>
                   <div className="grid grid-cols-2 gap-2">
                     {getFieldsByCategory(category).map(field => (
                       <div
                         key={field.id}
                         className={`flex items-center gap-2 p-3 border-2 rounded-lg transition-colors ${
                           selectedFields.includes(field.id)
-                            ? 'border-green-600 bg-green-50'
+                            ? 'border-success bg-success-light'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
@@ -193,12 +193,12 @@ export default function CustomReportsPage() {
                           variant="atlvs"
                         />
                         <div className="flex-1">
-                          <div className={`text-sm font-medium ${
-                            selectedFields.includes(field.id) ? 'text-green-900' : 'text-gray-900'
+                          <div className={`text-body-sm ${
+                            selectedFields.includes(field.id) ? 'text-success' : 'text-gray-900'
                           }`}>
                             {field.name}
                           </div>
-                          <div className="text-xs text-gray-500 capitalize">{field.type}</div>
+                          <div className="text-caption text-gray-500 capitalize">{field.type}</div>
                         </div>
                       </div>
                     ))}
@@ -244,41 +244,41 @@ export default function CustomReportsPage() {
         {/* Preview Panel */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-lg border border-gray-200 p-6 sticky top-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Report Preview</h2>
+            <h2 className="text-h6 text-gray-900 mb-4">Report Preview</h2>
             
             <div className="space-y-4">
               <div>
-                <div className="text-sm text-gray-600 mb-1">Report Name</div>
+                <div className="text-body-sm text-gray-600 mb-1">Report Name</div>
                 <div className="font-medium text-gray-900">
                   {reportName || 'Untitled Report'}
                 </div>
               </div>
 
               <div>
-                <div className="text-sm text-gray-600 mb-1">Date Range</div>
-                <div className="flex items-center gap-1 text-sm">
+                <div className="text-body-sm text-gray-600 mb-1">Date Range</div>
+                <div className="flex items-center gap-1 text-body-sm">
                   <Calendar className="w-4 h-4 text-gray-600" />
                   <span className="capitalize">{dateRange.replace('-', ' ')}</span>
                 </div>
               </div>
 
               <div>
-                <div className="text-sm text-gray-600 mb-1">Visualization</div>
-                <div className="capitalize text-sm">{chartType} Chart</div>
+                <div className="text-body-sm text-gray-600 mb-1">Visualization</div>
+                <div className="capitalize text-body-sm">{chartType} Chart</div>
               </div>
 
               <div>
-                <div className="text-sm text-gray-600 mb-2">Selected Fields ({selectedFields.length})</div>
+                <div className="text-body-sm text-gray-600 mb-2">Selected Fields ({selectedFields.length})</div>
                 {selectedFields.length === 0 ? (
-                  <p className="text-sm text-gray-500 italic">No fields selected</p>
+                  <p className="text-body-sm text-gray-500 italic">No fields selected</p>
                 ) : (
                   <div className="space-y-1">
                     {selectedFields.map(fieldId => {
                       const field = availableFields.find(f => f.id === fieldId);
                       return (
-                        <div key={fieldId} className="flex items-center justify-between text-sm p-2 bg-gray-50 rounded">
+                        <div key={fieldId} className="flex items-center justify-between text-body-sm p-2 bg-gray-50 rounded">
                           <span>{field?.name}</span>
-                          <span className="text-xs text-gray-500 capitalize">{field?.type}</span>
+                          <span className="text-caption text-gray-500 capitalize">{field?.type}</span>
                         </div>
                       );
                     })}
@@ -288,10 +288,10 @@ export default function CustomReportsPage() {
             </div>
 
             {selectedFields.length > 0 && reportName && (
-              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="mt-6 p-4 bg-success-light border border-success-border rounded-lg">
                 <div className="flex items-start gap-2">
                   <TrendingUp className="w-5 h-5 text-success mt-0.5" />
-                  <div className="text-sm text-success-foreground">
+                  <div className="text-body-sm text-success-foreground">
                     <div className="font-medium mb-1">Ready to generate</div>
                     <div>Your custom report is configured and ready to run.</div>
                   </div>
@@ -304,7 +304,7 @@ export default function CustomReportsPage() {
 
       {/* Saved Reports */}
       <div className="mt-6 bg-white rounded-lg border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Saved Reports</h2>
+        <h2 className="text-h6 text-gray-900 mb-4">Saved Reports</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             { name: 'Monthly Budget Overview', fields: 5, lastRun: '2025-11-14' },
@@ -313,7 +313,7 @@ export default function CustomReportsPage() {
           ].map((report, index) => (
             <div key={index} className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
               <div className="font-medium text-gray-900 mb-2">{report.name}</div>
-              <div className="text-sm text-gray-600 mb-3">
+              <div className="text-body-sm text-gray-600 mb-3">
                 {report.fields} fields • Last run: {report.lastRun}
               </div>
               <div className="flex gap-2">

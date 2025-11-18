@@ -1,14 +1,14 @@
 'use client';
 
-
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
+
+import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 import { motion } from 'framer-motion';
 import { ClipboardCheck, ArrowRight } from 'lucide-react';
 import { useAdvancing } from '@/lib/hooks/compvss/useAdvancing';
 import Link from 'next/link';
-import { CompvssLayout } from '@/components/templates/CompvssLayout';
-import { ContentLayout } from '@/components/templates/ContentLayout';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { ADVANCING_CATEGORIES } from '@/lib/constants/categories';
 import { ADVANCING_CATEGORY_ICONS } from '@/lib/constants/advancing-icons';
@@ -30,10 +30,7 @@ export default function NewAdvancingRequestPage() {
       <ContentLayout
         title="New Advancing Request"
         description="Select a category to begin your request"
-        breadcrumbs={[
-          { label: 'Advancing', href: '/compvss/advancing' },
-          { label: 'New Request' }
-        ]}
+        
         variant="compvss"
         showToolbar={false}
       >
@@ -50,12 +47,12 @@ export default function NewAdvancingRequestPage() {
                   <ClipboardCheck className="w-6 h-6 text-compvss-cyan-500" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bebas text-white mb-2">About Production Advancing</h3>
-                  <p className="text-gray-400 font-share-tech text-sm mb-3">
+                  <h3 className="text-h6 font-bebas text-white mb-2">About Production Advancing</h3>
+                  <p className="text-gray-400 font-share-tech text-body-sm mb-3">
                     Production advancing allows external teams to submit requests for resources, equipment, and services needed for events. 
                     Your requests will be reviewed and approved by the internal ATLVS team.
                   </p>
-                  <ul className="space-y-1 text-sm text-gray-400 font-share-tech">
+                  <ul className="space-y-1 text-body-sm text-gray-400 font-share-tech">
                     <li className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 bg-compvss-cyan-500 rounded-full" />
                       Select the appropriate category for your request
@@ -85,7 +82,7 @@ export default function NewAdvancingRequestPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <h2 className="text-2xl font-bebas text-white mb-6">Select Request Category</h2>
+          <h2 className="text-h4 font-bebas text-white mb-6">Select Request Category</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category, index) => (
               <motion.div
@@ -111,7 +108,7 @@ export default function NewAdvancingRequestPage() {
                         {category.description}
                       </CardDescription>
                       <div className="pt-3 border-t border-gray-800">
-                        <p className="text-xs text-gray-500 font-share-tech">
+                        <p className="text-caption text-gray-500 font-share-tech">
                           Examples: {category.examples}
                         </p>
                       </div>

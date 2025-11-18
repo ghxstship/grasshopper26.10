@@ -123,9 +123,9 @@ export default function TemplatesPage() {
                 </div>
 
                 <CardTitle className="text-white mb-2">{template.name}</CardTitle>
-                <p className="text-sm text-gray-400 mb-4">{template.description}</p>
+                <p className="text-body-sm text-gray-400 mb-4">{template.description}</p>
 
-                <div className="flex items-center justify-between text-sm text-gray-400 mb-4 pb-4 border-b border-gray-700">
+                <div className="flex items-center justify-between text-body-sm text-gray-400 mb-4 pb-4 border-b border-gray-700">
                   <span>Used {template.usageCount} times</span>
                   <span>Last: {template.lastUsed}</span>
                 </div>
@@ -161,7 +161,7 @@ export default function TemplatesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Total Templates</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">{templates.length}</CardTitle>
+                  <CardTitle className="text-h3 font-bebas">{templates.length}</CardTitle>
                 </div>
                 <div className="p-3 bg-atlvs-green-500/10 rounded-xl">
                   <FileText className="w-6 h-6 text-atlvs-green-500" />
@@ -175,7 +175,7 @@ export default function TemplatesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Favorites</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {templates.filter(t => t.isFavorite).length}
                   </CardTitle>
                 </div>
@@ -191,7 +191,7 @@ export default function TemplatesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Total Uses</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {templates.reduce((sum, t) => sum + t.usageCount, 0)}
                   </CardTitle>
                 </div>
@@ -207,9 +207,9 @@ export default function TemplatesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Categories</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">{categories.length - 1}</CardTitle>
+                  <CardTitle className="text-h3 font-bebas">{categories.length - 1}</CardTitle>
                 </div>
-                <div className="p-3 bg-purple-500/10 rounded-xl">
+                <div className="p-3 bg-accent/100/10 rounded-xl">
                   <FileText className="w-6 h-6 text-atlvs-purple-500" />
                 </div>
               </div>

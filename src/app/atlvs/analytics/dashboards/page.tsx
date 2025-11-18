@@ -65,7 +65,7 @@ export default function DashboardsPage() {
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load Dashboards</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load Dashboards</h3>
                 <p className="text-gray-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={handleRetry}>Try Again</Button>
               </div>
@@ -76,7 +76,7 @@ export default function DashboardsPage() {
             <CardHeader>
               <div className="text-center py-12">
                 <BarChart3 className="w-12 h-12 mx-auto mb-4 text-gray-500 opacity-50" />
-                <h3 className="text-lg font-bebas mb-2">No Dashboards Yet</h3>
+                <h3 className="text-h6 font-bebas mb-2">No Dashboards Yet</h3>
                 <p className="text-gray-400 mb-4">Create your first dashboard to get started</p>
                 <Button variant="atlvs" onClick={handleCreateDashboard} disabled={createDashboard.isPending}>
                   {createDashboard.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Plus className="w-4 h-4 mr-2" />}
@@ -94,7 +94,7 @@ export default function DashboardsPage() {
                   <BarChart3 className="w-6 h-6" />
                 </div>
                 <CardTitle className="mb-2">{dashboard.name}</CardTitle>
-                <div className="text-sm text-gray-400 mb-4">
+                <div className="text-body-sm text-gray-400 mb-4">
                   {dashboard.widgets} widgets • Updated {dashboard.lastUpdated}
                 </div>
                 <Button variant="atlvs" size="sm" className="w-full">

@@ -14,6 +14,8 @@ import { Select } from '@/components/atoms/Select';
 import { Input } from '@/components/atoms/Input';
 import { Checkbox } from '@/components/atoms/Checkbox';
 import { Button } from '@/components/atoms/Button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
+import { Badge } from '@/components/atoms/Badge';
 
 interface _TeamMember {
   id: string;
@@ -140,11 +142,11 @@ export default function RoleAssignmentPage() {
   const getRoleColor = (roleName: string) => {
     const role = roles.find(r => r.name === roleName);
     const colors: Record<string, string> = {
-      purple: 'bg-purple-100 text-purple-800',
-      blue: 'bg-info-light text-blue-800',
-      green: 'bg-success-light text-success-foreground',
-      yellow: 'bg-yellow-100 text-yellow-800',
-      indigo: 'bg-indigo-100 text-indigo-800'
+      purple: 'bg-atlvs-purple-500/20 text-atlvs-purple-500',
+      blue: 'bg-info/20 text-info',
+      green: 'bg-atlvs-green-500/20 text-atlvs-green-500',
+      yellow: 'bg-warning/20 text-warning',
+      indigo: 'bg-indigo-500/20 text-indigo-400'
     };
     return colors[role?.color || 'green'];
   };
@@ -162,7 +164,8 @@ export default function RoleAssignmentPage() {
       >
 
       {/* Filters and Search */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6">
+      <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+        <CardContent className="pt-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 z-10" />
@@ -209,15 +212,17 @@ export default function RoleAssignmentPage() {
             </Button>
           </div>
         </div>
-      </div>
+        </CardContent>
+      </Card>
 
       {/* Bulk Assignment */}
       {selectedMembers.length > 0 && (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Shield className="w-5 h-5 text-success" />
-              <span className="font-medium text-green-900">
+        <Card variant="atlvs" className="bg-atlvs-green-500/10 border-atlvs-green-500/30 mb-6">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Shield className="w-5 h-5 text-atlvs-green-500" />
+                <span className="font-medium text-white">
                 {selectedMembers.length} member{selectedMembers.length !== 1 ? 's' : ''} selected
               </span>
             </div>
@@ -239,9 +244,10 @@ export default function RoleAssignmentPage() {
               >
                 Assign Role
               </Button>
+              </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Members List */}
@@ -257,16 +263,16 @@ export default function RoleAssignmentPage() {
                     variant="atlvs"
                   />
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Member
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Department
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Current Role
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Assign New Role
                 </th>
               </tr>
@@ -283,29 +289,29 @@ export default function RoleAssignmentPage() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-semibold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white">
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
                         <div className="font-medium text-gray-900">{member.name}</div>
-                        <div className="text-sm text-gray-500">{member.email}</div>
+                        <div className="text-body-sm text-gray-500">{member.email}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded">
+                    <span className="px-2 py-1 bg-gray-100 text-gray-700 text-body-sm rounded">
                       {member.department}
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`px-2 py-1 text-sm rounded ${getRoleColor(member.currentRole)}`}>
+                    <span className={`px-2 py-1 text-body-sm rounded ${getRoleColor(member.currentRole)}`}>
                       {member.currentRole}
                     </span>
                   </td>
                   <td className="px-6 py-4">
                     <Select
                       variant="atlvs"
-                      className="text-sm"
+                      className="text-body-sm"
                       defaultValue=""
                       onChange={(e) => {
                         if (e.target.value) {
@@ -336,20 +342,20 @@ export default function RoleAssignmentPage() {
       {/* Summary Stats */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Total Members</div>
-          <div className="text-2xl font-bold text-gray-900">{members.length}</div>
+          <div className="text-body-sm text-gray-600 mb-1">Total Members</div>
+          <div className="text-h4 text-gray-900">{members.length}</div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Filtered</div>
-          <div className="text-2xl font-bold text-gray-900">{filteredMembers.length}</div>
+          <div className="text-body-sm text-gray-600 mb-1">Filtered</div>
+          <div className="text-h4 text-gray-900">{filteredMembers.length}</div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Selected</div>
-          <div className="text-2xl font-bold text-success">{selectedMembers.length}</div>
+          <div className="text-body-sm text-gray-600 mb-1">Selected</div>
+          <div className="text-h4 text-success">{selectedMembers.length}</div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Roles Available</div>
-          <div className="text-2xl font-bold text-gray-900">{roles.length}</div>
+          <div className="text-body-sm text-gray-600 mb-1">Roles Available</div>
+          <div className="text-h4 text-gray-900">{roles.length}</div>
         </div>
       </div>
       </ContentLayout>

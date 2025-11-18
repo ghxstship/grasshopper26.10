@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, Users, Heart, Share2, Star, Ticket, ChevronRight, Info, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -36,7 +36,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Event Not Found</h2>
+            <h2 className="text-h5 font-bebas mb-2">Event Not Found</h2>
             <p className="text-gray-400 mb-4">{error?.message || 'This event could not be loaded'}</p>
             <Link href="/gvteway/events">
               <Button variant="gvteway">Browse Events</Button>
@@ -64,11 +64,11 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                   <Badge variant="gvteway">{event.categoryId || 'Event'}</Badge>
                   <div className="flex items-center text-warning">
                     <Star className="w-4 h-4 fill-current mr-1" />
-                    <span className="text-sm font-medium">{(event.metadata as any)?.rating || '4.5'}</span>
-                    <span className="text-gray-400 text-sm ml-1">({(event.metadata as any)?.reviews || '0'} reviews)</span>
+                    <span className="text-body-sm">{(event.metadata as any)?.rating || '4.5'}</span>
+                    <span className="text-gray-400 text-body-sm ml-1">({(event.metadata as any)?.reviews || '0'} reviews)</span>
                   </div>
                 </div>
-                <h1 className="text-5xl sm:text-6xl font-bebas text-white mb-4">
+                <h1 className="text-h1 font-bebas text-white mb-4">
                   {event.name}
                 </h1>
                 <div className="flex flex-wrap gap-4 text-gray-300">
@@ -101,20 +101,20 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     <CardTitle className="text-white">About This Event</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-300 leading-relaxed">{event.description}</p>
+                    <p className="text-gray-300">{event.description}</p>
                     <div className="mt-6 grid sm:grid-cols-2 gap-4">
                       <div className="flex items-start">
                         <Clock className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-white font-medium">Duration</p>
-                          <p className="text-gray-400 text-sm">3 Days</p>
+                          <p className="text-white">Duration</p>
+                          <p className="text-gray-400 text-body-sm">3 Days</p>
                         </div>
                       </div>
                       <div className="flex items-start">
                         <Users className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-white font-medium">Capacity</p>
-                          <p className="text-gray-400 text-sm">{event.capacity.toLocaleString()} people</p>
+                          <p className="text-white">Capacity</p>
+                          <p className="text-gray-400 text-body-sm">{event.capacity.toLocaleString()} people</p>
                         </div>
                       </div>
                     </div>
@@ -129,7 +129,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                   <CardContent>
                     <div className="space-y-4">
                       <div>
-                        <h3 className="text-white font-medium mb-1">Venue</h3>
+                        <h3 className="text-white mb-1">Venue</h3>
                         <p className="text-gray-400">{event.location || 'Location TBA'}</p>
                       </div>
                       <div className="h-48 bg-gray-800 rounded-lg flex items-center justify-center">
@@ -156,8 +156,8 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                           <Users className="w-6 h-6 text-gvteway-red-500" />
                         </div>
                         <div>
-                          <p className="text-white font-medium">Event Organizer</p>
-                          <p className="text-gray-400 text-sm">Event Organizer</p>
+                          <p className="text-white">Event Organizer</p>
+                          <p className="text-gray-400 text-body-sm">Event Organizer</p>
                         </div>
                       </div>
                       <Button variant="gvteway-outline" size="sm">
@@ -174,11 +174,11 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                 <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm sticky top-24">
                   <CardContent className="p-6">
                     <div className="text-center mb-6">
-                      <p className="text-gray-400 text-sm mb-2">Starting from</p>
-                      <p className="text-5xl font-bebas text-gvteway-red-500">
+                      <p className="text-gray-400 text-body-sm mb-2">Starting from</p>
+                      <p className="text-h1 font-bebas text-gvteway-red-500">
                         $0
                       </p>
-                      <p className="text-gray-400 text-sm">per person</p>
+                      <p className="text-gray-400 text-body-sm">per person</p>
                     </div>
 
                     <div className="space-y-3">
@@ -205,7 +205,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     </div>
 
                     <div className="mt-6 pt-6 border-t border-gray-800">
-                      <div className="flex items-start text-sm text-gray-400">
+                      <div className="flex items-start text-body-sm text-gray-400">
                         <Info className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                         <p>Tickets are non-refundable. See our cancellation policy for details.</p>
                       </div>
@@ -225,9 +225,9 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                           <div className="flex gap-3 p-3 rounded-lg hover:bg-gray-800/50 transition-colors cursor-pointer">
                             <div className="w-20 h-20 bg-gray-800 rounded-lg flex-shrink-0" />
                             <div className="flex-1 min-w-0">
-                              <p className="text-white font-medium text-sm truncate">Event Title {i}</p>
-                              <p className="text-gray-400 text-xs mt-1">Jul 20, 2025</p>
-                              <p className="text-gvteway-red-500 text-sm font-medium mt-1">$49.99</p>
+                              <p className="text-white text-body-sm truncate">Event Title {i}</p>
+                              <p className="text-gray-400 text-caption mt-1">Jul 20, 2025</p>
+                              <p className="text-gvteway-red-500 text-body-sm mt-1">$49.99</p>
                             </div>
                           </div>
                         </Link>

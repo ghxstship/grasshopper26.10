@@ -24,10 +24,10 @@ const FormField: React.FC<FormFieldProps> = ({
       {label && <Label required={required}>{label}</Label>}
       {children}
       {hint && !error && (
-        <p className="text-sm text-gray-500 font-share-tech">{hint}</p>
+        <p className="text-body-sm text-gray-500 font-share-tech">{hint}</p>
       )}
       {error && (
-        <p className="text-sm text-error font-share-tech">{error}</p>
+        <p className="text-body-sm text-error font-share-tech">{error}</p>
       )}
     </div>
   );

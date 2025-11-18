@@ -62,7 +62,7 @@ export default function ProjectDependenciesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertTriangle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Dependencies</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Dependencies</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -111,7 +111,7 @@ export default function ProjectDependenciesPage() {
     switch (status) {
       case 'completed': return 'text-success bg-success-light';
       case 'ready': return 'text-info bg-info-light';
-      case 'blocked': return 'text-error bg-red-100';
+      case 'blocked': return 'text-error bg-destructive/20';
     }
   };
 
@@ -137,7 +137,7 @@ export default function ProjectDependenciesPage() {
         <div className="p-6 max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Task Dependencies</h1>
+            <h1 className="text-h3 text-gray-900 mb-2">Task Dependencies</h1>
             <p className="text-gray-600">Manage task relationships and execution order</p>
           </div>
 
@@ -146,8 +146,8 @@ export default function ProjectDependenciesPage() {
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-600 mb-1">Total Dependencies</div>
-              <div className="text-2xl font-bold text-gray-900">{dependencies.length}</div>
+              <div className="text-body-sm text-gray-600 mb-1">Total Dependencies</div>
+              <div className="text-h4 text-gray-900">{dependencies.length}</div>
             </div>
             <GitBranch className="w-8 h-8 text-gray-400" />
           </div>
@@ -155,19 +155,19 @@ export default function ProjectDependenciesPage() {
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-600 mb-1">Blocked Tasks</div>
-              <div className="text-2xl font-bold text-error">
+              <div className="text-body-sm text-gray-600 mb-1">Blocked Tasks</div>
+              <div className="text-h4 text-error">
                 {dependencies.filter(d => d.status === 'blocked').length}
               </div>
             </div>
-            <AlertTriangle className="w-8 h-8 text-red-400" />
+            <AlertTriangle className="w-8 h-8 text-destructive" />
           </div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-600 mb-1">Ready to Start</div>
-              <div className="text-2xl font-bold text-info">
+              <div className="text-body-sm text-gray-600 mb-1">Ready to Start</div>
+              <div className="text-h4 text-info">
                 {dependencies.filter(d => d.status === 'ready').length}
               </div>
             </div>
@@ -179,7 +179,7 @@ export default function ProjectDependenciesPage() {
       {/* Dependencies List */}
       <div className="bg-white rounded-lg border border-gray-200">
         <div className="p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Dependency Chain</h2>
+          <h2 className="text-h6 text-gray-900">Dependency Chain</h2>
         </div>
         <div className="divide-y divide-gray-200">
           {dependencies.map(dep => (
@@ -191,11 +191,11 @@ export default function ProjectDependenciesPage() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     <h3 className="font-semibold text-gray-900">{dep.taskName}</h3>
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(dep.status)}`}>
+                    <span className={`px-2 py-1 rounded text-caption ${getStatusColor(dep.status)}`}>
                       {dep.status}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2 text-body-sm text-gray-600">
                     <span>Depends on:</span>
                     <span className="font-medium text-gray-900">{dep.dependsOn}</span>
                     <span className="text-gray-400">•</span>
@@ -215,9 +215,9 @@ export default function ProjectDependenciesPage() {
       </div>
 
       {/* Dependency Types Legend */}
-      <div className="mt-6 bg-blue-50 rounded-lg p-4">
+      <div className="mt-6 bg-info-light rounded-lg p-4">
         <h3 className="font-semibold text-gray-900 mb-3">Dependency Types</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-body-sm">
           <div>
             <div className="font-medium text-gray-900 mb-1">Finish-to-Start</div>
             <div className="text-gray-600">Task B starts when Task A finishes</div>

@@ -84,16 +84,16 @@ export async function generateQRCodeBuffer(
 }
 
 /**
- * Generate branded QR code with GVTEWAY colors
+ * Generate branded QR code with brand colors
  */
 export async function generateBrandedQRCode(
   data: string | QRCodeData,
   brand: 'gvteway' | 'compvss' | 'atlvs' = 'gvteway'
 ): Promise<string> {
   const brandColors = {
-    gvteway: { dark: '#EF4444', light: '#000000' },
-    compvss: { dark: '#3B82F6', light: '#000000' },
-    atlvs: { dark: '#10B981', light: '#000000' },
+    gvteway: { dark: '#FF0000', light: '#000000' }, // gvteway-red-500
+    compvss: { dark: '#00FFFF', light: '#000000' }, // compvss-cyan-500
+    atlvs: { dark: '#00FF00', light: '#000000' }, // atlvs-green-500
   };
 
   return generateQRCode(data, {

@@ -52,7 +52,7 @@ export default function TeamSettingsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Team Settings</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Team Settings</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -84,20 +84,20 @@ export default function TeamSettingsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Total Members</div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">24</div>
+              <div className="text-body-sm text-gray-400 mb-1">Total Members</div>
+              <div className="text-h3 font-bebas atlvs-text-gradient">24</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Active</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">21</div>
+              <div className="text-body-sm text-gray-400 mb-1">Active</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500">21</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Pending</div>
-              <div className="text-3xl font-bebas text-warning">3</div>
+              <div className="text-body-sm text-gray-400 mb-1">Pending</div>
+              <div className="text-h3 font-bebas text-warning">3</div>
             </CardHeader>
           </Card>
           </div>
@@ -109,12 +109,12 @@ export default function TeamSettingsPage() {
               {members.map((member) => (
                 <div key={member.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors">
                   <div className="flex items-center gap-4 flex-1">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-xl">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h5">
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div className="flex-1">
                       <div className="font-medium mb-1">{member.name}</div>
-                      <div className="text-sm text-gray-400 flex items-center gap-2">
+                      <div className="text-body-sm text-gray-400 flex items-center gap-2">
                         <Mail className="w-4 h-4" />
                         {member.email}
                       </div>
@@ -127,7 +127,7 @@ export default function TeamSettingsPage() {
                     >
                       {member.status}
                     </Badge>
-                    <Select variant="atlvs" className="px-3 py-1 text-sm">
+                    <Select variant="atlvs" className="px-3 py-1 text-body-sm">
                       <option value="admin">Admin</option>
                       <option value="manager">Manager</option>
                       <option value="member">Member</option>
@@ -149,7 +149,7 @@ export default function TeamSettingsPage() {
               <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
                 <div>
                   <div className="font-medium mb-1">taylor@example.com</div>
-                  <div className="text-sm text-gray-400">Invited 2 days ago • Role: Member</div>
+                  <div className="text-body-sm text-gray-400">Invited 2 days ago • Role: Member</div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button variant="ghost" size="sm">Resend</Button>

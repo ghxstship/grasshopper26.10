@@ -32,11 +32,7 @@ export default function MarketingAdvancingPage() {
       <ContentLayout
         title="Marketing Request"
         description="Promotional materials and marketing"
-        breadcrumbs={[
-          { label: 'Advancing', href: '/compvss/advancing' },
-          { label: 'New Request', href: '/compvss/advancing/new' },
-          { label: 'Marketing' }
-        ]}
+        
         variant="compvss"
         showToolbar={false}
       >
@@ -54,9 +50,9 @@ export default function MarketingAdvancingPage() {
             </CardHeader>
             <CardContent>
               {errors.submit && (
-                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center gap-2 text-red-400">
+                <div className="mb-4 p-3 bg-destructive/100/10 border border-destructive/30 rounded-lg flex items-center gap-2 text-destructive">
                   <AlertCircle className="w-4 h-4" />
-                  <span className="text-sm">{errors.submit}</span>
+                  <span className="text-body-sm">{errors.submit}</span>
                 </div>
               )}
               <form onSubmit={handleSubmit} className="space-y-6">

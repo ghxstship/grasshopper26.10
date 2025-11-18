@@ -120,8 +120,8 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Total Executions</div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">
+              <div className="text-body-sm text-gray-400 mb-1">Total Executions</div>
+              <div className="text-h3 font-bebas atlvs-text-gradient">
                 {workflow.executions.total.toLocaleString()}
               </div>
             </CardHeader>
@@ -129,8 +129,8 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
 
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Successful</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">
+              <div className="text-body-sm text-gray-400 mb-1">Successful</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500">
                 {workflow.executions.successful.toLocaleString()}
               </div>
             </CardHeader>
@@ -138,8 +138,8 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
 
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Failed</div>
-              <div className="text-3xl font-bebas text-error">
+              <div className="text-body-sm text-gray-400 mb-1">Failed</div>
+              <div className="text-h3 font-bebas text-error">
                 {workflow.executions.failed}
               </div>
             </CardHeader>
@@ -147,8 +147,8 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
 
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Success Rate</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">
+              <div className="text-body-sm text-gray-400 mb-1">Success Rate</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500">
                 {workflow.executions.successRate}%
               </div>
             </CardHeader>
@@ -166,7 +166,7 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
                   {workflow.steps?.map((step: any, index: number) => (
                     <div key={step.id} className="flex items-start gap-4">
                       <div className="relative">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-lg ${
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-h6 ${
                           step.type === 'trigger' 
                             ? 'bg-atlvs-purple-500' 
                             : 'bg-atlvs-green-500'
@@ -181,7 +181,7 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
                         <div className="flex items-center justify-between mb-2">
                           <div>
                             <div className="font-medium mb-1">{step.name}</div>
-                            <Badge variant="atlvs-outline" className="bg-gray-700/50 text-xs">
+                            <Badge variant="atlvs-outline" className="bg-gray-700/50 text-caption">
                               {step.type.charAt(0).toUpperCase() + step.type.slice(1)}
                             </Badge>
                           </div>
@@ -214,12 +214,12 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
                             {new Date(execution.time).toLocaleString()}
                           </div>
                           {execution.error && (
-                            <div className="text-sm text-red-400">{execution.error}</div>
+                            <div className="text-body-sm text-destructive">{execution.error}</div>
                           )}
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        <div className="text-sm text-gray-400 flex items-center gap-1">
+                        <div className="text-body-sm text-gray-400 flex items-center gap-1">
                           <Clock className="w-4 h-4" />
                           {execution.duration}
                         </div>
@@ -248,21 +248,21 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
                 <CardTitle className="mb-4">Workflow Info</CardTitle>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <Zap className="w-4 h-4" />
                       Trigger
                     </div>
                     <div className="font-medium">{workflow.trigger}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       Last Run
                     </div>
                     <div className="font-medium">{new Date(workflow.lastRun).toLocaleString()}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1">Next Run</div>
+                    <div className="text-body-sm text-gray-400 mb-1">Next Run</div>
                     <div className="font-medium">{new Date(workflow.nextRun).toLocaleString()}</div>
                   </div>
                 </div>

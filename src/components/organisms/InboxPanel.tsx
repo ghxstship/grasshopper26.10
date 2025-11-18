@@ -132,7 +132,7 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
                     className={cn(
                       'truncate',
                       conversation.unreadCount > 0
-                        ? 'text-gray-900 font-medium'
+                        ? 'text-gray-900'
                         : 'text-gray-600'
                     )}
                   >

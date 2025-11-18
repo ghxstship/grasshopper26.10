@@ -98,7 +98,7 @@ export default function IntegrationsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Integrations</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Integrations</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -136,7 +136,7 @@ export default function IntegrationsPage() {
                           <Icon className="w-6 h-6 text-atlvs-green-500" aria-hidden="true" />
                         </div>
                         <div>
-                          <div className="font-medium text-lg">{integration.name}</div>
+                          <div className="font-medium text-h6">{integration.name}</div>
                           {integration.connected && (
                             <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50 mt-1" role="status" aria-label="Integration connected">
                               <Check className="w-3 h-3 mr-1" aria-hidden="true" />
@@ -148,7 +148,7 @@ export default function IntegrationsPage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-gray-400 mb-4">{integration.description}</p>
+                    <p className="text-body-sm text-gray-400 mb-4">{integration.description}</p>
                     <div className="flex gap-2">
                       <Link href={integration.href} className="flex-1">
                         <Button variant="atlvs" size="sm" className="w-full" aria-label={`Configure ${integration.name} integration`}>

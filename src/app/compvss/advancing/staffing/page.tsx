@@ -30,11 +30,7 @@ export default function StaffingAdvancingPage() {
       <ContentLayout
         title="Staffing Request"
         description="Event staff and personnel"
-        breadcrumbs={[
-          { label: 'Advancing', href: '/compvss/advancing' },
-          { label: 'New Request', href: '/compvss/advancing/new' },
-          { label: 'Staffing' }
-        ]}
+        
         variant="compvss"
         showToolbar={false}
       >
@@ -103,8 +99,8 @@ export default function StaffingAdvancingPage() {
                 </FormField>
 
                 {error && (
-                  <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-                    <p className="text-red-400 text-sm">{error.message}</p>
+                  <div className="p-4 bg-destructive/100/10 border border-destructive/30 rounded-lg">
+                    <p className="text-destructive text-body-sm">{error.message}</p>
                   </div>
                 )}
 

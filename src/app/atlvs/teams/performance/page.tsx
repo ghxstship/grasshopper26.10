@@ -72,9 +72,9 @@ export default function TeamPerformancePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Avg Efficiency</div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">91%</div>
-              <div className="flex items-center gap-1 text-sm text-atlvs-green-500 mt-2">
+              <div className="text-body-sm text-gray-400 mb-1">Avg Efficiency</div>
+              <div className="text-h3 font-bebas atlvs-text-gradient">91%</div>
+              <div className="flex items-center gap-1 text-body-sm text-atlvs-green-500 mt-2">
                 <TrendingUp className="w-4 h-4" />
                 <span>+5%</span>
               </div>
@@ -82,20 +82,20 @@ export default function TeamPerformancePage() {
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Tasks Completed</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">125</div>
+              <div className="text-body-sm text-gray-400 mb-1">Tasks Completed</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500">125</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Avg Rating</div>
-              <div className="text-3xl font-bebas text-atlvs-purple-500">4.7</div>
+              <div className="text-body-sm text-gray-400 mb-1">Avg Rating</div>
+              <div className="text-h3 font-bebas text-atlvs-purple-500">4.7</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Active Members</div>
-              <div className="text-3xl font-bebas text-info">24</div>
+              <div className="text-body-sm text-gray-400 mb-1">Active Members</div>
+              <div className="text-h3 font-bebas text-info">24</div>
             </CardHeader>
           </Card>
         </div>
@@ -110,17 +110,17 @@ export default function TeamPerformancePage() {
               {typedMembers.map((member: any, index: number) => (
                 <div key={member.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
                   <div className="flex items-center gap-4 flex-1">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-xl">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h5">
                       {index + 1}
                     </div>
                     <div className="flex-1">
                       <div className="font-medium mb-1">{member.name}</div>
-                      <div className="text-sm text-gray-400">
+                      <div className="text-body-sm text-gray-400">
                         {member.tasksCompleted} tasks • {member.efficiency}% efficiency
                       </div>
                     </div>
                   </div>
-                  <div className="text-2xl font-bebas atlvs-text-gradient">
+                  <div className="text-h4 font-bebas atlvs-text-gradient">
                     {member.rating} ⭐
                   </div>
                 </div>

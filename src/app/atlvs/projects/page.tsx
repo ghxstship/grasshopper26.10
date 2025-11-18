@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Projects
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${stats.total} total projects`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.total} total projects`}>
                     {stats.total}
                   </CardTitle>
                 </div>
@@ -156,7 +156,7 @@ export default function ProjectsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Active Projects
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${stats.active} active projects`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.active} active projects`}>
                     {stats.active}
                   </CardTitle>
                 </div>
@@ -174,11 +174,11 @@ export default function ProjectsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Budget
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${formatCurrency(stats.totalBudget)} total budget`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${formatCurrency(stats.totalBudget)} total budget`}>
                     {formatCurrency(stats.totalBudget)}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-purple-500/10 rounded-xl" aria-hidden="true">
+                <div className="p-3 bg-accent/100/10 rounded-xl" aria-hidden="true">
                   <DollarSign className="w-6 h-6 text-atlvs-purple-500" aria-hidden="true" />
                 </div>
               </div>
@@ -192,11 +192,11 @@ export default function ProjectsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Team Members
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {stats.totalTeam}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-orange-500/10 rounded-xl">
+                <div className="p-3 bg-warning-light0/10 rounded-xl">
                   <Users className="w-6 h-6 text-atlvs-orange-500" />
                 </div>
               </div>
@@ -286,8 +286,8 @@ export default function ProjectsPage() {
                     {/* Progress */}
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-400 font-oswald">Progress</span>
-                        <span className="text-xs text-white font-bebas">{project.progress}%</span>
+                        <span className="text-caption text-gray-400 font-oswald">Progress</span>
+                        <span className="text-caption text-white font-bebas">{project.progress}%</span>
                       </div>
                       <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                         <motion.div
@@ -302,21 +302,21 @@ export default function ProjectsPage() {
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div>
-                        <div className="text-xs text-gray-400 mb-1">Budget</div>
-                        <div className="text-sm font-bebas text-white">
+                        <div className="text-caption text-gray-400 mb-1">Budget</div>
+                        <div className="text-body-sm font-bebas text-white">
                           {formatCurrency(project.budget)}
                         </div>
                       </div>
                       <div>
-                        <div className="text-xs text-gray-400 mb-1">Spent</div>
-                        <div className="text-sm font-bebas text-white">
+                        <div className="text-caption text-gray-400 mb-1">Spent</div>
+                        <div className="text-body-sm font-bebas text-white">
                           {formatCurrency(project.spent)}
                         </div>
                       </div>
                     </div>
 
                     {/* Meta */}
-                    <div className="flex items-center justify-between text-xs text-gray-400">
+                    <div className="flex items-center justify-between text-caption text-gray-400">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
                         <span>{new Date(project.endDate).toLocaleDateString()}</span>

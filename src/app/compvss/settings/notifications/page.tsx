@@ -57,11 +57,11 @@ export default function NotificationSettingsPage() {
   };
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
-            <h1 className="text-3xl font-bebas compvss-text-gradient">Notification Settings</h1>
+            <h1 className="text-h3 font-bebas compvss-text-gradient">Notification Settings</h1>
             <p className="text-gray-400 font-oswald mt-1">Manage how you receive notifications</p>
           </div>
         </div>
@@ -201,7 +201,7 @@ function NotificationToggle({
         )}
         <div>
           <h3 className="font-oswald text-white mb-1">{label}</h3>
-          <p className="text-sm text-gray-400 font-share-tech">{description}</p>
+          <p className="text-body-sm text-gray-400 font-share-tech">{description}</p>
         </div>
       </div>
       <Checkbox

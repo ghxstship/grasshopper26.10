@@ -82,7 +82,7 @@ export default function AnalyticsInsightsPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-2">
-                      <CardTitle className="text-xl">{insight.title}</CardTitle>
+                      <CardTitle className="text-h5">{insight.title}</CardTitle>
                       <Badge variant="atlvs-outline" className={getImpactColor(insight.impact)} role="status" aria-label={`Impact level: ${insight.impact}`}>
                         {insight.impact}
                       </Badge>

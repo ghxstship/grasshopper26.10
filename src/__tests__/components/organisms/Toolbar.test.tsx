@@ -83,7 +83,7 @@ describe('Toolbar', () => {
       render(<Toolbar title="Title" />);
       
       const heading = screen.getByText('Title');
-      expect(heading).toHaveClass('text-2xl', 'font-bebas', 'tracking-wide');
+      expect(heading).toHaveClass('text-h4', 'font-bebas', 'tracking-wide');
     });
   });
 

@@ -52,7 +52,7 @@ export default function BudgetApprovalPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Approval Requests</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Approval Requests</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -94,20 +94,20 @@ export default function BudgetApprovalPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Pending</div>
-              <div className="text-3xl font-bebas text-warning">5</div>
+              <div className="text-body-sm text-gray-400 mb-1">Pending</div>
+              <div className="text-h3 font-bebas text-warning">5</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Approved</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">18</div>
+              <div className="text-body-sm text-gray-400 mb-1">Approved</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500">18</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Rejected</div>
-              <div className="text-3xl font-bebas text-error">3</div>
+              <div className="text-body-sm text-gray-400 mb-1">Rejected</div>
+              <div className="text-h3 font-bebas text-error">3</div>
             </CardHeader>
           </Card>
         </div>
@@ -122,11 +122,11 @@ export default function BudgetApprovalPage() {
                     {getStatusIcon(request.status)}
                     <div className="flex-1">
                       <div className="font-medium mb-1">{request.item}</div>
-                      <div className="text-sm text-gray-400">
+                      <div className="text-body-sm text-gray-400">
                         Requested by {request.requester} • {request.date}
                       </div>
                     </div>
-                    <div className="text-2xl font-bebas atlvs-text-gradient">
+                    <div className="text-h4 font-bebas atlvs-text-gradient">
                       ${request.amount.toLocaleString()}
                     </div>
                   </div>

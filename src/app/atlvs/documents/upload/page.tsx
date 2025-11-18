@@ -75,10 +75,10 @@ export default function DocumentUploadPage() {
           onDrop={handleDrop}
         >
           <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-white mb-2">
+          <h3 className="text-h6 text-white mb-2">
             Drop files here or click to browse
           </h3>
-          <p className="text-sm text-gray-400 mb-4">
+          <p className="text-body-sm text-gray-400 mb-4">
             Supports PDF, DOC, DOCX, XLS, XLSX (max 50MB)
           </p>
           <Button variant="atlvs" size="sm">
@@ -99,7 +99,7 @@ export default function DocumentUploadPage() {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex-1 min-w-0">
                           <div className="font-medium text-white truncate">{file.name}</div>
-                          <div className="text-sm text-gray-400">{formatFileSize(file.size)}</div>
+                          <div className="text-body-sm text-gray-400">{formatFileSize(file.size)}</div>
                         </div>
                         {file.status === 'complete' ? (
                           <CheckCircle className="w-5 h-5 text-atlvs-green-500 flex-shrink-0" />

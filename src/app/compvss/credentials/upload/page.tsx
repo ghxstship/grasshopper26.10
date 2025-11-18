@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 
 import { motion } from 'framer-motion';
 import { Upload, Save, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
@@ -84,15 +85,15 @@ export default function CredentialUploadPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Upload Credential</h1>
-          <p className="text-gray-400 font-oswald mt-1">Add a new certification or credential</p>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <CompvssLayout>
+      <ContentLayout
+        title="Upload Credential"
+        description="Add a new certification or credential"
+        variant="compvss"
+        breadcrumbs={breadcrumbs}
+        showToolbar={true}
+      >
+      <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <Card variant="compvss" className="bg-gray-900/50">
             <CardHeader>
@@ -107,7 +108,7 @@ export default function CredentialUploadPage() {
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error font-share-tech">{error}</p>
                   </div>
                 )}
 
@@ -115,7 +116,7 @@ export default function CredentialUploadPage() {
                 {success && (
                   <div className="p-3 rounded-lg bg-success/10 border border-success/30 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-success" />
-                    <p className="text-sm text-success font-share-tech">Credential uploaded successfully! Redirecting...</p>
+                    <p className="text-body-sm text-success font-share-tech">Credential uploaded successfully! Redirecting...</p>
                   </div>
                 )}
 
@@ -200,7 +201,7 @@ export default function CredentialUploadPage() {
                         Click to upload or drag and drop
                       </p>
                     )}
-                    <p className="text-xs text-gray-500 font-share-tech">
+                    <p className="text-caption text-gray-500 font-share-tech">
                       PDF, JPG, PNG up to 10MB
                     </p>
                   </label>
@@ -230,6 +231,7 @@ export default function CredentialUploadPage() {
           </Card>
         </motion.div>
       </div>
+      </ContentLayout>
     </CompvssLayout>
   );
 }

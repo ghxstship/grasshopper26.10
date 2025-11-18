@@ -63,6 +63,21 @@ export type { IconButtonProps } from "./atoms/IconButton";
 export { Text, textVariants } from "./atoms/Text";
 export type { TextProps } from "./atoms/Text";
 
+export { 
+  Typography,
+  HeroTitle,
+  PageTitle,
+  SectionHeader,
+  SubsectionHeader,
+  CardTitle as TypographyCardTitle,
+  SmallHeader,
+  Subtitle,
+  BodyText,
+  Metadata,
+  Caption
+} from "./atoms/Typography";
+export type { TypographyProps } from "./atoms/Typography";
+
 // ============================================================================
 // MOLECULES - Simple component combinations
 // ============================================================================
@@ -102,6 +117,8 @@ export type { ChatMessageProps } from "./molecules/ChatMessage";
 
 export { ChatInput } from "./molecules/ChatInput";
 export type { ChatInputProps } from "./molecules/ChatInput";
+
+export { BrandCard } from "./molecules/BrandCard";
 
 // ============================================================================
 // ORGANISMS - Complex UI sections
@@ -143,6 +160,7 @@ export { GanttChart } from "./atlvs/GanttChart";
 // TEMPLATES - Page-level layouts
 // ============================================================================
 
+// Layout Wrappers
 export { DashboardLayout } from "./templates/DashboardLayout";
 export type { DashboardLayoutProps } from "./templates/DashboardLayout";
 
@@ -157,3 +175,28 @@ export type { AtlvsLayoutProps } from "./templates/AtlvsLayout";
 
 export { ContentLayout } from "./templates/ContentLayout";
 export type { ContentLayoutProps } from "./templates/ContentLayout";
+
+// Page Templates
+export { FormPageTemplate } from "./templates/FormPageTemplate";
+export type { FormPageTemplateProps, FormStep } from "./templates/FormPageTemplate";
+
+export { SettingsPageTemplate } from "./templates/SettingsPageTemplate";
+export type { SettingsPageTemplateProps, SettingsSection } from "./templates/SettingsPageTemplate";
+
+export { CheckoutPageTemplate } from "./templates/CheckoutPageTemplate";
+export type { CheckoutPageTemplateProps, CheckoutItem } from "./templates/CheckoutPageTemplate";
+
+export { ProfilePageTemplate } from "./templates/ProfilePageTemplate";
+export type { ProfilePageTemplateProps, ProfileStat, ProfileTab } from "./templates/ProfilePageTemplate";
+
+export { WizardPageTemplate } from "./templates/WizardPageTemplate";
+export type { WizardPageTemplateProps, WizardStep } from "./templates/WizardPageTemplate";
+
+export { ErrorPageTemplate } from "./templates/ErrorPageTemplate";
+export type { ErrorPageTemplateProps } from "./templates/ErrorPageTemplate";
+
+export { SearchResultsPageTemplate } from "./templates/SearchResultsPageTemplate";
+export type { SearchResultsPageTemplateProps, SearchFilter } from "./templates/SearchResultsPageTemplate";
+
+export { ComparisonPageTemplate } from "./templates/ComparisonPageTemplate";
+export type { ComparisonPageTemplateProps, ComparisonOption } from "./templates/ComparisonPageTemplate";

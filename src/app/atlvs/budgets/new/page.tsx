@@ -77,9 +77,9 @@ export default function NewBudgetPage() {
       >
         <form onSubmit={handleSubmit}>
           {error && (
-            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center gap-2 text-red-400">
+            <div className="mb-4 p-3 bg-destructive/100/10 border border-destructive/30 rounded-lg flex items-center gap-2 text-destructive">
               <AlertCircle className="w-4 h-4" />
-              <span className="text-sm">{error.message}</span>
+              <span className="text-body-sm">{error.message}</span>
             </div>
           )}
           <div className="space-y-6">
@@ -184,7 +184,7 @@ export default function NewBudgetPage() {
                             variant="ghost"
                             size="sm"
                             icon={<Trash2 className="w-4 h-4" />}
-                            className="text-error hover:text-red-400"
+                            className="text-error hover:text-destructive"
                           />
                         )}
                       </div>

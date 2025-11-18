@@ -56,7 +56,7 @@ export default function WorkflowCredentialsPage() {
                 <div key={cred.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
                   <div className="flex-1">
                     <div className="font-medium mb-1">{cred.name}</div>
-                    <div className="text-sm text-gray-400">{cred.type} • Last used {cred.lastUsed}</div>
+                    <div className="text-body-sm text-gray-400">{cred.type} • Last used {cred.lastUsed}</div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Badge

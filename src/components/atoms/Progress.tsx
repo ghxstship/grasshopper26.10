@@ -34,7 +34,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       >
         <div
           className={cn('h-full transition-all', getVariantStyles())}
-          style={{ width: `${value}%` }}
+          style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
         />
       </div>
     );

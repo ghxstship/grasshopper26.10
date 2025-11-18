@@ -34,7 +34,7 @@ export default function TasksDashboardPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <TasksContent />
     </CompvssLayout>
   );
@@ -90,13 +90,13 @@ function TasksContent() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'critical':
-        return 'bg-error-light text-error border-red-500/30';
+        return 'bg-error-light text-error border-destructive/30';
       case 'high':
-        return 'bg-orange-500/20 text-atlvs-orange-500 border-orange-500/30';
+        return 'bg-warning-light0/20 text-atlvs-orange-500 border-warning/30';
       case 'medium':
-        return 'bg-warning-light text-warning border-yellow-500/30';
+        return 'bg-warning-light text-warning border-warning/30';
       case 'low':
-        return 'bg-success-light text-success border-green-500/30';
+        return 'bg-success-light text-success border-success/30';
       default:
         return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
     }
@@ -105,11 +105,11 @@ function TasksContent() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'bg-success-light text-success border-green-500/30';
+        return 'bg-success-light text-success border-success/30';
       case 'in_progress':
-        return 'bg-info-light text-info border-blue-500/30';
+        return 'bg-info-light text-info border-info/30';
       case 'overdue':
-        return 'bg-error-light text-error border-red-500/30';
+        return 'bg-error-light text-error border-destructive/30';
       default:
         return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
     }
@@ -122,7 +122,7 @@ function TasksContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">My Tasks</h1>
+              <h1 className="text-h3 font-bebas compvss-text-gradient">My Tasks</h1>
               <p className="text-gray-400 font-oswald mt-1">Manage your assigned _tasks</p>
             </div>
             <div className="flex items-center gap-4">
@@ -153,8 +153,8 @@ function TasksContent() {
             >
               <Card variant="compvss" className="bg-gray-900/50">
                 <CardContent className="pt-6 text-center">
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -195,11 +195,11 @@ function TasksContent() {
                                 {task.status.replace('_', ' ')}
                               </Badge>
                             </div>
-                            <h3 className="font-oswald text-white text-lg mb-1">{task.title}</h3>
-                            <p className="text-sm text-gray-400 font-share-tech mb-2">
+                            <h3 className="font-oswald text-white text-h6 mb-1">{task.title}</h3>
+                            <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                               {task.project}
                             </p>
-                            <div className="flex items-center gap-4 text-xs text-gray-500 font-share-tech">
+                            <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
                               <span className="flex items-center gap-1">
                                 <Calendar className="w-3 h-3" />
                                 {task.dueDate}

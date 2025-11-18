@@ -40,10 +40,7 @@ export default function TeamDirectoryPage() {
           description="View and manage team members"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team/directory' },
-            { label: 'Directory' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
@@ -64,15 +61,12 @@ export default function TeamDirectoryPage() {
           description="View and manage team members"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team/directory' },
-            { label: 'Directory' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Team</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Team</h2>
               <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -87,13 +81,13 @@ export default function TeamDirectoryPage() {
   const _getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':
-        return <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">Active</Badge>;
+        return <Badge variant="compvss" className="bg-success-light text-success border-success/30">Active</Badge>;
       case 'on-break':
-        return <Badge variant="compvss-outline" className="border-yellow-500/30 text-warning">On Break</Badge>;
+        return <Badge variant="compvss-outline" className="border-warning/30 text-warning">On Break</Badge>;
       case 'inactive':
         return <Badge variant="compvss-outline" className="border-gray-500/30 text-gray-400">Inactive</Badge>;
       case 'pending':
-        return <Badge variant="compvss-outline" className="border-blue-500/30 text-info">Pending</Badge>;
+        return <Badge variant="compvss-outline" className="border-info/30 text-info">Pending</Badge>;
       default:
         return <Badge variant="compvss-outline">{status}</Badge>;
     }
@@ -106,10 +100,7 @@ export default function TeamDirectoryPage() {
         description="Connect with other team members"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'Team', href: '/compvss/team/members' },
-          { label: 'Directory' }
-        ]}
+        
         actions={[
           {
             label: 'Filter',
@@ -129,7 +120,7 @@ export default function TeamDirectoryPage() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <Input
               placeholder="Search by name, role, or organization..."
-              className="pl-12 bg-gray-900/50 border-compvss-cyan-500/30 h-12 text-lg"
+              className="pl-12 bg-gray-900/50 border-compvss-cyan-500/30 h-12 text-h6"
             />
           </div>
         </motion.div>
@@ -138,26 +129,26 @@ export default function TeamDirectoryPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <Card variant="compvss" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-3xl font-bebas text-white mb-1">48</div>
-              <div className="text-sm text-gray-400 font-oswald">Total Members</div>
+              <div className="text-h3 font-bebas text-white mb-1">48</div>
+              <div className="text-body-sm text-gray-400 font-oswald">Total Members</div>
             </CardContent>
           </Card>
           <Card variant="compvss" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-3xl font-bebas text-success mb-1">42</div>
-              <div className="text-sm text-gray-400 font-oswald">Active</div>
+              <div className="text-h3 font-bebas text-success mb-1">42</div>
+              <div className="text-body-sm text-gray-400 font-oswald">Active</div>
             </CardContent>
           </Card>
           <Card variant="compvss" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-3xl font-bebas text-warning mb-1">4</div>
-              <div className="text-sm text-gray-400 font-oswald">On Break</div>
+              <div className="text-h3 font-bebas text-warning mb-1">4</div>
+              <div className="text-body-sm text-gray-400 font-oswald">On Break</div>
             </CardContent>
           </Card>
           <Card variant="compvss" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-3xl font-bebas text-info mb-1">12</div>
-              <div className="text-sm text-gray-400 font-oswald">Organizations</div>
+              <div className="text-h3 font-bebas text-info mb-1">12</div>
+              <div className="text-body-sm text-gray-400 font-oswald">Organizations</div>
             </CardContent>
           </Card>
         </div>
@@ -188,23 +179,23 @@ export default function TeamDirectoryPage() {
                       <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all cursor-pointer">
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-lg">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-h6">
                               {member.name.split(' ').map(n => n[0]).join('')}
                             </div>
                             <div>
-                              <h3 className="font-oswald text-white text-lg">{member.name}</h3>
-                              <p className="text-sm text-gray-400 font-share-tech">{member.role}</p>
-                              <p className="text-gray-400 text-sm">{(member as any).organization || 'N/A'}</p>
+                              <h3 className="font-oswald text-white text-h6">{member.name}</h3>
+                              <p className="text-body-sm text-gray-400 font-share-tech">{member.role}</p>
+                              <p className="text-gray-400 text-body-sm">{(member as any).organization || 'N/A'}</p>
                             </div>
                           </div>
                           <Badge 
                             variant={member.status === 'active' ? 'compvss' : 'compvss-outline'}
-                            className={member.status === 'active' ? 'bg-success-light text-success border-green-500/30' : ''}
+                            className={member.status === 'active' ? 'bg-success-light text-success border-success/30' : ''}
                           >
                             {member.status}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-6 text-sm text-gray-400 font-share-tech">
+                        <div className="flex items-center gap-6 text-body-sm text-gray-400 font-share-tech">
                           <div className="flex items-center gap-2">
                             <Mail className="w-4 h-4" />
                             <span>{member.email}</span>

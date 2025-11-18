@@ -138,24 +138,24 @@ export default function ReportPresetsPage() {
           {/* Summary Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-sm text-gray-400 mb-1">Total Presets</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-body-sm text-gray-400 mb-1">Total Presets</p>
+              <p className="text-h4 text-white">
                 {allPresetsData?.total || 200}
               </p>
             </div>
             <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-sm text-gray-400 mb-1">Categories</p>
-              <p className="text-2xl font-bold text-white">8</p>
+              <p className="text-body-sm text-gray-400 mb-1">Categories</p>
+              <p className="text-h4 text-white">8</p>
             </div>
             <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-sm text-gray-400 mb-1">Your Favorites</p>
-              <p className="text-2xl font-bold text-atlvs-green-500">
+              <p className="text-body-sm text-gray-400 mb-1">Your Favorites</p>
+              <p className="text-h4 text-atlvs-green-500">
                 {favoriteIds.length}
               </p>
             </div>
             <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-sm text-gray-400 mb-1">Showing</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-body-sm text-gray-400 mb-1">Showing</p>
+              <p className="text-h4 text-white">
                 {displayedPresets.length}
               </p>
             </div>
@@ -190,7 +190,7 @@ export default function ReportPresetsPage() {
 
         {/* Help Text */}
         <div className="mt-8 p-4 bg-atlvs-green-500/10 border border-atlvs-green-500/30 rounded-lg">
-          <p className="text-sm text-gray-300">
+          <p className="text-body-sm text-gray-300">
             <strong className="text-atlvs-green-500">💡 Tip:</strong> Each report preset is linked to a KPI calculation function. 
             Click &quot;Generate&quot; to create a report for a specific event or project. Star your most-used reports for quick access!
           </p>

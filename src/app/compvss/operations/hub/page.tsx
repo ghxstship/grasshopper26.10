@@ -49,10 +49,7 @@ export default function OperationsHubPage() {
           description="Real-time event operations monitoring"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Operations', href: '/compvss/operations' },
-            { label: 'Hub' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
@@ -73,15 +70,12 @@ export default function OperationsHubPage() {
           description="Real-time event operations monitoring"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Operations', href: '/compvss/operations' },
-            { label: 'Hub' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircleIcon className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Operations</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Operations</h2>
               <p className="text-gray-400 mb-4">{checkInsError.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetchCheckIns()}>
                 Try Again
@@ -115,10 +109,7 @@ export default function OperationsHubPage() {
         description="Real-time event operations monitoring"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Operations', href: '/compvss/operations' },
-          { label: 'Hub' }
-        ]}
+        
         actions={[
           {
             label: 'LIVE',
@@ -141,16 +132,16 @@ export default function OperationsHubPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
                     <div className={`p-2 rounded-lg ${
-                      stat.status === 'good' ? 'bg-green-500/10 text-success' : 'bg-warning/10 text-warning'
+                      stat.status === 'good' ? 'bg-success-light0/10 text-success' : 'bg-warning/10 text-warning'
                     }`}>
                       {stat.icon}
                     </div>
                     <div className={`w-2 h-2 rounded-full ${
-                      stat.status === 'good' ? 'bg-green-500' : 'bg-warning'
+                      stat.status === 'good' ? 'bg-success-light0' : 'bg-warning'
                     } animate-pulse`} />
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -193,14 +184,14 @@ export default function OperationsHubPage() {
                         <Badge 
                           variant={zone.status === 'operational' ? 'compvss' : 'compvss-outline'}
                           className={zone.status === 'operational' 
-                            ? 'bg-success-light text-success border-green-500/30' 
-                            : 'bg-warning-light text-warning border-yellow-500/30'
+                            ? 'bg-success-light text-success border-success/30' 
+                            : 'bg-warning-light text-warning border-warning/30'
                           }
                         >
                           {zone.status}
                         </Badge>
                       </div>
-                      <div className="flex items-center justify-between text-sm text-gray-400 font-share-tech">
+                      <div className="flex items-center justify-between text-body-sm text-gray-400 font-share-tech">
                         <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1">
                             <Users2 className="w-4 h-4" />
@@ -245,13 +236,13 @@ export default function OperationsHubPage() {
                       className="flex items-start gap-3 p-3 rounded-lg bg-black/50 border border-compvss-cyan-500/20"
                     >
                       <div className={`w-2 h-2 rounded-full mt-2 ${
-                        update.type === 'success' ? 'bg-green-500' :
+                        update.type === 'success' ? 'bg-success-light0' :
                         update.type === 'warning' ? 'bg-warning' :
                         'bg-info'
                       }`} />
                       <div className="flex-1">
-                        <p className="text-white font-oswald text-sm">{update.message}</p>
-                        <p className="text-xs text-gray-500 font-share-tech mt-1">{update.time}</p>
+                        <p className="text-white font-oswald text-body-sm">{update.message}</p>
+                        <p className="text-caption text-gray-500 font-share-tech mt-1">{update.time}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -268,7 +259,7 @@ export default function OperationsHubPage() {
           transition={{ delay: 0.7 }}
           className="mt-8"
         >
-          <h2 className="text-2xl font-bebas text-white mb-4">Quick Actions</h2>
+          <h2 className="text-h4 font-bebas text-white mb-4">Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link href="/compvss/operations/checkin">
               <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer">

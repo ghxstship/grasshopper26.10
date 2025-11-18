@@ -139,7 +139,7 @@ export default function ProjectDetailPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Project</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Project</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -184,7 +184,7 @@ export default function ProjectDetailPage() {
                     <TrendingUp className="w-4 h-4" />
                     Progress
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-atlvs-green-500">
+                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500">
                     65%
                   </CardTitle>
                 </div>
@@ -200,7 +200,7 @@ export default function ProjectDetailPage() {
                     <CheckCircle2 className="w-4 h-4" />
                     Tasks Complete
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     152/234
                   </CardTitle>
                 </div>
@@ -216,7 +216,7 @@ export default function ProjectDetailPage() {
                     <DollarSign className="w-4 h-4" />
                     Budget Used
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     $1.6M/$2.5M
                   </CardTitle>
                 </div>
@@ -232,7 +232,7 @@ export default function ProjectDetailPage() {
                     <Clock className="w-4 h-4" />
                     Days Remaining
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     45
                   </CardTitle>
                 </div>
@@ -249,7 +249,7 @@ export default function ProjectDetailPage() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
                 variant="ghost"
-                className={`pb-4 font-bebas text-lg rounded-none ${
+                className={`pb-4 font-bebas text-h6 rounded-none ${
                   activeTab === tab.id
                     ? 'text-atlvs-green-500 border-b-2 border-atlvs-green-500'
                     : 'text-gray-400 hover:text-gray-300'
@@ -271,7 +271,7 @@ export default function ProjectDetailPage() {
                 <Card variant="atlvs" className="bg-gray-900/50">
                   <CardHeader>
                     <CardTitle className="mb-4">Project Description</CardTitle>
-                    <CardDescription className="text-gray-300 leading-relaxed">
+                    <CardDescription className="text-gray-300">
                       A three-day outdoor music festival featuring 50+ artists across 4 stages. 
                       Expected attendance of 75,000 people per day. Full production including 
                       stage design, lighting, sound, video, and artist hospitality.
@@ -298,7 +298,7 @@ export default function ProjectDetailPage() {
                           }`} />
                           <div className="flex-1">
                             <p className="text-white font-oswald">{activity.action}</p>
-                            <p className="text-sm text-gray-400 mt-1">
+                            <p className="text-body-sm text-gray-400 mt-1">
                               {activity.user} • {activity.time}
                             </p>
                           </div>
@@ -316,28 +316,28 @@ export default function ProjectDetailPage() {
                   <CardHeader>
                     <CardTitle className="mb-4">Project Details</CardTitle>
                     <div className="space-y-3">
-                      <div className="flex items-center gap-3 text-sm">
+                      <div className="flex items-center gap-3 text-body-sm">
                         <Calendar className="w-4 h-4 text-gray-400" />
                         <div>
                           <div className="text-gray-400">Start Date</div>
                           <div className="text-white font-oswald">Jan 15, 2024</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 text-sm">
+                      <div className="flex items-center gap-3 text-body-sm">
                         <Calendar className="w-4 h-4 text-gray-400" />
                         <div>
                           <div className="text-gray-400">End Date</div>
                           <div className="text-white font-oswald">Jul 20, 2024</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 text-sm">
+                      <div className="flex items-center gap-3 text-body-sm">
                         <Users className="w-4 h-4 text-gray-400" />
                         <div>
                           <div className="text-gray-400">Team Size</div>
                           <div className="text-white font-oswald">45 members</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 text-sm">
+                      <div className="flex items-center gap-3 text-body-sm">
                         <FileText className="w-4 h-4 text-gray-400" />
                         <div>
                           <div className="text-gray-400">Documents</div>
@@ -367,13 +367,13 @@ export default function ProjectDetailPage() {
                             ) : (
                               <AlertCircle className="w-4 h-4 text-gray-500" />
                             )}
-                            <span className={`text-sm font-oswald ${
+                            <span className={`text-body-sm font-oswald ${
                               milestone.completed ? 'text-white' : 'text-gray-400'
                             }`}>
                               {milestone.name}
                             </span>
                           </div>
-                          <span className="text-xs text-gray-500">{milestone.date}</span>
+                          <span className="text-caption text-gray-500">{milestone.date}</span>
                         </div>
                       ))}
                     </div>

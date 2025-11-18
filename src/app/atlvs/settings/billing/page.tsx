@@ -29,7 +29,7 @@ export default function BillingSettingsPage() {
               <CardTitle className="mb-6">Current Plan</CardTitle>
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="text-2xl font-bebas atlvs-text-gradient mb-2">ENTERPRISE</div>
+                  <div className="text-h4 font-bebas atlvs-text-gradient mb-2">ENTERPRISE</div>
                   <div className="text-gray-400 mb-4">$299/month • Billed annually</div>
                   <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50">
                     Active
@@ -53,7 +53,7 @@ export default function BillingSettingsPage() {
                   </div>
                   <div>
                     <div className="font-medium">•••• •••• •••• 4242</div>
-                    <div className="text-sm text-gray-400">Expires 12/25</div>
+                    <div className="text-body-sm text-gray-400">Expires 12/25</div>
                   </div>
                 </div>
                 <Button variant="ghost" size="sm">Update</Button>
@@ -73,7 +73,7 @@ export default function BillingSettingsPage() {
                   <div key={i} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
                     <div>
                       <div className="font-medium mb-1">{invoice.date}</div>
-                      <div className="text-sm text-gray-400">{invoice.amount}</div>
+                      <div className="text-body-sm text-gray-400">{invoice.amount}</div>
                     </div>
                     <div className="flex items-center gap-3">
                       <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50">

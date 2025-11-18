@@ -91,8 +91,8 @@ export default function DataSourcesPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Total Sources</div>
-                <div className="text-3xl font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-gray-400 mb-1">Total Sources</div>
+                <div className="text-h3 font-bebas atlvs-text-gradient">
                   {dataSources.length}
                 </div>
               </CardHeader>
@@ -100,8 +100,8 @@ export default function DataSourcesPage() {
 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Connected</div>
-                <div className="text-3xl font-bebas text-atlvs-green-500">
+                <div className="text-body-sm text-gray-400 mb-1">Connected</div>
+                <div className="text-h3 font-bebas text-atlvs-green-500">
                   {dataSources.filter((ds: DataSource) => ds.status === 'connected').length}
                 </div>
               </CardHeader>
@@ -109,8 +109,8 @@ export default function DataSourcesPage() {
 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Errors</div>
-                <div className="text-3xl font-bebas text-error">
+                <div className="text-body-sm text-gray-400 mb-1">Errors</div>
+                <div className="text-h3 font-bebas text-error">
                   {dataSources.filter(ds => ds.status === '_error').length}
                 </div>
               </CardHeader>
@@ -118,8 +118,8 @@ export default function DataSourcesPage() {
 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Total Records</div>
-                <div className="text-3xl font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-gray-400 mb-1">Total Records</div>
+                <div className="text-h3 font-bebas atlvs-text-gradient">
                   {dataSources.reduce((sum: number, ds: DataSource) => sum + (ds.recordCount || 0), 0).toLocaleString()}
                 </div>
               </CardHeader>
@@ -138,13 +138,13 @@ export default function DataSourcesPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-lg font-medium">{source.name}</h3>
+                          <h3 className="text-h6">{source.name}</h3>
                           <Badge variant="atlvs-outline" className={getStatusColor(source.status || 'unknown')}>
                             {getStatusIcon(source.status || 'unknown')}
                             <span className="ml-1">{(source.status || 'unknown').toUpperCase()}</span>
                           </Badge>
                         </div>
-                        <div className="grid grid-cols-3 gap-4 text-sm">
+                        <div className="grid grid-cols-3 gap-4 text-body-sm">
                           <div>
                             <div className="text-gray-400 mb-1">Type</div>
                             <div>{source.type}</div>

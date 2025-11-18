@@ -7,7 +7,7 @@ import { use } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Calendar, Users, Music, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -56,7 +56,7 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
               </div>
               
               <div className="text-center mb-12">
-                <h1 className="text-6xl font-bebas text-white mb-4">{artist.name}</h1>
+                <h1 className="text-h1 font-bebas text-white mb-4">{artist.name}</h1>
                 <Badge variant="gvteway" className="mb-4">{artist.genre}</Badge>
                 <div className="flex items-center justify-center gap-2 text-gray-400">
                   <Users className="w-5 h-5" />
@@ -66,15 +66,15 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
                 <Button variant="gvteway" size="lg" className="mt-6">Follow Artist</Button>
               </div>
 
-              <h2 className="text-3xl font-bebas text-white mb-6">Upcoming Shows</h2>
+              <h2 className="text-h3 font-bebas text-white mb-6">Upcoming Shows</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {events && events.length > 0 ? (
                   events.map((event) => (
                     <Link key={event.id} href={`/gvteway/events/${event.id}`}>
                       <Card variant="gvteway" className="bg-gray-900/50 hover:scale-105 transition-transform cursor-pointer">
                         <CardContent className="p-6">
-                          <h3 className="text-2xl font-bebas text-white mb-3">{event.name}</h3>
-                          <div className="space-y-2 text-gray-400 text-sm mb-4">
+                          <h3 className="text-h4 font-bebas text-white mb-3">{event.name}</h3>
+                          <div className="space-y-2 text-gray-400 text-body-sm mb-4">
                             <div className="flex items-center">
                               <Calendar className="w-4 h-4 mr-2" />
                               {new Date(event.startDate).toLocaleDateString()}
@@ -82,7 +82,7 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
                             <div>{event.location || 'Venue TBA'}</div>
                           </div>
                           <div className="flex items-center justify-between">
-                            <span className="text-lg font-bebas text-gvteway-red-500">View Event</span>
+                            <span className="text-h6 font-bebas text-gvteway-red-500">View Event</span>
                             <Button variant="gvteway" size="sm">Get Tickets</Button>
                           </div>
                         </CardContent>

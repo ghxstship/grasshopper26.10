@@ -72,7 +72,7 @@ describe('Card Components', () => {
     it('applies correct styling', () => {
       render(<CardTitle>Title</CardTitle>)
       const title = screen.getByRole('heading', { level: 3 })
-      expect(title).toHaveClass('font-bebas', 'text-2xl', 'tracking-wide')
+      expect(title).toHaveClass('font-bebas', 'text-h4', 'tracking-wide')
     })
 
     it('applies custom className', () => {
@@ -93,7 +93,7 @@ describe('Card Components', () => {
     it('applies correct styling', () => {
       render(<CardDescription>Description</CardDescription>)
       const description = screen.getByText('Description')
-      expect(description).toHaveClass('font-share-tech', 'text-sm', 'text-gray-600')
+      expect(description).toHaveClass('font-share-tech', 'text-body-sm', 'text-gray-600')
     })
 
     it('applies custom className', () => {

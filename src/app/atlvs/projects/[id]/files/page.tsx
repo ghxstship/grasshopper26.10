@@ -58,7 +58,7 @@ export default function ProjectFilesPage({ params }: { params: { id: string } })
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Project</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Project</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -128,11 +128,11 @@ export default function ProjectFilesPage({ params }: { params: { id: string } })
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-sm text-gray-400 mb-1">Storage Used</div>
-                <div className="text-2xl font-bebas">8.7 GB <span className="text-gray-500">/ 50 GB</span></div>
+                <div className="text-body-sm text-gray-400 mb-1">Storage Used</div>
+                <div className="text-h4 font-bebas">8.7 GB <span className="text-gray-500">/ 50 GB</span></div>
               </div>
               <div className="w-48 h-2 bg-gray-800 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500" style={{ width: '17.4%' }} />
+                <div className="h-full bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500 w-[17.4%]" />
               </div>
             </div>
           </CardHeader>
@@ -167,9 +167,9 @@ export default function ProjectFilesPage({ params }: { params: { id: string } })
                     </div>
                     <div className="font-medium mb-1 truncate">{file.name}</div>
                     {file.size && (
-                      <div className="text-sm text-gray-400 mb-2">{file.size}</div>
+                      <div className="text-body-sm text-gray-400 mb-2">{file.size}</div>
                     )}
-                    <div className="flex items-center justify-between text-xs text-gray-500">
+                    <div className="flex items-center justify-between text-caption text-gray-500">
                       <span>{file.owner}</span>
                       <span>{file.modified}</span>
                     </div>
@@ -195,7 +195,7 @@ export default function ProjectFilesPage({ params }: { params: { id: string } })
                       )}
                       <div className="flex-1">
                         <div className="font-medium">{file.name}</div>
-                        <div className="text-sm text-gray-400">
+                        <div className="text-body-sm text-gray-400">
                           {file.owner} • {file.modified}
                         </div>
                       </div>

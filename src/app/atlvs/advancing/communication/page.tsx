@@ -144,7 +144,7 @@ export default function AdvancingCommunicationPage() {
                           <span className="w-2 h-2 rounded-full bg-atlvs-green-500" />
                         )}
                       </div>
-                      <span className="text-sm text-gray-400">{msg.time}</span>
+                      <span className="text-body-sm text-gray-400">{msg.time}</span>
                     </div>
                     <div className="text-gray-300">{msg.message}</div>
                   </div>
@@ -179,7 +179,7 @@ export default function AdvancingCommunicationPage() {
                   onChange={(e) => setMessageText(e.target.value)}
                   disabled={isSending}
                 />
-                <div className="text-xs text-gray-400 mt-1">
+                <div className="text-caption text-gray-400 mt-1">
                   {messageText.length}/500 characters
                 </div>
               </FormField>

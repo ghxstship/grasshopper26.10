@@ -136,7 +136,7 @@ export default function AdvancingDetailPage({ params }: { params: { id: string }
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Request</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Request</h2>
             <p className="text-gray-400 mb-4">{error?.message || 'Request not found'}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -180,12 +180,12 @@ export default function AdvancingDetailPage({ params }: { params: { id: string }
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Request Details</CardTitle>
-                <p className="text-gray-300 leading-relaxed mb-6">{request.description}</p>
+                <p className="text-gray-300 mb-6">{request.description}</p>
                 
                 <div className="grid grid-cols-2 gap-4">
                   {Object.entries(request.details).map(([key, value]) => (
                     <div key={key} className="p-3 bg-gray-800/50 rounded-lg">
-                      <div className="text-sm text-gray-400 mb-1">
+                      <div className="text-body-sm text-gray-400 mb-1">
                         {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
                       </div>
                       <div className="font-medium">{String(value)}</div>
@@ -217,14 +217,14 @@ export default function AdvancingDetailPage({ params }: { params: { id: string }
                           <span className="font-medium">
                             {event.status.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                           </span>
-                          <Badge variant="atlvs-outline" className="bg-gray-700/50 text-xs">
+                          <Badge variant="atlvs-outline" className="bg-gray-700/50 text-caption">
                             {event.user}
                           </Badge>
                         </div>
-                        <div className="text-sm text-gray-400 mb-1">
+                        <div className="text-body-sm text-gray-400 mb-1">
                           {new Date(event.date).toLocaleString()}
                         </div>
-                        <div className="text-sm text-gray-300">{event.note}</div>
+                        <div className="text-body-sm text-gray-300">{event.note}</div>
                       </div>
                     </div>
                   ))}
@@ -242,13 +242,13 @@ export default function AdvancingDetailPage({ params }: { params: { id: string }
                 <div className="space-y-4">
                   {request.comments.map((comment: any) => (
                     <div key={comment.id} className="flex gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-lg">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h6">
                         {comment.user.split(' ').map((n: string) => n[0]).join('')}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="font-medium">{comment.user}</span>
-                          <span className="text-sm text-gray-500">{comment.time}</span>
+                          <span className="text-body-sm text-gray-500">{comment.time}</span>
                         </div>
                         <p className="text-gray-300">{comment.text}</p>
                       </div>
@@ -294,21 +294,21 @@ export default function AdvancingDetailPage({ params }: { params: { id: string }
                 <CardTitle className="mb-4">Request Info</CardTitle>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <User className="w-4 h-4" />
                       Requested By
                     </div>
                     <div className="font-medium">{request.requestedBy}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       Requested
                     </div>
                     <div className="font-medium">{new Date(request.requestedAt).toLocaleString()}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
                       Due Date
                     </div>
@@ -333,7 +333,7 @@ export default function AdvancingDetailPage({ params }: { params: { id: string }
                     >
                       <div className="flex-1 min-w-0">
                         <div className="font-medium truncate">{file.name}</div>
-                        <div className="text-sm text-gray-400">{file.size}</div>
+                        <div className="text-body-sm text-gray-400">{file.size}</div>
                       </div>
                     </div>
                   ))}

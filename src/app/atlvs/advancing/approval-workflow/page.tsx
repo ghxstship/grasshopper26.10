@@ -109,7 +109,7 @@ export default function ApprovalWorkflowPage() {
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load Workflow</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load Workflow</h3>
                 <p className="text-gray-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
@@ -120,8 +120,8 @@ export default function ApprovalWorkflowPage() {
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium text-gray-400">Overall Progress</span>
-                  <span className="text-sm font-medium">
+                  <span className="text-body-sm text-gray-400">Overall Progress</span>
+                  <span className="text-body-sm">
                     {progress.approved} of {progress.total} approved ({progress.percentage}%)
                   </span>
                 </div>
@@ -152,23 +152,23 @@ export default function ApprovalWorkflowPage() {
                           <div className="flex items-start justify-between mb-2">
                             <div>
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="text-sm font-medium text-gray-400">Step {step.step}</span>
+                                <span className="text-body-sm text-gray-400">Step {step.step}</span>
                                 <Badge variant="atlvs-outline" className={getStatusColor(step.status)}>
                                   {step.status.charAt(0).toUpperCase() + step.status.slice(1)}
                                 </Badge>
                               </div>
                               <div className="font-semibold">{step.approver}</div>
-                              <div className="text-sm text-gray-400">{step.role}</div>
+                              <div className="text-body-sm text-gray-400">{step.role}</div>
                             </div>
                             {step.date && (
-                              <p className="text-xs text-gray-500">
+                              <p className="text-caption text-gray-500">
                                 Last updated: {new Date().toLocaleString()}
                               </p>
                             )}
                           </div>
                           {step.comments && (
                             <div className="mt-3 pt-3 border-t border-gray-700">
-                              <div className="text-sm text-gray-300">{step.comments}</div>
+                              <div className="text-body-sm text-gray-300">{step.comments}</div>
                             </div>
                           )}
                         </div>
@@ -186,7 +186,7 @@ export default function ApprovalWorkflowPage() {
                     <Clock className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
                     <div>
                       <div className="font-medium text-warning mb-1">Pending Approval</div>
-                      <div className="text-sm text-gray-300">
+                      <div className="text-body-sm text-gray-300">
                         Waiting for {approvalSteps.find((s: ApprovalStep) => s.status === 'pending')?.approver} to review and approve.
                       </div>
                     </div>

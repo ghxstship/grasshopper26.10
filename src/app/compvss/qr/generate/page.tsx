@@ -90,10 +90,7 @@ export default function GenerateQRPage() {
         description="Create new QR codes for access and tracking"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'QR System', href: '/compvss/qr/hub' },
-          { label: 'Generate' }
-        ]}
+        
       >
         <div className="max-w-4xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-8">
@@ -201,7 +198,7 @@ export default function GenerateQRPage() {
 
                   {/* Error Message */}
                   {generateQRMutation.error && (
-                    <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                    <div className="p-3 rounded-lg bg-destructive/100/10 border border-destructive/20 text-destructive text-body-sm">
                       {generateQRMutation.error.message || 'Failed to generate QR code'}
                     </div>
                   )}
@@ -253,10 +250,10 @@ export default function GenerateQRPage() {
                     {/* QR Details */}
                     <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                       <h3 className="font-oswald text-white mb-2">{formData.name}</h3>
-                      <p className="text-sm text-gray-400 font-share-tech mb-3">
+                      <p className="text-body-sm text-gray-400 font-share-tech mb-3">
                         Type: {formData.type}
                       </p>
-                      <div className="text-xs text-gray-500 font-share-tech">
+                      <div className="text-caption text-gray-500 font-share-tech">
                         ID: {qrData?.id || 'Generating...'}
                       </div>
                     </div>

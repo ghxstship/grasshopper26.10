@@ -180,7 +180,7 @@ export default function AssetsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Assets</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Assets</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -246,7 +246,7 @@ export default function AssetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Assets
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${statusCounts.all} total assets`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${statusCounts.all} total assets`}>
                     {statusCounts.all}
                   </CardTitle>
                 </div>
@@ -264,7 +264,7 @@ export default function AssetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Available
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-atlvs-green-500" aria-label={`${statusCounts.available} assets available`}>
+                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500" aria-label={`${statusCounts.available} assets available`}>
                     {statusCounts.available}
                   </CardTitle>
                 </div>
@@ -282,7 +282,7 @@ export default function AssetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     In Use
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-info" aria-label={`${statusCounts['in-use']} assets in use`}>
+                  <CardTitle className="text-h3 font-bebas text-info" aria-label={`${statusCounts['in-use']} assets in use`}>
                     {statusCounts['in-use']}
                   </CardTitle>
                 </div>
@@ -300,11 +300,11 @@ export default function AssetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Value
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${formatCurrency(totalValue)} total asset value`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${formatCurrency(totalValue)} total asset value`}>
                     {formatCurrency(totalValue)}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-purple-500/10 rounded-xl" aria-hidden="true">
+                <div className="p-3 bg-accent/100/10 rounded-xl" aria-hidden="true">
                   <Package className="w-6 h-6 text-atlvs-purple-500" aria-hidden="true" />
                 </div>
               </div>
@@ -397,10 +397,10 @@ export default function AssetsPage() {
                           {getCategoryIcon(asset.category)}
                         </div>
                         <div className="flex-1">
-                          <Badge variant="atlvs-outline" className="text-xs mb-2">
+                          <Badge variant="atlvs-outline" className="text-caption mb-2">
                             {asset.id}
                           </Badge>
-                          <CardTitle className="text-white text-sm">
+                          <CardTitle className="text-white text-body-sm">
                             {asset.name}
                           </CardTitle>
                         </div>
@@ -421,7 +421,7 @@ export default function AssetsPage() {
                     </div>
 
                     {/* Details */}
-                    <div className="space-y-2 text-sm">
+                    <div className="space-y-2 text-body-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-400">Location:</span>
                         <span className="text-white">{asset.location}</span>
@@ -446,11 +446,11 @@ export default function AssetsPage() {
 
                     {/* QR Code */}
                     <div className="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-xs text-gray-400">
+                      <div className="flex items-center gap-2 text-caption text-gray-400">
                         <QrCode className="w-3 h-3" />
                         <span>{asset.qrCode}</span>
                       </div>
-                      <Button variant="ghost" size="sm" className="text-xs">
+                      <Button variant="ghost" size="sm" className="text-caption">
                         View Details
                       </Button>
                     </div>

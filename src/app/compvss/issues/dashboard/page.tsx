@@ -1,13 +1,15 @@
 'use client';
 
-
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
+
 import { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { AlertCircle, Filter, Search, Clock, CheckCircle2, AlertTriangle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -15,14 +17,28 @@ import { Input } from '@/components/atoms/Input';
 import { useIssues } from '@/lib/hooks/compvss/useIssues';
 
 export default function IssuesDashboardPage() {
+  const router = useRouter();
   const breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Issues', href: '/compvss/issues/dashboard' },
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
-      <IssuesDashboardContent />
+    <CompvssLayout>
+      <ContentLayout
+        title="Issues Dashboard"
+        description="Track and manage reported issues"
+        variant="compvss"
+        breadcrumbs={breadcrumbs}
+        primaryAction={{
+          label: 'Report Issue',
+          icon: <AlertCircle className="w-5 h-5" />,
+          onClick: () => router.push('/compvss/issues/new'),
+          variant: 'compvss'
+        }}
+      >
+        <IssuesDashboardContent />
+      </ContentLayout>
     </CompvssLayout>
   );
 }
@@ -55,7 +71,7 @@ function IssuesDashboardContent() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-          <h2 className="text-xl font-bebas mb-2">Failed to Load Issues</h2>
+          <h2 className="text-h5 font-bebas mb-2">Failed to Load Issues</h2>
           <p className="text-gray-400 mb-4">{error.message}</p>
           <Button variant="compvss" onClick={() => refetch()}>
             Try Again
@@ -75,13 +91,13 @@ function IssuesDashboardContent() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'critical':
-        return 'bg-error-light text-error border-red-500/30';
+        return 'bg-error-light text-error border-destructive/30';
       case 'high':
-        return 'bg-orange-500/20 text-atlvs-orange-500 border-orange-500/30';
+        return 'bg-warning-light0/20 text-atlvs-orange-500 border-warning/30';
       case 'medium':
-        return 'bg-warning-light text-warning border-yellow-500/30';
+        return 'bg-warning-light text-warning border-warning/30';
       case 'low':
-        return 'bg-success-light text-success border-green-500/30';
+        return 'bg-success-light text-success border-success/30';
       default:
         return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
     }
@@ -90,43 +106,18 @@ function IssuesDashboardContent() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'open':
-        return 'bg-warning-light text-warning border-yellow-500/30';
+        return 'bg-warning-light text-warning border-warning/30';
       case 'in_progress':
-        return 'bg-info-light text-info border-blue-500/30';
+        return 'bg-info-light text-info border-info/30';
       case 'resolved':
-        return 'bg-success-light text-success border-green-500/30';
+        return 'bg-success-light text-success border-success/30';
       default:
         return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
     }
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">Issues Dashboard</h1>
-              <p className="text-gray-400 font-oswald mt-1">Track and manage reported issues</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button variant="compvss-ghost" size="sm">
-                <Filter className="w-4 h-4 mr-2" />
-                Filter
-              </Button>
-              <Link href="/compvss/issues/new">
-                <Button variant="compvss" size="lg">
-                  <AlertCircle className="w-5 h-5 mr-2" />
-                  Report Issue
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {statsDisplay.map((stat, index) => (
@@ -141,8 +132,8 @@ function IssuesDashboardContent() {
                   <div className={`p-2 bg-black/50 rounded-lg ${stat.color} w-fit mb-2`}>
                     {stat.icon}
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -192,7 +183,7 @@ function IssuesDashboardContent() {
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-xs text-gray-500 font-share-tech">{issue.id}</span>
+                              <span className="text-caption text-gray-500 font-share-tech">{issue.id}</span>
                               <Badge variant="compvss-outline" className={getPriorityColor(issue.priority)}>
                                 {issue.priority}
                               </Badge>
@@ -200,11 +191,11 @@ function IssuesDashboardContent() {
                                 {issue.status.replace('_', ' ')}
                               </Badge>
                             </div>
-                            <h3 className="font-oswald text-white text-lg mb-1">{issue.title}</h3>
-                            <p className="text-sm text-gray-400 font-share-tech mb-2">
+                            <h3 className="font-oswald text-white text-h6 mb-1">{issue.title}</h3>
+                            <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                               {issue.category} • {issue.location}
                             </p>
-                            <div className="flex items-center gap-4 text-xs text-gray-500 font-share-tech">
+                            <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
                               <span>Reported by {issue.reporter}</span>
                               <span>•</span>
                               <span>{issue.time}</span>
@@ -219,7 +210,6 @@ function IssuesDashboardContent() {
             </CardContent>
           </Card>
         </motion.div>
-      </div>
-    </div>
+    </>
   );
 }

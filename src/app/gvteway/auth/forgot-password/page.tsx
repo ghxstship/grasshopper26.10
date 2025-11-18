@@ -1,23 +1,18 @@
 'use client';
 
-
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Mail, ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
-import { FormField } from '@/components/molecules/FormField';
+import { Mail, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
+import { PageTitle, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,133 +26,105 @@ export default function ForgotPasswordPage() {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || 'Failed to send reset email');
+        throw new Error(data.error || 'Failed to send reset email');
       }
 
-      setSubmitted(true);
-    } catch (err: any) {
-      setError(err.message || 'An error occurred. Please try again.');
+      setSuccess(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <GvtewayLayout showNav={false}>
-    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      
-      <motion.div
-        className="absolute top-20 right-20 w-96 h-96 bg-gvteway-red-500/20 rounded-full blur-3xl"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-
-      <div className="relative z-10 w-full max-w-md">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+    <GvtewayLayout>
+      <section className="section-padding">
+        <div className="max-w-md mx-auto px-8">
           <div className="text-center mb-8">
-            <Link href="/gvteway">
-              <h1 className="text-5xl font-anton gvteway-text-gradient mb-2 cursor-pointer">
-                GVTEWAY
-              </h1>
-            </Link>
-            <p className="text-gray-400 font-oswald">Reset your password</p>
+            <PageTitle className="mb-4 uppercase text-ghxst-primary">Reset Password</PageTitle>
+            <BodyText className="text-ghxst-text-secondary">
+              Enter your email and we&apos;ll send you a reset link
+            </BodyText>
           </div>
 
-          <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-white text-2xl">Forgot Password?</CardTitle>
-              <CardDescription className="text-gray-400">
-                {submitted 
-                  ? 'Check your email for reset instructions'
-                  : 'Enter your email and we will send you reset instructions'}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {!submitted ? (
-                <>
-                  {/* Error Message */}
-                  {error && (
-                    <div className="mb-4 p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
-                      <AlertCircle className="w-5 h-5 text-error" />
-                      <p className="text-sm text-error font-share-tech">{error}</p>
-                    </div>
-                  )}
+          {error && (
+            <div className="mb-6 p-4 bg-destructive/10 border-2 border-destructive rounded-lg flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+              <BodyText className="text-destructive-foreground text-body-sm">{error}</BodyText>
+            </div>
+          )}
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                  <FormField label="Email Address">
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="you@example.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        disabled={isLoading}
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </FormField>
-
-                  <Button 
-                    type="submit" 
-                    variant="gvteway" 
-                    size="lg" 
-                    className="w-full" 
-                    rounded="full"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      'Send Reset Link'
-                    )}
-                  </Button>
-                </form>
-                </>
-              ) : (
-                <div className="text-center py-4">
-                  <div className="w-16 h-16 bg-gvteway-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-8 h-8 text-gvteway-red-500" />
+          {success ? (
+            <div className="space-y-6">
+              <div className="p-6 bg-success-light border-2 border-success-border rounded-lg">
+                <div className="flex items-start gap-3 mb-4">
+                  <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-0.5" />
+                  <div>
+                    <BodyText className="text-success-foreground mb-2">
+                      Check your email
+                    </BodyText>
+                    <BodyText className="text-success-foreground text-body-sm">
+                      We&apos;ve sent a password reset link to <strong>{email}</strong>
+                    </BodyText>
                   </div>
-                  <p className="text-gray-300 mb-6">
-                    We have sent password reset instructions to <strong>{email}</strong>
-                  </p>
-                  <Button 
-                    variant="gvteway-outline" 
-                    size="lg" 
-                    className="w-full" 
-                    rounded="full"
-                    onClick={() => setSubmitted(false)}
-                  >
-                    Try Another Email
-                  </Button>
                 </div>
-              )}
+                <BodyText className="text-success-foreground text-body-sm">
+                  Didn&apos;t receive the email? Check your spam folder or try again.
+                </BodyText>
+              </div>
 
-              <div className="mt-6 text-center">
-                <Link href="/gvteway/auth/login" className="inline-flex items-center text-sm text-gray-400 hover:text-gray-300">
+              <Link href="/gvteway/auth/login">
+                <Button variant="secondary" size="lg" className="w-full">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Sign In
-                </Link>
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="email" className="block mb-2">
+                  <Metadata className="text-ghxst-text-primary">Email</Metadata>
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ghxst-text-secondary" />
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    required
+                    disabled={isLoading}
+                    className="pl-12"
+                  />
+                </div>
               </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
-    </div>
+
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                className="w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Sending...' : 'Send Reset Link'}
+              </Button>
+
+              <Link href="/gvteway/auth/login">
+                <Button variant="secondary" size="lg" className="w-full">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Sign In
+                </Button>
+              </Link>
+            </form>
+          )}
+        </div>
+      </section>
     </GvtewayLayout>
   );
 }

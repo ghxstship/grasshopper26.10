@@ -57,10 +57,7 @@ export default function QRScanPage() {
         description="Scan QR codes for access and tracking"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'QR System', href: '/compvss/qr/hub' },
-          { label: 'Scan' }
-        ]}
+        
         actions={[
           {
             label: 'History',
@@ -85,7 +82,7 @@ export default function QRScanPage() {
                     <div className="w-32 h-32 mx-auto mb-6 bg-compvss-cyan-500/10 rounded-full flex items-center justify-center">
                       <QrCode className="w-16 h-16 text-compvss-cyan-500" />
                     </div>
-                    <h2 className="text-2xl font-bebas text-white mb-2">Ready to Scan</h2>
+                    <h2 className="text-h4 font-bebas text-white mb-2">Ready to Scan</h2>
                     <p className="text-gray-400 font-oswald mb-6">
                       Position QR code within the camera frame
                     </p>
@@ -106,7 +103,7 @@ export default function QRScanPage() {
                       <div className="absolute inset-0 bg-gradient-to-b from-compvss-cyan-500/20 to-transparent animate-pulse" />
                       <div className="absolute top-0 left-0 right-0 h-1 bg-compvss-cyan-500 animate-scan" />
                     </div>
-                    <h2 className="text-2xl font-bebas text-white mb-2">Scanning...</h2>
+                    <h2 className="text-h4 font-bebas text-white mb-2">Scanning...</h2>
                     <p className="text-gray-400 font-oswald">
                       Hold steady and align QR code
                     </p>
@@ -119,27 +116,27 @@ export default function QRScanPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="py-12"
                   >
-                    <div className="w-32 h-32 mx-auto mb-6 bg-green-500/10 rounded-full flex items-center justify-center">
+                    <div className="w-32 h-32 mx-auto mb-6 bg-success-light0/10 rounded-full flex items-center justify-center">
                       <CheckCircle2 className="w-16 h-16 text-success" />
                     </div>
-                    <h2 className="text-2xl font-bebas text-white mb-2">Scan Successful</h2>
+                    <h2 className="text-h4 font-bebas text-white mb-2">Scan Successful</h2>
                     <div className="max-w-md mx-auto mb-6">
                       <div className="p-6 rounded-lg bg-black/50 border border-compvss-cyan-500/30 text-left">
                         <div className="flex items-center justify-between mb-4">
-                          <span className="text-sm text-gray-400 font-share-tech">Type</span>
+                          <span className="text-body-sm text-gray-400 font-share-tech">Type</span>
                           <Badge variant="compvss">{lastScan.type}</Badge>
                         </div>
                         <div className="mb-4">
-                          <span className="text-sm text-gray-400 font-share-tech block mb-1">Name</span>
+                          <span className="text-body-sm text-gray-400 font-share-tech block mb-1">Name</span>
                           <span className="text-white font-oswald">{lastScan.name}</span>
                         </div>
                         <div className="mb-4">
-                          <span className="text-sm text-gray-400 font-share-tech block mb-1">Details</span>
+                          <span className="text-body-sm text-gray-400 font-share-tech block mb-1">Details</span>
                           <span className="text-white font-oswald">{lastScan.details}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-400 font-share-tech">Status</span>
-                          <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">
+                          <span className="text-body-sm text-gray-400 font-share-tech">Status</span>
+                          <Badge variant="compvss" className="bg-success-light text-success border-success/30">
                             Valid
                           </Badge>
                         </div>
@@ -201,16 +198,16 @@ export default function QRScanPage() {
                           )}
                           <span className="font-oswald text-white">{scan.name}</span>
                         </div>
-                        <p className="text-sm text-gray-400 font-share-tech">{scan.type}</p>
+                        <p className="text-body-sm text-gray-400 font-share-tech">{scan.type}</p>
                       </div>
                       <Badge 
                         variant={scan.status === 'valid' ? 'compvss' : 'compvss-outline'}
-                        className={scan.status === 'valid' ? 'bg-success-light text-success border-green-500/30' : ''}
+                        className={scan.status === 'valid' ? 'bg-success-light text-success border-success/30' : ''}
                       >
                         {scan.status}
                       </Badge>
                     </div>
-                    <div className="flex items-center justify-between text-xs text-gray-500 font-share-tech">
+                    <div className="flex items-center justify-between text-caption text-gray-500 font-share-tech">
                       <span>ID: {scan.id}</span>
                       <span>{scan.time}</span>
                     </div>

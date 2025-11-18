@@ -50,7 +50,7 @@ export function DataFetchingPattern<T>({
         <CardHeader>
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h3 className="text-lg font-bebas mb-2">Failed to Load Data</h3>
+            <h3 className="text-h6 font-bebas mb-2">Failed to Load Data</h3>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={refetch}>
               Try Again
@@ -259,7 +259,7 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
   return (
     <div className="text-center py-12">
       <div className="flex justify-center mb-4 opacity-50">{icon}</div>
-      <h3 className="text-lg font-bebas mb-2">{title}</h3>
+      <h3 className="text-h6 font-bebas mb-2">{title}</h3>
       {description && <p className="text-gray-400 mb-4">{description}</p>}
       {action && (
         <Button variant="atlvs" onClick={action.onClick}>
@@ -343,7 +343,7 @@ export function getStatusColor(status: string, _variant: 'atlvs' | 'compvss' | '
 export function getPriorityColor(priority: string) {
   const colors = {
     urgent: 'bg-error',
-    high: 'bg-orange-500',
+    high: 'bg-warning-light0',
     medium: 'bg-warning',
     low: 'bg-info'
   };

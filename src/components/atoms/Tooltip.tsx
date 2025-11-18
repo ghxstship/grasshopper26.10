@@ -33,7 +33,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       {isVisible && (
         <div
           className={cn(
-            "absolute z-50 px-3 py-2 text-sm font-share-tech text-white bg-gray-900 rounded-lg shadow-lg whitespace-nowrap pointer-events-none",
+            "absolute z-50 px-3 py-2 text-body-sm font-share-tech text-white bg-gray-900 rounded-lg shadow-lg whitespace-nowrap pointer-events-none",
             sideStyles[side],
             className
           )}

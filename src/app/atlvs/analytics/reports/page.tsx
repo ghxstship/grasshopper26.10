@@ -52,7 +52,7 @@ export default function ReportsPage() {
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Reports</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Reports</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>
                 Try Again
@@ -99,29 +99,29 @@ export default function ReportsPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Total Reports</div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">24</div>
+              <div className="text-body-sm text-gray-400 mb-1">Total Reports</div>
+              <div className="text-h3 font-bebas atlvs-text-gradient">24</div>
             </CardHeader>
           </Card>
 
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">This Month</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">8</div>
+              <div className="text-body-sm text-gray-400 mb-1">This Month</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500">8</div>
             </CardHeader>
           </Card>
 
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Scheduled</div>
-              <div className="text-3xl font-bebas text-atlvs-purple-500">5</div>
+              <div className="text-body-sm text-gray-400 mb-1">Scheduled</div>
+              <div className="text-h3 font-bebas text-atlvs-purple-500">5</div>
             </CardHeader>
           </Card>
 
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Downloads</div>
-              <div className="text-3xl font-bebas text-info">142</div>
+              <div className="text-body-sm text-gray-400 mb-1">Downloads</div>
+              <div className="text-h3 font-bebas text-info">142</div>
             </CardHeader>
           </Card>
         </div>
@@ -154,7 +154,7 @@ export default function ReportsPage() {
                     </div>
                     <div className="flex-1">
                       <div className="font-medium mb-1">{report.name}</div>
-                      <div className="flex items-center gap-3 text-sm text-gray-400">
+                      <div className="flex items-center gap-3 text-body-sm text-gray-400">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
                           {report.period}
@@ -182,7 +182,7 @@ export default function ReportsPage() {
 
         {/* Report Templates */}
         <div className="mt-6">
-          <h2 className="text-2xl font-bebas mb-4 atlvs-text-gradient">REPORT TEMPLATES</h2>
+          <h2 className="text-h4 font-bebas mb-4 atlvs-text-gradient">REPORT TEMPLATES</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { name: 'Project Summary', type: 'project', icon: <BarChart3 className="w-6 h-6" /> },

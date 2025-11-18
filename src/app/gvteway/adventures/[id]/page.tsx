@@ -6,7 +6,7 @@ export const runtime = 'edge';
 import { motion } from 'framer-motion';
 import { Calendar, Users, Clock, MapPin, Loader2, AlertCircle } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { useAdventure } from '@/lib/hooks/gvteway/useAdventures';
@@ -35,7 +35,7 @@ export default function AdventureDetailPage() {
       <GvtewayLayout>
         <div className="flex flex-col items-center justify-center min-h-screen">
           <AlertCircle className="w-12 h-12 text-error mb-4" />
-          <h2 className="text-2xl font-bebas text-white mb-2">Adventure Not Found</h2>
+          <h2 className="text-h4 font-bebas text-white mb-2">Adventure Not Found</h2>
           <p className="text-gray-400">{error?.message || 'This adventure could not be loaded'}</p>
         </div>
       </GvtewayLayout>
@@ -51,7 +51,7 @@ export default function AdventureDetailPage() {
               <div className="h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl mb-8" />
               <div className="grid lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
-                  <h1 className="text-5xl font-bebas text-white mb-4">{adventure.name || 'BACKSTAGE VIP EXPERIENCE'}</h1>
+                  <h1 className="text-h1 font-bebas text-white mb-4">{adventure.name || 'BACKSTAGE VIP EXPERIENCE'}</h1>
                   <p className="text-gray-300 mb-6">{adventure.description || 'Get exclusive backstage access and meet the artists in person.'}</p>
                   <div className="grid md:grid-cols-2 gap-4 mb-6">
                     <div className="flex items-center text-gray-300">
@@ -75,7 +75,7 @@ export default function AdventureDetailPage() {
                 <div>
                   <Card variant="gvteway" className="bg-gray-900/50 sticky top-24">
                     <CardContent className="p-6">
-                      <p className="text-4xl font-bebas text-gvteway-red-500 mb-6">${adventure.price || '499.99'}</p>
+                      <p className="text-h2 font-bebas text-gvteway-red-500 mb-6">${adventure.price || '499.99'}</p>
                       <Button variant="gvteway" size="lg" className="w-full">Book Now</Button>
                     </CardContent>
                   </Card>

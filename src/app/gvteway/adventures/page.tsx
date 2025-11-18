@@ -1,212 +1,200 @@
 'use client';
 
+import { GvtewayLayout } from "@/components/templates/GvtewayLayout";
+import { PageTitle, SectionHeader, CardTitle, BodyText, Metadata } from "@/components/atoms/Typography";
+import { CategoryTab } from "@/components/atoms/CategoryTab";
+import { Button } from "@/components/atoms/Button";
+import { Badge } from "@/components/atoms/Badge";
+import { Sparkles, MapPin, Clock, Users, Star, Compass } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
-import { useMemo, useState } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { AlertCircle, Clock, Filter, Loader2, MapPin, Star, TrendingUp, Users } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
-import { Button } from '@/components/atoms/Button';
-import { Input } from '@/components/atoms/Input';
-import { Card, CardContent } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
-import { useAdventures } from '@/lib/hooks/gvteway/useAdventures';
-import { useDebounce } from 'use-debounce';
-
-const CATEGORIES = ['All', 'VIP Experiences', 'Meet & Greets', 'Tours', 'Workshops', 'Exclusive Access'];
+const metadata = {
+  title: 'Adventures | Experiences & Tours | GVTEWAY',
+  description: 'Discover tours, excursions, and points of interest. Turn every event into an unforgettable experience.',
+  keywords: 'adventures, tours, excursions, experiences, activities',
+};
 
 export default function AdventuresPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [debouncedSearch] = useDebounce(searchQuery, 300);
-  
-  const { data: adventures, isLoading, error, refetch } = useAdventures();
-  
-  const filteredAdventures = useMemo(() => {
-    if (!adventures) return [];
-    
-    return adventures.filter((adventure: any) => {
-      const categoryMatch = selectedCategory === 'All' || adventure.category === selectedCategory;
-      const searchMatch = !debouncedSearch || 
-        adventure.title?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-        adventure.description?.toLowerCase().includes(debouncedSearch.toLowerCase());
-      
-      return categoryMatch && searchMatch;
-    });
-  }, [adventures, selectedCategory, debouncedSearch]);
-  
-  if (isLoading) {
-    return (
-      <GvtewayLayout>
-        <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
-          <div className="text-center">
-            <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-gvteway-red-500" />
-            <p className="text-gray-400">Loading adventures...</p>
-          </div>
-        </div>
-      </GvtewayLayout>
-    );
-  }
-  
-  if (error) {
-    return (
-      <GvtewayLayout>
-        <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
-          <div className="text-center">
-            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Adventures</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
-            <Button variant="gvteway" onClick={() => refetch()}>
-              Try Again
-            </Button>
-          </div>
-        </div>
-      </GvtewayLayout>
-    );
-  }
+  const adventures = [
+    {
+      id: "1",
+      title: "VIP Backstage Tour",
+      category: "VIP Experience",
+      image: "/api/placeholder/400/300",
+      duration: "2 hours",
+      price: 150,
+      rating: 4.9,
+      reviewCount: 45,
+      location: "Various Venues",
+      description: "Get exclusive backstage access and meet the artists.",
+      featured: true,
+    },
+    {
+      id: "2",
+      title: "Tampa Bay Sunset Cruise",
+      category: "Tour",
+      image: "/api/placeholder/400/300",
+      duration: "3 hours",
+      price: 75,
+      rating: 4.8,
+      reviewCount: 128,
+      location: "Tampa Bay",
+      description: "Experience stunning sunset views while cruising the bay.",
+      featured: true,
+    },
+    {
+      id: "3",
+      title: "Ybor City Food & Culture Walk",
+      category: "Tour",
+      image: "/api/placeholder/400/300",
+      duration: "2.5 hours",
+      price: 45,
+      rating: 4.7,
+      reviewCount: 89,
+      location: "Ybor City",
+      description: "Explore historic Ybor City with tastings at local spots.",
+      featured: false,
+    },
+    {
+      id: "4",
+      title: "Artist Meet & Greet Package",
+      category: "Meet & Greet",
+      image: "/api/placeholder/400/300",
+      duration: "1 hour",
+      price: 200,
+      rating: 5.0,
+      reviewCount: 67,
+      location: "Event Dependent",
+      description: "Personal meet and greet with photo opportunity.",
+      featured: true,
+    },
+  ];
 
   return (
     <GvtewayLayout>
-      <div className="min-h-screen bg-black pt-20 pb-16">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              {/* Header */}
-              <header className="mb-12">
-                <h1 className="text-5xl sm:text-6xl font-bebas mb-4 gvteway-text-gradient" id="page-title">
-                  ADVENTURES
-                </h1>
-                <p className="text-xl text-gray-400 font-oswald">
-                  Exclusive experiences and VIP access
-                </p>
-              </header>
 
-              {/* Search */}
-              <div className="flex gap-4 mb-8" role="search" aria-label="Adventure search">
-                <Input 
-                  placeholder="Search adventures..." 
-                  className="flex-1"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  aria-label="Search adventures by name or description"
-                />
-                <Button variant="outline" size="lg" aria-label="Open advanced filters">
-                  <Filter className="w-5 h-5 mr-2" aria-hidden="true" />
-                  Filters
-                </Button>
-              </div>
+      <section className="section-padding bg-ghxst-surface">
+        <div className="max-w-7xl mx-auto px-8 text-center">
+          <PageTitle className="mb-4 uppercase text-ghxst-primary">Find Adventures</PageTitle>
+          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto">
+            Turn every event into an experience. Discover nearby points of interest, tours, 
+            excursions, and activities to make your trip unforgettable.
+          </BodyText>
+        </div>
+      </section>
 
-              {/* Categories */}
-              <div className="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter by category">
-                {CATEGORIES.map((category) => (
-                  <Button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    variant={selectedCategory === category ? 'gvteway' : 'outline'}
-                    size="sm"
-                    aria-pressed={selectedCategory === category}
-                    aria-label={`Filter by ${category}`}
-                  >
-                    {category}
-                  </Button>
-                ))}
-              </div>
-
-              {/* Stats */}
-              <div className="grid md:grid-cols-3 gap-6 mb-12" role="region" aria-label="Adventure statistics">
-                <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-                  <CardContent className="p-6 text-center">
-                    <TrendingUp className="w-8 h-8 text-gvteway-red-500 mx-auto mb-2" aria-hidden="true" />
-                    <p className="text-2xl font-bebas text-white mb-1" aria-label="Over 150 experiences available">150+</p>
-                    <p className="text-gray-400 text-sm">Experiences Available</p>
-                  </CardContent>
-                </Card>
-                <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-                  <CardContent className="p-6 text-center">
-                    <Star className="w-8 h-8 text-warning mx-auto mb-2" aria-hidden="true" />
-                    <p className="text-2xl font-bebas text-white mb-1" aria-label="Average rating 4.9 out of 5">4.9/5</p>
-                    <p className="text-gray-400 text-sm">Average Rating</p>
-                  </CardContent>
-                </Card>
-                <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-                  <CardContent className="p-6 text-center">
-                    <Users className="w-8 h-8 text-gvteway-blue-500 mx-auto mb-2" aria-hidden="true" />
-                    <p className="text-2xl font-bebas text-white mb-1" aria-label="Over 25 thousand happy customers">25K+</p>
-                    <p className="text-gray-400 text-sm">Happy Customers</p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Adventures Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
-                {filteredAdventures.map((adventure: any, index: number) => (
-                  <motion.div
-                    key={adventure.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                  >
-                    <Link href={`/gvteway/adventures/${adventure.id}`}>
-                      <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                        <div className="relative h-64 bg-gradient-to-br from-gvteway-red-500/20 to-gvteway-blue-500/20">
-                          {adventure.featured && (
-                            <Badge variant="gvteway" className="absolute top-4 right-4 z-10">
-                              Featured
-                            </Badge>
-                          )}
-                        </div>
-                        <CardContent className="p-6">
-                          <Badge variant="gvteway-outline" className="mb-3">
-                            {adventure.category}
-                          </Badge>
-                          <h3 className="text-2xl font-bebas text-white mb-2">
-                            {adventure.title}
-                          </h3>
-                          <p className="text-gray-400 mb-4">{adventure.description}</p>
-
-                          <div className="grid grid-cols-2 gap-3 mb-4 text-sm text-gray-400">
-                            <div className="flex items-center">
-                              <Clock className="w-4 h-4 mr-2" />
-                              {adventure.duration}
-                            </div>
-                            <div className="flex items-center">
-                              <Users className="w-4 h-4 mr-2" />
-                              {adventure.capacity} spots
-                            </div>
-                            <div className="flex items-center">
-                              <MapPin className="w-4 h-4 mr-2" />
-                              {adventure.location}
-                            </div>
-                            <div className="flex items-center">
-                              <Star className="w-4 h-4 mr-2 fill-yellow-500 text-warning" />
-                              {adventure.rating} ({adventure.reviews})
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                            <span className="text-3xl font-bebas text-gvteway-red-500">
-                              ${adventure.price}
-                            </span>
-                            <Button variant="gvteway" size="sm" rounded="full">
-                              Book Now
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+      <section className="border-b-2 border-ghxst-border">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex flex-wrap gap-4 py-4">
+            <CategoryTab active>All Adventures</CategoryTab>
+            <CategoryTab icon={<Sparkles className="w-4 h-4" />}>VIP Experiences</CategoryTab>
+            <CategoryTab icon={<Users className="w-4 h-4" />}>Meet & Greets</CategoryTab>
+            <CategoryTab icon={<Compass className="w-4 h-4" />}>Tours</CategoryTab>
+            <CategoryTab icon={<Star className="w-4 h-4" />}>Workshops</CategoryTab>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex items-center justify-between mb-8">
+            <SectionHeader className="uppercase text-ghxst-primary">Featured Adventures</SectionHeader>
+            <Button variant="secondary" size="sm">Submit Adventure</Button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {adventures.map((adventure) => (
+              <Link
+                key={adventure.id}
+                href={`/gvteway/adventures/${adventure.id}`}
+                className="card bg-ghxst-white border-2 border-ghxst-border hover:border-ghxst-black transition-colors group"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={adventure.image}
+                    alt={adventure.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-3 left-3 flex gap-2">
+                    <Badge variant="default">{adventure.category}</Badge>
+                    {adventure.featured && <Badge variant="warning">FEATURED</Badge>}
+                  </div>
+                  <div className="absolute bottom-3 right-3">
+                    <div className="flex items-center gap-1 bg-ghxst-black/80 text-ghxst-white px-2 py-1 rounded">
+                      <Star className="w-3 h-3 fill-yellow-500 text-warning" />
+                      <Metadata className="text-caption text-ghxst-white">{adventure.rating}</Metadata>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-4">
+                  <div>
+                    <CardTitle className="text-ghxst-primary mb-2 line-clamp-2">
+                      {adventure.title}
+                    </CardTitle>
+                    <BodyText className="text-ghxst-text-secondary text-body-sm line-clamp-2">
+                      {adventure.description}
+                    </BodyText>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Metadata className="flex items-center gap-2 text-ghxst-text-secondary">
+                      <Clock className="w-4 h-4" />
+                      {adventure.duration}
+                    </Metadata>
+                    <Metadata className="flex items-center gap-2 text-ghxst-text-secondary">
+                      <MapPin className="w-4 h-4" />
+                      {adventure.location}
+                    </Metadata>
+                    <Metadata className="text-ghxst-text-secondary text-caption">
+                      {adventure.reviewCount} reviews
+                    </Metadata>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-3 border-t border-ghxst-border">
+                    <span className="text-h4 font-bebas text-ghxst-primary">
+                      ${adventure.price}
+                    </span>
+                    <Button variant="primary" size="sm">View Details</Button>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-ghxst-surface">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <SectionHeader className="uppercase text-ghxst-primary">Adventure Sources</SectionHeader>
+            <BodyText className="text-ghxst-text-secondary">
+              Our adventures come from verified partners, member submissions, and curated local experiences.
+            </BodyText>
+            <div className="grid md:grid-cols-4 gap-6 mt-8">
+              <div className="text-center">
+                <Metadata className="text-ghxst-text-primary">Google Places</Metadata>
+                <Metadata className="text-ghxst-text-secondary text-caption">Points of Interest</Metadata>
+              </div>
+              <div className="text-center">
+                <Metadata className="text-ghxst-text-primary">Local Partners</Metadata>
+                <Metadata className="text-ghxst-text-secondary text-caption">Tour Operators</Metadata>
+              </div>
+              <div className="text-center">
+                <Metadata className="text-ghxst-text-primary">Member Curated</Metadata>
+                <Metadata className="text-ghxst-text-secondary text-caption">Community Picks</Metadata>
+              </div>
+              <div className="text-center">
+                <Metadata className="text-ghxst-text-primary">Event Packages</Metadata>
+                <Metadata className="text-ghxst-text-secondary text-caption">Bundled Experiences</Metadata>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </GvtewayLayout>
   );
 }

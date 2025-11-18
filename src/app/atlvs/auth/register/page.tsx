@@ -107,7 +107,7 @@ export default function AtlvsRegisterPage() {
 
   if (success) {
     return (
-      <AtlvsLayout showNav={false}>
+      <AtlvsLayout>
         <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
           <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm max-w-md w-full">
             <CardContent className="pt-6">
@@ -115,11 +115,11 @@ export default function AtlvsRegisterPage() {
                 <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                   <CheckCircle className="w-10 h-10 text-success" aria-hidden="true" />
                 </div>
-                <h2 className="text-2xl font-bebas text-white mb-2" role="status" aria-live="polite">Registration Successful!</h2>
+                <h2 className="text-h4 font-bebas text-white mb-2" role="status" aria-live="polite">Registration Successful!</h2>
                 <p className="text-gray-400 mb-6">
                   Please check your email to verify your account.
                 </p>
-                <p className="text-sm text-gray-500">Redirecting to verification page...</p>
+                <p className="text-body-sm text-gray-500">Redirecting to verification page...</p>
               </div>
             </CardContent>
           </Card>
@@ -129,7 +129,7 @@ export default function AtlvsRegisterPage() {
   }
 
   return (
-    <AtlvsLayout showNav={false}>
+    <AtlvsLayout>
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -149,7 +149,7 @@ export default function AtlvsRegisterPage() {
           >
             <div className="text-center mb-8">
               <Link href="/atlvs">
-                <h1 className="text-5xl font-bebas atlvs-text-gradient mb-2 cursor-pointer tracking-wider">
+                <h1 className="text-h1 font-bebas atlvs-text-gradient mb-2 cursor-pointerr">
                   ATLVS
                 </h1>
               </Link>
@@ -158,7 +158,7 @@ export default function AtlvsRegisterPage() {
 
             <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="text-white text-2xl">Create Account</CardTitle>
+                <CardTitle className="text-white text-h4">Create Account</CardTitle>
                 <CardDescription className="text-gray-400">
                   Join the internal team platform
                 </CardDescription>
@@ -167,7 +167,7 @@ export default function AtlvsRegisterPage() {
                 {error && (
                   <div className="mb-4 p-3 bg-error/10 border border-error/20 rounded-lg flex items-start gap-2">
                     <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-error">{error}</p>
+                    <p className="text-body-sm text-error">{error}</p>
                   </div>
                 )}
 
@@ -280,7 +280,7 @@ export default function AtlvsRegisterPage() {
                       required
                       disabled={isLoading}
                     />
-                    <span className="ml-2 text-sm text-gray-400">
+                    <span className="ml-2 text-body-sm text-gray-400">
                       I agree to the{' '}
                       <Link href="/terms" className="text-atlvs-orange-500 hover:text-atlvs-orange-400">
                         Terms of Service
@@ -304,9 +304,9 @@ export default function AtlvsRegisterPage() {
                 </form>
 
                 <div className="mt-6 text-center">
-                  <p className="text-sm text-gray-400">
+                  <p className="text-body-sm text-gray-400">
                     Already have an account?{' '}
-                    <Link href="/atlvs/auth/login" className="text-atlvs-orange-500 hover:text-atlvs-orange-400 font-medium">
+                    <Link href="/atlvs/auth/login" className="text-atlvs-orange-500 hover:text-atlvs-orange-400">
                       Sign in
                     </Link>
                   </p>
@@ -315,7 +315,7 @@ export default function AtlvsRegisterPage() {
             </Card>
 
             <div className="mt-6 text-center">
-              <Link href="/" className="text-sm text-gray-500 hover:text-gray-400">
+              <Link href="/" className="text-body-sm text-gray-500 hover:text-gray-400">
                 ← Back to Home
               </Link>
             </div>

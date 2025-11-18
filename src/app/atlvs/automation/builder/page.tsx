@@ -53,7 +53,7 @@ export default function WorkflowBuilderPage() {
               <div className="space-y-2">
                 {['Trigger', 'Action', 'Condition', 'Loop', 'Delay'].map((node) => (
                   <div key={node} className="p-3 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
-                    <div className="font-medium text-sm">{node}</div>
+                    <div className="font-medium text-body-sm">{node}</div>
                   </div>
                 ))}
               </div>
@@ -69,7 +69,7 @@ export default function WorkflowBuilderPage() {
               <CardTitle className="mb-4">Canvas</CardTitle>
               <div className="h-[600px] bg-gray-800/30 rounded-lg border-2 border-dashed border-gray-700 flex items-center justify-center">
                 <div className="text-center text-gray-400">
-                  <div className="text-6xl mb-4">🔧</div>
+                  <div className="text-h1 mb-4">🔧</div>
                   <div className="font-oswald">Drag nodes here to build your workflow</div>
                 </div>
               </div>

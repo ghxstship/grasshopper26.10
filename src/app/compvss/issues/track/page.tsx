@@ -23,10 +23,7 @@ export default function IssueTrackingPage() {
           description="Loading metrics..."
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Issues', href: '/compvss/issues/dashboard' },
-            { label: 'Tracking' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -47,15 +44,12 @@ export default function IssueTrackingPage() {
           description="Error loading metrics"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Issues', href: '/compvss/issues/dashboard' },
-            { label: 'Tracking' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Tracking Data</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Tracking Data</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -72,10 +66,7 @@ export default function IssueTrackingPage() {
         description="Monitor issue resolution metrics"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Issues', href: '/compvss/issues/dashboard' },
-          { label: 'Tracking' }
-        ]}
+        
       >
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {metrics.map((metric, index) => (
@@ -90,9 +81,9 @@ export default function IssueTrackingPage() {
                   <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500 w-fit mb-2">
                     {metric.icon}
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{metric.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald mb-1">{metric.label}</div>
-                  <div className="text-xs text-success font-share-tech">{metric.trend}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{metric.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald mb-1">{metric.label}</div>
+                  <div className="text-caption text-success font-share-tech">{metric.trend}</div>
                 </CardContent>
               </Card>
             </motion.div>

@@ -77,7 +77,7 @@ export default function WorkflowExecutionsPage() {
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Executions</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Executions</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>
                 Try Again
@@ -121,26 +121,26 @@ export default function WorkflowExecutionsPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" role="region" aria-label="Workflow execution statistics">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Total Runs</div>
-              <div className="text-3xl font-bebas atlvs-text-gradient" aria-label={`${stats.total.toLocaleString()} total workflow runs`}>{stats.total.toLocaleString()}</div>
+              <div className="text-body-sm text-gray-400 mb-1">Total Runs</div>
+              <div className="text-h3 font-bebas atlvs-text-gradient" aria-label={`${stats.total.toLocaleString()} total workflow runs`}>{stats.total.toLocaleString()}</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Success Rate</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500" aria-label={`${stats.successRate} percent success rate`}>{stats.successRate}%</div>
+              <div className="text-body-sm text-gray-400 mb-1">Success Rate</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500" aria-label={`${stats.successRate} percent success rate`}>{stats.successRate}%</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Avg Duration</div>
-              <div className="text-3xl font-bebas text-atlvs-purple-500" aria-label={`${stats.avgDuration} average duration`}>{stats.avgDuration}</div>
+              <div className="text-body-sm text-gray-400 mb-1">Avg Duration</div>
+              <div className="text-h3 font-bebas text-atlvs-purple-500" aria-label={`${stats.avgDuration} average duration`}>{stats.avgDuration}</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Active Now</div>
-              <div className="text-3xl font-bebas text-info" aria-label="3 workflows active now">3</div>
+              <div className="text-body-sm text-gray-400 mb-1">Active Now</div>
+              <div className="text-h3 font-bebas text-info" aria-label="3 workflows active now">3</div>
             </CardHeader>
           </Card>
         </div>
@@ -155,7 +155,7 @@ export default function WorkflowExecutionsPage() {
                     {getStatusIcon(execution.status)}
                     <div className="flex-1">
                       <div className="font-medium mb-1">{execution.workflow}</div>
-                      <div className="text-sm text-gray-400">Duration: {execution.duration} • {execution.time}</div>
+                      <div className="text-body-sm text-gray-400">Duration: {execution.duration} • {execution.time}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

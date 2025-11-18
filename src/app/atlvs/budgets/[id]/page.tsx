@@ -109,10 +109,10 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-gray-400">Total Budget</div>
+                <div className="text-body-sm text-gray-400">Total Budget</div>
                 <DollarSign className="w-5 h-5 text-gray-400" />
               </div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">
+              <div className="text-h3 font-bebas atlvs-text-gradient">
                 ${budget.totalBudget.toLocaleString()}
               </div>
             </CardHeader>
@@ -121,26 +121,26 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-gray-400">Total Spent</div>
-                <TrendingDown className="w-5 h-5 text-red-400" />
+                <div className="text-body-sm text-gray-400">Total Spent</div>
+                <TrendingDown className="w-5 h-5 text-destructive" />
               </div>
-              <div className="text-3xl font-bebas text-red-400">
+              <div className="text-h3 font-bebas text-destructive">
                 ${budget.totalSpent.toLocaleString()}
               </div>
-              <div className="text-sm text-gray-500">{percentSpent.toFixed(1)}% of budget</div>
+              <div className="text-body-sm text-gray-500">{percentSpent.toFixed(1)}% of budget</div>
             </CardHeader>
           </Card>
 
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-gray-400">Remaining</div>
+                <div className="text-body-sm text-gray-400">Remaining</div>
                 <TrendingUp className="w-5 h-5 text-atlvs-green-500" />
               </div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">
+              <div className="text-h3 font-bebas text-atlvs-green-500">
                 ${budget.totalRemaining.toLocaleString()}
               </div>
-              <div className="text-sm text-gray-500">{(100 - percentSpent).toFixed(1)}% remaining</div>
+              <div className="text-body-sm text-gray-500">{(100 - percentSpent).toFixed(1)}% remaining</div>
             </CardHeader>
           </Card>
         </div>
@@ -150,7 +150,7 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
           <CardHeader>
             <CardTitle className="mb-4">Overall Progress</CardTitle>
             <div className="space-y-3">
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-body-sm">
                 <span className="text-gray-400">Budget Utilization</span>
                 <span className="font-medium">{percentSpent.toFixed(1)}%</span>
               </div>
@@ -184,20 +184,20 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex-1">
                             <div className="font-medium mb-1">{item.category}</div>
-                            <div className="text-sm text-gray-400">{item.description}</div>
+                            <div className="text-body-sm text-gray-400">{item.description}</div>
                           </div>
                           <Badge variant="atlvs-outline" className={getStatusColor(item.status)}>
                             {item.status.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                           </Badge>
                         </div>
-                        <div className="grid grid-cols-3 gap-4 mb-3 text-sm">
+                        <div className="grid grid-cols-3 gap-4 mb-3 text-body-sm">
                           <div>
                             <div className="text-gray-500">Allocated</div>
                             <div className="font-medium">${item.allocated.toLocaleString()}</div>
                           </div>
                           <div>
                             <div className="text-gray-500">Spent</div>
-                            <div className="font-medium text-red-400">${item.spent.toLocaleString()}</div>
+                            <div className="font-medium text-destructive">${item.spent.toLocaleString()}</div>
                           </div>
                           <div>
                             <div className="text-gray-500">Remaining</div>
@@ -232,12 +232,12 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
                   {budget.recentTransactions.map((transaction: any) => (
                     <div key={transaction.id} className="p-3 bg-gray-800/50 rounded-lg">
                       <div className="flex items-center justify-between mb-1">
-                        <div className="text-sm font-medium">{transaction.description}</div>
-                        <div className="text-sm font-medium text-red-400">
+                        <div className="text-body-sm">{transaction.description}</div>
+                        <div className="text-body-sm text-destructive">
                           -${transaction.amount.toLocaleString()}
                         </div>
                       </div>
-                      <div className="flex items-center justify-between text-xs text-gray-500">
+                      <div className="flex items-center justify-between text-caption text-gray-500">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
                           {new Date(transaction.date).toLocaleDateString()}

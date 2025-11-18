@@ -92,11 +92,11 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
           className="flex flex-col items-center justify-center cursor-pointer w-full"
         >
           <Upload className={cn("w-10 h-10 mb-3", iconColorStyles[variant])} />
-          <p className="text-sm text-gray-400 font-share-tech mb-3">
+          <p className="text-body-sm text-gray-400 font-share-tech mb-3">
             {dragDropText}
           </p>
           <span className={cn(
-            "text-sm font-medium font-share-tech",
+            "text-body-sm font-share-tech",
             iconColorStyles[variant]
           )}>
             {browseText}

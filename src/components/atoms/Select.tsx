@@ -20,7 +20,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       <div className="relative">
         <select
           className={cn(
-            "flex h-11 w-full appearance-none rounded-lg border-2 border-gray-300 bg-white px-4 py-2 pr-10 font-share-tech text-base transition-colors",
+            "flex h-11 w-full appearance-none rounded-lg border-2 border-gray-300 bg-white px-4 py-2 pr-10 font-share-tech text-body transition-colors",
             "focus:outline-none focus:ring-2 focus:ring-offset-2",
             "disabled:cursor-not-allowed disabled:opacity-50",
             "dark:bg-gray-900 dark:border-gray-700 dark:text-white",

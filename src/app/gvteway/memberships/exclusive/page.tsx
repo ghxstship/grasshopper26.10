@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 import { motion } from 'framer-motion';
 import { Lock, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
@@ -33,7 +33,7 @@ export default function ExclusiveContentPage() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Content</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Content</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
@@ -60,12 +60,12 @@ export default function ExclusiveContentPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-5xl font-bebas mb-8 gvteway-text-gradient">EXCLUSIVE CONTENT</h1>
+              <h1 className="text-h1 font-bebas mb-8 gvteway-text-gradient">EXCLUSIVE CONTENT</h1>
 
               {!membershipData ? (
                 <div className="text-center py-12">
                   <Lock className="w-16 h-16 mx-auto mb-4 text-gray-600" />
-                  <h3 className="text-xl font-bebas text-white mb-2">Membership Required</h3>
+                  <h3 className="text-h5 font-bebas text-white mb-2">Membership Required</h3>
                   <p className="text-gray-400 mb-6">
                     Subscribe to a membership tier to access exclusive content
                   </p>
@@ -82,7 +82,7 @@ export default function ExclusiveContentPage() {
                           </div>
                         )}
                         {!item.locked && (
-                          <div className="text-gray-600 text-sm">Content Preview</div>
+                          <div className="text-gray-600 text-body-sm">Content Preview</div>
                         )}
                       </div>
                       <CardContent className="p-6">
@@ -90,7 +90,7 @@ export default function ExclusiveContentPage() {
                           <Badge variant="gvteway-outline">{item.type}</Badge>
                           <Badge variant="gvteway">{item.tier}</Badge>
                         </div>
-                        <h3 className="text-lg font-bebas text-white">{item.title}</h3>
+                        <h3 className="text-h6 font-bebas text-white">{item.title}</h3>
                       </CardContent>
                     </Card>
                   ))}

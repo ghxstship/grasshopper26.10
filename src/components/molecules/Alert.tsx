@@ -52,11 +52,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
           <Icon className="h-5 w-5 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
             {title && (
-              <h5 className="mb-1 font-medium leading-none tracking-tight">
+              <h5 className="mb-1">
                 {title}
               </h5>
             )}
-            <div className="text-sm [&_p]:leading-relaxed">{children}</div>
+            <div className="text-body-sm [&_p]:leading-relaxed">{children}</div>
           </div>
           {onClose && (
             <IconButton

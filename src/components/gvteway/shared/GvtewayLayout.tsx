@@ -37,7 +37,7 @@ function GvtewayNav() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/gvteway" className="flex items-center space-x-2">
-            <span className="text-2xl font-anton gvteway-text-gradient">GVTEWAY</span>
+            <span className="text-h4 font-anton gvteway-text-gradient">GVTEWAY</span>
           </Link>
 
           {/* Desktop Navigation */}

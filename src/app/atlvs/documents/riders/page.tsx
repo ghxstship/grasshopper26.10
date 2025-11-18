@@ -141,7 +141,7 @@ export default function RidersPage() {
                 
                 <CardTitle className="text-white mb-4">{rider.name}</CardTitle>
                 
-                <div className="space-y-2 mb-4 text-sm text-gray-400">
+                <div className="space-y-2 mb-4 text-body-sm text-gray-400">
                   <div className="flex items-center justify-between">
                     <span>Artist:</span>
                     <span className="font-medium text-white">{rider.artist}</span>
@@ -192,7 +192,7 @@ export default function RidersPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Total Riders</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">{riders.length}</CardTitle>
+                  <CardTitle className="text-h3 font-bebas">{riders.length}</CardTitle>
                 </div>
                 <div className="p-3 bg-atlvs-green-500/10 rounded-xl">
                   <FileText className="w-6 h-6 text-atlvs-green-500" />
@@ -206,7 +206,7 @@ export default function RidersPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Technical</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {riders.filter(r => r.type === 'technical').length}
                   </CardTitle>
                 </div>
@@ -222,11 +222,11 @@ export default function RidersPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Hospitality</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {riders.filter(r => r.type === 'hospitality').length}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-purple-500/10 rounded-xl">
+                <div className="p-3 bg-accent/100/10 rounded-xl">
                   <Utensils className="w-6 h-6 text-atlvs-purple-500" />
                 </div>
               </div>
@@ -238,7 +238,7 @@ export default function RidersPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Production</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {riders.filter(r => r.type === 'production').length}
                   </CardTitle>
                 </div>

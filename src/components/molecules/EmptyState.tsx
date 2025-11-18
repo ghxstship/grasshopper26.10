@@ -18,9 +18,9 @@ export interface EmptyStateProps {
 
 const variantClasses = {
   default: "text-gray-600",
-  gvteway: "text-purple-600",
-  compvss: "text-blue-600",
-  atlvs: "text-green-600",
+  gvteway: "text-accent",
+  compvss: "text-info",
+  atlvs: "text-success",
 };
 
 export const EmptyState: React.FC<EmptyStateProps> = ({
@@ -41,7 +41,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       <div className={cn("mb-4", variantClasses[variant])}>
         {icon || <Inbox className="w-16 h-16" />}
       </div>
-      <h3 className="text-2xl font-bebas text-white uppercase tracking-wide mb-2">
+      <h3 className="text-h4 font-bebas text-white uppercase mb-2">
         {title}
       </h3>
       <p className="text-gray-400 font-oswald max-w-md mb-6">{message}</p>

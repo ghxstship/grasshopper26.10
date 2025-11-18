@@ -52,11 +52,11 @@ export default function AccountSettingsPage() {
   };
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
-            <h1 className="text-3xl font-bebas compvss-text-gradient">Account Settings</h1>
+            <h1 className="text-h3 font-bebas compvss-text-gradient">Account Settings</h1>
             <p className="text-gray-400 font-oswald mt-1">Manage your account information</p>
           </div>
         </div>
@@ -189,7 +189,7 @@ export default function AccountSettingsPage() {
                 <div className="flex items-center justify-between p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <div>
                     <h3 className="font-oswald text-white mb-1">Password</h3>
-                    <p className="text-sm text-gray-400 font-share-tech">Last changed 3 months ago</p>
+                    <p className="text-body-sm text-gray-400 font-share-tech">Last changed 3 months ago</p>
                   </div>
                   <Button variant="compvss-outline" size="sm">
                     Change Password
@@ -198,7 +198,7 @@ export default function AccountSettingsPage() {
                 <div className="flex items-center justify-between p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <div>
                     <h3 className="font-oswald text-white mb-1">Two-Factor Authentication</h3>
-                    <p className="text-sm text-gray-400 font-share-tech">Not enabled</p>
+                    <p className="text-body-sm text-gray-400 font-share-tech">Not enabled</p>
                   </div>
                   <Button variant="compvss-outline" size="sm">
                     Enable 2FA

@@ -121,7 +121,7 @@ describe('GanttChart', () => {
       const { container } = render(<GanttChart tasks={mockTasks} startDate={startDate} endDate={endDate} />);
       
       // Check for progress-based color classes
-      expect(container.querySelector('.bg-yellow-500')).toBeInTheDocument(); // 50% progress
+      expect(container.querySelector('.bg-warning-light0')).toBeInTheDocument(); // 50% progress
       expect(container.querySelector('.bg-atlvs-green-500')).toBeInTheDocument(); // 100% progress
     });
   });

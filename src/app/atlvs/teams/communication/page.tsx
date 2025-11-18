@@ -7,6 +7,7 @@ export const runtime = 'edge';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { MessageSquare, Send, Search, Users, Phone, Video, MoreVertical, Paperclip, Smile, Bell,  } from 'lucide-react';
+import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
 import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 import { Textarea } from '@/components/atoms/Textarea';
 import { Input } from '@/components/atoms/Input';
@@ -139,12 +140,13 @@ export default function CommunicationHubPage() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <AtlvsLayout>
+      <div className="h-screen flex flex-col">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 p-4">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-900">Communication Hub</h1>
-          <p className="text-sm text-gray-600">Team messaging and collaboration</p>
+          <h1 className="text-h4 text-gray-900">Communication Hub</h1>
+          <p className="text-body-sm text-gray-600">Team messaging and collaboration</p>
         </div>
       </div>
 
@@ -162,7 +164,7 @@ export default function CommunicationHubPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 variant="atlvs"
-                className="pl-10 text-sm"
+                className="pl-10 text-body-sm"
               />
             </div>
           </div>
@@ -174,25 +176,25 @@ export default function CommunicationHubPage() {
                 key={channel.id}
                 onClick={() => setSelectedChannel(channel.id)}
                 className={`p-4 cursor-pointer border-b border-gray-100 hover:bg-gray-50 ${
-                  selectedChannel === channel.id ? 'bg-green-50 border-l-4 border-l-green-600' : ''
+                  selectedChannel === channel.id ? 'bg-success-light border-l-4 border-l-green-600' : ''
                 }`}
               >
                 <div className="flex items-start justify-between mb-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-xl">{getChannelIcon(channel.type)}</span>
+                    <span className="text-h5">{getChannelIcon(channel.type)}</span>
                     <span className="font-medium text-gray-900">{channel.name}</span>
                   </div>
                   {channel.unreadCount > 0 && (
-                    <span className="px-2 py-0.5 bg-success text-white text-xs rounded-full">
+                    <span className="px-2 py-0.5 bg-success text-white text-caption rounded-full">
                       {channel.unreadCount}
                     </span>
                   )}
                 </div>
-                <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-body-sm">
                   <span className="text-gray-600 truncate flex-1">{channel.lastMessage}</span>
-                  <span className="text-gray-400 text-xs ml-2">{channel.lastMessageTime}</span>
+                  <span className="text-gray-400 text-caption ml-2">{channel.lastMessageTime}</span>
                 </div>
-                <div className="flex items-center gap-1 mt-1 text-xs text-gray-500">
+                <div className="flex items-center gap-1 mt-1 text-caption text-gray-500">
                   <Users className="w-3 h-3" />
                   <span>{channel.members} members</span>
                 </div>
@@ -215,12 +217,12 @@ export default function CommunicationHubPage() {
           <div className="bg-white border-b border-gray-200 p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="text-2xl">{getChannelIcon(channels.find(c => c.id === selectedChannel)?.type || 'group')}</span>
+                <span className="text-h4">{getChannelIcon(channels.find(c => c.id === selectedChannel)?.type || 'group')}</span>
                 <div>
                   <h2 className="font-semibold text-gray-900">
                     {channels.find(c => c.id === selectedChannel)?.name}
                   </h2>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-body-sm text-gray-600">
                     {channels.find(c => c.id === selectedChannel)?.members} members
                   </p>
                 </div>
@@ -251,7 +253,7 @@ export default function CommunicationHubPage() {
               >
                 <div className={`max-w-md ${message.senderId === 'current' ? 'order-2' : 'order-1'}`}>
                   {message.senderId !== 'current' && (
-                    <div className="text-sm font-medium text-gray-700 mb-1">{message.senderName}</div>
+                    <div className="text-body-sm text-gray-700 mb-1">{message.senderName}</div>
                   )}
                   <div
                     className={`px-4 py-2 rounded-lg ${
@@ -262,10 +264,10 @@ export default function CommunicationHubPage() {
                   >
                     <p>{message.content}</p>
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">{message.timestamp}</div>
+                  <div className="text-caption text-gray-500 mt-1">{message.timestamp}</div>
                 </div>
                 {message.senderId !== 'current' && (
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-semibold text-sm mr-2 order-0">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white text-body-sm mr-2 order-0">
                     {message.senderName.split(' ').map(n => n[0]).join('')}
                   </div>
                 )}
@@ -311,6 +313,7 @@ export default function CommunicationHubPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </AtlvsLayout>
   );
 }

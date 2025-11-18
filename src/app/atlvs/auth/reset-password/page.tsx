@@ -78,13 +78,13 @@ export default function AtlvsResetPasswordPage() {
 
   if (!token) {
     return (
-      <AtlvsLayout showNav={false}>
+      <AtlvsLayout>
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
         <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm max-w-md w-full">
           <CardContent className="pt-6">
             <div className="text-center py-8">
               <AlertCircle className="w-16 h-16 text-error mx-auto mb-4" />
-              <h2 className="text-2xl font-bebas text-white mb-2">Invalid Reset Link</h2>
+              <h2 className="text-h4 font-bebas text-white mb-2">Invalid Reset Link</h2>
               <p className="text-gray-400 mb-6">
                 This password reset link is invalid or has expired.
               </p>
@@ -103,7 +103,7 @@ export default function AtlvsResetPasswordPage() {
 
   if (success) {
     return (
-      <AtlvsLayout showNav={false}>
+      <AtlvsLayout>
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
         <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm max-w-md w-full">
           <CardContent className="pt-6">
@@ -111,7 +111,7 @@ export default function AtlvsResetPasswordPage() {
               <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-10 h-10 text-success" />
               </div>
-              <h2 className="text-2xl font-bebas text-white mb-2">Password Reset Successful!</h2>
+              <h2 className="text-h4 font-bebas text-white mb-2">Password Reset Successful!</h2>
               <p className="text-gray-400 mb-6">
                 Your password has been updated. Redirecting to sign in...
               </p>
@@ -124,7 +124,7 @@ export default function AtlvsResetPasswordPage() {
   }
 
   return (
-    <AtlvsLayout showNav={false}>
+    <AtlvsLayout>
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.1),transparent_50%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -143,7 +143,7 @@ export default function AtlvsResetPasswordPage() {
         >
           <div className="text-center mb-8">
             <Link href="/atlvs">
-              <h1 className="text-5xl font-bebas atlvs-text-gradient mb-2 cursor-pointer tracking-wider">
+              <h1 className="text-h1 font-bebas atlvs-text-gradient mb-2 cursor-pointerr">
                 ATLVS
               </h1>
             </Link>
@@ -152,7 +152,7 @@ export default function AtlvsResetPasswordPage() {
 
           <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-white text-2xl">Create New Password</CardTitle>
+              <CardTitle className="text-white text-h4">Create New Password</CardTitle>
               <CardDescription className="text-gray-400">
                 Enter your new password below
               </CardDescription>
@@ -161,7 +161,7 @@ export default function AtlvsResetPasswordPage() {
               {error && (
                 <div className="mb-4 p-3 bg-error/10 border border-error/20 rounded-lg flex items-start gap-2">
                   <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-error">{error}</p>
+                  <p className="text-body-sm text-error">{error}</p>
                 </div>
               )}
 
@@ -190,7 +190,7 @@ export default function AtlvsResetPasswordPage() {
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </Button>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">Must be at least 8 characters</p>
+                  <p className="text-caption text-gray-500 mt-1">Must be at least 8 characters</p>
                 </FormField>
 
                 <FormField label="Confirm Password" required>
@@ -231,7 +231,7 @@ export default function AtlvsResetPasswordPage() {
               </form>
 
               <div className="mt-6 text-center">
-                <Link href="/atlvs/auth/login" className="text-sm text-gray-400 hover:text-gray-300">
+                <Link href="/atlvs/auth/login" className="text-body-sm text-gray-400 hover:text-gray-300">
                   Back to Sign In
                 </Link>
               </div>

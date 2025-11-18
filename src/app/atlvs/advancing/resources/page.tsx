@@ -113,7 +113,7 @@ export default function AdvancingResourcesPage() {
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load Resources</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load Resources</h3>
                 <p className="text-gray-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
@@ -124,26 +124,26 @@ export default function AdvancingResourcesPage() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" role="region" aria-label="Resource allocation statistics">
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <div className="text-sm text-gray-400 mb-1">Total Resources</div>
-                  <div className="text-3xl font-bebas atlvs-text-gradient" aria-label={`${metrics.total} total resources`}>{metrics.total}</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Total Resources</div>
+                  <div className="text-h3 font-bebas atlvs-text-gradient" aria-label={`${metrics.total} total resources`}>{metrics.total}</div>
                 </CardHeader>
               </Card>
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <div className="text-sm text-gray-400 mb-1">Available</div>
-                  <div className="text-3xl font-bebas text-atlvs-green-500" aria-label={`${metrics.available} resources available`}>{metrics.available}</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Available</div>
+                  <div className="text-h3 font-bebas text-atlvs-green-500" aria-label={`${metrics.available} resources available`}>{metrics.available}</div>
                 </CardHeader>
               </Card>
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <div className="text-sm text-gray-400 mb-1">Allocated</div>
-                  <div className="text-3xl font-bebas text-atlvs-purple-500" aria-label={`${metrics.allocated} resources allocated`}>{metrics.allocated}</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Allocated</div>
+                  <div className="text-h3 font-bebas text-atlvs-purple-500" aria-label={`${metrics.allocated} resources allocated`}>{metrics.allocated}</div>
                 </CardHeader>
               </Card>
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <div className="text-sm text-gray-400 mb-1">Utilization</div>
-                  <div className="text-3xl font-bebas text-info" aria-label={`${metrics.utilization} percent utilization rate`}>{metrics.utilization}%</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Utilization</div>
+                  <div className="text-h3 font-bebas text-info" aria-label={`${metrics.utilization} percent utilization rate`}>{metrics.utilization}%</div>
                 </CardHeader>
               </Card>
             </div>
@@ -165,12 +165,12 @@ export default function AdvancingResourcesPage() {
                   <div key={resource.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors">
                     <div className="flex-1">
                       <div className="font-medium mb-1">{resource.name}</div>
-                      <div className="text-sm text-gray-400">{resource.category}</div>
+                      <div className="text-body-sm text-gray-400">{resource.category}</div>
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="text-center">
-                        <div className="text-2xl font-bebas atlvs-text-gradient">{resource.available}/{resource.total}</div>
-                        <div className="text-xs text-gray-400">Available</div>
+                        <div className="text-h4 font-bebas atlvs-text-gradient">{resource.available}/{resource.total}</div>
+                        <div className="text-caption text-gray-400">Available</div>
                       </div>
                       <Badge variant="atlvs-outline" className={getStatusColor(resource.status)}>
                         {resource.status}

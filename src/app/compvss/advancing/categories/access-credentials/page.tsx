@@ -90,11 +90,7 @@ export default function AccessCredentialsRequestPage() {
         title="ACCESS & CREDENTIALS REQUEST"
         description="Submit access and credential requirements"
         variant="compvss"
-        breadcrumbs={[
-          { label: 'Advancing', href: '/compvss/advancing' },
-          { label: 'Categories', href: '/compvss/advancing/categories' },
-          { label: 'Access & Credentials', href: '/compvss/advancing/categories/access-credentials' }
-        ]}
+        
       >
         <div className="min-h-screen bg-black text-white p-6">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.1),transparent_50%)]" />
@@ -104,7 +100,7 @@ export default function AccessCredentialsRequestPage() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <div className="mb-8">
                 <Link href="/compvss/advancing/dashboard">
-                  <h1 className="compvss-text-gradient text-4xl font-anton mb-2 cursor-pointer">
+                  <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
                     Access & Credentials Request
                   </h1>
                 </Link>
@@ -237,7 +233,7 @@ export default function AccessCredentialsRequestPage() {
                   dragDropText="Drag and drop files or click to browse"
                   browseText="Choose Files"
                 />
-                <p className="text-xs text-gray-500 font-share-tech mt-2 text-center">
+                <p className="text-caption text-gray-500 font-share-tech mt-2 text-center">
                   PDF, JPG, PNG, DOC (Max 10MB each)
                 </p>
 
@@ -245,7 +241,7 @@ export default function AccessCredentialsRequestPage() {
                   <div className="mt-4 space-y-2">
                     {attachments.map((file, index) => (
                       <div key={index} className="flex items-center justify-between bg-black/50 p-3 rounded-lg">
-                        <span className="text-sm text-gray-300 font-share-tech">{file.name}</span>
+                        <span className="text-body-sm text-gray-300 font-share-tech">{file.name}</span>
                         <Button
                           type="button"
                           variant="compvss-outline"

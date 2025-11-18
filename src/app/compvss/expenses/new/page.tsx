@@ -42,10 +42,7 @@ export default function NewExpensePage() {
         description="Report an expense for reimbursement"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-          { label: 'New Expense' }
-        ]}
+        
         actions={[
           {
             label: 'View All Expenses',
@@ -196,7 +193,7 @@ export default function NewExpensePage() {
                         <p className="text-white font-oswald mb-1">
                           Upload receipt image
                         </p>
-                        <p className="text-sm text-gray-400 font-share-tech">
+                        <p className="text-body-sm text-gray-400 font-share-tech">
                           PNG, JPG, PDF up to 5MB
                         </p>
                       </div>
@@ -206,7 +203,7 @@ export default function NewExpensePage() {
                       </Button>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 font-share-tech">
+                  <p className="text-caption text-gray-500 font-share-tech">
                     Clear, readable receipt required for reimbursement
                   </p>
                 </FormField>

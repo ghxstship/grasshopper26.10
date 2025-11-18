@@ -60,7 +60,7 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Phases</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Phases</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>
                 Try Again
@@ -110,7 +110,7 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h1 className="text-5xl font-bebas mb-2 atlvs-text-gradient">
+                    <h1 className="text-h1 font-bebas mb-2 atlvs-text-gradient">
                       PROJECT PHASES
                     </h1>
                     <p className="text-gray-400 font-oswald">
@@ -132,16 +132,13 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
             <div className="relative">
               {/* Timeline Bar */}
               <div className="h-2 bg-gray-800 rounded-full overflow-hidden mb-8">
-                <div
-                  className="h-full bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500"
-                  style={{ width: '45%' }}
-                />
+                <div className="h-full bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500 w-2/5" />
               </div>
 
               {/* _Phase Markers */}
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-body-sm">
                 {phases.map((phase) => (
-                  <div key={phase.id} className="text-center" style={{ width: `${100 / phases.length}%` }}>
+                  <div key={phase.id} className="text-center flex-1">
                     <div className={`w-3 h-3 rounded-full mx-auto mb-2 ${
                       phase.status === 'completed' ? 'bg-atlvs-green-500' :
                       phase.status === 'in-progress' ? 'bg-info' :
@@ -168,7 +165,7 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
                 <CardHeader>
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-4 flex-1">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bebas text-xl ${
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bebas text-h5 ${
                         phase.status === 'completed' ? 'bg-atlvs-green-500' :
                         phase.status === 'in-progress' ? 'bg-info' :
                         'bg-gray-700'
@@ -177,14 +174,14 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="text-2xl font-bebas">{phase.name}</h3>
+                          <h3 className="text-h4 font-bebas">{phase.name}</h3>
                           <Badge variant="atlvs-outline" className={getStatusColor(phase.status)}>
                             {phase.status === 'completed' && <CheckCircle className="w-3 h-3 mr-1" />}
                             {phase.status === 'in-progress' && <Clock className="w-3 h-3 mr-1" />}
                             {phase.status.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
+                        <div className="flex items-center gap-4 text-body-sm text-gray-400 mb-4">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
                             {new Date(phase.startDate).toLocaleDateString()} - {new Date(phase.endDate).toLocaleDateString()}
@@ -195,13 +192,13 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
 
                         {/* Progress Bar */}
                         <div className="space-y-2">
-                          <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center justify-between text-body-sm">
                             <span className="text-gray-400">Progress</span>
                             <span className="font-medium">{phase.progress}%</span>
                           </div>
                           <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
                             <div
-                              className={`h-full ${
+                              className={`h-full transition-all ${
                                 phase.status === 'completed' ? 'bg-atlvs-green-500' :
                                 phase.status === 'in-progress' ? 'bg-info' :
                                 'bg-gray-600'

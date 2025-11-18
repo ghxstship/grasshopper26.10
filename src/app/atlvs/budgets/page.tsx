@@ -64,7 +64,7 @@ export default function BudgetsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Budgets</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Budgets</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -148,7 +148,7 @@ export default function BudgetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Budget
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`Total budget: ${formatCurrency(stats.totalBudget)}`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`Total budget: ${formatCurrency(stats.totalBudget)}`}>
                     {formatCurrency(stats.totalBudget)}
                   </CardTitle>
                 </div>
@@ -166,14 +166,14 @@ export default function BudgetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Spent
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`Total spent: ${formatCurrency(stats.totalSpent)}, ${stats.percentageSpent.toFixed(1)} percent of budget`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`Total spent: ${formatCurrency(stats.totalSpent)}, ${stats.percentageSpent.toFixed(1)} percent of budget`}>
                     {formatCurrency(stats.totalSpent)}
                   </CardTitle>
-                  <div className="text-xs text-gray-400 mt-1" aria-hidden="true">
+                  <div className="text-caption text-gray-400 mt-1" aria-hidden="true">
                     {stats.percentageSpent.toFixed(1)}% of budget
                   </div>
                 </div>
-                <div className="p-3 bg-orange-500/10 rounded-xl" aria-hidden="true">
+                <div className="p-3 bg-warning-light0/10 rounded-xl" aria-hidden="true">
                   <TrendingUp className="w-6 h-6 text-atlvs-orange-500" aria-hidden="true" />
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default function BudgetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Remaining
                   </CardDescription>
-                  <CardTitle className={`text-3xl font-bebas ${
+                  <CardTitle className={`text-h3 font-bebas ${
                     stats.totalRemaining < 0 ? 'text-error' : 'text-atlvs-green-500'
                   }`} aria-label={`Remaining budget: ${formatCurrency(stats.totalRemaining)}${stats.totalRemaining < 0 ? ', over budget' : ''}`}>
                     {formatCurrency(stats.totalRemaining)}
@@ -213,7 +213,7 @@ export default function BudgetsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Over Budget Items
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-error">
+                  <CardTitle className="text-h3 font-bebas text-error">
                     {budgetData.filter((item: BudgetItem) => item.status === 'over-budget').length}
                   </CardTitle>
                 </div>

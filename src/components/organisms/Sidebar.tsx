@@ -80,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             }
           }}
           className={cn(
-            "flex items-center gap-3 px-4 py-3 text-sm font-share-tech transition-colors relative",
+            "flex items-center gap-3 px-4 py-3 text-body-sm font-share-tech transition-colors relative",
             depth > 0 && "pl-8",
             isActive
               ? activeStyles[variant]
@@ -92,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <>
               <span className="flex-1 truncate">{item.label}</span>
               {item.badge && (
-                <span className="flex-shrink-0 rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium">
+                <span className="flex-shrink-0 rounded-full bg-gray-200 px-2 py-0.5 text-caption">
                   {item.badge}
                 </span>
               )}
@@ -145,7 +145,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         {sections.map((section, index) => (
           <div key={index}>
             {section.title && !isCollapsed && (
-              <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <div className="px-4 py-2 text-caption text-gray-500 uppercaser">
                 {section.title}
               </div>
             )}

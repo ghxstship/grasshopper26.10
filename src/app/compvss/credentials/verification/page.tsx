@@ -1,9 +1,10 @@
 'use client';
 
-
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
+
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 
 import { motion } from 'framer-motion';
 import { Shield, CheckCircle2, XCircle, AlertCircle, Calendar, Loader2, Clock } from 'lucide-react';
@@ -68,70 +69,85 @@ export default function CredentialVerificationPage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading credentials...</p>
+      <CompvssLayout>
+        <ContentLayout
+          title="Credential Verification"
+          description="Review and verify team credentials"
+          variant="compvss"
+          breadcrumbs={breadcrumbs}
+          showToolbar={false}
+        >
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-center">
+              <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
+              <p className="text-gray-400">Loading credentials...</p>
+            </div>
           </div>
-        </div>
+        </ContentLayout>
       </CompvssLayout>
     );
   }
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Credentials</h2>
-            <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
-            <Button variant="compvss" onClick={() => refetch()}>
-              Try Again
-            </Button>
+      <CompvssLayout>
+        <ContentLayout
+          title="Credential Verification"
+          description="Review and verify team credentials"
+          variant="compvss"
+          breadcrumbs={breadcrumbs}
+          showToolbar={false}
+        >
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-center">
+              <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Credentials</h2>
+              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <Button variant="compvss" onClick={() => refetch()}>
+                Try Again
+              </Button>
+            </div>
           </div>
-        </div>
+        </ContentLayout>
       </CompvssLayout>
     );
   }
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Credential Verification</h1>
-          <p className="text-gray-400 font-oswald mt-1">Review and verify team credentials</p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <CompvssLayout>
+      <ContentLayout
+        title="Credential Verification"
+        description="Review and verify team credentials"
+        variant="compvss"
+        breadcrumbs={breadcrumbs}
+        showToolbar={false}
+      >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
 
           {/* Stats */}
           <div className="grid grid-cols-4 gap-4 mb-6">
-            <Card variant="compvss" className="bg-warning/10 border-yellow-500/30">
+            <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-warning">{stats.pending}</p>
-                <p className="text-sm text-gray-400 font-oswald">Pending</p>
+                <p className="text-h3 font-bebas text-warning">{stats.pending}</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Pending</p>
               </CardContent>
             </Card>
-            <Card variant="compvss" className="bg-green-500/10 border-green-500/30">
+            <Card variant="compvss" className="bg-success-light0/10 border-success/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-success">{stats.verified}</p>
-                <p className="text-sm text-gray-400 font-oswald">Verified</p>
+                <p className="text-h3 font-bebas text-success">{stats.verified}</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Verified</p>
               </CardContent>
             </Card>
-            <Card variant="compvss" className="bg-warning/10 border-yellow-500/30">
+            <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-warning">{stats.expired}</p>
-                <p className="text-sm text-gray-400 font-oswald">Expired</p>
+                <p className="text-h3 font-bebas text-warning">{stats.expired}</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Expired</p>
               </CardContent>
             </Card>
-            <Card variant="compvss" className="bg-error/10 border-red-500/30">
+            <Card variant="compvss" className="bg-error/10 border-destructive/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-error">{stats.rejected}</p>
-                <p className="text-sm text-gray-400 font-oswald">Rejected</p>
+                <p className="text-h3 font-bebas text-error">{stats.rejected}</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Rejected</p>
               </CardContent>
             </Card>
           </div>
@@ -148,13 +164,13 @@ export default function CredentialVerificationPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white text-lg">{credential.name}</h3>
-                          <Badge variant="default" className="text-xs">{credential.id}</Badge>
+                          <h3 className="font-oswald text-white text-h6">{credential.name}</h3>
+                          <Badge variant="default" className="text-caption">{credential.id}</Badge>
                         </div>
-                        <p className="text-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                           {credential.type}
                         </p>
-                        <div className="flex gap-4 text-xs text-gray-500 font-share-tech">
+                        <div className="flex gap-4 text-caption text-gray-500 font-share-tech">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             <span>Issued: {credential.issuedDate ? new Date(credential.issuedDate).toLocaleDateString() : 'N/A'}</span>
@@ -176,7 +192,7 @@ export default function CredentialVerificationPage() {
                       <Button
                         variant="compvss"
                         size="sm"
-                        className="flex-1 bg-green-500 hover:bg-success"
+                        className="flex-1 bg-success-light0 hover:bg-success"
                         onClick={() => handleVerify(credential.id)}
                         disabled={verifyMutation.isPending}
                       >
@@ -186,7 +202,7 @@ export default function CredentialVerificationPage() {
                       <Button
                         variant="compvss"
                         size="sm"
-                        className="flex-1 bg-error hover:bg-red-600"
+                        className="flex-1 bg-error hover:bg-destructive"
                         onClick={() => handleReject(credential.id)}
                         disabled={verifyMutation.isPending}
                       >
@@ -209,7 +225,7 @@ export default function CredentialVerificationPage() {
             ))}
           </div>
         </motion.div>
-      </div>
+      </ContentLayout>
     </CompvssLayout>
   );
 }

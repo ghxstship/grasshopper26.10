@@ -58,7 +58,7 @@ export default function WorkflowTemplatesPage() {
                   </Badge>
                 </div>
                 <CardTitle className="mb-2">{template.name}</CardTitle>
-                <p className="text-sm text-gray-400 mb-4">{template.description}</p>
+                <p className="text-body-sm text-gray-400 mb-4">{template.description}</p>
                 <div className="flex items-center gap-2">
                   <Button variant="atlvs" size="sm" className="flex-1">
                     <Copy className="w-4 h-4 mr-2" />

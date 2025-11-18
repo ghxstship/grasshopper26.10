@@ -6,7 +6,7 @@ export const runtime = 'edge';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Bell, Plus, X, MapPin, Calendar, Music, Ticket, Settings, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -67,7 +67,7 @@ export default function AlertsPage() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Alerts</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Alerts</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
@@ -100,10 +100,10 @@ export default function AlertsPage() {
               {/* Header */}
               <header className="flex items-center justify-between mb-8">
                 <div>
-                  <h1 className="text-5xl sm:text-6xl font-bebas mb-2 gvteway-text-gradient" id="page-title">
+                  <h1 className="text-h1 font-bebas mb-2 gvteway-text-gradient" id="page-title">
                     ALERTS
                   </h1>
-                  <p className="text-xl text-gray-400 font-oswald">
+                  <p className="text-h5 text-gray-400 font-oswald">
                     Get notified about events you care about
                   </p>
                 </div>
@@ -222,7 +222,7 @@ export default function AlertsPage() {
                 <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                   <CardContent className="py-12 text-center">
                     <Bell className="w-16 h-16 mx-auto mb-4 text-gray-600" />
-                    <h3 className="text-xl font-bebas text-white mb-2">
+                    <h3 className="text-h5 font-bebas text-white mb-2">
                       No Alerts Yet
                     </h3>
                     <p className="text-gray-400 mb-6">
@@ -257,22 +257,22 @@ export default function AlertsPage() {
                               </div>
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-2">
-                                  <h3 className="text-lg font-bebas text-white">
+                                  <h3 className="text-h6 font-bebas text-white">
                                     {alert.name}
                                   </h3>
-                                  <Badge className="bg-gvteway-red-500/20 text-gvteway-red-500 text-xs">
+                                  <Badge className="bg-gvteway-red-500/20 text-gvteway-red-500 text-caption">
                                     {alert.type}
                                   </Badge>
                                   {alert.active && (
-                                    <Badge className="bg-green-500/20 text-green-500 text-xs">
+                                    <Badge className="bg-success-light0/20 text-success text-caption">
                                       Active
                                     </Badge>
                                   )}
                                 </div>
-                                <p className="text-sm text-gray-400">
+                                <p className="text-body-sm text-gray-400">
                                   {alert.criteria}
                                 </p>
-                                <p className="text-xs text-gray-500 mt-2">
+                                <p className="text-caption text-gray-500 mt-2">
                                   Created {new Date(alert.createdAt).toLocaleDateString()}
                                 </p>
                               </div>
@@ -300,10 +300,10 @@ export default function AlertsPage() {
                   <div className="flex items-start gap-4">
                     <Settings className="w-6 h-6 text-gvteway-red-500 flex-shrink-0" />
                     <div>
-                      <h4 className="text-white font-medium mb-2">
+                      <h4 className="text-white mb-2">
                         How Alerts Work
                       </h4>
-                      <ul className="text-sm text-gray-400 space-y-1">
+                      <ul className="text-body-sm text-gray-400 space-y-1">
                         <li>• Get notified when new events match your criteria</li>
                         <li>• Receive email and push notifications</li>
                         <li>• Manage your alerts anytime</li>

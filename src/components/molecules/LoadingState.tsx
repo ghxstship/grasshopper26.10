@@ -15,9 +15,9 @@ export interface LoadingStateProps {
 
 const variantClasses = {
   default: "text-gray-400",
-  gvteway: "text-purple-500",
-  compvss: "text-blue-500",
-  atlvs: "text-green-500",
+  gvteway: "text-accent",
+  compvss: "text-info",
+  atlvs: "text-success",
 };
 
 export const LoadingState: React.FC<LoadingStateProps> = ({
@@ -38,7 +38,7 @@ export const LoadingState: React.FC<LoadingStateProps> = ({
       <Spinner size={size} variant={variant} />
       {message && (
         <p className={cn(
-          "mt-4 text-sm font-oswald",
+          "mt-4 text-body-sm font-oswald",
           variantClasses[variant]
         )}>
           {message}

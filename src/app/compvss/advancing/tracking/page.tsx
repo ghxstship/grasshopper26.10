@@ -69,10 +69,7 @@ export default function RequestTrackingPage() {
         <ContentLayout
           title="Request Tracking"
           description="Monitor and manage all advancing requests"
-          breadcrumbs={[
-            { label: 'Advancing', href: '/compvss/advancing' },
-            { label: 'Tracking' }
-          ]}
+          
           variant="compvss"
           showToolbar={false}
         >
@@ -93,17 +90,14 @@ export default function RequestTrackingPage() {
         <ContentLayout
           title="Request Tracking"
           description="Monitor and manage all advancing requests"
-          breadcrumbs={[
-            { label: 'Advancing', href: '/compvss/advancing' },
-            { label: 'Tracking' }
-          ]}
+          
           variant="compvss"
           showToolbar={false}
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Requests</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Requests</h2>
               <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -164,17 +158,14 @@ export default function RequestTrackingPage() {
       <ContentLayout
         title="Request Tracking"
         description="Monitor and manage advancing requests"
-        breadcrumbs={[
-          { label: 'Advancing', href: '/compvss/advancing' },
-          { label: 'Tracking' }
-        ]}
+        
         variant="compvss"
         showToolbar={false}
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
             <Link href="/compvss/advancing/dashboard">
-              <h1 className="compvss-text-gradient text-4xl font-anton mb-2 cursor-pointer">
+              <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
                 Request Tracking
               </h1>
             </Link>
@@ -197,8 +188,8 @@ export default function RequestTrackingPage() {
               onClick={() => setStatusFilter(status)}
             >
               <CardContent className="pt-6 text-center">
-                <p className="text-2xl font-bebas text-compvss-cyan-500">{count}</p>
-                <p className="text-xs text-gray-400 font-oswald capitalize">{status.replace('-', ' ')}</p>
+                <p className="text-h4 font-bebas text-compvss-cyan-500">{count}</p>
+                <p className="text-caption text-gray-400 font-oswald capitalize">{status.replace('-', ' ')}</p>
               </CardContent>
             </Card>
           ))}
@@ -252,14 +243,14 @@ export default function RequestTrackingPage() {
                       {getStatusIcon(request.status)}
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white text-lg">{request.title}</h3>
+                          <h3 className="font-oswald text-white text-h6">{request.title}</h3>
                           {request.unreadMessages > 0 && (
-                            <Badge variant="error" className="text-xs">
+                            <Badge variant="error" className="text-caption">
                               {request.unreadMessages} new
                             </Badge>
                           )}
                         </div>
-                        <div className="flex flex-wrap gap-3 text-sm text-gray-400 font-share-tech mb-2">
+                        <div className="flex flex-wrap gap-3 text-body-sm text-gray-400 font-share-tech mb-2">
                           <span>ID: {request.id}</span>
                           <span>•</span>
                           <span>{request.category}</span>
@@ -272,7 +263,7 @@ export default function RequestTrackingPage() {
                             </>
                           )}
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-gray-500 font-share-tech">
+                        <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
                           <Clock className="w-3 h-3" />
                           <span>Submitted: {new Date(request.submittedAt).toLocaleString()}</span>
                           <span>•</span>

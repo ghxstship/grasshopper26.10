@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Send, Mail, User } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
@@ -26,7 +26,7 @@ export default function TransferTicketPage() {
                 <Button variant="ghost" size="sm" className="mb-6">← Back</Button>
               </Link>
 
-              <h1 className="text-5xl font-bebas mb-4 gvteway-text-gradient">TRANSFER TICKET</h1>
+              <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">TRANSFER TICKET</h1>
 
               <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                 <CardHeader>

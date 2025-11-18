@@ -64,7 +64,7 @@ export default function WorkflowTriggersPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Triggers</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Triggers</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -114,8 +114,8 @@ export default function WorkflowTriggersPage() {
                 <div key={trigger.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
                   <div className="flex-1">
                     <div className="font-medium mb-1">{trigger.name}</div>
-                    <div className="text-sm text-gray-400">
-                      <code className="px-2 py-1 bg-gray-900 rounded text-xs">{trigger.event}</code>
+                    <div className="text-body-sm text-gray-400">
+                      <code className="px-2 py-1 bg-gray-900 rounded text-caption">{trigger.event}</code>
                       <span className="ml-3">{trigger.workflows} workflow{trigger.workflows !== 1 ? 's' : ''}</span>
                     </div>
                   </div>

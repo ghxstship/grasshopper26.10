@@ -58,10 +58,10 @@ export default function AffiliateSettingsPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Affiliate Settings</h1>
+          <h1 className="text-h3 font-bebas compvss-text-gradient">Affiliate Settings</h1>
           <p className="text-gray-400 font-oswald mt-1">Manage your affiliate account settings</p>
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function AffiliateSettingsPage() {
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error font-share-tech">{error}</p>
                   </div>
                 )}
 
@@ -92,7 +92,7 @@ export default function AffiliateSettingsPage() {
                 {success && (
                   <div className="p-3 rounded-lg bg-success/10 border border-success/30 flex items-center gap-2">
                     <Settings className="w-5 h-5 text-success" />
-                    <p className="text-sm text-success font-share-tech">Settings saved successfully!</p>
+                    <p className="text-body-sm text-success font-share-tech">Settings saved successfully!</p>
                   </div>
                 )}
 

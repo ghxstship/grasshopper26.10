@@ -46,8 +46,8 @@ export default function StripeIntegrationPage() {
                     <DollarSign className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium">Stripe</h3>
-                    <p className="text-sm text-gray-400">Payment processing platform</p>
+                    <h3 className="text-h6">Stripe</h3>
+                    <p className="text-body-sm text-gray-400">Payment processing platform</p>
                   </div>
                 </div>
                 {isConnected ? (
@@ -68,8 +68,8 @@ export default function StripeIntegrationPage() {
           {/* API Configuration */}
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <h3 className="text-lg font-medium">API Configuration</h3>
-              <p className="text-sm text-gray-400">Configure your Stripe API credentials</p>
+              <h3 className="text-h6">API Configuration</h3>
+              <p className="text-body-sm text-gray-400">Configure your Stripe API credentials</p>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -118,8 +118,8 @@ export default function StripeIntegrationPage() {
           {/* Features */}
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <h3 className="text-lg font-medium">Enabled Features</h3>
-              <p className="text-sm text-gray-400">Stripe features available in ATLVS</p>
+              <h3 className="text-h6">Enabled Features</h3>
+              <p className="text-body-sm text-gray-400">Stripe features available in ATLVS</p>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -131,7 +131,7 @@ export default function StripeIntegrationPage() {
                   'Webhook events',
                   'Refund processing'
                 ].map((feature) => (
-                  <div key={feature} className="flex items-center gap-2 text-sm">
+                  <div key={feature} className="flex items-center gap-2 text-body-sm">
                     <Check className="w-4 h-4 text-atlvs-green-500" />
                     <span>{feature}</span>
                   </div>

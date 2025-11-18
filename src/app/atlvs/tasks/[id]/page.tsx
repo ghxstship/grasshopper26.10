@@ -37,7 +37,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Task</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Task</h2>
             <p className="text-gray-400 mb-4">{error?.message || 'Task not found'}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -103,7 +103,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Description</CardTitle>
-                <p className="text-gray-300 leading-relaxed">{task.description}</p>
+                <p className="text-gray-300">{task.description}</p>
               </CardHeader>
             </Card>
 
@@ -112,7 +112,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
               <CardHeader>
                 <CardTitle className="mb-4">Progress</CardTitle>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center justify-between text-body-sm">
                     <span className="text-gray-400">Completion</span>
                     <span className="font-medium">{task.progress}%</span>
                   </div>
@@ -165,13 +165,13 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 <div className="space-y-4">
                   {task.comments.map((comment) => (
                     <div key={comment.id} className="flex gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-lg">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h6">
                         {comment.author.charAt(0)}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="font-medium">{comment.author}</span>
-                          <span className="text-sm text-gray-500">{comment.time}</span>
+                          <span className="text-body-sm text-gray-500">{comment.time}</span>
                         </div>
                         <p className="text-gray-300">{comment.text}</p>
                       </div>
@@ -202,25 +202,25 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 <CardTitle className="mb-4">Details</CardTitle>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-sm text-gray-400 mb-1">Project</div>
+                    <div className="text-body-sm text-gray-400 mb-1">Project</div>
                     <div className="font-medium">{task.project}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <User className="w-4 h-4" />
                       Assignee
                     </div>
                     <div className="font-medium">{task.assignee}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       Due Date
                     </div>
                     <div className="font-medium">{new Date(task.dueDate).toLocaleDateString()}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400 mb-1">Created</div>
+                    <div className="text-body-sm text-gray-400 mb-1">Created</div>
                     <div className="font-medium">{new Date(task.created).toLocaleDateString()}</div>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                     >
                       <div className="flex-1 min-w-0">
                         <div className="font-medium truncate">{file.name}</div>
-                        <div className="text-sm text-gray-400">{file.size}</div>
+                        <div className="text-body-sm text-gray-400">{file.size}</div>
                       </div>
                     </div>
                   ))}

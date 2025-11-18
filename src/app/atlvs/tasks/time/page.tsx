@@ -59,7 +59,7 @@ export default function TimeTrackingPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Time Entries</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Time Entries</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>
                 Try Again
@@ -98,10 +98,10 @@ export default function TimeTrackingPage() {
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-gray-400">Today</div>
+                <div className="text-body-sm text-gray-400">Today</div>
                 <Clock className="w-5 h-5 text-gray-400" />
               </div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">
+              <div className="text-h3 font-bebas atlvs-text-gradient">
                 {formatDuration(totalToday)}
               </div>
             </CardHeader>
@@ -110,10 +110,10 @@ export default function TimeTrackingPage() {
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-gray-400">This Week</div>
+                <div className="text-body-sm text-gray-400">This Week</div>
                 <Calendar className="w-5 h-5 text-gray-400" />
               </div>
-              <div className="text-3xl font-bebas text-atlvs-green-500">
+              <div className="text-h3 font-bebas text-atlvs-green-500">
                 32h 45m
               </div>
             </CardHeader>
@@ -122,10 +122,10 @@ export default function TimeTrackingPage() {
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-gray-400">This Month</div>
+                <div className="text-body-sm text-gray-400">This Month</div>
                 <TrendingUp className="w-5 h-5 text-gray-400" />
               </div>
-              <div className="text-3xl font-bebas text-atlvs-purple-500">
+              <div className="text-h3 font-bebas text-atlvs-purple-500">
                 142h 30m
               </div>
             </CardHeader>
@@ -138,12 +138,12 @@ export default function TimeTrackingPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex-1">
-                  <div className="text-sm text-gray-400 mb-1">Currently Tracking</div>
-                  <div className="text-2xl font-bebas mb-1">Design stage layout</div>
-                  <div className="text-sm text-gray-400">Summer Music Festival</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Currently Tracking</div>
+                  <div className="text-h4 font-bebas mb-1">Design stage layout</div>
+                  <div className="text-body-sm text-gray-400">Summer Music Festival</div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="text-4xl font-bebas atlvs-text-gradient">
+                  <div className="text-h2 font-bebas atlvs-text-gradient">
                     {formatDuration(7200)}
                   </div>
                   <Button variant="ghost" size="sm">
@@ -177,13 +177,13 @@ export default function TimeTrackingPage() {
                     )}
                     <div className="flex-1">
                       <div className="font-medium mb-1">{entry.task}</div>
-                      <div className="text-sm text-gray-400">{entry.project}</div>
+                      <div className="text-body-sm text-gray-400">{entry.project}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="text-right">
                       <div className="font-medium">{formatDuration(entry.duration)}</div>
-                      <div className="text-sm text-gray-400">{new Date(entry.date).toLocaleDateString()}</div>
+                      <div className="text-body-sm text-gray-400">{new Date(entry.date).toLocaleDateString()}</div>
                     </div>
                     <Badge
                       variant="atlvs-outline"

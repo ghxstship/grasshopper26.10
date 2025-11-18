@@ -41,8 +41,8 @@ export default function ZapierIntegrationPage() {
                     <Zap className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium">Zapier</h3>
-                    <p className="text-sm text-gray-400">Workflow automation platform</p>
+                    <h3 className="text-h6">Zapier</h3>
+                    <p className="text-body-sm text-gray-400">Workflow automation platform</p>
                   </div>
                 </div>
                 {isConnected ? (
@@ -63,24 +63,24 @@ export default function ZapierIntegrationPage() {
           {/* Setup Instructions */}
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <h3 className="text-lg font-medium">Setup Instructions</h3>
-              <p className="text-sm text-gray-400">Connect ATLVS to Zapier in 3 steps</p>
+              <h3 className="text-h6">Setup Instructions</h3>
+              <p className="text-body-sm text-gray-400">Connect ATLVS to Zapier in 3 steps</p>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-atlvs-green-500/20 border border-atlvs-green-500/50 flex items-center justify-center text-sm font-medium">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-atlvs-green-500/20 border border-atlvs-green-500/50 flex items-center justify-center text-body-sm">
                     1
                   </div>
                   <div>
                     <h4 className="font-medium mb-1">Copy your API Key</h4>
-                    <p className="text-sm text-gray-400 mb-2">Use this key to authenticate ATLVS in Zapier</p>
+                    <p className="text-body-sm text-gray-400 mb-2">Use this key to authenticate ATLVS in Zapier</p>
                     <div className="flex gap-2">
                       <Input
                         variant="atlvs"
                         value={apiKey}
                         readOnly
-                        className="font-mono text-sm"
+                        className="font-mono text-body-sm"
                       />
                       <Button variant="outline" size="sm">
                         <Copy className="w-4 h-4" />
@@ -90,22 +90,22 @@ export default function ZapierIntegrationPage() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-atlvs-green-500/20 border border-atlvs-green-500/50 flex items-center justify-center text-sm font-medium">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-atlvs-green-500/20 border border-atlvs-green-500/50 flex items-center justify-center text-body-sm">
                     2
                   </div>
                   <div>
                     <h4 className="font-medium mb-1">Create a Zap</h4>
-                    <p className="text-sm text-gray-400">Go to Zapier and search for &quot;ATLVS&quot; to create your first automation</p>
+                    <p className="text-body-sm text-gray-400">Go to Zapier and search for &quot;ATLVS&quot; to create your first automation</p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-atlvs-green-500/20 border border-atlvs-green-500/50 flex items-center justify-center text-sm font-medium">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-atlvs-green-500/20 border border-atlvs-green-500/50 flex items-center justify-center text-body-sm">
                     3
                   </div>
                   <div>
                     <h4 className="font-medium mb-1">Authenticate</h4>
-                    <p className="text-sm text-gray-400">Paste your API key when prompted to connect ATLVS to Zapier</p>
+                    <p className="text-body-sm text-gray-400">Paste your API key when prompted to connect ATLVS to Zapier</p>
                   </div>
                 </div>
               </div>
@@ -115,8 +115,8 @@ export default function ZapierIntegrationPage() {
           {/* Available Triggers */}
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <h3 className="text-lg font-medium">Available Triggers</h3>
-              <p className="text-sm text-gray-400">Events that can start a Zap</p>
+              <h3 className="text-h6">Available Triggers</h3>
+              <p className="text-body-sm text-gray-400">Events that can start a Zap</p>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -132,7 +132,7 @@ export default function ZapierIntegrationPage() {
                 ].map((trigger) => (
                   <div key={trigger} className="p-3 rounded-lg bg-gray-800/50 flex items-center gap-2">
                     <Zap className="w-4 h-4 text-atlvs-green-500" />
-                    <span className="text-sm">{trigger}</span>
+                    <span className="text-body-sm">{trigger}</span>
                   </div>
                 ))}
               </div>
@@ -142,8 +142,8 @@ export default function ZapierIntegrationPage() {
           {/* Available Actions */}
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <h3 className="text-lg font-medium">Available Actions</h3>
-              <p className="text-sm text-gray-400">Things you can do with ATLVS</p>
+              <h3 className="text-h6">Available Actions</h3>
+              <p className="text-body-sm text-gray-400">Things you can do with ATLVS</p>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -159,7 +159,7 @@ export default function ZapierIntegrationPage() {
                 ].map((action) => (
                   <div key={action} className="p-3 rounded-lg bg-gray-800/50 flex items-center gap-2">
                     <Check className="w-4 h-4 text-atlvs-green-500" />
-                    <span className="text-sm">{action}</span>
+                    <span className="text-body-sm">{action}</span>
                   </div>
                 ))}
               </div>
@@ -169,8 +169,8 @@ export default function ZapierIntegrationPage() {
           {/* Popular Zaps */}
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <h3 className="text-lg font-medium">Popular Zaps</h3>
-              <p className="text-sm text-gray-400">Common automation workflows</p>
+              <h3 className="text-h6">Popular Zaps</h3>
+              <p className="text-body-sm text-gray-400">Common automation workflows</p>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -181,12 +181,12 @@ export default function ZapierIntegrationPage() {
                   { from: 'Typeform', to: 'ATLVS', action: 'Create project from form submission' }
                 ].map((zap, index) => (
                   <div key={index} className="p-4 rounded-lg bg-gray-800/50">
-                    <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-3 text-body-sm">
                       <span className="font-medium">{zap.from}</span>
                       <Zap className="w-4 h-4 text-atlvs-green-500" />
                       <span className="font-medium">{zap.to}</span>
                     </div>
-                    <p className="text-xs text-gray-400 mt-1">{zap.action}</p>
+                    <p className="text-caption text-gray-400 mt-1">{zap.action}</p>
                   </div>
                 ))}
               </div>

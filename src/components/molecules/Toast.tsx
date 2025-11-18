@@ -123,16 +123,16 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
 
         {/* Content */}
         <div className="flex-1 space-y-1">
-          <div className="font-semibold text-sm">{title}</div>
+          <div className="font-semibold text-body-sm">{title}</div>
           {description && (
-            <div className="text-sm opacity-90">{description}</div>
+            <div className="text-body-sm opacity-90">{description}</div>
           )}
           {action && (
             <Button
               onClick={action.onClick}
               variant="ghost"
               size="sm"
-              className="mt-2 text-sm font-medium underline hover:no-underline"
+              className="mt-2 text-body-sm underline hover:no-underline"
             >
               {action.label}
             </Button>

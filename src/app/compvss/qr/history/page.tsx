@@ -40,10 +40,7 @@ export default function QRHistoryPage() {
           description="View all QR code scans"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'QR System', href: '/compvss/qr/hub' },
-            { label: 'History' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
@@ -64,15 +61,12 @@ export default function QRHistoryPage() {
           description="View all QR code scans"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'QR System', href: '/compvss/qr/hub' },
-            { label: 'History' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load History</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load History</h2>
               <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -87,13 +81,13 @@ export default function QRHistoryPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'valid':
-        return <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">Valid</Badge>;
+        return <Badge variant="compvss" className="bg-success-light text-success border-success/30">Valid</Badge>;
       case 'redeemed':
-        return <Badge variant="compvss" className="bg-info-light text-info border-blue-500/30">Redeemed</Badge>;
+        return <Badge variant="compvss" className="bg-info-light text-info border-info/30">Redeemed</Badge>;
       case 'expired':
-        return <Badge variant="compvss-outline" className="border-red-500/30 text-error">Expired</Badge>;
+        return <Badge variant="compvss-outline" className="border-destructive/30 text-error">Expired</Badge>;
       case 'invalid':
-        return <Badge variant="compvss-outline" className="border-yellow-500/30 text-warning">Invalid</Badge>;
+        return <Badge variant="compvss-outline" className="border-warning/30 text-warning">Invalid</Badge>;
       default:
         return null;
     }
@@ -106,10 +100,7 @@ export default function QRHistoryPage() {
         description="View all QR code scan records"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'QR System', href: '/compvss/qr/hub' },
-          { label: 'History' }
-        ]}
+        
         actions={[
           {
             label: 'Filter',
@@ -166,16 +157,16 @@ export default function QRHistoryPage() {
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <Badge variant="compvss-outline" className="text-xs">
+                          <Badge variant="compvss-outline" className="text-caption">
                             {scan.type}
                           </Badge>
                           {getStatusBadge(scan.status)}
                         </div>
                         <h3 className="font-oswald text-white mb-1">{scan.user}</h3>
-                        <p className="text-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                           {scan.location}
                         </p>
-                        <div className="flex items-center gap-4 text-xs text-gray-500 font-share-tech">
+                        <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
                           <span>QR ID: {scan.qrId}</span>
                           <span>•</span>
                           <span>{typeof scan.timestamp === 'string' ? scan.timestamp : new Date(scan.timestamp).toLocaleString()}</span>

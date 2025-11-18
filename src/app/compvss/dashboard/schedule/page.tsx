@@ -18,7 +18,7 @@ export default function SchedulePage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <ScheduleContent />
     </CompvssLayout>
   );
@@ -89,9 +89,9 @@ function ScheduleContent() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">Completed</Badge>;
+        return <Badge variant="compvss" className="bg-success-light text-success border-success/30">Completed</Badge>;
       case 'in_progress':
-        return <Badge variant="compvss" className="bg-info-light text-info border-blue-500/30 animate-pulse">In Progress</Badge>;
+        return <Badge variant="compvss" className="bg-info-light text-info border-info/30 animate-pulse">In Progress</Badge>;
       case 'upcoming':
         return <Badge variant="compvss-outline" className="border-gray-500/30 text-gray-400">Upcoming</Badge>;
       default:
@@ -106,7 +106,7 @@ function ScheduleContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">Event Schedule</h1>
+              <h1 className="text-h3 font-bebas compvss-text-gradient">Event Schedule</h1>
               <p className="text-gray-400 font-oswald mt-1">Summer Music Festival 2025</p>
             </div>
             <div className="flex items-center gap-4">
@@ -115,8 +115,8 @@ function ScheduleContent() {
                 Filter
               </Button>
               <div className="text-right">
-                <div className="text-2xl font-bebas text-white">15:32</div>
-                <div className="text-xs text-gray-400 font-share-tech">Current Time</div>
+                <div className="text-h4 font-bebas text-white">15:32</div>
+                <div className="text-caption text-gray-400 font-share-tech">Current Time</div>
               </div>
             </div>
           </div>
@@ -154,9 +154,9 @@ function ScheduleContent() {
                     {/* Timeline Dot */}
                     <div className={`absolute left-0 top-2 w-6 h-6 rounded-full border-2 flex items-center justify-center ${
                       item.status === 'completed' 
-                        ? 'bg-green-500 border-green-500' 
+                        ? 'bg-success-light0 border-success' 
                         : item.status === 'in_progress'
-                        ? 'bg-info border-blue-500 animate-pulse'
+                        ? 'bg-info border-info animate-pulse'
                         : 'bg-black border-compvss-cyan-500/30'
                     }`}>
                       {item.status === 'completed' && (
@@ -169,13 +169,13 @@ function ScheduleContent() {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <div className="text-2xl font-bebas text-compvss-cyan-500">
+                            <div className="text-h4 font-bebas text-compvss-cyan-500">
                               {item.time}
                             </div>
                             {getStatusBadge(item.status)}
                           </div>
-                          <h3 className="text-xl font-bebas text-white mb-2">{item.title}</h3>
-                          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 font-share-tech">
+                          <h3 className="text-h5 font-bebas text-white mb-2">{item.title}</h3>
+                          <div className="flex flex-wrap items-center gap-4 text-body-sm text-gray-400 font-share-tech">
                             <span className="flex items-center gap-1">
                               <MapPin className="w-4 h-4" />
                               {item.location}

@@ -94,7 +94,7 @@ export default function DocumentVersionsPage() {
                             </Badge>
                           )}
                         </div>
-                        <div className="text-sm text-gray-400">
+                        <div className="text-body-sm text-gray-400">
                           {version.date} • {version.author} • {version.size}
                         </div>
                       </div>

@@ -22,7 +22,7 @@ export default function OperationsSchedulePage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
@@ -35,11 +35,11 @@ export default function OperationsSchedulePage() {
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Schedule</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Schedule</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
           </div>
@@ -49,10 +49,10 @@ export default function OperationsSchedulePage() {
   }
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Operations Schedule</h1>
+          <h1 className="text-h3 font-bebas compvss-text-gradient">Operations Schedule</h1>
           <p className="text-gray-400 font-oswald mt-1">Manage crew shifts and schedules</p>
         </div>
       </div>
@@ -79,11 +79,11 @@ export default function OperationsSchedulePage() {
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2 text-compvss-cyan-500">
                         <Clock className="w-5 h-5" />
-                        <span className="font-bebas text-xl">{shift.time}</span>
+                        <span className="font-bebas text-h5">{shift.time}</span>
                       </div>
                       <div>
                         <h3 className="font-oswald text-white">{shift.role}</h3>
-                        <div className="flex items-center gap-2 text-sm text-gray-400 font-share-tech">
+                        <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
                           <Users2 className="w-4 h-4" />
                           <span>{shift.count} crew members</span>
                         </div>

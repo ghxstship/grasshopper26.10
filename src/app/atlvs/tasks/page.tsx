@@ -99,7 +99,7 @@ export default function TasksPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Tasks</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Tasks</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -124,7 +124,7 @@ export default function TasksPage() {
               <CardDescription className="text-gray-400 mb-1">
                 Total Tasks
               </CardDescription>
-              <CardTitle className="text-3xl font-bebas" aria-label={`${tasks?.length || 0} total tasks`}>
+              <CardTitle className="text-h3 font-bebas" aria-label={`${tasks?.length || 0} total tasks`}>
                 {tasks?.length || 0}
               </CardTitle>
             </CardHeader>

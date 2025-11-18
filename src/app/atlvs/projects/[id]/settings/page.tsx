@@ -117,7 +117,7 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
                 <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
                   <div>
                     <div className="font-medium">Enable Notifications</div>
-                    <div className="text-sm text-gray-400">Receive updates about project activity</div>
+                    <div className="text-body-sm text-gray-400">Receive updates about project activity</div>
                   </div>
                   <Checkbox
                     checked={settings.notifications}
@@ -129,7 +129,7 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
                 <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
                   <div>
                     <div className="font-medium">Auto-Archive Completed Tasks</div>
-                    <div className="text-sm text-gray-400">Automatically archive tasks after 30 days</div>
+                    <div className="text-body-sm text-gray-400">Automatically archive tasks after 30 days</div>
                   </div>
                   <Checkbox
                     checked={settings.autoArchive}
@@ -152,7 +152,7 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
                 <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
                   <div>
                     <div className="font-medium">Allow Guest Access</div>
-                    <div className="text-sm text-gray-400">External collaborators can view project</div>
+                    <div className="text-body-sm text-gray-400">External collaborators can view project</div>
                   </div>
                   <Checkbox
                     checked={settings.allowGuestAccess}
@@ -163,7 +163,7 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
 
                 <div className="p-4 bg-gray-800/50 rounded-lg">
                   <div className="font-medium mb-2">Team Members</div>
-                  <div className="text-sm text-gray-400 mb-4">Manage who has access to this project</div>
+                  <div className="text-body-sm text-gray-400 mb-4">Manage who has access to this project</div>
                   <Button variant="atlvs" size="sm">
                     <Users className="w-4 h-4 mr-2" />
                     Manage Team
@@ -174,16 +174,16 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
           </Card>
 
           {/* Danger Zone */}
-          <Card variant="atlvs" className="bg-red-900/10 border-red-500/20">
+          <Card variant="atlvs" className="bg-destructive/10 border-destructive/20">
             <CardHeader>
               <CardTitle className="text-error mb-6">Danger Zone</CardTitle>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg">
                   <div>
                     <div className="font-medium">Archive Project</div>
-                    <div className="text-sm text-gray-400">Hide project from active view</div>
+                    <div className="text-body-sm text-gray-400">Hide project from active view</div>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-warning hover:text-yellow-400">
+                  <Button variant="ghost" size="sm" className="text-warning hover:text-warning">
                     <Archive className="w-4 h-4 mr-2" />
                     Archive
                   </Button>
@@ -192,9 +192,9 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
                 <div className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg">
                   <div>
                     <div className="font-medium">Delete Project</div>
-                    <div className="text-sm text-gray-400">Permanently delete this project and all data</div>
+                    <div className="text-body-sm text-gray-400">Permanently delete this project and all data</div>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-error hover:text-red-400">
+                  <Button variant="ghost" size="sm" className="text-error hover:text-destructive">
                     <Trash2 className="w-4 h-4 mr-2" />
                     Delete
                   </Button>

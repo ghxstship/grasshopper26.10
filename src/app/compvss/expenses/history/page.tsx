@@ -33,10 +33,7 @@ export default function ExpenseHistoryPage() {
         description="View all expense submissions"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-          { label: 'History' }
-        ]}
+        
         actions={[
           {
             label: 'Filter',
@@ -76,15 +73,15 @@ export default function ExpenseHistoryPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <h3 className="font-oswald text-white mb-1">{expense.description}</h3>
-                      <div className="flex items-center gap-3 text-sm text-gray-400 font-share-tech">
-                        <Badge variant="compvss-outline" className="text-xs">{expense.category}</Badge>
+                      <div className="flex items-center gap-3 text-body-sm text-gray-400 font-share-tech">
+                        <Badge variant="compvss-outline" className="text-caption">{expense.category}</Badge>
                         <span>{expense.date}</span>
                         <span>•</span>
                         <span>Approved by {expense.approver}</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-xl font-bebas text-white mb-1">{expense.amount}</div>
+                      <div className="text-h5 font-bebas text-white mb-1">{expense.amount}</div>
                       <Badge 
                         variant="compvss" 
                         className={expense.status === 'approved' ? 'bg-success-light text-success' : 'bg-error-light text-error'}

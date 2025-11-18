@@ -85,7 +85,7 @@ export default function TasksCalendarPage() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'urgent': return 'bg-error';
-      case 'high': return 'bg-orange-500';
+      case 'high': return 'bg-warning-light0';
       case 'medium': return 'bg-warning';
       case 'low': return 'bg-info';
       default: return 'bg-gray-500';
@@ -109,7 +109,7 @@ export default function TasksCalendarPage() {
             <Button variant="ghost" size="sm" onClick={previousMonth}>
               <ChevronLeft className="w-4 h-4" />
             </Button>
-            <div className="text-2xl font-bebas">
+            <div className="text-h4 font-bebas">
               {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
             </div>
             <Button variant="ghost" size="sm" onClick={nextMonth}>
@@ -152,7 +152,7 @@ export default function TasksCalendarPage() {
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load Tasks</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load Tasks</h3>
                 <p className="text-gray-400 mb-4">Unable to fetch calendar data</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
@@ -167,7 +167,7 @@ export default function TasksCalendarPage() {
             {/* Weekday Headers */}
             <div className="grid grid-cols-7 gap-2 mb-2">
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                <div key={day} className="text-center font-oswald text-gray-400 text-sm py-2">
+                <div key={day} className="text-center font-oswald text-gray-400 text-body-sm py-2">
                   {day}
                 </div>
               ))}
@@ -200,14 +200,14 @@ export default function TasksCalendarPage() {
                     }`}
                   >
                     <div className="flex flex-col h-full">
-                      <div className={`text-sm font-medium mb-1 ${isTodayDate ? 'text-atlvs-green-500' : 'text-gray-300'}`}>
+                      <div className={`text-body-sm mb-1 ${isTodayDate ? 'text-atlvs-green-500' : 'text-gray-300'}`}>
                         {day}
                       </div>
                       <div className="flex-1 overflow-hidden">
                         {tasks.slice(0, 3).map((task: any) => (
                           <Link key={task.id} href={`/atlvs/tasks/${task.id}`}>
                             <div
-                              className="mb-1 text-xs truncate bg-gray-900/50 rounded px-1 py-0.5 flex items-center gap-1 hover:bg-gray-900 transition-colors"
+                              className="mb-1 text-caption truncate bg-gray-900/50 rounded px-1 py-0.5 flex items-center gap-1 hover:bg-gray-900 transition-colors"
                             >
                               <div className={`w-1.5 h-1.5 rounded-full ${getPriorityColor(task.priority)}`} />
                               <span className="truncate">{task.title}</span>
@@ -215,7 +215,7 @@ export default function TasksCalendarPage() {
                           </Link>
                         ))}
                         {tasks.length > 3 && (
-                          <div className="text-xs text-gray-500">+{tasks.length - 3} more</div>
+                          <div className="text-caption text-gray-500">+{tasks.length - 3} more</div>
                         )}
                       </div>
                     </div>
@@ -230,7 +230,7 @@ export default function TasksCalendarPage() {
         {/* Today's Tasks */}
         {!isLoading && !isError && todaysTasks.length > 0 && (
         <div className="mt-6">
-          <h2 className="text-2xl font-bebas mb-4 atlvs-text-gradient">TODAY&apos;S TASKS</h2>
+          <h2 className="text-h4 font-bebas mb-4 atlvs-text-gradient">TODAY&apos;S TASKS</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {todaysTasks.map((task: any) => (
               <Link key={task.id} href={`/atlvs/tasks/${task.id}`}>
@@ -241,14 +241,14 @@ export default function TasksCalendarPage() {
                         {task.priority.toUpperCase()}
                       </Badge>
                       {task.dueDate && (
-                        <span className="text-sm text-gray-400">
+                        <span className="text-body-sm text-gray-400">
                           {new Date(task.dueDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       )}
                     </div>
                     <div className="font-medium">{task.title}</div>
                     {task.description && (
-                      <p className="text-sm text-gray-400 mt-2 line-clamp-2">{task.description}</p>
+                      <p className="text-body-sm text-gray-400 mt-2 line-clamp-2">{task.description}</p>
                     )}
                   </CardHeader>
                 </Card>

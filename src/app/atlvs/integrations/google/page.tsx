@@ -39,8 +39,8 @@ export default function GoogleIntegrationPage() {
                     <Calendar className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium">Google Workspace</h3>
-                    <p className="text-sm text-gray-400">Calendar, Drive, and Gmail integration</p>
+                    <h3 className="text-h6">Google Workspace</h3>
+                    <p className="text-body-sm text-gray-400">Calendar, Drive, and Gmail integration</p>
                   </div>
                 </div>
                 {isConnected ? (
@@ -62,19 +62,19 @@ export default function GoogleIntegrationPage() {
           {isConnected && (
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <h3 className="text-lg font-medium">Connected Account</h3>
+                <h3 className="text-h6">Connected Account</h3>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-body-sm">
                     <span className="text-gray-400">Email</span>
                     <span className="font-medium">admin@atlvs.com</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-body-sm">
                     <span className="text-gray-400">Account Type</span>
                     <span>Google Workspace</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-body-sm">
                     <span className="text-gray-400">Connected Since</span>
                     <span>January 15, 2024</span>
                   </div>
@@ -89,9 +89,9 @@ export default function GoogleIntegrationPage() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-lg font-medium">Google Calendar</h3>
+                  <h3 className="text-h6">Google Calendar</h3>
                 </div>
-                <p className="text-sm text-gray-400">Sync events and meetings</p>
+                <p className="text-body-sm text-gray-400">Sync events and meetings</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -102,7 +102,7 @@ export default function GoogleIntegrationPage() {
                     'Attendee management',
                     'Calendar sharing'
                   ].map((feature) => (
-                    <div key={feature} className="flex items-center gap-2 text-sm">
+                    <div key={feature} className="flex items-center gap-2 text-body-sm">
                       <Check className="w-4 h-4 text-atlvs-green-500" />
                       <span>{feature}</span>
                     </div>
@@ -118,9 +118,9 @@ export default function GoogleIntegrationPage() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <FolderOpen className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-lg font-medium">Google Drive</h3>
+                  <h3 className="text-h6">Google Drive</h3>
                 </div>
-                <p className="text-sm text-gray-400">File storage and collaboration</p>
+                <p className="text-body-sm text-gray-400">File storage and collaboration</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -131,7 +131,7 @@ export default function GoogleIntegrationPage() {
                     'Version control',
                     'Shared drive access'
                   ].map((feature) => (
-                    <div key={feature} className="flex items-center gap-2 text-sm">
+                    <div key={feature} className="flex items-center gap-2 text-body-sm">
                       <Check className="w-4 h-4 text-atlvs-green-500" />
                       <span>{feature}</span>
                     </div>
@@ -147,9 +147,9 @@ export default function GoogleIntegrationPage() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Mail className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-lg font-medium">Gmail</h3>
+                  <h3 className="text-h6">Gmail</h3>
                 </div>
-                <p className="text-sm text-gray-400">Email integration and automation</p>
+                <p className="text-body-sm text-gray-400">Email integration and automation</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -160,7 +160,7 @@ export default function GoogleIntegrationPage() {
                     'Attachment handling',
                     'Label management'
                   ].map((feature) => (
-                    <div key={feature} className="flex items-center gap-2 text-sm">
+                    <div key={feature} className="flex items-center gap-2 text-body-sm">
                       <Check className="w-4 h-4 text-atlvs-green-500" />
                       <span>{feature}</span>
                     </div>

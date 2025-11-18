@@ -128,13 +128,13 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Results */}
           <div className="max-h-[400px] overflow-y-auto p-2">
             {Object.keys(groupedItems).length === 0 ? (
-              <div className="py-12 text-center text-sm text-gray-500 font-share-tech">
+              <div className="py-12 text-center text-body-sm text-gray-500 font-share-tech">
                 No results found
               </div>
             ) : (
               Object.entries(groupedItems).map(([category, categoryItems]) => (
                 <div key={category} className="mb-4 last:mb-0">
-                  <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <div className="px-3 py-2 text-caption text-gray-500 uppercaser">
                     {category}
                   </div>
                   {categoryItems.map((item, _index) => {
@@ -162,17 +162,17 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium font-share-tech truncate">
+                          <div className="text-body-sm font-share-tech truncate">
                             {item.label}
                           </div>
                           {item.description && (
-                            <div className="text-xs text-gray-500 font-share-tech truncate">
+                            <div className="text-caption text-gray-500 font-share-tech truncate">
                               {item.description}
                             </div>
                           )}
                         </div>
                         {item.shortcut && (
-                          <div className="flex-shrink-0 text-xs text-gray-400 font-mono">
+                          <div className="flex-shrink-0 text-caption text-gray-400 font-mono">
                             {item.shortcut}
                           </div>
                         )}
@@ -185,7 +185,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="border-t border-gray-200 px-4 py-2 text-xs text-gray-500 font-share-tech">
+          <div className="border-t border-gray-200 px-4 py-2 text-caption text-gray-500 font-share-tech">
             <span className="mr-4">↑↓ Navigate</span>
             <span className="mr-4">↵ Select</span>
             <span>ESC Close</span>

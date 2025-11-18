@@ -1,0 +1,207 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Ticket, Calendar, ShoppingBag, Users, MapPin, Wallet, Star, TrendingUp, Heart } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/atoms/Button';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms/Card';
+import { Badge } from '@/components/atoms/Badge';
+import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+
+export default function GVTEWAYPage() {
+  return (
+    <GvtewayLayout>
+    <div className="min-h-screen bg-black text-white -m-6">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="hero-title">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1),transparent_50%)]" aria-hidden="true" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" aria-hidden="true" />
+        
+        {/* Gradient Orbs */}
+        <motion.div
+          className="absolute top-20 right-20 w-96 h-96 bg-gvteway-red-500/20 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity }}
+          aria-hidden="true"
+        />
+        <motion.div
+          className="absolute bottom-20 left-20 w-96 h-96 bg-gvteway-blue-500/20 rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity }}
+          aria-hidden="true"
+        />
+        
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="gvteway-text-gradient mb-6" id="hero-title">
+              GVTEWAY
+            </h1>
+            <p className="text-3xl sm:text-4xl font-bebas tracking-wide mb-4 text-gray-300">
+              COMMUNITY FIRST EXPERIENCES • EXPERIENCE FIRST COMMUNITIES
+            </p>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 font-oswald">
+              Discover events, book tickets, connect with communities, and shop exclusive merchandise—all in one seamless platform.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Primary actions">
+              <Button variant="gvteway" size="lg" rounded="full" aria-label="Explore events">
+                EXPLORE EVENTS
+              </Button>
+              <Button variant="gvteway-outline" size="lg" rounded="full" aria-label="Download mobile app">
+                DOWNLOAD APP
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Core Features */}
+      <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-950" aria-labelledby="features-heading">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl sm:text-6xl font-bebas mb-6" id="features-heading">
+              EVERYTHING YOU NEED
+            </h2>
+            <p className="text-xl text-gray-400 font-oswald">
+              Nine powerful modules for the ultimate event experience
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" role="list" aria-label="Platform features">
+            <FeatureCard
+              icon={<Calendar className="w-8 h-8" />}
+              title="Event Discovery"
+              description="Find concerts, festivals, sports, and experiences tailored to your interests"
+              badge="Smart Recommendations"
+            />
+            <FeatureCard
+              icon={<Ticket className="w-8 h-8" />}
+              title="Smart Ticketing"
+              description="NFT tickets, digital wallet passes, QR codes, and seamless transfers"
+              badge="Blockchain Ready"
+            />
+            <FeatureCard
+              icon={<ShoppingBag className="w-8 h-8" />}
+              title="Marketplace"
+              description="Shop official merchandise, exclusive drops, and artist collaborations"
+              badge="Verified Sellers"
+            />
+            <FeatureCard
+              icon={<Users className="w-8 h-8" />}
+              title="Social Hub"
+              description="Connect with fans, share experiences, and build your event community"
+              badge="Live Feed"
+            />
+            <FeatureCard
+              icon={<MapPin className="w-8 h-8" />}
+              title="Adventures"
+              description="Book tours, VIP experiences, meet & greets, and exclusive access"
+              badge="Curated"
+            />
+            <FeatureCard
+              icon={<Wallet className="w-8 h-8" />}
+              title="Universal Wallet"
+              description="Store tickets, credentials, and loyalty rewards in one secure place"
+              badge="Multi-Chain"
+            />
+            <FeatureCard
+              icon={<Star className="w-8 h-8" />}
+              title="Memberships"
+              description="Join exclusive clubs, earn rewards, and unlock premium benefits"
+              badge="VIP Access"
+            />
+            <FeatureCard
+              icon={<TrendingUp className="w-8 h-8" />}
+              title="Analytics"
+              description="Track your event history, spending, and personalized insights"
+              badge="AI Powered"
+            />
+            <FeatureCard
+              icon={<Heart className="w-8 h-8" />}
+              title="Wishlist & Alerts"
+              description="Save favorites, get notified about new events and ticket drops"
+              badge="Real-time"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 px-4 sm:px-6 lg:px-8 bg-black" aria-labelledby="cta-heading">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl sm:text-6xl font-bebas mb-6" id="cta-heading">
+              READY TO EXPLORE?
+            </h2>
+            <p className="text-xl text-gray-400 mb-12 font-oswald">
+              Join thousands of event-goers discovering their next adventure
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Call to action">
+              <Button variant="gvteway" size="xl" rounded="full" aria-label="Create free account">
+                CREATE FREE ACCOUNT
+              </Button>
+              <Link href="/">
+                <Button variant="ghost" size="xl" rounded="full" className="text-white" aria-label="Return to main home page">
+                  BACK TO HOME
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+    </GvtewayLayout>
+  );
+}
+
+function FeatureCard({ 
+  icon, 
+  title, 
+  description, 
+  badge 
+}: { 
+  icon: React.ReactNode; 
+  title: string; 
+  description: string; 
+  badge: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
+      role="listitem"
+    >
+      <Card variant="gvteway" className="h-full bg-gray-900/50 backdrop-blur-sm">
+        <CardHeader>
+          <div className="flex items-start justify-between mb-4">
+            <div className="p-3 bg-gvteway-red-500/10 rounded-xl text-gvteway-red-500" aria-hidden="true">
+              {icon}
+            </div>
+            <Badge variant="gvteway-outline" role="status">{badge}</Badge>
+          </div>
+          <CardTitle className="text-white">{title}</CardTitle>
+          <CardDescription className="text-gray-400">
+            {description}
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </motion.div>
+  );
+}

@@ -160,7 +160,7 @@ export function WalletConnectionCard({
             </div>
             <div>
               <p className="font-semibold">Wallet Connected</p>
-              <p className="text-sm text-gray-400">{formatAddress(address)}</p>
+              <p className="text-body-sm text-gray-400">{formatAddress(address)}</p>
             </div>
           </div>
           <Button
@@ -182,8 +182,8 @@ export function WalletConnectionCard({
           <Wallet className="w-8 h-8 text-gray-400" />
         </div>
         <div>
-          <h3 className="font-semibold text-lg mb-2">Connect Your Wallet</h3>
-          <p className="text-sm text-gray-400 mb-4">
+          <h3 className="font-semibold text-h6 mb-2">Connect Your Wallet</h3>
+          <p className="text-body-sm text-gray-400 mb-4">
             Connect your Web3 wallet to access exclusive features and NFT tickets
           </p>
         </div>

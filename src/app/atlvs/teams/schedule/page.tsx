@@ -12,6 +12,8 @@ import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { FormField } from '@/components/molecules/FormField';
 import { Button } from '@/components/atoms/Button';
+import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
+import { Badge } from '@/components/atoms/Badge';
 import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 
 export default function TeamSchedulePage() {
@@ -90,7 +92,7 @@ export default function TeamSchedulePage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Schedule</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Schedule</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -116,19 +118,19 @@ export default function TeamSchedulePage() {
 
   const getShiftColor = (shift: string) => {
     const colors: Record<string, string> = {
-      morning: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-      afternoon: 'bg-info-light text-blue-800 border-blue-200',
-      evening: 'bg-purple-100 text-purple-800 border-purple-200',
-      night: 'bg-gray-100 text-gray-800 border-gray-200'
+      morning: 'bg-warning/20 text-warning border-warning/30',
+      afternoon: 'bg-info/20 text-info border-info/30',
+      evening: 'bg-atlvs-purple-500/20 text-atlvs-purple-500 border-atlvs-purple-500/30',
+      night: 'bg-gray-700 text-gray-300 border-gray-600'
     };
     return colors[shift] || colors.morning;
   };
 
   const getStatusBadge = (status: string) => {
     const badges: Record<string, string> = {
-      confirmed: 'bg-success-light text-success-foreground',
-      pending: 'bg-yellow-100 text-yellow-800',
-      requested: 'bg-info-light text-blue-800'
+      confirmed: 'bg-atlvs-green-500/20 text-atlvs-green-500',
+      pending: 'bg-warning/20 text-warning',
+      requested: 'bg-info/20 text-info'
     };
     return badges[status] || badges.confirmed;
   };
@@ -161,12 +163,12 @@ export default function TeamSchedulePage() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="mb-6 flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Team Schedule</h1>
-          <p className="text-gray-600">Manage team shifts and availability</p>
+          <h1 className="text-h3 font-bebas text-white mb-2">Team Schedule</h1>
+          <p className="text-gray-400">Manage team shifts and availability</p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -197,22 +199,23 @@ export default function TeamSchedulePage() {
       </div>
 
       {/* Controls */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          {/* Week Navigator */}
-          <div className="flex items-center gap-2">
-            <Button
-              onClick={() => navigateWeek('prev')}
-              variant="ghost"
-              size="sm"
-              className="p-2"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
-            <div className="flex items-center gap-2 px-4">
-              <Calendar className="w-5 h-5 text-gray-600" />
-              <span className="font-semibold text-gray-900">Week of Nov 11-17, 2025</span>
-            </div>
+      <Card variant="atlvs" className="bg-gray-900/50">
+        <CardHeader>
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            {/* Week Navigator */}
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={() => navigateWeek('prev')}
+                variant="ghost"
+                size="sm"
+                className="p-2 text-gray-400"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
+              <div className="flex items-center gap-2 px-4">
+                <Calendar className="w-5 h-5 text-gray-400" />
+                <span className="font-semibold text-white">Week of Nov 11-17, 2025</span>
+              </div>
             <Button
               onClick={() => navigateWeek('next')}
               variant="ghost"
@@ -243,7 +246,7 @@ export default function TeamSchedulePage() {
 
           {/* Department Filter */}
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-gray-600" />
+            <Filter className="w-5 h-5 text-gray-400" />
             <Select
               value={selectedDepartment}
               onChange={(e) => setSelectedDepartment(e.target.value)}
@@ -257,7 +260,8 @@ export default function TeamSchedulePage() {
             </Select>
           </div>
         </div>
-      </div>
+        </CardHeader>
+      </Card>
 
       {/* Schedule Grid */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
@@ -265,16 +269,16 @@ export default function TeamSchedulePage() {
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 w-32">
+                <th className="px-4 py-3 text-left text-body-sm text-gray-900 w-32">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
                     Shift
                   </div>
                 </th>
                 {weekDays.map(day => (
-                  <th key={day} className="px-4 py-3 text-center text-sm font-semibold text-gray-900">
+                  <th key={day} className="px-4 py-3 text-center text-body-sm text-gray-900">
                     {day}
-                    <div className="text-xs font-normal text-gray-500">Nov {11 + weekDays.indexOf(day)}</div>
+                    <div className="text-caption text-gray-500">Nov {11 + weekDays.indexOf(day)}</div>
                   </th>
                 ))}
               </tr>
@@ -282,10 +286,10 @@ export default function TeamSchedulePage() {
             <tbody className="divide-y divide-gray-200">
               {shifts.map(shift => (
                 <tr key={shift}>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900 capitalize bg-gray-50">
+                  <td className="px-4 py-3 text-body-sm text-gray-900 capitalize bg-gray-50">
                     <div>
                       {shift}
-                      <div className="text-xs text-gray-500 font-normal">
+                      <div className="text-caption text-gray-500">
                         {shift === 'morning' && '6am-12pm'}
                         {shift === 'afternoon' && '12pm-6pm'}
                         {shift === 'evening' && '6pm-12am'}
@@ -297,16 +301,16 @@ export default function TeamSchedulePage() {
                     <td key={`${shift}-${day}`} className="px-2 py-2 align-top">
                       <div
                         onClick={() => handleAddShift(day, shift)}
-                        className="min-h-[100px] p-2 hover:bg-gray-50 rounded cursor-pointer border border-transparent hover:border-green-300 transition-colors"
+                        className="min-h-[100px] p-2 hover:bg-gray-50 rounded cursor-pointer border border-transparent hover:border-success transition-colors"
                       >
                         {getEntriesForCell(day, shift).map(entry => (
                           <div
                             key={entry.id}
-                            className={`text-xs p-2 rounded mb-1 border ${getShiftColor(shift)}`}
+                            className={`text-caption p-2 rounded mb-1 border ${getShiftColor(shift)}`}
                           >
                             <div className="font-medium mb-1">{entry.memberName}</div>
-                            <div className="text-xs opacity-75 mb-1">{entry.role}</div>
-                            <span className={`px-1.5 py-0.5 rounded text-xs ${getStatusBadge(entry.status)}`}>
+                            <div className="text-caption opacity-75 mb-1">{entry.role}</div>
+                            <span className={`px-1.5 py-0.5 rounded text-caption ${getStatusBadge(entry.status)}`}>
                               {entry.status}
                             </span>
                           </div>
@@ -332,19 +336,19 @@ export default function TeamSchedulePage() {
           <div className="flex items-center gap-3">
             <Users className="w-8 h-8 text-success" />
             <div>
-              <div className="text-sm text-gray-600">Total Shifts</div>
-              <div className="text-2xl font-bold text-gray-900">{scheduleEntries.length}</div>
+              <div className="text-body-sm text-gray-600">Total Shifts</div>
+              <div className="text-h4 text-gray-900">{scheduleEntries.length}</div>
             </div>
           </div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-success-light flex items-center justify-center">
-              <span className="text-success font-bold">✓</span>
+              <span className="text-success">✓</span>
             </div>
             <div>
-              <div className="text-sm text-gray-600">Confirmed</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Confirmed</div>
+              <div className="text-h4 text-gray-900">
                 {scheduleEntries.filter(e => e.status === 'confirmed').length}
               </div>
             </div>
@@ -352,12 +356,12 @@ export default function TeamSchedulePage() {
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
-              <span className="text-warning font-bold">⏱</span>
+            <div className="w-8 h-8 rounded-full bg-warning-light flex items-center justify-center">
+              <span className="text-warning">⏱</span>
             </div>
             <div>
-              <div className="text-sm text-gray-600">Pending</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Pending</div>
+              <div className="text-h4 text-gray-900">
                 {scheduleEntries.filter(e => e.status === 'pending').length}
               </div>
             </div>
@@ -366,11 +370,11 @@ export default function TeamSchedulePage() {
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-info-light flex items-center justify-center">
-              <span className="text-info font-bold">?</span>
+              <span className="text-info">?</span>
             </div>
             <div>
-              <div className="text-sm text-gray-600">Requested</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Requested</div>
+              <div className="text-h4 text-gray-900">
                 {scheduleEntries.filter(e => e.status === 'requested').length}
               </div>
             </div>
@@ -383,7 +387,7 @@ export default function TeamSchedulePage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Add Shift</h3>
+              <h3 className="text-h6 text-gray-900">Add Shift</h3>
               <Button
                 onClick={() => setShowAddModal(false)}
                 variant="ghost"

@@ -87,8 +87,8 @@ export default function KPIsPage() {
           {getMetricsForCategory(selectedCategory).map((metric, index) => (
             <Card key={index} variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <CardTitle className="text-sm text-gray-400 mb-2">{metric.title}</CardTitle>
-                <div className="text-2xl font-bebas text-white">
+                <CardTitle className="text-body-sm text-gray-400 mb-2">{metric.title}</CardTitle>
+                <div className="text-h4 font-bebas text-white">
                   {metric.format === 'currency' && '$'}
                   {metric.format === 'currency' ? (metric.value / 1000000).toFixed(1) + 'M' : metric.value.toLocaleString()}
                   {metric.format === 'percentage' && '%'}
@@ -102,8 +102,8 @@ export default function KPIsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <Card variant="atlvs" className="bg-gradient-to-br from-atlvs-green-500/20 to-atlvs-green-600/20 border-atlvs-green-500/30">
             <CardHeader>
-              <CardTitle className="text-sm text-gray-400">Total Revenue</CardTitle>
-              <div className="text-3xl font-bebas text-atlvs-green-500 mt-2">
+              <CardTitle className="text-body-sm text-gray-400">Total Revenue</CardTitle>
+              <div className="text-h3 font-bebas text-atlvs-green-500 mt-2">
                 $2.4M
               </div>
             </CardHeader>
@@ -111,8 +111,8 @@ export default function KPIsPage() {
           
           <Card variant="atlvs" className="bg-gradient-to-br from-info/20 to-info/20 border-info/30">
             <CardHeader>
-              <CardTitle className="text-sm text-gray-400">Active Projects</CardTitle>
-              <div className="text-3xl font-bebas text-info mt-2">
+              <CardTitle className="text-body-sm text-gray-400">Active Projects</CardTitle>
+              <div className="text-h3 font-bebas text-info mt-2">
                 {analyticsData?.length || 0}
               </div>
             </CardHeader>
@@ -120,8 +120,8 @@ export default function KPIsPage() {
           
           <Card variant="atlvs" className="bg-gradient-to-br from-atlvs-purple-500/20 to-atlvs-purple-600/20 border-atlvs-purple-500/30">
             <CardHeader>
-              <CardTitle className="text-sm text-gray-400">ROI</CardTitle>
-              <div className="text-3xl font-bebas text-atlvs-purple-500 mt-2">
+              <CardTitle className="text-body-sm text-gray-400">ROI</CardTitle>
+              <div className="text-h3 font-bebas text-atlvs-purple-500 mt-2">
                 24.3%
               </div>
             </CardHeader>

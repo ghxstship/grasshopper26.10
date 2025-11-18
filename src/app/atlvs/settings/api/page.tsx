@@ -64,7 +64,7 @@ export default function APISettingsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load API Settings</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load API Settings</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -104,9 +104,9 @@ export default function APISettingsPage() {
           <CardHeader>
             <CardTitle className="mb-4">API Documentation</CardTitle>
             <div className="p-4 bg-gray-800/50 rounded-lg">
-              <div className="text-sm text-gray-400 mb-2">Base URL</div>
+              <div className="text-body-sm text-gray-400 mb-2">Base URL</div>
               <div className="flex items-center gap-2">
-                <code className="flex-1 px-3 py-2 bg-gray-900 rounded font-mono text-sm">
+                <code className="flex-1 px-3 py-2 bg-gray-900 rounded font-mono text-body-sm">
                   https://api.atlvs.com/v1
                 </code>
                 <Button variant="ghost" size="sm">
@@ -129,7 +129,7 @@ export default function APISettingsPage() {
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="font-medium text-lg">{apiKey.name}</span>
+                        <span className="font-medium text-h6">{apiKey.name}</span>
                         <Badge
                           variant="atlvs-outline"
                           className={apiKey.status === 'active' ? 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50' : 'bg-gray-500/20 text-gray-500 border-gray-500/50'}
@@ -137,11 +137,11 @@ export default function APISettingsPage() {
                           {apiKey.status}
                         </Badge>
                       </div>
-                      <div className="text-sm text-gray-400 mb-3">
+                      <div className="text-body-sm text-gray-400 mb-3">
                         Created {apiKey.created} • Last used {apiKey.lastUsed}
                       </div>
                       <div className="flex items-center gap-2">
-                        <code className="flex-1 px-3 py-2 bg-gray-900 rounded font-mono text-sm">
+                        <code className="flex-1 px-3 py-2 bg-gray-900 rounded font-mono text-body-sm">
                           {showKeys[apiKey.id] ? apiKey.key : maskKey(apiKey.key)}
                         </code>
                         <Button
@@ -171,16 +171,16 @@ export default function APISettingsPage() {
             <CardTitle className="mb-6">Rate Limits</CardTitle>
             <div className="grid grid-cols-3 gap-4">
               <div className="p-4 bg-gray-800/50 rounded-lg">
-                <div className="text-sm text-gray-400 mb-1">Requests per minute</div>
-                <div className="text-2xl font-bebas atlvs-text-gradient">1,000</div>
+                <div className="text-body-sm text-gray-400 mb-1">Requests per minute</div>
+                <div className="text-h4 font-bebas atlvs-text-gradient">1,000</div>
               </div>
               <div className="p-4 bg-gray-800/50 rounded-lg">
-                <div className="text-sm text-gray-400 mb-1">Daily limit</div>
-                <div className="text-2xl font-bebas text-atlvs-green-500">100,000</div>
+                <div className="text-body-sm text-gray-400 mb-1">Daily limit</div>
+                <div className="text-h4 font-bebas text-atlvs-green-500">100,000</div>
               </div>
               <div className="p-4 bg-gray-800/50 rounded-lg">
-                <div className="text-sm text-gray-400 mb-1">Current usage</div>
-                <div className="text-2xl font-bebas text-atlvs-purple-500">24,567</div>
+                <div className="text-body-sm text-gray-400 mb-1">Current usage</div>
+                <div className="text-h4 font-bebas text-atlvs-purple-500">24,567</div>
               </div>
             </div>
           </CardHeader>

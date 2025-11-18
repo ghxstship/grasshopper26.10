@@ -87,7 +87,7 @@ describe('EmptyState', () => {
       );
       
       const description = screen.getByText('Description text');
-      expect(description).toHaveClass('text-sm', 'text-gray-500');
+      expect(description).toHaveClass('text-body-sm', 'text-gray-500');
     });
   });
 
@@ -183,7 +183,7 @@ describe('EmptyState', () => {
       render(<EmptyState title="No items" />);
       
       const title = screen.getByText('No items');
-      expect(title).toHaveClass('text-lg', 'font-bebas', 'tracking-wide');
+      expect(title).toHaveClass('text-h6', 'font-bebas', 'tracking-wide');
     });
 
     it('should limit description width', () => {

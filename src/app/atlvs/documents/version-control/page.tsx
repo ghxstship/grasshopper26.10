@@ -8,7 +8,7 @@ import { ContentLayout } from '@/components/templates/ContentLayout';
 import { useState } from 'react';
 import { FileText, Clock, Download, Eye, GitBranch, User, Calendar, ChevronDown, ChevronUp,  } from 'lucide-react';
 import { useDocuments } from '@/lib/hooks/atlvs/useDocuments';
-import { Card as _Card, CardHeader as _CardHeader, CardTitle as _CardTitle, CardContent as _CardContent } from '@/components/atoms/Card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Select } from '@/components/atoms/Select';
@@ -74,8 +74,8 @@ export default function VersionControlPage() {
   const getStatusBadge = (status: string) => {
     const badges: Record<string, string> = {
       current: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50',
-      previous: 'bg-info-light text-info border-info-border',
-      archived: 'bg-gray-500/20 text-gray-500 border-gray-500/50'
+      previous: 'bg-info/20 text-info border-info/50',
+      archived: 'bg-gray-700 text-gray-300 border-gray-600'
     };
     return badges[status] || badges.archived;
   };
@@ -95,44 +95,48 @@ export default function VersionControlPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Document List */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Documents</h2>
-            <div className="space-y-2">
-              {documents.map((doc: VersionedDocument) => (
-                <div
-                  key={doc.id}
-                  onClick={() => setSelectedDoc(doc.id)}
-                  className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                    selectedDoc === doc.id
-                      ? 'bg-green-50 border-2 border-green-600'
-                      : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
-                  }`}
-                >
-                  <div className="flex items-start gap-2">
-                    <FileText className="w-5 h-5 text-gray-600 mt-0.5" />
-                    <div className="flex-1 min-w-0">
-                      <div className="font-medium text-gray-900 text-sm truncate">{doc.name}</div>
-                      <div className="text-xs text-gray-600 mt-1">{doc.type}</div>
-                      <div className="flex items-center gap-1 mt-1 text-xs text-gray-500">
-                        <GitBranch className="w-3 h-3" />
-                        <span>{doc.versions.length} versions</span>
+          <Card variant="atlvs" className="bg-gray-900/50">
+            <CardHeader>
+              <CardTitle>Documents</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {documents.map((doc: VersionedDocument) => (
+                  <div
+                    key={doc.id}
+                    onClick={() => setSelectedDoc(doc.id)}
+                    className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                      selectedDoc === doc.id
+                        ? 'bg-atlvs-green-500/20 border-2 border-atlvs-green-500'
+                        : 'bg-gray-800/50 border-2 border-transparent hover:bg-gray-800'
+                    }`}
+                  >
+                    <div className="flex items-start gap-2">
+                      <FileText className="w-5 h-5 text-gray-400 mt-0.5" />
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium text-white text-body-sm truncate">{doc.name}</div>
+                        <div className="text-caption text-gray-400 mt-1">{doc.type}</div>
+                        <div className="flex items-center gap-1 mt-1 text-caption text-gray-500">
+                          <GitBranch className="w-3 h-3" />
+                          <span>{doc.versions.length} versions</span>
+                        </div>
                       </div>
-                    </div>
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Version History */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-1">
+              <h2 className="text-h6 text-gray-900 mb-1">
                 {selectedDocument?.name}
               </h2>
-              <p className="text-sm text-gray-600">{selectedDocument?.type}</p>
+              <p className="text-body-sm text-gray-600">{selectedDocument?.type}</p>
             </div>
 
             <div className="space-y-3">
@@ -146,7 +150,7 @@ export default function VersionControlPage() {
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <span className="text-xl font-bold text-gray-900">v{version.version}</span>
+                            <span className="text-h5 text-gray-900">v{version.version}</span>
                             <Badge variant="atlvs-outline" className={statusStyle}>
                               {version.status}
                             </Badge>
@@ -156,7 +160,7 @@ export default function VersionControlPage() {
                               </Badge>
                             )}
                           </div>
-                          <div className="flex items-center gap-4 text-sm text-gray-600">
+                          <div className="flex items-center gap-4 text-body-sm text-gray-600">
                             <div className="flex items-center gap-1">
                               <User className="w-4 h-4" />
                               <span>{version.author}</span>
@@ -189,8 +193,8 @@ export default function VersionControlPage() {
                     {isExpanded && (
                       <div className="p-4 border-t border-gray-200">
                         <div className="mb-4">
-                          <div className="text-sm font-medium text-gray-700 mb-1">Changes:</div>
-                          <p className="text-sm text-gray-600">{version.changes}</p>
+                          <div className="text-body-sm text-gray-700 mb-1">Changes:</div>
+                          <p className="text-body-sm text-gray-600">{version.changes}</p>
                         </div>
                         <div className="flex gap-2">
                           <Button variant="atlvs" size="sm">
@@ -218,7 +222,7 @@ export default function VersionControlPage() {
 
           {/* Version Comparison */}
           <div className="mt-6 bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Compare Versions</h3>
+            <h3 className="text-h6 text-gray-900 mb-4">Compare Versions</h3>
             <div className="grid grid-cols-2 gap-4">
               <FormField label="Version A">
                 <Select variant="atlvs">
@@ -248,8 +252,8 @@ export default function VersionControlPage() {
           <div className="flex items-center gap-3">
             <FileText className="w-8 h-8 text-success" />
             <div>
-              <div className="text-sm text-gray-600">Total Documents</div>
-              <div className="text-2xl font-bold text-gray-900">{documents.length}</div>
+              <div className="text-body-sm text-gray-600">Total Documents</div>
+              <div className="text-h4 text-gray-900">{documents.length}</div>
             </div>
           </div>
         </div>
@@ -257,8 +261,8 @@ export default function VersionControlPage() {
           <div className="flex items-center gap-3">
             <GitBranch className="w-8 h-8 text-info" />
             <div>
-              <div className="text-sm text-gray-600">Total Versions</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Total Versions</div>
+              <div className="text-h4 text-gray-900">
                 {documents.reduce((sum: number, doc: VersionedDocument) => sum + doc.versions.length, 0)}
               </div>
             </div>
@@ -268,8 +272,8 @@ export default function VersionControlPage() {
           <div className="flex items-center gap-3">
             <Clock className="w-8 h-8 text-atlvs-purple-500" />
             <div>
-              <div className="text-sm text-gray-600">Recent Updates</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Recent Updates</div>
+              <div className="text-h4 text-gray-900">
                 {documents.filter((d: VersionedDocument) => d.versions.some((v: Version) => v.status === 'current')).length}
               </div>
             </div>
@@ -279,8 +283,8 @@ export default function VersionControlPage() {
           <div className="flex items-center gap-3">
             <User className="w-8 h-8 text-atlvs-orange-500" />
             <div>
-              <div className="text-sm text-gray-600">Contributors</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Contributors</div>
+              <div className="text-h4 text-gray-900">
                 {new Set(documents.flatMap(d => d.versions.map(v => v.author))).size}
               </div>
             </div>

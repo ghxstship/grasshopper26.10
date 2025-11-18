@@ -126,7 +126,7 @@ export default function PermitsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Total Permits</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">{permits.length}</CardTitle>
+                  <CardTitle className="text-h3 font-bebas">{permits.length}</CardTitle>
                 </div>
                 <div className="p-3 bg-atlvs-green-500/10 rounded-xl">
                   <FileCheck className="w-6 h-6 text-atlvs-green-500" />
@@ -140,7 +140,7 @@ export default function PermitsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Active</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {permits.filter(p => p.status === 'active').length}
                   </CardTitle>
                 </div>
@@ -156,11 +156,11 @@ export default function PermitsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Expiring Soon</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {permits.filter(p => p.status === 'expiring-soon').length}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-orange-500/10 rounded-xl">
+                <div className="p-3 bg-warning-light0/10 rounded-xl">
                   <AlertCircle className="w-6 h-6 text-atlvs-orange-500" />
                 </div>
               </div>
@@ -172,7 +172,7 @@ export default function PermitsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardDescription className="text-gray-400 mb-1">Total Cost</CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     ${permits.reduce((sum, p) => sum + p.cost, 0).toLocaleString()}
                   </CardTitle>
                 </div>
@@ -188,7 +188,7 @@ export default function PermitsPage() {
         <Card variant="atlvs" className="bg-gray-900/50 mb-6">
           <CardHeader>
             <div className="flex items-center gap-4">
-              <span className="text-sm font-medium text-gray-300">Filter by status:</span>
+              <span className="text-body-sm text-gray-300">Filter by status:</span>
               <div className="flex gap-2">
                 {['all', 'active', 'pending', 'expiring-soon', 'expired'].map(status => (
                   <Button
@@ -212,22 +212,22 @@ export default function PermitsPage() {
             <table className="w-full">
               <thead className="bg-gray-800/50 border-b border-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
                     Permit
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
                     Type
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
                     Venue
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
                     Expiry Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-right text-caption text-gray-400 uppercaser">
                     Cost
                   </th>
                 </tr>
@@ -243,7 +243,7 @@ export default function PermitsPage() {
                           {getStatusIcon(permit.status)}
                           <div>
                             <div className="font-medium text-white">{permit.name}</div>
-                            <div className="text-sm text-gray-400">{permit.authority}</div>
+                            <div className="text-body-sm text-gray-400">{permit.authority}</div>
                           </div>
                         </div>
                       </td>
@@ -253,18 +253,18 @@ export default function PermitsPage() {
                         </Badge>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1 text-sm text-gray-300">
+                        <div className="flex items-center gap-1 text-body-sm text-gray-300">
                           <MapPin className="w-4 h-4" />
                           {permit.venue}
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1 text-sm text-gray-300">
+                        <div className="flex items-center gap-1 text-body-sm text-gray-300">
                           <Calendar className="w-4 h-4" />
                           {permit.expiryDate}
                         </div>
                         {permit.status === 'active' && daysUntilExpiry <= 30 && (
-                          <div className="text-xs text-atlvs-orange-500 mt-1">
+                          <div className="text-caption text-atlvs-orange-500 mt-1">
                             {daysUntilExpiry} days remaining
                           </div>
                         )}
@@ -274,7 +274,7 @@ export default function PermitsPage() {
                           {permit.status.replace('-', ' ')}
                         </Badge>
                       </td>
-                      <td className="px-6 py-4 text-right font-medium text-white">
+                      <td className="px-6 py-4 text-right text-white">
                         ${permit.cost.toLocaleString()}
                       </td>
                     </tr>
@@ -286,7 +286,7 @@ export default function PermitsPage() {
         </Card>
 
         {/* Renewal Reminders */}
-        <Card variant="atlvs" className="bg-orange-500/10 border-orange-500/50">
+        <Card variant="atlvs" className="bg-warning-light0/10 border-warning/50">
           <CardHeader>
             <CardTitle className="mb-4 flex items-center gap-2 text-atlvs-orange-500">
               <AlertCircle className="w-5 h-5" />
@@ -297,7 +297,7 @@ export default function PermitsPage() {
                 <div key={permit.id} className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
                   <div>
                     <div className="font-medium text-white">{permit.name}</div>
-                    <div className="text-sm text-gray-400">
+                    <div className="text-body-sm text-gray-400">
                       {permit.status === 'expired' ? 'Expired on' : 'Expires on'} {permit.expiryDate}
                     </div>
                   </div>

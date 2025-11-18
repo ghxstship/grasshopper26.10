@@ -5,7 +5,7 @@
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 import { useState, useEffect } from 'react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Input } from '@/components/atoms/Input';
 import { Button } from '@/components/atoms/Button';
@@ -77,7 +77,7 @@ export default function ProfileSettingsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Profile</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Profile</h2>
             <p className="text-gray-400">Unable to load your profile settings</p>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function ProfileSettingsPage() {
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-6">
         <div className="max-w-4xl mx-auto space-y-6">
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">Profile Settings</h1>
+            <h1 className="text-h2 text-white mb-2">Profile Settings</h1>
             <p className="text-gray-400">Customize your public profile</p>
           </div>
 
@@ -100,7 +100,7 @@ export default function ProfileSettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-6">
-                <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold">
+                <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-h3">
                   JD
                 </div>
                 <div className="flex-1">
@@ -108,7 +108,7 @@ export default function ProfileSettingsPage() {
                   <Camera className="w-4 h-4 mr-2" />
                   Upload Photo
                 </Button>
-                <p className="text-sm text-gray-400 mt-2">JPG, PNG or GIF. Max 5MB.</p>
+                <p className="text-body-sm text-gray-400 mt-2">JPG, PNG or GIF. Max 5MB.</p>
               </div>
             </div>
           </CardContent>
@@ -136,7 +136,7 @@ export default function ProfileSettingsPage() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <MapPin className="w-4 h-4 text-gray-400" />
-                <span className="text-white text-sm">Location</span>
+                <span className="text-white text-body-sm">Location</span>
               </div>
               <Input
                 value={location}
@@ -148,7 +148,7 @@ export default function ProfileSettingsPage() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <LinkIcon className="w-4 h-4 text-gray-400" />
-                <span className="text-white text-sm">Website</span>
+                <span className="text-white text-body-sm">Website</span>
               </div>
               <Input
                 value={website}
@@ -168,7 +168,7 @@ export default function ProfileSettingsPage() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <Instagram className="w-4 h-4 text-gray-400" />
-                <span className="text-white text-sm">Instagram</span>
+                <span className="text-white text-body-sm">Instagram</span>
               </div>
               <Input
                 value={instagram}
@@ -180,7 +180,7 @@ export default function ProfileSettingsPage() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <Twitter className="w-4 h-4 text-gray-400" />
-                <span className="text-white text-sm">Twitter</span>
+                <span className="text-white text-body-sm">Twitter</span>
               </div>
               <Input
                 value={twitter}

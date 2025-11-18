@@ -107,7 +107,7 @@ export default function OpportunitiesPage() {
         {/* Opportunities Grid */}
         {data && (
           <>
-            <div className="mb-4 text-sm text-gray-600">
+            <div className="mb-4 text-body-sm text-gray-600">
               {data.pagination.total} opportunities found
             </div>
 
@@ -122,21 +122,21 @@ export default function OpportunitiesPage() {
                       <div className="flex items-start justify-between mb-3">
                         <OpportunityBadge category={opportunity.category as string} />
                         {opportunity.compensationType && (
-                          <span className="text-xs text-gray-500 capitalize">
+                          <span className="text-caption text-gray-500 capitalize">
                             {opportunity.compensationType as string}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="font-bebas text-xl mb-2 text-gray-900">
+                      <h3 className="font-bebas text-h5 mb-2 text-gray-900">
                         {opportunity.title as string}
                       </h3>
 
-                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                      <p className="text-body-sm text-gray-600 mb-4 line-clamp-2">
                         {opportunity.description as string}
                       </p>
 
-                      <div className="space-y-2 text-sm text-gray-500">
+                      <div className="space-y-2 text-body-sm text-gray-500">
                         {opportunity.organization && (
                           <div className="flex items-center gap-2">
                             <Briefcase className="h-4 w-4" />
@@ -180,7 +180,7 @@ export default function OpportunitiesPage() {
               <Card>
                 <div className="p-12 text-center">
                   <Briefcase className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="font-bebas text-xl text-gray-900 mb-2">
+                  <h3 className="font-bebas text-h5 text-gray-900 mb-2">
                     No Opportunities Found
                   </h3>
                   <p className="text-gray-600">

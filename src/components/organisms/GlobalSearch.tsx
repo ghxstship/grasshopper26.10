@@ -122,7 +122,7 @@ export function GlobalSearch({
       case 'task': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500';
       case 'project': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500';
       case 'user': return 'bg-gray-500/20 text-gray-400';
-      case 'page': return 'bg-blue-500/20 text-blue-400';
+      case 'page': return 'bg-info-light text-info';
       default: return 'bg-gray-500/20 text-gray-400';
     }
   };
@@ -160,8 +160,8 @@ export function GlobalSearch({
 
       {/* Keyboard Shortcut Hint */}
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs text-gray-500 bg-gray-800 border border-gray-700 rounded">
-          <span className="text-xs">⌘</span>K
+        <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-caption text-gray-500 bg-gray-800 border border-gray-700 rounded">
+          <span className="text-caption">⌘</span>K
         </kbd>
       </div>
 
@@ -172,13 +172,13 @@ export function GlobalSearch({
           {!query && recentSearches.length > 0 && (
             <div className="p-4 border-b border-gray-800">
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 text-sm text-gray-400">
+                <div className="flex items-center gap-2 text-body-sm text-gray-400">
                   <Clock className="w-4 h-4" />
                   Recent Searches
                 </div>
                 <button
                   onClick={clearRecentSearches}
-                  className="text-xs text-gray-500 hover:text-white transition-colors"
+                  className="text-caption text-gray-500 hover:text-white transition-colors"
                 >
                   Clear
                 </button>
@@ -188,7 +188,7 @@ export function GlobalSearch({
                   <button
                     key={index}
                     onClick={() => handleRecentSearchClick(search)}
-                    className="w-full text-left px-3 py-2 text-sm text-gray-300 hover:bg-gray-800 rounded transition-colors"
+                    className="w-full text-left px-3 py-2 text-body-sm text-gray-300 hover:bg-gray-800 rounded transition-colors"
                   >
                     {search}
                   </button>
@@ -210,15 +210,15 @@ export function GlobalSearch({
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <Badge className={`text-xs ${getTypeColor(result.type)}`}>
+                        <Badge className={`text-caption ${getTypeColor(result.type)}`}>
                           {result.type}
                         </Badge>
-                        <h4 className="text-sm font-medium text-white truncate">
+                        <h4 className="text-body-sm text-white truncate">
                           {result.title}
                         </h4>
                       </div>
                       {result.description && (
-                        <p className="text-xs text-gray-400 line-clamp-2">
+                        <p className="text-caption text-gray-400 line-clamp-2">
                           {result.description}
                         </p>
                       )}
@@ -232,15 +232,15 @@ export function GlobalSearch({
           {/* No Results */}
           {query && !isLoading && results.length === 0 && (
             <div className="p-8 text-center text-gray-500">
-              <p className="text-sm">No results found for &quot;{query}&quot;</p>
-              <p className="text-xs mt-2">Try different keywords or check your spelling</p>
+              <p className="text-body-sm">No results found for &quot;{query}&quot;</p>
+              <p className="text-caption mt-2">Try different keywords or check your spelling</p>
             </div>
           )}
 
           {/* Trending/Popular (when no query) */}
           {!query && recentSearches.length === 0 && (
             <div className="p-4">
-              <div className="flex items-center gap-2 text-sm text-gray-400 mb-3">
+              <div className="flex items-center gap-2 text-body-sm text-gray-400 mb-3">
                 <TrendingUp className="w-4 h-4" />
                 Popular Searches
               </div>
@@ -249,7 +249,7 @@ export function GlobalSearch({
                   <button
                     key={term}
                     onClick={() => handleRecentSearchClick(term)}
-                    className="w-full text-left px-3 py-2 text-sm text-gray-300 hover:bg-gray-800 rounded transition-colors"
+                    className="w-full text-left px-3 py-2 text-body-sm text-gray-300 hover:bg-gray-800 rounded transition-colors"
                   >
                     {term}
                   </button>

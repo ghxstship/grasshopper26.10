@@ -116,8 +116,8 @@ export default function InsurancePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Total Policies</div>
-                <div className="text-3xl font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-gray-400 mb-1">Total Policies</div>
+                <div className="text-h3 font-bebas atlvs-text-gradient">
                   {typedPolicies.length}
                 </div>
               </CardHeader>
@@ -125,8 +125,8 @@ export default function InsurancePage() {
 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Active</div>
-                <div className="text-3xl font-bebas text-atlvs-green-500">
+                <div className="text-body-sm text-gray-400 mb-1">Active</div>
+                <div className="text-h3 font-bebas text-atlvs-green-500">
                   {typedPolicies.filter((p: any) => p.status === 'active').length}
                 </div>
               </CardHeader>
@@ -134,8 +134,8 @@ export default function InsurancePage() {
 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Expiring Soon</div>
-                <div className="text-3xl font-bebas text-warning">
+                <div className="text-body-sm text-gray-400 mb-1">Expiring Soon</div>
+                <div className="text-h3 font-bebas text-warning">
                   {typedPolicies.filter((p: any) => p.status === 'expiring-soon').length}
                 </div>
               </CardHeader>
@@ -143,8 +143,8 @@ export default function InsurancePage() {
 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <div className="text-sm text-gray-400 mb-1">Total Coverage</div>
-                <div className="text-3xl font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-gray-400 mb-1">Total Coverage</div>
+                <div className="text-h3 font-bebas atlvs-text-gradient">
                   ${(typedPolicies.reduce((sum: number, p: any) => sum + (p.coverage || 0), 0) / 1000000).toFixed(1)}M
                 </div>
               </CardHeader>
@@ -163,7 +163,7 @@ export default function InsurancePage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <CardTitle className="text-lg">{policy.title}</CardTitle>
+                          <CardTitle className="text-h6">{policy.title}</CardTitle>
                           <Badge variant="atlvs-outline" className={getStatusColor(policy.status)}>
                             {getStatusIcon(policy.status)}
                             <span className="ml-1">{policy.status.replace('-', ' ').toUpperCase()}</span>
@@ -172,10 +172,10 @@ export default function InsurancePage() {
                         <CardDescription className="mb-3">
                           {policy.provider} • {policy.type}
                         </CardDescription>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-body-sm">
                           <div>
                             <div className="text-gray-400 mb-1">Policy Number</div>
-                            <div className="font-mono text-xs">{policy.policyNumber}</div>
+                            <div className="font-mono text-caption">{policy.policyNumber}</div>
                           </div>
                           <div>
                             <div className="text-gray-400 mb-1 flex items-center gap-1">

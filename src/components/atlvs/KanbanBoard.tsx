@@ -65,10 +65,10 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
               <div
                 className={`w-3 h-3 rounded-full ${column.color || 'bg-atlvs-green-500'}`}
               />
-              <h3 className="font-bebas text-xl text-white">
+              <h3 className="font-bebas text-h5 text-white">
                 {column.title}
               </h3>
-              <Badge variant="atlvs-outline" className="text-xs">
+              <Badge variant="atlvs-outline" className="text-caption">
                 {column.tasks.length}
               </Badge>
             </div>
@@ -111,7 +111,7 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-start gap-2 flex-1">
                         <GripVertical className="w-4 h-4 text-gray-500 mt-1 flex-shrink-0" />
-                        <h4 className="text-white font-oswald text-sm leading-tight">
+                        <h4 className="text-white font-oswald text-body-sm">
                           {task.title}
                         </h4>
                       </div>
@@ -122,7 +122,7 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
 
                     {/* Task Description */}
                     {task.description && (
-                      <p className="text-gray-400 text-xs mb-3 line-clamp-2">
+                      <p className="text-gray-400 text-caption mb-3 line-clamp-2">
                         {task.description}
                       </p>
                     )}
@@ -137,14 +137,14 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
                           />
                         )}
                         {task.assignee && (
-                          <div className="flex items-center gap-1 text-gray-400 text-xs">
+                          <div className="flex items-center gap-1 text-gray-400 text-caption">
                             <User className="w-3 h-3" />
                             <span>{task.assignee}</span>
                           </div>
                         )}
                       </div>
                       {task.dueDate && (
-                        <div className="flex items-center gap-1 text-gray-400 text-xs">
+                        <div className="flex items-center gap-1 text-gray-400 text-caption">
                           <Calendar className="w-3 h-3" />
                           <span>{task.dueDate}</span>
                         </div>
@@ -158,7 +158,7 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
                           <Badge
                             key={tag}
                             variant="atlvs-outline"
-                            className="text-xs"
+                            className="text-caption"
                           >
                             {tag}
                           </Badge>

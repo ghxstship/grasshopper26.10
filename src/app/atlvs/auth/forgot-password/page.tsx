@@ -46,7 +46,7 @@ export default function AtlvsForgotPasswordPage() {
   };
 
   return (
-    <AtlvsLayout showNav={false}>
+    <AtlvsLayout>
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -66,7 +66,7 @@ export default function AtlvsForgotPasswordPage() {
           >
             <div className="text-center mb-8">
               <Link href="/atlvs">
-                <h1 className="text-5xl font-bebas atlvs-text-gradient mb-2 cursor-pointer tracking-wider">
+                <h1 className="text-h1 font-bebas atlvs-text-gradient mb-2 cursor-pointerr">
                   ATLVS
                 </h1>
               </Link>
@@ -75,7 +75,7 @@ export default function AtlvsForgotPasswordPage() {
 
             <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="text-white text-2xl">Forgot Password?</CardTitle>
+                <CardTitle className="text-white text-h4">Forgot Password?</CardTitle>
                 <CardDescription className="text-gray-400">
                   {submitted 
                     ? 'Check your email for reset instructions'
@@ -88,7 +88,7 @@ export default function AtlvsForgotPasswordPage() {
                     {error && (
                       <div className="mb-4 p-3 bg-error/10 border border-error/20 rounded-lg flex items-start gap-2" role="alert" aria-live="polite">
                         <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" aria-hidden="true" />
-                        <p className="text-sm text-error">{error}</p>
+                        <p className="text-body-sm text-error">{error}</p>
                       </div>
                     )}
 
@@ -140,7 +140,7 @@ export default function AtlvsForgotPasswordPage() {
                 )}
 
                 <div className="mt-6 text-center">
-                  <Link href="/atlvs/auth/login" className="inline-flex items-center text-sm text-gray-400 hover:text-gray-300">
+                  <Link href="/atlvs/auth/login" className="inline-flex items-center text-body-sm text-gray-400 hover:text-gray-300">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Sign In
                   </Link>

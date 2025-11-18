@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CreditCard, Lock, Calendar, MapPin, Ticket, ChevronLeft, Plus, Minus, Shield, Loader2 } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
@@ -65,7 +65,7 @@ function CheckoutContent() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Event</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Event</h2>
             <p className="text-gray-400 mb-4">{error?.message || 'Event not found'}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
@@ -184,10 +184,10 @@ function CheckoutContent() {
                 </Button>
               </Link>
 
-              <h1 className="text-5xl sm:text-6xl font-bebas mb-4 gvteway-text-gradient">
+              <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">
                 CHECKOUT
               </h1>
-              <p className="text-xl text-gray-400 font-oswald mb-12">
+              <p className="text-h5 text-gray-400 font-oswald mb-12">
                 Complete your ticket purchase
               </p>
 
@@ -214,16 +214,16 @@ function CheckoutContent() {
                           >
                             <div className="flex items-center justify-between">
                               <div>
-                                <h3 className="text-white font-medium mb-1">{type.name}</h3>
-                                <p className="text-gray-400 text-sm">
+                                <h3 className="text-white mb-1">{type.name}</h3>
+                                <p className="text-gray-400 text-body-sm">
                                   {type.available} available
                                 </p>
                               </div>
                               <div className="text-right">
-                                <p className="text-2xl font-bebas text-gvteway-red-500">
+                                <p className="text-h4 font-bebas text-gvteway-red-500">
                                   ${type.price}
                                 </p>
-                                <p className="text-gray-400 text-sm">per ticket</p>
+                                <p className="text-gray-400 text-body-sm">per ticket</p>
                               </div>
                             </div>
                           </Button>
@@ -242,7 +242,7 @@ function CheckoutContent() {
                             >
                               <Minus className="w-4 h-4" />
                             </Button>
-                            <span className="text-2xl font-bebas text-white w-12 text-center">
+                            <span className="text-h4 font-bebas text-white w-12 text-center">
                               {quantity}
                             </span>
                             <Button
@@ -253,7 +253,7 @@ function CheckoutContent() {
                             >
                               <Plus className="w-4 h-4" />
                             </Button>
-                            <span className="text-gray-400 text-sm ml-4">
+                            <span className="text-gray-400 text-body-sm ml-4">
                               Max 10 tickets per order
                             </span>
                           </div>
@@ -301,7 +301,7 @@ function CheckoutContent() {
 
                       <div className="mt-6 p-4 bg-gray-800/50 rounded-lg flex items-start">
                         <Shield className="w-5 h-5 text-success mr-3 mt-0.5 flex-shrink-0" />
-                        <div className="text-sm text-gray-300">
+                        <div className="text-body-sm text-gray-300">
                           <p className="font-medium text-white mb-1">Secure Payment</p>
                           <p>Your payment information is encrypted and secure</p>
                         </div>
@@ -351,10 +351,10 @@ function CheckoutContent() {
                     <CardContent>
                       {/* Event Info */}
                       <div className="mb-6 pb-6 border-b border-gray-800">
-                        <h3 className="text-xl font-bebas text-white mb-3">
+                        <h3 className="text-h5 font-bebas text-white mb-3">
                           {event.name}
                         </h3>
-                        <div className="space-y-2 text-sm text-gray-400">
+                        <div className="space-y-2 text-body-sm text-gray-400">
                           <div className="flex items-center">
                             <Calendar className="w-4 h-4 mr-2" />
                             {new Date(event.startDate).toLocaleDateString()} • {new Date(event.startDate).toLocaleTimeString()}
@@ -381,8 +381,8 @@ function CheckoutContent() {
                           <span>${serviceFee.toFixed(2)}</span>
                         </div>
                         <div className="pt-3 border-t border-gray-800 flex justify-between">
-                          <span className="text-white font-medium text-lg">Total</span>
-                          <span className="text-2xl font-bebas text-gvteway-red-500">
+                          <span className="text-white text-h6">Total</span>
+                          <span className="text-h4 font-bebas text-gvteway-red-500">
                             ${total.toFixed(2)}
                           </span>
                         </div>
@@ -410,7 +410,7 @@ function CheckoutContent() {
                         )}
                       </Button>
 
-                      <p className="text-xs text-gray-500 text-center">
+                      <p className="text-caption text-gray-500 text-center">
                         By completing this purchase, you agree to our{' '}
                         <Link href="/terms" className="text-gvteway-red-500 hover:underline">
                           Terms of Service
@@ -432,7 +432,7 @@ export default function CheckoutPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-red-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-destructive" />
       </div>
     }>
       <CheckoutContent />

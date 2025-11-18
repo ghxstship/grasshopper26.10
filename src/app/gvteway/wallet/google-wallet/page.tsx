@@ -5,7 +5,7 @@ export const runtime = 'edge';
 
 import { motion } from 'framer-motion';
 import { Smartphone } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 
@@ -20,7 +20,7 @@ export default function GoogleWalletPage() {
               <Card variant="gvteway" className="bg-gray-900/50 text-center">
                 <CardContent className="p-12">
                   <Smartphone className="w-24 h-24 text-gvteway-blue-500 mx-auto mb-6" />
-                  <h1 className="text-4xl font-bebas text-white mb-4">GOOGLE WALLET</h1>
+                  <h1 className="text-h2 font-bebas text-white mb-4">GOOGLE WALLET</h1>
                   <p className="text-gray-300 mb-8">Add your tickets to Google Wallet for easy access</p>
                   <Button variant="gvteway" size="lg">Add to Google Wallet</Button>
                 </CardContent>

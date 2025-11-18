@@ -1,9 +1,10 @@
 'use client';
 
-
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
+
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 
 import { motion } from 'framer-motion';
 import { Shield, Search, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
@@ -33,15 +34,14 @@ export default function CredentialVerifyPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Verify Credentials</h1>
-          <p className="text-gray-400 font-oswald mt-1">Check credential authenticity</p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <CompvssLayout>
+      <ContentLayout
+        title="Verify Credentials"
+        description="Check credential authenticity"
+        variant="compvss"
+        breadcrumbs={breadcrumbs}
+        showToolbar={false}
+      >
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -99,8 +99,8 @@ export default function CredentialVerifyPage() {
                     {error ? (
                       <div className="text-center py-8">
                         <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                        <h3 className="text-lg font-bebas text-white mb-2">Credential Not Found</h3>
-                        <p className="text-gray-400 text-sm">The credential ID you entered could not be verified.</p>
+                        <h3 className="text-h6 font-bebas text-white mb-2">Credential Not Found</h3>
+                        <p className="text-gray-400 text-body-sm">The credential ID you entered could not be verified.</p>
                       </div>
                     ) : credential ? (
                       <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
@@ -108,12 +108,12 @@ export default function CredentialVerifyPage() {
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
                               <Shield className="w-5 h-5 text-compvss-cyan-500" />
-                              <h3 className="font-oswald text-white text-lg">{credential.name}</h3>
+                              <h3 className="font-oswald text-white text-h6">{credential.name}</h3>
                             </div>
-                            <p className="text-sm text-gray-400 font-share-tech mb-2">
+                            <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                               {credential.type}
                             </p>
-                            <div className="flex gap-4 text-xs text-gray-500 font-share-tech">
+                            <div className="flex gap-4 text-caption text-gray-500 font-share-tech">
                               <span>Issued: {credential.issuedDate ? new Date(credential.issuedDate).toLocaleDateString() : 'N/A'}</span>
                               {credential.expiryDate && (
                                 <span>Expires: {new Date(credential.expiryDate).toLocaleDateString()}</span>
@@ -140,14 +140,14 @@ export default function CredentialVerifyPage() {
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
               <Card variant="compvss" className="bg-gray-900/50">
                 <CardHeader>
-                  <CardTitle className="text-white text-sm">Verification Info</CardTitle>
+                  <CardTitle className="text-white text-body-sm">Verification Info</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3 text-sm text-gray-400 font-share-tech">
+                  <div className="space-y-3 text-body-sm text-gray-400 font-share-tech">
                     <p>Enter a credential ID to verify its authenticity and check expiration status.</p>
                     <div className="pt-3 border-t border-gray-800">
-                      <p className="text-xs text-gray-500">Supported credentials:</p>
-                      <ul className="mt-2 space-y-1 text-xs">
+                      <p className="text-caption text-gray-500">Supported credentials:</p>
+                      <ul className="mt-2 space-y-1 text-caption">
                         <li>• Safety certifications</li>
                         <li>• Professional licenses</li>
                         <li>• Training certificates</li>
@@ -160,7 +160,7 @@ export default function CredentialVerifyPage() {
             </motion.div>
           </div>
         </div>
-      </div>
+      </ContentLayout>
     </CompvssLayout>
   );
 }

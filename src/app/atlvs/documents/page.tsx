@@ -136,7 +136,7 @@ export default function DocumentsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Documents
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${stats.totalDocs} total documents`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.totalDocs} total documents`}>
                     {stats.totalDocs}
                   </CardTitle>
                 </div>
@@ -154,11 +154,11 @@ export default function DocumentsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Contracts
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${stats.contracts} contracts`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.contracts} contracts`}>
                     {stats.contracts}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-purple-500/10 rounded-xl" aria-hidden="true">
+                <div className="p-3 bg-accent/100/10 rounded-xl" aria-hidden="true">
                   <File className="w-6 h-6 text-atlvs-purple-500" aria-hidden="true" />
                 </div>
               </div>
@@ -172,7 +172,7 @@ export default function DocumentsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Storage Used
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${stats.totalSize.toFixed(1)} megabytes storage used`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.totalSize.toFixed(1)} megabytes storage used`}>
                     {stats.totalSize.toFixed(1)} MB
                   </CardTitle>
                 </div>
@@ -190,11 +190,11 @@ export default function DocumentsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Recent Uploads
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {stats.recentUploads}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-orange-500/10 rounded-xl">
+                <div className="p-3 bg-warning-light0/10 rounded-xl">
                   <Upload className="w-6 h-6 text-atlvs-orange-500" />
                 </div>
               </div>
@@ -265,11 +265,11 @@ export default function DocumentsPage() {
                           <CardTitle className="text-white truncate">
                             {doc.name}
                           </CardTitle>
-                          <Badge variant="atlvs-outline" className="text-xs">
+                          <Badge variant="atlvs-outline" className="text-caption">
                             v{doc.version}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-gray-400">
+                        <div className="flex items-center gap-4 text-body-sm text-gray-400">
                           <span>{doc.uploadedBy}</span>
                           <span>•</span>
                           <span>{new Date(doc.uploadedDate).toLocaleDateString()}</span>
@@ -291,7 +291,7 @@ export default function DocumentsPage() {
                       </Badge>
                       <div className="flex gap-1">
                         {doc.tags.slice(0, 2).map((tag) => (
-                          <Badge key={tag} variant="atlvs-outline" className="text-xs">
+                          <Badge key={tag} variant="atlvs-outline" className="text-caption">
                             {tag}
                           </Badge>
                         ))}

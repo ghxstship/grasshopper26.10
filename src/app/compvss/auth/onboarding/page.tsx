@@ -69,7 +69,7 @@ export default function CompvssOnboardingPage() {
             {/* Header */}
             <div className="text-center mb-8">
               <Link href="/compvss">
-                <h1 className="compvss-text-gradient text-5xl font-anton mb-2 cursor-pointer">
+                <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
                   COMPVSS
                 </h1>
               </Link>
@@ -82,14 +82,14 @@ export default function CompvssOnboardingPage() {
               {steps.map((step, index) => (
                 <div key={step.number} className="flex items-center flex-1">
                   <div className="flex flex-col items-center flex-1">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-lg transition-all ${
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-h6 transition-all ${
                       currentStep >= step.number 
                         ? 'bg-compvss-cyan-500 text-black' 
                         : 'bg-gray-800 text-gray-500'
                     }`}>
                       {currentStep > step.number ? <CheckCircle2 className="w-6 h-6" /> : step.number}
                     </div>
-                    <p className="text-xs font-oswald text-gray-400 mt-2 text-center">{step.title}</p>
+                    <p className="text-caption font-oswald text-gray-400 mt-2 text-center">{step.title}</p>
                   </div>
                   {index < steps.length - 1 && (
                     <div className={`h-0.5 flex-1 mx-2 transition-all ${
@@ -117,7 +117,7 @@ export default function CompvssOnboardingPage() {
               {error && (
                 <div className="mb-4 p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                   <AlertCircle className="w-5 h-5 text-error" />
-                  <p className="text-sm text-error font-share-tech">{error}</p>
+                  <p className="text-body-sm text-error font-share-tech">{error}</p>
                 </div>
               )}
 
@@ -131,7 +131,7 @@ export default function CompvssOnboardingPage() {
                   >
                     <div>
                       <h3 className="font-oswald text-white mb-1">{role.name}</h3>
-                      <p className="text-sm text-gray-400 font-share-tech">{role.description}</p>
+                      <p className="text-body-sm text-gray-400 font-share-tech">{role.description}</p>
                     </div>
                   </Button>
                 ))}
@@ -162,7 +162,7 @@ export default function CompvssOnboardingPage() {
           </Card>
 
           <div className="mt-6 text-center">
-            <Link href="/compvss/dashboard" className="text-sm text-gray-500 hover:text-gray-400 font-share-tech">
+            <Link href="/compvss/dashboard" className="text-body-sm text-gray-500 hover:text-gray-400 font-share-tech">
               Skip for now →
             </Link>
           </div>

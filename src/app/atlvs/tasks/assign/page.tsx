@@ -89,7 +89,7 @@ export default function BulkAssignPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Data</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Data</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => { refetchTasks(); refetchMembers(); }}>
                 Try Again
@@ -173,7 +173,7 @@ export default function BulkAssignPage() {
                     />
                     <div className="flex-1">
                       <div className="font-medium mb-1">{task.title}</div>
-                      <div className="text-sm text-gray-400">{task.project}</div>
+                      <div className="text-body-sm text-gray-400">{task.project}</div>
                     </div>
                     <Badge variant="atlvs-outline" className={getPriorityColor(task.priority)}>
                       {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
@@ -215,7 +215,7 @@ export default function BulkAssignPage() {
                       </div>
                       <div>
                         <div className="font-medium">{member.name}</div>
-                        <div className="text-sm text-gray-400">{member.role}</div>
+                        <div className="text-body-sm text-gray-400">{member.role}</div>
                       </div>
                     </div>
                     <Badge variant="atlvs-outline" className="bg-gray-700/50">
@@ -228,7 +228,7 @@ export default function BulkAssignPage() {
               {/* Assignment Summary */}
               {selectedTasks.length > 0 && selectedMember && (
                 <div className="p-4 bg-atlvs-green-500/10 border border-atlvs-green-500/50 rounded-lg mb-4">
-                  <div className="text-sm text-gray-400 mb-1">Assignment Summary</div>
+                  <div className="text-body-sm text-gray-400 mb-1">Assignment Summary</div>
                   <div className="font-medium">
                     Assigning {selectedTasks.length} task{selectedTasks.length !== 1 ? 's' : ''} to{' '}
                     {teamMembers.find(m => m.id === selectedMember)?.name}

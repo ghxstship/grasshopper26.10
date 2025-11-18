@@ -6,6 +6,8 @@ export const runtime = 'edge';
 import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
 import { CheckCircle, XCircle, Clock, Calendar, Loader2, AlertCircle } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
+import { Badge } from '@/components/atoms/Badge';
 import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 
 interface _TeamMember {
@@ -81,13 +83,13 @@ export default function TeamAvailabilityPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'available':
-        return 'bg-success-light text-success-foreground';
+        return 'bg-atlvs-green-500/20 text-atlvs-green-500';
       case 'busy':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-warning/20 text-warning';
       case 'away':
-        return 'bg-red-100 text-red-800';
+        return 'bg-error/20 text-error';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-700 text-gray-300';
     }
   };
 
@@ -107,20 +109,20 @@ export default function TeamAvailabilityPage() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Total Team</div>
-          <div className="text-2xl font-bold text-gray-900">{typedTeamMembers.length}</div>
+          <div className="text-body-sm text-gray-600 mb-1">Total Team</div>
+          <div className="text-h4 text-gray-900">{typedTeamMembers.length}</div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Available</div>
-          <div className="text-2xl font-bold text-success">{availableCount}</div>
+          <div className="text-body-sm text-gray-600 mb-1">Available</div>
+          <div className="text-h4 text-success">{availableCount}</div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Busy</div>
-          <div className="text-2xl font-bold text-warning">{busyCount}</div>
+          <div className="text-body-sm text-gray-600 mb-1">Busy</div>
+          <div className="text-h4 text-warning">{busyCount}</div>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Away</div>
-          <div className="text-2xl font-bold text-error">
+          <div className="text-body-sm text-gray-600 mb-1">Away</div>
+          <div className="text-h4 text-error">
             {typedTeamMembers.filter((m: any) => m.status === 'away').length}
           </div>
         </div>
@@ -128,39 +130,39 @@ export default function TeamAvailabilityPage() {
 
           <div className="bg-white rounded-lg border border-gray-200">
         <div className="p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Team Members</h2>
+          <h2 className="text-h6 text-gray-900">Team Members</h2>
         </div>
         <div className="divide-y divide-gray-200">
           {typedTeamMembers.map((member: any) => (
             <div key={member.id} className="p-4 hover:bg-gray-50">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4 flex-1">
-                  <div className="w-12 h-12 bg-success-light rounded-full flex items-center justify-center text-green-700 font-semibold">
+                  <div className="w-12 h-12 bg-success-light rounded-full flex items-center justify-center text-success-foreground">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900">{member.name}</div>
-                    <div className="text-sm text-gray-600">{member.role}</div>
+                    <div className="text-body-sm text-gray-600">{member.role}</div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-6">
                   <div className="text-right">
-                    <div className="text-sm text-gray-600">Hours this week</div>
+                    <div className="text-body-sm text-gray-600">Hours this week</div>
                     <div className="font-semibold text-gray-900">{member.hoursThisWeek}h</div>
                   </div>
 
                   <div className="text-right min-w-[120px]">
-                    <div className="text-sm text-gray-600 mb-1">Next available</div>
+                    <div className="text-body-sm text-gray-600 mb-1">Next available</div>
                     <div className="flex items-center gap-2 justify-end">
                       <Calendar className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm font-medium text-gray-900">{member.nextAvailable}</span>
+                      <span className="text-body-sm text-gray-900">{member.nextAvailable}</span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
                     {getStatusIcon(member.status)}
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(member.status)}`}>
+                    <span className={`px-3 py-1 rounded-full text-body-sm ${getStatusColor(member.status)}`}>
                       {member.status.charAt(0).toUpperCase() + member.status.slice(1)}
                     </span>
                   </div>

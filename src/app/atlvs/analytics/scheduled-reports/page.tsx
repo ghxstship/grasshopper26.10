@@ -10,6 +10,8 @@ import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { Textarea } from '@/components/atoms/Textarea';
 import { Button } from '@/components/atoms/Button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
+import { Badge } from '@/components/atoms/Badge';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Calendar, Clock, Mail, Users, Plus, Play, Pause, Edit, Trash2,  } from 'lucide-react';
@@ -86,17 +88,17 @@ export default function ScheduledReportsPage() {
 
   const getFrequencyBadge = (frequency: string) => {
     const badges: Record<string, { bg: string; text: string }> = {
-      daily: { bg: 'bg-info-light', text: 'text-blue-800' },
-      weekly: { bg: 'bg-purple-100', text: 'text-purple-800' },
-      monthly: { bg: 'bg-success-light', text: 'text-success-foreground' }
+      daily: { bg: 'bg-info/20', text: 'text-info' },
+      weekly: { bg: 'bg-atlvs-purple-500/20', text: 'text-atlvs-purple-500' },
+      monthly: { bg: 'bg-atlvs-green-500/20', text: 'text-atlvs-green-500' }
     };
     return badges[frequency] || badges.daily;
   };
 
   const getStatusBadge = (status: string) => {
     const badges: Record<string, { bg: string; text: string }> = {
-      active: { bg: 'bg-success-light', text: 'text-success-foreground' },
-      paused: { bg: 'bg-gray-100', text: 'text-gray-800' }
+      active: { bg: 'bg-atlvs-green-500/20', text: 'text-atlvs-green-500' },
+      paused: { bg: 'bg-gray-700', text: 'text-gray-300' }
     };
     return badges[status] || badges.active;
   };
@@ -125,8 +127,8 @@ export default function ScheduledReportsPage() {
           <div className="flex items-center gap-3">
             <Calendar className="w-8 h-8 text-success" />
             <div>
-              <div className="text-sm text-gray-600">Total Scheduled</div>
-              <div className="text-2xl font-bold text-gray-900">{scheduledReports.length}</div>
+              <div className="text-body-sm text-gray-600">Total Scheduled</div>
+              <div className="text-h4 text-gray-900">{scheduledReports.length}</div>
             </div>
           </div>
         </div>
@@ -134,8 +136,8 @@ export default function ScheduledReportsPage() {
           <div className="flex items-center gap-3">
             <Play className="w-8 h-8 text-success" />
             <div>
-              <div className="text-sm text-gray-600">Active</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Active</div>
+              <div className="text-h4 text-gray-900">
                 {scheduledReports.filter(r => r.status === 'active').length}
               </div>
             </div>
@@ -145,8 +147,8 @@ export default function ScheduledReportsPage() {
           <div className="flex items-center gap-3">
             <Pause className="w-8 h-8 text-gray-600" />
             <div>
-              <div className="text-sm text-gray-600">Paused</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Paused</div>
+              <div className="text-h4 text-gray-900">
                 {scheduledReports.filter(r => r.status === 'paused').length}
               </div>
             </div>
@@ -156,8 +158,8 @@ export default function ScheduledReportsPage() {
           <div className="flex items-center gap-3">
             <Mail className="w-8 h-8 text-info" />
             <div>
-              <div className="text-sm text-gray-600">Recipients</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-body-sm text-gray-600">Recipients</div>
+              <div className="text-h4 text-gray-900">
                 {new Set(scheduledReports.flatMap(r => r.recipients)).size}
               </div>
             </div>
@@ -171,25 +173,25 @@ export default function ScheduledReportsPage() {
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Report
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Frequency
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Schedule
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Recipients
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Next Run
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                   Status
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-right text-caption text-gray-500 uppercaser">
                   Actions
                 </th>
               </tr>
@@ -203,28 +205,28 @@ export default function ScheduledReportsPage() {
                   <tr key={report.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div className="font-medium text-gray-900">{report.name}</div>
-                      <div className="text-sm text-gray-500">{report.format.toUpperCase()}</div>
+                      <div className="text-body-sm text-gray-500">{report.format.toUpperCase()}</div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`px-2 py-1 ${frequencyStyle.bg} ${frequencyStyle.text} text-xs rounded capitalize`}>
+                      <span className={`px-2 py-1 ${frequencyStyle.bg} ${frequencyStyle.text} text-caption rounded capitalize`}>
                         {report.frequency}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-1 text-sm text-gray-600">
+                      <div className="flex items-center gap-1 text-body-sm text-gray-600">
                         <Clock className="w-4 h-4" />
                         {report.time}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-1 text-sm text-gray-600">
+                      <div className="flex items-center gap-1 text-body-sm text-gray-600">
                         <Users className="w-4 h-4" />
                         {report.recipients.length} recipients
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">{report.nextRun}</td>
+                    <td className="px-6 py-4 text-body-sm text-gray-600">{report.nextRun}</td>
                     <td className="px-6 py-4">
-                      <span className={`px-2 py-1 ${statusStyle.bg} ${statusStyle.text} text-xs rounded capitalize`}>
+                      <span className={`px-2 py-1 ${statusStyle.bg} ${statusStyle.text} text-caption rounded capitalize`}>
                         {report.status}
                       </span>
                     </td>
@@ -235,14 +237,14 @@ export default function ScheduledReportsPage() {
                             <Pause className="w-4 h-4" />
                           </Button>
                         ) : (
-                          <Button variant="ghost" size="sm" className="text-success hover:bg-green-50">
+                          <Button variant="ghost" size="sm" className="text-success hover:bg-success-light">
                             <Play className="w-4 h-4" />
                           </Button>
                         )}
                         <Button variant="ghost" size="sm">
                           <Edit className="w-4 h-4" />
                         </Button>
-                        <Button variant="ghost" size="sm" className="text-error hover:bg-red-50">
+                        <Button variant="ghost" size="sm" className="text-error hover:bg-destructive/10">
                           <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
@@ -259,7 +261,7 @@ export default function ScheduledReportsPage() {
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-lg w-full mx-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Schedule New Report</h3>
+            <h3 className="text-h6 text-gray-900 mb-4">Schedule New Report</h3>
             <div className="space-y-4">
               <FormField label="Report Name">
                 <Input

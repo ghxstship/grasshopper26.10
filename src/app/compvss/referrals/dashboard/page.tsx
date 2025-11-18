@@ -48,7 +48,7 @@ export default function ReferralDashboardPage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
@@ -61,11 +61,11 @@ export default function ReferralDashboardPage() {
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Referrals</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Referrals</h2>
             <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
@@ -84,12 +84,12 @@ export default function ReferralDashboardPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">Referral Dashboard</h1>
+              <h1 className="text-h3 font-bebas compvss-text-gradient">Referral Dashboard</h1>
               <p className="text-gray-400 font-oswald mt-1">Earn rewards by referring new users</p>
             </div>
             <Link href="/compvss/referrals/generate">
@@ -118,12 +118,12 @@ export default function ReferralDashboardPage() {
                     <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500">
                       {stat.icon}
                     </div>
-                    <Badge variant="compvss-outline" className="text-xs text-success border-green-500/30">
+                    <Badge variant="compvss-outline" className="text-caption text-success border-success/30">
                       {stat.change}
                     </Badge>
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -156,7 +156,7 @@ export default function ReferralDashboardPage() {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <h3 className="font-oswald text-white mb-1">{link.name}</h3>
-                          <div className="flex items-center gap-2 text-sm text-gray-400 font-share-tech">
+                          <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
                             <span className="truncate">{link.url}</span>
                             <IconButton
                               variant="ghost"
@@ -166,18 +166,18 @@ export default function ReferralDashboardPage() {
                             />
                           </div>
                         </div>
-                        <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">
+                        <Badge variant="compvss" className="bg-success-light text-success border-success/30">
                           {link.status}
                         </Badge>
                       </div>
                       <div className="grid grid-cols-2 gap-4 text-center">
                         <div>
-                          <div className="text-lg font-bebas text-white">{link.clicks}</div>
-                          <div className="text-xs text-gray-400 font-share-tech">Clicks</div>
+                          <div className="text-h6 font-bebas text-white">{link.clicks}</div>
+                          <div className="text-caption text-gray-400 font-share-tech">Clicks</div>
                         </div>
                         <div>
-                          <div className="text-lg font-bebas text-compvss-cyan-500">{link.conversions}</div>
-                          <div className="text-xs text-gray-400 font-share-tech">Conversions</div>
+                          <div className="text-h6 font-bebas text-compvss-cyan-500">{link.conversions}</div>
+                          <div className="text-caption text-gray-400 font-share-tech">Conversions</div>
                         </div>
                       </div>
                     </div>
@@ -207,16 +207,16 @@ export default function ReferralDashboardPage() {
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className={`font-bebas text-lg ${tier.color}`}>
+                          <h3 className={`font-bebas text-h6 ${tier.color}`}>
                             {tier.name}
                             {tier.active && ' (Current)'}
                           </h3>
-                          <p className="text-sm text-gray-400 font-share-tech">
+                          <p className="text-body-sm text-gray-400 font-share-tech">
                             {tier.min}-{tier.max === 999 ? '+' : tier.max} referrals
                           </p>
                         </div>
                         <div className="text-right">
-                          <div className="font-bebas text-white text-lg">{tier.reward}</div>
+                          <div className="font-bebas text-white text-h6">{tier.reward}</div>
                         </div>
                       </div>
                     </div>
@@ -251,7 +251,7 @@ export default function ReferralDashboardPage() {
                       }`}
                     >
                       <div className="flex items-center gap-4">
-                        <div className="text-2xl font-bebas text-white w-12 text-center">
+                        <div className="text-h4 font-bebas text-white w-12 text-center">
                           {entry.badge || `#${entry.rank}`}
                         </div>
                         <div className="flex-1">
@@ -259,12 +259,12 @@ export default function ReferralDashboardPage() {
                             {entry.name}
                             {entry.isCurrentUser && ' (You)'}
                           </h3>
-                          <p className="text-sm text-gray-400 font-share-tech">
+                          <p className="text-body-sm text-gray-400 font-share-tech">
                             {entry.referrals} referrals
                           </p>
                         </div>
                         <div className="text-right">
-                          <div className="font-bebas text-success text-lg">${entry.rewards}</div>
+                          <div className="font-bebas text-success text-h6">${entry.rewards}</div>
                         </div>
                       </div>
                     </div>

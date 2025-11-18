@@ -20,7 +20,7 @@ export function ConflictIndicator({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition-colors ${className}`}
+      className={`inline-flex items-center px-2.5 py-1 rounded-full text-caption bg-warning-light text-warning-foreground hover:bg-warning transition-colors ${className}`}
       title="Click to resolve conflicts"
     >
       <svg
@@ -62,7 +62,7 @@ export function FieldConflictIndicator({
         title="Field has conflicting values"
       >
         <svg
-          className="w-5 h-5 text-yellow-500"
+          className="w-5 h-5 text-warning"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -76,23 +76,23 @@ export function FieldConflictIndicator({
 
       {showDetails && (
         <div className="absolute z-10 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg p-4">
-          <div className="text-sm font-medium text-gray-900 mb-2">
+          <div className="text-body-sm text-gray-900 mb-2">
             Conflict in &ldquo;{fieldName}&rdquo;
           </div>
           
           <div className="space-y-2 mb-3">
-            <div className="bg-blue-50 p-2 rounded">
-              <div className="text-xs text-blue-600 mb-1">Your Value</div>
-              <div className="text-sm text-gray-900 break-all">
+            <div className="bg-conflict-local-bg p-2 rounded">
+              <div className="text-caption text-conflict-local mb-1">Your Value</div>
+              <div className="text-body-sm text-gray-900 break-all">
                 {typeof localValue === 'object'
                   ? JSON.stringify(localValue)
                   : String(localValue)}
               </div>
             </div>
             
-            <div className="bg-orange-50 p-2 rounded">
-              <div className="text-xs text-orange-600 mb-1">Remote Value</div>
-              <div className="text-sm text-gray-900 break-all">
+            <div className="bg-conflict-remote-bg p-2 rounded">
+              <div className="text-caption text-conflict-remote mb-1">Remote Value</div>
+              <div className="text-body-sm text-gray-900 break-all">
                 {typeof remoteValue === 'object'
                   ? JSON.stringify(remoteValue)
                   : String(remoteValue)}
@@ -107,7 +107,7 @@ export function FieldConflictIndicator({
                   onResolve(localValue);
                   setShowDetails(false);
                 }}
-                className="flex-1 px-3 py-1.5 text-xs font-medium text-blue-700 bg-blue-100 rounded hover:bg-blue-200"
+                className="flex-1 px-3 py-1.5 text-caption text-conflict-local bg-conflict-local-bg rounded hover:bg-conflict-local-hover hover:text-white"
               >
                 Keep Mine
               </button>
@@ -116,7 +116,7 @@ export function FieldConflictIndicator({
                   onResolve(remoteValue);
                   setShowDetails(false);
                 }}
-                className="flex-1 px-3 py-1.5 text-xs font-medium text-orange-700 bg-orange-100 rounded hover:bg-orange-200"
+                className="flex-1 px-3 py-1.5 text-caption text-conflict-remote bg-conflict-remote-bg rounded hover:bg-conflict-remote-hover hover:text-white"
               >
                 Keep Theirs
               </button>

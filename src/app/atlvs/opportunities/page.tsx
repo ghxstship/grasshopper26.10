@@ -111,7 +111,7 @@ export default function OpportunitiesManagementPage() {
         {/* Opportunities Table */}
         {data && (
           <>
-            <div className="mb-4 text-sm text-gray-600">
+            <div className="mb-4 text-body-sm text-gray-600">
               {data.pagination?.total || 0} opportunities found
             </div>
 
@@ -120,22 +120,22 @@ export default function OpportunitiesManagementPage() {
                 <table className="w-full" role="table" aria-label="Opportunities list">
                   <thead className="bg-gray-50 border-b border-gray-200" role="rowgroup">
                     <tr role="row">
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                         Title
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                         Category
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                         Applications
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                         Views
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
                         Actions
                       </th>
                     </tr>
@@ -148,12 +148,12 @@ export default function OpportunitiesManagementPage() {
                             {opportunity.title}
                           </div>
                           {opportunity.location && (
-                            <div className="text-sm text-gray-500">
+                            <div className="text-body-sm text-gray-500">
                               {opportunity.location}
                             </div>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500 capitalize">
+                        <td className="px-6 py-4 text-body-sm text-gray-500 capitalize">
                           {opportunity.category?.replace(/_/g, ' ').toLowerCase()}
                         </td>
                         <td className="px-6 py-4">
@@ -164,7 +164,7 @@ export default function OpportunitiesManagementPage() {
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
                             <Users className="h-4 w-4 text-gray-400" aria-hidden="true" />
-                            <span className="text-sm text-gray-900" aria-label={`${opportunity.applicationCount || 0} applications`}>
+                            <span className="text-body-sm text-gray-900" aria-label={`${opportunity.applicationCount || 0} applications`}>
                               {opportunity.applicationCount || 0}
                             </span>
                           </div>
@@ -172,7 +172,7 @@ export default function OpportunitiesManagementPage() {
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
                             <Eye className="h-4 w-4 text-gray-400" />
-                            <span className="text-sm text-gray-900">
+                            <span className="text-body-sm text-gray-900">
                               {opportunity.viewCount || 0}
                             </span>
                           </div>
@@ -195,7 +195,7 @@ export default function OpportunitiesManagementPage() {
             {(!data.opportunities || data.opportunities.length === 0) && (
               <Card>
                 <div className="p-12 text-center">
-                  <h3 className="font-bebas text-xl text-gray-900 mb-2">
+                  <h3 className="font-bebas text-h5 text-gray-900 mb-2">
                     No Opportunities Found
                   </h3>
                   <p className="text-gray-600 mb-4">

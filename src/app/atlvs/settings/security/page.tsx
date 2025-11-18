@@ -108,7 +108,7 @@ export default function SecuritySettingsPage() {
               <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg mb-4">
                 <div>
                   <div className="font-medium mb-1">2FA Status</div>
-                  <div className="text-sm text-gray-400">
+                  <div className="text-body-sm text-gray-400">
                     {twoFactorEnabled ? 'Enabled - Your account is protected' : 'Disabled - Enable for extra security'}
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export default function SecuritySettingsPage() {
                           </Badge>
                         )}
                       </div>
-                      <div className="text-sm text-gray-400">{session.location} • {session.lastActive}</div>
+                      <div className="text-body-sm text-gray-400">{session.location} • {session.lastActive}</div>
                     </div>
                     {!session.current && (
                       <Button variant="ghost" size="sm" className="text-error">

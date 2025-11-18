@@ -75,7 +75,7 @@ export default function AtlvsVerifyEmailPage() {
   };
 
   return (
-    <AtlvsLayout showNav={false}>
+    <AtlvsLayout>
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.1),transparent_50%)]" />
       
@@ -87,7 +87,7 @@ export default function AtlvsVerifyEmailPage() {
         >
           <div className="text-center mb-8">
             <Link href="/atlvs">
-              <h1 className="text-5xl font-bebas atlvs-text-gradient mb-2 cursor-pointer tracking-wider">
+              <h1 className="text-h1 font-bebas atlvs-text-gradient mb-2 cursor-pointerr">
                 ATLVS
               </h1>
             </Link>
@@ -95,7 +95,7 @@ export default function AtlvsVerifyEmailPage() {
 
           <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-white text-2xl text-center">Email Verification</CardTitle>
+              <CardTitle className="text-white text-h4 text-center">Email Verification</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
@@ -103,7 +103,7 @@ export default function AtlvsVerifyEmailPage() {
                   <>
                     <Loader2 className="w-16 h-16 text-atlvs-orange-500 animate-spin mx-auto mb-4" />
                     <p className="text-gray-300 mb-2">Verifying your email...</p>
-                    <p className="text-sm text-gray-500">Please wait a moment</p>
+                    <p className="text-body-sm text-gray-500">Please wait a moment</p>
                   </>
                 )}
 
@@ -111,7 +111,7 @@ export default function AtlvsVerifyEmailPage() {
                   <>
                     <Mail className="w-16 h-16 text-atlvs-orange-500 mx-auto mb-4" />
                     <p className="text-gray-300 mb-2">Check Your Email</p>
-                    <p className="text-sm text-gray-500 mb-6">
+                    <p className="text-body-sm text-gray-500 mb-6">
                       We sent a verification link to <strong>{email}</strong>
                     </p>
                     <Button 
@@ -130,8 +130,8 @@ export default function AtlvsVerifyEmailPage() {
                     <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
                       <CheckCircle className="w-10 h-10 text-success" />
                     </div>
-                    <p className="text-gray-300 mb-2 text-lg font-semibold">Email Verified!</p>
-                    <p className="text-sm text-gray-500 mb-6">{message}</p>
+                    <p className="text-gray-300 mb-2 text-h6">Email Verified!</p>
+                    <p className="text-body-sm text-gray-500 mb-6">{message}</p>
                     <Link href="/atlvs/auth/login">
                       <Button variant="atlvs" size="lg" className="w-full">
                         Continue to Sign In
@@ -145,8 +145,8 @@ export default function AtlvsVerifyEmailPage() {
                     <div className="w-16 h-16 bg-error/20 rounded-full flex items-center justify-center mx-auto mb-4">
                       <XCircle className="w-10 h-10 text-error" />
                     </div>
-                    <p className="text-gray-300 mb-2 text-lg font-semibold">Verification Failed</p>
-                    <p className="text-sm text-gray-500 mb-6">{message}</p>
+                    <p className="text-gray-300 mb-2 text-h6">Verification Failed</p>
+                    <p className="text-body-sm text-gray-500 mb-6">{message}</p>
                     {email && (
                       <Button 
                         variant="atlvs-outline" 

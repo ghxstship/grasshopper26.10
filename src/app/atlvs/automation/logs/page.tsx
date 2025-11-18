@@ -69,7 +69,7 @@ export default function WorkflowLogsPage() {
             </CardTitle>
             <div className="space-y-3" role="list" aria-label="Workflow logs">
               {logs.map((log: WorkflowLog) => (
-                <div key={log.id} className="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg font-mono text-sm" role="listitem">
+                <div key={log.id} className="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg font-mono text-body-sm" role="listitem">
                   <Badge variant="atlvs-outline" className={getLevelColor(log.level)} role="status" aria-label={`Log level: ${log.level}`}>
                     {log.level.toUpperCase()}
                   </Badge>

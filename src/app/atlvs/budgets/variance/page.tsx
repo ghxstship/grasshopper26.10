@@ -54,7 +54,7 @@ export default function BudgetVariancePage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Variance Data</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Variance Data</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -79,20 +79,20 @@ export default function BudgetVariancePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Total Budgeted</div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">$275K</div>
+              <div className="text-body-sm text-gray-400 mb-1">Total Budgeted</div>
+              <div className="text-h3 font-bebas atlvs-text-gradient">$275K</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Total Actual</div>
-              <div className="text-3xl font-bebas text-atlvs-purple-500">$281K</div>
+              <div className="text-body-sm text-gray-400 mb-1">Total Actual</div>
+              <div className="text-h3 font-bebas text-atlvs-purple-500">$281K</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Variance</div>
-              <div className="text-3xl font-bebas text-error">+$6K</div>
+              <div className="text-body-sm text-gray-400 mb-1">Variance</div>
+              <div className="text-h3 font-bebas text-error">+$6K</div>
             </CardHeader>
           </Card>
         </div>
@@ -116,7 +116,7 @@ export default function BudgetVariancePage() {
                       </span>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="grid grid-cols-2 gap-4 text-body-sm">
                     <div>
                       <div className="text-gray-400">Budgeted</div>
                       <div className="font-medium">${item.budgeted.toLocaleString()}</div>

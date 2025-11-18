@@ -53,7 +53,7 @@ export default function ProfileSettingsPage() {
               <CardHeader>
                 <CardTitle className="mb-6">Profile Photo</CardTitle>
                 <div className="flex items-center gap-6">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-4xl">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h2">
                     {profile.name.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <Button variant="atlvs" size="sm">

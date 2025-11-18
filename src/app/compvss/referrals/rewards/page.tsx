@@ -22,7 +22,7 @@ export default function ReferralRewardsPage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
@@ -35,11 +35,11 @@ export default function ReferralRewardsPage() {
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Rewards</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Rewards</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
           </div>
@@ -49,10 +49,10 @@ export default function ReferralRewardsPage() {
   }
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Rewards & Tiers</h1>
+          <h1 className="text-h3 font-bebas compvss-text-gradient">Rewards & Tiers</h1>
           <p className="text-gray-400 font-oswald mt-1">Unlock rewards as you refer more people</p>
         </div>
       </div>
@@ -72,20 +72,20 @@ export default function ReferralRewardsPage() {
                     {tier.unlocked ? <Star className="w-8 h-8" /> : <Lock className="w-8 h-8" />}
                   </div>
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-2xl font-bebas text-white">{tier.name}</h3>
+                    <h3 className="text-h4 font-bebas text-white">{tier.name}</h3>
                     {tier.unlocked && (
-                      <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">
+                      <Badge variant="compvss" className="bg-success-light text-success border-success/30">
                         Unlocked
                       </Badge>
                     )}
                   </div>
-                  <p className="text-sm text-gray-400 font-share-tech mb-4">
+                  <p className="text-body-sm text-gray-400 font-share-tech mb-4">
                     {tier.referrals} referrals required
                   </p>
                   <div className="flex items-center gap-2 p-3 bg-black/50 rounded-lg border border-compvss-cyan-500/20">
                     <Gift className="w-5 h-5 text-compvss-cyan-500" />
-                    <span className="font-bebas text-xl text-white">{tier.reward}</span>
-                    <span className="text-sm text-gray-400 font-share-tech">bonus</span>
+                    <span className="font-bebas text-h5 text-white">{tier.reward}</span>
+                    <span className="text-body-sm text-gray-400 font-share-tech">bonus</span>
                   </div>
                 </CardContent>
               </Card>

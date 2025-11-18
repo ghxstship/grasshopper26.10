@@ -46,11 +46,11 @@ export function KPICard({
   const getTrendIcon = () => {
     switch (trend) {
       case 'up':
-        return <TrendingUp className="h-4 w-4 text-green-600" />;
+        return <TrendingUp className="h-4 w-4 text-success" />;
       case 'down':
-        return <TrendingDown className="h-4 w-4 text-red-600" />;
+        return <TrendingDown className="h-4 w-4 text-destructive" />;
       case 'neutral':
-        return <Minus className="h-4 w-4 text-gray-600" />;
+        return <Minus className="h-4 w-4 text-muted-foreground" />;
       default:
         return null;
     }
@@ -59,23 +59,23 @@ export function KPICard({
   const getTrendColor = () => {
     switch (trend) {
       case 'up':
-        return 'text-green-600';
+        return 'text-success';
       case 'down':
-        return 'text-red-600';
+        return 'text-destructive';
       default:
-        return 'text-gray-600';
+        return 'text-muted-foreground';
     }
   };
 
   return (
     <div className={`bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow ${className}`}>
       <div className="flex items-start justify-between mb-2">
-        <h3 className="text-sm font-medium text-gray-600">{title}</h3>
+        <h3 className="text-body-sm text-gray-600">{title}</h3>
         {trend && (
           <div className={`flex items-center gap-1 ${getTrendColor()}`}>
             {getTrendIcon()}
             {trendValue !== undefined && (
-              <span className="text-xs font-medium">
+              <span className="text-caption">
                 {trendValue > 0 ? '+' : ''}{trendValue.toFixed(1)}%
               </span>
             )}
@@ -84,16 +84,16 @@ export function KPICard({
       </div>
 
       <div className="flex items-baseline gap-2 mb-1">
-        <span className="text-3xl font-bold text-gray-900">
+        <span className="text-h3 text-gray-900">
           {formatValue(value)}
         </span>
         {unit && !format && (
-          <span className="text-sm text-gray-500">{unit}</span>
+          <span className="text-body-sm text-gray-500">{unit}</span>
         )}
       </div>
 
       {description && (
-        <p className="text-xs text-gray-500 mt-2">{description}</p>
+        <p className="text-caption text-gray-500 mt-2">{description}</p>
       )}
     </div>
   );

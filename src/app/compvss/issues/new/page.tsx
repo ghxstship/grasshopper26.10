@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -26,8 +27,16 @@ export default function NewIssuePage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
-      <NewIssueContent />
+    <CompvssLayout>
+      <ContentLayout
+        title="Report Issue"
+        description="Submit a new issue or incident report"
+        variant="compvss"
+        breadcrumbs={breadcrumbs}
+        showToolbar={true}
+      >
+        <NewIssueContent />
+      </ContentLayout>
     </CompvssLayout>
   );
 }
@@ -67,25 +76,7 @@ function NewIssueContent() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">Report Issue</h1>
-              <p className="text-gray-400 font-oswald mt-1">Submit a new issue or incident report</p>
-            </div>
-            <Link href="/compvss/issues/dashboard">
-              <Button variant="compvss-outline" size="lg">
-                View All Issues
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -191,7 +182,7 @@ function NewIssueContent() {
                         <p className="text-white font-oswald mb-1">
                           Click to upload or drag and drop
                         </p>
-                        <p className="text-sm text-gray-400 font-share-tech">
+                        <p className="text-body-sm text-gray-400 font-share-tech">
                           PNG, JPG, MP4 up to 10MB
                         </p>
                       </div>
@@ -238,8 +229,8 @@ function NewIssueContent() {
           >
             <Card variant="compvss" className="bg-gray-900/30 border-compvss-cyan-500/20">
               <CardContent className="pt-6">
-                <h3 className="text-lg font-bebas text-white mb-3">Reporting Tips</h3>
-                <ul className="space-y-2 text-sm text-gray-400 font-share-tech">
+                <h3 className="text-h6 font-bebas text-white mb-3">Reporting Tips</h3>
+                <ul className="space-y-2 text-body-sm text-gray-400 font-share-tech">
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-compvss-cyan-500 rounded-full mt-2" />
                     <span>Be specific and include all relevant details</span>
@@ -261,7 +252,6 @@ function NewIssueContent() {
             </Card>
           </motion.div>
         </motion.div>
-      </div>
     </div>
   );
 }

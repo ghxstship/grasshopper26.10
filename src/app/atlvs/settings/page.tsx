@@ -107,7 +107,7 @@ export default function SettingsPage() {
                     <CardTitle className="mb-6">Profile Settings</CardTitle>
                     <div className="space-y-6">
                       <div className="flex items-center gap-6">
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-2xl">
+                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h4">
                           JD
                         </div>
                         <Button variant="atlvs-outline" size="sm" aria-label="Change profile avatar">
@@ -158,7 +158,7 @@ export default function SettingsPage() {
                         <div key={index} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg" role="group" aria-label={`${item.label} notification setting`}>
                           <div>
                             <div className="font-oswald text-white">{item.label}</div>
-                            <div className="text-sm text-gray-400">{item.description}</div>
+                            <div className="text-body-sm text-gray-400">{item.description}</div>
                           </div>
                           <Checkbox defaultChecked variant="atlvs" />
                         </div>

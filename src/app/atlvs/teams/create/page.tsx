@@ -141,7 +141,7 @@ export default function CreateTeamPage() {
                     onClick={() => removeMember(member)}
                     variant="ghost"
                     size="sm"
-                    className="text-red-500 hover:text-red-700"
+                    className="text-destructive hover:text-destructive-foreground"
                   >
                     <X className="w-4 h-4" />
                   </Button>

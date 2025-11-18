@@ -70,7 +70,7 @@ export default function CompvssLoginPage() {
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <Link href="/compvss">
-              <h1 className="compvss-text-gradient text-5xl font-anton mb-2 cursor-pointer">
+              <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
                 COMPVSS
               </h1>
             </Link>
@@ -94,7 +94,7 @@ export default function CompvssLoginPage() {
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error font-share-tech">{error}</p>
                   </div>
                 )}
 
@@ -142,7 +142,7 @@ export default function CompvssLoginPage() {
                 </FormField>
 
                 {/* Remember Me & Forgot Password */}
-                <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-body-sm">
                   <div className="flex items-center gap-2 cursor-pointer">
                     <Checkbox 
                       variant="compvss" 
@@ -183,7 +183,7 @@ export default function CompvssLoginPage() {
                   <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-gray-700" />
                   </div>
-                  <div className="relative flex justify-center text-sm">
+                  <div className="relative flex justify-center text-body-sm">
                     <span className="px-2 bg-gray-900 text-gray-400 font-share-tech">
                       Don&apos;t have an account?
                     </span>
@@ -207,10 +207,10 @@ export default function CompvssLoginPage() {
 
           {/* Footer Links */}
           <div className="mt-6 text-center space-y-2">
-            <p className="text-sm text-gray-500 font-share-tech">
+            <p className="text-body-sm text-gray-500 font-share-tech">
               Need help? <Link href="/contact" className="text-compvss-cyan-500 hover:text-compvss-teal-500">Contact Support</Link>
             </p>
-            <Link href="/" className="text-sm text-gray-500 hover:text-gray-400 font-share-tech block">
+            <Link href="/" className="text-body-sm text-gray-500 hover:text-gray-400 font-share-tech block">
               ← Back to Home
             </Link>
           </div>

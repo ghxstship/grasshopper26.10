@@ -71,11 +71,7 @@ export default function CredentialUploadPage() {
         description="Upload required documents for verification"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Team', href: '/compvss/team/directory' },
-          { label: 'Onboarding', href: '/compvss/team/onboarding/training' },
-          { label: 'Credentials' }
-        ]}
+        
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -88,7 +84,7 @@ export default function CredentialUploadPage() {
                   <Shield className="w-6 h-6 text-compvss-cyan-500 flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-oswald text-white mb-1">Secure Document Upload</h3>
-                    <p className="text-sm text-gray-400 font-share-tech">
+                    <p className="text-body-sm text-gray-400 font-share-tech">
                       All documents are encrypted and stored securely. Only authorized personnel can access your credentials.
                     </p>
                   </div>
@@ -107,7 +103,7 @@ export default function CredentialUploadPage() {
                         <div>
                           <h3 className="font-oswald text-white">{credential.type}</h3>
                           {credential.file && (
-                            <p className="text-sm text-gray-400 font-share-tech">{credential.file.name}</p>
+                            <p className="text-body-sm text-gray-400 font-share-tech">{credential.file.name}</p>
                           )}
                         </div>
                       </div>
@@ -129,24 +125,24 @@ export default function CredentialUploadPage() {
                     )}
 
                     {credential.status === 'uploaded' && (
-                      <div className="bg-warning/10 border border-yellow-500/30 rounded-lg p-4">
-                        <p className="text-sm text-warning font-share-tech">
+                      <div className="bg-warning/10 border border-warning/30 rounded-lg p-4">
+                        <p className="text-body-sm text-warning font-share-tech">
                           Document uploaded. Awaiting verification...
                         </p>
                       </div>
                     )}
 
                     {credential.status === 'verified' && (
-                      <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
-                        <p className="text-sm text-success font-share-tech">
+                      <div className="bg-success-light0/10 border border-success/30 rounded-lg p-4">
+                        <p className="text-body-sm text-success font-share-tech">
                           ✓ Verified and approved
                         </p>
                       </div>
                     )}
 
                     {credential.status === 'rejected' && (
-                      <div className="bg-error/10 border border-red-500/30 rounded-lg p-4">
-                        <p className="text-sm text-error font-share-tech">
+                      <div className="bg-error/10 border border-destructive/30 rounded-lg p-4">
+                        <p className="text-body-sm text-error font-share-tech">
                           Document rejected. Please upload a valid document.
                         </p>
                         <Button variant="destructive" size="sm" className="mt-2">

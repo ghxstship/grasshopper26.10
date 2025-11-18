@@ -40,7 +40,7 @@ export default function TaskManagementPage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
@@ -53,11 +53,11 @@ export default function TaskManagementPage() {
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Tasks</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Tasks</h2>
             <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
@@ -89,7 +89,7 @@ export default function TaskManagementPage() {
   };
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="min-h-screen bg-black text-white px-4 sm:px-6 lg:px-8 py-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -99,7 +99,7 @@ export default function TaskManagementPage() {
             <div className="flex items-center justify-between mb-8">
               <div>
                 <Link href="/compvss/operations/dashboard">
-                  <h1 className="compvss-text-gradient text-4xl font-anton mb-2 cursor-pointer">
+                  <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
                     Task Management
                   </h1>
                 </Link>
@@ -117,20 +117,20 @@ export default function TaskManagementPage() {
             <div className="grid grid-cols-3 gap-4 mb-6">
               <Card variant="compvss" className="bg-gray-900/80 border-compvss-cyan-500/20">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-3xl font-bebas text-gray-400">{tasksByStatus.todo.length}</p>
-                  <p className="text-sm text-gray-500 font-oswald">To Do</p>
+                  <p className="text-h3 font-bebas text-gray-400">{tasksByStatus.todo.length}</p>
+                  <p className="text-body-sm text-gray-500 font-oswald">To Do</p>
                 </CardContent>
               </Card>
-              <Card variant="compvss" className="bg-warning/10 border-yellow-500/30">
+              <Card variant="compvss" className="bg-warning/10 border-warning/30">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-3xl font-bebas text-warning">{tasksByStatus['in-progress'].length}</p>
-                  <p className="text-sm text-gray-400 font-oswald">In Progress</p>
+                  <p className="text-h3 font-bebas text-warning">{tasksByStatus['in-progress'].length}</p>
+                  <p className="text-body-sm text-gray-400 font-oswald">In Progress</p>
                 </CardContent>
               </Card>
-              <Card variant="compvss" className="bg-green-500/10 border-green-500/30">
+              <Card variant="compvss" className="bg-success-light0/10 border-success/30">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-3xl font-bebas text-success">{tasksByStatus.completed.length}</p>
-                  <p className="text-sm text-gray-400 font-oswald">Completed</p>
+                  <p className="text-h3 font-bebas text-success">{tasksByStatus.completed.length}</p>
+                  <p className="text-body-sm text-gray-400 font-oswald">Completed</p>
                 </CardContent>
               </Card>
             </div>
@@ -153,13 +153,13 @@ export default function TaskManagementPage() {
                       <Card key={task.id} variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all cursor-pointer">
                         <CardContent className="pt-6">
                           <div className="flex items-start justify-between mb-2">
-                            <h3 className="font-oswald text-white text-sm">{task.title}</h3>
+                            <h3 className="font-oswald text-white text-body-sm">{task.title}</h3>
                             <Flag className={`w-4 h-4 ${getPriorityColor(task.priority)}`} />
                           </div>
-                          <p className="text-xs text-gray-400 font-share-tech mb-3">
+                          <p className="text-caption text-gray-400 font-share-tech mb-3">
                             {task.description || 'No description'}
                           </p>
-                          <div className="flex items-center justify-between text-xs">
+                          <div className="flex items-center justify-between text-caption">
                             <div className="flex items-center gap-1 text-gray-500 font-share-tech">
                               <User className="w-3 h-3" />
                               <span>{task.assignee || 'Unassigned'}</span>
@@ -172,7 +172,7 @@ export default function TaskManagementPage() {
                             )}
                           </div>
                           <div className="mt-3 flex items-center justify-between">
-                            <Badge variant="default" className="text-xs">{task.category}</Badge>
+                            <Badge variant="default" className="text-caption">{task.category}</Badge>
                             {getStatusBadge(task.status)}
                           </div>
                         </CardContent>

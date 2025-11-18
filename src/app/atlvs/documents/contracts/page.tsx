@@ -65,7 +65,7 @@ export default function ContractsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Contracts</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Contracts</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -127,7 +127,7 @@ export default function ContractsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Contracts
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {contracts.length}
                   </CardTitle>
                 </div>
@@ -145,7 +145,7 @@ export default function ContractsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Active
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {contracts.filter((c: ContractData) => c.status === 'active').length}
                   </CardTitle>
                 </div>
@@ -163,7 +163,7 @@ export default function ContractsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Expiring Soon
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {contracts.filter((c: ContractData) => c.status === 'expiring-soon').length}
                   </CardTitle>
                 </div>
@@ -181,11 +181,11 @@ export default function ContractsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Value
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     ${contracts.reduce((sum: number, c: ContractData) => sum + c.value, 0).toLocaleString()}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-purple-500/10 rounded-xl">
+                <div className="p-3 bg-accent/100/10 rounded-xl">
                   <FileText className="w-6 h-6 text-atlvs-purple-500" />
                 </div>
               </div>
@@ -210,8 +210,8 @@ export default function ContractsPage() {
                           {contract.status.replace(/-/g, ' ')}
                         </Badge>
                       </div>
-                      <div className="text-sm text-gray-400 mb-2">{contract.vendor}</div>
-                      <div className="flex items-center gap-4 text-sm text-gray-400">
+                      <div className="text-body-sm text-gray-400 mb-2">{contract.vendor}</div>
+                      <div className="flex items-center gap-4 text-body-sm text-gray-400">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
                           <span>Expires: {new Date(contract.expiryDate).toLocaleDateString()}</span>
@@ -220,7 +220,7 @@ export default function ContractsPage() {
                         <span className="font-medium text-white">${contract.value.toLocaleString()}</span>
                       </div>
                       {contract.status === 'expiring-soon' && (
-                        <div className="mt-2 flex items-center gap-2 text-sm text-warning">
+                        <div className="mt-2 flex items-center gap-2 text-body-sm text-warning">
                           <AlertCircle className="w-4 h-4" />
                           <span>Renewal required within 30 days</span>
                         </div>

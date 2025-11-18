@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 import { motion } from 'framer-motion';
 import { Shield, Plus, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -34,7 +34,7 @@ export default function CredentialsPage() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Credentials</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Credentials</h2>
             <p className="text-gray-400">Unable to load your credentials</p>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function CredentialsPage() {
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <div className="flex items-center justify-between mb-8">
-                <h1 className="text-5xl font-bebas gvteway-text-gradient">CREDENTIALS</h1>
+                <h1 className="text-h1 font-bebas gvteway-text-gradient">CREDENTIALS</h1>
                 <Button variant="gvteway">
                   <Plus className="w-5 h-5 mr-2" />
                   Add Credential
@@ -63,8 +63,8 @@ export default function CredentialsPage() {
                         <div className="flex items-center gap-4">
                           <Shield className="w-8 h-8 text-gvteway-blue-500" />
                           <div>
-                            <h3 className="text-xl font-bebas text-white">{cred.name}</h3>
-                            <p className="text-gray-400 text-sm">{cred.type}</p>
+                            <h3 className="text-h5 font-bebas text-white">{cred.name}</h3>
+                            <p className="text-gray-400 text-body-sm">{cred.type}</p>
                           </div>
                         </div>
                         <Badge variant={cred.verified ? 'gvteway' : 'default'}>

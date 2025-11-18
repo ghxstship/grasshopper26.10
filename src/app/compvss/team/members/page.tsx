@@ -59,13 +59,13 @@ export default function TeamMembersPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':
-        return <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">Active</Badge>;
+        return <Badge variant="compvss" className="bg-success-light text-success border-success/30">Active</Badge>;
       case 'on-break':
-        return <Badge variant="compvss-outline" className="border-yellow-500/30 text-warning">On Break</Badge>;
+        return <Badge variant="compvss-outline" className="border-warning/30 text-warning">On Break</Badge>;
       case 'inactive':
         return <Badge variant="compvss-outline" className="border-gray-500/30 text-gray-400">Inactive</Badge>;
       case 'pending':
-        return <Badge variant="compvss-outline" className="border-blue-500/30 text-info">Pending</Badge>;
+        return <Badge variant="compvss-outline" className="border-info/30 text-info">Pending</Badge>;
       default:
         return null;
     }
@@ -79,10 +79,7 @@ export default function TeamMembersPage() {
           description="Manage your team roster"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team/members' },
-            { label: 'Members' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -103,15 +100,12 @@ export default function TeamMembersPage() {
           description="Manage your team roster"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team/members' },
-            { label: 'Members' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Team Members</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Team Members</h2>
               <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -130,10 +124,7 @@ export default function TeamMembersPage() {
         description="Manage your team roster"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'Team', href: '/compvss/team/members' },
-          { label: 'Members' }
-        ]}
+        
         actions={[
           {
             label: 'Filter',
@@ -160,8 +151,8 @@ export default function TeamMembersPage() {
             >
               <Card variant="compvss" className="bg-gray-900/50">
                 <CardContent className="pt-6 text-center">
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -199,21 +190,21 @@ export default function TeamMembersPage() {
                 <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer">
                   <CardContent className="pt-6">
                     <div className="flex items-start gap-4">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-2xl flex-shrink-0">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-h4 flex-shrink-0">
                         {member.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-bebas text-xl text-white truncate">{member.name}</h3>
+                          <h3 className="font-bebas text-h5 text-white truncate">{member.name}</h3>
                           {getStatusBadge(member.status)}
                         </div>
-                        <p className="text-sm text-gray-400 font-oswald mb-3">{member.role}</p>
+                        <p className="text-body-sm text-gray-400 font-oswald mb-3">{member.role}</p>
                         <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-xs text-gray-500 font-share-tech">
+                          <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
                             <Mail className="w-3 h-3" />
                             <span className="truncate">{member.email}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-xs text-gray-500 font-share-tech">
+                          <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
                             <Phone className="w-3 h-3" />
                             <span>{member.phone}</span>
                           </div>

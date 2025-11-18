@@ -5,7 +5,7 @@ export const runtime = 'edge';
 
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
@@ -48,7 +48,7 @@ export default function OrdersPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-5xl font-bebas mb-8 gvteway-text-gradient">MY ORDERS</h1>
+              <h1 className="text-h1 font-bebas mb-8 gvteway-text-gradient">MY ORDERS</h1>
 
               <div className="space-y-4">
                 {orders.map((order) => (
@@ -57,12 +57,12 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-xl font-bebas text-white">Order #{order.orderNumber}</h3>
+                            <h3 className="text-h5 font-bebas text-white">Order #{order.orderNumber}</h3>
                             <Badge variant={order.status === 'COMPLETED' ? 'gvteway' : 'default'}>
                               {order.status}
                             </Badge>
                           </div>
-                          <div className="flex gap-4 text-sm text-gray-400">
+                          <div className="flex gap-4 text-body-sm text-gray-400">
                             <div className="flex items-center">
                               <Calendar className="w-4 h-4 mr-2" />
                               {new Date(order.createdAt).toLocaleDateString()}
@@ -74,8 +74,8 @@ export default function OrdersPage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-gray-400 text-sm">{order.currency}</p>
-                          <p className="text-2xl font-bebas text-gvteway-red-500">${Number(order.total).toFixed(2)}</p>
+                          <p className="text-gray-400 text-body-sm">{order.currency}</p>
+                          <p className="text-h4 font-bebas text-gvteway-red-500">${Number(order.total).toFixed(2)}</p>
                         </div>
                       </div>
                     </CardContent>

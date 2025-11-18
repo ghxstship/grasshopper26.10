@@ -83,16 +83,16 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
         >
           <div className="flex items-start gap-6 mb-8">
               {/* Avatar */}
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-4xl">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h2">
                 {member.name.split(' ').map(n => n[0]).join('')}
               </div>
 
               {/* Info */}
               <div className="flex-1">
-                <h1 className="text-5xl font-bebas mb-2 atlvs-text-gradient">
+                <h1 className="text-h1 font-bebas mb-2 atlvs-text-gradient">
                   {member.name}
                 </h1>
-                <p className="text-xl text-gray-400 font-oswald mb-4">
+                <p className="text-h5 text-gray-400 font-oswald mb-4">
                   {member.role} • {member.department}
                 </p>
                 <div className="flex items-center gap-2 flex-wrap">
@@ -124,7 +124,7 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">About</CardTitle>
-                <p className="text-gray-300 leading-relaxed">{member.bio}</p>
+                <p className="text-gray-300">{member.bio}</p>
               </CardHeader>
             </Card>
 
@@ -137,28 +137,28 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
                 </CardTitle>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-3xl font-bebas atlvs-text-gradient mb-1">
+                    <div className="text-h3 font-bebas atlvs-text-gradient mb-1">
                       {member.stats.projectsCompleted}
                     </div>
-                    <div className="text-sm text-gray-400">Projects</div>
+                    <div className="text-body-sm text-gray-400">Projects</div>
                   </div>
                   <div className="text-center p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-3xl font-bebas atlvs-text-gradient mb-1">
+                    <div className="text-h3 font-bebas atlvs-text-gradient mb-1">
                       {member.stats.tasksCompleted}
                     </div>
-                    <div className="text-sm text-gray-400">Tasks</div>
+                    <div className="text-body-sm text-gray-400">Tasks</div>
                   </div>
                   <div className="text-center p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-3xl font-bebas atlvs-text-gradient mb-1">
+                    <div className="text-h3 font-bebas atlvs-text-gradient mb-1">
                       {member.stats.hoursLogged}
                     </div>
-                    <div className="text-sm text-gray-400">Hours</div>
+                    <div className="text-body-sm text-gray-400">Hours</div>
                   </div>
                   <div className="text-center p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-3xl font-bebas atlvs-text-gradient mb-1">
+                    <div className="text-h3 font-bebas atlvs-text-gradient mb-1">
                       {member.stats.avgRating}
                     </div>
-                    <div className="text-sm text-gray-400">Rating</div>
+                    <div className="text-body-sm text-gray-400">Rating</div>
                   </div>
                 </div>
               </CardHeader>
@@ -177,7 +177,7 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <div className="font-medium mb-1">{project.name}</div>
-                          <div className="text-sm text-gray-400">{project.role}</div>
+                          <div className="text-body-sm text-gray-400">{project.role}</div>
                         </div>
                         <Badge variant="atlvs-outline" className="bg-gray-700/50">
                           {project.progress}%
@@ -205,10 +205,10 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
                       <div className="w-2 h-2 rounded-full bg-atlvs-green-500 mt-2" />
                       <div className="flex-1">
                         <div className="text-gray-300">
-                          <span className="text-white font-medium">{activity.action}</span>
+                          <span className="text-white">{activity.action}</span>
                           {' '}{activity.item}
                         </div>
-                        <div className="text-sm text-gray-500">{activity.time}</div>
+                        <div className="text-body-sm text-gray-500">{activity.time}</div>
                       </div>
                     </div>
                   ))}
@@ -227,7 +227,7 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
                   <div className="flex items-start gap-3">
                     <Mail className="w-5 h-5 text-gray-400 mt-0.5" />
                     <div>
-                      <div className="text-sm text-gray-400 mb-1">Email</div>
+                      <div className="text-body-sm text-gray-400 mb-1">Email</div>
                       <a href={`mailto:${member.email}`} className="text-atlvs-green-500 hover:underline">
                         {member.email}
                       </a>
@@ -236,7 +236,7 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
                   <div className="flex items-start gap-3">
                     <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                     <div>
-                      <div className="text-sm text-gray-400 mb-1">Phone</div>
+                      <div className="text-body-sm text-gray-400 mb-1">Phone</div>
                       <a href={`tel:${member.phone}`} className="text-white hover:text-atlvs-green-500">
                         {member.phone}
                       </a>
@@ -245,14 +245,14 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                     <div>
-                      <div className="text-sm text-gray-400 mb-1">Location</div>
+                      <div className="text-body-sm text-gray-400 mb-1">Location</div>
                       <div className="text-white">{member.location}</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Calendar className="w-5 h-5 text-gray-400 mt-0.5" />
                     <div>
-                      <div className="text-sm text-gray-400 mb-1">Joined</div>
+                      <div className="text-body-sm text-gray-400 mb-1">Joined</div>
                       <div className="text-white">{new Date(member.joinDate).toLocaleDateString()}</div>
                     </div>
                   </div>

@@ -30,8 +30,8 @@ const sizeClasses = {
 
 const variantClasses = {
   default: 'bg-gray-900 border-gray-800',
-  gvteway: 'bg-purple-950/90 border-purple-800',
-  compvss: 'bg-blue-950/90 border-blue-800',
+  gvteway: 'bg-gvteway-red/10 border-gvteway-red/30',
+  compvss: 'bg-compvss-cyan/10 border-compvss-cyan/30',
   atlvs: 'bg-black border-gray-800',
 };
 
@@ -99,12 +99,12 @@ export const Modal: React.FC<ModalProps> = ({
           <div className="flex items-start justify-between p-6 border-b border-gray-800">
             <div className="flex-1">
               {title && (
-                <h2 className="text-2xl font-bebas text-white uppercase tracking-wide">
+                <h2 className="text-h4 font-bebas text-white uppercase">
                   {title}
                 </h2>
               )}
               {description && (
-                <p className="mt-1 text-sm text-gray-400 font-oswald">
+                <p className="mt-1 text-body-sm text-gray-400 font-oswald">
                   {description}
                 </p>
               )}
@@ -147,8 +147,9 @@ export const NestedModal: React.FC<NestedModalProps> = ({
   parentZIndex = 50,
   ...props
 }) => {
+  const zIndexClass = `z-${parentZIndex + 10}`;
   return (
-    <div style={{ zIndex: parentZIndex + 10 }}>
+    <div className={zIndexClass}>
       <Modal {...props} />
     </div>
   );

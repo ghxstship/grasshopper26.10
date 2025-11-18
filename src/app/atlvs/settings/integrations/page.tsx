@@ -51,7 +51,7 @@ export default function IntegrationsSettingsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Integrations</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Integrations</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -78,10 +78,10 @@ export default function IntegrationsSettingsPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-4 flex-1">
-                    <div className="text-4xl">{integration.icon}</div>
+                    <div className="text-h2">{integration.icon}</div>
                     <div className="flex-1">
-                      <div className="font-medium text-lg mb-1">{integration.name}</div>
-                      <div className="text-sm text-gray-400 mb-3">{integration.description}</div>
+                      <div className="font-medium text-h6 mb-1">{integration.name}</div>
+                      <div className="text-body-sm text-gray-400 mb-3">{integration.description}</div>
                       {integration.connected ? (
                         <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50">
                           <Check className="w-3 h-3 mr-1" />

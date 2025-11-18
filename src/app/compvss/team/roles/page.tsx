@@ -23,10 +23,7 @@ export default function TeamRolesPage() {
           description="Manage team roles and permissions"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team' },
-            { label: 'Roles' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -47,15 +44,12 @@ export default function TeamRolesPage() {
           description="Manage team roles and permissions"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team' },
-            { label: 'Roles' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Roles</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Roles</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -72,10 +66,7 @@ export default function TeamRolesPage() {
         description="Manage roles and permissions"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'Team', href: '/compvss/team/members' },
-          { label: 'Roles' }
-        ]}
+        
         actions={[
           {
             label: 'Create Role',
@@ -98,16 +89,16 @@ export default function TeamRolesPage() {
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${role.color} flex items-center justify-center text-white mb-4`}>
                     <Shield className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bebas text-white mb-2">{role.name}</h3>
+                  <h3 className="text-h5 font-bebas text-white mb-2">{role.name}</h3>
                   <div className="flex items-center gap-2 mb-4">
                     <Users2 className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-400 font-share-tech">{role.members} members</span>
+                    <span className="text-body-sm text-gray-400 font-share-tech">{role.members} members</span>
                   </div>
                   <div className="space-y-2 mb-4">
-                    <p className="text-xs text-gray-500 font-oswald">Permissions:</p>
+                    <p className="text-caption text-gray-500 font-oswald">Permissions:</p>
                     <div className="flex flex-wrap gap-2">
                       {role.permissions.map((perm) => (
-                        <Badge key={perm} variant="compvss-outline" className="text-xs">
+                        <Badge key={perm} variant="compvss-outline" className="text-caption">
                           {perm}
                         </Badge>
                       ))}

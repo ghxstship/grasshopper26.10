@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { QrCode, Download, Send, DollarSign, Calendar, MapPin, User, Ticket, ChevronLeft, Smartphone,  } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -85,7 +85,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                   {/* Header */}
                   <div className="flex items-start justify-between mb-6">
                     <div>
-                      <h1 className="text-4xl font-bebas text-white mb-2">
+                      <h1 className="text-h2 font-bebas text-white mb-2">
                         {ticket.eventName}
                       </h1>
                       <Badge variant="gvteway">{ticket.ticketType}</Badge>
@@ -100,8 +100,8 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                         <div className="w-64 h-64 bg-gray-200 mx-auto mb-4 flex items-center justify-center">
                           <QrCode className="w-32 h-32 text-gray-400" />
                         </div>
-                        <p className="text-gray-600 text-sm mb-2">Scan at venue entrance</p>
-                        <p className="text-gray-800 font-mono text-xs">{ticket.qrCode}</p>
+                        <p className="text-gray-600 text-body-sm mb-2">Scan at venue entrance</p>
+                        <p className="text-gray-800 font-mono text-caption">{ticket.qrCode}</p>
                       </div>
                     ) : (
                       <div className="py-12">
@@ -114,7 +114,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                         >
                           Show QR Code
                         </Button>
-                        <p className="text-gray-600 text-sm mt-4">
+                        <p className="text-gray-600 text-body-sm mt-4">
                           Only show this at the venue entrance
                         </p>
                       </div>
@@ -127,8 +127,8 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                       <div className="flex items-start">
                         <Calendar className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-sm">Date & Time</p>
-                          <p className="text-white font-medium">{ticket.date}</p>
+                          <p className="text-gray-400 text-body-sm">Date & Time</p>
+                          <p className="text-white">{ticket.date}</p>
                           <p className="text-gray-300">{ticket.time}</p>
                         </div>
                       </div>
@@ -136,8 +136,8 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                       <div className="flex items-start">
                         <MapPin className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-sm">Venue</p>
-                          <p className="text-white font-medium">{ticket.venue}</p>
+                          <p className="text-gray-400 text-body-sm">Venue</p>
+                          <p className="text-white">{ticket.venue}</p>
                           <p className="text-gray-300">{ticket.location}</p>
                         </div>
                       </div>
@@ -147,8 +147,8 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                       <div className="flex items-start">
                         <Ticket className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-sm">Seating</p>
-                          <p className="text-white font-medium">Section {ticket.section}</p>
+                          <p className="text-gray-400 text-body-sm">Seating</p>
+                          <p className="text-white">Section {ticket.section}</p>
                           <p className="text-gray-300">Row {ticket.row}, Seats {ticket.seat}</p>
                         </div>
                       </div>
@@ -156,8 +156,8 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                       <div className="flex items-start">
                         <User className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-sm">Quantity</p>
-                          <p className="text-white font-medium">{ticket.quantity} Tickets</p>
+                          <p className="text-gray-400 text-body-sm">Quantity</p>
+                          <p className="text-white">{ticket.quantity} Tickets</p>
                         </div>
                       </div>
                     </div>
@@ -165,7 +165,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
 
                   {/* Order Info */}
                   <div className="pt-6 border-t border-gray-800">
-                    <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                    <div className="grid sm:grid-cols-2 gap-4 text-body-sm">
                       <div>
                         <p className="text-gray-400">Order Number</p>
                         <p className="text-white font-mono">{ticket.orderNumber}</p>
@@ -176,7 +176,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                       </div>
                       <div>
                         <p className="text-gray-400">Total Paid</p>
-                        <p className="text-white font-medium">${(ticket.price * ticket.quantity).toFixed(2)}</p>
+                        <p className="text-white">${(ticket.price * ticket.quantity).toFixed(2)}</p>
                       </div>
                       <div>
                         <p className="text-gray-400">Price per Ticket</p>
@@ -221,7 +221,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                   <CardTitle className="text-white">Important Information</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-3 text-gray-300 text-sm">
+                  <ul className="space-y-3 text-gray-300 text-body-sm">
                     <li className="flex items-start">
                       <span className="text-gvteway-red-500 mr-2">•</span>
                       <span>Please arrive at least 30 minutes before the event starts</span>

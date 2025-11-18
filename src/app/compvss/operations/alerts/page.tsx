@@ -24,10 +24,7 @@ export default function OperationsAlertsPage() {
           description="Monitor and manage system alerts"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Operations', href: '/compvss/operations/hub' },
-            { label: 'Alerts' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
@@ -48,15 +45,12 @@ export default function OperationsAlertsPage() {
           description="Monitor and manage system alerts"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Operations', href: '/compvss/operations/hub' },
-            { label: 'Alerts' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircleIcon className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Alerts</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Alerts</h2>
               <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -75,10 +69,7 @@ export default function OperationsAlertsPage() {
         description="Monitor and manage system alerts"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Operations', href: '/compvss/operations/hub' },
-          { label: 'Alerts' }
-        ]}
+        
       >
         <Card variant="compvss" className="bg-gray-900/50">
           <CardHeader>
@@ -102,7 +93,7 @@ export default function OperationsAlertsPage() {
                       <AlertTriangle className={`w-5 h-5 flex-shrink-0 ${alert.severity === 'warning' ? 'text-warning' : 'text-info'}`} />
                       <div>
                         <h3 className="font-oswald text-white mb-1">{alert.title}</h3>
-                        <p className="text-sm text-gray-400 font-share-tech">{alert.time}</p>
+                        <p className="text-body-sm text-gray-400 font-share-tech">{alert.time}</p>
                       </div>
                     </div>
                     <Badge 

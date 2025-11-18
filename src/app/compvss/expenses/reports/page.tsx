@@ -22,10 +22,7 @@ export default function ExpenseReportsPage() {
           description="View and download expense reports"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Reports' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -46,15 +43,12 @@ export default function ExpenseReportsPage() {
           description="View and download expense reports"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Reports' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Reports</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Reports</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -71,10 +65,7 @@ export default function ExpenseReportsPage() {
         description="View and download expense reports"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-          { label: 'Reports' }
-        ]}
+        
       >
         <Card variant="compvss" className="bg-gray-900/50">
           <CardHeader>
@@ -97,7 +88,7 @@ export default function ExpenseReportsPage() {
                       </div>
                       <div>
                         <h3 className="font-oswald text-white mb-1">{report.name}</h3>
-                        <div className="flex items-center gap-2 text-sm text-gray-400 font-share-tech">
+                        <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
                           <Calendar className="w-4 h-4" />
                           <span>{report.period}</span>
                         </div>
@@ -105,8 +96,8 @@ export default function ExpenseReportsPage() {
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="text-right">
-                        <div className="text-xl font-bebas text-white">{report.total}</div>
-                        <div className="text-xs text-gray-500 font-share-tech">{report.status}</div>
+                        <div className="text-h5 font-bebas text-white">{report.total}</div>
+                        <div className="text-caption text-gray-500 font-share-tech">{report.status}</div>
                       </div>
                       <Button variant="compvss-outline" size="sm">
                         <Download className="w-4 h-4 mr-2" />

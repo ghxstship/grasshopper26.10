@@ -63,10 +63,7 @@ export default function ExpenseApprovalPage() {
           description="Review and approve expense reports"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Approval' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -87,15 +84,12 @@ export default function ExpenseApprovalPage() {
           description="Review and approve expense reports"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Approval' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Expenses</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Expenses</h2>
               <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -114,39 +108,36 @@ export default function ExpenseApprovalPage() {
         description="Review and approve expense reports"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-          { label: 'Approval' }
-        ]}
+        
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
 
           {/* Stats */}
           <div className="grid grid-cols-4 gap-4 mb-6">
-            <Card variant="compvss" className="bg-warning/10 border-yellow-500/30">
+            <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-warning">{stats.pending}</p>
-                <p className="text-sm text-gray-400 font-oswald">Pending</p>
+                <p className="text-h3 font-bebas text-warning">{stats.pending}</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Pending</p>
               </CardContent>
             </Card>
-            <Card variant="compvss" className="bg-green-500/10 border-green-500/30">
+            <Card variant="compvss" className="bg-success-light0/10 border-success/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-success">{stats.approved}</p>
-                <p className="text-sm text-gray-400 font-oswald">Approved</p>
+                <p className="text-h3 font-bebas text-success">{stats.approved}</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Approved</p>
               </CardContent>
             </Card>
-            <Card variant="compvss" className="bg-error/10 border-red-500/30">
+            <Card variant="compvss" className="bg-error/10 border-destructive/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-error">{stats.rejected}</p>
-                <p className="text-sm text-gray-400 font-oswald">Rejected</p>
+                <p className="text-h3 font-bebas text-error">{stats.rejected}</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Rejected</p>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-compvss-cyan-500/10 border-compvss-cyan-500/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-3xl font-bebas text-compvss-cyan-500">
+                <p className="text-h3 font-bebas text-compvss-cyan-500">
                   ${stats.totalPending.toFixed(2)}
                 </p>
-                <p className="text-sm text-gray-400 font-oswald">Total Pending</p>
+                <p className="text-body-sm text-gray-400 font-oswald">Total Pending</p>
               </CardContent>
             </Card>
           </div>
@@ -163,17 +154,17 @@ export default function ExpenseApprovalPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white text-lg">{expense.description}</h3>
-                          <Badge variant="default" className="text-xs">{expense.id}</Badge>
+                          <h3 className="font-oswald text-white text-h6">{expense.description}</h3>
+                          <Badge variant="default" className="text-caption">{expense.id}</Badge>
                         </div>
-                        <div className="flex flex-wrap gap-3 text-sm text-gray-400 font-share-tech mb-2">
+                        <div className="flex flex-wrap gap-3 text-body-sm text-gray-400 font-share-tech mb-2">
                           <span>User: {expense.userId}</span>
                           <span>•</span>
                           <span>Category: {expense.category}</span>
                           <span>•</span>
                           <span>Date: {new Date(expense.date).toLocaleDateString()}</span>
                         </div>
-                        <p className="text-2xl font-bebas text-compvss-cyan-500">
+                        <p className="text-h4 font-bebas text-compvss-cyan-500">
                           ${expense.amount.toFixed(2)}
                         </p>
                       </div>
@@ -186,7 +177,7 @@ export default function ExpenseApprovalPage() {
                       <Button
                         variant="compvss"
                         size="sm"
-                        className="flex-1 bg-green-500 hover:bg-success"
+                        className="flex-1 bg-success-light0 hover:bg-success"
                         onClick={() => handleApprove(expense.id)}
                       >
                         <CheckCircle2 className="w-4 h-4 mr-2" />
@@ -195,7 +186,7 @@ export default function ExpenseApprovalPage() {
                       <Button
                         variant="compvss"
                         size="sm"
-                        className="flex-1 bg-error hover:bg-red-600"
+                        className="flex-1 bg-error hover:bg-destructive"
                         onClick={() => handleReject(expense.id)}
                       >
                         <XCircle className="w-4 h-4 mr-2" />

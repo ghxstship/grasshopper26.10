@@ -61,7 +61,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-800">
             {fallback ? (
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 font-bebas">
+              <span className="text-body-sm text-gray-700 dark:text-gray-300 font-bebas">
                 {getInitials(fallback)}
               </span>
             ) : (

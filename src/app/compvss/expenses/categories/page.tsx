@@ -23,10 +23,7 @@ export default function ExpenseCategoriesPage() {
           description="Track spending by category"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Categories' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -47,15 +44,12 @@ export default function ExpenseCategoriesPage() {
           description="Track spending by category"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Categories' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Categories</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Categories</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -72,10 +66,7 @@ export default function ExpenseCategoriesPage() {
         description="Track spending by category"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-          { label: 'Categories' }
-        ]}
+        
       >
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category, index) => (
@@ -90,14 +81,14 @@ export default function ExpenseCategoriesPage() {
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4`}>
                     <Tag className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bebas text-white mb-2">{category.name}</h3>
+                  <h3 className="text-h5 font-bebas text-white mb-2">{category.name}</h3>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="text-2xl font-bebas text-compvss-cyan-500">{category.total}</div>
-                    <Badge variant="compvss-outline" className="text-xs">
+                    <div className="text-h4 font-bebas text-compvss-cyan-500">{category.total}</div>
+                    <Badge variant="compvss-outline" className="text-caption">
                       {category.count} expenses
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-success font-share-tech">
+                  <div className="flex items-center gap-2 text-caption text-success font-share-tech">
                     <TrendingUp className="w-3 h-3" />
                     <span>Within budget</span>
                   </div>

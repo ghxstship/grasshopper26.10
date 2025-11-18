@@ -7,7 +7,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { AlertCircle, Calendar, Filter, Grid, List, Loader2, MapPin } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -81,7 +81,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Events</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Events</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
@@ -105,11 +105,11 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               {/* Header */}
               <div className={`relative mb-12 p-12 rounded-2xl bg-gradient-to-br ${category.color}`}>
                 <div className="relative z-10">
-                  <div className="text-6xl mb-4">{category.icon}</div>
-                  <h1 className="text-5xl sm:text-6xl font-bebas text-white mb-4">
+                  <div className="text-h1 mb-4">{category.icon}</div>
+                  <h1 className="text-h1 font-bebas text-white mb-4">
                     {category.name.toUpperCase()} EVENTS
                   </h1>
-                  <p className="text-xl text-white/90">
+                  <p className="text-h5 text-white/90">
                     Discover the best {category.name.toLowerCase()} events near you
                   </p>
                 </div>
@@ -154,7 +154,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               {/* Events Grid */}
               {displayEvents.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-400 text-lg">No {category.name.toLowerCase()} events found.</p>
+                  <p className="text-gray-400 text-h6">No {category.name.toLowerCase()} events found.</p>
                 </div>
               ) : (
                 <div className={viewMode === 'grid' ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
@@ -170,8 +170,8 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
                           <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900" />
                           <CardContent className="p-6">
                             <Badge variant="gvteway" className="mb-3">{category.name}</Badge>
-                            <h3 className="text-xl font-bebas text-white mb-2">{event.title}</h3>
-                            <div className="space-y-2 text-sm text-gray-400 mb-4">
+                            <h3 className="text-h5 font-bebas text-white mb-2">{event.title}</h3>
+                            <div className="space-y-2 text-body-sm text-gray-400 mb-4">
                               <div className="flex items-center">
                                 <Calendar className="w-4 h-4 mr-2" />
                                 {event.startDate ? new Date(event.startDate).toLocaleDateString() : 'TBA'}
@@ -182,7 +182,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
                               </div>
                             </div>
                             <div className="flex items-center justify-between">
-                              <span className="text-2xl font-bebas text-gvteway-red-500">
+                              <span className="text-h4 font-bebas text-gvteway-red-500">
                                 ${event.ticketTypes?.[0]?.price || '0.00'}
                               </span>
                               <Button variant="gvteway" size="sm" rounded="full">

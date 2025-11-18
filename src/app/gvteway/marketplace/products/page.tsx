@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Star, Loader2, AlertCircle } from 'lucide-react';
 import { useProducts } from '@/lib/hooks/gvteway/useProducts';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Button } from '@/components/atoms/Button';
 
@@ -33,7 +33,7 @@ export default function ProductsPage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Products</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Products</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
@@ -50,10 +50,10 @@ export default function ProductsPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-5xl font-bebas mb-8 gvteway-text-gradient">ALL PRODUCTS</h1>
+              <h1 className="text-h1 font-bebas mb-8 gvteway-text-gradient">ALL PRODUCTS</h1>
               {products.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-400 text-lg">No products available at this time.</p>
+                  <p className="text-gray-400 text-h6">No products available at this time.</p>
                 </div>
               ) : (
                 <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -62,13 +62,13 @@ export default function ProductsPage() {
                     <Card variant="gvteway" className="bg-gray-900/50 hover:scale-105 transition-transform cursor-pointer">
                       <div className="aspect-square bg-gray-800" />
                       <CardContent className="p-4">
-                        <h3 className="text-lg font-bebas text-white mb-2">{product.name}</h3>
+                        <h3 className="text-h6 font-bebas text-white mb-2">{product.name}</h3>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <Star className="w-4 h-4 fill-yellow-500 text-warning" />
-                            <span className="text-sm text-white ml-1">{product.rating || 4.5}</span>
+                            <span className="text-body-sm text-white ml-1">{product.rating || 4.5}</span>
                           </div>
-                          <span className="text-xl font-bebas text-gvteway-red-500">${product.price}</span>
+                          <span className="text-h5 font-bebas text-gvteway-red-500">${product.price}</span>
                         </div>
                       </CardContent>
                     </Card>

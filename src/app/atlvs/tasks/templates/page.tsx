@@ -49,7 +49,7 @@ export default function TaskTemplatesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Templates</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Templates</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -99,9 +99,9 @@ export default function TaskTemplatesPage() {
                 </div>
 
                 <CardTitle className="mb-2">{template.name}</CardTitle>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-2">{template.description}</p>
+                <p className="text-gray-400 text-body-sm mb-4 line-clamp-2">{template.description}</p>
 
-                <div className="space-y-2 mb-4 text-sm text-gray-400">
+                <div className="space-y-2 mb-4 text-body-sm text-gray-400">
                   <div>{template.tasksCount} tasks</div>
                   <div>Est. {template.estimatedDuration}</div>
                   <div>Used {template.usageCount} times</div>

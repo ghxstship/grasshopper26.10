@@ -23,7 +23,7 @@ export default function ReferralLeaderboardPage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
@@ -36,11 +36,11 @@ export default function ReferralLeaderboardPage() {
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Leaderboard</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Leaderboard</h2>
             <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
@@ -54,10 +54,10 @@ export default function ReferralLeaderboardPage() {
   const leaders = leaderboard;
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Referral Leaderboard</h1>
+          <h1 className="text-h3 font-bebas compvss-text-gradient">Referral Leaderboard</h1>
           <p className="text-gray-400 font-oswald mt-1">Top referrers this month</p>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default function ReferralLeaderboardPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bebas text-2xl ${
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bebas text-h4 ${
                         leader.rank === 1 ? 'bg-gradient-to-r from-yellow-500 to-amber-600 text-black' :
                         leader.rank === 2 ? 'bg-gradient-to-r from-gray-400 to-gray-500 text-black' :
                         leader.rank === 3 ? 'bg-gradient-to-r from-orange-600 to-orange-700 text-black' :
@@ -92,13 +92,13 @@ export default function ReferralLeaderboardPage() {
                       </div>
                       <div>
                         <h3 className="font-oswald text-white mb-1">{leader.name}</h3>
-                        <div className="flex items-center gap-3 text-sm text-gray-400 font-share-tech">
+                        <div className="flex items-center gap-3 text-body-sm text-gray-400 font-share-tech">
                           <span>{leader.referrals} referrals</span>
                           {leader.badge && (
-                            <Badge variant="compvss" className={`text-xs ${
+                            <Badge variant="compvss" className={`text-caption ${
                               leader.badge === 'Gold' ? 'bg-warning-light text-warning' :
                               leader.badge === 'Silver' ? 'bg-gray-400/20 text-gray-400' :
-                              'bg-orange-600/20 text-atlvs-orange-500'
+                              'bg-warning/20 text-atlvs-orange-500'
                             }`}>
                               <Award className="w-3 h-3 mr-1" />
                               {leader.badge}
@@ -108,8 +108,8 @@ export default function ReferralLeaderboardPage() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-xl font-bebas text-compvss-cyan-500">{leader.earnings}</div>
-                      <div className="flex items-center gap-1 text-xs text-success font-share-tech">
+                      <div className="text-h5 font-bebas text-compvss-cyan-500">{leader.earnings}</div>
+                      <div className="flex items-center gap-1 text-caption text-success font-share-tech">
                         <TrendingUp className="w-3 h-3" />
                         <span>+{leader.referrals * 2}%</span>
                       </div>

@@ -30,11 +30,7 @@ export default function TechnicalAdvancingPage() {
       <ContentLayout
         title="Technical Request"
         description="Technical services"
-        breadcrumbs={[
-          { label: 'Advancing', href: '/compvss/advancing' },
-          { label: 'New Request', href: '/compvss/advancing/new' },
-          { label: 'Technical' }
-        ]}
+        
         variant="compvss"
         showToolbar={false}
       >
@@ -94,8 +90,8 @@ export default function TechnicalAdvancingPage() {
                 </FormField>
 
                 {error && (
-                  <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-                    <p className="text-red-400 text-sm">{error.message}</p>
+                  <div className="p-4 bg-destructive/100/10 border border-destructive/30 rounded-lg">
+                    <p className="text-destructive text-body-sm">{error.message}</p>
                   </div>
                 )}
 

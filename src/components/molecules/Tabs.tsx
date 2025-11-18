@@ -59,7 +59,7 @@ const Tabs: React.FC<TabsProps> = ({
               disabled={tab.disabled}
               variant="ghost"
               className={cn(
-                "flex items-center gap-2 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium font-share-tech transition-colors",
+                "flex items-center gap-2 whitespace-nowrap border-b-2 py-4 px-1 text-body-sm font-share-tech transition-colors",
                 styles,
                 tab.disabled && "opacity-50 cursor-not-allowed"
               )}

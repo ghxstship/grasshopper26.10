@@ -1,29 +1,29 @@
 'use client';
 
-
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
+import { PageTitle, BodyText } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const token = searchParams.get('token');
+  
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    const verifyEmail = async () => {
-      if (!token) {
-        setStatus('error');
-        return;
-      }
+    if (!token) {
+      setStatus('error');
+      setMessage('Invalid verification link');
+      return;
+    }
 
+    const verifyEmail = async () => {
       try {
         const response = await fetch('/api/auth/verify-email', {
           method: 'POST',
@@ -31,85 +31,84 @@ export default function VerifyEmailPage() {
           body: JSON.stringify({ token }),
         });
 
-        if (!response.ok) {
-          throw new Error('Verification failed');
-        }
+        const data = await response.json();
 
-        setStatus('success');
+        if (response.ok) {
+          setStatus('success');
+          setMessage('Email verified successfully!');
+          setTimeout(() => {
+            router.push('/gvteway/auth/login?verified=true');
+          }, 3000);
+        } else {
+          setStatus('error');
+          setMessage(data.error || 'Verification failed');
+        }
       } catch {
         setStatus('error');
+        setMessage('An unexpected error occurred');
       }
     };
 
     verifyEmail();
-  }, [token]);
+  }, [token, router]);
 
   return (
-    <GvtewayLayout showNav={false}>
-    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1),transparent_50%)]" />
-      
-      <div className="relative z-10 w-full max-w-md">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="text-center mb-8">
-            <Link href="/gvteway">
-              <h1 className="text-5xl font-anton gvteway-text-gradient mb-2 cursor-pointer">
-                GVTEWAY
-              </h1>
-            </Link>
-          </div>
+    <GvtewayLayout>
+      <section className="section-padding">
+        <div className="max-w-md mx-auto px-8 text-center">
+          <PageTitle className="mb-8 uppercase text-ghxst-primary">Email Verification</PageTitle>
 
-          <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-white text-2xl text-center">Email Verification</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8">
-                {status === 'loading' && (
-                  <>
-                    <Loader2 className="w-16 h-16 text-gvteway-red-500 animate-spin mx-auto mb-4" />
-                    <p className="text-gray-300 mb-2">Verifying your email...</p>
-                    <p className="text-sm text-gray-500">Please wait a moment</p>
-                  </>
-                )}
+          {status === 'loading' && (
+            <div className="space-y-6">
+              <Loader2 className="w-16 h-16 mx-auto text-ghxst-primary animate-spin" />
+              <BodyText className="text-ghxst-text-secondary">
+                Verifying your email...
+              </BodyText>
+            </div>
+          )}
 
-                {status === 'success' && (
-                  <>
-                    <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle className="w-10 h-10 text-success" />
-                    </div>
-                    <p className="text-gray-300 mb-2 text-lg font-semibold">Email Verified!</p>
-                    <p className="text-sm text-gray-500 mb-6">Your account has been successfully verified</p>
-                    <Link href="/gvteway/auth/login">
-                      <Button variant="gvteway" size="lg" className="w-full" rounded="full">
-                        Continue to Sign In
-                      </Button>
-                    </Link>
-                  </>
-                )}
-
-                {status === 'error' && (
-                  <>
-                    <div className="w-16 h-16 bg-error/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <XCircle className="w-10 h-10 text-error" />
-                    </div>
-                    <p className="text-gray-300 mb-2 text-lg font-semibold">Verification Failed</p>
-                    <p className="text-sm text-gray-500 mb-6">The verification link is invalid or has expired</p>
-                    <Button variant="gvteway-outline" size="lg" className="w-full" rounded="full">
-                      Resend Verification Email
-                    </Button>
-                  </>
-                )}
+          {status === 'success' && (
+            <div className="space-y-6">
+              <CheckCircle className="w-16 h-16 mx-auto text-success" />
+              <div>
+                <BodyText className="text-success-foreground mb-2">
+                  {message}
+                </BodyText>
+                <BodyText className="text-ghxst-text-secondary text-body-sm">
+                  Redirecting to login...
+                </BodyText>
               </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
-    </div>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div className="space-y-6">
+              <XCircle className="w-16 h-16 mx-auto text-destructive" />
+              <div>
+                <BodyText className="text-destructive-foreground mb-2">
+                  {message}
+                </BodyText>
+                <BodyText className="text-ghxst-text-secondary text-body-sm">
+                  The verification link may have expired or is invalid.
+                </BodyText>
+              </div>
+              <Link href="/gvteway/auth/login">
+                <Button variant="primary" size="lg">
+                  Go to Sign In
+                </Button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
     </GvtewayLayout>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }

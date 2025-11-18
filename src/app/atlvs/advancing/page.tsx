@@ -98,7 +98,7 @@ export default function AdvancingPage() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'urgent': return 'bg-error';
-      case 'high': return 'bg-orange-500';
+      case 'high': return 'bg-warning-light0';
       case 'medium': return 'bg-warning';
       case 'low': return 'bg-info';
       default: return 'bg-gray-500';
@@ -169,7 +169,7 @@ export default function AdvancingPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Requests</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Requests</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
@@ -197,7 +197,7 @@ export default function AdvancingPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Requests
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${statusCounts.all} total requests`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${statusCounts.all} total requests`}>
                     {statusCounts.all}
                   </CardTitle>
                 </div>
@@ -213,7 +213,7 @@ export default function AdvancingPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Pending
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-warning">
+                  <CardTitle className="text-h3 font-bebas text-warning">
                     {statusCounts.pending}
                   </CardTitle>
                 </div>
@@ -229,7 +229,7 @@ export default function AdvancingPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Under Review
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-info">
+                  <CardTitle className="text-h3 font-bebas text-info">
                     {statusCounts['under-review']}
                   </CardTitle>
                 </div>
@@ -245,7 +245,7 @@ export default function AdvancingPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Approved
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-atlvs-green-500">
+                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500">
                     {statusCounts.approved}
                   </CardTitle>
                 </div>
@@ -261,7 +261,7 @@ export default function AdvancingPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Rejected
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-error">
+                  <CardTitle className="text-h3 font-bebas text-error">
                     {statusCounts.rejected}
                   </CardTitle>
                 </div>
@@ -341,7 +341,7 @@ export default function AdvancingPage() {
               <CardHeader>
                 <div className="text-center py-12">
                   <Inbox className="w-12 h-12 mx-auto mb-4 text-gray-500" />
-                  <h3 className="text-lg font-bebas mb-2">No Requests Found</h3>
+                  <h3 className="text-h6 font-bebas mb-2">No Requests Found</h3>
                   <p className="text-gray-400">
                     {debouncedSearch ? 'Try adjusting your search or filters' : 'No advancing requests at this time'}
                   </p>
@@ -366,10 +366,10 @@ export default function AdvancingPage() {
                       {/* Left Side */}
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <Badge variant="atlvs-outline" className="text-xs">
+                          <Badge variant="atlvs-outline" className="text-caption">
                             {request.id}
                           </Badge>
-                          <Badge variant="atlvs-outline" className="text-xs">
+                          <Badge variant="atlvs-outline" className="text-caption">
                             {request.type}
                           </Badge>
                           <div className={`w-2 h-2 rounded-full ${getPriorityColor(request.priority || 'medium')}`} />
@@ -377,7 +377,7 @@ export default function AdvancingPage() {
                         <CardTitle className="text-white mb-2">
                           {request.title}
                         </CardTitle>
-                        <div className="flex items-center gap-4 text-sm text-gray-400">
+                        <div className="flex items-center gap-4 text-body-sm text-gray-400">
                           <span>{request.requestedBy || 'Unknown'}</span>
                           <span>•</span>
                           <span>{request.project || 'N/A'}</span>

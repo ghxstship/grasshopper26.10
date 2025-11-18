@@ -38,10 +38,10 @@ export default function ATLVSPage() {
             <h1 className="atlvs-text-gradient mb-6" id="hero-title">
               ATLVS
             </h1>
-            <p className="text-3xl sm:text-4xl font-bebas tracking-wide mb-4 text-gray-300">
+            <p className="text-h3 font-bebas mb-4 text-gray-300">
               PROFESSIONAL EVENT PRODUCTION PLATFORM
             </p>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 font-oswald">
+            <p className="text-h5 text-gray-400 max-w-3xl mx-auto mb-12 font-oswald">
               Manage projects, coordinate teams, track budgets, and automate workflows with enterprise-grade tools built for event professionals.
             </p>
             

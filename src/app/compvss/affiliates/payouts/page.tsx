@@ -18,11 +18,7 @@ export default function AffiliatePayoutsPage() {
   
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={[
-        { label: 'Dashboard', href: '/compvss/dashboard' },
-        { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
-        { label: 'Payouts', href: '/compvss/affiliates/payouts' },
-      ]}>
+      <CompvssLayout >
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
@@ -35,15 +31,11 @@ export default function AffiliatePayoutsPage() {
   
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={[
-        { label: 'Dashboard', href: '/compvss/dashboard' },
-        { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
-        { label: 'Payouts', href: '/compvss/affiliates/payouts' },
-      ]}>
+      <CompvssLayout >
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Payouts</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Payouts</h2>
             <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
@@ -61,10 +53,10 @@ export default function AffiliatePayoutsPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Payout History</h1>
+          <h1 className="text-h3 font-bebas compvss-text-gradient">Payout History</h1>
           <p className="text-gray-400 font-oswald mt-1">View your payout history</p>
         </div>
       </div>
@@ -89,20 +81,20 @@ export default function AffiliatePayoutsPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="p-3 bg-green-500/10 rounded-lg">
+                      <div className="p-3 bg-success-light0/10 rounded-lg">
                         <CheckCircle2 className="w-6 h-6 text-success" />
                       </div>
                       <div>
                         <h3 className="font-oswald text-white mb-1">{payout.method}</h3>
-                        <div className="flex items-center gap-2 text-sm text-gray-400 font-share-tech">
+                        <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
                           <Calendar className="w-4 h-4" />
                           <span>{payout.date}</span>
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bebas text-white mb-1">{payout.amount}</div>
-                      <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">
+                      <div className="text-h4 font-bebas text-white mb-1">{payout.amount}</div>
+                      <Badge variant="compvss" className="bg-success-light text-success border-success/30">
                         {payout.status}
                       </Badge>
                     </div>

@@ -37,7 +37,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load Asset</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load Asset</h3>
                 <p className="text-gray-400 mb-4">{error?.message || 'Asset not found'}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
@@ -76,7 +76,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
         >
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
-              <h1 className="text-5xl font-bebas mb-2 atlvs-text-gradient">
+              <h1 className="text-h1 font-bebas mb-2 atlvs-text-gradient">
                 {asset.name}
               </h1>
               <p className="text-gray-400 font-oswald">
@@ -117,7 +117,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
                   <CardTitle className="mb-4">Description</CardTitle>
-                  <p className="text-gray-300 leading-relaxed">{asset.description}</p>
+                  <p className="text-gray-300">{asset.description}</p>
                 </CardHeader>
               </Card>
             )}
@@ -128,22 +128,22 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
                 <CardTitle className="mb-6">Asset Information</CardTitle>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-sm text-gray-400 mb-1">Asset Type</div>
+                    <div className="text-body-sm text-gray-400 mb-1">Asset Type</div>
                     <div className="font-medium">{asset.type || 'N/A'}</div>
                   </div>
                   <div className="p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-sm text-gray-400 mb-1">Status</div>
+                    <div className="text-body-sm text-gray-400 mb-1">Status</div>
                     <div className="font-medium">{asset.status}</div>
                   </div>
                   {asset.location && (
                     <div className="p-4 bg-gray-800/50 rounded-lg">
-                      <div className="text-sm text-gray-400 mb-1">Location</div>
+                      <div className="text-body-sm text-gray-400 mb-1">Location</div>
                       <div className="font-medium">{asset.location}</div>
                     </div>
                   )}
                   {asset.serialNumber && (
                     <div className="p-4 bg-gray-800/50 rounded-lg">
-                      <div className="text-sm text-gray-400 mb-1">Serial Number</div>
+                      <div className="text-body-sm text-gray-400 mb-1">Serial Number</div>
                       <div className="font-medium">{asset.serialNumber}</div>
                     </div>
                   )}
@@ -161,7 +161,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
                 <div className="space-y-4">
                   {asset.location && (
                     <div>
-                      <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
                         Location
                       </div>
@@ -170,7 +170,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
                   )}
                   {asset.value && (
                     <div>
-                      <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                         <DollarSign className="w-4 h-4" />
                         Asset Value
                       </div>
@@ -179,13 +179,13 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
                   )}
                   {asset.purchaseDate && (
                     <div>
-                      <div className="text-sm text-gray-400 mb-1">Purchase Date</div>
+                      <div className="text-body-sm text-gray-400 mb-1">Purchase Date</div>
                       <div className="font-medium">{new Date(asset.purchaseDate).toLocaleDateString()}</div>
                     </div>
                   )}
                   {asset.assignedTo ? (
                     <div>
-                      <div className="text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
                         <User className="w-4 h-4" />
                         Assigned To
                       </div>
@@ -193,7 +193,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
                     </div>
                   ) : (
                     <div className="p-3 bg-atlvs-green-500/10 border border-atlvs-green-500/20 rounded-lg">
-                      <div className="text-sm text-atlvs-green-500 flex items-center gap-2">
+                      <div className="text-body-sm text-atlvs-green-500 flex items-center gap-2">
                         <CheckCircle className="w-4 h-4" />
                         Available for booking
                       </div>

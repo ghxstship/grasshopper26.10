@@ -39,28 +39,28 @@ describe('Alert', () => {
       render(<Alert variant="info">Info message</Alert>);
       
       const alert = screen.getByRole('alert');
-      expect(alert).toHaveClass('bg-blue-50', 'border-blue-200', 'text-blue-900');
+      expect(alert).toHaveClass('bg-info-light', 'border-info', 'text-info');
     });
 
     it('should render success variant', () => {
       render(<Alert variant="success">Success message</Alert>);
       
       const alert = screen.getByRole('alert');
-      expect(alert).toHaveClass('bg-green-50', 'border-green-200', 'text-green-900');
+      expect(alert).toHaveClass('bg-success-light', 'border-success', 'text-success');
     });
 
     it('should render warning variant', () => {
       render(<Alert variant="warning">Warning message</Alert>);
       
       const alert = screen.getByRole('alert');
-      expect(alert).toHaveClass('bg-yellow-50', 'border-yellow-200', 'text-yellow-900');
+      expect(alert).toHaveClass('bg-warning-light', 'border-warning-border', 'text-warning');
     });
 
     it('should render error variant', () => {
       render(<Alert variant="error">Error message</Alert>);
       
       const alert = screen.getByRole('alert');
-      expect(alert).toHaveClass('bg-red-50', 'border-red-200', 'text-red-900');
+      expect(alert).toHaveClass('bg-destructive/10', 'border-destructive', 'text-destructive');
     });
 
     it('should render default variant explicitly', () => {

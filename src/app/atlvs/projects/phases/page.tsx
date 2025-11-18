@@ -69,7 +69,7 @@ export default function ProjectPhasesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Phases</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Phases</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -133,8 +133,8 @@ export default function ProjectPhasesPage() {
   const _getStatusColor = (status: Phase['status']) => {
     switch (status) {
       case 'completed': return 'bg-success-light text-success-foreground';
-      case 'active': return 'bg-info-light text-blue-800';
-      case 'delayed': return 'bg-red-100 text-red-800';
+      case 'active': return 'bg-info-light text-info-foreground';
+      case 'delayed': return 'bg-destructive/20 text-destructive-foreground';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -162,7 +162,7 @@ export default function ProjectPhasesPage() {
         {/* Timeline View */}
         <Card variant="atlvs" className="bg-gray-900/50 mb-6">
           <CardContent className="pt-6">
-            <h2 className="text-lg font-oswald text-white mb-4">Phase Timeline</h2>
+            <h2 className="text-h6 font-oswald text-white mb-4">Phase Timeline</h2>
         <div className="relative">
           {phases.map((phase, index) => (
             <div key={phase.id} className="relative">
@@ -174,7 +174,7 @@ export default function ProjectPhasesPage() {
               {/* Phase Card */}
               <div
                 className={`mb-6 flex items-start gap-4 cursor-pointer ${
-                  selectedPhase === phase.id ? 'bg-purple-500/10' : ''
+                  selectedPhase === phase.id ? 'bg-accent/100/10' : ''
                 } p-4 rounded-lg transition-colors hover:bg-gray-800/50`}
                 onClick={() => setSelectedPhase(phase.id)}
               >
@@ -187,8 +187,8 @@ export default function ProjectPhasesPage() {
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
                     <div>
-                      <h3 className="text-lg font-oswald text-white">{phase.name}</h3>
-                      <p className="text-sm text-gray-400 font-share-tech">
+                      <h3 className="text-h6 font-oswald text-white">{phase.name}</h3>
+                      <p className="text-body-sm text-gray-400 font-share-tech">
                         {new Date(phase.startDate).toLocaleDateString()} - {new Date(phase.endDate).toLocaleDateString()}
                       </p>
                     </div>
@@ -199,7 +199,7 @@ export default function ProjectPhasesPage() {
 
                   {/* Progress Bar */}
                   <div className="mb-3">
-                    <div className="flex items-center justify-between text-sm text-gray-400 font-share-tech mb-1">
+                    <div className="flex items-center justify-between text-body-sm text-gray-400 font-share-tech mb-1">
                       <span>Progress</span>
                       <span>{phase.progress}%</span>
                     </div>
@@ -212,7 +212,7 @@ export default function ProjectPhasesPage() {
                   </div>
 
                   {/* Stats */}
-                  <div className="grid grid-cols-2 gap-4 text-sm font-share-tech">
+                  <div className="grid grid-cols-2 gap-4 text-body-sm font-share-tech">
                     <div>
                       <span className="text-gray-400">Tasks: </span>
                       <span className="font-medium text-white">
@@ -240,30 +240,30 @@ export default function ProjectPhasesPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-sm text-gray-400 font-share-tech mb-1">Total Phases</div>
-              <div className="text-2xl font-bebas text-white">{phases.length}</div>
+              <div className="text-body-sm text-gray-400 font-share-tech mb-1">Total Phases</div>
+              <div className="text-h4 font-bebas text-white">{phases.length}</div>
             </CardContent>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-sm text-gray-400 font-share-tech mb-1">Completed</div>
-              <div className="text-2xl font-bebas text-success">
+              <div className="text-body-sm text-gray-400 font-share-tech mb-1">Completed</div>
+              <div className="text-h4 font-bebas text-success">
                 {phases.filter(p => p.status === 'completed').length}
               </div>
             </CardContent>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-sm text-gray-400 font-share-tech mb-1">Active</div>
-              <div className="text-2xl font-bebas text-info">
+              <div className="text-body-sm text-gray-400 font-share-tech mb-1">Active</div>
+              <div className="text-h4 font-bebas text-info">
                 {phases.filter(p => p.status === 'active').length}
               </div>
             </CardContent>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardContent className="pt-6">
-              <div className="text-sm text-gray-400 font-share-tech mb-1">Upcoming</div>
-              <div className="text-2xl font-bebas text-gray-400">
+              <div className="text-body-sm text-gray-400 font-share-tech mb-1">Upcoming</div>
+              <div className="text-h4 font-bebas text-gray-400">
                 {phases.filter(p => p.status === 'upcoming').length}
               </div>
             </CardContent>

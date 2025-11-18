@@ -67,7 +67,7 @@ function AtlvsLoginContent() {
   };
 
   return (
-    <AtlvsLayout showNav={false}>
+    <AtlvsLayout>
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.1),transparent_50%)]" />
@@ -90,7 +90,7 @@ function AtlvsLoginContent() {
             {/* Logo */}
             <div className="text-center mb-8">
               <Link href="/atlvs">
-                <h1 className="text-5xl font-bebas atlvs-text-gradient mb-2 cursor-pointer tracking-wider">
+                <h1 className="text-h1 font-bebas atlvs-text-gradient mb-2 cursor-pointerr">
                   ATLVS
                 </h1>
               </Link>
@@ -99,7 +99,7 @@ function AtlvsLoginContent() {
 
             <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="text-white text-2xl">Team Access</CardTitle>
+                <CardTitle className="text-white text-h4">Team Access</CardTitle>
                 <CardDescription className="text-gray-400">
                   Sign in to your ATLVS account
                 </CardDescription>
@@ -108,7 +108,7 @@ function AtlvsLoginContent() {
                 {_error && (
                   <div className="mb-4 p-3 bg-error/10 border border-error/20 rounded-lg flex items-start gap-2" role="alert" aria-live="polite">
                     <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <p className="text-sm text-error">{_error}</p>
+                    <p className="text-body-sm text-error">{_error}</p>
                   </div>
                 )}
 
@@ -168,9 +168,9 @@ function AtlvsLoginContent() {
                         onChange={(e) => setRememberMe(e.target.checked)}
                         disabled={isLoading}
                       />
-                      <span className="ml-2 text-sm text-gray-400">Remember me</span>
+                      <span className="ml-2 text-body-sm text-gray-400">Remember me</span>
                     </div>
-                    <Link href="/atlvs/auth/forgot-password" className="text-sm text-atlvs-orange-500 hover:text-atlvs-orange-400">
+                    <Link href="/atlvs/auth/forgot-password" className="text-body-sm text-atlvs-orange-500 hover:text-atlvs-orange-400">
                       Forgot password?
                     </Link>
                   </div>
@@ -191,7 +191,7 @@ function AtlvsLoginContent() {
                     <div className="absolute inset-0 flex items-center">
                       <div className="w-full border-t border-gray-700" />
                     </div>
-                    <div className="relative flex justify-center text-sm">
+                    <div className="relative flex justify-center text-body-sm">
                       <span className="px-2 bg-gray-900 text-gray-400">Or continue with</span>
                     </div>
                   </div>
@@ -217,9 +217,9 @@ function AtlvsLoginContent() {
 
                 {/* Register Link */}
                 <div className="mt-6 text-center">
-                  <p className="text-sm text-gray-400">
+                  <p className="text-body-sm text-gray-400">
                     Need access?{' '}
-                    <Link href="/atlvs/auth/register" className="text-atlvs-orange-500 hover:text-atlvs-orange-400 font-medium">
+                    <Link href="/atlvs/auth/register" className="text-atlvs-orange-500 hover:text-atlvs-orange-400">
                       Request Account
                     </Link>
                   </p>
@@ -229,7 +229,7 @@ function AtlvsLoginContent() {
 
             {/* Back to Home */}
             <div className="mt-6 text-center">
-              <Link href="/" className="text-sm text-gray-500 hover:text-gray-400">
+              <Link href="/" className="text-body-sm text-gray-500 hover:text-gray-400">
                 ← Back to Home
               </Link>
             </div>
@@ -244,7 +244,7 @@ export default function AtlvsLoginPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-red-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-destructive" />
       </div>
     }>
       <AtlvsLoginContent />

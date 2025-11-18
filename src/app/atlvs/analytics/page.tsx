@@ -165,7 +165,7 @@ export default function AnalyticsPage() {
                       <stat.icon className="w-4 h-4" aria-hidden="true" />
                     </div>
                   </div>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${stat.label}: ${stat.value}, ${stat.change} ${stat.trend === 'up' ? 'increase' : 'decrease'} versus last period`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${stat.label}: ${stat.value}, ${stat.change} ${stat.trend === 'up' ? 'increase' : 'decrease'} versus last period`}>
                     {stat.value}
                   </CardTitle>
                   <div className="flex items-center gap-2 mt-2" aria-hidden="true">
@@ -174,10 +174,10 @@ export default function AnalyticsPage() {
                     ) : (
                       <TrendingDown className="w-4 h-4 text-error" aria-hidden="true" />
                     )}
-                    <span className={`text-sm ${stat.trend === 'up' ? 'text-atlvs-green-500' : 'text-error'}`}>
+                    <span className={`text-body-sm ${stat.trend === 'up' ? 'text-atlvs-green-500' : 'text-error'}`}>
                       {stat.change}
                     </span>
-                    <span className="text-sm text-gray-400">vs last period</span>
+                    <span className="text-body-sm text-gray-400">vs last period</span>
                   </div>
                 </CardHeader>
               </Card>
@@ -239,7 +239,7 @@ export default function AnalyticsPage() {
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <h4 className="font-oswald text-white">{team.name}</h4>
-                      <p className="text-sm text-gray-400">{team.memberCount || 0} members</p>
+                      <p className="text-body-sm text-gray-400">{team.memberCount || 0} members</p>
                     </div>
                     <Badge variant="atlvs-outline">
                       Active
@@ -247,21 +247,15 @@ export default function AnalyticsPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <div className="text-xs text-gray-400 mb-1">Task Completion</div>
+                      <div className="text-caption text-gray-400 mb-1">Task Completion</div>
                       <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-atlvs-green-500"
-                          style={{ width: '75%' }}
-                        />
+                        <div className="h-full bg-atlvs-green-500 w-3/4" />
                       </div>
                     </div>
                     <div>
-                      <div className="text-xs text-gray-400 mb-1">Budget Efficiency</div>
+                      <div className="text-caption text-gray-400 mb-1">Budget Efficiency</div>
                       <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-info"
-                          style={{ width: '82%' }}
-                        />
+                        <div className="h-full bg-info w-4/5" />
                       </div>
                     </div>
                   </div>
@@ -295,7 +289,7 @@ export default function AnalyticsPage() {
                     <div className="p-3 bg-atlvs-green-500/10 rounded-lg">
                       <report.icon className="w-5 h-5 text-atlvs-green-500" />
                     </div>
-                    <CardTitle className="text-lg">{report.title}</CardTitle>
+                    <CardTitle className="text-h6">{report.title}</CardTitle>
                   </div>
                   <CardDescription className="text-gray-400">
                     {report.description}

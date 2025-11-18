@@ -40,7 +40,7 @@ export default function MyApplicationsPage() {
         <Card className="mb-6">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <label className="text-sm font-medium text-gray-700">Filter by Status:</label>
+              <label className="text-body-sm text-gray-700">Filter by Status:</label>
               <Select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
@@ -83,7 +83,7 @@ export default function MyApplicationsPage() {
         {/* Applications List */}
         {data && (
           <>
-            <div className="mb-4 text-sm text-gray-600">
+            <div className="mb-4 text-body-sm text-gray-600">
               {data.pagination?.total || data.applications?.length || 0} applications found
             </div>
 
@@ -98,7 +98,7 @@ export default function MyApplicationsPage() {
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="font-bebas text-xl text-gray-900">
+                            <h3 className="font-bebas text-h5 text-gray-900">
                               {application.opportunity?.title || 'Opportunity'}
                             </h3>
                             <ApplicationStatusBadge status={application.status} />
@@ -110,7 +110,7 @@ export default function MyApplicationsPage() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-body-sm">
                         <div className="flex items-center gap-2 text-gray-600">
                           <Calendar className="h-4 w-4" />
                           <span>
@@ -136,7 +136,7 @@ export default function MyApplicationsPage() {
 
                       {application.reviewNotes && (
                         <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-                          <p className="text-sm text-gray-700">
+                          <p className="text-body-sm text-gray-700">
                             <strong>Review Notes:</strong> {application.reviewNotes}
                           </p>
                         </div>
@@ -152,7 +152,7 @@ export default function MyApplicationsPage() {
               <Card>
                 <div className="p-12 text-center">
                   <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="font-bebas text-xl text-gray-900 mb-2">
+                  <h3 className="font-bebas text-h5 text-gray-900 mb-2">
                     No Applications Yet
                   </h3>
                   <p className="text-gray-600 mb-4">

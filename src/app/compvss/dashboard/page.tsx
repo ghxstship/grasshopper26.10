@@ -1,9 +1,10 @@
 'use client';
 
-
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
+
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { ContentLayout } from '@/components/templates/ContentLayout';
 
 import { motion } from 'framer-motion';
 import { ClipboardCheck, QrCode, AlertCircle, DollarSign, Calendar, CheckCircle2, Clock, Activity, Bell, Loader2 } from 'lucide-react';
@@ -17,9 +18,22 @@ import { useIssues } from '@/lib/hooks/compvss/useIssues';
 import { useMemo } from 'react';
 
 export default function CompvssDashboardPage() {
+  const breadcrumbs = [
+    { label: 'COMPVSS', href: '/compvss' },
+    { label: 'Dashboard', href: '/compvss/dashboard' },
+  ];
+
   return (
     <CompvssLayout>
-      <CompvssDashboardContent />
+      <ContentLayout
+        title="Dashboard"
+        description="Welcome back, Team Member"
+        variant="compvss"
+        breadcrumbs={breadcrumbs}
+        showToolbar={false}
+      >
+        <CompvssDashboardContent />
+      </ContentLayout>
     </CompvssLayout>
   );
 }
@@ -72,7 +86,7 @@ function CompvssDashboardContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
           <p className="text-gray-400">Loading dashboard...</p>
@@ -82,30 +96,7 @@ function CompvssDashboardContent() {
   }
   
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">Dashboard</h1>
-              <p className="text-gray-400 font-oswald mt-1">Welcome back, Team Member</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button variant="compvss-ghost" size="icon">
-                <Bell className="w-5 h-5" />
-              </Button>
-              <Link href="/compvss/profile">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black">
-                  TM
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat, index) => (
@@ -121,12 +112,12 @@ function CompvssDashboardContent() {
                     <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500">
                       {stat.icon}
                     </div>
-                    <Badge variant="compvss-outline" className="text-xs">
+                    <Badge variant="compvss-outline" className="text-caption">
                       {stat.change}
                     </Badge>
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -140,7 +131,7 @@ function CompvssDashboardContent() {
           transition={{ delay: 0.4 }}
           className="mb-8"
         >
-          <h2 className="text-2xl font-bebas text-white mb-4">Quick Actions</h2>
+          <h2 className="text-h4 font-bebas text-white mb-4">Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link href="/compvss/advancing/new">
               <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer h-full">
@@ -209,13 +200,13 @@ function CompvssDashboardContent() {
                         <h3 className="font-oswald text-white">{event.name}</h3>
                         <Badge 
                           variant={event.status === 'confirmed' ? 'compvss' : 'compvss-outline'}
-                          className="text-xs"
+                          className="text-caption"
                         >
                           {event.status}
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-400 font-share-tech mb-1">{event.date}</p>
-                      <p className="text-sm text-compvss-cyan-500 font-share-tech">Role: {event.role}</p>
+                      <p className="text-body-sm text-gray-400 font-share-tech mb-1">{event.date}</p>
+                      <p className="text-body-sm text-compvss-cyan-500 font-share-tech">Role: {event.role}</p>
                     </div>
                   ))}
                 </div>
@@ -247,23 +238,23 @@ function CompvssDashboardContent() {
                     >
                       <div className="w-2 h-2 bg-compvss-cyan-500 rounded-full mt-2" />
                       <div className="flex-1">
-                        <p className="text-white font-oswald text-sm">{activity.action}</p>
+                        <p className="text-white font-oswald text-body-sm">{activity.action}</p>
                         {activity.category && (
-                          <p className="text-compvss-cyan-500 font-share-tech text-xs mt-1">
+                          <p className="text-compvss-cyan-500 font-share-tech text-caption mt-1">
                             {activity.category}
                           </p>
                         )}
                         {activity.task && (
-                          <p className="text-compvss-cyan-500 font-share-tech text-xs mt-1">
+                          <p className="text-compvss-cyan-500 font-share-tech text-caption mt-1">
                             {activity.task}
                           </p>
                         )}
                         {activity.issue && (
-                          <p className="text-compvss-cyan-500 font-share-tech text-xs mt-1">
+                          <p className="text-compvss-cyan-500 font-share-tech text-caption mt-1">
                             {activity.issue}
                           </p>
                         )}
-                        <p className="text-gray-500 font-share-tech text-xs mt-1">{activity.time}</p>
+                        <p className="text-gray-500 font-share-tech text-caption mt-1">{activity.time}</p>
                       </div>
                     </div>
                   ))}
@@ -272,7 +263,102 @@ function CompvssDashboardContent() {
             </Card>
           </motion.div>
         </div>
-      </div>
-    </div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+    {/* Upcoming Events */}
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.5 }}
+    >
+      <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-compvss-cyan-500" />
+              Upcoming Events
+            </CardTitle>
+            <Link href="/compvss/events">
+              <Button variant="compvss-ghost" size="sm">
+                View All
+              </Button>
+            </Link>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {upcomingEvents.map((event, index) => (
+              <div
+                key={index}
+                className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="font-oswald text-white">{event.name}</h3>
+                  <Badge 
+                    variant={event.status === 'confirmed' ? 'compvss' : 'compvss-outline'}
+                    className="text-caption"
+                  >
+                    {event.status}
+                  </Badge>
+                </div>
+                <p className="text-body-sm text-gray-400 font-share-tech mb-1">{event.date}</p>
+                <p className="text-body-sm text-compvss-cyan-500 font-share-tech">Role: {event.role}</p>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+
+    {/* Recent Activity */}
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.6 }}
+    >
+      <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white flex items-center gap-2">
+              <Activity className="w-5 h-5 text-compvss-cyan-500" />
+              Recent Activity
+            </CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {recentActivity.map((activity, index) => (
+              <div
+                key={index}
+                className="flex items-start gap-3 p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20"
+              >
+                <div className="w-2 h-2 bg-compvss-cyan-500 rounded-full mt-2" />
+                <div className="flex-1">
+                  <p className="text-white font-oswald text-body-sm">{activity.action}</p>
+                  {activity.category && (
+                    <p className="text-compvss-cyan-500 font-share-tech text-caption mt-1">
+                      {activity.category}
+                    </p>
+                  )}
+                  {activity.task && (
+                    <p className="text-compvss-cyan-500 font-share-tech text-caption mt-1">
+                      {activity.task}
+                    </p>
+                  )}
+                  {activity.issue && (
+                    <p className="text-compvss-cyan-500 font-share-tech text-caption mt-1">
+                      {activity.issue}
+                    </p>
+                  )}
+                  <p className="text-gray-500 font-share-tech text-caption mt-1">{activity.time}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  </div>
+    </>
   );
 }

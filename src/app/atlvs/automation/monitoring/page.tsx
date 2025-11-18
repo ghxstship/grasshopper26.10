@@ -53,26 +53,26 @@ export default function AutomationMonitoringPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" role="region" aria-label="Monitoring statistics">
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Active Workflows</div>
-              <div className="text-3xl font-bebas atlvs-text-gradient">12</div>
+              <div className="text-body-sm text-gray-400 mb-1">Active Workflows</div>
+              <div className="text-h3 font-bebas atlvs-text-gradient">12</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Healthy</div>
-              <div className="text-3xl font-bebas text-atlvs-green-500" aria-label="10 healthy _workflows">10</div>
+              <div className="text-body-sm text-gray-400 mb-1">Healthy</div>
+              <div className="text-h3 font-bebas text-atlvs-green-500" aria-label="10 healthy _workflows">10</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Warnings</div>
-              <div className="text-3xl font-bebas text-warning" aria-label="1 warning">1</div>
+              <div className="text-body-sm text-gray-400 mb-1">Warnings</div>
+              <div className="text-h3 font-bebas text-warning" aria-label="1 warning">1</div>
             </CardHeader>
           </Card>
           <Card variant="atlvs" className="bg-gray-900/50">
             <CardHeader>
-              <div className="text-sm text-gray-400 mb-1">Errors</div>
-              <div className="text-3xl font-bebas text-error" aria-label="1 error">1</div>
+              <div className="text-body-sm text-gray-400 mb-1">Errors</div>
+              <div className="text-h3 font-bebas text-error" aria-label="1 error">1</div>
             </CardHeader>
           </Card>
         </div>
@@ -92,11 +92,11 @@ export default function AutomationMonitoringPage() {
                     {alert.type === 'info' && <CheckCircle className="w-5 h-5 text-info" />}
                     <div className="flex-1">
                       <div className="font-medium mb-1">{alert.workflow}</div>
-                      <div className="text-sm text-gray-400">{alert.message}</div>
+                      <div className="text-body-sm text-gray-400">{alert.message}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-sm text-gray-400">{alert.time}</span>
+                    <span className="text-body-sm text-gray-400">{alert.time}</span>
                     <Badge variant="atlvs-outline" className={getAlertColor(alert.type)}>
                       {alert.type}
                     </Badge>

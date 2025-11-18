@@ -66,7 +66,10 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
         <div className="flex border-b border-gray-800 hover:bg-gray-900/50 transition-colors">
           {/* Task Info Column */}
           <div className="w-80 flex-shrink-0 p-4 border-r border-gray-800">
-            <div className="flex items-center gap-2" style={{ paddingLeft: `${level * 20}px` }}>
+            <div 
+              className="flex items-center gap-2"
+              style={{ paddingLeft: `${level * 20}px` }}
+            >
               {hasSubtasks && (
                 <Button variant="ghost" size="sm" className="h-auto p-0">
                   {task.expanded ? (
@@ -77,16 +80,16 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
                 </Button>
               )}
               <div className="flex-1 min-w-0">
-                <div className="font-oswald text-sm text-white truncate">
+                <div className="font-oswald text-body-sm text-white truncate">
                   {task.name}
                 </div>
                 {task.assignee && (
-                  <div className="text-xs text-gray-400 mt-1">
+                  <div className="text-caption text-gray-400 mt-1">
                     {task.assignee}
                   </div>
                 )}
               </div>
-              <Badge variant="atlvs-outline" className="text-xs">
+              <Badge variant="atlvs-outline" className="text-caption">
                 {task.progress}%
               </Badge>
             </div>
@@ -109,7 +112,7 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
               
               {/* Task Label */}
               <div className="absolute inset-0 flex items-center px-3">
-                <span className="text-xs font-oswald text-white truncate">
+                <span className="text-caption font-oswald text-white truncate">
                   {task.name}
                 </span>
               </div>
@@ -131,7 +134,7 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
       <div className="flex border-b border-gray-800 bg-gray-900/50">
         {/* Task Header */}
         <div className="w-80 flex-shrink-0 p-4 border-r border-gray-800">
-          <h3 className="font-bebas text-lg text-white">TASKS</h3>
+          <h3 className="font-bebas text-h6 text-white">TASKS</h3>
         </div>
 
         {/* Timeline Header */}
@@ -141,7 +144,7 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
               key={index}
               className="flex-1 p-4 border-r border-gray-800 last:border-r-0"
             >
-              <div className="font-bebas text-sm text-gray-400">
+              <div className="font-bebas text-body-sm text-gray-400">
                 {month.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
               </div>
             </div>

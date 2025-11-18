@@ -2,8 +2,8 @@ import { cn } from '@/lib/utils'
 
 describe('cn utility function', () => {
   it('merges class names correctly', () => {
-    const result = cn('px-4', 'py-2', 'bg-blue-500')
-    expect(result).toBe('px-4 py-2 bg-blue-500')
+    const result = cn('px-4', 'py-2', 'bg-info-light0')
+    expect(result).toBe('px-4 py-2 bg-info-light0')
   })
 
   it('handles conditional classes', () => {

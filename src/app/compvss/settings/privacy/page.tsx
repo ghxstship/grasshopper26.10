@@ -56,11 +56,11 @@ export default function PrivacySettingsPage() {
   };
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
-            <h1 className="text-3xl font-bebas compvss-text-gradient">Privacy Settings</h1>
+            <h1 className="text-h3 font-bebas compvss-text-gradient">Privacy Settings</h1>
             <p className="text-gray-400 font-oswald mt-1">Control your privacy and data</p>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function PrivacySettingsPage() {
               <div className="space-y-4">
                 <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <h3 className="font-oswald text-white mb-2">Download Your Data</h3>
-                  <p className="text-sm text-gray-400 font-share-tech mb-3">
+                  <p className="text-body-sm text-gray-400 font-share-tech mb-3">
                     Request a copy of all your data in a portable format
                   </p>
                   <Button variant="compvss-outline" size="sm">
@@ -166,12 +166,12 @@ export default function PrivacySettingsPage() {
                   </Button>
                 </div>
 
-                <div className="p-4 rounded-lg bg-black/50 border border-red-500/30">
+                <div className="p-4 rounded-lg bg-black/50 border border-destructive/30">
                   <h3 className="font-oswald text-white mb-2">Delete Account</h3>
-                  <p className="text-sm text-gray-400 font-share-tech mb-3">
+                  <p className="text-body-sm text-gray-400 font-share-tech mb-3">
                     Permanently delete your account and all associated data
                   </p>
-                  <Button variant="compvss-outline" size="sm" className="border-red-500/30 text-error hover:bg-error/10">
+                  <Button variant="compvss-outline" size="sm" className="border-destructive/30 text-error hover:bg-error/10">
                     <Trash2 className="w-4 h-4 mr-2" />
                     Delete Account
                   </Button>
@@ -212,7 +212,7 @@ function PrivacyToggle({
     <div className="flex items-start justify-between p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
       <div>
         <h3 className="font-oswald text-white mb-1">{label}</h3>
-        <p className="text-sm text-gray-400 font-share-tech">{description}</p>
+        <p className="text-body-sm text-gray-400 font-share-tech">{description}</p>
       </div>
       <Checkbox
         checked={checked}

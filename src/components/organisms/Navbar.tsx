@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* Logo */}
       {logo && (
-        <Link href="/" className="flex items-center gap-2 font-bebas text-xl tracking-wide">
+        <Link href="/" className="flex items-center gap-2 font-bebas text-h5">
           {logo}
         </Link>
       )}
@@ -104,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({
           />
           <Badge
             variant="error"
-            className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+            className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-caption"
           >
             {notifications > 9 ? "9+" : notifications}
           </Badge>
@@ -121,11 +121,11 @@ const Navbar: React.FC<NavbarProps> = ({
             size="sm"
           />
           <div className="hidden lg:block text-left">
-            <div className="text-sm font-medium text-gray-900 font-share-tech">
+            <div className="text-body-sm text-gray-900 font-share-tech">
               {user.name}
             </div>
             {user.email && (
-              <div className="text-xs text-gray-500 font-share-tech">
+              <div className="text-caption text-gray-500 font-share-tech">
                 {user.email}
               </div>
             )}

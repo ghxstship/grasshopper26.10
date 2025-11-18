@@ -64,7 +64,7 @@ export default function AssetCalendarPage() {
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
             <div className="grid grid-cols-7 border-b border-gray-200">
               {weekDays.map(day => (
-                <div key={day} className="px-4 py-3 text-center text-sm font-semibold text-gray-900 bg-gray-50">
+                <div key={day} className="px-4 py-3 text-center text-body-sm text-gray-900 bg-gray-50">
                   {day}
                 </div>
               ))}
@@ -72,14 +72,14 @@ export default function AssetCalendarPage() {
             <div className="grid grid-cols-7">
               {Array.from({ length: 35 }, (_, i) => (
                 <div key={i} className="border-r border-b border-gray-200 min-h-[120px] p-2">
-                  <div className="text-sm text-gray-600 mb-2">{i + 1}</div>
+                  <div className="text-body-sm text-gray-600 mb-2">{i + 1}</div>
                   {(bookings || [])
                     .filter(b => new Date(b.startDate).getDate() === i + 1)
                     .map(booking => (
                       <div
                         key={booking.id}
-                        className={`text-xs p-2 rounded mb-1 ${
-                          booking.status === 'confirmed' ? 'bg-success-light text-success-foreground' : 'bg-yellow-100 text-yellow-800'
+                        className={`text-caption p-2 rounded mb-1 ${
+                          booking.status === 'confirmed' ? 'bg-success-light text-success-foreground' : 'bg-warning-light text-warning-foreground'
                         }`}
                       >
                         <div className="font-medium truncate">{booking.assetName}</div>
@@ -91,13 +91,13 @@ export default function AssetCalendarPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-center gap-6 text-body-sm">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-success-light rounded"></div>
               <span className="text-gray-600">Confirmed</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-yellow-100 rounded"></div>
+              <div className="w-4 h-4 bg-warning-light rounded"></div>
               <span className="text-gray-600">Pending</span>
             </div>
           </div>

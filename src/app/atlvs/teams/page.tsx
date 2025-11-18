@@ -190,7 +190,7 @@ export default function TeamsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Total Members
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas" aria-label={`${totalMembers} total team members`}>
+                  <CardTitle className="text-h3 font-bebas" aria-label={`${totalMembers} total team members`}>
                     {totalMembers}
                   </CardTitle>
                 </div>
@@ -208,7 +208,7 @@ export default function TeamsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Available Now
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas text-atlvs-green-500" aria-label={`${availableMembers} members available now`}>
+                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500" aria-label={`${availableMembers} members available now`}>
                     {availableMembers}
                   </CardTitle>
                 </div>
@@ -226,11 +226,11 @@ export default function TeamsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Hours This Week
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {totalHours}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-purple-500/10 rounded-xl">
+                <div className="p-3 bg-accent/100/10 rounded-xl">
                   <Clock className="w-6 h-6 text-atlvs-purple-500" />
                 </div>
               </div>
@@ -244,11 +244,11 @@ export default function TeamsPage() {
                   <CardDescription className="text-gray-400 mb-1">
                     Avg Tasks Done
                   </CardDescription>
-                  <CardTitle className="text-3xl font-bebas">
+                  <CardTitle className="text-h3 font-bebas">
                     {avgTasksCompleted}
                   </CardTitle>
                 </div>
-                <div className="p-3 bg-orange-500/10 rounded-xl">
+                <div className="p-3 bg-warning-light0/10 rounded-xl">
                   <Award className="w-6 h-6 text-atlvs-orange-500" />
                 </div>
               </div>
@@ -315,32 +315,32 @@ export default function TeamsPage() {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <div className="relative">
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-lg">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h6">
                             {member.avatar}
                           </div>
                           <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-gray-900 ${getStatusColor(member.status)}`} />
                         </div>
                         <div>
-                          <CardTitle className="text-white text-lg">
+                          <CardTitle className="text-white text-h6">
                             {member.name}
                           </CardTitle>
-                          <CardDescription className="text-gray-400 text-sm">
+                          <CardDescription className="text-gray-400 text-body-sm">
                             {member.role}
                           </CardDescription>
                         </div>
                       </div>
-                      <Badge variant="atlvs-outline" className="text-xs">
+                      <Badge variant="atlvs-outline" className="text-caption">
                         {member.department}
                       </Badge>
                     </div>
 
                     {/* Contact Info */}
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <div className="flex items-center gap-2 text-body-sm text-gray-400">
                         <Mail className="w-3 h-3" />
                         <span className="truncate">{member.email}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <div className="flex items-center gap-2 text-body-sm text-gray-400">
                         <Phone className="w-3 h-3" />
                         <span>{member.phone}</span>
                       </div>
@@ -349,16 +349,16 @@ export default function TeamsPage() {
                     {/* Stats */}
                     <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-800">
                       <div>
-                        <div className="text-xs text-gray-400 mb-1">Projects</div>
-                        <div className="text-lg font-bebas text-white">{member.projects}</div>
+                        <div className="text-caption text-gray-400 mb-1">Projects</div>
+                        <div className="text-h6 font-bebas text-white">{member.projects}</div>
                       </div>
                       <div>
-                        <div className="text-xs text-gray-400 mb-1">Tasks</div>
-                        <div className="text-lg font-bebas text-white">{member.tasksCompleted}</div>
+                        <div className="text-caption text-gray-400 mb-1">Tasks</div>
+                        <div className="text-h6 font-bebas text-white">{member.tasksCompleted}</div>
                       </div>
                       <div>
-                        <div className="text-xs text-gray-400 mb-1">Hours</div>
-                        <div className="text-lg font-bebas text-white">{member.hoursThisWeek}</div>
+                        <div className="text-caption text-gray-400 mb-1">Hours</div>
+                        <div className="text-h6 font-bebas text-white">{member.hoursThisWeek}</div>
                       </div>
                     </div>
                   </CardHeader>

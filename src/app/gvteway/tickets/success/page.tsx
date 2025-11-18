@@ -6,7 +6,7 @@ export const runtime = 'edge';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle, Download, Calendar, Mail, Smartphone } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 
 import { Card, CardContent } from '@/components/atoms/Card';
@@ -31,16 +31,16 @@ export default function TicketSuccessPage() {
                     transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
                     className="mb-6"
                   >
-                    <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
+                    <div className="w-24 h-24 bg-success-light0/20 rounded-full flex items-center justify-center mx-auto">
                       <CheckCircle className="w-16 h-16 text-success" />
                     </div>
                   </motion.div>
 
                   {/* Success Message */}
-                  <h1 className="text-4xl sm:text-5xl font-bebas text-white mb-4">
+                  <h1 className="text-h2 font-bebas text-white mb-4">
                     TICKETS PURCHASED!
                   </h1>
-                  <p className="text-xl text-gray-300 mb-8">
+                  <p className="text-h5 text-gray-300 mb-8">
                     Your order has been confirmed
                   </p>
 
@@ -60,8 +60,8 @@ export default function TicketSuccessPage() {
                         <span className="text-white">2x VIP Pass</span>
                       </div>
                       <div className="flex justify-between pt-3 border-t border-gray-700">
-                        <span className="text-gray-400 font-medium">Total Paid</span>
-                        <span className="text-2xl font-bebas text-gvteway-red-500">$179.98</span>
+                        <span className="text-gray-400">Total Paid</span>
+                        <span className="text-h4 font-bebas text-gvteway-red-500">$179.98</span>
                       </div>
                     </div>
                   </div>
@@ -70,7 +70,7 @@ export default function TicketSuccessPage() {
                   <div className="mb-8 p-4 bg-gvteway-blue-500/10 border border-gvteway-blue-500/30 rounded-lg">
                     <div className="flex items-start text-left">
                       <Mail className="w-5 h-5 text-gvteway-blue-500 mr-3 mt-0.5 flex-shrink-0" />
-                      <div className="text-sm text-gray-300">
+                      <div className="text-body-sm text-gray-300">
                         <p className="font-medium text-white mb-1">Confirmation Email Sent</p>
                         <p>Check your email for order details and tickets</p>
                       </div>
@@ -98,8 +98,8 @@ export default function TicketSuccessPage() {
 
                   {/* Next Steps */}
                   <div className="mt-8 pt-8 border-t border-gray-800 text-left">
-                    <h3 className="text-white font-bebas text-xl mb-4">What&apos;s Next?</h3>
-                    <div className="space-y-3 text-sm text-gray-300">
+                    <h3 className="text-white font-bebas text-h5 mb-4">What&apos;s Next?</h3>
+                    <div className="space-y-3 text-body-sm text-gray-300">
                       <div className="flex items-start">
                         <Calendar className="w-4 h-4 text-gvteway-red-500 mr-3 mt-1 flex-shrink-0" />
                         <p>Add the event to your calendar and set reminders</p>
@@ -117,7 +117,7 @@ export default function TicketSuccessPage() {
 
                   {/* Continue Shopping */}
                   <div className="mt-8">
-                    <Link href="/gvteway/events" className="text-gvteway-red-500 hover:text-gvteway-red-400 text-sm">
+                    <Link href="/gvteway/events" className="text-gvteway-red-500 hover:text-gvteway-red-400 text-body-sm">
                       ← Continue exploring events
                     </Link>
                   </div>

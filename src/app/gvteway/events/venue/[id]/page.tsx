@@ -7,7 +7,7 @@ import { use } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MapPin, Calendar, Star, Loader2, AlertCircle } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { useVenue, useEvents } from '@/lib/hooks/gvteway';
@@ -54,7 +54,7 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
               
               <div className="grid lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
-                  <h1 className="text-5xl font-bebas text-white mb-4">{venue.name}</h1>
+                  <h1 className="text-h1 font-bebas text-white mb-4">{venue.name}</h1>
                   
                   <div className="space-y-3 mb-8 text-gray-300">
                     <div className="flex items-center">
@@ -67,20 +67,20 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
                     </div>
                   </div>
 
-                  <h2 className="text-3xl font-bebas text-white mb-6">Upcoming Events</h2>
+                  <h2 className="text-h3 font-bebas text-white mb-6">Upcoming Events</h2>
                   <div className="grid md:grid-cols-2 gap-6">
                     {events && events.length > 0 ? (
                       events.map((event) => (
                         <Link key={event.id} href={`/gvteway/events/${event.id}`}>
                           <Card variant="gvteway" className="bg-gray-900/50 hover:scale-105 transition-transform cursor-pointer">
                             <CardContent className="p-6">
-                              <h3 className="text-xl font-bebas text-white mb-2">{event.name}</h3>
-                              <div className="flex items-center text-gray-400 text-sm mb-3">
+                              <h3 className="text-h5 font-bebas text-white mb-2">{event.name}</h3>
+                              <div className="flex items-center text-gray-400 text-body-sm mb-3">
                                 <Calendar className="w-4 h-4 mr-2" />
                                 {new Date(event.startDate).toLocaleDateString()}
                               </div>
                               <div className="flex items-center justify-between">
-                                <span className="text-lg font-bebas text-gvteway-red-500">View Event</span>
+                                <span className="text-h6 font-bebas text-gvteway-red-500">View Event</span>
                                 <Button variant="gvteway" size="sm">Get Tickets</Button>
                               </div>
                             </CardContent>
@@ -96,19 +96,19 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
                 <div>
                   <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm sticky top-24">
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bebas text-white mb-4">Venue Information</h3>
-                      <div className="space-y-4 text-sm">
+                      <h3 className="text-h5 font-bebas text-white mb-4">Venue Information</h3>
+                      <div className="space-y-4 text-body-sm">
                         <div>
                           <p className="text-gray-400">Capacity</p>
-                          <p className="text-white font-medium">{venue.capacity.toLocaleString()}</p>
+                          <p className="text-white">{venue.capacity.toLocaleString()}</p>
                         </div>
                         <div>
                           <p className="text-gray-400">Type</p>
-                          <p className="text-white font-medium">Arena</p>
+                          <p className="text-white">Arena</p>
                         </div>
                         <div>
                           <p className="text-gray-400">Parking</p>
-                          <p className="text-white font-medium">Available</p>
+                          <p className="text-white">Available</p>
                         </div>
                       </div>
                       <Button variant="gvteway" className="w-full mt-6">View on Map</Button>

@@ -7,7 +7,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { AlertCircle, Award, ExternalLink, Filter, Grid, List, Loader2, Share2 } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -51,10 +51,10 @@ export default function NFTCollectionPage() {
                     ← Back to Wallet
                   </Button>
                 </Link>
-                <h1 className="text-5xl sm:text-6xl font-bebas mb-4 gvteway-text-gradient">
+                <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">
                   NFT COLLECTION
                 </h1>
-                <p className="text-xl text-gray-400 font-oswald">
+                <p className="text-h5 text-gray-400 font-oswald">
                   Your blockchain-verified event collectibles
                 </p>
               </div>
@@ -70,7 +70,7 @@ export default function NFTCollectionPage() {
               {error && (
                 <div className="text-center py-12">
                   <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                  <h2 className="text-xl font-bebas mb-2">Failed to Load NFTs</h2>
+                  <h2 className="text-h5 font-bebas mb-2">Failed to Load NFTs</h2>
                   <p className="text-gray-400 mb-4">{error.message}</p>
                   <Button variant="gvteway" onClick={() => refetch()}>
                     Try Again
@@ -84,26 +84,26 @@ export default function NFTCollectionPage() {
                   <div className="grid md:grid-cols-4 gap-6 mb-8">
                     <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                       <CardContent className="p-6 text-center">
-                        <p className="text-3xl font-bebas text-white mb-1">{stats.total}</p>
-                        <p className="text-gray-400 text-sm">Total NFTs</p>
+                        <p className="text-h3 font-bebas text-white mb-1">{stats.total}</p>
+                        <p className="text-gray-400 text-body-sm">Total NFTs</p>
                       </CardContent>
                     </Card>
                     <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                       <CardContent className="p-6 text-center">
-                        <p className="text-3xl font-bebas text-white mb-1">{stats.collections}</p>
-                        <p className="text-gray-400 text-sm">Collections</p>
+                        <p className="text-h3 font-bebas text-white mb-1">{stats.collections}</p>
+                        <p className="text-gray-400 text-body-sm">Collections</p>
                       </CardContent>
                     </Card>
                     <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                       <CardContent className="p-6 text-center">
-                        <p className="text-3xl font-bebas text-white mb-1">{stats.legendary}</p>
-                        <p className="text-gray-400 text-sm">Legendary</p>
+                        <p className="text-h3 font-bebas text-white mb-1">{stats.legendary}</p>
+                        <p className="text-gray-400 text-body-sm">Legendary</p>
                       </CardContent>
                     </Card>
                     <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                       <CardContent className="p-6 text-center">
-                        <p className="text-3xl font-bebas text-white mb-1">${stats.totalValue}</p>
-                        <p className="text-gray-400 text-sm">Est. Value</p>
+                        <p className="text-h3 font-bebas text-white mb-1">${stats.totalValue}</p>
+                        <p className="text-gray-400 text-body-sm">Est. Value</p>
                       </CardContent>
                     </Card>
                   </div>
@@ -142,7 +142,7 @@ export default function NFTCollectionPage() {
                   {nftsData?.tickets.length === 0 ? (
                     <div className="text-center py-12">
                       <Award className="w-16 h-16 mx-auto mb-4 text-gray-600" />
-                      <h3 className="text-xl font-bebas text-white mb-2">No NFT Tickets Yet</h3>
+                      <h3 className="text-h5 font-bebas text-white mb-2">No NFT Tickets Yet</h3>
                       <p className="text-gray-400 mb-6">
                         Purchase tickets to events and they&apos;ll appear here as NFT collectibles
                       </p>
@@ -176,19 +176,19 @@ export default function NFTCollectionPage() {
 
                             <CardContent className="p-6">
                               <div className="mb-4">
-                                <p className="text-gray-400 text-xs mb-1">{nft.event?.title || 'Event'}</p>
-                                <h3 className="text-xl font-bebas text-white mb-1">{nft.ticketType?.name || 'Ticket'}</h3>
-                                <p className="text-gray-400 text-sm">#{nft.id.slice(0, 8)}</p>
+                                <p className="text-gray-400 text-caption mb-1">{nft.event?.title || 'Event'}</p>
+                                <h3 className="text-h5 font-bebas text-white mb-1">{nft.ticketType?.name || 'Ticket'}</h3>
+                                <p className="text-gray-400 text-body-sm">#{nft.id.slice(0, 8)}</p>
                               </div>
 
                               <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-800">
                                 <div>
-                                  <p className="text-gray-400 text-xs">Status</p>
-                                  <p className="text-white text-sm font-medium">{nft.status}</p>
+                                  <p className="text-gray-400 text-caption">Status</p>
+                                  <p className="text-white text-body-sm">{nft.status}</p>
                                 </div>
                                 <div className="text-right">
-                                  <p className="text-gray-400 text-xs">Value</p>
-                                  <p className="text-white text-sm font-medium">${nft.ticketType?.price || '0.00'}</p>
+                                  <p className="text-gray-400 text-caption">Value</p>
+                                  <p className="text-white text-body-sm">${nft.ticketType?.price || '0.00'}</p>
                                 </div>
                               </div>
 
@@ -218,11 +218,11 @@ export default function NFTCollectionPage() {
               <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm mt-12">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-accent/100/20 rounded-full flex items-center justify-center flex-shrink-0">
                       <Award className="w-6 h-6 text-atlvs-purple-500" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bebas text-white mb-2">
+                      <h3 className="text-h5 font-bebas text-white mb-2">
                         About NFT Tickets
                       </h3>
                       <p className="text-gray-400 mb-4">

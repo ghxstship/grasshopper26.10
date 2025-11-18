@@ -21,7 +21,7 @@ export default function IssueDetailPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <IssueDetailContent />
     </CompvssLayout>
   );
@@ -57,11 +57,11 @@ function IssueDetailContent() {
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-3xl font-bebas compvss-text-gradient">{issue.id}</h1>
-                <Badge variant="compvss" className="bg-error-light text-error border-red-500/30">
+                <h1 className="text-h3 font-bebas compvss-text-gradient">{issue.id}</h1>
+                <Badge variant="compvss" className="bg-error-light text-error border-destructive/30">
                   {issue.priority}
                 </Badge>
-                <Badge variant="compvss" className="bg-info-light text-info border-blue-500/30">
+                <Badge variant="compvss" className="bg-info-light text-info border-info/30">
                   {issue.status.replace('_', ' ')}
                 </Badge>
               </div>
@@ -90,7 +90,7 @@ function IssueDetailContent() {
                   <CardTitle className="text-white">Description</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300 font-share-tech leading-relaxed">
+                  <p className="text-gray-300 font-share-tech">
                     {issue.description}
                   </p>
                 </CardContent>
@@ -109,14 +109,14 @@ function IssueDetailContent() {
                   <div className="space-y-4">
                     {updates.map((update, index) => (
                       <div key={index} className="flex gap-3 pb-4 border-b border-gray-800 last:border-0">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-sm flex-shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-body-sm flex-shrink-0">
                           {update.user.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div className="flex-1">
-                          <p className="text-sm text-gray-300 font-share-tech">
+                          <p className="text-body-sm text-gray-300 font-share-tech">
                             <span className="text-white font-oswald">{update.user}</span> {update.action}
                           </p>
-                          <p className="text-xs text-gray-500 font-share-tech mt-1">{update.time}</p>
+                          <p className="text-caption text-gray-500 font-share-tech mt-1">{update.time}</p>
                         </div>
                       </div>
                     ))}
@@ -135,44 +135,44 @@ function IssueDetailContent() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <p className="text-xs text-gray-500 font-oswald mb-1">Reporter</p>
+                    <p className="text-caption text-gray-500 font-oswald mb-1">Reporter</p>
                     <div className="flex items-center gap-2">
                       <User className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-white font-share-tech">{issue.reporter}</span>
+                      <span className="text-body-sm text-white font-share-tech">{issue.reporter}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 font-oswald mb-1">Assignee</p>
+                    <p className="text-caption text-gray-500 font-oswald mb-1">Assignee</p>
                     <div className="flex items-center gap-2">
                       <User className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-white font-share-tech">{issue.assignee}</span>
+                      <span className="text-body-sm text-white font-share-tech">{issue.assignee}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 font-oswald mb-1">Location</p>
+                    <p className="text-caption text-gray-500 font-oswald mb-1">Location</p>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-white font-share-tech">{issue.location}</span>
+                      <span className="text-body-sm text-white font-share-tech">{issue.location}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 font-oswald mb-1">Category</p>
-                    <Badge variant="compvss-outline" className="text-xs">
+                    <p className="text-caption text-gray-500 font-oswald mb-1">Category</p>
+                    <Badge variant="compvss-outline" className="text-caption">
                       {issue.category}
                     </Badge>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 font-oswald mb-1">Created</p>
+                    <p className="text-caption text-gray-500 font-oswald mb-1">Created</p>
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-white font-share-tech">{issue.created}</span>
+                      <span className="text-body-sm text-white font-share-tech">{issue.created}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 font-oswald mb-1">Last Updated</p>
+                    <p className="text-caption text-gray-500 font-oswald mb-1">Last Updated</p>
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-white font-share-tech">{issue.updated}</span>
+                      <span className="text-body-sm text-white font-share-tech">{issue.updated}</span>
                     </div>
                   </div>
                 </CardContent>

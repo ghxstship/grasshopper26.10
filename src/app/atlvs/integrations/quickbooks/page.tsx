@@ -55,8 +55,8 @@ export default function QuickBooksIntegrationPage() {
                     <FileText className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium">QuickBooks</h3>
-                    <p className="text-sm text-gray-400">Accounting and financial management</p>
+                    <h3 className="text-h6">QuickBooks</h3>
+                    <p className="text-body-sm text-gray-400">Accounting and financial management</p>
                   </div>
                 </div>
                 {isConnected ? (
@@ -78,8 +78,8 @@ export default function QuickBooksIntegrationPage() {
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardContent className="text-center py-12">
                 <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <h3 className="text-lg font-medium mb-2">Connect to QuickBooks</h3>
-                <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
+                <h3 className="text-h6 mb-2">Connect to QuickBooks</h3>
+                <p className="text-body-sm text-gray-400 mb-6 max-w-md mx-auto">
                   Authorize ATLVS to access your QuickBooks account to sync invoices, expenses, and customer data.
                 </p>
                 <Button variant="atlvs" onClick={() => connect('quickbooks')}>
@@ -92,8 +92,8 @@ export default function QuickBooksIntegrationPage() {
               {/* Sync Configuration */}
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <h3 className="text-lg font-medium">Sync Configuration</h3>
-                  <p className="text-sm text-gray-400">Configure how data syncs with QuickBooks</p>
+                  <h3 className="text-h6">Sync Configuration</h3>
+                  <p className="text-body-sm text-gray-400">Configure how data syncs with QuickBooks</p>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -131,8 +131,8 @@ export default function QuickBooksIntegrationPage() {
               {/* Sync Features */}
               <Card variant="atlvs" className="bg-gray-900/50">
                 <CardHeader>
-                  <h3 className="text-lg font-medium">Data Sync</h3>
-                  <p className="text-sm text-gray-400">Choose what data to sync</p>
+                  <h3 className="text-h6">Data Sync</h3>
+                  <p className="text-body-sm text-gray-400">Choose what data to sync</p>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -145,7 +145,7 @@ export default function QuickBooksIntegrationPage() {
                       { label: 'Payments', enabled: true }
                     ].map((item) => (
                       <div key={item.label} className="flex items-center justify-between p-3 rounded-lg bg-gray-800/50">
-                        <span className="text-sm">{item.label}</span>
+                        <span className="text-body-sm">{item.label}</span>
                         {item.enabled && <Check className="w-4 h-4 text-atlvs-green-500" />}
                       </div>
                     ))}
@@ -158,8 +158,8 @@ export default function QuickBooksIntegrationPage() {
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-medium">Last Sync</h3>
-                      <p className="text-sm text-gray-400">2 hours ago</p>
+                      <h3 className="text-h6">Last Sync</h3>
+                      <p className="text-body-sm text-gray-400">2 hours ago</p>
                     </div>
                     <Button variant="outline" size="sm">
                       <RefreshCw className="w-4 h-4 mr-2" />

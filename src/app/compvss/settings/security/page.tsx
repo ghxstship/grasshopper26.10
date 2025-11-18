@@ -25,7 +25,7 @@ export default function SecuritySettingsPage() {
 
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-12 h-12 animate-spin text-compvss-cyan-500" />
         </div>
@@ -35,7 +35,7 @@ export default function SecuritySettingsPage() {
 
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={breadcrumbs}>
+      <CompvssLayout>
         <div className="flex items-center justify-center py-12">
           <AlertTriangle className="w-12 h-12 text-error" />
         </div>
@@ -44,11 +44,11 @@ export default function SecuritySettingsPage() {
   }
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
-            <h1 className="text-3xl font-bebas compvss-text-gradient">Security Settings</h1>
+            <h1 className="text-h3 font-bebas compvss-text-gradient">Security Settings</h1>
             <p className="text-gray-400 font-oswald mt-1">Manage your account security</p>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function SecuritySettingsPage() {
               <div className="flex items-center justify-between p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                 <div>
                   <h3 className="font-oswald text-white mb-1">Current Password</h3>
-                  <p className="text-sm text-gray-400 font-share-tech">Last changed 3 months ago</p>
+                  <p className="text-body-sm text-gray-400 font-share-tech">Last changed 3 months ago</p>
                 </div>
                 <Button variant="compvss" size="sm">
                   Change Password
@@ -96,12 +96,12 @@ export default function SecuritySettingsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="p-4 rounded-lg bg-black/50 border border-yellow-500/30 mb-4">
+              <div className="p-4 rounded-lg bg-black/50 border border-warning/30 mb-4">
                 <div className="flex items-start gap-3">
                   <AlertTriangle className="w-5 h-5 text-warning mt-0.5" />
                   <div>
                     <h3 className="font-oswald text-white mb-1">2FA Not Enabled</h3>
-                    <p className="text-sm text-gray-400 font-share-tech mb-3">
+                    <p className="text-body-sm text-gray-400 font-share-tech mb-3">
                       Protect your account with two-factor authentication
                     </p>
                     <Button variant="compvss" size="sm">
@@ -129,14 +129,14 @@ export default function SecuritySettingsPage() {
                 <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="font-oswald text-white">Production API Key</h3>
-                    <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">
+                    <Badge variant="compvss" className="bg-success-light text-success border-success/30">
                       Active
                     </Badge>
                   </div>
-                  <p className="text-sm text-gray-400 font-share-tech mb-2">
+                  <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                     sk_live_••••••••••••••••1234
                   </p>
-                  <p className="text-xs text-gray-500 font-share-tech">
+                  <p className="text-caption text-gray-500 font-share-tech">
                     Created: Nov 1, 2025 • Last used: 2 hours ago
                   </p>
                 </div>
@@ -170,13 +170,13 @@ export default function SecuritySettingsPage() {
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="font-oswald text-white">{session.device}</h3>
                           {session.current && (
-                            <Badge variant="compvss" className="text-xs">Current</Badge>
+                            <Badge variant="compvss" className="text-caption">Current</Badge>
                           )}
                         </div>
-                        <p className="text-sm text-gray-400 font-share-tech">
+                        <p className="text-body-sm text-gray-400 font-share-tech">
                           {session.location}
                         </p>
-                        <p className="text-xs text-gray-500 font-share-tech mt-1">
+                        <p className="text-caption text-gray-500 font-share-tech mt-1">
                           Last active: {session.lastActive}
                         </p>
                       </div>

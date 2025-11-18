@@ -50,8 +50,8 @@ export default function SlackIntegrationPage() {
                     <MessageSquare className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium">Slack</h3>
-                    <p className="text-sm text-gray-400">Team communication platform</p>
+                    <h3 className="text-h6">Slack</h3>
+                    <p className="text-body-sm text-gray-400">Team communication platform</p>
                   </div>
                 </div>
                 {isConnected ? (
@@ -73,19 +73,19 @@ export default function SlackIntegrationPage() {
           {isConnected && (
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <h3 className="text-lg font-medium">Connected Workspace</h3>
+                <h3 className="text-h6">Connected Workspace</h3>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-body-sm">
                     <span className="text-gray-400">Workspace Name</span>
                     <span className="font-medium">ATLVS Team</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-body-sm">
                     <span className="text-gray-400">Team ID</span>
-                    <span className="font-mono text-xs">T01234567</span>
+                    <span className="font-mono text-caption">T01234567</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-body-sm">
                     <span className="text-gray-400">Connected By</span>
                     <span>admin@atlvs.com</span>
                   </div>
@@ -100,9 +100,9 @@ export default function SlackIntegrationPage() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Bell className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-lg font-medium">Notification Settings</h3>
+                  <h3 className="text-h6">Notification Settings</h3>
                 </div>
-                <p className="text-sm text-gray-400">Configure when to send Slack notifications</p>
+                <p className="text-body-sm text-gray-400">Configure when to send Slack notifications</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -124,7 +124,7 @@ export default function SlackIntegrationPage() {
                   </FormField>
 
                   <div className="space-y-3 pt-4">
-                    <h4 className="text-sm font-medium">Notification Events</h4>
+                    <h4 className="text-body-sm">Notification Events</h4>
                     {[
                       { label: 'Task created', enabled: true },
                       { label: 'Task completed', enabled: true },
@@ -134,7 +134,7 @@ export default function SlackIntegrationPage() {
                       { label: 'Budget threshold exceeded', enabled: true }
                     ].map((item) => (
                       <div key={item.label} className="flex items-center justify-between p-3 rounded-lg bg-gray-800/50">
-                        <span className="text-sm">{item.label}</span>
+                        <span className="text-body-sm">{item.label}</span>
                         {item.enabled && <Check className="w-4 h-4 text-atlvs-green-500" />}
                       </div>
                     ))}
@@ -148,8 +148,8 @@ export default function SlackIntegrationPage() {
           {isConnected && (
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardHeader>
-                <h3 className="text-lg font-medium">Available Slash Commands</h3>
-                <p className="text-sm text-gray-400">Use these commands in Slack</p>
+                <h3 className="text-h6">Available Slash Commands</h3>
+                <p className="text-body-sm text-gray-400">Use these commands in Slack</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
@@ -160,8 +160,8 @@ export default function SlackIntegrationPage() {
                     { command: '/atlvs help', description: 'Show help information' }
                   ].map((item) => (
                     <div key={item.command} className="p-3 rounded-lg bg-gray-800/50">
-                      <code className="text-sm text-atlvs-green-500">{item.command}</code>
-                      <p className="text-xs text-gray-400 mt-1">{item.description}</p>
+                      <code className="text-body-sm text-atlvs-green-500">{item.command}</code>
+                      <p className="text-caption text-gray-400 mt-1">{item.description}</p>
                     </div>
                   ))}
                 </div>

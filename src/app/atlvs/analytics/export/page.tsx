@@ -61,7 +61,7 @@ export default function ExportDataPage() {
                     </div>
                     <div>
                       <div className="font-medium mb-1">CSV Export</div>
-                      <div className="text-sm text-gray-400">Spreadsheet compatible format</div>
+                      <div className="text-body-sm text-gray-400">Spreadsheet compatible format</div>
                     </div>
                   </div>
                   <Button 
@@ -82,7 +82,7 @@ export default function ExportDataPage() {
                     </div>
                     <div>
                       <div className="font-medium mb-1">PDF Report</div>
-                      <div className="text-sm text-gray-400">Formatted document with charts</div>
+                      <div className="text-body-sm text-gray-400">Formatted document with charts</div>
                     </div>
                   </div>
                   <Button 

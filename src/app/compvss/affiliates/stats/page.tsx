@@ -38,11 +38,7 @@ export default function AffiliateStatsPage() {
   
   if (isLoading) {
     return (
-      <CompvssLayout breadcrumbs={[
-        { label: 'Dashboard', href: '/compvss/dashboard' },
-        { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
-        { label: 'Stats', href: '/compvss/affiliates/stats' },
-      ]}>
+      <CompvssLayout >
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
@@ -55,15 +51,11 @@ export default function AffiliateStatsPage() {
   
   if (error) {
     return (
-      <CompvssLayout breadcrumbs={[
-        { label: 'Dashboard', href: '/compvss/dashboard' },
-        { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
-        { label: 'Stats', href: '/compvss/affiliates/stats' },
-      ]}>
+      <CompvssLayout >
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Stats</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Stats</h2>
             <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
@@ -81,10 +73,10 @@ export default function AffiliateStatsPage() {
   ];
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bebas compvss-text-gradient">Performance Stats</h1>
+          <h1 className="text-h3 font-bebas compvss-text-gradient">Performance Stats</h1>
           <p className="text-gray-400 font-oswald mt-1">View detailed performance metrics</p>
         </div>
       </div>
@@ -103,8 +95,8 @@ export default function AffiliateStatsPage() {
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${metric.color} flex items-center justify-center text-white mb-4`}>
                     {metric.icon}
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{metric.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{metric.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{metric.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{metric.label}</div>
                 </CardContent>
               </Card>
             </motion.div>

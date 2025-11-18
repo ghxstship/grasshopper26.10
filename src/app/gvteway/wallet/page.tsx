@@ -1,275 +1,125 @@
 'use client';
 
-
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
-import { useMemo, useState } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { AlertCircle, Award, Loader2, Plus, Shield, Smartphone, Ticket, TrendingUp, Wallet } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
+import { PageTitle, SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
-import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
-import { useWallet } from '@/lib/hooks/gvteway/useWallet';
+import { Wallet, CreditCard, Award, Key, TrendingUp } from 'lucide-react';
+import Link from 'next/link';
+
+const metadata = {
+  title: 'Universal Wallet | GVTEWAY',
+  description: 'Manage your digital passes, NFTs, credentials, and loyalty points.',
+};
 
 export default function WalletPage() {
-  const [activeTab, setActiveTab] = useState<'all' | 'tickets' | 'passes' | 'nft'>('all');
-  
-  const { data: walletData, isLoading, error, refetch } = useWallet();
-  
-  const stats = useMemo(() => {
-    if (!walletData) return {
-      totalItems: 0,
-      activeTickets: 0,
-      nftCollectibles: 0,
-      loyaltyPoints: 0,
-    };
-    
-    return {
-      totalItems: walletData.items?.length || 0,
-      activeTickets: walletData.items?.filter((item: any) => item.type === 'ticket' && item.status === 'active').length || 0,
-      nftCollectibles: walletData.items?.filter((item: any) => item.type === 'nft').length || 0,
-      loyaltyPoints: walletData.loyaltyPoints || 0,
-    };
-  }, [walletData]);
-  
-  if (isLoading) {
-    return (
-      <GvtewayLayout>
-        <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
-          <div className="text-center">
-            <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-gvteway-red-500" />
-            <p className="text-gray-400">Loading wallet...</p>
-          </div>
-        </div>
-      </GvtewayLayout>
-    );
-  }
-  
-  if (error) {
-    return (
-      <GvtewayLayout>
-        <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
-          <div className="text-center">
-            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Wallet</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
-            <Button variant="gvteway" onClick={() => refetch()}>
-              Try Again
-            </Button>
-          </div>
-        </div>
-      </GvtewayLayout>
-    );
-  }
-
   return (
     <GvtewayLayout>
-      <div className="min-h-screen bg-black pt-20 pb-16">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              {/* Header */}
-              <header className="mb-12">
-                <h1 className="text-5xl sm:text-6xl font-bebas mb-4 gvteway-text-gradient" id="page-title">
-                  UNIVERSAL WALLET
-                </h1>
-                <p className="text-xl text-gray-400 font-oswald">
-                  Your digital hub for tickets, passes, and collectibles
-                </p>
-              </header>
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="mb-8">
+            <PageTitle className="mb-4 uppercase text-ghxst-primary">Universal Wallet</PageTitle>
+            <BodyText className="text-ghxst-text-secondary">
+              Your digital hub for passes, NFTs, credentials, and rewards
+            </BodyText>
+          </div>
 
-              {/* Stats Grid */}
-              <div className="grid md:grid-cols-4 gap-6 mb-8" role="region" aria-label="Wallet statistics">
-                <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm mb-1">Total Items</p>
-                        <p className="text-3xl font-bebas text-white" aria-label={`${stats.totalItems} total items`}>{stats.totalItems}</p>
-                      </div>
-                      <div className="w-12 h-12 bg-gvteway-red-500/20 rounded-full flex items-center justify-center" aria-hidden="true">
-                        <Wallet className="w-6 h-6 text-gvteway-red-500" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <WalletCard
+              icon={<CreditCard className="w-8 h-8" />}
+              title="Digital Passes"
+              count="12"
+              href="/gvteway/wallet/passes"
+            />
+            <WalletCard
+              icon={<Wallet className="w-8 h-8" />}
+              title="NFT Collection"
+              count="8"
+              href="/gvteway/wallet/nfts"
+            />
+            <WalletCard
+              icon={<Key className="w-8 h-8" />}
+              title="Credentials"
+              count="5"
+              href="/gvteway/wallet/credentials"
+            />
+            <WalletCard
+              icon={<Award className="w-8 h-8" />}
+              title="Loyalty Points"
+              count="2,450"
+              href="/gvteway/wallet/loyalty"
+            />
+          </div>
 
-                <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm mb-1">Active Tickets</p>
-                        <p className="text-3xl font-bebas text-white" aria-label={`${stats.activeTickets} active tickets`}>{stats.activeTickets}</p>
-                      </div>
-                      <div className="w-12 h-12 bg-gvteway-blue-500/20 rounded-full flex items-center justify-center" aria-hidden="true">
-                        <Ticket className="w-6 h-6 text-gvteway-blue-500" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm mb-1">NFT Collectibles</p>
-                        <p className="text-3xl font-bebas text-white" aria-label={`${stats.nftCollectibles} NFT collectibles`}>{stats.nftCollectibles}</p>
-                      </div>
-                      <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center" aria-hidden="true">
-                        <Award className="w-6 h-6 text-atlvs-purple-500" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm mb-1">Loyalty Points</p>
-                        <p className="text-3xl font-bebas text-white" aria-label={`${stats.loyaltyPoints} loyalty points`}>{stats.loyaltyPoints}</p>
-                      </div>
-                      <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center" aria-hidden="true">
-                        <TrendingUp className="w-6 h-6 text-success" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Quick Actions */}
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <Link href="/gvteway/wallet/passes">
-                  <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-transform cursor-pointer">
-                    <CardContent className="p-6 text-center">
-                      <Smartphone className="w-12 h-12 text-gvteway-red-500 mx-auto mb-3" />
-                      <h3 className="text-xl font-bebas text-white mb-2">Digital Passes</h3>
-                      <p className="text-gray-400 text-sm">View all your wallet passes</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-
-                <Link href="/gvteway/wallet/nft">
-                  <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-transform cursor-pointer">
-                    <CardContent className="p-6 text-center">
-                      <Award className="w-12 h-12 text-atlvs-purple-500 mx-auto mb-3" />
-                      <h3 className="text-xl font-bebas text-white mb-2">NFT Collection</h3>
-                      <p className="text-gray-400 text-sm">Browse your collectibles</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-
-                <Link href="/gvteway/wallet/credentials">
-                  <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-transform cursor-pointer">
-                    <CardContent className="p-6 text-center">
-                      <Shield className="w-12 h-12 text-gvteway-blue-500 mx-auto mb-3" />
-                      <h3 className="text-xl font-bebas text-white mb-2">Credentials</h3>
-                      <p className="text-gray-400 text-sm">Manage your credentials</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </div>
-
-              {/* Tabs */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex gap-2">
-                  {(['all', 'tickets', 'passes', 'nft'] as const).map((tab) => (
-                    <Button
-                      key={tab}
-                      onClick={() => setActiveTab(tab)}
-                      variant="ghost"
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all capitalize ${
-                        activeTab === tab
-                          ? 'bg-gvteway-red-500 text-white'
-                          : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                      }`}
-                    >
-                      {tab}
-                    </Button>
-                  ))}
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="card p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-3 bg-ghxst-surface rounded-lg">
+                  <TrendingUp className="w-6 h-6 text-ghxst-primary" />
                 </div>
-                <Button variant="gvteway" size="sm">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Item
-                </Button>
+                <SectionHeader className="text-ghxst-primary">Recent Activity</SectionHeader>
               </div>
-
-              {/* Wallet Items Grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6].map((item) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: item * 0.1 }}
-                  >
-                    <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                      <div className="relative h-48 bg-gradient-to-br from-gvteway-red-500/20 to-gvteway-blue-500/20">
-                        <div className="absolute top-4 right-4">
-                          <Badge variant="gvteway">Active</Badge>
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Ticket className="w-16 h-16 text-white/20" />
-                        </div>
-                      </div>
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-bebas text-white mb-2">
-                          Event Ticket #{item}
-                        </h3>
-                        <p className="text-gray-400 text-sm mb-4">
-                          Summer Music Festival 2025
-                        </p>
-                        <Button variant="gvteway-outline" size="sm" className="w-full">
-                          View Details
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+              <div className="space-y-4">
+                {[
+                  { action: 'Ticket added', item: 'Summer Festival 2025', time: '2 hours ago' },
+                  { action: 'NFT minted', item: 'VIP Access Pass', time: '1 day ago' },
+                  { action: 'Points earned', item: '+150 points', time: '2 days ago' },
+                ].map((activity, i) => (
+                  <div key={i} className="flex items-center justify-between py-3 border-b border-ghxst-border last:border-0">
+                    <div>
+                      <BodyText className="text-ghxst-text-primary">
+                        {activity.action}
+                      </BodyText>
+                      <Metadata className="text-ghxst-text-secondary">{activity.item}</Metadata>
+                    </div>
+                    <Metadata className="text-ghxst-text-secondary">{activity.time}</Metadata>
+                  </div>
                 ))}
               </div>
+            </div>
 
-              {/* Wallet Integration CTA */}
-              <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm mt-12">
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 bg-gvteway-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Smartphone className="w-8 h-8 text-gvteway-red-500" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bebas text-white mb-1">
-                          Add to Mobile Wallet
-                        </h3>
-                        <p className="text-gray-400">
-                          Access your tickets instantly on Apple Wallet or Google Pay
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      <Link href="/gvteway/wallet/apple-wallet">
-                        <Button variant="gvteway" size="lg">
-                          Apple Wallet
-                        </Button>
-                      </Link>
-                      <Link href="/gvteway/wallet/google-wallet">
-                        <Button variant="gvteway-outline" size="lg">
-                          Google Pay
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <div className="card p-6 bg-ghxst-surface">
+              <SectionHeader className="mb-4 text-ghxst-primary">Quick Actions</SectionHeader>
+              <div className="space-y-3">
+                <Link href="/gvteway/wallet/passes">
+                  <Button variant="primary" size="md" className="w-full">
+                    View All Passes
+                  </Button>
+                </Link>
+                <Link href="/gvteway/auth/connect-wallet">
+                  <Button variant="secondary" size="md" className="w-full">
+                    Connect Crypto Wallet
+                  </Button>
+                </Link>
+                <Link href="/gvteway/wallet/loyalty">
+                  <Button variant="secondary" size="md" className="w-full">
+                    Redeem Points
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </GvtewayLayout>
+  );
+}
+
+interface WalletCardProps {
+  icon: React.ReactNode;
+  title: string;
+  count: string;
+  href: string;
+}
+
+function WalletCard({ icon, title, count, href }: WalletCardProps) {
+  return (
+    <Link href={href} className="card p-6 hover:border-ghxst-primary transition-colors group">
+      <div className="text-ghxst-primary group-hover:text-ghxst-black transition-colors mb-4">
+        {icon}
+      </div>
+      <div className="text-h2 font-anton text-ghxst-primary mb-2">{count}</div>
+      <CardTitle className="text-ghxst-text-secondary">{title}</CardTitle>
+    </Link>
   );
 }

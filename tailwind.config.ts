@@ -21,10 +21,40 @@ const config: Config = {
         // Mono
         'share-tech-mono': ['var(--font-share-tech-mono)', 'monospace'],
       },
+      fontSize: {
+        // Semantic Typography Scale
+        'hero': ['var(--font-size-hero)', { lineHeight: 'var(--line-height-hero)', letterSpacing: 'var(--letter-spacing-hero)', fontWeight: 'var(--font-weight-hero)' }],
+        'display': ['var(--font-size-display)', { lineHeight: 'var(--line-height-display)', letterSpacing: 'var(--letter-spacing-display)', fontWeight: 'var(--font-weight-display)' }],
+        'h1': ['var(--font-size-h1)', { lineHeight: 'var(--line-height-h1)', letterSpacing: 'var(--letter-spacing-h1)', fontWeight: 'var(--font-weight-h1)' }],
+        'h2': ['var(--font-size-h2)', { lineHeight: 'var(--line-height-h2)', letterSpacing: 'var(--letter-spacing-h2)', fontWeight: 'var(--font-weight-h2)' }],
+        'h3': ['var(--font-size-h3)', { lineHeight: 'var(--line-height-h3)', letterSpacing: 'var(--letter-spacing-h3)', fontWeight: 'var(--font-weight-h3)' }],
+        'h4': ['var(--font-size-h4)', { lineHeight: 'var(--line-height-h4)', letterSpacing: 'var(--letter-spacing-h4)', fontWeight: 'var(--font-weight-h4)' }],
+        'h5': ['var(--font-size-h5)', { lineHeight: 'var(--line-height-h5)', letterSpacing: 'var(--letter-spacing-h5)', fontWeight: 'var(--font-weight-h5)' }],
+        'h6': ['var(--font-size-h6)', { lineHeight: 'var(--line-height-h6)', letterSpacing: 'var(--letter-spacing-h6)', fontWeight: 'var(--font-weight-h6)' }],
+        'subtitle': ['var(--font-size-subtitle)', { lineHeight: 'var(--line-height-subtitle)', letterSpacing: 'var(--letter-spacing-subtitle)', fontWeight: 'var(--font-weight-subtitle)' }],
+        'body-lg': ['var(--font-size-body-lg)', { lineHeight: 'var(--line-height-body-lg)', letterSpacing: 'var(--letter-spacing-body-lg)', fontWeight: 'var(--font-weight-body-lg)' }],
+        'body': ['var(--font-size-body)', { lineHeight: 'var(--line-height-body)', letterSpacing: 'var(--letter-spacing-body)', fontWeight: 'var(--font-weight-body)' }],
+        'body-sm': ['var(--font-size-body-sm)', { lineHeight: 'var(--line-height-body-sm)', letterSpacing: 'var(--letter-spacing-body-sm)', fontWeight: 'var(--font-weight-body-sm)' }],
+        'caption': ['var(--font-size-caption)', { lineHeight: 'var(--line-height-caption)', letterSpacing: 'var(--letter-spacing-caption)', fontWeight: 'var(--font-weight-caption)' }],
+        'overline': ['var(--font-size-overline)', { lineHeight: 'var(--line-height-overline)', letterSpacing: 'var(--letter-spacing-overline)', fontWeight: 'var(--font-weight-overline)' }],
+      },
       colors: {
         // Base colors
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        
+        // GHXSTSHIP Monochromatic Semantic Tokens
+        'ghxst-black': 'var(--black)',
+        'ghxst-white': 'var(--white)',
+        'ghxst-primary': 'var(--primary)',
+        'ghxst-secondary': 'var(--secondary)',
+        'ghxst-accent': 'var(--accent)',
+        'ghxst-accent-hover': 'var(--accent-hover)',
+        'ghxst-surface': 'var(--surface)',
+        'ghxst-border': 'var(--border)',
+        'ghxst-text-primary': 'var(--text-primary)',
+        'ghxst-text-secondary': 'var(--text-secondary)',
+        'ghxst-text-inverse': 'var(--text-inverse)',
         
         // GVTEWAY Primary Colors (Bold Accents)
         gvteway: {
@@ -155,19 +185,19 @@ const config: Config = {
           },
         },
         
-        // Grayscale
+        // Grayscale - Aligned with CSS variables
         gray: {
-          50: '#FAFAFA',
-          100: '#F5F5F5',
-          200: '#E5E5E5',
-          300: '#D4D4D4',
-          400: '#A3A3A3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
-          950: '#0A0A0A',
+          50: 'var(--gray-50)',
+          100: 'var(--gray-100)',
+          200: 'var(--gray-200)',
+          300: 'var(--gray-300)',
+          400: 'var(--gray-400)',
+          500: 'var(--gray-500)',
+          600: 'var(--gray-600)',
+          700: 'var(--gray-700)',
+          800: 'var(--gray-800)',
+          900: 'var(--gray-900)',
+          950: 'var(--gray-950)',
         },
         
         // UI Component colors
@@ -234,6 +264,28 @@ const config: Config = {
           foreground: 'hsl(var(--info-foreground))',
           light: 'hsl(var(--info-light))',
           border: 'hsl(var(--info-border))'
+        },
+        
+        // Conflict Resolution Colors
+        conflict: {
+          local: 'var(--conflict-local)',
+          'local-bg': 'var(--conflict-local-bg)',
+          'local-hover': 'var(--conflict-local-hover)',
+          remote: 'var(--conflict-remote)',
+          'remote-bg': 'var(--conflict-remote-bg)',
+          'remote-hover': 'var(--conflict-remote-hover)',
+          custom: 'var(--conflict-custom)',
+          'custom-bg': 'var(--conflict-custom-bg)',
+          'custom-hover': 'var(--conflict-custom-hover)',
+        },
+        
+        // Integration Provider Colors
+        integration: {
+          spotify: 'var(--integration-spotify)',
+          shopify: 'var(--integration-shopify)',
+          'google-bg': 'var(--integration-google-bg)',
+          'google-text': 'var(--integration-google-text)',
+          'google-border': 'var(--integration-google-border)',
         }
       },
       borderRadius: {
@@ -279,11 +331,47 @@ const config: Config = {
         'slide-in-from-bottom': 'slide-in-from-bottom 0.3s ease-out',
         'slide-in-from-left': 'slide-in-from-left 0.3s ease-out',
         'slide-in-from-right': 'slide-in-from-right 0.3s ease-out'
+      },
+      animationDelay: {
+        '0': '0ms',
+        '75': '75ms',
+        '100': '100ms',
+        '150': '150ms',
+        '200': '200ms',
+        '300': '300ms',
+        '500': '500ms',
+        '700': '700ms',
+        '1000': '1000ms',
+      },
+      zIndex: {
+        '0': '0',
+        '10': '10',
+        '20': '20',
+        '30': '30',
+        '40': '40',
+        '50': '50',
+        '60': '60',
+        '70': '70',
+        '80': '80',
+        '90': '90',
+        '100': '100',
       }
     }
   },
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports -- Tailwind requires CommonJS
+    require("tailwindcss-animate"),
+    function({ matchUtilities, theme }: { matchUtilities: (utilities: Record<string, (value: string) => Record<string, string>>, config: { values: Record<string, string> }) => void; theme: (key: string) => Record<string, string> }) {
+      matchUtilities(
+        {
+          'animation-delay': (value: string) => ({
+            'animation-delay': value,
+          }),
+        },
+        { values: theme('animationDelay') }
+      );
+    },
+  ],
 };
 
 export default config;

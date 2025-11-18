@@ -51,7 +51,7 @@ export default function ProjectTemplatesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Templates</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Templates</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -98,14 +98,14 @@ export default function ProjectTemplatesPage() {
               placeholder="Search templates..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-gray-900/50 border-purple-500/30 text-white"
+              className="pl-10 bg-gray-900/50 border-accent/30 text-white"
             />
           </div>
           <Select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             variant="atlvs"
-            className="border-purple-500/30 focus:border-purple-500"
+            className="border-accent/30 focus:border-accent"
           >
             {categories.map(cat => (
               <option key={cat} value={cat}>
@@ -121,7 +121,7 @@ export default function ProjectTemplatesPage() {
             <Card key={template.id} variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all">
               <CardContent className="pt-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-purple-500/10 rounded-lg">
+                  <div className="p-3 bg-accent/100/10 rounded-lg">
                     <Folder className="w-6 h-6 text-atlvs-purple-500" />
                   </div>
                   <Badge variant="atlvs">
@@ -129,26 +129,26 @@ export default function ProjectTemplatesPage() {
                   </Badge>
                 </div>
 
-                <h3 className="text-lg font-oswald text-white mb-2">{template.name}</h3>
-                <p className="text-gray-400 text-sm font-share-tech mb-4 line-clamp-2">{template.description}</p>
+                <h3 className="text-h6 font-oswald text-white mb-2">{template.name}</h3>
+                <p className="text-gray-400 text-body-sm font-share-tech mb-4 line-clamp-2">{template.description}</p>
 
                 <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-sm text-gray-400 font-share-tech">
+                  <div className="flex items-center text-body-sm text-gray-400 font-share-tech">
                     <Clock className="w-4 h-4 mr-2" />
                     <span>{template.duration} timeline</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-400 font-share-tech">
+                  <div className="flex items-center text-body-sm text-gray-400 font-share-tech">
                     <Users className="w-4 h-4 mr-2" />
                     <span>{template.teamSize} team members</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-400 font-share-tech">
+                  <div className="flex items-center text-body-sm text-gray-400 font-share-tech">
                     <CheckCircle className="w-4 h-4 mr-2" />
                     <span>{template.tasksCount} tasks included</span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                  <span className="text-sm text-gray-500 font-share-tech">Used {template.usageCount} times</span>
+                  <span className="text-body-sm text-gray-500 font-share-tech">Used {template.usageCount} times</span>
                   <Button variant="atlvs" size="sm">
                     Use Template
                   </Button>

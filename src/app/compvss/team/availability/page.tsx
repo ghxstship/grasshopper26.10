@@ -23,10 +23,7 @@ export default function TeamAvailabilityPage() {
           description="Track crew schedules and availability"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team/members' },
-            { label: 'Availability' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -47,15 +44,12 @@ export default function TeamAvailabilityPage() {
           description="Track crew schedules and availability"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Team', href: '/compvss/team/members' },
-            { label: 'Availability' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Availability</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Availability</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -67,8 +61,8 @@ export default function TeamAvailabilityPage() {
 
   const getStatusBadge = (status: string) => {
     return status === 'available' 
-      ? <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">Available</Badge>
-      : <Badge variant="compvss-outline" className="border-red-500/30 text-error">Unavailable</Badge>;
+      ? <Badge variant="compvss" className="bg-success-light text-success border-success/30">Available</Badge>
+      : <Badge variant="compvss-outline" className="border-destructive/30 text-error">Unavailable</Badge>;
   };
 
   return (
@@ -78,10 +72,7 @@ export default function TeamAvailabilityPage() {
         description="Track crew schedules and availability"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'Team', href: '/compvss/team/members' },
-          { label: 'Availability' }
-        ]}
+        
         actions={[
           {
             label: 'Filter',
@@ -111,8 +102,8 @@ export default function TeamAvailabilityPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <h3 className="font-oswald text-white mb-1">{person.name}</h3>
-                      <p className="text-sm text-gray-400 font-share-tech mb-2">{person.role}</p>
-                      <div className="flex items-center gap-2 text-xs text-gray-500 font-share-tech">
+                      <p className="text-body-sm text-gray-400 font-share-tech mb-2">{person.role}</p>
+                      <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
                         <Clock className="w-3 h-3" />
                         <span>{person.shift}</span>
                       </div>

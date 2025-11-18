@@ -54,7 +54,7 @@ export default function TeamRolesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Roles</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Roles</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
@@ -93,9 +93,9 @@ export default function TeamRolesPage() {
 
   const getColorClasses = (color: string) => {
     const colors: Record<string, string> = {
-      purple: 'bg-purple-100 text-purple-800 border-purple-200',
-      blue: 'bg-info-light text-blue-800 border-blue-200',
-      green: 'bg-success-light text-success-foreground border-green-200'
+      purple: 'bg-accent/20 text-accent border-accent',
+      blue: 'bg-info-light text-info-foreground border-info-border',
+      green: 'bg-success-light text-success-foreground border-success-border'
     };
     return colors[color] || colors.green;
   };
@@ -128,20 +128,20 @@ export default function TeamRolesPage() {
                 <Button variant="ghost" size="sm">
                   <Edit className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-error hover:bg-red-50">
+                <Button variant="ghost" size="sm" className="text-error hover:bg-destructive/10">
                   <Trash2 className="w-4 h-4" />
                 </Button>
               </div>
             </div>
 
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">{role.name}</h3>
-            <p className="text-sm text-gray-600 mb-4">{role.description}</p>
+            <h3 className="text-h6 text-gray-900 mb-2">{role.name}</h3>
+            <p className="text-body-sm text-gray-600 mb-4">{role.description}</p>
 
             <div className="mb-4">
-              <div className="text-sm font-medium text-gray-700 mb-2">Permissions:</div>
+              <div className="text-body-sm text-gray-700 mb-2">Permissions:</div>
               <div className="flex flex-wrap gap-2">
                 {role.permissions.map(perm => (
-                  <span key={perm} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                  <span key={perm} className="px-2 py-1 bg-gray-100 text-gray-700 text-caption rounded">
                     {perm.replace(/_/g, ' ')}
                   </span>
                 ))}
@@ -149,7 +149,7 @@ export default function TeamRolesPage() {
             </div>
 
             <div className="pt-4 border-t border-gray-200">
-              <span className="text-sm text-gray-600">{role.memberCount} members</span>
+              <span className="text-body-sm text-gray-600">{role.memberCount} members</span>
             </div>
           </div>
         ))}

@@ -126,11 +126,7 @@ export default function ComplianceTrackingPage() {
         description="Monitor your compliance status and requirements"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Team', href: '/compvss/team/directory' },
-          { label: 'Onboarding', href: '/compvss/team/onboarding/training' },
-          { label: 'Compliance' }
-        ]}
+        
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -139,36 +135,36 @@ export default function ComplianceTrackingPage() {
 
           {/* Compliance Overview */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <Card variant="compvss" className="bg-green-500/10 border-green-500/30">
+            <Card variant="compvss" className="bg-success-light0/10 border-success/30">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400 font-share-tech mb-1">Compliant</p>
-                    <p className="text-3xl font-bebas text-success">{compliantCount}/{totalRequired}</p>
+                    <p className="text-body-sm text-gray-400 font-share-tech mb-1">Compliant</p>
+                    <p className="text-h3 font-bebas text-success">{compliantCount}/{totalRequired}</p>
                   </div>
                   <CheckCircle2 className="w-8 h-8 text-success" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card variant="compvss" className="bg-warning/10 border-yellow-500/30">
+            <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400 font-share-tech mb-1">Pending</p>
-                    <p className="text-3xl font-bebas text-warning">{pendingCount}</p>
+                    <p className="text-body-sm text-gray-400 font-share-tech mb-1">Pending</p>
+                    <p className="text-h3 font-bebas text-warning">{pendingCount}</p>
                   </div>
                   <FileCheck className="w-8 h-8 text-warning" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card variant="compvss" className="bg-error/10 border-red-500/30">
+            <Card variant="compvss" className="bg-error/10 border-destructive/30">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400 font-share-tech mb-1">Expired</p>
-                    <p className="text-3xl font-bebas text-error">{expiredCount}</p>
+                    <p className="text-body-sm text-gray-400 font-share-tech mb-1">Expired</p>
+                    <p className="text-h3 font-bebas text-error">{expiredCount}</p>
                   </div>
                   <AlertTriangle className="w-8 h-8 text-error" />
                 </div>
@@ -177,7 +173,7 @@ export default function ComplianceTrackingPage() {
           </div>
 
           {/* Overall Status */}
-          <Card variant="compvss" className={`mb-6 ${isCompliant ? 'bg-green-500/10 border-green-500/30' : 'bg-warning/10 border-yellow-500/30'}`}>
+          <Card variant="compvss" className={`mb-6 ${isCompliant ? 'bg-success-light0/10 border-success/30' : 'bg-warning/10 border-warning/30'}`}>
             <CardContent className="pt-6">
               <div className="flex items-center gap-3">
                 {isCompliant ? (
@@ -185,7 +181,7 @@ export default function ComplianceTrackingPage() {
                     <CheckCircle2 className="w-6 h-6 text-success flex-shrink-0" />
                     <div>
                       <h3 className="font-oswald text-white mb-1">Fully Compliant</h3>
-                      <p className="text-sm text-gray-400 font-share-tech">
+                      <p className="text-body-sm text-gray-400 font-share-tech">
                         All required compliance items are up to date. You&apos;re cleared to work!
                       </p>
                     </div>
@@ -195,7 +191,7 @@ export default function ComplianceTrackingPage() {
                     <AlertTriangle className="w-6 h-6 text-warning flex-shrink-0" />
                     <div>
                       <h3 className="font-oswald text-white mb-1">Action Required</h3>
-                      <p className="text-sm text-gray-400 font-share-tech">
+                      <p className="text-body-sm text-gray-400 font-share-tech">
                         Please complete all pending items to maintain compliance status.
                       </p>
                     </div>
@@ -217,15 +213,15 @@ export default function ComplianceTrackingPage() {
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="font-oswald text-white">{item.title}</h3>
                           {item.required && (
-                            <Badge variant="error" className="text-xs">Required</Badge>
+                            <Badge variant="error" className="text-caption">Required</Badge>
                           )}
                         </div>
-                        <p className="text-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                           {item.description}
                         </p>
                         
                         {/* Dates */}
-                        <div className="flex flex-wrap gap-4 text-xs text-gray-500 font-share-tech">
+                        <div className="flex flex-wrap gap-4 text-caption text-gray-500 font-share-tech">
                           {item.expiryDate && (
                             <div className="flex items-center gap-1">
                               <Calendar className="w-3 h-3" />
@@ -251,7 +247,7 @@ export default function ComplianceTrackingPage() {
                     </Button>
                   )}
                   {item.status === 'expired' && (
-                    <Button variant="compvss" size="sm" className="w-full bg-error hover:bg-red-600">
+                    <Button variant="compvss" size="sm" className="w-full bg-error hover:bg-destructive">
                       Renew Now
                     </Button>
                   )}

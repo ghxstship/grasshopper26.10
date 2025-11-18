@@ -262,7 +262,7 @@ describe('Input Component', () => {
         'px-4',
         'py-2',
         'font-share-tech',
-        'text-base',
+        'text-body',
         'transition-colors'
       )
     })

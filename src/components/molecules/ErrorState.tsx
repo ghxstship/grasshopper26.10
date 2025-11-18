@@ -17,10 +17,10 @@ export interface ErrorStateProps {
 }
 
 const variantClasses = {
-  default: 'text-red-500',
-  gvteway: 'text-purple-500',
-  compvss: 'text-blue-500',
-  atlvs: 'text-green-500',
+  default: 'text-destructive',
+  gvteway: 'text-gvteway-red',
+  compvss: 'text-compvss-cyan',
+  atlvs: 'text-atlvs-green',
 };
 
 export const ErrorState: React.FC<ErrorStateProps> = ({
@@ -49,7 +49,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         <AlertCircle className="w-16 h-16" />
       </div>
 
-      <h2 className="text-2xl font-bebas text-white uppercase tracking-wide mb-2">
+      <h2 className="text-h4 font-bebas text-white uppercase mb-2">
         {title}
       </h2>
 
@@ -59,18 +59,18 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         <div className="mb-6 w-full max-w-2xl">
           <button
             onClick={() => setShowErrorDetails(!showErrorDetails)}
-            className="text-sm text-gray-500 hover:text-gray-400 font-oswald mb-2"
+            className="text-body-sm text-gray-500 hover:text-gray-400 font-oswald mb-2"
           >
             {showErrorDetails ? 'Hide' : 'Show'} error details
           </button>
 
           {showErrorDetails && (
             <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 text-left">
-              <p className="text-sm text-red-400 font-mono mb-2">
+              <p className="text-body-sm text-destructive font-mono mb-2">
                 {errorMessage}
               </p>
               {errorStack && (
-                <pre className="text-xs text-gray-500 font-mono overflow-x-auto">
+                <pre className="text-caption text-gray-500 font-mono overflow-x-auto">
                   {errorStack}
                 </pre>
               )}

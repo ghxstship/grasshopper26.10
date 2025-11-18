@@ -59,7 +59,7 @@ export function ReportPresetCard({
             </div>
             <div>
               <h3 className="font-semibold text-white">{preset.name}</h3>
-              <p className="text-sm text-gray-400">{preset.subcategory}</p>
+              <p className="text-body-sm text-gray-400">{preset.subcategory}</p>
             </div>
           </div>
           <Button
@@ -70,22 +70,22 @@ export function ReportPresetCard({
           >
             <Star
               className={`w-5 h-5 ${
-                isFavorite ? 'fill-yellow-500 text-yellow-500' : 'text-gray-400'
+                isFavorite ? 'fill-yellow-500 text-warning' : 'text-gray-400'
               }`}
             />
           </Button>
         </div>
 
-        <p className="text-sm text-gray-300 mb-4 line-clamp-2">
+        <p className="text-body-sm text-gray-300 mb-4 line-clamp-2">
           {preset.description}
         </p>
 
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
-            <Badge variant="atlvs" className="text-xs">
+            <Badge variant="atlvs" className="text-caption">
               {preset.category}
             </Badge>
-            <Badge variant="atlvs-outline" className="text-xs">
+            <Badge variant="atlvs-outline" className="text-caption">
               {preset.display_format}
             </Badge>
           </div>

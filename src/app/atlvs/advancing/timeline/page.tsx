@@ -82,7 +82,7 @@ export default function AdvancingTimelinePage() {
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load Timeline</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load Timeline</h3>
                 <p className="text-gray-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
@@ -118,9 +118,9 @@ export default function AdvancingTimelinePage() {
                         <div className="flex items-start justify-between mb-2">
                           <div>
                             <div className="font-medium mb-1">{event.title}</div>
-                            <div className="text-sm text-gray-400">{event.date} at {event.time}</div>
+                            <div className="text-body-sm text-gray-400">{event.date} at {event.time}</div>
                             {event.project && (
-                              <div className="text-xs text-gray-500 mt-1">{event.project}</div>
+                              <div className="text-caption text-gray-500 mt-1">{event.project}</div>
                             )}
                           </div>
                           <Badge variant="atlvs-outline" className={getStatusColor(event.status)} role="status" aria-label={`Status: ${event.status}`}>

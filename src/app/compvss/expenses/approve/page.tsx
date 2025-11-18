@@ -40,10 +40,7 @@ export default function ExpenseApprovePage() {
           description="Review and approve pending expenses"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Approve' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -64,15 +61,12 @@ export default function ExpenseApprovePage() {
           description="Review and approve pending expenses"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-            { label: 'Approve' }
-          ]}
+          
         >
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load Expenses</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load Expenses</h2>
               <p className="text-gray-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -91,10 +85,7 @@ export default function ExpenseApprovePage() {
         description="Review and approve pending expenses"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Expenses', href: '/compvss/expenses/dashboard' },
-          { label: 'Approve' }
-        ]}
+        
       >
         <Card variant="compvss" className="bg-gray-900/50">
           <CardHeader>
@@ -124,20 +115,20 @@ export default function ExpenseApprovePage() {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex-1">
                       <h3 className="font-oswald text-white mb-1">{expense.description}</h3>
-                      <p className="text-sm text-gray-400 font-share-tech mb-2">
+                      <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                         Submitted by {expense.user} • {expense.date}
                       </p>
-                      <Badge variant="compvss-outline" className="text-xs">
+                      <Badge variant="compvss-outline" className="text-caption">
                         {expense.category}
                       </Badge>
                     </div>
-                    <div className="text-2xl font-bebas text-white">{expense.amount}</div>
+                    <div className="text-h4 font-bebas text-white">{expense.amount}</div>
                   </div>
                   <div className="flex gap-3 pt-3 border-t border-gray-800">
                     <Button 
                       variant="compvss" 
                       size="sm" 
-                      className="flex-1 bg-green-500 hover:bg-success"
+                      className="flex-1 bg-success-light0 hover:bg-success"
                       onClick={() => handleApprove(expense.id)}
                       disabled={approveMutation.isPending}
                     >
@@ -147,7 +138,7 @@ export default function ExpenseApprovePage() {
                     <Button 
                       variant="compvss-outline" 
                       size="sm" 
-                      className="flex-1 border-red-500/30 text-error hover:bg-error/10"
+                      className="flex-1 border-destructive/30 text-error hover:bg-error/10"
                       onClick={() => handleReject(expense.id)}
                       disabled={approveMutation.isPending}
                     >

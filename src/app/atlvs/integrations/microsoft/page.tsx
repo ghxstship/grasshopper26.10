@@ -39,8 +39,8 @@ export default function MicrosoftIntegrationPage() {
                     <Mail className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium">Microsoft 365</h3>
-                    <p className="text-sm text-gray-400">Outlook, Teams, and OneDrive integration</p>
+                    <h3 className="text-h6">Microsoft 365</h3>
+                    <p className="text-body-sm text-gray-400">Outlook, Teams, and OneDrive integration</p>
                   </div>
                 </div>
                 {isConnected ? (
@@ -62,8 +62,8 @@ export default function MicrosoftIntegrationPage() {
             <Card variant="atlvs" className="bg-gray-900/50">
               <CardContent className="text-center py-12">
                 <Mail className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <h3 className="text-lg font-medium mb-2">Connect to Microsoft 365</h3>
-                <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
+                <h3 className="text-h6 mb-2">Connect to Microsoft 365</h3>
+                <p className="text-body-sm text-gray-400 mb-6 max-w-md mx-auto">
                   Authorize ATLVS to access your Microsoft 365 account to sync emails, calendar events, and files.
                 </p>
                 <Button variant="atlvs">
@@ -78,9 +78,9 @@ export default function MicrosoftIntegrationPage() {
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <Mail className="w-5 h-5 text-atlvs-green-500" />
-                    <h3 className="text-lg font-medium">Outlook</h3>
+                    <h3 className="text-h6">Outlook</h3>
                   </div>
-                  <p className="text-sm text-gray-400">Email and calendar integration</p>
+                  <p className="text-body-sm text-gray-400">Email and calendar integration</p>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -91,7 +91,7 @@ export default function MicrosoftIntegrationPage() {
                       'Email templates',
                       'Meeting scheduling'
                     ].map((feature) => (
-                      <div key={feature} className="flex items-center gap-2 text-sm">
+                      <div key={feature} className="flex items-center gap-2 text-body-sm">
                         <Check className="w-4 h-4 text-atlvs-green-500" />
                         <span>{feature}</span>
                       </div>
@@ -105,9 +105,9 @@ export default function MicrosoftIntegrationPage() {
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <Users className="w-5 h-5 text-atlvs-green-500" />
-                    <h3 className="text-lg font-medium">Microsoft Teams</h3>
+                    <h3 className="text-h6">Microsoft Teams</h3>
                   </div>
-                  <p className="text-sm text-gray-400">Team collaboration and chat</p>
+                  <p className="text-body-sm text-gray-400">Team collaboration and chat</p>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -118,7 +118,7 @@ export default function MicrosoftIntegrationPage() {
                       'Video meetings',
                       'Bot integration'
                     ].map((feature) => (
-                      <div key={feature} className="flex items-center gap-2 text-sm">
+                      <div key={feature} className="flex items-center gap-2 text-body-sm">
                         <Check className="w-4 h-4 text-atlvs-green-500" />
                         <span>{feature}</span>
                       </div>
@@ -132,9 +132,9 @@ export default function MicrosoftIntegrationPage() {
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <FolderOpen className="w-5 h-5 text-atlvs-green-500" />
-                    <h3 className="text-lg font-medium">OneDrive</h3>
+                    <h3 className="text-h6">OneDrive</h3>
                   </div>
-                  <p className="text-sm text-gray-400">Cloud storage and file sync</p>
+                  <p className="text-body-sm text-gray-400">Cloud storage and file sync</p>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -145,7 +145,7 @@ export default function MicrosoftIntegrationPage() {
                       'Version history',
                       'Shared folders'
                     ].map((feature) => (
-                      <div key={feature} className="flex items-center gap-2 text-sm">
+                      <div key={feature} className="flex items-center gap-2 text-body-sm">
                         <Check className="w-4 h-4 text-atlvs-green-500" />
                         <span>{feature}</span>
                       </div>

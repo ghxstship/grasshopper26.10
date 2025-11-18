@@ -6,7 +6,7 @@ export const runtime = 'edge';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { DollarSign } from 'lucide-react';
-import { GvtewayLayout } from '@/components/gvteway/shared/GvtewayLayout';
+import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 
 import { Input } from '@/components/atoms/Input';
@@ -24,7 +24,7 @@ export default function SellTicketPage() {
                 <Button variant="ghost" size="sm" className="mb-6">← Back</Button>
               </Link>
 
-              <h1 className="text-5xl font-bebas mb-4 gvteway-text-gradient">SELL TICKET</h1>
+              <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">SELL TICKET</h1>
 
               <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                 <CardHeader>

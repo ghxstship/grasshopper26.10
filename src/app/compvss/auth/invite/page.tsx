@@ -68,7 +68,7 @@ export default function InvitePage() {
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <Link href="/compvss">
-              <h1 className="compvss-text-gradient text-5xl font-anton mb-2 cursor-pointer">
+              <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
                 COMPVSS
               </h1>
             </Link>
@@ -141,7 +141,7 @@ export default function InvitePage() {
 
                 {/* Send Button */}
                 {sent ? (
-                  <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/30 text-center">
+                  <div className="p-4 rounded-lg bg-success-light0/10 border border-success/30 text-center">
                     <CheckCircle2 className="w-6 h-6 text-success mx-auto mb-2" />
                     <p className="text-success font-oswald">
                       Invitations sent successfully!
@@ -162,8 +162,8 @@ export default function InvitePage() {
 
               {/* Info */}
               <div className="mt-6 p-4 rounded-lg bg-black/30 border border-compvss-cyan-500/20">
-                <h3 className="text-sm font-oswald text-white mb-2">What happens next?</h3>
-                <ul className="space-y-2 text-xs text-gray-400 font-share-tech">
+                <h3 className="text-body-sm font-oswald text-white mb-2">What happens next?</h3>
+                <ul className="space-y-2 text-caption text-gray-400 font-share-tech">
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-compvss-cyan-500 rounded-full mt-1.5" />
                     <span>Recipients will receive an email invitation</span>

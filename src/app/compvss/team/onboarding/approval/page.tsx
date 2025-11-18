@@ -82,11 +82,7 @@ export default function ApprovalWorkflowPage() {
         description="Track your onboarding approval progress"
         variant="compvss"
         showToolbar={false}
-        breadcrumbs={[
-          { label: 'Team', href: '/compvss/team/directory' },
-          { label: 'Onboarding', href: '/compvss/team/onboarding/training' },
-          { label: 'Approval' }
-        ]}
+        
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,14 +95,14 @@ export default function ApprovalWorkflowPage() {
                 <div className="flex items-center gap-3">
                   <Shield className="w-8 h-8 text-compvss-cyan-500" />
                   <div>
-                    <h3 className="font-oswald text-white text-lg">Approval Progress</h3>
-                    <p className="text-sm text-gray-400 font-share-tech">
+                    <h3 className="font-oswald text-white text-h6">Approval Progress</h3>
+                    <p className="text-body-sm text-gray-400 font-share-tech">
                       {completedSteps} of {totalSteps} steps completed
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-3xl font-bebas text-compvss-cyan-500">
+                  <p className="text-h3 font-bebas text-compvss-cyan-500">
                     {Math.round((completedSteps / totalSteps) * 100)}%
                   </p>
                 </div>
@@ -122,16 +118,16 @@ export default function ApprovalWorkflowPage() {
 
           {/* Current Status */}
           {currentStep && (
-            <Card variant="compvss" className="mb-6 bg-warning/10 border-yellow-500/30">
+            <Card variant="compvss" className="mb-6 bg-warning/10 border-warning/30">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
                   <Clock className="w-6 h-6 text-warning flex-shrink-0 mt-1 animate-pulse" />
                   <div>
                     <h3 className="font-oswald text-white mb-1">Currently Under Review</h3>
-                    <p className="text-sm text-gray-400 font-share-tech mb-2">
+                    <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                       {currentStep.title} - {currentStep.description}
                     </p>
-                    <p className="text-xs text-gray-500 font-share-tech">
+                    <p className="text-caption text-gray-500 font-share-tech">
                       Reviewer: {currentStep.reviewer}
                     </p>
                   </div>
@@ -148,7 +144,7 @@ export default function ApprovalWorkflowPage() {
                   <div className="flex items-start gap-4">
                     {/* Step Number & Icon */}
                     <div className="flex flex-col items-center">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-lg ${
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-h6 ${
                         step.status === 'completed' 
                           ? 'bg-success-light text-success' 
                           : step.status === 'in-progress'
@@ -159,7 +155,7 @@ export default function ApprovalWorkflowPage() {
                       </div>
                       {index < approvalSteps.length - 1 && (
                         <div className={`w-0.5 h-12 mt-2 ${
-                          step.status === 'completed' ? 'bg-green-500' : 'bg-gray-800'
+                          step.status === 'completed' ? 'bg-success-light0' : 'bg-gray-800'
                         }`} />
                       )}
                     </div>
@@ -169,10 +165,10 @@ export default function ApprovalWorkflowPage() {
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex-1">
                           <h3 className="font-oswald text-white mb-1">{step.title}</h3>
-                          <p className="text-sm text-gray-400 font-share-tech mb-2">
+                          <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                             {step.description}
                           </p>
-                          <div className="flex items-center gap-4 text-xs text-gray-500 font-share-tech">
+                          <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
                             <div className="flex items-center gap-1">
                               <User className="w-3 h-3" />
                               <span>{step.reviewer}</span>
@@ -190,16 +186,16 @@ export default function ApprovalWorkflowPage() {
 
                       {/* Status-specific messages */}
                       {step.status === 'completed' && (
-                        <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3 mt-3">
-                          <p className="text-sm text-success font-share-tech flex items-center gap-2">
+                        <div className="bg-success-light0/10 border border-success/30 rounded-lg p-3 mt-3">
+                          <p className="text-body-sm text-success font-share-tech flex items-center gap-2">
                             <CheckCircle2 className="w-4 h-4" />
                             Approved and verified
                           </p>
                         </div>
                       )}
                       {step.status === 'in-progress' && (
-                        <div className="bg-warning/10 border border-yellow-500/30 rounded-lg p-3 mt-3">
-                          <p className="text-sm text-warning font-share-tech">
+                        <div className="bg-warning/10 border border-warning/30 rounded-lg p-3 mt-3">
+                          <p className="text-body-sm text-warning font-share-tech">
                             Under review. Estimated completion: 1-2 business days
                           </p>
                         </div>
@@ -218,10 +214,10 @@ export default function ApprovalWorkflowPage() {
                 <Shield className="w-6 h-6 text-compvss-cyan-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-oswald text-white mb-1">What&apos;s Next?</h3>
-                  <p className="text-sm text-gray-400 font-share-tech mb-2">
+                  <p className="text-body-sm text-gray-400 font-share-tech mb-2">
                     Once all approval steps are completed, you&apos;ll receive an email notification and gain full access to the COMPVSS platform.
                   </p>
-                  <p className="text-sm text-gray-400 font-share-tech">
+                  <p className="text-body-sm text-gray-400 font-share-tech">
                     Questions? Contact our support team at support@compvss.com
                   </p>
                 </div>

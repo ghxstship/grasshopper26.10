@@ -91,10 +91,7 @@ export default function QRHubPage() {
           description="Manage and track QR codes"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'QR System', href: '/compvss/qr/hub' },
-            { label: 'Hub' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
@@ -115,15 +112,12 @@ export default function QRHubPage() {
           description="Manage and track QR codes"
           variant="compvss"
           showToolbar={false}
-          breadcrumbs={[
-            { label: 'QR System', href: '/compvss/qr/hub' },
-            { label: 'Hub' }
-          ]}
+          
         >
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-xl font-bebas mb-2">Failed to Load QR Codes</h2>
+              <h2 className="text-h5 font-bebas mb-2">Failed to Load QR Codes</h2>
               <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
@@ -142,10 +136,7 @@ export default function QRHubPage() {
         description="Manage and track QR codes"
         variant="compvss"
         showToolbar={true}
-        breadcrumbs={[
-          { label: 'QR System', href: '/compvss/qr/hub' },
-          { label: 'Hub' }
-        ]}
+        
         actions={[
           {
             label: 'Scan QR',
@@ -177,8 +168,8 @@ export default function QRHubPage() {
                       {stat.icon}
                     </div>
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -192,7 +183,7 @@ export default function QRHubPage() {
           transition={{ delay: 0.4 }}
           className="mb-8"
         >
-          <h2 className="text-2xl font-bebas text-white mb-6">QR Code Categories</h2>
+          <h2 className="text-h4 font-bebas text-white mb-6">QR Code Categories</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {qrCategories.map((category, index) => (
               <motion.div
@@ -207,12 +198,12 @@ export default function QRHubPage() {
                       <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4`}>
                         {category.icon}
                       </div>
-                      <h3 className="text-xl font-bebas text-white mb-2">{category.name}</h3>
-                      <p className="text-sm text-gray-400 font-share-tech mb-4">
+                      <h3 className="text-h5 font-bebas text-white mb-2">{category.name}</h3>
+                      <p className="text-body-sm text-gray-400 font-share-tech mb-4">
                         {category.description}
                       </p>
                       <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                        <span className="text-sm text-gray-500 font-share-tech">Active Codes</span>
+                        <span className="text-body-sm text-gray-500 font-share-tech">Active Codes</span>
                         <Badge variant="compvss" className="bg-compvss-cyan-500/20 text-compvss-cyan-500">
                           {category.count}
                         </Badge>
@@ -255,16 +246,16 @@ export default function QRHubPage() {
                     <div className="flex items-center justify-between mb-2">
                       <div>
                         <h3 className="font-oswald text-white">{scan.user}</h3>
-                        <p className="text-sm text-gray-400 font-share-tech">{scan.type}</p>
+                        <p className="text-body-sm text-gray-400 font-share-tech">{scan.type}</p>
                       </div>
                       <Badge 
                         variant={scan.status === 'valid' ? 'compvss' : 'compvss-outline'}
-                        className={scan.status === 'valid' ? 'bg-success-light text-success border-green-500/30' : 'bg-info-light text-info border-blue-500/30'}
+                        className={scan.status === 'valid' ? 'bg-success-light text-success border-success/30' : 'bg-info-light text-info border-info/30'}
                       >
                         {scan.status}
                       </Badge>
                     </div>
-                    <div className="flex items-center justify-between text-xs text-gray-500 font-share-tech">
+                    <div className="flex items-center justify-between text-caption text-gray-500 font-share-tech">
                       <span>{scan.location}</span>
                       <span>{scan.time}</span>
                     </div>

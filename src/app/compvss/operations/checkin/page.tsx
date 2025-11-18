@@ -55,7 +55,7 @@ export default function CheckInPage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-xl font-bebas mb-2">Failed to Load Check-Ins</h2>
+            <h2 className="text-h5 font-bebas mb-2">Failed to Load Check-Ins</h2>
             <p className="text-gray-400 mb-4">{error.message}</p>
             <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
           </div>
@@ -72,19 +72,19 @@ export default function CheckInPage() {
 
   const getStatusBadge = (status: string) => {
     if (status === 'checked_in') {
-      return <Badge variant="compvss" className="bg-success-light text-success border-green-500/30">Checked In</Badge>;
+      return <Badge variant="compvss" className="bg-success-light text-success border-success/30">Checked In</Badge>;
     }
-    return <Badge variant="compvss-outline" className="border-yellow-500/30 text-warning">Pending</Badge>;
+    return <Badge variant="compvss-outline" className="border-warning/30 text-warning">Pending</Badge>;
   };
 
   return (
-    <CompvssLayout breadcrumbs={breadcrumbs}>
+    <CompvssLayout>
       {/* Header */}
       <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bebas compvss-text-gradient">Crew Check-In</h1>
+              <h1 className="text-h3 font-bebas compvss-text-gradient">Crew Check-In</h1>
               <p className="text-gray-400 font-oswald mt-1">Track crew arrival and attendance</p>
             </div>
             <div className="flex items-center gap-4">
@@ -116,8 +116,8 @@ export default function CheckInPage() {
                   <div className={`p-2 bg-black/50 rounded-lg ${stat.color} w-fit mb-2`}>
                     {stat.icon}
                   </div>
-                  <div className="text-3xl font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -167,15 +167,15 @@ export default function CheckInPage() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 flex-1">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-lg">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-h6">
                           {member.name.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div className="flex-1">
                           <h3 className="font-oswald text-white mb-1">{member.name}</h3>
-                          <p className="text-sm text-gray-400 font-share-tech">
+                          <p className="text-body-sm text-gray-400 font-share-tech">
                             {member.role} • {member.organization}
                           </p>
-                          <p className="text-xs text-gray-500 font-share-tech mt-1">
+                          <p className="text-caption text-gray-500 font-share-tech mt-1">
                             Zone: {member.zone}
                           </p>
                         </div>
@@ -183,10 +183,10 @@ export default function CheckInPage() {
                       <div className="flex items-center gap-4">
                         {member.checkInTime && (
                           <div className="text-right mr-4">
-                            <div className="text-sm text-compvss-cyan-500 font-share-tech">
+                            <div className="text-body-sm text-compvss-cyan-500 font-share-tech">
                               {member.checkInTime}
                             </div>
-                            <div className="text-xs text-gray-500 font-share-tech">
+                            <div className="text-caption text-gray-500 font-share-tech">
                               Check-in time
                             </div>
                           </div>

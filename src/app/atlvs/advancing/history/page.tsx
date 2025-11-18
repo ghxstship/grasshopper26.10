@@ -80,7 +80,7 @@ export default function AdvancingHistoryPage() {
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-lg font-bebas mb-2">Failed to Load History</h3>
+                <h3 className="text-h6 font-bebas mb-2">Failed to Load History</h3>
                 <p className="text-gray-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
@@ -106,7 +106,7 @@ export default function AdvancingHistoryPage() {
                         <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer" role="listitem">
                           <div className="flex-1">
                             <div className="font-medium mb-1">{item.title}</div>
-                            <div className="text-sm text-gray-400">{item.project} • {item.requestedAt ? new Date(item.requestedAt).toLocaleDateString() : 'N/A'}</div>
+                            <div className="text-body-sm text-gray-400">{item.project} • {item.requestedAt ? new Date(item.requestedAt).toLocaleDateString() : 'N/A'}</div>
                           </div>
                           <div className="flex items-center gap-3">
                             <Badge variant="atlvs-outline" className={getStatusColor(item.status)} role="status" aria-label={`Status: ${item.status}`}>
