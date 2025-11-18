@@ -21,6 +21,10 @@ body {
 /* Typography Hierarchy */
 h1 {
   font-family: var(--font-anton), 'Anton', sans-serif;
+  font-size: 6rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 
 h2, h3, h4, h5, h6 {
@@ -29,4 +33,49 @@ h2, h3, h4, h5, h6 {
 
 .subtitle {
   font-family: var(--font-oswald), 'Oswald', sans-serif;
+}
+
+/* Brand Text Gradients */
+.gvteway-text-gradient {
+  font-family: var(--font-anton), 'Anton', sans-serif !important;
+  font-size: 6rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #FF0000 0%, #FFD700 50%, #0066FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.atlvs-text-gradient {
+  font-family: var(--font-anton), 'Anton', sans-serif !important;
+  font-size: 6rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #00FF00 0%, #FF8800 50%, #8800FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.compvss-text-gradient {
+  font-family: var(--font-anton), 'Anton', sans-serif !important;
+  font-size: 6rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #00FFFF 0%, #FF00FF 50%, #4B0082 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 640px) {
+  .gvteway-text-gradient,
+  .atlvs-text-gradient,
+  .compvss-text-gradient {
+    font-size: 3rem;
+  }
 }
