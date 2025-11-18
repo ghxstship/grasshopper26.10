@@ -1,0 +1,51 @@
+{
+  "name": "COMPVSS - Referral Reward Distribution",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST", "path": "referral-complete"},
+      "name": "Referral Completed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM referral_tiers WHERE min_referrals <= {{$json[\"totalReferrals\"]}} ORDER BY min_referrals DESC LIMIT 1"
+      },
+      "name": "Get Reward Tier",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO rewards (userId, type, amount, status) VALUES ('{{$node[\"Referral Completed\"].json[\"userId\"]}}', 'REFERRAL', {{$json[\"reward\"]}}, 'APPROVED') RETURNING *"
+      },
+      "name": "Issue Reward",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "rewards@compvss.com",
+        "toEmail": "={{$node[\"Referral Completed\"].json[\"email\"]}}",
+        "subject": "Referral Reward Earned!",
+        "message": "Congratulations! You've earned ${{$json[\"amount\"]}} for your referrals."
+      },
+      "name": "Notify User",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Referral Completed": {"main": [[{"node": "Get Reward Tier", "type": "main", "index": 0}]]},
+    "Get Reward Tier": {"main": [[{"node": "Issue Reward", "type": "main", "index": 0}]]},
+    "Issue Reward": {"main": [[{"node": "Notify User", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["compvss", "referrals"]
+}

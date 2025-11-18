@@ -1,0 +1,43 @@
+{
+  "name": "COMPVSS - Issue Escalation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "escalate"
+      },
+      "name": "Escalation Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE issues SET priority = 'URGENT', escalated = true WHERE id = '{{$json[\"issueId\"]}}' RETURNING *"
+      },
+      "name": "Update Issue",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "urgent@compvss.com",
+        "toEmail": "managers@compvss.com",
+        "subject": "URGENT: Issue Escalated",
+        "message": "Issue #{{$json[\"id\"]}} has been escalated: {{$json[\"description\"]}}"
+      },
+      "name": "Notify Management",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Escalation Trigger": {"main": [[{"node": "Update Issue", "type": "main", "index": 0}]]},
+    "Update Issue": {"main": [[{"node": "Notify Management", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["compvss", "issues"]
+}

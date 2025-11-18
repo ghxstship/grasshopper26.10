@@ -1,0 +1,56 @@
+{
+  "name": "ATLVS - Asset Maintenance Reminder",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{"field": "cronExpression", "expression": "0 9 1 * *"}]
+        }
+      },
+      "name": "Monthly Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "assetType": ""
+      },
+      "name": "Get Assets",
+      "type": "n8n-nodes-base.atlvsAsset",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "dateTime": [{"value1": "={{$json[\"lastMaintenance\"]}}", "operation": "before", "value2": "={{$now.minus({months: 3})}}"}]
+        }
+      },
+      "name": "Check Maintenance",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "maintenance@atlvs.com",
+        "toEmail": "ops@atlvs.com",
+        "subject": "Asset Maintenance Due",
+        "message": "Asset {{$json[\"name\"]}} requires maintenance"
+      },
+      "name": "Send Reminder",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Monthly Check": {"main": [[{"node": "Get Assets", "type": "main", "index": 0}]]},
+    "Get Assets": {"main": [[{"node": "Check Maintenance", "type": "main", "index": 0}]]},
+    "Check Maintenance": {"main": [[{"node": "Send Reminder", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["atlvs", "assets"]
+}

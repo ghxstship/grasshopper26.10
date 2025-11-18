@@ -1,0 +1,42 @@
+{
+  "name": "ATLVS - Budget Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "event": "project.budget_exceeded"
+      },
+      "name": "Budget Exceeded",
+      "type": "n8n-nodes-base.atlvsProjectTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "projectId": "={{$json[\"projectId\"]}}"
+      },
+      "name": "Get Budget",
+      "type": "n8n-nodes-base.atlvsBudget",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendAlert",
+        "projectId": "={{$json[\"projectId\"]}}",
+        "alertType": "exceeded",
+        "recipients": "managers@atlvs.com"
+      },
+      "name": "Send Alert",
+      "type": "n8n-nodes-base.atlvsBudget",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Budget Exceeded": {"main": [[{"node": "Get Budget", "type": "main", "index": 0}]]},
+    "Get Budget": {"main": [[{"node": "Send Alert", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["atlvs", "budget"]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "GVTEWAY - Wallet Pass Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-pass"
+      },
+      "name": "Pass Request",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "addToWallet",
+        "ticketId": "={{$json[\"ticketId\"]}}",
+        "provider": "APPLE_WALLET"
+      },
+      "name": "Apple Wallet",
+      "type": "n8n-nodes-base.gvtewayCredential",
+      "typeVersion": 1,
+      "position": [450, 250]
+    },
+    {
+      "parameters": {
+        "operation": "addToWallet",
+        "ticketId": "={{$json[\"ticketId\"]}}",
+        "provider": "GOOGLE_WALLET"
+      },
+      "name": "Google Wallet",
+      "type": "n8n-nodes-base.gvtewayCredential",
+      "typeVersion": 1,
+      "position": [450, 400]
+    }
+  ],
+  "connections": {
+    "Pass Request": {"main": [[{"node": "Apple Wallet", "type": "main", "index": 0}, {"node": "Google Wallet", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["gvteway", "wallet"]
+}

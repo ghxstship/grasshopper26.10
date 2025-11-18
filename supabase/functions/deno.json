@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": ["deno.window"],
+    "strict": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.168.0/",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.81.1",
+    "stripe": "https://esm.sh/stripe@19.3.1?target=deno"
+  },
+  "tasks": {
+    "serve": "deno run --allow-all --watch index.ts"
+  }
+}

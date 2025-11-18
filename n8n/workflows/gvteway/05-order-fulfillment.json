@@ -1,0 +1,186 @@
+{
+  "name": "GVTEWAY - Order Fulfillment Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "event": "order.completed"
+      },
+      "name": "Order Completed Trigger",
+      "type": "n8n-nodes-base.gvtewayEventTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "orderId": "={{$json[\"orderId\"]}}"
+      },
+      "name": "Get Order Details",
+      "type": "n8n-nodes-base.gvtewayOrder",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "userId": "={{$json[\"userId\"]}}"
+      },
+      "name": "Get User Tickets",
+      "type": "n8n-nodes-base.gvtewayTicket",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "generateQr",
+        "ticketId": "={{$json[\"id\"]}}"
+      },
+      "name": "Generate QR Codes",
+      "type": "n8n-nodes-base.gvtewayTicket",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addToWallet",
+        "ticketId": "={{$json[\"id\"]}}",
+        "provider": "APPLE_WALLET"
+      },
+      "name": "Add to Apple Wallet",
+      "type": "n8n-nodes-base.gvtewayCredential",
+      "typeVersion": 1,
+      "position": [850, 450],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "orders@gvteway.com",
+        "toEmail": "={{$node[\"Get Order Details\"].json[\"userEmail\"]}}",
+        "subject": "Order Fulfilled - Your Tickets Are Ready!",
+        "emailType": "html",
+        "message": "<h1>Order Fulfilled</h1><p>Your order #{{$node[\"Get Order Details\"].json[\"orderNumber\"]}} has been fulfilled!</p><p>Total Tickets: {{$node[\"Get User Tickets\"].json.length}}</p><p>Your tickets are now available in your account and wallet.</p>"
+      },
+      "name": "Send Fulfillment Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "updateStatus",
+        "orderId": "={{$node[\"Get Order Details\"].json[\"id\"]}}",
+        "status": "COMPLETED"
+      },
+      "name": "Update Order Status",
+      "type": "n8n-nodes-base.gvtewayOrder",
+      "typeVersion": 1,
+      "position": [1050, 450],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Order Completed Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Order Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Order Details": {
+      "main": [
+        [
+          {
+            "node": "Get User Tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get User Tickets": {
+      "main": [
+        [
+          {
+            "node": "Generate QR Codes",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Add to Apple Wallet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate QR Codes": {
+      "main": [
+        [
+          {
+            "node": "Send Fulfillment Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add to Apple Wallet": {
+      "main": [
+        [
+          {
+            "node": "Update Order Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["gvteway", "orders", "fulfillment", "tickets"]
+}

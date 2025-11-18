@@ -1,0 +1,42 @@
+{
+  "name": "ATLVS - Team Performance Report",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {"interval": [{"field": "cronExpression", "expression": "0 9 1 * *"}]}
+      },
+      "name": "Monthly Report",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT t.name, COUNT(tk.id) as completed_tasks, AVG(tk.completionTime) as avg_time FROM teams t JOIN team_members tm ON tm.teamId = t.id JOIN tasks tk ON tk.assigneeId = tm.userId WHERE tk.status = 'COMPLETED' AND tk.completedAt >= NOW() - INTERVAL '1 month' GROUP BY t.id"
+      },
+      "name": "Get Metrics",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "reports@atlvs.com",
+        "toEmail": "management@atlvs.com",
+        "subject": "Monthly Team Performance",
+        "message": "Team: {{$json[\"name\"]}}, Tasks: {{$json[\"completed_tasks\"]}}, Avg Time: {{$json[\"avg_time\"]}}"
+      },
+      "name": "Send Report",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Monthly Report": {"main": [[{"node": "Get Metrics", "type": "main", "index": 0}]]},
+    "Get Metrics": {"main": [[{"node": "Send Report", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["atlvs", "performance"]
+}

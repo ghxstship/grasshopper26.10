@@ -39,3 +39,32 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# documentation (keep organized in docs/)
+/AGENT_*.md
+/PHASE_*.md
+*_SUMMARY.md
+*_STATUS.md
+*_PROGRESS.md
+*_REPORT.md
+*_AUDIT.md
+*_COMPLETE.md
+*_CHECKLIST.md
+*_MIGRATION.md
+
+# build logs (archive in docs/archive/build-logs/)
+*.log
+build-*.log
+*-build.log
+
+# test files in root
+.test-commands.md
+
+# large reports (archive in docs/archive/)
+eslint-*.json
+files-with-warnings.txt
+
+# shell scripts (keep in scripts/)
+/*.sh
+/*.mjs
+!/*.config.mjs

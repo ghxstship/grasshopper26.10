@@ -1,0 +1,51 @@
+{
+  "name": "ATLVS - Document Version Control",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST", "path": "document-update"},
+      "name": "Document Updated",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO document_versions (documentId, version, content, updatedBy, createdAt) VALUES ('{{$json[\"documentId\"]}}', {{$json[\"version\"]}}, '{{$json[\"content\"]}}', '{{$json[\"userId\"]}}', NOW()) RETURNING *"
+      },
+      "name": "Save Version",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT u.email FROM users u JOIN project_members pm ON pm.userId = u.id WHERE pm.projectId = '{{$node[\"Document Updated\"].json[\"projectId\"]}}'"
+      },
+      "name": "Get Team",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "documents@atlvs.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "Document Updated",
+        "message": "{{$node[\"Document Updated\"].json[\"documentName\"]}} updated to v{{$node[\"Save Version\"].json[\"version\"]}}"
+      },
+      "name": "Notify Team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Document Updated": {"main": [[{"node": "Save Version", "type": "main", "index": 0}]]},
+    "Save Version": {"main": [[{"node": "Get Team", "type": "main", "index": 0}]]},
+    "Get Team": {"main": [[{"node": "Notify Team", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["atlvs", "documents"]
+}

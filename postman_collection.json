@@ -1,0 +1,256 @@
+{
+  "info": {
+    "name": "GVTEWAY-ATLVS API Collection",
+    "description": "Complete API collection for GVTEWAY, COMPVSS, and ATLVS platforms",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"name\": \"John Doe\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"SecurePass123!\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.token) {",
+                  "  pm.environment.set('authToken', response.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/auth/logout"
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/auth/refresh",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "List Events",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/events?page=1&limit=20",
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "limit", "value": "20"},
+                {"key": "status", "value": "PUBLISHED", "disabled": true},
+                {"key": "search", "value": "", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Summer Music Festival\",\n  \"description\": \"Amazing outdoor concert\",\n  \"startDate\": \"2025-07-01T18:00:00Z\",\n  \"endDate\": \"2025-07-01T23:00:00Z\",\n  \"venueId\": \"venue-id\",\n  \"organizationId\": \"org-id\",\n  \"status\": \"DRAFT\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Event",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/events/{{eventId}}"
+          }
+        },
+        {
+          "name": "Update Event",
+          "request": {
+            "method": "PATCH",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/events/{{eventId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Event Name\",\n  \"status\": \"PUBLISHED\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Event",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/events/{{eventId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "COMPVSS - Advancing",
+      "item": [
+        {
+          "name": "List Advancing Requests",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compvss/advancing?page=1&limit=20",
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "limit", "value": "20"},
+                {"key": "eventId", "value": "", "disabled": true},
+                {"key": "status", "value": "", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Advancing Request",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/compvss/advancing",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"event-id\",\n  \"category\": \"ACCESS_CREDENTIALS\",\n  \"title\": \"Backstage Access Request\",\n  \"description\": \"Need backstage passes for crew\",\n  \"priority\": \"HIGH\",\n  \"requestedBy\": \"user-id\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "COMPVSS - Operations",
+      "item": [
+        {
+          "name": "Get Checklist",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/compvss/operations/checklist?eventId={{eventId}}"
+          }
+        },
+        {
+          "name": "Create Checklist Item",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/compvss/operations/checklist",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"event-id\",\n  \"items\": [\n    {\n      \"title\": \"Setup Stage\",\n      \"category\": \"SETUP\",\n      \"priority\": \"HIGH\"\n    }\n  ]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ATLVS - Projects",
+      "item": [
+        {
+          "name": "List Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/atlvs/projects?page=1&limit=20"
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/atlvs/projects",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Festival Production\",\n  \"description\": \"Main festival production project\",\n  \"startDate\": \"2025-06-01T00:00:00Z\",\n  \"endDate\": \"2025-07-31T23:59:59Z\",\n  \"status\": \"ACTIVE\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ATLVS - Tasks",
+      "item": [
+        {
+          "name": "List Tasks",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/atlvs/tasks?projectId={{projectId}}"
+          }
+        },
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/api/atlvs/tasks",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectId\": \"project-id\",\n  \"title\": \"Book Venue\",\n  \"description\": \"Secure venue for event\",\n  \"priority\": \"HIGH\",\n  \"dueDate\": \"2025-06-15T00:00:00Z\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

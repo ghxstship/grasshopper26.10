@@ -1,0 +1,116 @@
+{
+  "name": "GVTEWAY - Membership Renewal Reminder",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Daily at 9 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT m.*, u.email, u.name, mt.name as tier_name FROM memberships m JOIN users u ON m.userId = u.id JOIN membership_tiers mt ON m.tierId = mt.id WHERE m.status = 'ACTIVE' AND m.endDate BETWEEN NOW() AND NOW() + INTERVAL '7 days'"
+      },
+      "name": "Get Expiring Memberships",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 50
+      },
+      "name": "Split Into Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "memberships@gvteway.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "Your {{$json[\"tier_name\"]}} Membership is Expiring Soon",
+        "emailType": "html",
+        "message": "<h1>Membership Renewal Reminder</h1><p>Hi {{$json[\"name\"]}},</p><p>Your {{$json[\"tier_name\"]}} membership will expire on {{$json[\"endDate\"]}}.</p><p>Renew now to continue enjoying exclusive benefits!</p><a href=\"https://gvteway.com/memberships/renew\">Renew Membership</a>"
+      },
+      "name": "Send Renewal Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "Membership Expiring Soon",
+        "message": "Your {{$json[\"tier_name\"]}} membership expires on {{$json[\"endDate\"]}}. Renew now!",
+        "type": "membership_renewal",
+        "actionUrl": "/memberships/renew"
+      },
+      "name": "Create Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [850, 450]
+    }
+  ],
+  "connections": {
+    "Daily at 9 AM": {
+      "main": [
+        [
+          {
+            "node": "Get Expiring Memberships",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Expiring Memberships": {
+      "main": [
+        [
+          {
+            "node": "Split Into Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Into Batches": {
+      "main": [
+        [
+          {
+            "node": "Send Renewal Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["gvteway", "memberships", "renewal", "scheduled"]
+}

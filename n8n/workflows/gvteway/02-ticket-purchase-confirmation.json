@@ -1,0 +1,211 @@
+{
+  "name": "GVTEWAY - Ticket Purchase Confirmation",
+  "nodes": [
+    {
+      "parameters": {
+        "event": "order.completed"
+      },
+      "name": "Order Completed",
+      "type": "gvtewayEventTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "orderId": "={{$json[\"id\"]}}"
+      },
+      "name": "Get Order Details",
+      "type": "gvtewayOrder",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getTickets",
+        "orderId": "={{$json[\"id\"]}}"
+      },
+      "name": "Get Tickets",
+      "type": "gvtewayTicket",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "generateQr",
+        "ticketId": "={{$json[\"id\"]}}"
+      },
+      "name": "Generate QR Codes",
+      "type": "gvtewayTicket",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "tickets@gvteway.com",
+        "toEmail": "={{$node[\"Get Order Details\"].json[\"user\"][\"email\"]}}",
+        "subject": "Your Tickets for {{$node[\"Get Order Details\"].json[\"event\"][\"name\"]}}",
+        "emailType": "html",
+        "attachments": "={{$json[\"qrCodeUrl\"]}}",
+        "message": "<h1>Thank You for Your Purchase!</h1><p>Your tickets for {{$node[\"Get Order Details\"].json[\"event\"][\"name\"]}} are ready.</p><p><strong>Order Number:</strong> {{$node[\"Get Order Details\"].json[\"orderNumber\"]}}</p><p><strong>Event Date:</strong> {{$node[\"Get Order Details\"].json[\"event\"][\"startDate\"]}}</p><p><strong>Venue:</strong> {{$node[\"Get Order Details\"].json[\"event\"][\"venue\"][\"name\"]}}</p><p>Your QR codes are attached. You can also access them in your GVTEWAY wallet.</p>"
+      },
+      "name": "Send Confirmation Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addToWallet",
+        "ticketId": "={{$json[\"id\"]}}",
+        "provider": "APPLE_WALLET"
+      },
+      "name": "Add to Apple Wallet",
+      "type": "gvtewayCredential",
+      "typeVersion": 1,
+      "position": [1050, 450],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$node[\"Get Order Details\"].json[\"userId\"]}}",
+        "title": "Tickets Purchased",
+        "message": "Your tickets for {{$node[\"Get Order Details\"].json[\"event\"][\"name\"]}} are ready!",
+        "type": "purchase_confirmation",
+        "actionUrl": "/tickets"
+      },
+      "name": "Create Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1050, 600]
+    },
+    {
+      "parameters": {
+        "operation": "track",
+        "event": "ticket_purchased",
+        "properties": {
+          "orderId": "={{$node[\"Get Order Details\"].json[\"id\"]}}",
+          "eventId": "={{$node[\"Get Order Details\"].json[\"eventId\"]}}",
+          "total": "={{$node[\"Get Order Details\"].json[\"total\"]}}",
+          "ticketCount": "={{$node[\"Get Tickets\"].json.length}}"
+        }
+      },
+      "name": "Track Analytics",
+      "type": "n8n-nodes-base.posthog",
+      "typeVersion": 1,
+      "position": [1250, 450],
+      "credentials": {
+        "posthogApi": {
+          "id": "4",
+          "name": "PostHog"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Order Completed": {
+      "main": [
+        [
+          {
+            "node": "Get Order Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Order Details": {
+      "main": [
+        [
+          {
+            "node": "Get Tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Tickets": {
+      "main": [
+        [
+          {
+            "node": "Generate QR Codes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate QR Codes": {
+      "main": [
+        [
+          {
+            "node": "Send Confirmation Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Add to Apple Wallet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add to Apple Wallet": {
+      "main": [
+        [
+          {
+            "node": "Track Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["gvteway", "tickets", "orders", "confirmation"]
+}

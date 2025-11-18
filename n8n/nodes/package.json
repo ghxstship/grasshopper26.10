@@ -1,0 +1,52 @@
+{
+  "name": "@gvteway/n8n-nodes",
+  "version": "1.0.0",
+  "description": "Custom N8N nodes for GVTEWAY, COMPVSS, and ATLVS platforms",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npm run copy-icons",
+    "copy-icons": "copyfiles -u 1 \"**/*.{svg,png}\" dist/",
+    "watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "n8n",
+    "n8n-nodes",
+    "gvteway",
+    "compvss",
+    "atlvs"
+  ],
+  "author": "GHXSTSHIP",
+  "license": "MIT",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/GvtewayApi.credentials.js",
+      "dist/credentials/CompvssApi.credentials.js",
+      "dist/credentials/AtlvsApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/GvtewayEventTrigger/GvtewayEventTrigger.node.js",
+      "dist/nodes/GvtewayTicket/GvtewayTicket.node.js",
+      "dist/nodes/GvtewayOrder/GvtewayOrder.node.js",
+      "dist/nodes/GvtewayUser/GvtewayUser.node.js",
+      "dist/nodes/GvtewayCredential/GvtewayCredential.node.js",
+      "dist/nodes/CompvssAdvancing/CompvssAdvancing.node.js",
+      "dist/nodes/AtlvsProjectTrigger/AtlvsProjectTrigger.node.js",
+      "dist/nodes/AtlvsTask/AtlvsTask.node.js",
+      "dist/nodes/AtlvsBudget/AtlvsBudget.node.js",
+      "dist/nodes/AtlvsTeam/AtlvsTeam.node.js",
+      "dist/nodes/AtlvsAsset/AtlvsAsset.node.js",
+      "dist/nodes/UniversalCredential/UniversalCredential.node.js",
+      "dist/nodes/CrossPlatformSync/CrossPlatformSync.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "n8n-workflow": "^1.0.0"
+  }
+}

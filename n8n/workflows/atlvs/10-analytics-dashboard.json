@@ -1,0 +1,51 @@
+{
+  "name": "ATLVS - Analytics Dashboard Update",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {"interval": [{"field": "cronExpression", "expression": "0 */6 * * *"}]}
+      },
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT COUNT(*) as total_projects, SUM(CASE WHEN status = 'ACTIVE' THEN 1 ELSE 0 END) as active_projects, AVG(budget) as avg_budget, SUM(spent) as total_spent FROM projects"
+      },
+      "name": "Project Metrics",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 250]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT COUNT(*) as total_tasks, AVG(CASE WHEN completedAt IS NOT NULL THEN EXTRACT(EPOCH FROM (completedAt - createdAt))/3600 END) as avg_completion_hours FROM tasks WHERE createdAt >= NOW() - INTERVAL '7 days'"
+      },
+      "name": "Task Metrics",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 400]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO analytics_cache (type, data, updatedAt) VALUES ('dashboard', '{{JSON.stringify({projects: $node[\"Project Metrics\"].json, tasks: $node[\"Task Metrics\"].json})}}', NOW()) ON CONFLICT (type) DO UPDATE SET data = EXCLUDED.data, updatedAt = EXCLUDED.updatedAt"
+      },
+      "name": "Update Cache",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": {"main": [[{"node": "Project Metrics", "type": "main", "index": 0}, {"node": "Task Metrics", "type": "main", "index": 0}]]},
+    "Project Metrics": {"main": [[{"node": "Update Cache", "type": "main", "index": 0}]]},
+    "Task Metrics": {"main": [[{"node": "Update Cache", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["atlvs", "analytics"]
+}

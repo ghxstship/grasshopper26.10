@@ -1,0 +1,168 @@
+{
+  "name": "GVTEWAY - New Event Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "event": "event.created"
+      },
+      "name": "Event Created Trigger",
+      "type": "gvtewayEventTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "auto-generated",
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"status\"]}}",
+              "value2": "PUBLISHED"
+            }
+          ]
+        }
+      },
+      "name": "Is Published?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "filters": {
+          "eventId": "={{$json[\"id\"]}}"
+        }
+      },
+      "name": "Get Followers",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 100,
+        "options": {}
+      },
+      "name": "Split Into Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notifications@gvteway.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "New Event: {{$node[\"Event Created Trigger\"].json[\"name\"]}}",
+        "emailType": "html",
+        "message": "<h1>New Event Alert!</h1><p>{{$node[\"Event Created Trigger\"].json[\"name\"]}} is now live on GVTEWAY.</p><p>Date: {{$node[\"Event Created Trigger\"].json[\"startDate\"]}}</p><a href=\"https://gvteway.com/events/{{$node[\"Event Created Trigger\"].json[\"slug\"]}}\">View Event</a>"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "New Event Available",
+        "message": "{{$node[\"Event Created Trigger\"].json[\"name\"]}} is now available for booking!",
+        "type": "event_notification",
+        "actionUrl": "/events/{{$node[\"Event Created Trigger\"].json[\"slug\"]}}"
+      },
+      "name": "Create In-App Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1050, 450]
+    },
+    {
+      "parameters": {
+        "to": "={{$json[\"phone\"]}}",
+        "message": "New event on GVTEWAY: {{$node[\"Event Created Trigger\"].json[\"name\"]}}. Book now at gvteway.com",
+        "options": {}
+      },
+      "name": "Send SMS (Optional)",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [1050, 600],
+      "credentials": {
+        "twilioApi": {
+          "id": "3",
+          "name": "Twilio"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Event Created Trigger": {
+      "main": [
+        [
+          {
+            "node": "Is Published?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Published?": {
+      "main": [
+        [
+          {
+            "node": "Get Followers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Followers": {
+      "main": [
+        [
+          {
+            "node": "Split Into Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Into Batches": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create In-App Notification",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send SMS (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["gvteway", "events", "notifications"]
+}

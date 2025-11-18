@@ -1,0 +1,145 @@
+{
+  "name": "GVTEWAY - Wishlist Price Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 */6 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT w.*, u.email, u.name, e.name as event_name, e.slug, MIN(tt.price) as min_price FROM wishlists w JOIN users u ON w.userId = u.id JOIN events e ON w.eventId = e.id JOIN ticket_types tt ON tt.eventId = e.id WHERE e.status = 'PUBLISHED' GROUP BY w.id, u.email, u.name, e.name, e.slug"
+      },
+      "name": "Get Wishlist Items",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT price FROM price_history WHERE eventId = {{$json[\"eventId\"]}} ORDER BY createdAt DESC LIMIT 1"
+      },
+      "name": "Get Previous Price",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json[\"min_price\"]}}",
+              "operation": "smaller",
+              "value2": "={{$node[\"Get Previous Price\"].json[\"price\"]}}"
+            }
+          ]
+        }
+      },
+      "name": "Price Dropped?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "alerts@gvteway.com",
+        "toEmail": "={{$node[\"Get Wishlist Items\"].json[\"email\"]}}",
+        "subject": "Price Drop Alert: {{$node[\"Get Wishlist Items\"].json[\"event_name\"]}}",
+        "emailType": "html",
+        "message": "<h1>Price Drop Alert!</h1><p>Hi {{$node[\"Get Wishlist Items\"].json[\"name\"]}},</p><p>Great news! The price for {{$node[\"Get Wishlist Items\"].json[\"event_name\"]}} has dropped!</p><p><strong>New Price:</strong> ${{$node[\"Get Wishlist Items\"].json[\"min_price\"]}}</p><p><strong>Previous Price:</strong> ${{$node[\"Get Previous Price\"].json[\"price\"]}}</p><a href=\"https://gvteway.com/events/{{$node[\"Get Wishlist Items\"].json[\"slug\"]}}\">Book Now</a>"
+      },
+      "name": "Send Price Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 250],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$node[\"Get Wishlist Items\"].json[\"userId\"]}}",
+        "title": "Price Drop Alert",
+        "message": "{{$node[\"Get Wishlist Items\"].json[\"event_name\"]}} price dropped to ${{$node[\"Get Wishlist Items\"].json[\"min_price\"]}}!",
+        "type": "price_alert",
+        "actionUrl": "/events/{{$node[\"Get Wishlist Items\"].json[\"slug\"]}}"
+      },
+      "name": "Create Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1050, 400]
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": {
+      "main": [
+        [
+          {
+            "node": "Get Wishlist Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Wishlist Items": {
+      "main": [
+        [
+          {
+            "node": "Get Previous Price",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Previous Price": {
+      "main": [
+        [
+          {
+            "node": "Price Dropped?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Price Dropped?": {
+      "main": [
+        [
+          {
+            "node": "Send Price Alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["gvteway", "wishlist", "price-alert", "scheduled"]
+}

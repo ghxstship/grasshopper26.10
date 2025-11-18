@@ -1,0 +1,43 @@
+{
+  "name": "ATLVS - Resource Allocation",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST", "path": "allocate-resource"},
+      "name": "Allocation Request",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "checkAvailability",
+        "assetId": "={{$json[\"assetId\"]}}",
+        "startDate": "={{$json[\"startDate\"]}}",
+        "endDate": "={{$json[\"endDate\"]}}"
+      },
+      "name": "Check Availability",
+      "type": "n8n-nodes-base.atlvsAsset",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "book",
+        "assetId": "={{$json[\"assetId\"]}}",
+        "projectId": "={{$node[\"Allocation Request\"].json[\"projectId\"]}}",
+        "startDate": "={{$node[\"Allocation Request\"].json[\"startDate\"]}}",
+        "endDate": "={{$node[\"Allocation Request\"].json[\"endDate\"]}}"
+      },
+      "name": "Book Asset",
+      "type": "n8n-nodes-base.atlvsAsset",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Allocation Request": {"main": [[{"node": "Check Availability", "type": "main", "index": 0}]]},
+    "Check Availability": {"main": [[{"node": "Book Asset", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["atlvs", "resources"]
+}

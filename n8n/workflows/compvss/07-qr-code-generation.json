@@ -1,0 +1,25 @@
+{
+  "name": "COMPVSS - QR Code Generation",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST", "path": "generate-qr"},
+      "name": "QR Request",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO qr_codes (userId, type, data, expiresAt) VALUES ('{{$json[\"userId\"]}}', '{{$json[\"type\"]}}', '{{$json[\"data\"]}}', NOW() + INTERVAL '24 hours') RETURNING *"
+      },
+      "name": "Generate QR",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    }
+  ],
+  "connections": {"QR Request": {"main": [[{"node": "Generate QR", "type": "main", "index": 0}]]}},
+  "active": true,
+  "tags": ["compvss", "qr"]
+}

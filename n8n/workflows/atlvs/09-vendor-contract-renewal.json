@@ -1,0 +1,52 @@
+{
+  "name": "ATLVS - Vendor Contract Renewal",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {"interval": [{"field": "cronExpression", "expression": "0 9 * * 1"}]}
+      },
+      "name": "Weekly Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM vendor_contracts WHERE expiryDate BETWEEN NOW() AND NOW() + INTERVAL '30 days' AND status = 'ACTIVE'"
+      },
+      "name": "Get Expiring Contracts",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "contracts@atlvs.com",
+        "toEmail": "procurement@atlvs.com",
+        "subject": "Contract Renewal Required",
+        "message": "Contract with {{$json[\"vendorName\"]}} expires on {{$json[\"expiryDate\"]}}"
+      },
+      "name": "Send Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO tasks (title, description, assigneeId, dueDate, priority) VALUES ('Renew {{$json[\"vendorName\"]}} Contract', 'Contract expires {{$json[\"expiryDate\"]}}', '{{$json[\"ownerId\"]}}', '{{$json[\"expiryDate\"]}}', 'HIGH')"
+      },
+      "name": "Create Task",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 450]
+    }
+  ],
+  "connections": {
+    "Weekly Check": {"main": [[{"node": "Get Expiring Contracts", "type": "main", "index": 0}]]},
+    "Get Expiring Contracts": {"main": [[{"node": "Send Alert", "type": "main", "index": 0}, {"node": "Create Task", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["atlvs", "contracts"]
+}

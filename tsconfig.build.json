@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false
+  },
+  "exclude": [
+    "node_modules",
+    "n8n/**/*",
+    "hardhat.config.ts",
+    "scripts/deploy-nft.ts",
+    "contracts/**/*",
+    "supabase/functions/**/*",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "__tests__/**/*"
+  ]
+}

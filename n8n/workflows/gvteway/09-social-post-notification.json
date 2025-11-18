@@ -1,0 +1,44 @@
+{
+  "name": "GVTEWAY - Social Post Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "social-post"
+      },
+      "name": "Post Created",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT u.id, u.email FROM users u JOIN follows f ON f.followerId = u.id WHERE f.followingId = '{{$json[\"userId\"]}}'"
+      },
+      "name": "Get Followers",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"id\"]}}",
+        "title": "New Post",
+        "message": "{{$node[\"Post Created\"].json[\"userName\"]}} posted: {{$node[\"Post Created\"].json[\"content\"]}}",
+        "type": "social_post"
+      },
+      "name": "Notify Followers",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Post Created": {"main": [[{"node": "Get Followers", "type": "main", "index": 0}]]},
+    "Get Followers": {"main": [[{"node": "Notify Followers", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["gvteway", "social"]
+}

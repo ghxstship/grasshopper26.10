@@ -1,0 +1,54 @@
+{
+  "name": "GVTEWAY - NFT Ticket Minting",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mint-nft"
+      },
+      "name": "Mint Request Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "ticketId": "={{$json[\"ticketId\"]}}"
+      },
+      "name": "Get Ticket",
+      "type": "n8n-nodes-base.gvtewayTicket",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "mintNft",
+        "ticketId": "={{$json[\"id\"]}}"
+      },
+      "name": "Mint NFT",
+      "type": "n8n-nodes-base.gvtewayTicket",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "nft@gvteway.com",
+        "toEmail": "={{$json[\"userEmail\"]}}",
+        "subject": "Your NFT Ticket is Ready!",
+        "message": "Your ticket has been minted as an NFT. Token ID: {{$json[\"tokenId\"]}}"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Mint Request Webhook": {"main": [[{"node": "Get Ticket", "type": "main", "index": 0}]]},
+    "Get Ticket": {"main": [[{"node": "Mint NFT", "type": "main", "index": 0}]]},
+    "Mint NFT": {"main": [[{"node": "Send Email", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["gvteway", "nft", "blockchain"]
+}

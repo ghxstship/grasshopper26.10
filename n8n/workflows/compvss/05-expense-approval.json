@@ -1,0 +1,54 @@
+{
+  "name": "COMPVSS - Expense Approval",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "expense-submit"
+      },
+      "name": "Expense Submitted",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [{"value1": "={{$json[\"amount\"]}}", "operation": "larger", "value2": 500}]
+        }
+      },
+      "name": "Check Amount",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "expenses@compvss.com",
+        "toEmail": "manager@compvss.com",
+        "subject": "Expense Approval Required",
+        "message": "Expense of ${{$node[\"Expense Submitted\"].json[\"amount\"]}} requires approval"
+      },
+      "name": "Request Approval",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 250]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE expenses SET status = 'APPROVED' WHERE id = '{{$node[\"Expense Submitted\"].json[\"id\"]}}'"
+      },
+      "name": "Auto Approve",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 400]
+    }
+  ],
+  "connections": {
+    "Expense Submitted": {"main": [[{"node": "Check Amount", "type": "main", "index": 0}]]},
+    "Check Amount": {"main": [[{"node": "Request Approval", "type": "main", "index": 0}], [{"node": "Auto Approve", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["compvss", "expenses"]
+}

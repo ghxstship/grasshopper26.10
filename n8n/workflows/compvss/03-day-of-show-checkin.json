@@ -1,0 +1,44 @@
+{
+  "name": "COMPVSS - Day of Show Check-in",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "checkin"
+      },
+      "name": "Check-in Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO checkins (userId, eventId, timestamp, location) VALUES ('{{$json[\"userId\"]}}', '{{$json[\"eventId\"]}}', NOW(), '{{$json[\"location\"]}}') RETURNING *"
+      },
+      "name": "Record Check-in",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "Checked In",
+        "message": "Successfully checked in at {{$json[\"location\"]}}",
+        "type": "checkin"
+      },
+      "name": "Confirm",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Check-in Webhook": {"main": [[{"node": "Record Check-in", "type": "main", "index": 0}]]},
+    "Record Check-in": {"main": [[{"node": "Confirm", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["compvss", "checkin"]
+}

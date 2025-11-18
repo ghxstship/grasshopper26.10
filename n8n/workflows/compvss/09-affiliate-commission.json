@@ -1,0 +1,53 @@
+{
+  "name": "COMPVSS - Affiliate Commission Tracking",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {"interval": [{"field": "cronExpression", "expression": "0 0 1 * *"}]}
+      },
+      "name": "Monthly Processing",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT a.id, a.userId, a.rate, COUNT(r.id) as referrals, SUM(r.revenue) as total_revenue FROM affiliates a JOIN referrals r ON r.affiliateId = a.id WHERE r.createdAt >= NOW() - INTERVAL '1 month' GROUP BY a.id"
+      },
+      "name": "Calculate Commissions",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO commissions (affiliateId, amount, period, status) VALUES ('{{$json[\"id\"]}}', {{$json[\"total_revenue\"]}} * {{$json[\"rate\"]}}, NOW(), 'PENDING') RETURNING *"
+      },
+      "name": "Create Commission",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "affiliates@compvss.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "Monthly Commission Report",
+        "message": "Commission: ${{$json[\"amount\"]}}, Referrals: {{$node[\"Calculate Commissions\"].json[\"referrals\"]}}"
+      },
+      "name": "Send Report",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Monthly Processing": {"main": [[{"node": "Calculate Commissions", "type": "main", "index": 0}]]},
+    "Calculate Commissions": {"main": [[{"node": "Create Commission", "type": "main", "index": 0}]]},
+    "Create Commission": {"main": [[{"node": "Send Report", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "tags": ["compvss", "affiliates"]
+}

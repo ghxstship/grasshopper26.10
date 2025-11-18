@@ -1,0 +1,170 @@
+{
+  "name": "ATLVS - Project Creation Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "event": "project.created"
+      },
+      "name": "Project Created Trigger",
+      "type": "n8n-nodes-base.atlvsProjectTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "credentials": {
+        "atlvsApi": {
+          "id": "3",
+          "name": "ATLVS API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "projectId": "={{$json[\"projectId\"]}}",
+        "title": "Project Setup",
+        "description": "Complete initial project setup",
+        "status": "TODO",
+        "priority": "HIGH"
+      },
+      "name": "Create Setup Task",
+      "type": "n8n-nodes-base.atlvsTask",
+      "typeVersion": 1,
+      "position": [450, 250],
+      "credentials": {
+        "atlvsApi": {
+          "id": "3",
+          "name": "ATLVS API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "projectId": "={{$json[\"projectId\"]}}",
+        "title": "Budget Planning",
+        "description": "Create project budget",
+        "status": "TODO",
+        "priority": "HIGH"
+      },
+      "name": "Create Budget Task",
+      "type": "n8n-nodes-base.atlvsTask",
+      "typeVersion": 1,
+      "position": [450, 400],
+      "credentials": {
+        "atlvsApi": {
+          "id": "3",
+          "name": "ATLVS API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "projectId": "={{$json[\"projectId\"]}}",
+        "title": "Team Assembly",
+        "description": "Assign team members",
+        "status": "TODO",
+        "priority": "MEDIUM"
+      },
+      "name": "Create Team Task",
+      "type": "n8n-nodes-base.atlvsTask",
+      "typeVersion": 1,
+      "position": [450, 550],
+      "credentials": {
+        "atlvsApi": {
+          "id": "3",
+          "name": "ATLVS API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT u.email, u.name FROM users u JOIN project_members pm ON pm.userId = u.id WHERE pm.projectId = '{{$json[\"projectId\"]}}' AND pm.role IN ('LEAD', 'MANAGER')"
+      },
+      "name": "Get Project Leaders",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "projects@atlvs.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "New Project Created: {{$node[\"Project Created Trigger\"].json[\"projectName\"]}}",
+        "emailType": "html",
+        "message": "<h1>New Project Created</h1><p>Hi {{$json[\"name\"]}},</p><p>A new project has been created: <strong>{{$node[\"Project Created Trigger\"].json[\"projectName\"]}}</strong></p><h2>Initial Tasks Created:</h2><ul><li>Project Setup</li><li>Budget Planning</li><li>Team Assembly</li></ul><a href=\"https://atlvs.com/projects/{{$node[\"Project Created Trigger\"].json[\"projectId\"]}}\">View Project</a>"
+      },
+      "name": "Notify Project Leaders",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "New Project Created",
+        "message": "{{$node[\"Project Created Trigger\"].json[\"projectName\"]}} has been created. Review initial tasks.",
+        "type": "project_created",
+        "actionUrl": "/projects/{{$node[\"Project Created Trigger\"].json[\"projectId\"]}}"
+      },
+      "name": "Create Notifications",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [850, 450]
+    }
+  ],
+  "connections": {
+    "Project Created Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create Setup Task",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Budget Task",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Team Task",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Project Leaders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Project Leaders": {
+      "main": [
+        [
+          {
+            "node": "Notify Project Leaders",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notifications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["atlvs", "projects", "automation", "tasks"]
+}

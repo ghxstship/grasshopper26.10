@@ -1,0 +1,533 @@
+openapi: 3.0.3
+info:
+  title: COMPVSS API
+  description: |
+    COMPVSS (Comprehensive Production & Venue Support System) provides advancing request management,
+    team coordination, expense tracking, QR code generation, and check-in management for events.
+  version: 1.0.0
+  contact:
+    name: COMPVSS API Support
+    email: api-support@gvteway-atlvs.com
+
+servers:
+  - url: https://api.gvteway-atlvs.com
+    description: Production server
+  - url: http://localhost:3000
+    description: Development server
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Advancing
+    description: Advancing request management
+  - name: Teams
+    description: Team management
+  - name: Expenses
+    description: Expense tracking
+  - name: QR Codes
+    description: QR code generation and scanning
+  - name: Check-ins
+    description: Check-in management
+  - name: Issues
+    description: Issue tracking
+  - name: Affiliates
+    description: Affiliate management
+
+paths:
+  /api/compvss/advancing:
+    get:
+      tags:
+        - Advancing
+      summary: List advancing requests
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [PENDING, APPROVED, REJECTED, IN_PROGRESS, COMPLETED]
+        - name: category
+          in: query
+          schema:
+            type: string
+            enum: [TECHNICAL, HOSPITALITY, TRANSPORTATION, ACCOMMODATION, SECURITY, STAFFING, MARKETING, PERMITS, ACCESS, OTHER]
+      responses:
+        '200':
+          description: List of advancing requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AdvancingRequest'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+    post:
+      tags:
+        - Advancing
+      summary: Create advancing request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAdvancingRequest'
+      responses:
+        '201':
+          description: Advancing request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancingRequest'
+
+  /api/compvss/advancing/{id}:
+    get:
+      tags:
+        - Advancing
+      summary: Get advancing request by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Advancing request details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancingRequest'
+
+    put:
+      tags:
+        - Advancing
+      summary: Update advancing request
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAdvancingRequest'
+      responses:
+        '200':
+          description: Advancing request updated
+
+  /api/compvss/advancing/{id}/approve:
+    post:
+      tags:
+        - Advancing
+      summary: Approve advancing request
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+      responses:
+        '200':
+          description: Request approved
+
+  /api/compvss/advancing/{id}/reject:
+    post:
+      tags:
+        - Advancing
+      summary: Reject advancing request
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reason
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Request rejected
+
+  /api/compvss/qr/generate:
+    post:
+      tags:
+        - QR Codes
+      summary: Generate QR code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateQRRequest'
+      responses:
+        '201':
+          description: QR code generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRCode'
+
+  /api/compvss/qr/scan:
+    post:
+      tags:
+        - QR Codes
+      summary: Scan and validate QR code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: QR code validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRScanResult'
+
+  /api/compvss/teams:
+    get:
+      tags:
+        - Teams
+      summary: List teams
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+
+    post:
+      tags:
+        - Teams
+      summary: Create team
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamRequest'
+      responses:
+        '201':
+          description: Team created
+
+  /api/compvss/expenses:
+    get:
+      tags:
+        - Expenses
+      summary: List expenses
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [PENDING, APPROVED, REJECTED, PAID]
+      responses:
+        '200':
+          description: List of expenses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  expenses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Expense'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+    post:
+      tags:
+        - Expenses
+      summary: Create expense
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseRequest'
+      responses:
+        '201':
+          description: Expense created
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    LimitParam:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+
+  schemas:
+    AdvancingRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+        status:
+          type: string
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, URGENT]
+        description:
+          type: string
+        submittedBy:
+          $ref: '#/components/schemas/User'
+        submittedAt:
+          type: string
+          format: date-time
+        approvers:
+          type: array
+          items:
+            type: object
+        details:
+          type: object
+
+    CreateAdvancingRequest:
+      type: object
+      required:
+        - category
+        - description
+        - priority
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        priority:
+          type: string
+        eventId:
+          type: string
+        details:
+          type: object
+
+    UpdateAdvancingRequest:
+      type: object
+      properties:
+        status:
+          type: string
+        priority:
+          type: string
+        description:
+          type: string
+        details:
+          type: object
+
+    QRCode:
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        type:
+          type: string
+          enum: [ACCESS, TICKET, EQUIPMENT, ASSET]
+        name:
+          type: string
+        description:
+          type: string
+        qrCodeUrl:
+          type: string
+          format: uri
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE, EXPIRED]
+        validFrom:
+          type: string
+          format: date-time
+        validUntil:
+          type: string
+          format: date-time
+        maxScans:
+          type: integer
+        scansRemaining:
+          type: integer
+
+    GenerateQRRequest:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        validFrom:
+          type: string
+          format: date-time
+        validUntil:
+          type: string
+          format: date-time
+        maxScans:
+          type: integer
+        zone:
+          type: string
+
+    QRScanResult:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        qrCode:
+          $ref: '#/components/schemas/QRCode'
+        message:
+          type: string
+
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        memberCount:
+          type: integer
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+
+    CreateTeamRequest:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+
+    Expense:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+          format: float
+        category:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        submittedBy:
+          $ref: '#/components/schemas/User'
+        submittedAt:
+          type: string
+          format: date-time
+        receiptUrl:
+          type: string
+          format: uri
+
+    CreateExpenseRequest:
+      type: object
+      required:
+        - amount
+        - category
+        - description
+      properties:
+        amount:
+          type: number
+          format: float
+        category:
+          type: string
+        description:
+          type: string
+        receiptUrl:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        hasNext:
+          type: boolean
+        hasPrev:
+          type: boolean

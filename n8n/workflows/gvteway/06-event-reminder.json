@@ -1,0 +1,145 @@
+{
+  "name": "GVTEWAY - Event Reminder Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Daily at 10 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT e.*, t.userId, t.id as ticketId, u.email, u.name FROM events e JOIN tickets t ON t.eventId = e.id JOIN users u ON u.id = t.userId WHERE e.startDate BETWEEN NOW() + INTERVAL '1 day' AND NOW() + INTERVAL '2 days' AND e.status = 'PUBLISHED'"
+      },
+      "name": "Get Upcoming Events",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 100
+      },
+      "name": "Split Into Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "reminders@gvteway.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "Tomorrow: {{$json[\"name\"]}}",
+        "emailType": "html",
+        "message": "<h1>Event Reminder</h1><p>Hi {{$json[\"name\"]}},</p><p>This is a friendly reminder that <strong>{{$json[\"name\"]}}</strong> is happening tomorrow!</p><p><strong>Date:</strong> {{$json[\"startDate\"]}}</p><p><strong>Venue:</strong> {{$json[\"venueName\"]}}</p><p><strong>Address:</strong> {{$json[\"venueAddress\"]}}</p><p>Don't forget to bring your ticket!</p><a href=\"https://gvteway.com/tickets/{{$json[\"ticketId\"]}}\">View Ticket</a>"
+      },
+      "name": "Send Reminder Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "Event Tomorrow",
+        "message": "{{$json[\"name\"]}} is happening tomorrow at {{$json[\"venueName\"]}}!",
+        "type": "event_reminder",
+        "actionUrl": "/tickets/{{$json[\"ticketId\"]}}"
+      },
+      "name": "Create Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [850, 450]
+    },
+    {
+      "parameters": {
+        "to": "={{$json[\"phone\"]}}",
+        "message": "Reminder: {{$json[\"name\"]}} is tomorrow at {{$json[\"venueName\"]}}. See you there!",
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json[\"smsEnabled\"]}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "Send SMS (Optional)",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [850, 600],
+      "credentials": {
+        "twilioApi": {
+          "id": "3",
+          "name": "Twilio"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily at 10 AM": {
+      "main": [
+        [
+          {
+            "node": "Get Upcoming Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Upcoming Events": {
+      "main": [
+        [
+          {
+            "node": "Split Into Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Into Batches": {
+      "main": [
+        [
+          {
+            "node": "Send Reminder Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notification",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send SMS (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["gvteway", "events", "reminders", "scheduled"]
+}

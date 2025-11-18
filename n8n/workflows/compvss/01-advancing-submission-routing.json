@@ -1,0 +1,316 @@
+{
+  "name": "COMPVSS - Advancing Submission Routing",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "advancing-webhook",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "auto-generated"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "category": "={{$json[\"category\"]}}",
+        "title": "={{$json[\"title\"]}}",
+        "description": "={{$json[\"description\"]}}",
+        "userId": "={{$json[\"userId\"]}}",
+        "priority": "={{$json[\"priority\"]}}"
+      },
+      "name": "Create Advancing Request",
+      "type": "compvssAdvancing",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "compvssApi": {
+          "id": "1",
+          "name": "COMPVSS API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"category\"]}}",
+              "operation": "contains"
+            }
+          ]
+        }
+      },
+      "name": "Route by Category",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{$json[\"category\"]}}",
+                    "value2": "ACCESS_CREDENTIALS"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "access"
+            },
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{$json[\"category\"]}}",
+                    "value2": "TECHNICAL_PRODUCTION"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "technical"
+            },
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{$json[\"category\"]}}",
+                    "value2": "HOSPITALITY"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "hospitality"
+            }
+          ]
+        },
+        "fallbackOutput": "other"
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "advancing@compvss.com",
+        "toEmail": "access-team@company.com",
+        "subject": "New Access Request: {{$json[\"title\"]}}",
+        "emailType": "html",
+        "message": "<h2>New Access & Credentials Request</h2><p><strong>Title:</strong> {{$json[\"title\"]}}</p><p><strong>Priority:</strong> {{$json[\"priority\"]}}</p><p><strong>Description:</strong> {{$json[\"description\"]}}</p><a href=\"https://atlvs.com/advancing/{{$json[\"id\"]}}\">Review Request</a>"
+      },
+      "name": "Notify Access Team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 200],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "advancing@compvss.com",
+        "toEmail": "technical-team@company.com",
+        "subject": "New Technical Request: {{$json[\"title\"]}}",
+        "emailType": "html",
+        "message": "<h2>New Technical Production Request</h2><p><strong>Title:</strong> {{$json[\"title\"]}}</p><p><strong>Priority:</strong> {{$json[\"priority\"]}}</p><p><strong>Description:</strong> {{$json[\"description\"]}}</p><a href=\"https://atlvs.com/advancing/{{$json[\"id\"]}}\">Review Request</a>"
+      },
+      "name": "Notify Technical Team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "advancing@compvss.com",
+        "toEmail": "hospitality-team@company.com",
+        "subject": "New Hospitality Request: {{$json[\"title\"]}}",
+        "emailType": "html",
+        "message": "<h2>New Hospitality Request</h2><p><strong>Title:</strong> {{$json[\"title\"]}}</p><p><strong>Priority:</strong> {{$json[\"priority\"]}}</p><p><strong>Description:</strong> {{$json[\"description\"]}}</p><a href=\"https://atlvs.com/advancing/{{$json[\"id\"]}}\">Review Request</a>"
+      },
+      "name": "Notify Hospitality Team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 400],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "advancing@compvss.com",
+        "toEmail": "operations@company.com",
+        "subject": "New Advancing Request: {{$json[\"title\"]}}",
+        "emailType": "html",
+        "message": "<h2>New Advancing Request</h2><p><strong>Category:</strong> {{$json[\"category\"]}}</p><p><strong>Title:</strong> {{$json[\"title\"]}}</p><p><strong>Priority:</strong> {{$json[\"priority\"]}}</p><p><strong>Description:</strong> {{$json[\"description\"]}}</p><a href=\"https://atlvs.com/advancing/{{$json[\"id\"]}}\">Review Request</a>"
+      },
+      "name": "Notify Operations",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 500],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "updateStatus",
+        "requestId": "={{$json[\"id\"]}}",
+        "status": "UNDER_REVIEW"
+      },
+      "name": "Update Status",
+      "type": "compvssAdvancing",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "compvssApi": {
+          "id": "1",
+          "name": "COMPVSS API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "Request Submitted",
+        "message": "Your advancing request has been submitted and is under review.",
+        "type": "advancing_update"
+      },
+      "name": "Notify Submitter",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Create Advancing Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Advancing Request": {
+      "main": [
+        [
+          {
+            "node": "Route by Category",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Category": {
+      "main": [
+        [
+          {
+            "node": "Notify Access Team",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify Technical Team",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify Hospitality Team",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify Operations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Access Team": {
+      "main": [
+        [
+          {
+            "node": "Update Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Technical Team": {
+      "main": [
+        [
+          {
+            "node": "Update Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Hospitality Team": {
+      "main": [
+        [
+          {
+            "node": "Update Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Operations": {
+      "main": [
+        [
+          {
+            "node": "Update Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Status": {
+      "main": [
+        [
+          {
+            "node": "Notify Submitter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["compvss", "advancing", "routing", "notifications"]
+}

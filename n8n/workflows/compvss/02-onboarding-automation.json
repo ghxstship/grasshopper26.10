@@ -1,0 +1,164 @@
+{
+  "name": "COMPVSS - Team Onboarding Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "onboarding",
+        "responseMode": "onReceived"
+      },
+      "name": "Onboarding Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "compvss-onboarding"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO team_members (userId, organizationId, role, status, onboardingStep) VALUES ('{{$json[\"userId\"]}}', '{{$json[\"organizationId\"]}}', '{{$json[\"role\"]}}', 'ONBOARDING', 'WELCOME') RETURNING *"
+      },
+      "name": "Create Team Member",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "welcome@compvss.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "Welcome to COMPVSS!",
+        "emailType": "html",
+        "message": "<h1>Welcome to COMPVSS!</h1><p>Hi {{$json[\"name\"]}},</p><p>We're excited to have you join our production team!</p><h2>Next Steps:</h2><ol><li>Complete your profile</li><li>Upload required credentials</li><li>Review safety protocols</li><li>Join your team channel</li></ol><a href=\"https://compvss.com/onboarding\">Continue Onboarding</a>"
+      },
+      "name": "Send Welcome Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "Complete Your Onboarding",
+        "message": "Welcome to COMPVSS! Please complete your onboarding checklist.",
+        "type": "onboarding",
+        "actionUrl": "/onboarding"
+      },
+      "name": "Create Onboarding Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 450]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO onboarding_tasks (userId, task, status, dueDate) VALUES ('{{$json[\"userId\"]}}', 'Complete Profile', 'PENDING', NOW() + INTERVAL '3 days'), ('{{$json[\"userId\"]}}', 'Upload Credentials', 'PENDING', NOW() + INTERVAL '7 days'), ('{{$json[\"userId\"]}}', 'Safety Training', 'PENDING', NOW() + INTERVAL '7 days')"
+      },
+      "name": "Create Onboarding Tasks",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT u.email FROM users u JOIN team_members tm ON tm.userId = u.id WHERE tm.organizationId = '{{$json[\"organizationId\"]}}' AND tm.role IN ('ADMIN', 'MANAGER')"
+      },
+      "name": "Get Team Managers",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [850, 450]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notifications@compvss.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "New Team Member: {{$node[\"Onboarding Webhook\"].json[\"name\"]}}",
+        "emailType": "html",
+        "message": "<h1>New Team Member</h1><p>{{$node[\"Onboarding Webhook\"].json[\"name\"]}} has joined your team as {{$node[\"Onboarding Webhook\"].json[\"role\"]}}.</p><p>Please help them get started!</p>"
+      },
+      "name": "Notify Team Managers",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 450],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Onboarding Webhook": {
+      "main": [
+        [
+          {
+            "node": "Create Team Member",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Team Member": {
+      "main": [
+        [
+          {
+            "node": "Send Welcome Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Onboarding Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Welcome Email": {
+      "main": [
+        [
+          {
+            "node": "Create Onboarding Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Onboarding Notification": {
+      "main": [
+        [
+          {
+            "node": "Get Team Managers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Team Managers": {
+      "main": [
+        [
+          {
+            "node": "Notify Team Managers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["compvss", "onboarding", "team", "automation"]
+}

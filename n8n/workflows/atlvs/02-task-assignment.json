@@ -1,0 +1,47 @@
+{
+  "name": "ATLVS - Task Assignment Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "task-assigned"
+      },
+      "name": "Task Assignment Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "taskId": "={{$json[\"taskId\"]}}"
+      },
+      "name": "Get Task Details",
+      "type": "n8n-nodes-base.atlvsTask",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "tasks@atlvs.com",
+        "toEmail": "={{$json[\"assigneeEmail\"]}}",
+        "subject": "New Task Assigned",
+        "message": "You have been assigned a new task"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Task Assignment Webhook": {
+      "main": [[{"node": "Get Task Details", "type": "main", "index": 0}]]
+    },
+    "Get Task Details": {
+      "main": [[{"node": "Send Email", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "tags": ["atlvs", "tasks"]
+}
