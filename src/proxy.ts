@@ -53,8 +53,70 @@ function getRequiredRole(path: string): string | null {
 }
 
 export async function proxy(request: NextRequest) {
+  const hostname = request.headers.get('host') || '';
   const { pathname } = request.nextUrl;
+  const url = request.nextUrl.clone();
 
+  // ============================================================================
+  // SUBDOMAIN ROUTING - Handle before authentication
+  // ============================================================================
+  let subdomain = '';
+  
+  if (hostname.includes('localhost') || hostname.includes('127.0.0.1')) {
+    // Local development - check for subdomain
+    const parts = hostname.split('.');
+    if (parts.length > 1 && parts[0] !== 'localhost' && parts[0] !== '127') {
+      subdomain = parts[0];
+    }
+  } else {
+    // Production - extract subdomain from gvteway.one
+    const parts = hostname.split('.');
+    if (parts.length >= 3) {
+      subdomain = parts[0];
+    }
+  }
+
+  // Route based on subdomain
+  if (subdomain) {
+    switch (subdomain) {
+      case 'app':
+        // GVTEWAY authenticated app
+        if (!pathname.startsWith('/gvteway')) {
+          url.pathname = `/gvteway${pathname}`;
+          return NextResponse.rewrite(url);
+        }
+        break;
+
+      case 'atlvs':
+        // ATLVS authenticated app
+        if (!pathname.startsWith('/atlvs')) {
+          if (pathname === '/') {
+            url.pathname = '/atlvs/projects';
+          } else {
+            url.pathname = `/atlvs${pathname}`;
+          }
+          return NextResponse.rewrite(url);
+        }
+        break;
+
+      case 'compass':
+        // COMPVSS authenticated app
+        if (!pathname.startsWith('/compvss')) {
+          if (pathname === '/') {
+            url.pathname = '/compvss/dashboard';
+          } else {
+            url.pathname = `/compvss${pathname}`;
+          }
+          return NextResponse.rewrite(url);
+        }
+        break;
+    }
+  }
+
+  // ============================================================================
+  // CORS & SECURITY HEADERS
+  // ============================================================================
+  
   // Handle CORS preflight requests for API routes
   if (pathname.startsWith("/api") && request.method === "OPTIONS") {
     return handleCorsPreflightRequest(request);
