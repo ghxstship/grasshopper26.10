@@ -45,17 +45,17 @@ const Sidebar: React.FC<SidebarProps> = ({
   const pathname = usePathname();
 
   const variantStyles = {
-    default: "bg-white border-gray-200",
-    gvteway: "bg-gradient-to-b from-gvteway-red-50 to-white border-gvteway-red-200",
-    compvss: "bg-gradient-to-b from-compvss-cyan-50 to-white border-compvss-cyan-200",
-    atlvs: "bg-gradient-to-b from-atlvs-green-50 to-white border-atlvs-green-200",
+    default: "bg-white border-gray-200 text-gray-900",
+    gvteway: "bg-gray-950 border-gvteway-red-900/20 text-gray-100",
+    compvss: "bg-gray-950 border-compvss-cyan-900/20 text-gray-100",
+    atlvs: "bg-gray-950 border-atlvs-green-900/20 text-gray-100",
   };
 
   const activeStyles = {
     default: "bg-gray-100 text-gray-900 border-l-4 border-gray-900",
-    gvteway: "bg-gvteway-red-100 text-gvteway-red-900 border-l-4 border-gvteway-red-500",
-    compvss: "bg-compvss-cyan-100 text-compvss-cyan-900 border-l-4 border-compvss-cyan-500",
-    atlvs: "bg-atlvs-green-100 text-atlvs-green-900 border-l-4 border-atlvs-green-500",
+    gvteway: "bg-gvteway-red-900/20 text-gvteway-red-400 border-l-4 border-gvteway-red-500",
+    compvss: "bg-compvss-cyan-900/20 text-compvss-cyan-400 border-l-4 border-compvss-cyan-500",
+    atlvs: "bg-atlvs-green-900/20 text-atlvs-green-400 border-l-4 border-atlvs-green-500",
   };
 
   const toggleExpanded = (label: string) => {

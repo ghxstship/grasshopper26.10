@@ -43,8 +43,15 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 }) => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
 
+  const backgroundStyles = {
+    default: "bg-gray-50",
+    gvteway: "bg-black",
+    compvss: "bg-black",
+    atlvs: "bg-black",
+  };
+
   return (
-    <div className={cn("flex h-screen overflow-hidden bg-gray-50", className)}>
+    <div className={cn("flex h-screen overflow-hidden", backgroundStyles[variant], className)}>
       {/* Desktop Sidebar */}
       <div className="hidden lg:block">
         <Sidebar

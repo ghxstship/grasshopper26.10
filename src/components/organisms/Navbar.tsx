@@ -38,10 +38,10 @@ const Navbar: React.FC<NavbarProps> = ({
   className,
 }) => {
   const variantStyles = {
-    default: "bg-white border-gray-200",
-    gvteway: "bg-white border-gvteway-red-200",
-    compvss: "bg-white border-compvss-cyan-200",
-    atlvs: "bg-white border-atlvs-green-200",
+    default: "bg-white border-gray-200 text-gray-900",
+    gvteway: "bg-gray-950 border-gvteway-red-900/20 text-gray-100",
+    compvss: "bg-gray-950 border-compvss-cyan-900/20 text-gray-100",
+    atlvs: "bg-gray-950 border-atlvs-green-900/20 text-gray-100",
   };
 
   return (

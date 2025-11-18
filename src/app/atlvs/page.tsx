@@ -3,18 +3,30 @@
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 
-import { motion } from 'framer-motion';
-import { FolderKanban, Users, DollarSign, Package, Zap, BarChart3, FileText, Settings, Workflow } from 'lucide-react';
-
-import Link from 'next/link';
-import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
-import { Button } from '@/components/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ATLVSPage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    // Redirect to projects as the authenticated root page
+    router.push('/atlvs/projects');
+  }, [router]);
+  
   return (
-    <AtlvsLayout>
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-12 h-12 border-4 border-atlvs-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-400">Redirecting to projects...</p>
+      </div>
+    </div>
+  );
+}
+
+// Keep the landing page content as a separate component for marketing purposes
+export function ATLVSLandingPage() {
+  return (
     <div className="min-h-screen bg-black text-white -m-6">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="hero-title">
@@ -217,7 +229,6 @@ export default function ATLVSPage() {
         </div>
       </section>
     </div>
-    </AtlvsLayout>
   );
 }
 

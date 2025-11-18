@@ -3,17 +3,30 @@
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 
-import { CompvssLayout } from '@/components/templates/CompvssLayout';
-import { motion } from 'framer-motion';
-import { UserCheck, ClipboardCheck, QrCode, AlertCircle, DollarSign, BarChart2, Users2, Shield, Camera, Megaphone, Handshake, Building2, FileCheck } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function COMPVSSPage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    // Redirect to dashboard as the authenticated root page
+    router.push('/compvss/dashboard');
+  }, [router]);
+  
   return (
-    <CompvssLayout>
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-12 h-12 border-4 border-compvss-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-400">Redirecting to dashboard...</p>
+      </div>
+    </div>
+  );
+}
+
+// Keep the landing page content as a separate component for marketing purposes
+export function COMPVSSLandingPage() {
+  return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -348,7 +361,6 @@ export default function COMPVSSPage() {
         </div>
       </section>
     </div>
-    </CompvssLayout>
   );
 }
 
