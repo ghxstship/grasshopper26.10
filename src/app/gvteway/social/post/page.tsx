@@ -20,7 +20,7 @@ export default function CreatePostPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-h1 font-bebas mb-8 gvteway-text-gradient">CREATE POST</h1>
+              <h1 className="text-h1 font-anton mb-8 gvteway-text-gradient">CREATE POST</h1>
               
               <Card variant="gvteway" className="bg-gray-900/50">
                 <CardContent className="p-6">

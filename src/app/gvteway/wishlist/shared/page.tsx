@@ -51,7 +51,7 @@ export default function SharedWishlistsPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-h1 font-bebas mb-8 gvteway-text-gradient">SHARED WISHLISTS</h1>
+              <h1 className="text-h1 font-anton mb-8 gvteway-text-gradient">SHARED WISHLISTS</h1>
 
               <div className="space-y-4">
                 {shared.length === 0 ? (

@@ -51,7 +51,7 @@ export default function NFTCollectionPage() {
                     ← Back to Wallet
                   </Button>
                 </Link>
-                <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">
+                <h1 className="text-h1 font-anton mb-4 gvteway-text-gradient">
                   NFT COLLECTION
                 </h1>
                 <p className="text-h5 text-gray-400 font-oswald">

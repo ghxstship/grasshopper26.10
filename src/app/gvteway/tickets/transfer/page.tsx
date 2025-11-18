@@ -26,7 +26,7 @@ export default function TransferTicketPage() {
                 <Button variant="ghost" size="sm" className="mb-6">← Back</Button>
               </Link>
 
-              <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">TRANSFER TICKET</h1>
+              <h1 className="text-h1 font-anton mb-4 gvteway-text-gradient">TRANSFER TICKET</h1>
 
               <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
                 <CardHeader>

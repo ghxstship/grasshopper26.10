@@ -89,7 +89,7 @@ export default function TeamMemberDetailPage({ params }: { params: { id: string 
 
               {/* Info */}
               <div className="flex-1">
-                <h1 className="text-h1 font-bebas mb-2 atlvs-text-gradient">
+                <h1 className="text-h1 font-anton mb-2 atlvs-text-gradient">
                   {member.name}
                 </h1>
                 <p className="text-h5 text-gray-400 font-oswald mb-4">

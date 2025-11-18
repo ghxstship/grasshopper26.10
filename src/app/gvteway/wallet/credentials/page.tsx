@@ -49,7 +49,7 @@ export default function CredentialsPage() {
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <div className="flex items-center justify-between mb-8">
-                <h1 className="text-h1 font-bebas gvteway-text-gradient">CREDENTIALS</h1>
+                <h1 className="text-h1 font-anton gvteway-text-gradient">CREDENTIALS</h1>
                 <Button variant="gvteway">
                   <Plus className="w-5 h-5 mr-2" />
                   Add Credential

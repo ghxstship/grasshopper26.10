@@ -106,7 +106,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               <div className={`relative mb-12 p-12 rounded-2xl bg-gradient-to-br ${category.color}`}>
                 <div className="relative z-10">
                   <div className="text-h1 mb-4">{category.icon}</div>
-                  <h1 className="text-h1 font-bebas text-white mb-4">
+                  <h1 className="text-h1 font-anton text-white mb-4">
                     {category.name.toUpperCase()} EVENTS
                   </h1>
                   <p className="text-h5 text-white/90">

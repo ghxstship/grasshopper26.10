@@ -56,7 +56,7 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
               </div>
               
               <div className="text-center mb-12">
-                <h1 className="text-h1 font-bebas text-white mb-4">{artist.name}</h1>
+                <h1 className="text-h1 font-anton text-white mb-4">{artist.name}</h1>
                 <Badge variant="gvteway" className="mb-4">{artist.genre}</Badge>
                 <div className="flex items-center justify-center gap-2 text-gray-400">
                   <Users className="w-5 h-5" />

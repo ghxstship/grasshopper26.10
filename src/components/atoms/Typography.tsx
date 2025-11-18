@@ -41,7 +41,7 @@ export const DisplayTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = 
 );
 
 export const PageTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ className, ...props }) => (
-  <h2 className={cn("font-bebas text-h1", className)} {...props} />
+  <h1 className={cn("font-anton text-h1", className)} {...props} />
 );
 
 export const SectionHeader: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ className, ...props }) => (

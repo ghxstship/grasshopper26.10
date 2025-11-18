@@ -110,7 +110,7 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h1 className="text-h1 font-bebas mb-2 atlvs-text-gradient">
+                    <h1 className="text-h1 font-anton mb-2 atlvs-text-gradient">
                       PROJECT PHASES
                     </h1>
                     <p className="text-gray-400 font-oswald">

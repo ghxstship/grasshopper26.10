@@ -100,7 +100,7 @@ export default function AlertsPage() {
               {/* Header */}
               <header className="flex items-center justify-between mb-8">
                 <div>
-                  <h1 className="text-h1 font-bebas mb-2 gvteway-text-gradient" id="page-title">
+                  <h1 className="text-h1 font-anton mb-2 gvteway-text-gradient" id="page-title">
                     ALERTS
                   </h1>
                   <p className="text-h5 text-gray-400 font-oswald">

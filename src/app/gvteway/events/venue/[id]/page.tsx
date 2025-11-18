@@ -54,7 +54,7 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
               
               <div className="grid lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
-                  <h1 className="text-h1 font-bebas text-white mb-4">{venue.name}</h1>
+                  <h1 className="text-h1 font-anton text-white mb-4">{venue.name}</h1>
                   
                   <div className="space-y-3 mb-8 text-gray-300">
                     <div className="flex items-center">

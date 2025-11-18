@@ -7,7 +7,7 @@ const textVariants = cva("font-share-tech", {
     variant: {
       hero: "font-anton text-hero",
       display: "font-anton text-display",
-      h1: "font-bebas text-h1",
+      h1: "font-anton text-h1",
       h2: "font-bebas text-h2",
       h3: "font-bebas text-h3",
       h4: "font-bebas text-h4",

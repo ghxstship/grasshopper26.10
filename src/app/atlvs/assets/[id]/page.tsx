@@ -76,7 +76,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
         >
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
-              <h1 className="text-h1 font-bebas mb-2 atlvs-text-gradient">
+              <h1 className="text-h1 font-anton mb-2 atlvs-text-gradient">
                 {asset.name}
               </h1>
               <p className="text-gray-400 font-oswald">

@@ -143,7 +143,7 @@ export default function AtlvsResetPasswordPage() {
         >
           <div className="text-center mb-8">
             <Link href="/atlvs">
-              <h1 className="text-h1 font-bebas atlvs-text-gradient mb-2 cursor-pointerr">
+              <h1 className="text-h1 font-anton atlvs-text-gradient mb-2 cursor-pointerr">
                 ATLVS
               </h1>
             </Link>

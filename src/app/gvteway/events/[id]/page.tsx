@@ -68,7 +68,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     <span className="text-gray-400 text-body-sm ml-1">({(event.metadata as any)?.reviews || '0'} reviews)</span>
                   </div>
                 </div>
-                <h1 className="text-h1 font-bebas text-white mb-4">
+                <h1 className="text-h1 font-anton text-white mb-4">
                   {event.name}
                 </h1>
                 <div className="flex flex-wrap gap-4 text-gray-300">
@@ -175,7 +175,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                   <CardContent className="p-6">
                     <div className="text-center mb-6">
                       <p className="text-gray-400 text-body-sm mb-2">Starting from</p>
-                      <p className="text-h1 font-bebas text-gvteway-red-500">
+                      <p className="text-h1 font-anton text-gvteway-red-500">
                         $0
                       </p>
                       <p className="text-gray-400 text-body-sm">per person</p>

@@ -72,7 +72,7 @@ export default function TicketHistoryPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-h1 font-bebas mb-8 gvteway-text-gradient">TICKET HISTORY</h1>
+              <h1 className="text-h1 font-anton mb-8 gvteway-text-gradient">TICKET HISTORY</h1>
               <div className="space-y-4">
                 {history.map((item) => (
                   <Card key={item.id} variant="gvteway" className="bg-gray-900/50">

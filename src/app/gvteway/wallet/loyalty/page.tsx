@@ -77,7 +77,7 @@ export default function LoyaltyPointsPage() {
                     ← Back to Wallet
                   </Button>
                 </Link>
-                <h1 className="text-h1 font-bebas mb-4 gvteway-text-gradient">
+                <h1 className="text-h1 font-anton mb-4 gvteway-text-gradient">
                   LOYALTY REWARDS
                 </h1>
                 <p className="text-h5 text-gray-400 font-oswald">
@@ -93,7 +93,7 @@ export default function LoyaltyPointsPage() {
                       <TrendingUp className="w-10 h-10 text-white" />
                     </div>
                     <p className="text-gray-300 text-body-sm mb-2">Your Balance</p>
-                    <p className="text-h1 font-bebas text-white mb-1">{currentPoints.toLocaleString()}</p>
+                    <p className="text-h1 font-anton text-white mb-1">{currentPoints.toLocaleString()}</p>
                     <p className="text-gray-300">Loyalty Points</p>
                   </div>
 
