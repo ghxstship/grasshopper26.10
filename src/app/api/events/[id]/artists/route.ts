@@ -3,6 +3,11 @@ import { prisma } from '@/lib/prisma';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { EventsService } from '@/lib/services/events/id/artists.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -23,7 +28,7 @@ export async function GET(
   try {
     const { id } = await params;
     // Check if event exists
-    const event = await prisma.event.findUnique({
+    const event = await new EventsService().findById({
       where: { id: id },
     });
 
@@ -32,7 +37,7 @@ export async function GET(
     }
 
     // Get event artists
-    const eventArtists = await prisma.eventArtist.findMany({
+    const eventArtists = await new EventsService().findAll({
       where: { eventId: id },
       include: {
         artist: {
@@ -72,7 +77,7 @@ export async function POST(
     const validatedData = addArtistSchema.parse(body);
 
     // Check if event exists
-    const event = await prisma.event.findUnique({
+    const event = await new EventsService().findById({
       where: { id: id },
     });
 
@@ -81,7 +86,7 @@ export async function POST(
     }
 
     // Check if artist exists
-    const artist = await prisma.artist.findUnique({
+    const artist = await new EventsService().findById({
       where: { id: validatedData.artistId },
     });
 
@@ -90,7 +95,7 @@ export async function POST(
     }
 
     // Check if artist already added
-    const existing = await prisma.eventArtist.findUnique({
+    const existing = await new EventsService().findById({
       where: {
         eventId_artistId: {
           eventId: id,
@@ -104,7 +109,7 @@ export async function POST(
     }
 
     // Add artist to event
-    const eventArtist = await prisma.eventArtist.create({
+    const eventArtist = await new EventsService().create({
       data: {
         eventId: id,
         artistId: validatedData.artistId,

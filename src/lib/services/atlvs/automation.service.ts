@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { BaseService } from '../base/BaseService';
 
-export class AutomationService extends BaseService {
+export class AtlvsService extends BaseService {
   /**
    * Create automation workflow
    */
@@ -210,4 +210,4 @@ export class AutomationService extends BaseService {
   }
 }
 
-export const automationService = new AutomationService();
+export const automationService = new AtlvsService();

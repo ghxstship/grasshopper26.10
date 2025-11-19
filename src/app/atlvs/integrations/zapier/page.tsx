@@ -12,6 +12,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Zap, AlertCircle, ExternalLink, Copy } from 'lucide-react';
+import { BodyText, CardTitle, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/integrations/zapier
 
 export default function ZapierIntegrationPage() {
   const [isConnected] = useState(false);
@@ -33,7 +36,7 @@ export default function ZapierIntegrationPage() {
           className="space-y-6"
         >
           {/* Connection Status */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -41,8 +44,8 @@ export default function ZapierIntegrationPage() {
                     <Zap className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-h6">Zapier</h3>
-                    <p className="text-body-sm text-gray-400">Workflow automation platform</p>
+                    <SubsectionHeader >Zapier</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400">Workflow automation platform</BodyText>
                   </div>
                 </div>
                 {isConnected ? (
@@ -61,10 +64,10 @@ export default function ZapierIntegrationPage() {
           </Card>
 
           {/* Setup Instructions */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <h3 className="text-h6">Setup Instructions</h3>
-              <p className="text-body-sm text-gray-400">Connect ATLVS to Zapier in 3 steps</p>
+              <SubsectionHeader >Setup Instructions</SubsectionHeader>
+              <BodyText className="text-body-sm text-grey-400">Connect ATLVS to Zapier in 3 steps</BodyText>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -73,8 +76,8 @@ export default function ZapierIntegrationPage() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Copy your API Key</h4>
-                    <p className="text-body-sm text-gray-400 mb-2">Use this key to authenticate ATLVS in Zapier</p>
+                    <CardTitle className="font-medium mb-1">Copy your API Key</CardTitle>
+                    <BodyText className="text-body-sm text-grey-400 mb-2">Use this key to authenticate ATLVS in Zapier</BodyText>
                     <div className="flex gap-2">
                       <Input
                         variant="atlvs"
@@ -94,8 +97,8 @@ export default function ZapierIntegrationPage() {
                     2
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Create a Zap</h4>
-                    <p className="text-body-sm text-gray-400">Go to Zapier and search for &quot;ATLVS&quot; to create your first automation</p>
+                    <CardTitle className="font-medium mb-1">Create a Zap</CardTitle>
+                    <BodyText className="text-body-sm text-grey-400">Go to Zapier and search for &quot;ATLVS&quot; to create your first automation</BodyText>
                   </div>
                 </div>
 
@@ -104,8 +107,8 @@ export default function ZapierIntegrationPage() {
                     3
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Authenticate</h4>
-                    <p className="text-body-sm text-gray-400">Paste your API key when prompted to connect ATLVS to Zapier</p>
+                    <CardTitle className="font-medium mb-1">Authenticate</CardTitle>
+                    <BodyText className="text-body-sm text-grey-400">Paste your API key when prompted to connect ATLVS to Zapier</BodyText>
                   </div>
                 </div>
               </div>
@@ -113,10 +116,10 @@ export default function ZapierIntegrationPage() {
           </Card>
 
           {/* Available Triggers */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <h3 className="text-h6">Available Triggers</h3>
-              <p className="text-body-sm text-gray-400">Events that can start a Zap</p>
+              <SubsectionHeader >Available Triggers</SubsectionHeader>
+              <BodyText className="text-body-sm text-grey-400">Events that can start a Zap</BodyText>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -130,7 +133,7 @@ export default function ZapierIntegrationPage() {
                   'Payment Received',
                   'Team Member Added'
                 ].map((trigger) => (
-                  <div key={trigger} className="p-3 rounded-lg bg-gray-800/50 flex items-center gap-2">
+                  <div key={trigger} className="p-3 rounded-lg bg-grey-800/50 flex items-center gap-2">
                     <Zap className="w-4 h-4 text-atlvs-green-500" />
                     <span className="text-body-sm">{trigger}</span>
                   </div>
@@ -140,10 +143,10 @@ export default function ZapierIntegrationPage() {
           </Card>
 
           {/* Available Actions */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <h3 className="text-h6">Available Actions</h3>
-              <p className="text-body-sm text-gray-400">Things you can do with ATLVS</p>
+              <SubsectionHeader >Available Actions</SubsectionHeader>
+              <BodyText className="text-body-sm text-grey-400">Things you can do with ATLVS</BodyText>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -157,7 +160,7 @@ export default function ZapierIntegrationPage() {
                   'Update Budget',
                   'Add Comment'
                 ].map((action) => (
-                  <div key={action} className="p-3 rounded-lg bg-gray-800/50 flex items-center gap-2">
+                  <div key={action} className="p-3 rounded-lg bg-grey-800/50 flex items-center gap-2">
                     <Check className="w-4 h-4 text-atlvs-green-500" />
                     <span className="text-body-sm">{action}</span>
                   </div>
@@ -167,10 +170,10 @@ export default function ZapierIntegrationPage() {
           </Card>
 
           {/* Popular Zaps */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <h3 className="text-h6">Popular Zaps</h3>
-              <p className="text-body-sm text-gray-400">Common automation workflows</p>
+              <SubsectionHeader >Popular Zaps</SubsectionHeader>
+              <BodyText className="text-body-sm text-grey-400">Common automation workflows</BodyText>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -180,13 +183,13 @@ export default function ZapierIntegrationPage() {
                   { from: 'ATLVS', to: 'Slack', action: 'Send notification on task completion' },
                   { from: 'Typeform', to: 'ATLVS', action: 'Create project from form submission' }
                 ].map((zap, index) => (
-                  <div key={index} className="p-4 rounded-lg bg-gray-800/50">
+                  <div key={index} className="p-4 rounded-lg bg-grey-800/50">
                     <div className="flex items-center gap-3 text-body-sm">
                       <span className="font-medium">{zap.from}</span>
                       <Zap className="w-4 h-4 text-atlvs-green-500" />
                       <span className="font-medium">{zap.to}</span>
                     </div>
-                    <p className="text-caption text-gray-400 mt-1">{zap.action}</p>
+                    <p className="text-caption text-grey-400 mt-1">{zap.action}</p>
                   </div>
                 ))}
               </div>

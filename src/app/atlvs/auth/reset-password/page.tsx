@@ -13,6 +13,7 @@ import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
 
 export default function AtlvsResetPasswordPage() {
   const router = useRouter();
@@ -80,14 +81,14 @@ export default function AtlvsResetPasswordPage() {
     return (
       <AtlvsLayout>
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
-        <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm max-w-md w-full">
+        <Card variant="atlvs" className="bg-grey-900/50 backdrop-blur-sm max-w-md w-full">
           <CardContent className="pt-6">
             <div className="text-center py-8">
               <AlertCircle className="w-16 h-16 text-error mx-auto mb-4" />
-              <h2 className="text-h4 font-bebas text-white mb-2">Invalid Reset Link</h2>
-              <p className="text-gray-400 mb-6">
+              <SectionHeader className="text-white mb-2">Invalid Reset Link</SectionHeader>
+              <BodyText className="text-grey-400 mb-6">
                 This password reset link is invalid or has expired.
-              </p>
+              </BodyText>
               <Link href="/atlvs/auth/forgot-password">
                 <Button variant="atlvs" size="lg" className="w-full">
                   Request New Link
@@ -105,16 +106,16 @@ export default function AtlvsResetPasswordPage() {
     return (
       <AtlvsLayout>
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
-        <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm max-w-md w-full">
+        <Card variant="atlvs" className="bg-grey-900/50 backdrop-blur-sm max-w-md w-full">
           <CardContent className="pt-6">
             <div className="text-center py-8">
               <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-10 h-10 text-success" />
               </div>
-              <h2 className="text-h4 font-bebas text-white mb-2">Password Reset Successful!</h2>
-              <p className="text-gray-400 mb-6">
+              <SectionHeader className="text-white mb-2">Password Reset Successful!</SectionHeader>
+              <BodyText className="text-grey-400 mb-6">
                 Your password has been updated. Redirecting to sign in...
-              </p>
+              </BodyText>
             </div>
           </CardContent>
         </Card>
@@ -143,17 +144,17 @@ export default function AtlvsResetPasswordPage() {
         >
           <div className="text-center mb-8">
             <Link href="/atlvs">
-              <h1 className="text-h1 font-anton atlvs-text-gradient mb-2 cursor-pointerr">
+              <HeroTitle className="atlvs-text-gradient mb-2 cursor-pointerr">
                 ATLVS
-              </h1>
+              </HeroTitle>
             </Link>
-            <p className="text-gray-400 font-roboto-condensed">Reset your password</p>
+            <BodyText className="text-grey-400 font-roboto-condensed">Reset your password</BodyText>
           </div>
 
-          <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="atlvs" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-white text-h4">Create New Password</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardTitle className="text-white">Create New Password</CardTitle>
+              <CardDescription className="text-grey-400">
                 Enter your new password below
               </CardDescription>
             </CardHeader>
@@ -168,7 +169,7 @@ export default function AtlvsResetPasswordPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <FormField label="New Password" required>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                     <Input
                       type={showPassword ? 'text' : 'password'}
                       placeholder="••••••••"
@@ -184,18 +185,18 @@ export default function AtlvsResetPasswordPage() {
                       variant="ghost"
                       size="sm"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 h-auto p-2"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 text-grey-500 hover:text-grey-300 h-auto p-2"
                       disabled={isLoading}
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </Button>
                   </div>
-                  <p className="text-caption text-gray-500 mt-1">Must be at least 8 characters</p>
+                  <BodyText className="text-caption text-grey-500 mt-1">Must be at least 8 characters</BodyText>
                 </FormField>
 
                 <FormField label="Confirm Password" required>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                     <Input
                       type={showConfirmPassword ? 'text' : 'password'}
                       placeholder="••••••••"
@@ -211,7 +212,7 @@ export default function AtlvsResetPasswordPage() {
                       variant="ghost"
                       size="sm"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 h-auto p-2"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 text-grey-500 hover:text-grey-300 h-auto p-2"
                       disabled={isLoading}
                     >
                       {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -231,7 +232,7 @@ export default function AtlvsResetPasswordPage() {
               </form>
 
               <div className="mt-6 text-center">
-                <Link href="/atlvs/auth/login" className="text-body-sm text-gray-400 hover:text-gray-300">
+                <Link href="/atlvs/auth/login" className="text-body-sm text-grey-400 hover:text-grey-300">
                   Back to Sign In
                 </Link>
               </div>

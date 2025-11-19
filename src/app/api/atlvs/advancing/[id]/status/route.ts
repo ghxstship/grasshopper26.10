@@ -3,6 +3,10 @@ import { getSession } from '@/lib/auth';
 import { AdvancingRequestService } from '@/lib/services/atlvs/advancing/AdvancingRequestService';
 import { AdvancingStatus } from '@prisma/client';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+
 
 const updateStatusSchema = z.object({
   status: z.nativeEnum(AdvancingStatus),

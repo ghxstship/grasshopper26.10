@@ -74,13 +74,13 @@ const ModalForm: React.FC<ModalFormProps> = ({
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-start justify-between border-b border-gray-200 p-6">
+          <div className="flex items-start justify-between border-b border-grey-200 p-6">
             <div className="flex-1">
-              <h2 className="text-h5 font-bebas text-gray-900">
+              <h2 className="text-grey-900">
                 {title}
               </h2>
               {description && (
-                <p className="mt-1 text-body-sm text-gray-600 font-share-tech">
+                <p className="mt-1 text-body-sm text-grey-600 -tech">
                   {description}
                 </p>
               )}
@@ -100,7 +100,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
           {/* Footer */}
           {onSubmit && (
-            <div className="flex items-center justify-end gap-3 border-t border-gray-200 p-6">
+            <div className="flex items-center justify-end gap-3 border-t border-grey-200 p-6">
               <Button
                 variant="outline"
                 onClick={onClose}

@@ -63,7 +63,7 @@ export default function CartPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <BodyText className="text-h4 font-anton text-ghxst-primary">
+                  <BodyText className="text-ghxst-primary">
                     ${item.price * item.quantity}
                   </BodyText>
                   <Metadata className="text-ghxst-text-secondary">${item.price} each</Metadata>

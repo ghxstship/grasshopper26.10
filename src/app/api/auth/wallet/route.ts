@@ -7,9 +7,32 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticateWithWallet, type WalletAuthParams } from '@/lib/integrations/walletconnect/auth';
 import { createSession } from '@/lib/auth/session';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { z } from 'zod';
+import { handleApiError } from '@/lib/api/response';
+import { AuthService } from '@/lib/services/auth/wallet.service';
+
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const body = await request.json();
     const { address, signature, message, chainId } = body as WalletAuthParams;
 
@@ -37,7 +60,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user details
-    const user = await prisma.user.findUnique({
+    const user = await new AuthService().findById({
       where: { id: result.userId },
       select: {
         id: true,

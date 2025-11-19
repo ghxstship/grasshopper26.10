@@ -4,9 +4,16 @@ import { prisma } from '@/lib/prisma';
 import { loginSchema } from '@/lib/validations/auth';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { AuthService } from '@/lib/services/auth/login.service';
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     const identifier = getClientIdentifier(request);
     if (!rateLimit(`login:${identifier}`, 5, 900000)) {
@@ -19,7 +26,7 @@ export async function POST(request: NextRequest) {
     const validatedData = loginSchema.parse(body);
 
     // Find user by email
-    const user = await prisma.user.findUnique({
+    const user = await new AuthService().findById({
       where: { email: validatedData.email },
       select: {
         id: true,
@@ -48,7 +55,7 @@ export async function POST(request: NextRequest) {
     const sessionToken = crypto.randomUUID();
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
-    await prisma.session.create({
+    await new AuthService().create({
       data: {
         sessionToken,
         userId: user.id,

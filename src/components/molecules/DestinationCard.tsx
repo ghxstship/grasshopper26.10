@@ -58,7 +58,7 @@ export const DestinationCard: React.FC<DestinationCardProps> = ({
   return (
     <Card className={cn("overflow-hidden group", className)}>
       <Link href={`/destinations/${slug}`}>
-        <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+        <div className="relative aspect-[4/3] overflow-hidden bg-grey-100">
           <Image
             src={image}
             alt={name}
@@ -68,17 +68,17 @@ export const DestinationCard: React.FC<DestinationCardProps> = ({
         </div>
         
         <div className="p-4 space-y-3">
-          <CardTitle className="line-clamp-2 group-hover:text-gray-700 transition-colors">
+          <CardTitle className="line-clamp-2 group-hover:text-grey-700 transition-colors">
             {name}
           </CardTitle>
           
           <div className="space-y-2">
-            <Metadata className="text-gray-700">
+            <Metadata className="text-grey-700">
               {categoryLabels[category]}
             </Metadata>
             
             {distance && (
-              <Metadata className="flex items-center gap-2 text-gray-700">
+              <Metadata className="flex items-center gap-2 text-grey-700">
                 <MapPin className="w-4 h-4" />
                 {distance} from venue
               </Metadata>

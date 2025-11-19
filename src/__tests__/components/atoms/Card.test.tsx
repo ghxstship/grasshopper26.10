@@ -7,7 +7,7 @@ describe('Card Components', () => {
       render(<Card data-testid="card">Card content</Card>)
       const card = screen.getByTestId('card')
       expect(card).toBeInTheDocument()
-      expect(card).toHaveClass('bg-white', 'border-gray-200')
+      expect(card).toHaveClass('bg-white', 'border-grey-200')
     })
 
     it('renders with GVTEWAY variant', () => {
@@ -93,7 +93,7 @@ describe('Card Components', () => {
     it('applies correct styling', () => {
       render(<CardDescription>Description</CardDescription>)
       const description = screen.getByText('Description')
-      expect(description).toHaveClass('font-share-tech', 'text-body-sm', 'text-gray-600')
+      expect(description).toHaveClass('font-share-tech', 'text-body-sm', 'text-grey-600')
     })
 
     it('applies custom className', () => {

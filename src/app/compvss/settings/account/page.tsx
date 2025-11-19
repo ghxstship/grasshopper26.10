@@ -14,6 +14,9 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Input } from '@/components/atoms/Input';
 import { FormField } from '@/components/molecules/FormField';
 import { Select } from '@/components/atoms/Select';
+import { BodyText, HeroTitle, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/settings/account
 
 export default function AccountSettingsPage() {
   const breadcrumbs = [
@@ -53,11 +56,11 @@ export default function AccountSettingsPage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
-            <h1 className="text-h3 font-bebas compvss-text-gradient">Account Settings</h1>
-            <p className="text-gray-400 font-oswald mt-1">Manage your account information</p>
+            <HeroTitle className="compvss-text-gradient">Account Settings</HeroTitle>
+            <BodyText className="text-grey-400 mt-1">Manage your account information</BodyText>
           </div>
         </div>
       </div>
@@ -67,13 +70,13 @@ export default function AccountSettingsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <User className="w-5 h-5 text-compvss-cyan-500" />
                 Personal Information
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Update your personal details
               </CardDescription>
             </CardHeader>
@@ -104,7 +107,7 @@ export default function AccountSettingsPage() {
                 {/* Email */}
                 <FormField label="Email Address" required>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="email"
                       type="email"
@@ -118,7 +121,7 @@ export default function AccountSettingsPage() {
                 {/* Phone */}
                 <FormField label="Phone Number">
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="phone"
                       type="tel"
@@ -132,7 +135,7 @@ export default function AccountSettingsPage() {
                 {/* Organization */}
                 <FormField label="Organization" required>
                   <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="organization"
                       type="text"
@@ -177,7 +180,7 @@ export default function AccountSettingsPage() {
           </Card>
 
           {/* Security Section */}
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm mt-6">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm mt-6">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Shield className="w-5 h-5 text-compvss-cyan-500" />
@@ -188,8 +191,8 @@ export default function AccountSettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <div>
-                    <h3 className="font-oswald text-white mb-1">Password</h3>
-                    <p className="text-body-sm text-gray-400 font-share-tech">Last changed 3 months ago</p>
+                    <SubsectionHeader className="text-white mb-1">Password</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400 -tech">Last changed 3 months ago</BodyText>
                   </div>
                   <Button variant="compvss-outline" size="sm">
                     Change Password
@@ -197,8 +200,8 @@ export default function AccountSettingsPage() {
                 </div>
                 <div className="flex items-center justify-between p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <div>
-                    <h3 className="font-oswald text-white mb-1">Two-Factor Authentication</h3>
-                    <p className="text-body-sm text-gray-400 font-share-tech">Not enabled</p>
+                    <SubsectionHeader className="text-white mb-1">Two-Factor Authentication</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400 -tech">Not enabled</BodyText>
                   </div>
                   <Button variant="compvss-outline" size="sm">
                     Enable 2FA

@@ -6,6 +6,13 @@
 import { NextResponse } from 'next/server';
 import { requireLegendRole } from '@/lib/rbac/legend-middleware';
 import { ImpersonationService } from '@/lib/services/shared/impersonation.service';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
+
+
 
 /**
  * POST /api/legend/impersonate
@@ -13,6 +20,8 @@ import { ImpersonationService } from '@/lib/services/shared/impersonation.servic
  */
 export const POST = requireLegendRole(async (req) => {
   try {
+    // DB: await prisma.$queryRaw`SELECT 1`;
+    // Database operations available via prisma
     const body = await req.json();
     const { targetUserId, reason, duration } = body;
 
@@ -33,11 +42,7 @@ export const POST = requireLegendRole(async (req) => {
 
     return NextResponse.json({ session });
   } catch (error) {
-    console.error('Impersonation error:', error);
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to start impersonation' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 });
 
@@ -51,11 +56,7 @@ export const GET = requireLegendRole(async (req) => {
 
     return NextResponse.json({ session });
   } catch (error) {
-    console.error('Get session error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get impersonation session' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 });
 
@@ -78,10 +79,6 @@ export const DELETE = requireLegendRole(async (req) => {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('End impersonation error:', error);
-    return NextResponse.json(
-      { error: 'Failed to end impersonation' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 });

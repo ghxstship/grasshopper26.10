@@ -12,6 +12,8 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/versions
+
 export default function DocumentVersionsPage() {
   const { documents, isLoading, error, refetch } = useDocuments('version');
   const versions = (documents as any) || [];
@@ -72,7 +74,7 @@ export default function DocumentVersionsPage() {
       >
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6 flex items-center gap-2">
                 <Clock className="w-5 h-5" />
@@ -80,9 +82,9 @@ export default function DocumentVersionsPage() {
               </CardTitle>
               <div className="space-y-3">
                 {versions.map((version) => (
-                  <div key={version.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                  <div key={version.id} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg">
                     <div className="flex items-center gap-4 flex-1">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas">
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                         {version.version}
                       </div>
                       <div className="flex-1">
@@ -94,7 +96,7 @@ export default function DocumentVersionsPage() {
                             </Badge>
                           )}
                         </div>
-                        <div className="text-body-sm text-gray-400">
+                        <div className="text-body-sm text-grey-400">
                           {version.date} • {version.author} • {version.size}
                         </div>
                       </div>

@@ -140,41 +140,25 @@ export function WizardPageTemplate({
               <div key={step.id} className="flex items-center flex-1">
                 <div className="flex flex-col items-center flex-1">
                   <div
-                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all ${
-                      index === currentStep
-                        ? 'bg-ghxst-primary border-ghxst-primary text-white scale-110'
-                        : completedSteps.has(index)
-                        ? 'bg-success-light0 border-success text-white'
-                        : 'bg-white border-ghxst-border text-ghxst-text-secondary'
-                    }`}
+                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all ${ index === currentStep ? 'bg-ghxst-primary border-ghxst-primary text-white scale-110' : completedSteps.has(index) ? 'bg-success-light0 border-success text-white' : 'bg-white border-ghxst-border text-ghxst-text-secondary' }`}
                   >
                     {completedSteps.has(index) ? (
                       <Check className="w-6 h-6" />
                     ) : step.icon ? (
                       step.icon
                     ) : showStepNumbers ? (
-                      <span className="font-bebas text-h5">{index + 1}</span>
+                      <span >{index + 1}</span>
                     ) : null}
                   </div>
                   <Metadata
-                    className={`mt-2 text-center text-caption ${
-                      index === currentStep
-                        ? 'text-ghxst-primary'
-                        : completedSteps.has(index)
-                        ? 'text-success'
-                        : 'text-ghxst-text-secondary'
-                    }`}
+                    className={`mt-2 text-center text-caption ${ index === currentStep ? 'text-ghxst-primary' : completedSteps.has(index) ? 'text-success' : 'text-ghxst-text-secondary' }`}
                   >
                     {step.title}
                   </Metadata>
                 </div>
                 {index < steps.length - 1 && (
                   <div
-                    className={`h-1 flex-1 mx-2 rounded-full transition-all ${
-                      completedSteps.has(index) || index < currentStep
-                        ? 'bg-success-light0'
-                        : 'bg-ghxst-border'
-                    }`}
+                    className={`h-1 flex-1 mx-2 rounded-full transition-all ${ completedSteps.has(index) || index < currentStep ? 'bg-success-light0' : 'bg-ghxst-border' }`}
                   />
                 )}
               </div>
@@ -185,7 +169,7 @@ export function WizardPageTemplate({
           <Card className="mb-6">
             <CardContent className="p-8">
               <div className="mb-6">
-                <SectionHeader className="mb-2 font-bebas text-h4">
+                <SectionHeader className="mb-2">
                   {currentStepData.title}
                   {isOptionalStep && (
                     <span className="ml-2 text-body-sm text-ghxst-text-secondary">

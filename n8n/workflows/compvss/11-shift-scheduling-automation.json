@@ -1,0 +1,139 @@
+{
+  "name": "COMPVSS - Shift Scheduling Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 0 * * 0"
+            }
+          ]
+        }
+      },
+      "name": "Weekly on Sunday",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT e.id, e.name, e.date, e.requiredStaff FROM events e WHERE e.date BETWEEN NOW() + INTERVAL '7 days' AND NOW() + INTERVAL '14 days' AND e.status = 'CONFIRMED'"
+      },
+      "name": "Get Upcoming Events",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT u.id, u.name, u.email, u.role, u.availability FROM users u JOIN crew_members cm ON cm.userId = u.id WHERE cm.status = 'ACTIVE' AND u.availability IS NOT NULL"
+      },
+      "name": "Get Available Crew",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Auto-assign crew based on availability and role\nconst events = $input.first().json.events;\nconst crew = $input.all()[1].json;\n\nconst assignments = [];\n\nfor (const event of events) {\n  const eventDate = new Date(event.date);\n  const requiredRoles = JSON.parse(event.requiredStaff);\n  \n  for (const [role, count] of Object.entries(requiredRoles)) {\n    const availableCrew = crew.filter(c => \n      c.role === role && \n      c.availability.includes(eventDate.getDay())\n    ).slice(0, count);\n    \n    for (const member of availableCrew) {\n      assignments.push({\n        eventId: event.id,\n        eventName: event.name,\n        userId: member.id,\n        userName: member.name,\n        userEmail: member.email,\n        role: role,\n        date: event.date\n      });\n    }\n  }\n}\n\nreturn assignments.map(a => ({ json: a }));"
+      },
+      "name": "Auto-Assign Shifts",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO shift_assignments (eventId, userId, role, date, status) VALUES ('{{$json[\"eventId\"]}}', '{{$json[\"userId\"]}}', '{{$json[\"role\"]}}', '{{$json[\"date\"]}}', 'ASSIGNED')"
+      },
+      "name": "Create Shift Assignment",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "scheduling@compvss.com",
+        "toEmail": "={{$json[\"userEmail\"]}}",
+        "subject": "New Shift Assignment - {{$json[\"eventName\"]}}",
+        "emailType": "html",
+        "message": "<h1>New Shift Assignment</h1><p>Hi {{$json[\"userName\"]}},</p><p>You've been assigned to work at <strong>{{$json[\"eventName\"]}}</strong></p><p><strong>Role:</strong> {{$json[\"role\"]}}</p><p><strong>Date:</strong> {{$json[\"date\"]}}</p><p>Please confirm your availability within 48 hours.</p><a href=\"https://compvss.com/shifts/confirm/{{$json[\"eventId\"]}}\">Confirm Shift</a>"
+      },
+      "name": "Notify Crew Member",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1250, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Weekly on Sunday": {
+      "main": [
+        [
+          {
+            "node": "Get Upcoming Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Upcoming Events": {
+      "main": [
+        [
+          {
+            "node": "Get Available Crew",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Available Crew": {
+      "main": [
+        [
+          {
+            "node": "Auto-Assign Shifts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-Assign Shifts": {
+      "main": [
+        [
+          {
+            "node": "Create Shift Assignment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Shift Assignment": {
+      "main": [
+        [
+          {
+            "node": "Notify Crew Member",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["compvss", "scheduling", "shifts", "automation"]
+}

@@ -144,21 +144,21 @@ describe('Breadcrumb', () => {
       render(<Breadcrumb items={mockItems} />);
       
       const lastItem = screen.getByText('Details');
-      expect(lastItem).toHaveClass('text-gray-900', 'font-medium');
+      expect(lastItem).toHaveClass('text-grey-900', 'font-medium');
     });
 
     it('should style non-last items differently', () => {
       render(<Breadcrumb items={mockItems} />);
       
       const firstItem = screen.getByText('Events');
-      expect(firstItem).toHaveClass('text-gray-500');
+      expect(firstItem).toHaveClass('text-grey-500');
     });
 
     it('should apply hover styles to links', () => {
       render(<Breadcrumb items={mockItems} />);
       
       const eventsLink = screen.getByText('Events').closest('a');
-      expect(eventsLink).toHaveClass('hover:text-gray-900');
+      expect(eventsLink).toHaveClass('hover:text-grey-900');
     });
   });
 

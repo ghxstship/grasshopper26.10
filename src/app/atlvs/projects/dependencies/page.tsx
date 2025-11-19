@@ -8,6 +8,7 @@ import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
 import { Button } from '@/components/atoms/Button';
 import { useProjects } from '@/lib/hooks/atlvs/useProjects';
+import { BodyText, HeroTitle, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
 
 interface Dependency {
   id: string;
@@ -19,6 +20,8 @@ interface Dependency {
   dependsOn: string;
   lag: number;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/projects/dependencies
 
 export default function ProjectDependenciesPage() {
   const { isLoading, error, refetch } = useProjects({});
@@ -39,7 +42,7 @@ export default function ProjectDependenciesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading project dependencies...</p>
+              <BodyText className="text-grey-400">Loading project dependencies...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -62,8 +65,8 @@ export default function ProjectDependenciesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertTriangle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Dependencies</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Dependencies</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -137,37 +140,37 @@ export default function ProjectDependenciesPage() {
         <div className="p-6 max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-h3 text-gray-900 mb-2">Task Dependencies</h1>
-            <p className="text-gray-600">Manage task relationships and execution order</p>
+            <HeroTitle className="text-grey-900 mb-2">Task Dependencies</HeroTitle>
+            <BodyText className="text-grey-600">Manage task relationships and execution order</BodyText>
           </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Total Dependencies</div>
-              <div className="text-h4 text-gray-900">{dependencies.length}</div>
+              <div className="text-body-sm text-grey-600 mb-1">Total Dependencies</div>
+              <div className="text-grey-900">{dependencies.length}</div>
             </div>
-            <GitBranch className="w-8 h-8 text-gray-400" />
+            <GitBranch className="w-8 h-8 text-grey-400" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Blocked Tasks</div>
-              <div className="text-h4 text-error">
+              <div className="text-body-sm text-grey-600 mb-1">Blocked Tasks</div>
+              <div className="text-error">
                 {dependencies.filter(d => d.status === 'blocked').length}
               </div>
             </div>
             <AlertTriangle className="w-8 h-8 text-destructive" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Ready to Start</div>
-              <div className="text-h4 text-info">
+              <div className="text-body-sm text-grey-600 mb-1">Ready to Start</div>
+              <div className="text-info">
                 {dependencies.filter(d => d.status === 'ready').length}
               </div>
             </div>
@@ -177,32 +180,32 @@ export default function ProjectDependenciesPage() {
       </div>
 
       {/* Dependencies List */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-4 border-b border-gray-200">
-          <h2 className="text-h6 text-gray-900">Dependency Chain</h2>
+      <div className="bg-white rounded-lg border border-grey-200">
+        <div className="p-4 border-b border-grey-200">
+          <SectionHeader className="text-grey-900">Dependency Chain</SectionHeader>
         </div>
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-grey-200">
           {dependencies.map(dep => (
-            <div key={dep.id} className="p-4 hover:bg-gray-50 transition-colors">
+            <div key={dep.id} className="p-4 hover:bg-grey-50 transition-colors">
               <div className="flex items-start gap-4">
                 <div className={`p-2 rounded-lg ${getStatusColor(dep.status)}`}>
                   {getStatusIcon(dep.status)}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-gray-900">{dep.taskName}</h3>
+                    <h3 className="font-semibold text-grey-900">{dep.taskName}</h3>
                     <span className={`px-2 py-1 rounded text-caption ${getStatusColor(dep.status)}`}>
                       {dep.status}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-body-sm text-gray-600">
+                  <div className="flex items-center gap-2 text-body-sm text-grey-600">
                     <span>Depends on:</span>
-                    <span className="font-medium text-gray-900">{dep.dependsOn}</span>
-                    <span className="text-gray-400">•</span>
+                    <span className="font-medium text-grey-900">{dep.dependsOn}</span>
+                    <span className="text-grey-400">•</span>
                     <span className="capitalize">{dep.type.replace(/-/g, ' ')}</span>
                     {dep.lag > 0 && (
                       <>
-                        <span className="text-gray-400">•</span>
+                        <span className="text-grey-400">•</span>
                         <span>{dep.lag} day lag</span>
                       </>
                     )}
@@ -216,19 +219,19 @@ export default function ProjectDependenciesPage() {
 
       {/* Dependency Types Legend */}
       <div className="mt-6 bg-info-light rounded-lg p-4">
-        <h3 className="font-semibold text-gray-900 mb-3">Dependency Types</h3>
+        <SubsectionHeader className="font-semibold text-grey-900 mb-3">Dependency Types</SubsectionHeader>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-body-sm">
           <div>
-            <div className="font-medium text-gray-900 mb-1">Finish-to-Start</div>
-            <div className="text-gray-600">Task B starts when Task A finishes</div>
+            <div className="font-medium text-grey-900 mb-1">Finish-to-Start</div>
+            <div className="text-grey-600">Task B starts when Task A finishes</div>
           </div>
           <div>
-            <div className="font-medium text-gray-900 mb-1">Start-to-Start</div>
-            <div className="text-gray-600">Task B starts when Task A starts</div>
+            <div className="font-medium text-grey-900 mb-1">Start-to-Start</div>
+            <div className="text-grey-600">Task B starts when Task A starts</div>
           </div>
           <div>
-            <div className="font-medium text-gray-900 mb-1">Finish-to-Finish</div>
-            <div className="text-gray-600">Task B finishes when Task A finishes</div>
+            <div className="font-medium text-grey-900 mb-1">Finish-to-Finish</div>
+            <div className="text-grey-600">Task B finishes when Task A finishes</div>
           </div>
         </div>
       </div>

@@ -13,6 +13,9 @@ import { Input } from '@/components/atoms/Input';
 import { Badge } from '@/components/atoms/Badge';
 import { Select } from '@/components/atoms/Select';
 import { useProjectTemplates } from '@/lib/hooks/atlvs/useProjects';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/projects/templates
 
 export default function ProjectTemplatesPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,7 +34,7 @@ export default function ProjectTemplatesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading project templates...</p>
+              <BodyText className="text-grey-400">Loading project templates...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -51,8 +54,8 @@ export default function ProjectTemplatesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Templates</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Templates</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -92,13 +95,13 @@ export default function ProjectTemplatesPage() {
         {/* Search and Filters */}
         <div className="mb-6 flex gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-grey-400 w-5 h-5" />
             <Input
               type="text"
               placeholder="Search templates..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-gray-900/50 border-accent/30 text-white"
+              className="pl-10 bg-grey-900/50 border-accent/30 text-white"
             />
           </div>
           <Select
@@ -118,7 +121,7 @@ export default function ProjectTemplatesPage() {
         {/* Templates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTemplates.map(template => (
-            <Card key={template.id} variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all">
+            <Card key={template.id} variant="atlvs" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all">
               <CardContent className="pt-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-3 bg-accent/100/10 rounded-lg">
@@ -129,26 +132,26 @@ export default function ProjectTemplatesPage() {
                   </Badge>
                 </div>
 
-                <h3 className="text-h6 font-oswald text-white mb-2">{template.name}</h3>
-                <p className="text-gray-400 text-body-sm font-share-tech mb-4 line-clamp-2">{template.description}</p>
+                <h3 className="text-white mb-2">{template.name}</h3>
+                <p className="text-grey-400 text-body-sm -tech mb-4 line-clamp-2">{template.description}</p>
 
                 <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-body-sm text-gray-400 font-share-tech">
+                  <div className="flex items-center text-body-sm text-grey-400 -tech">
                     <Clock className="w-4 h-4 mr-2" />
                     <span>{template.duration} timeline</span>
                   </div>
-                  <div className="flex items-center text-body-sm text-gray-400 font-share-tech">
+                  <div className="flex items-center text-body-sm text-grey-400 -tech">
                     <Users className="w-4 h-4 mr-2" />
                     <span>{template.teamSize} team members</span>
                   </div>
-                  <div className="flex items-center text-body-sm text-gray-400 font-share-tech">
+                  <div className="flex items-center text-body-sm text-grey-400 -tech">
                     <CheckCircle className="w-4 h-4 mr-2" />
                     <span>{template.tasksCount} tasks included</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                  <span className="text-body-sm text-gray-500 font-share-tech">Used {template.usageCount} times</span>
+                <div className="flex items-center justify-between pt-4 border-t border-grey-800">
+                  <span className="text-body-sm text-grey-500 -tech">Used {template.usageCount} times</span>
                   <Button variant="atlvs" size="sm">
                     Use Template
                   </Button>
@@ -160,8 +163,8 @@ export default function ProjectTemplatesPage() {
 
         {filteredTemplates.length === 0 && (
           <div className="text-center py-12">
-            <Folder className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400 font-share-tech">No templates found matching your criteria</p>
+            <Folder className="w-16 h-16 text-grey-600 mx-auto mb-4" />
+            <BodyText className="text-grey-400 -tech">No templates found matching your criteria</BodyText>
           </div>
         )}
       </ContentLayout>

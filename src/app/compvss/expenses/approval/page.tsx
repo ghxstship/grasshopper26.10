@@ -12,6 +12,9 @@ import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useExpenses, useApproveExpense, Expense } from '@/lib/hooks/compvss/useExpenses';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/expenses/approval
 
 export default function ExpenseApprovalPage() {
   const { data: expenses = [], isLoading, error, refetch } = useExpenses({ status: 'pending' });
@@ -68,7 +71,7 @@ export default function ExpenseApprovalPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading expenses...</p>
+              <BodyText className="text-grey-400">Loading expenses...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -89,8 +92,8 @@ export default function ExpenseApprovalPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Expenses</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Expenses</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -116,28 +119,28 @@ export default function ExpenseApprovalPage() {
           <div className="grid grid-cols-4 gap-4 mb-6">
             <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-warning">{stats.pending}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Pending</p>
+                <p className="text-warning">{stats.pending}</p>
+                <BodyText className="text-body-sm text-grey-400">Pending</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-success-light0/10 border-success/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-success">{stats.approved}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Approved</p>
+                <p className="text-success">{stats.approved}</p>
+                <BodyText className="text-body-sm text-grey-400">Approved</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-error/10 border-destructive/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-error">{stats.rejected}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Rejected</p>
+                <p className="text-error">{stats.rejected}</p>
+                <BodyText className="text-body-sm text-grey-400">Rejected</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-compvss-cyan-500/10 border-compvss-cyan-500/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-compvss-cyan-500">
+                <p className="text-compvss-cyan-500">
                   ${stats.totalPending.toFixed(2)}
                 </p>
-                <p className="text-body-sm text-gray-400 font-oswald">Total Pending</p>
+                <BodyText className="text-body-sm text-grey-400">Total Pending</BodyText>
               </CardContent>
             </Card>
           </div>
@@ -145,7 +148,7 @@ export default function ExpenseApprovalPage() {
           {/* Expenses List */}
           <div className="space-y-4">
             {expenses.map((expense: Expense) => (
-              <Card key={expense.id} variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+              <Card key={expense.id} variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-3 flex-1">
@@ -154,17 +157,17 @@ export default function ExpenseApprovalPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white text-h6">{expense.description}</h3>
+                          <h3 className="text-white">{expense.description}</h3>
                           <Badge variant="default" className="text-caption">{expense.id}</Badge>
                         </div>
-                        <div className="flex flex-wrap gap-3 text-body-sm text-gray-400 font-share-tech mb-2">
+                        <div className="flex flex-wrap gap-3 text-body-sm text-grey-400 -tech mb-2">
                           <span>User: {expense.userId}</span>
                           <span>•</span>
                           <span>Category: {expense.category}</span>
                           <span>•</span>
                           <span>Date: {new Date(expense.date).toLocaleDateString()}</span>
                         </div>
-                        <p className="text-h4 font-bebas text-compvss-cyan-500">
+                        <p className="text-compvss-cyan-500">
                           ${expense.amount.toFixed(2)}
                         </p>
                       </div>

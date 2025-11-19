@@ -5,6 +5,8 @@ import { validateRequest, requireAuth, getPaginationParams, rateLimit } from '@/
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { createTaskSchema } from '@/lib/validations/tasks';
 import type { Prisma } from '@prisma/client';
+import { CompvssService } from '@/lib/services/compvss/tasks.service';
+
 
 export async function GET(request: NextRequest) {
   try {
@@ -60,7 +62,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = createTaskSchema.parse(body);
     
-    const task = await prisma.dayOfShowTask.create({
+    const task = await new CompvssService().create({
       data: validatedData as any,
     });
 

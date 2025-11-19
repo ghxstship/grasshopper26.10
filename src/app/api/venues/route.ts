@@ -3,10 +3,26 @@ import { prisma } from '@/lib/prisma';
 import { createVenueSchema } from '@/lib/validations/events';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, getPaginationParams, getSortParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { VenuesService } from '@/lib/services/venues.service';
+
+
 
 // GET /api/venues - List venues
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const { searchParams } = new URL(request.url);
     const { page, limit, skip } = getPaginationParams(request);
     const { sortBy, sortOrder } = getSortParams(request, 'name');
@@ -33,7 +49,7 @@ export async function GET(request: NextRequest) {
     const total = await prisma.venue.count({ where });
 
     // Get venues
-    const venues = await prisma.venue.findMany({
+    const venues = await new VenuesService().findAll({
       where,
       skip,
       take: limit,
@@ -61,6 +77,17 @@ export async function GET(request: NextRequest) {
 // POST /api/venues - Create venue
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -76,7 +103,7 @@ export async function POST(request: NextRequest) {
         .replace(/(^-|-$)/g, '');
 
     // Check if slug is unique
-    const existingVenue = await prisma.venue.findUnique({
+    const existingVenue = await new VenuesService().findById({
       where: { slug },
     });
 
@@ -85,7 +112,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create venue
-    const venue = await prisma.venue.create({
+    const venue = await new VenuesService().create({
       data: {
         name: validatedData.name,
         slug,

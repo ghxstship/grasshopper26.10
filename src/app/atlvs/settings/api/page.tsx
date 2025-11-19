@@ -12,6 +12,7 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useSettings } from '@/lib/hooks/atlvs/useSettings';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface APIKey {
   id: string;
@@ -42,7 +43,7 @@ export default function APISettingsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading API _settings...</p>
+              <BodyText className="text-grey-400">Loading API _settings...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -64,8 +65,8 @@ export default function APISettingsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load API Settings</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load API Settings</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -100,13 +101,13 @@ export default function APISettingsPage() {
         ]}
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-4">API Documentation</CardTitle>
-            <div className="p-4 bg-gray-800/50 rounded-lg">
-              <div className="text-body-sm text-gray-400 mb-2">Base URL</div>
+            <div className="p-4 bg-grey-800/50 rounded-lg">
+              <div className="text-body-sm text-grey-400 mb-2">Base URL</div>
               <div className="flex items-center gap-2">
-                <code className="flex-1 px-3 py-2 bg-gray-900 rounded font-mono text-body-sm">
+                <code className="flex-1 px-3 py-2 bg-grey-900 rounded font-mono text-body-sm">
                   https://api.atlvs.com/v1
                 </code>
                 <Button variant="ghost" size="sm">
@@ -117,7 +118,7 @@ export default function APISettingsPage() {
           </CardHeader>
         </Card>
 
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6 flex items-center gap-2">
               <Key className="w-5 h-5" />
@@ -125,23 +126,23 @@ export default function APISettingsPage() {
             </CardTitle>
             <div className="space-y-3">
               {apiKeys.map((apiKey) => (
-                <div key={apiKey.id} className="p-4 bg-gray-800/50 rounded-lg">
+                <div key={apiKey.id} className="p-4 bg-grey-800/50 rounded-lg">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="font-medium text-h6">{apiKey.name}</span>
+                        <span className="font-medium">{apiKey.name}</span>
                         <Badge
                           variant="atlvs-outline"
-                          className={apiKey.status === 'active' ? 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50' : 'bg-gray-500/20 text-gray-500 border-gray-500/50'}
+                          className={apiKey.status === 'active' ? 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50' : 'bg-grey-500/20 text-grey-500 border-grey-500/50'}
                         >
                           {apiKey.status}
                         </Badge>
                       </div>
-                      <div className="text-body-sm text-gray-400 mb-3">
+                      <div className="text-body-sm text-grey-400 mb-3">
                         Created {apiKey.created} • Last used {apiKey.lastUsed}
                       </div>
                       <div className="flex items-center gap-2">
-                        <code className="flex-1 px-3 py-2 bg-gray-900 rounded font-mono text-body-sm">
+                        <code className="flex-1 px-3 py-2 bg-grey-900 rounded font-mono text-body-sm">
                           {showKeys[apiKey.id] ? apiKey.key : maskKey(apiKey.key)}
                         </code>
                         <Button
@@ -166,21 +167,21 @@ export default function APISettingsPage() {
           </CardHeader>
         </Card>
 
-        <Card variant="atlvs" className="bg-gray-900/50 mt-6">
+        <Card variant="atlvs" className="bg-grey-900/50 mt-6">
           <CardHeader>
             <CardTitle className="mb-6">Rate Limits</CardTitle>
             <div className="grid grid-cols-3 gap-4">
-              <div className="p-4 bg-gray-800/50 rounded-lg">
-                <div className="text-body-sm text-gray-400 mb-1">Requests per minute</div>
-                <div className="text-h4 font-bebas atlvs-text-gradient">1,000</div>
+              <div className="p-4 bg-grey-800/50 rounded-lg">
+                <div className="text-body-sm text-grey-400 mb-1">Requests per minute</div>
+                <div className="atlvs-text-gradient">1,000</div>
               </div>
-              <div className="p-4 bg-gray-800/50 rounded-lg">
-                <div className="text-body-sm text-gray-400 mb-1">Daily limit</div>
-                <div className="text-h4 font-bebas text-atlvs-green-500">100,000</div>
+              <div className="p-4 bg-grey-800/50 rounded-lg">
+                <div className="text-body-sm text-grey-400 mb-1">Daily limit</div>
+                <div className="text-atlvs-green-500">100,000</div>
               </div>
-              <div className="p-4 bg-gray-800/50 rounded-lg">
-                <div className="text-body-sm text-gray-400 mb-1">Current usage</div>
-                <div className="text-h4 font-bebas text-atlvs-purple-500">24,567</div>
+              <div className="p-4 bg-grey-800/50 rounded-lg">
+                <div className="text-body-sm text-grey-400 mb-1">Current usage</div>
+                <div className="text-atlvs-purple-500">24,567</div>
               </div>
             </div>
           </CardHeader>

@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { TicketsService } from '@/lib/services/tickets/id/transfer.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -16,12 +24,12 @@ export async function POST(
     const body = await req.json();
     const { recipientEmail } = body;
 
-    const recipient = await prisma.user.findUnique({ where: { email: recipientEmail } });
+    const recipient = await new TicketsService().findById({ where: { email: recipientEmail } });
     if (!recipient) {
       return NextResponse.json({ error: 'Recipient not found' }, { status: 404 });
     }
 
-    const ticket = await prisma.ticket.update({
+    const ticket = await new TicketsService().update({
       where: { id },
       data: {
         userId: recipient.id,
@@ -32,7 +40,6 @@ export async function POST(
 
     return NextResponse.json(ticket);
   } catch (error) {
-    console.error('Error transferring ticket:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

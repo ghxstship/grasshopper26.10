@@ -13,6 +13,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { useAdvancingRequests } from '@/lib/hooks/compvss';
 import { useMemo } from 'react';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/advancing/analytics
 
 export default function AdvancingAnalyticsPage() {
   const { data: requestsData, isLoading, error, refetch } = useAdvancingRequests();
@@ -86,7 +89,7 @@ export default function AdvancingAnalyticsPage() {
         <div className="min-h-screen bg-black text-white flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading analytics...</p>
+            <BodyText className="text-grey-400">Loading analytics...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -99,8 +102,8 @@ export default function AdvancingAnalyticsPage() {
         <div className="min-h-screen bg-black text-white flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Analytics</h2>
-            <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+            <SectionHeader className="mb-2">Failed to Load Analytics</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -122,25 +125,25 @@ export default function AdvancingAnalyticsPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
             <Link href="/compvss/advancing/dashboard">
-              <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
+              <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                 Advancing Analytics
-              </h1>
+              </HeroTitle>
             </Link>
-            <p className="text-gray-400 font-oswald">
+            <BodyText className="text-grey-400">
               Performance metrics and insights
-            </p>
+            </BodyText>
           </div>
 
           {/* Key Metrics */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+            <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-body-sm text-gray-400 font-oswald">Total Requests</p>
+                  <BodyText className="text-body-sm text-grey-400">Total Requests</BodyText>
                   <BarChart3 className="w-5 h-5 text-compvss-cyan-500" />
                 </div>
-                <p className="text-h2 font-bebas text-white mb-1">{stats.totalRequests}</p>
-                <div className="flex items-center gap-2 text-caption text-success font-share-tech">
+                <p className="text-white mb-1">{stats.totalRequests}</p>
+                <div className="flex items-center gap-2 text-caption text-success -tech">
                   <TrendingUp className="w-3 h-3" />
                   <span>+12% from last month</span>
                 </div>
@@ -150,11 +153,11 @@ export default function AdvancingAnalyticsPage() {
             <Card variant="compvss" className="bg-success-light0/10 border-success/30">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-body-sm text-gray-400 font-oswald">Approved</p>
+                  <BodyText className="text-body-sm text-grey-400">Approved</BodyText>
                   <CheckCircle2 className="w-5 h-5 text-success" />
                 </div>
-                <p className="text-h2 font-bebas text-success mb-1">{stats.approved}</p>
-                <p className="text-caption text-gray-400 font-share-tech">
+                <p className="text-success mb-1">{stats.approved}</p>
+                <p className="text-caption text-grey-400 -tech">
                   {Math.round((stats.approved / stats.totalRequests) * 100)}% approval rate
                 </p>
               </CardContent>
@@ -163,11 +166,11 @@ export default function AdvancingAnalyticsPage() {
             <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-body-sm text-gray-400 font-oswald">Pending</p>
+                  <BodyText className="text-body-sm text-grey-400">Pending</BodyText>
                   <Clock className="w-5 h-5 text-warning" />
                 </div>
-                <p className="text-h2 font-bebas text-warning mb-1">{stats.pending}</p>
-                <p className="text-caption text-gray-400 font-share-tech">
+                <p className="text-warning mb-1">{stats.pending}</p>
+                <p className="text-caption text-grey-400 -tech">
                   Avg response: {stats.avgResponseTime}
                 </p>
               </CardContent>
@@ -176,11 +179,11 @@ export default function AdvancingAnalyticsPage() {
             <Card variant="compvss" className="bg-error/10 border-destructive/30">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-body-sm text-gray-400 font-oswald">Rejected</p>
+                  <BodyText className="text-body-sm text-grey-400">Rejected</BodyText>
                   <XCircle className="w-5 h-5 text-error" />
                 </div>
-                <p className="text-h2 font-bebas text-error mb-1">{stats.rejected}</p>
-                <p className="text-caption text-gray-400 font-share-tech">
+                <p className="text-error mb-1">{stats.rejected}</p>
+                <p className="text-caption text-grey-400 -tech">
                   {Math.round((stats.rejected / stats.totalRequests) * 100)}% rejection rate
                 </p>
               </CardContent>
@@ -189,24 +192,24 @@ export default function AdvancingAnalyticsPage() {
             <Card variant="compvss" className="bg-compvss-cyan-500/10 border-compvss-cyan-500/30">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-body-sm text-gray-400 font-oswald">Completion Rate</p>
+                  <BodyText className="text-body-sm text-grey-400">Completion Rate</BodyText>
                   <AlertTriangle className="w-5 h-5 text-compvss-cyan-500" />
                 </div>
-                <p className="text-h2 font-bebas text-compvss-cyan-500 mb-1">{stats.completionRate}%</p>
-                <p className="text-caption text-gray-400 font-share-tech">
+                <p className="text-compvss-cyan-500 mb-1">{stats.completionRate}%</p>
+                <BodyText className="text-caption text-grey-400 -tech">
                   On-time delivery rate
-                </p>
+                </BodyText>
               </CardContent>
             </Card>
 
-            <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+            <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-body-sm text-gray-400 font-oswald">Avg Response Time</p>
+                  <BodyText className="text-body-sm text-grey-400">Avg Response Time</BodyText>
                   <Clock className="w-5 h-5 text-compvss-cyan-500" />
                 </div>
-                <p className="text-h2 font-bebas text-white mb-1">{stats.avgResponseTime}</p>
-                <div className="flex items-center gap-2 text-caption text-success font-share-tech">
+                <p className="text-white mb-1">{stats.avgResponseTime}</p>
+                <div className="flex items-center gap-2 text-caption text-success -tech">
                   <TrendingUp className="w-3 h-3" />
                   <span>15% faster</span>
                 </div>
@@ -215,10 +218,10 @@ export default function AdvancingAnalyticsPage() {
           </div>
 
           {/* Category Breakdown */}
-          <Card variant="compvss" className="mb-6 bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="mb-6 bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
             <CardHeader>
               <CardTitle className="text-white">Requests by Category</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Distribution across advancing categories
               </CardDescription>
             </CardHeader>
@@ -227,10 +230,10 @@ export default function AdvancingAnalyticsPage() {
                 {categoryBreakdown.map((cat) => (
                   <div key={cat.category}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-body-sm font-oswald text-white">{cat.category}</span>
-                      <span className="text-body-sm font-bebas text-gray-400">{cat.count} total</span>
+                      <span className="text-body-sm text-white">{cat.category}</span>
+                      <span className="text-body-sm text-grey-400">{cat.count} total</span>
                     </div>
-                    <div className="flex gap-1 h-2 rounded-full overflow-hidden bg-gray-800">
+                    <div className="flex gap-1 h-2 rounded-full overflow-hidden bg-grey-800">
                       <div
                         className="bg-success-light0"
                         style={{ width: `${(cat.approved / cat.count) * 100}%` }}
@@ -247,7 +250,7 @@ export default function AdvancingAnalyticsPage() {
                         title={`${cat.rejected} rejected`}
                       />
                     </div>
-                    <div className="flex gap-4 mt-1 text-caption font-share-tech">
+                    <div className="flex gap-4 mt-1 text-caption -tech">
                       <span className="text-success">{cat.approved} approved</span>
                       <span className="text-warning">{cat.pending} pending</span>
                       <span className="text-error">{cat.rejected} rejected</span>
@@ -259,10 +262,10 @@ export default function AdvancingAnalyticsPage() {
           </Card>
 
           {/* Recent Activity */}
-          <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
             <CardHeader>
               <CardTitle className="text-white">Recent Activity</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Last 5 days of request activity
               </CardDescription>
             </CardHeader>
@@ -271,12 +274,12 @@ export default function AdvancingAnalyticsPage() {
                 {recentActivity.map((day) => (
                   <div key={day.date} className="flex items-center justify-between p-3 bg-black/50 rounded-lg">
                     <div className="flex items-center gap-4">
-                      <span className="text-body-sm font-oswald text-gray-300">
+                      <span className="text-body-sm text-grey-300">
                         {new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </span>
                       <Badge variant="default">{day.requests} requests</Badge>
                     </div>
-                    <div className="flex gap-3 text-caption font-share-tech">
+                    <div className="flex gap-3 text-caption -tech">
                       <span className="text-success">{day.approved} approved</span>
                       <span className="text-error">{day.rejected} rejected</span>
                     </div>

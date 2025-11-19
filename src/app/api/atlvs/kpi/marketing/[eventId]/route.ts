@@ -1,13 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { errors , handleApiError } from '@/lib/api/response';
+import { z } from 'zod';
+
+const eventIdSchema = z.object({
+  eventId: z.string().cuid(),
+});
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ eventId: string }> }
 ) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.READ_OPERATIONS.limit,
+        RATE_LIMITS.READ_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
+    const { eventId } = eventIdSchema.parse(await params);
     const supabase = await createClient();
-    const { eventId } = await params;
 
     // Calculate marketing KPIs
     const [
@@ -34,10 +56,6 @@ export async function GET(
 
     return NextResponse.json(kpis);
   } catch (error) {
-    console.error('Error in marketing KPIs API:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

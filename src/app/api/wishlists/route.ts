@@ -3,6 +3,11 @@ import { prisma } from '@/lib/prisma';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { WishlistsService } from '@/lib/services/wishlists.service';
+
+
 
 const addToWishlistSchema = z.object({
   eventId: z.string().cuid(),
@@ -11,10 +16,21 @@ const addToWishlistSchema = z.object({
 // GET /api/wishlists - Get user's wishlist
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
-    const wishlists = await prisma.wishlist.findMany({
+    const wishlists = await new WishlistsService().findAll({
       where: { userId: context.userId },
       include: {
         event: {
@@ -53,6 +69,17 @@ export async function GET(request: NextRequest) {
 // POST /api/wishlists - Add event to wishlist
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -60,7 +87,7 @@ export async function POST(request: NextRequest) {
     const validatedData = addToWishlistSchema.parse(body);
 
     // Check if event exists
-    const event = await prisma.event.findUnique({
+    const event = await new WishlistsService().findById({
       where: { id: validatedData.eventId },
     });
 
@@ -69,7 +96,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if already in wishlist
-    const existing = await prisma.wishlist.findUnique({
+    const existing = await new WishlistsService().findById({
       where: {
         userId_eventId: {
           userId: context.userId!,
@@ -83,7 +110,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Add to wishlist
-    const wishlist = await prisma.wishlist.create({
+    const wishlist = await new WishlistsService().create({
       data: {
         userId: context.userId!,
         eventId: validatedData.eventId,

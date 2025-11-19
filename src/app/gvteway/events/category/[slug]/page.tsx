@@ -13,6 +13,7 @@ import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Select } from '@/components/atoms/Select';
 import { useEvents } from '@/lib/hooks/gvteway/useEvents';
+import { SectionHeader } from "@/components/atoms/Typography";
 
 const CATEGORIES = {
   music: { name: 'Music', icon: '🎵', color: 'from-gvteway-red-500 to-pink-500' },
@@ -20,6 +21,8 @@ const CATEGORIES = {
   comedy: { name: 'Comedy', icon: '😂', color: 'from-purple-500 to-pink-500' },
   theater: { name: 'Theater', icon: '🎭', color: 'from-green-500 to-emerald-500' },
 };
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/events/category/[slug]
 
 export default function CategoryPage({ params }: { params: { slug: string } }) {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -67,7 +70,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-gvteway-red-500" />
-            <p className="text-gray-400">Loading {category.name.toLowerCase()} events...</p>
+            <p className="text-grey-400">Loading {category.name.toLowerCase()} events...</p>
           </div>
         </div>
       </GvtewayLayout>
@@ -81,8 +84,8 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Events</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Events</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -105,11 +108,11 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               {/* Header */}
               <div className={`relative mb-12 p-12 rounded-2xl bg-gradient-to-br ${category.color}`}>
                 <div className="relative z-10">
-                  <div className="text-h1 mb-4">{category.icon}</div>
-                  <h1 className="text-h1 font-anton text-white mb-4">
+                  <div className="mb-4">{category.icon}</div>
+                  <h1 className="text-white mb-4">
                     {category.name.toUpperCase()} EVENTS
                   </h1>
-                  <p className="text-h5 text-white/90">
+                  <p className="text-white/90">
                     Discover the best {category.name.toLowerCase()} events near you
                   </p>
                 </div>
@@ -154,7 +157,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               {/* Events Grid */}
               {displayEvents.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-400 text-h6">No {category.name.toLowerCase()} events found.</p>
+                  <p className="text-grey-400">No {category.name.toLowerCase()} events found.</p>
                 </div>
               ) : (
                 <div className={viewMode === 'grid' ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
@@ -166,12 +169,12 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
                       transition={{ duration: 0.4, delay: index * 0.05 }}
                     >
                       <Link href={`/gvteway/events/${event.id}`}>
-                        <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                          <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900" />
+                        <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+                          <div className="relative h-48 bg-gradient-to-br from-grey-800 to-grey-900" />
                           <CardContent className="p-6">
                             <Badge variant="gvteway" className="mb-3">{category.name}</Badge>
-                            <h3 className="text-h5 font-bebas text-white mb-2">{event.title}</h3>
-                            <div className="space-y-2 text-body-sm text-gray-400 mb-4">
+                            <h3 className="text-white mb-2">{event.title}</h3>
+                            <div className="space-y-2 text-body-sm text-grey-400 mb-4">
                               <div className="flex items-center">
                                 <Calendar className="w-4 h-4 mr-2" />
                                 {event.startDate ? new Date(event.startDate).toLocaleDateString() : 'TBA'}
@@ -182,7 +185,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
                               </div>
                             </div>
                             <div className="flex items-center justify-between">
-                              <span className="text-h4 font-bebas text-gvteway-red-500">
+                              <span className="text-gvteway-red-500">
                                 ${event.ticketTypes?.[0]?.price || '0.00'}
                               </span>
                               <Button variant="gvteway" size="sm" rounded="full">

@@ -3,6 +3,10 @@ import { getSession } from '@/lib/auth';
 import { OpportunityService } from '@/lib/services/shared/opportunity.service';
 import { opportunityFiltersSchema } from '@/lib/validations/opportunities';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+
 
 /**
  * GET /api/compvss/opportunities
@@ -10,6 +14,17 @@ import { z } from 'zod';
  */
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const session = await getSession();
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

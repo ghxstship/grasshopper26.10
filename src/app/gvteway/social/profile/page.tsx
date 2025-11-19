@@ -13,6 +13,8 @@ const metadata = {
   description: 'View and edit your profile',
 };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/social/profile
+
 export default function ProfilePage() {
   return (
     <DetailPageTemplate

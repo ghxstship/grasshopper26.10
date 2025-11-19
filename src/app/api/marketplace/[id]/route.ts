@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { z } from 'zod';
+import { handleApiError } from '@/lib/api/response';
+import { MarketplaceService } from '@/lib/services/marketplace/id.service';
+
+
+
 
 export async function GET(
   request: NextRequest,
@@ -7,7 +16,7 @@ export async function GET(
 ) {
   const resolvedParams = await params;
   try {
-    const item = await prisma.product.findUnique({
+    const item = await new MarketplaceService().findById({
       where: { id: resolvedParams.id },
     });
 
@@ -20,11 +29,7 @@ export async function GET(
 
     return NextResponse.json(item);
   } catch (error) {
-    console.error('Error fetching marketplace item:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch marketplace item' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -36,18 +41,14 @@ export async function PATCH(
   try {
     const body = await request.json();
 
-    const item = await prisma.product.update({
+    const item = await new MarketplaceService().update({
       where: { id: resolvedParams.id },
       data: body,
     });
 
     return NextResponse.json(item);
   } catch (error) {
-    console.error('Error updating marketplace item:', error);
-    return NextResponse.json(
-      { error: 'Failed to update marketplace item' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -57,16 +58,12 @@ export async function DELETE(
 ) {
   const resolvedParams = await params;
   try {
-    await prisma.product.delete({
+    await new MarketplaceService().delete({
       where: { id: resolvedParams.id },
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error deleting marketplace item:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete marketplace item' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

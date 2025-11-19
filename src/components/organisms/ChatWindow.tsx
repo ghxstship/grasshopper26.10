@@ -49,14 +49,14 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
     <div className={cn('flex flex-col h-full bg-white rounded-lg shadow-lg', className)}>
       {/* Header */}
       {(title || subtitle) && (
-        <div className="p-4 border-b bg-gray-50">
+        <div className="p-4 border-b bg-grey-50">
           {title && (
             <Text variant="h3" className="font-semibold">
               {title}
             </Text>
           )}
           {subtitle && (
-            <Text variant="caption" className="text-gray-600 mt-1">
+            <Text variant="caption" className="text-grey-600 mt-1">
               {subtitle}
             </Text>
           )}
@@ -70,13 +70,13 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
       >
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
-            <Text variant="body" className="text-gray-500">
+            <Text variant="body" className="text-grey-500">
               Loading messages...
             </Text>
           </div>
         ) : messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
-            <Text variant="body" className="text-gray-500">
+            <Text variant="body" className="text-grey-500">
               No messages yet. Start the conversation!
             </Text>
           </div>
@@ -94,11 +94,11 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
             {typingUsers.length > 0 && (
               <div className="flex items-center gap-2 px-4 py-2">
                 <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animation-delay-0" />
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animation-delay-150" />
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animation-delay-300" />
+                  <span className="w-2 h-2 bg-grey-400 rounded-full animate-bounce animation-delay-0" />
+                  <span className="w-2 h-2 bg-grey-400 rounded-full animate-bounce animation-delay-150" />
+                  <span className="w-2 h-2 bg-grey-400 rounded-full animate-bounce animation-delay-300" />
                 </div>
-                <Text variant="caption" className="text-gray-500">
+                <Text variant="caption" className="text-grey-500">
                   {typingUsers.length === 1
                     ? `${typingUsers[0]} is typing...`
                     : `${typingUsers.length} people are typing...`}

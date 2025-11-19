@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { z } from 'zod';
+import { handleApiError } from '@/lib/api/response';
+import { DestinationsService } from '@/lib/services/destinations/slug.service';
+
+
+
 
 export async function GET(
   request: NextRequest,
@@ -7,7 +16,7 @@ export async function GET(
 ) {
   const resolvedParams = await params;
   try {
-    const destination = await prisma.venue.findUnique({
+    const destination = await new DestinationsService().findById({
       where: { slug: resolvedParams.slug },
     });
 
@@ -20,11 +29,7 @@ export async function GET(
 
     return NextResponse.json(destination);
   } catch (error) {
-    console.error('Error fetching destination:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch destination' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -36,18 +41,14 @@ export async function PATCH(
   try {
     const body = await request.json();
 
-    const destination = await prisma.venue.update({
+    const destination = await new DestinationsService().update({
       where: { slug: resolvedParams.slug },
       data: body,
     });
 
     return NextResponse.json(destination);
   } catch (error) {
-    console.error('Error updating destination:', error);
-    return NextResponse.json(
-      { error: 'Failed to update destination' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -57,16 +58,12 @@ export async function DELETE(
 ) {
   const resolvedParams = await params;
   try {
-    await prisma.venue.delete({
+    await new DestinationsService().delete({
       where: { slug: resolvedParams.slug },
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error deleting destination:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete destination' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

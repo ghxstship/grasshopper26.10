@@ -19,6 +19,8 @@ import { FormField } from '@/components/molecules/FormField';
 import { useCreateProject } from '@/lib/hooks/atlvs/useProjects';
 import { useAuth } from '@/lib/hooks/auth/useAuth';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/projects/new
+
 export default function NewProjectPage() {
   const router = useRouter();
   const { user } = useAuth();
@@ -66,7 +68,7 @@ export default function NewProjectPage() {
         <form onSubmit={handleSubmit}>
           <div className="space-y-6">
             {/* Basic Information */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <FileText className="w-5 h-5" />
@@ -138,7 +140,7 @@ export default function NewProjectPage() {
             </Card>
 
             {/* Timeline */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <Calendar className="w-5 h-5" />
@@ -169,7 +171,7 @@ export default function NewProjectPage() {
             </Card>
 
             {/* Budget */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <DollarSign className="w-5 h-5" />
@@ -189,7 +191,7 @@ export default function NewProjectPage() {
             </Card>
 
             {/* Team */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <Users className="w-5 h-5" />

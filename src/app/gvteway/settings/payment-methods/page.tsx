@@ -4,8 +4,11 @@ import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { PageTitle, CardTitle } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { CreditCard, Plus } from 'lucide-react';
+import { BodyText } from "@/components/atoms/Typography";
 
 const metadata = { title: 'Payment Methods | GVTEWAY' };
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/settings/payment-methods
 
 export default function PaymentMethodsPage() {
   return (
@@ -23,7 +26,7 @@ export default function PaymentMethodsPage() {
               <CreditCard className="w-8 h-8 text-ghxst-primary" />
               <div className="flex-1">
                 <CardTitle className="text-ghxst-primary">•••• 4242</CardTitle>
-                <p className="text-body-sm text-ghxst-text-secondary">Expires 12/25</p>
+                <BodyText className="text-body-sm text-ghxst-text-secondary">Expires 12/25</BodyText>
               </div>
               <Button variant="secondary" size="sm">Remove</Button>
             </div>

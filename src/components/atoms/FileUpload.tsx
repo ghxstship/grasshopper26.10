@@ -25,14 +25,14 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
     const inputId = id || `file-upload-${generatedId}`;
 
     const variantStyles = {
-      default: "border-gray-300 hover:border-gray-400 focus-within:border-gray-500",
+      default: "border-grey-300 hover:border-grey-400 focus-within:border-grey-500",
       gvteway: "border-gvteway-red-500/30 hover:border-gvteway-red-500/50 focus-within:border-gvteway-red-500",
       compvss: "border-compvss-cyan-500/30 hover:border-compvss-cyan-500/50 focus-within:border-compvss-cyan-500",
       atlvs: "border-atlvs-green-500/30 hover:border-atlvs-green-500/50 focus-within:border-atlvs-green-500",
     };
 
     const iconColorStyles = {
-      default: "text-gray-400",
+      default: "text-grey-400",
       gvteway: "text-gvteway-red-500",
       compvss: "text-compvss-cyan-500",
       atlvs: "text-atlvs-green-500",
@@ -82,7 +82,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
         onDrop={handleDrop}
         className={cn(
           "relative flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors cursor-pointer",
-          isDragging && "border-solid bg-gray-50 dark:bg-gray-800",
+          isDragging && "border-solid bg-grey-50 dark:bg-grey-800",
           variantStyles[variant],
           className
         )}
@@ -92,7 +92,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
           className="flex flex-col items-center justify-center cursor-pointer w-full"
         >
           <Upload className={cn("w-10 h-10 mb-3", iconColorStyles[variant])} />
-          <p className="text-body-sm text-gray-400 font-share-tech mb-3">
+          <p className="text-body-sm text-grey-400 -tech mb-3">
             {dragDropText}
           </p>
           <span className={cn(

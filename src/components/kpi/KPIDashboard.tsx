@@ -37,13 +37,9 @@ const categoryColors = {
 const MetricCard = memo(({ metric }: { metric: KPIMetric }) => (
   <Card className="p-6 hover:shadow-lg transition-shadow">
     <div className="flex items-start justify-between mb-2">
-      <p className="text-body-sm text-gray-600">{metric.name}</p>
+      <p className="text-body-sm text-grey-600">{metric.name}</p>
       {metric.trend && (
-        <div className={`flex items-center gap-1 text-caption ${
-          metric.trend === 'up' ? 'text-success' : 
-          metric.trend === 'down' ? 'text-destructive' : 
-          'text-gray-600'
-        }`}>
+        <div className={`flex items-center gap-1 text-caption ${ metric.trend === 'up' ? 'text-success' : metric.trend === 'down' ? 'text-destructive' : 'text-grey-600' }`}>
           {metric.trend === 'up' ? (
             <TrendingUp className="h-3 w-3" />
           ) : metric.trend === 'down' ? (
@@ -55,13 +51,13 @@ const MetricCard = memo(({ metric }: { metric: KPIMetric }) => (
     </div>
     
     <div className="flex items-baseline gap-2">
-      <span className="text-h3">
+      <span >
         {metric.value.toLocaleString(undefined, { 
           maximumFractionDigits: 2,
           minimumFractionDigits: metric.unit === 'USD' ? 2 : 0
         })}
       </span>
-      <span className="text-body-sm text-gray-500">{metric.unit}</span>
+      <span className="text-body-sm text-grey-500">{metric.unit}</span>
     </div>
   </Card>
 ));
@@ -84,8 +80,8 @@ function KPIDashboardComponent({ metrics, loading }: KPIDashboardProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[...Array(8)].map((_, i) => (
           <Card key={i} className="p-6 animate-pulse">
-            <div className="h-4 bg-gray-200 rounded w-3/4 mb-4" />
-            <div className="h-8 bg-gray-200 rounded w-1/2" />
+            <div className="h-4 bg-grey-200 rounded w-3/4 mb-4" />
+            <div className="h-8 bg-grey-200 rounded w-1/2" />
           </Card>
         ))}
       </div>
@@ -96,13 +92,13 @@ function KPIDashboardComponent({ metrics, loading }: KPIDashboardProps) {
     <div className="space-y-8">
       {Object.entries(groupedMetrics).map(([category, categoryMetrics]) => {
         const Icon = categoryIcons[category as keyof typeof categoryIcons] || Activity;
-        const colorClass = categoryColors[category as keyof typeof categoryColors] || 'text-gray-600';
+        const colorClass = categoryColors[category as keyof typeof categoryColors] || 'text-grey-600';
 
         return (
           <div key={category}>
             <div className="flex items-center gap-2 mb-4">
               <Icon className={`h-5 w-5 ${colorClass}`} />
-              <h3 className="text-h6 capitalize">{category} Metrics</h3>
+              <h3 className="capitalize">{category} Metrics</h3>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

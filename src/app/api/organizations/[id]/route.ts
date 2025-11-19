@@ -3,6 +3,11 @@ import { prisma } from '@/lib/prisma';
 import { updateOrganizationSchema } from '@/lib/validations/organizations';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { OrganizationsService } from '@/lib/services/organizations/id.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -20,7 +25,7 @@ export async function GET(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    const organization = await prisma.organization.findUnique({
+    const organization = await new OrganizationsService().findById({
       where: { id },
       include: {
         members: {
@@ -101,7 +106,7 @@ export async function PATCH(
     const validatedData = updateOrganizationSchema.parse(body);
 
     // Check if organization exists and user has permission
-    const organization = await prisma.organization.findUnique({
+    const organization = await new OrganizationsService().findById({
       where: { id },
       include: {
         _count: {
@@ -127,7 +132,7 @@ export async function PATCH(
     }
 
     // Update organization
-    const updatedOrganization = await prisma.organization.update({
+    const updatedOrganization = await new OrganizationsService().update({
       where: { id: id },
       data: validatedData,
     });
@@ -149,7 +154,7 @@ export async function DELETE(
     requireAuth(context);
 
     // Check if organization exists and user is owner
-    const existingOrg = await prisma.organization.findUnique({
+    const existingOrg = await new OrganizationsService().findById({
       where: { id: id },
       include: {
         members: {
@@ -183,7 +188,7 @@ export async function DELETE(
     }
 
     // Delete organization
-    await prisma.organization.delete({
+    await new OrganizationsService().delete({
       where: { id: id },
     });
 

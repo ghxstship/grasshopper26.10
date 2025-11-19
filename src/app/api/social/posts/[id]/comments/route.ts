@@ -3,6 +3,11 @@ import { prisma } from '@/lib/prisma';
 import { createCommentSchema } from '@/lib/validations/social';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, getPaginationParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { SocialService } from '@/lib/services/social/posts/id/comments.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -20,7 +25,7 @@ export async function GET(
 
     // Check if post exists
     const { id } = await params;
-    const post = await prisma.socialPost.findUnique({
+    const post = await new SocialService().findById({
       where: { id },
     });
 
@@ -34,7 +39,7 @@ export async function GET(
     });
 
     // Get comments
-    const comments = await prisma.socialComment.findMany({
+    const comments = await new SocialService().findAll({
       where: { postId: id },
       skip,
       take: limit,
@@ -83,7 +88,7 @@ export async function POST(
     });
 
     // Check if post exists
-    const post = await prisma.socialPost.findUnique({
+    const post = await new SocialService().findById({
       where: { id },
     });
 
@@ -92,7 +97,7 @@ export async function POST(
     }
 
     // Get user data for notifications
-    const user = await prisma.user.findUnique({
+    const user = await new SocialService().findById({
       where: { id: context.userId! },
       select: {
         id: true,
@@ -102,7 +107,7 @@ export async function POST(
     });
 
     // Create comment
-    const comment = await prisma.socialComment.create({
+    const comment = await new SocialService().create({
       data: {
         userId: context.userId!,
         postId: validatedData.postId,
@@ -123,7 +128,7 @@ export async function POST(
 
     // Create notification for post author (if not commenting on own post)
     if (post.userId !== context.userId) {
-      await prisma.notification.create({
+      await new SocialService().create({
         data: {
           userId: post.userId,
           type: 'POST_COMMENT',
@@ -143,12 +148,12 @@ export async function POST(
 
     // If this is a reply, notify the parent comment author
     if (validatedData.parentId) {
-      const parentComment = await prisma.socialComment.findUnique({
+      const parentComment = await new SocialService().findById({
         where: { id: validatedData.parentId },
       });
 
       if (parentComment && parentComment.userId !== context.userId) {
-        await prisma.notification.create({
+        await new SocialService().create({
           data: {
             userId: parentComment.userId,
             type: 'COMMENT_REPLY',

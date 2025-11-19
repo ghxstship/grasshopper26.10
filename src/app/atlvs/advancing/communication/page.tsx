@@ -14,6 +14,7 @@ import { Textarea } from '@/components/atoms/Textarea';
 import { FormField } from '@/components/molecules/FormField';
 import { useToast } from '@/lib/hooks/useToast';
 import { useAdvancingRequests } from '@/lib/hooks/atlvs/useAdvancingRequestQuery';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface Message {
   id: string;
@@ -28,6 +29,8 @@ interface AdvancingRequest {
   project?: string;
   [key: string]: unknown;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/advancing/communication
 
 export default function AdvancingCommunicationPage() {
   const { addToast } = useToast();
@@ -114,7 +117,7 @@ export default function AdvancingCommunicationPage() {
           { label: 'Communication' }
         ]}
       >
-        <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+        <Card variant="atlvs" className="bg-grey-900/50 mb-6">
           <CardHeader>
             <CardTitle className="mb-6 flex items-center gap-2">
               <MessageSquare className="w-5 h-5" />
@@ -122,19 +125,15 @@ export default function AdvancingCommunicationPage() {
             </CardTitle>
             <div className="space-y-3">
               {messages.length === 0 ? (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-grey-400">
                   <MessageSquare className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p>No messages yet</p>
+                  <BodyText >No messages yet</BodyText>
                 </div>
               ) : (
                 messages.map((msg) => (
                   <div 
                     key={msg.id} 
-                    className={`p-4 rounded-lg cursor-pointer transition-colors ${
-                      msg.unread 
-                        ? 'bg-atlvs-green-500/10 border border-atlvs-green-500/30 hover:bg-atlvs-green-500/20' 
-                        : 'bg-gray-800/50 hover:bg-gray-800'
-                    }`}
+                    className={`p-4 rounded-lg cursor-pointer transition-colors ${ msg.unread ? 'bg-atlvs-green-500/10 border border-atlvs-green-500/30 hover:bg-atlvs-green-500/20' : 'bg-grey-800/50 hover:bg-grey-800' }`}
                     onClick={() => msg.unread && handleMarkAsRead(msg.id)}
                   >
                     <div className="flex items-start justify-between mb-2">
@@ -144,9 +143,9 @@ export default function AdvancingCommunicationPage() {
                           <span className="w-2 h-2 rounded-full bg-atlvs-green-500" />
                         )}
                       </div>
-                      <span className="text-body-sm text-gray-400">{msg.time}</span>
+                      <span className="text-body-sm text-grey-400">{msg.time}</span>
                     </div>
-                    <div className="text-gray-300">{msg.message}</div>
+                    <div className="text-grey-300">{msg.message}</div>
                   </div>
                 ))
               )}
@@ -154,7 +153,7 @@ export default function AdvancingCommunicationPage() {
           </CardHeader>
         </Card>
 
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-4">Send Message</CardTitle>
             <div className="space-y-4">
@@ -179,7 +178,7 @@ export default function AdvancingCommunicationPage() {
                   onChange={(e) => setMessageText(e.target.value)}
                   disabled={isSending}
                 />
-                <div className="text-caption text-gray-400 mt-1">
+                <div className="text-caption text-grey-400 mt-1">
                   {messageText.length}/500 characters
                 </div>
               </FormField>

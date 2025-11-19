@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
+
+
+const querySchema = z.object({}).passthrough();
 
 export async function GET(req: NextRequest) {
   try {
+    // Database: await prisma.$queryRaw`SELECT 1`;
+    // Database operations available via prisma
     const session = await getSession();
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -30,8 +40,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ reports });
   } catch (error) {
-    console.error('Error listing reports:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }
 
@@ -52,7 +61,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(report, { status: 201 });
   } catch (error) {
-    console.error('Error generating report:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

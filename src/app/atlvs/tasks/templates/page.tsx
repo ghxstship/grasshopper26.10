@@ -12,6 +12,9 @@ import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { SearchBar } from '@/components/molecules/SearchBar';
 import { useTaskTemplates } from '@/lib/hooks/atlvs/useTasks';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/templates
 
 export default function TaskTemplatesPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,7 +32,7 @@ export default function TaskTemplatesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading task templates...</p>
+              <BodyText className="text-grey-400">Loading task templates...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -49,8 +52,8 @@ export default function TaskTemplatesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Templates</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Templates</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -87,21 +90,21 @@ export default function TaskTemplatesPage() {
         {/* Templates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTemplates.map((template: any) => (
-            <Card key={template.id} variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900/70 transition-colors">
+            <Card key={template.id} variant="atlvs" className="bg-grey-900/50 hover:bg-grey-900/70 transition-colors">
               <CardHeader>
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-3 bg-atlvs-green-500/20 rounded-lg">
                     <FileText className="w-6 h-6 text-atlvs-green-500" />
                   </div>
-                  <Badge variant="atlvs-outline" className="bg-gray-700/50">
+                  <Badge variant="atlvs-outline" className="bg-grey-700/50">
                     {template.category}
                   </Badge>
                 </div>
 
                 <CardTitle className="mb-2">{template.name}</CardTitle>
-                <p className="text-gray-400 text-body-sm mb-4 line-clamp-2">{template.description}</p>
+                <p className="text-grey-400 text-body-sm mb-4 line-clamp-2">{template.description}</p>
 
-                <div className="space-y-2 mb-4 text-body-sm text-gray-400">
+                <div className="space-y-2 mb-4 text-body-sm text-grey-400">
                   <div>{template.tasksCount} tasks</div>
                   <div>Est. {template.estimatedDuration}</div>
                   <div>Used {template.usageCount} times</div>

@@ -61,7 +61,7 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
       >
         <div className="space-y-6">
           {/* General Settings */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">General Settings</CardTitle>
               <div className="space-y-4">
@@ -107,17 +107,17 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
           </Card>
 
           {/* Notifications */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 mb-6">
                 <Bell className="w-5 h-5" />
                 Notifications
               </CardTitle>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
+                <div className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg cursor-pointer hover:bg-grey-800 transition-colors">
                   <div>
                     <div className="font-medium">Enable Notifications</div>
-                    <div className="text-body-sm text-gray-400">Receive updates about project activity</div>
+                    <div className="text-body-sm text-grey-400">Receive updates about project activity</div>
                   </div>
                   <Checkbox
                     checked={settings.notifications}
@@ -126,10 +126,10 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
+                <div className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg cursor-pointer hover:bg-grey-800 transition-colors">
                   <div>
                     <div className="font-medium">Auto-Archive Completed Tasks</div>
-                    <div className="text-body-sm text-gray-400">Automatically archive tasks after 30 days</div>
+                    <div className="text-body-sm text-grey-400">Automatically archive tasks after 30 days</div>
                   </div>
                   <Checkbox
                     checked={settings.autoArchive}
@@ -142,17 +142,17 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
           </Card>
 
           {/* Access Control */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 mb-6">
                 <Users className="w-5 h-5" />
                 Access Control
               </CardTitle>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
+                <div className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg cursor-pointer hover:bg-grey-800 transition-colors">
                   <div>
                     <div className="font-medium">Allow Guest Access</div>
-                    <div className="text-body-sm text-gray-400">External collaborators can view project</div>
+                    <div className="text-body-sm text-grey-400">External collaborators can view project</div>
                   </div>
                   <Checkbox
                     checked={settings.allowGuestAccess}
@@ -161,9 +161,9 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
                   />
                 </div>
 
-                <div className="p-4 bg-gray-800/50 rounded-lg">
+                <div className="p-4 bg-grey-800/50 rounded-lg">
                   <div className="font-medium mb-2">Team Members</div>
-                  <div className="text-body-sm text-gray-400 mb-4">Manage who has access to this project</div>
+                  <div className="text-body-sm text-grey-400 mb-4">Manage who has access to this project</div>
                   <Button variant="atlvs" size="sm">
                     <Users className="w-4 h-4 mr-2" />
                     Manage Team
@@ -178,10 +178,10 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
             <CardHeader>
               <CardTitle className="text-error mb-6">Danger Zone</CardTitle>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg">
+                <div className="flex items-center justify-between p-4 bg-grey-900/50 rounded-lg">
                   <div>
                     <div className="font-medium">Archive Project</div>
-                    <div className="text-body-sm text-gray-400">Hide project from active view</div>
+                    <div className="text-body-sm text-grey-400">Hide project from active view</div>
                   </div>
                   <Button variant="ghost" size="sm" className="text-warning hover:text-warning">
                     <Archive className="w-4 h-4 mr-2" />
@@ -189,10 +189,10 @@ export default function ProjectSettingsPage({ params }: { params: { id: string }
                   </Button>
                 </div>
 
-                <div className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg">
+                <div className="flex items-center justify-between p-4 bg-grey-900/50 rounded-lg">
                   <div>
                     <div className="font-medium">Delete Project</div>
-                    <div className="text-body-sm text-gray-400">Permanently delete this project and all data</div>
+                    <div className="text-body-sm text-grey-400">Permanently delete this project and all data</div>
                   </div>
                   <Button variant="ghost" size="sm" className="text-error hover:text-destructive">
                     <Trash2 className="w-4 h-4 mr-2" />

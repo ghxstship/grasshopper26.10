@@ -10,6 +10,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { useOperationsSchedule } from '@/lib/hooks/compvss/useOperations';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/schedule
 
 export default function OperationsSchedulePage() {
   const breadcrumbs = [
@@ -26,7 +29,7 @@ export default function OperationsSchedulePage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading schedule...</p>
+            <BodyText className="text-grey-400">Loading schedule...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -39,8 +42,8 @@ export default function OperationsSchedulePage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Schedule</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Schedule</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
           </div>
         </div>
@@ -50,15 +53,15 @@ export default function OperationsSchedulePage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-h3 font-bebas compvss-text-gradient">Operations Schedule</h1>
-          <p className="text-gray-400 font-oswald mt-1">Manage crew shifts and schedules</p>
+          <HeroTitle className="compvss-text-gradient">Operations Schedule</HeroTitle>
+          <BodyText className="text-grey-400 mt-1">Manage crew shifts and schedules</BodyText>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Calendar className="w-5 h-5 text-compvss-cyan-500" />
@@ -79,11 +82,11 @@ export default function OperationsSchedulePage() {
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2 text-compvss-cyan-500">
                         <Clock className="w-5 h-5" />
-                        <span className="font-bebas text-h5">{shift.time}</span>
+                        <span >{shift.time}</span>
                       </div>
                       <div>
-                        <h3 className="font-oswald text-white">{shift.role}</h3>
-                        <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
+                        <h3 className="text-white">{shift.role}</h3>
+                        <div className="flex items-center gap-2 text-body-sm text-grey-400 -tech">
                           <Users2 className="w-4 h-4" />
                           <span>{shift.count} crew members</span>
                         </div>
@@ -91,7 +94,7 @@ export default function OperationsSchedulePage() {
                     </div>
                     <Badge 
                       variant="compvss" 
-                      className={shift.status === 'active' ? 'bg-success-light text-success animate-pulse' : 'bg-gray-500/20 text-gray-400'}
+                      className={shift.status === 'active' ? 'bg-success-light text-success animate-pulse' : 'bg-grey-500/20 text-grey-400'}
                     >
                       {shift.status}
                     </Badge>

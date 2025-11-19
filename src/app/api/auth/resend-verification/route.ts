@@ -8,17 +8,33 @@ import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
 import { generateToken, hashToken } from '@/lib/auth/tokens';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { AuthService } from '@/lib/services/auth/resendVerification.service';
+
+
 
 /**
  * POST /api/auth/resend-verification - Resend email verification
  */
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
     // Get user
-    const user = await prisma.user.findUnique({
+    const user = await new AuthService().findById({
       where: { id: context.userId },
       select: {
         id: true,
@@ -39,7 +55,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Invalidate old tokens
-    await prisma.emailVerificationToken.updateMany({
+    await new AuthService().updateMany({
       where: {
         userId: user.id,
         used: false,
@@ -54,7 +70,7 @@ export async function POST(request: NextRequest) {
     const tokenHash = hashToken(token);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-    await prisma.emailVerificationToken.create({
+    await new AuthService().create({
       data: {
         userId: user.id,
         token: tokenHash,
@@ -64,7 +80,7 @@ export async function POST(request: NextRequest) {
 
     // Send verification email using notification system
     // The actual email sending is handled by the notification service/worker
-    await prisma.notification.create({
+    await new AuthService().create({
       data: {
         userId: user.id,
         type: 'EMAIL_VERIFICATION',

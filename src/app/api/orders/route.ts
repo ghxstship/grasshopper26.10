@@ -5,6 +5,8 @@ import { successResponse, createdResponse, handleApiError, errors,  } from '@/li
 import { parseBody, getPaginationParams, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
 import { Decimal } from '@prisma/client/runtime/library';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { OrdersService } from '@/lib/services/orders.service';
+
 
 // GET /api/orders - List user's orders
 export async function GET(request: NextRequest) {
@@ -35,7 +37,7 @@ export async function GET(request: NextRequest) {
 
     const total = await prisma.order.count({ where });
 
-    const orders = await prisma.order.findMany({
+    const orders = await new OrdersService().findAll({
       where,
       skip,
       take: limit,
@@ -110,7 +112,7 @@ export async function POST(request: NextRequest) {
       let itemName = '';
 
       if (item.type === 'ticket') {
-        const ticketType = await prisma.ticketType.findUnique({
+        const ticketType = await new OrdersService().findById({
           where: { id: item.itemId },
           include: { event: true },
         });
@@ -127,7 +129,7 @@ export async function POST(request: NextRequest) {
         itemPrice = new Decimal(ticketType.price.toString());
         itemName = `${ticketType.event.name} - ${ticketType.name}`;
       } else if (item.type === 'product') {
-        const product = await prisma.product.findUnique({
+        const product = await new OrdersService().findById({
           where: { id: item.itemId },
         });
 
@@ -142,7 +144,7 @@ export async function POST(request: NextRequest) {
         itemPrice = new Decimal(product.price.toString());
         itemName = product.name;
       } else if (item.type === 'adventure') {
-        const adventure = await prisma.adventure.findUnique({
+        const adventure = await new OrdersService().findById({
           where: { id: item.itemId },
         });
 
@@ -175,7 +177,7 @@ export async function POST(request: NextRequest) {
     const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 
     // Create order
-    const order = await prisma.order.create({
+    const order = await new OrdersService().create({
       data: {
         userId: context.userId!,
         eventId: validatedData.eventId,
@@ -215,7 +217,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Update order with payment intent ID
-    await prisma.order.update({
+    await new OrdersService().update({
       where: { id: order.id },
       data: {
         paymentIntent: paymentIntent.id,

@@ -70,9 +70,7 @@ export default function OnboardingPage() {
               {[1, 2, 3].map((s) => (
                 <div
                   key={s}
-                  className={`flex-1 h-2 rounded-full ${
-                    s <= step ? 'bg-ghxst-primary' : 'bg-ghxst-border'
-                  } ${s < 3 ? 'mr-2' : ''}`}
+                  className={`flex-1 h-2 rounded-full ${ s <= step ? 'bg-ghxst-primary' : 'bg-ghxst-border' } ${s < 3 ? 'mr-2' : ''}`}
                 />
               ))}
             </div>
@@ -95,11 +93,7 @@ export default function OnboardingPage() {
                   <button
                     key={id}
                     onClick={() => toggleInterest(id)}
-                    className={`p-6 border-2 rounded-lg transition-all ${
-                      interests.includes(id)
-                        ? 'border-ghxst-primary bg-ghxst-surface'
-                        : 'border-ghxst-border hover:border-ghxst-text-secondary'
-                    }`}
+                    className={`p-6 border-2 rounded-lg transition-all ${ interests.includes(id) ? 'border-ghxst-primary bg-ghxst-surface' : 'border-ghxst-border hover:border-ghxst-text-secondary' }`}
                   >
                     <Icon className="w-8 h-8 mx-auto mb-3 text-ghxst-primary" />
                     <Metadata className="text-ghxst-text-primary">

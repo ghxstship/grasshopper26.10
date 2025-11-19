@@ -13,6 +13,7 @@ import { Button } from '@/components/atoms/Button';
 import { Select } from '@/components/atoms/Select';
 import { Input } from '@/components/atoms/Input';
 import { FormField } from '@/components/molecules/FormField';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
 
 interface UploadedFile {
   id: string;
@@ -22,6 +23,8 @@ interface UploadedFile {
   status: 'uploading' | 'complete' | 'error';
   progress: number;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/upload
 
 export default function DocumentUploadPage() { 
   const [files, _setFiles] = useState<UploadedFile[]>([]);
@@ -66,21 +69,19 @@ export default function DocumentUploadPage() {
         {/* Upload Area */}
         <Card
           variant="atlvs"
-          className={`border-2 border-dashed p-12 text-center transition-colors ${
-            dragActive ? 'border-atlvs-green-500 bg-atlvs-green-500/10' : 'border-gray-700 bg-gray-900/50'
-          }`}
+          className={`border-2 border-dashed p-12 text-center transition-colors ${ dragActive ? 'border-atlvs-green-500 bg-atlvs-green-500/10' : 'border-grey-700 bg-grey-900/50' }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
         >
-          <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-h6 text-white mb-2">
+          <Upload className="w-16 h-16 text-grey-400 mx-auto mb-4" />
+          <SubsectionHeader className="text-white mb-2">
             Drop files here or click to browse
-          </h3>
-          <p className="text-body-sm text-gray-400 mb-4">
+          </SubsectionHeader>
+          <BodyText className="text-body-sm text-grey-400 mb-4">
             Supports PDF, DOC, DOCX, XLS, XLSX (max 50MB)
-          </p>
+          </BodyText>
           <Button variant="atlvs" size="sm">
             Select Files
           </Button>
@@ -88,18 +89,18 @@ export default function DocumentUploadPage() {
 
         {/* File List */}
         {files.length > 0 && (
-          <Card variant="atlvs" className="mt-6 bg-gray-900/50">
+          <Card variant="atlvs" className="mt-6 bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-4">Uploading Files</CardTitle>
               <div className="space-y-4">
                 {files.map(file => (
-                  <div key={file.id} className="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg">
-                    <File className="w-10 h-10 text-gray-400 flex-shrink-0" />
+                  <div key={file.id} className="flex items-start gap-4 p-4 bg-grey-800/50 rounded-lg">
+                    <File className="w-10 h-10 text-grey-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex-1 min-w-0">
                           <div className="font-medium text-white truncate">{file.name}</div>
-                          <div className="text-body-sm text-gray-400">{formatFileSize(file.size)}</div>
+                          <div className="text-body-sm text-grey-400">{formatFileSize(file.size)}</div>
                         </div>
                         {file.status === 'complete' ? (
                           <CheckCircle className="w-5 h-5 text-atlvs-green-500 flex-shrink-0" />
@@ -110,7 +111,7 @@ export default function DocumentUploadPage() {
                         )}
                       </div>
                       {file.status === 'uploading' && (
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-grey-700 rounded-full h-2">
                           <div
                             className="bg-atlvs-green-500 h-2 rounded-full transition-all"
                             style={{ width: `${file.progress}%` }}
@@ -126,7 +127,7 @@ export default function DocumentUploadPage() {
         )}
 
         {/* Document Type Selection */}
-        <Card variant="atlvs" className="mt-6 bg-gray-900/50">
+        <Card variant="atlvs" className="mt-6 bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-4">Document Details</CardTitle>
             <div className="space-y-4">

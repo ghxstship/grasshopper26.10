@@ -13,6 +13,7 @@ import { CheckCircle, XCircle, Loader2, Mail } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
 export default function AtlvsVerifyEmailPage() {
   const searchParams = useSearchParams();
@@ -87,31 +88,31 @@ export default function AtlvsVerifyEmailPage() {
         >
           <div className="text-center mb-8">
             <Link href="/atlvs">
-              <h1 className="text-h1 font-anton atlvs-text-gradient mb-2 cursor-pointerr">
+              <HeroTitle className="atlvs-text-gradient mb-2 cursor-pointerr">
                 ATLVS
-              </h1>
+              </HeroTitle>
             </Link>
           </div>
 
-          <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="atlvs" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-white text-h4 text-center">Email Verification</CardTitle>
+              <CardTitle className="text-white text-center">Email Verification</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
                 {status === 'loading' && !email && (
                   <>
                     <Loader2 className="w-16 h-16 text-atlvs-orange-500 animate-spin mx-auto mb-4" />
-                    <p className="text-gray-300 mb-2">Verifying your email...</p>
-                    <p className="text-body-sm text-gray-500">Please wait a moment</p>
+                    <BodyText className="text-grey-300 mb-2">Verifying your email...</BodyText>
+                    <BodyText className="text-body-sm text-grey-500">Please wait a moment</BodyText>
                   </>
                 )}
 
                 {status === 'loading' && email && (
                   <>
                     <Mail className="w-16 h-16 text-atlvs-orange-500 mx-auto mb-4" />
-                    <p className="text-gray-300 mb-2">Check Your Email</p>
-                    <p className="text-body-sm text-gray-500 mb-6">
+                    <BodyText className="text-grey-300 mb-2">Check Your Email</BodyText>
+                    <p className="text-body-sm text-grey-500 mb-6">
                       We sent a verification link to <strong>{email}</strong>
                     </p>
                     <Button 
@@ -130,8 +131,8 @@ export default function AtlvsVerifyEmailPage() {
                     <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
                       <CheckCircle className="w-10 h-10 text-success" />
                     </div>
-                    <p className="text-gray-300 mb-2 text-h6">Email Verified!</p>
-                    <p className="text-body-sm text-gray-500 mb-6">{message}</p>
+                    <BodyText className="text-grey-300 mb-2">Email Verified!</BodyText>
+                    <p className="text-body-sm text-grey-500 mb-6">{message}</p>
                     <Link href="/atlvs/auth/login">
                       <Button variant="atlvs" size="lg" className="w-full">
                         Continue to Sign In
@@ -145,8 +146,8 @@ export default function AtlvsVerifyEmailPage() {
                     <div className="w-16 h-16 bg-error/20 rounded-full flex items-center justify-center mx-auto mb-4">
                       <XCircle className="w-10 h-10 text-error" />
                     </div>
-                    <p className="text-gray-300 mb-2 text-h6">Verification Failed</p>
-                    <p className="text-body-sm text-gray-500 mb-6">{message}</p>
+                    <BodyText className="text-grey-300 mb-2">Verification Failed</BodyText>
+                    <p className="text-body-sm text-grey-500 mb-6">{message}</p>
                     {email && (
                       <Button 
                         variant="atlvs-outline" 

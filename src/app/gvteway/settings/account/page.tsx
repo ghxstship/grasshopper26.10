@@ -7,6 +7,8 @@ import { Input } from '@/components/atoms/Input';
 
 const metadata = { title: 'Account Settings | GVTEWAY' };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/settings/account
+
 export default function AccountSettingsPage() {
   return (
     <GvtewayLayout>

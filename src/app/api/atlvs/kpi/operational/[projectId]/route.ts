@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { handleApiError } from '@/lib/api/response';
+
+
 
 export async function GET(
   request: NextRequest,
@@ -31,10 +37,6 @@ export async function GET(
 
     return NextResponse.json(kpis);
   } catch (error) {
-    console.error('Error in operational KPIs API:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

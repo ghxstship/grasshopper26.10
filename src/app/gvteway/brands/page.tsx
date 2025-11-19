@@ -1,7 +1,7 @@
 'use client';
 
 import { GvtewayLayout } from "@/components/templates/GvtewayLayout";
-import { PageTitle, SectionHeader, BodyText } from "@/components/atoms/Typography";
+import { BodyText, CardTitle, PageTitle, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
 import { BrandCard } from "@/components/molecules/BrandCard";
 import { CategoryTab } from "@/components/atoms/CategoryTab";
 import { SearchBar } from "@/components/atoms/SearchBar";
@@ -67,7 +67,7 @@ export default function BrandsPage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Shop The Scene</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-3xl mx-auto mb-8">
+          <BodyText className="text-ghxst-text-secondary max-w-3xl mx-auto mb-8">
             Exclusive merch, vinyl, apparel, and experiences from your favorite 
             venues, record labels, artist brands, communities, and local stores—all in one place.
           </BodyText>
@@ -136,8 +136,8 @@ export default function BrandsPage() {
                 <div className={`w-16 h-16 ${category.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
                   <category.icon className="w-8 h-8 text-ghxst-primary" />
                 </div>
-                <h3 className="font-bebas text-h5 text-ghxst-primary mb-2">{category.title}</h3>
-                <p className="font-share-tech-mono text-body-sm text-ghxst-text-secondary">{category.count}</p>
+                <h3 className="text-ghxst-primary mb-2">{category.title}</h3>
+                <p className="-tech-mono text-body-sm text-ghxst-text-secondary">{category.count}</p>
               </button>
             ))}
           </div>
@@ -165,13 +165,13 @@ export default function BrandsPage() {
                     className="object-cover group-hover:scale-105 transition-transform"
                   />
                   <div className="absolute top-4 right-4">
-                    <span className="bg-ghxst-black text-ghxst-white px-3 py-1 font-bebas text-body-sm">NEW</span>
+                    <span className="bg-ghxst-black text-ghxst-white px-3 py-1 text-body-sm">NEW</span>
                   </div>
                 </div>
                 <div className="p-4 space-y-2">
-                  <p className="font-share-tech-mono text-caption text-ghxst-text-secondary">Brand Name</p>
-                  <h5 className="font-bebas text-h5 text-ghxst-primary">Limited Edition Tee</h5>
-                  <p className="font-share-tech-mono text-body text-ghxst-primary">$35.00</p>
+                  <BodyText className="-tech-mono text-caption text-ghxst-text-secondary">Brand Name</BodyText>
+                  <CardTitle className="text-ghxst-primary">Limited Edition Tee</CardTitle>
+                  <BodyText className="-tech-mono text-body text-ghxst-primary">$35.00</BodyText>
                   <Button variant="primary" size="sm" className="w-full">
                     Add to Cart
                   </Button>
@@ -186,7 +186,7 @@ export default function BrandsPage() {
       <section className="section-padding bg-ghxst-black text-ghxst-white">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <SectionHeader className="mb-4 uppercase">Exclusive Member Drops</SectionHeader>
-          <BodyText className="text-gray-300 max-w-2xl mx-auto mb-8">
+          <BodyText className="text-grey-300 max-w-2xl mx-auto mb-8">
             Get early access to limited edition releases, exclusive collaborations, 
             and member-only products from your favorite brands
           </BodyText>
@@ -194,7 +194,7 @@ export default function BrandsPage() {
             <Button variant="primary" size="lg">
               Join Membership
             </Button>
-            <Button variant="secondary" size="lg" className="bg-ghxst-white text-ghxst-black hover:bg-gray-200">
+            <Button variant="secondary" size="lg" className="bg-ghxst-white text-ghxst-black hover:bg-grey-200">
               Learn More
             </Button>
           </div>
@@ -209,7 +209,7 @@ export default function BrandsPage() {
               <div className="w-16 h-16 bg-ghxst-surface rounded-full flex items-center justify-center mx-auto">
                 <Store className="w-8 h-8 text-ghxst-primary" />
               </div>
-              <h3 className="font-bebas text-h4 text-ghxst-primary">Authentic Merch</h3>
+              <SubsectionHeader className="text-ghxst-primary">Authentic Merch</SubsectionHeader>
               <BodyText className="text-ghxst-text-secondary">
                 100% official products directly from venues, labels, and artists
               </BodyText>
@@ -218,7 +218,7 @@ export default function BrandsPage() {
               <div className="w-16 h-16 bg-ghxst-surface rounded-full flex items-center justify-center mx-auto">
                 <Music className="w-8 h-8 text-ghxst-primary" />
               </div>
-              <h3 className="font-bebas text-h4 text-ghxst-primary">Support Artists</h3>
+              <SubsectionHeader className="text-ghxst-primary">Support Artists</SubsectionHeader>
               <BodyText className="text-ghxst-text-secondary">
                 Every purchase directly supports the local music scene and creators
               </BodyText>
@@ -227,7 +227,7 @@ export default function BrandsPage() {
               <div className="w-16 h-16 bg-ghxst-surface rounded-full flex items-center justify-center mx-auto">
                 <Sparkles className="w-8 h-8 text-ghxst-primary" />
               </div>
-              <h3 className="font-bebas text-h4 text-ghxst-primary">Exclusive Access</h3>
+              <SubsectionHeader className="text-ghxst-primary">Exclusive Access</SubsectionHeader>
               <BodyText className="text-ghxst-text-secondary">
                 Member-only drops, early releases, and limited edition collaborations
               </BodyText>

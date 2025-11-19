@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { Play, Pause, Clock, Calendar, TrendingUp,  } from 'lucide-react';
 import { useTimeEntries } from '@/lib/hooks/atlvs/useTimeEntries';
 import { Button } from '@/components/atoms/Button';
+import { SectionHeader } from "@/components/atoms/Typography";
 
 interface TimeEntry {
   id: string;
@@ -18,6 +19,8 @@ interface TimeEntry {
   duration: number; // minutes
   status: 'running' | 'paused' | 'completed';
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/time-tracking
 
 export default function TimeTrackingPage() {  
   const { data: timeEntriesData,  } = useTimeEntries();
@@ -53,29 +56,29 @@ export default function TimeTrackingPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Today&apos;s Total</div>
-              <div className="text-h4 text-gray-900">{formatDuration(totalToday)}</div>
+              <div className="text-body-sm text-grey-600 mb-1">Today&apos;s Total</div>
+              <div className="text-grey-900">{formatDuration(totalToday)}</div>
             </div>
             <Clock className="w-8 h-8 text-info" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">This Week</div>
-              <div className="text-h4 text-gray-900">28h 45m</div>
+              <div className="text-body-sm text-grey-600 mb-1">This Week</div>
+              <div className="text-grey-900">28h 45m</div>
             </div>
             <Calendar className="w-8 h-8 text-success" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Avg Per Day</div>
-              <div className="text-h4 text-gray-900">5h 45m</div>
+              <div className="text-body-sm text-grey-600 mb-1">Avg Per Day</div>
+              <div className="text-grey-900">5h 45m</div>
             </div>
             <TrendingUp className="w-8 h-8 text-atlvs-purple-500" />
           </div>
@@ -83,21 +86,21 @@ export default function TimeTrackingPage() {
       </div>
 
       {/* Time Entries */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-4 border-b border-gray-200">
-          <h2 className="text-h6 text-gray-900">Recent Entries</h2>
+      <div className="bg-white rounded-lg border border-grey-200">
+        <div className="p-4 border-b border-grey-200">
+          <SectionHeader className="text-grey-900">Recent Entries</SectionHeader>
         </div>
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-grey-200">
           {timeEntries.map(entry => (
-            <div key={entry.id} className="p-4 hover:bg-gray-50">
+            <div key={entry.id} className="p-4 hover:bg-grey-50">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
-                  <div className="font-semibold text-gray-900 mb-1">{entry.taskName}</div>
-                  <div className="text-body-sm text-gray-600">{new Date(entry.date).toLocaleDateString()}</div>
+                  <div className="font-semibold text-grey-900 mb-1">{entry.taskName}</div>
+                  <div className="text-body-sm text-grey-600">{new Date(entry.date).toLocaleDateString()}</div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="text-right">
-                    <div className="font-semibold text-gray-900">{formatDuration(entry.duration)}</div>
+                    <div className="font-semibold text-grey-900">{formatDuration(entry.duration)}</div>
                     {entry.status === 'running' && (
                       <div className="text-caption text-success">Running</div>
                     )}

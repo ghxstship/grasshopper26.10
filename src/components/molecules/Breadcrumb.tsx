@@ -26,12 +26,12 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
         <>
           <Link
             href="/"
-            className="text-gray-500 hover:text-gray-900 transition-colors"
+            className="text-grey-500 hover:text-grey-900 transition-colors"
           >
             <Home className="h-4 w-4" />
           </Link>
           {items.length > 0 && (
-            <ChevronRight className="h-4 w-4 text-gray-400" />
+            <ChevronRight className="h-4 w-4 text-grey-400" />
           )}
         </>
       )}
@@ -42,7 +42,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
             {item.href && !isLast ? (
               <Link
                 href={item.href}
-                className="flex items-center gap-1 text-body-sm font-share-tech text-gray-500 hover:text-gray-900 transition-colors"
+                className="flex items-center gap-1 text-body-sm -tech text-grey-500 hover:text-grey-900 transition-colors"
               >
                 {item.icon}
                 {item.label}
@@ -51,14 +51,14 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
               <span
                 className={cn(
                   "flex items-center gap-1 text-body-sm font-share-tech",
-                  isLast ? "text-gray-900" : "text-gray-500"
+                  isLast ? "text-grey-900" : "text-grey-500"
                 )}
               >
                 {item.icon}
                 {item.label}
               </span>
             )}
-            {!isLast && <ChevronRight className="h-4 w-4 text-gray-400" />}
+            {!isLast && <ChevronRight className="h-4 w-4 text-grey-400" />}
           </React.Fragment>
         );
       })}

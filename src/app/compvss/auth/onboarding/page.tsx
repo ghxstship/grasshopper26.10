@@ -12,6 +12,9 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/auth/onboarding
 
 export default function CompvssOnboardingPage() {
   const router = useRouter();
@@ -69,11 +72,11 @@ export default function CompvssOnboardingPage() {
             {/* Header */}
             <div className="text-center mb-8">
               <Link href="/compvss">
-                <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
+                <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                   COMPVSS
-                </h1>
+                </HeroTitle>
               </Link>
-              <p className="text-gray-400 font-oswald">Welcome! Let&apos;s get you set up</p>
+              <BodyText className="text-grey-400">Welcome! Let&apos;s get you set up</BodyText>
             </div>
 
           {/* Progress Steps */}
@@ -82,19 +85,13 @@ export default function CompvssOnboardingPage() {
               {steps.map((step, index) => (
                 <div key={step.number} className="flex items-center flex-1">
                   <div className="flex flex-col items-center flex-1">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-h6 transition-all ${
-                      currentStep >= step.number 
-                        ? 'bg-compvss-cyan-500 text-black' 
-                        : 'bg-gray-800 text-gray-500'
-                    }`}>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${ currentStep >= step.number ? 'bg-compvss-cyan-500 text-black' : 'bg-grey-800 text-grey-500' }`}>
                       {currentStep > step.number ? <CheckCircle2 className="w-6 h-6" /> : step.number}
                     </div>
-                    <p className="text-caption font-oswald text-gray-400 mt-2 text-center">{step.title}</p>
+                    <p className="text-caption text-grey-400 mt-2 text-center">{step.title}</p>
                   </div>
                   {index < steps.length - 1 && (
-                    <div className={`h-0.5 flex-1 mx-2 transition-all ${
-                      currentStep > step.number ? 'bg-compvss-cyan-500' : 'bg-gray-800'
-                    }`} />
+                    <div className={`h-0.5 flex-1 mx-2 transition-all ${ currentStep > step.number ? 'bg-compvss-cyan-500' : 'bg-grey-800' }`} />
                   )}
                 </div>
               ))}
@@ -102,13 +99,13 @@ export default function CompvssOnboardingPage() {
           </div>
 
           {/* Step Content */}
-          <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <UserCheck className="w-6 h-6 text-compvss-cyan-500" />
                 Select Your Role
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Choose the role that best describes your work
               </CardDescription>
             </CardHeader>
@@ -117,7 +114,7 @@ export default function CompvssOnboardingPage() {
               {error && (
                 <div className="mb-4 p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                   <AlertCircle className="w-5 h-5 text-error" />
-                  <p className="text-body-sm text-error font-share-tech">{error}</p>
+                  <p className="text-body-sm text-error -tech">{error}</p>
                 </div>
               )}
 
@@ -130,8 +127,8 @@ export default function CompvssOnboardingPage() {
                     className="h-auto p-4 text-left justify-start"
                   >
                     <div>
-                      <h3 className="font-oswald text-white mb-1">{role.name}</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech">{role.description}</p>
+                      <h3 className="text-white mb-1">{role.name}</h3>
+                      <p className="text-body-sm text-grey-400 -tech">{role.description}</p>
                     </div>
                   </Button>
                 ))}
@@ -162,7 +159,7 @@ export default function CompvssOnboardingPage() {
           </Card>
 
           <div className="mt-6 text-center">
-            <Link href="/compvss/dashboard" className="text-body-sm text-gray-500 hover:text-gray-400 font-share-tech">
+            <Link href="/compvss/dashboard" className="text-body-sm text-grey-500 hover:text-grey-400 -tech">
               Skip for now →
             </Link>
           </div>

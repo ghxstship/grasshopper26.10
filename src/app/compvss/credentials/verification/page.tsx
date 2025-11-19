@@ -13,6 +13,9 @@ import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useCredentials, useVerifyCredential, Credential } from '@/lib/hooks/compvss/useCredentials';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/credentials/verification
 
 export default function CredentialVerificationPage() {
   const { data, isLoading, error, refetch } = useCredentials({ status: 'pending' });
@@ -80,7 +83,7 @@ export default function CredentialVerificationPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading credentials...</p>
+              <BodyText className="text-grey-400">Loading credentials...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -101,8 +104,8 @@ export default function CredentialVerificationPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Credentials</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Credentials</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -128,26 +131,26 @@ export default function CredentialVerificationPage() {
           <div className="grid grid-cols-4 gap-4 mb-6">
             <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-warning">{stats.pending}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Pending</p>
+                <p className="text-warning">{stats.pending}</p>
+                <BodyText className="text-body-sm text-grey-400">Pending</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-success-light0/10 border-success/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-success">{stats.verified}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Verified</p>
+                <p className="text-success">{stats.verified}</p>
+                <BodyText className="text-body-sm text-grey-400">Verified</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-warning">{stats.expired}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Expired</p>
+                <p className="text-warning">{stats.expired}</p>
+                <BodyText className="text-body-sm text-grey-400">Expired</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-error/10 border-destructive/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-error">{stats.rejected}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Rejected</p>
+                <p className="text-error">{stats.rejected}</p>
+                <BodyText className="text-body-sm text-grey-400">Rejected</BodyText>
               </CardContent>
             </Card>
           </div>
@@ -155,7 +158,7 @@ export default function CredentialVerificationPage() {
           {/* Credentials List */}
           <div className="space-y-4">
             {credentials.map((credential: Credential) => (
-              <Card key={credential.id} variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+              <Card key={credential.id} variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-3 flex-1">
@@ -164,13 +167,13 @@ export default function CredentialVerificationPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white text-h6">{credential.name}</h3>
+                          <h3 className="text-white">{credential.name}</h3>
                           <Badge variant="default" className="text-caption">{credential.id}</Badge>
                         </div>
-                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-grey-400 -tech mb-2">
                           {credential.type}
                         </p>
-                        <div className="flex gap-4 text-caption text-gray-500 font-share-tech">
+                        <div className="flex gap-4 text-caption text-grey-500 -tech">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             <span>Issued: {credential.issuedDate ? new Date(credential.issuedDate).toLocaleDateString() : 'N/A'}</span>

@@ -5,6 +5,8 @@ import { Users } from 'lucide-react';
 import { CardTitle, BodyText } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/adventures/meet-greet
+
 export default function MeetGreetPage() {
   const events = [{ id: '1', title: 'Artist Meet & Greet', description: 'Meet your favorite artist', price: 149 }];
   return (
@@ -16,7 +18,7 @@ export default function MeetGreetPage() {
             <CardTitle className="mb-2 text-ghxst-primary">{event.title}</CardTitle>
             <BodyText className="text-ghxst-text-secondary mb-4">{event.description}</BodyText>
             <div className="flex items-center justify-between">
-              <span className="text-h4 font-anton text-ghxst-primary">${event.price}</span>
+              <span className="text-ghxst-primary">${event.price}</span>
               <Button variant="primary" size="sm">Book Now</Button>
             </div>
           </div>

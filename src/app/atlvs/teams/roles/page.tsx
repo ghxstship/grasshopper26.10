@@ -10,6 +10,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/atoms/Button';
 import { useTeamRoles } from '@/lib/hooks/atlvs/useTeams';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/teams/roles
 
 export default function TeamRolesPage() {
   const router = useRouter();
@@ -31,7 +34,7 @@ export default function TeamRolesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading team roles...</p>
+              <BodyText className="text-grey-400">Loading team roles...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -54,8 +57,8 @@ export default function TeamRolesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Roles</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Roles</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -119,7 +122,7 @@ export default function TeamRolesPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {roles.map(role => (
-          <div key={role.id} className="bg-white rounded-lg border border-gray-200 p-6">
+          <div key={role.id} className="bg-white rounded-lg border border-grey-200 p-6">
             <div className="flex items-start justify-between mb-4">
               <div className={`p-3 rounded-lg ${getColorClasses(role.color)}`}>
                 <Shield className="w-6 h-6" />
@@ -134,22 +137,22 @@ export default function TeamRolesPage() {
               </div>
             </div>
 
-            <h3 className="text-h6 text-gray-900 mb-2">{role.name}</h3>
-            <p className="text-body-sm text-gray-600 mb-4">{role.description}</p>
+            <h3 className="text-grey-900 mb-2">{role.name}</h3>
+            <p className="text-body-sm text-grey-600 mb-4">{role.description}</p>
 
             <div className="mb-4">
-              <div className="text-body-sm text-gray-700 mb-2">Permissions:</div>
+              <div className="text-body-sm text-grey-700 mb-2">Permissions:</div>
               <div className="flex flex-wrap gap-2">
                 {role.permissions.map(perm => (
-                  <span key={perm} className="px-2 py-1 bg-gray-100 text-gray-700 text-caption rounded">
+                  <span key={perm} className="px-2 py-1 bg-grey-100 text-grey-700 text-caption rounded">
                     {perm.replace(/_/g, ' ')}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="pt-4 border-t border-gray-200">
-              <span className="text-body-sm text-gray-600">{role.memberCount} members</span>
+            <div className="pt-4 border-t border-grey-200">
+              <span className="text-body-sm text-grey-600">{role.memberCount} members</span>
             </div>
           </div>
         ))}

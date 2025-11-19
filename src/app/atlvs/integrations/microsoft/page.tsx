@@ -11,6 +11,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Mail, AlertCircle, ExternalLink, FolderOpen, Users } from 'lucide-react';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/integrations/microsoft
 
 export default function MicrosoftIntegrationPage() {
   const [isConnected] = useState(false);
@@ -31,7 +34,7 @@ export default function MicrosoftIntegrationPage() {
           className="space-y-6"
         >
           {/* Connection Status */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -39,8 +42,8 @@ export default function MicrosoftIntegrationPage() {
                     <Mail className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-h6">Microsoft 365</h3>
-                    <p className="text-body-sm text-gray-400">Outlook, Teams, and OneDrive integration</p>
+                    <SubsectionHeader >Microsoft 365</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400">Outlook, Teams, and OneDrive integration</BodyText>
                   </div>
                 </div>
                 {isConnected ? (
@@ -59,13 +62,13 @@ export default function MicrosoftIntegrationPage() {
           </Card>
 
           {!isConnected ? (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardContent className="text-center py-12">
-                <Mail className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <h3 className="text-h6 mb-2">Connect to Microsoft 365</h3>
-                <p className="text-body-sm text-gray-400 mb-6 max-w-md mx-auto">
+                <Mail className="w-16 h-16 text-grey-600 mx-auto mb-4" />
+                <SubsectionHeader className="mb-2">Connect to Microsoft 365</SubsectionHeader>
+                <BodyText className="text-body-sm text-grey-400 mb-6 max-w-md mx-auto">
                   Authorize ATLVS to access your Microsoft 365 account to sync emails, calendar events, and files.
-                </p>
+                </BodyText>
                 <Button variant="atlvs">
                   Connect Microsoft Account
                 </Button>
@@ -74,13 +77,13 @@ export default function MicrosoftIntegrationPage() {
           ) : (
             <>
               {/* Outlook */}
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <Mail className="w-5 h-5 text-atlvs-green-500" />
-                    <h3 className="text-h6">Outlook</h3>
+                    <SubsectionHeader >Outlook</SubsectionHeader>
                   </div>
-                  <p className="text-body-sm text-gray-400">Email and calendar integration</p>
+                  <BodyText className="text-body-sm text-grey-400">Email and calendar integration</BodyText>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -101,13 +104,13 @@ export default function MicrosoftIntegrationPage() {
               </Card>
 
               {/* Teams */}
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <Users className="w-5 h-5 text-atlvs-green-500" />
-                    <h3 className="text-h6">Microsoft Teams</h3>
+                    <SubsectionHeader >Microsoft Teams</SubsectionHeader>
                   </div>
-                  <p className="text-body-sm text-gray-400">Team collaboration and chat</p>
+                  <BodyText className="text-body-sm text-grey-400">Team collaboration and chat</BodyText>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -128,13 +131,13 @@ export default function MicrosoftIntegrationPage() {
               </Card>
 
               {/* OneDrive */}
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <FolderOpen className="w-5 h-5 text-atlvs-green-500" />
-                    <h3 className="text-h6">OneDrive</h3>
+                    <SubsectionHeader >OneDrive</SubsectionHeader>
                   </div>
-                  <p className="text-body-sm text-gray-400">Cloud storage and file sync</p>
+                  <BodyText className="text-body-sm text-grey-400">Cloud storage and file sync</BodyText>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">

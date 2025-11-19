@@ -11,6 +11,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useQRCodes } from '@/lib/hooks/compvss/useQRCodes';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/qr/access
 
 export default function QRAccessControlPage() {
   const { data, isLoading, error, refetch } = useQRCodes({ type: 'access' });
@@ -29,7 +32,7 @@ export default function QRAccessControlPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading access control...</p>
+              <BodyText className="text-grey-400">Loading access control...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -50,8 +53,8 @@ export default function QRAccessControlPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Access Control</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Access Control</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -90,7 +93,7 @@ export default function QRAccessControlPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-white flex items-center gap-2">
@@ -104,17 +107,17 @@ export default function QRAccessControlPage() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Users2 className="w-4 h-4 text-gray-400" />
-                        <span className="text-body-sm text-gray-400 font-share-tech">
+                        <Users2 className="w-4 h-4 text-grey-400" />
+                        <span className="text-body-sm text-grey-400 -tech">
                           {zone.activeUsers} / {zone.capacity}
                         </span>
                       </div>
-                      <div className="text-body-sm font-share-tech">
+                      <div className="text-body-sm -tech">
                         <span className="text-compvss-cyan-500">{Math.round((zone.activeUsers / zone.capacity) * 100)}%</span>
-                        <span className="text-gray-500"> capacity</span>
+                        <span className="text-grey-500"> capacity</span>
                       </div>
                     </div>
-                    <div className="w-full bg-gray-800 rounded-full h-2">
+                    <div className="w-full bg-grey-800 rounded-full h-2">
                       <div
                         className="bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 h-2 rounded-full transition-all"
                         style={{ width: `${(zone.activeUsers / zone.capacity) * 100}%` }}

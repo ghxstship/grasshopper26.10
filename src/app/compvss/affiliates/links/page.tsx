@@ -10,6 +10,9 @@ import { Link as LinkIcon, Copy, Plus, TrendingUp, Loader2, AlertCircle } from '
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { useAffiliates } from '@/lib/hooks/compvss';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/affiliates/links
 
 export default function AffiliateLinksPage() {
   const { data: affiliateData, isLoading, error, refetch } = useAffiliates();
@@ -21,7 +24,7 @@ export default function AffiliateLinksPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading links...</p>
+            <BodyText className="text-grey-400">Loading links...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -34,8 +37,8 @@ export default function AffiliateLinksPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Links</h2>
-            <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+            <SectionHeader className="mb-2">Failed to Load Links</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -53,12 +56,12 @@ export default function AffiliateLinksPage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-h3 font-bebas compvss-text-gradient">Affiliate Links</h1>
-              <p className="text-gray-400 font-oswald mt-1">Manage your affiliate links</p>
+              <HeroTitle className="compvss-text-gradient">Affiliate Links</HeroTitle>
+              <BodyText className="text-grey-400 mt-1">Manage your affiliate links</BodyText>
             </div>
             <Button variant="compvss" size="lg">
               <Plus className="w-5 h-5 mr-2" />
@@ -69,7 +72,7 @@ export default function AffiliateLinksPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white">Your Affiliate Links</CardTitle>
           </CardHeader>
@@ -85,29 +88,29 @@ export default function AffiliateLinksPage() {
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1">
-                      <h3 className="font-oswald text-white mb-2">{link.name}</h3>
-                      <div className="flex items-center gap-2 p-2 bg-gray-900 rounded border border-gray-800">
-                        <LinkIcon className="w-4 h-4 text-gray-400" />
-                        <code className="text-body-sm text-gray-300 font-share-tech flex-1">{link.url}</code>
+                      <h3 className="text-white mb-2">{link.name}</h3>
+                      <div className="flex items-center gap-2 p-2 bg-grey-900 rounded border border-grey-800">
+                        <LinkIcon className="w-4 h-4 text-grey-400" />
+                        <code className="text-body-sm text-grey-300 -tech flex-1">{link.url}</code>
                         <Button variant="compvss-ghost" size="sm">
                           <Copy className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-4 pt-3 border-t border-gray-800">
+                  <div className="grid grid-cols-3 gap-4 pt-3 border-t border-grey-800">
                     <div>
-                      <p className="text-caption text-gray-500 font-oswald mb-1">Clicks</p>
-                      <p className="text-h6 font-bebas text-white">{link.clicks}</p>
+                      <BodyText className="text-caption text-grey-500 mb-1">Clicks</BodyText>
+                      <p className="text-white">{link.clicks}</p>
                     </div>
                     <div>
-                      <p className="text-caption text-gray-500 font-oswald mb-1">Conversions</p>
-                      <p className="text-h6 font-bebas text-white">{link.conversions}</p>
+                      <BodyText className="text-caption text-grey-500 mb-1">Conversions</BodyText>
+                      <p className="text-white">{link.conversions}</p>
                     </div>
                     <div>
-                      <p className="text-caption text-gray-500 font-oswald mb-1">Earnings</p>
+                      <BodyText className="text-caption text-grey-500 mb-1">Earnings</BodyText>
                       <div className="flex items-center gap-2">
-                        <p className="text-h6 font-bebas text-compvss-cyan-500">{link.earnings}</p>
+                        <p className="text-compvss-cyan-500">{link.earnings}</p>
                         <TrendingUp className="w-4 h-4 text-success" />
                       </div>
                     </div>

@@ -18,6 +18,8 @@ interface ProjectMetrics {
   daysRemaining: number;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics/projects
+
 export default function ProjectAnalyticsPage() {
   const { data: projectsData } = useProjects();
   
@@ -44,45 +46,45 @@ export default function ProjectAnalyticsPage() {
       >
         {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Active Projects</div>
-                <div className="text-h4 text-white">{projects.length}</div>
+                <div className="text-body-sm text-grey-400 mb-1">Active Projects</div>
+                <div className="text-white">{projects.length}</div>
               </div>
               <BarChart3 className="w-8 h-8 text-info" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Avg Completion</div>
-                <div className="text-h4 text-atlvs-green-500">{avgCompletion.toFixed(0)}%</div>
+                <div className="text-body-sm text-grey-400 mb-1">Avg Completion</div>
+                <div className="text-atlvs-green-500">{avgCompletion.toFixed(0)}%</div>
               </div>
               <TrendingUp className="w-8 h-8 text-atlvs-green-500" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Total Budget</div>
-                <div className="text-h4 text-atlvs-purple-500">${(totalBudget / 1000).toFixed(0)}K</div>
+                <div className="text-body-sm text-grey-400 mb-1">Total Budget</div>
+                <div className="text-atlvs-purple-500">${(totalBudget / 1000).toFixed(0)}K</div>
               </div>
               <DollarSign className="w-8 h-8 text-atlvs-purple-500" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Budget Used</div>
-                <div className="text-h4 text-atlvs-orange-500">
+                <div className="text-body-sm text-grey-400 mb-1">Budget Used</div>
+                <div className="text-atlvs-orange-500">
                   {((totalSpent / totalBudget) * 100).toFixed(0)}%
                 </div>
               </div>
@@ -93,27 +95,27 @@ export default function ProjectAnalyticsPage() {
       </div>
 
       {/* Project Details Table */}
-      <Card variant="atlvs" className="bg-gray-900/50">
+      <Card variant="atlvs" className="bg-grey-900/50">
         <CardHeader>
           <CardTitle>Project Performance</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-800/50 border-b border-gray-700">
+              <thead className="bg-grey-800/50 border-b border-grey-700">
                 <tr>
-                  <th className="px-4 py-3 text-left text-body-sm text-gray-400">Project</th>
-                  <th className="px-4 py-3 text-center text-body-sm text-gray-400">Status</th>
-                  <th className="px-4 py-3 text-center text-body-sm text-gray-400">Completion</th>
-                  <th className="px-4 py-3 text-right text-body-sm text-gray-400">Budget</th>
-                  <th className="px-4 py-3 text-right text-body-sm text-gray-400">Spent</th>
-                  <th className="px-4 py-3 text-center text-body-sm text-gray-400">Days Left</th>
+                  <th className="px-4 py-3 text-left text-body-sm text-grey-400">Project</th>
+                  <th className="px-4 py-3 text-center text-body-sm text-grey-400">Status</th>
+                  <th className="px-4 py-3 text-center text-body-sm text-grey-400">Completion</th>
+                  <th className="px-4 py-3 text-right text-body-sm text-grey-400">Budget</th>
+                  <th className="px-4 py-3 text-right text-body-sm text-grey-400">Spent</th>
+                  <th className="px-4 py-3 text-center text-body-sm text-grey-400">Days Left</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-grey-200">
                 {projects.map((project, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-body-sm text-gray-900">{project.projectName}</td>
+                  <tr key={idx} className="hover:bg-grey-50">
+                    <td className="px-4 py-3 text-body-sm text-grey-900">{project.projectName}</td>
                     <td className="px-4 py-3 text-center">
                       <span className="px-2 py-1 bg-success-light text-success-foreground text-caption rounded-full">
                         {project.status}
@@ -121,22 +123,22 @@ export default function ProjectAnalyticsPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-center gap-2">
-                        <div className="w-24 bg-gray-200 rounded-full h-2">
+                        <div className="w-24 bg-grey-200 rounded-full h-2">
                           <div
                             className="bg-success h-2 rounded-full"
                             style={{ width: `${project.completion}%` }}
                           />
                         </div>
-                        <span className="text-body-sm text-gray-900">{project.completion}%</span>
+                        <span className="text-body-sm text-grey-900">{project.completion}%</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-body-sm text-gray-900 text-right">
+                    <td className="px-4 py-3 text-body-sm text-grey-900 text-right">
                       ${project.budget.toLocaleString()}
                     </td>
-                    <td className="px-4 py-3 text-body-sm text-gray-900 text-right">
+                    <td className="px-4 py-3 text-body-sm text-grey-900 text-right">
                       ${project.spent.toLocaleString()}
                     </td>
-                    <td className="px-4 py-3 text-body-sm text-gray-900 text-center">
+                    <td className="px-4 py-3 text-body-sm text-grey-900 text-center">
                       {project.daysRemaining} days
                     </td>
                   </tr>

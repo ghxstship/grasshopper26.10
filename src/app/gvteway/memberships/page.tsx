@@ -7,6 +7,8 @@ import { SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms
 import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/memberships
+
 export default function MembershipsPage() {
   const tiers = [
     {
@@ -57,7 +59,7 @@ export default function MembershipsPage() {
               </div>
               <SectionHeader className="mb-2 text-ghxst-primary">{tier.name}</SectionHeader>
               <div className="mb-4">
-                <span className="text-h1 font-anton text-ghxst-primary">${tier.price}</span>
+                <span className="text-ghxst-primary">${tier.price}</span>
                 <Metadata className="text-ghxst-text-secondary">/month</Metadata>
               </div>
             </div>

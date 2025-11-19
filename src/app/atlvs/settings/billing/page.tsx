@@ -12,6 +12,8 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/settings/billing
+
 export default function BillingSettingsPage() {
   return (
     <AtlvsLayout>
@@ -24,13 +26,13 @@ export default function BillingSettingsPage() {
         ]}
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Current Plan</CardTitle>
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="text-h4 font-bebas atlvs-text-gradient mb-2">ENTERPRISE</div>
-                  <div className="text-gray-400 mb-4">$299/month • Billed annually</div>
+                  <div className="atlvs-text-gradient mb-2">ENTERPRISE</div>
+                  <div className="text-grey-400 mb-4">$299/month • Billed annually</div>
                   <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50">
                     Active
                   </Badge>
@@ -40,20 +42,20 @@ export default function BillingSettingsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6 flex items-center gap-2">
                 <CreditCard className="w-5 h-5" />
                 Payment Method
               </CardTitle>
-              <div className="p-4 bg-gray-800/50 rounded-lg flex items-center justify-between">
+              <div className="p-4 bg-grey-800/50 rounded-lg flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-8 bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 rounded flex items-center justify-center font-bebas">
+                  <div className="w-12 h-8 bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 rounded flex items-center justify-center">
                     VISA
                   </div>
                   <div>
                     <div className="font-medium">•••• •••• •••• 4242</div>
-                    <div className="text-body-sm text-gray-400">Expires 12/25</div>
+                    <div className="text-body-sm text-grey-400">Expires 12/25</div>
                   </div>
                 </div>
                 <Button variant="ghost" size="sm">Update</Button>
@@ -61,7 +63,7 @@ export default function BillingSettingsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Billing History</CardTitle>
               <div className="space-y-3">
@@ -70,10 +72,10 @@ export default function BillingSettingsPage() {
                   { date: '2024-05-01', amount: '$299.00', status: 'Paid' },
                   { date: '2024-04-01', amount: '$299.00', status: 'Paid' }
                 ].map((invoice, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                  <div key={i} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg">
                     <div>
                       <div className="font-medium mb-1">{invoice.date}</div>
-                      <div className="text-body-sm text-gray-400">{invoice.amount}</div>
+                      <div className="text-body-sm text-grey-400">{invoice.amount}</div>
                     </div>
                     <div className="flex items-center gap-3">
                       <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50">

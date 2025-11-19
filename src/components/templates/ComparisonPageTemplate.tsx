@@ -134,11 +134,7 @@ export function ComparisonPageTemplate({
               {options.map((option) => (
                 <Card
                   key={option.id}
-                  className={`relative ${
-                    option.highlighted
-                      ? 'border-2 border-ghxst-primary shadow-lg scale-105'
-                      : ''
-                  }`}
+                  className={`relative ${ option.highlighted ? 'border-2 border-ghxst-primary shadow-lg scale-105' : '' }`}
                 >
                   {option.badge && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -149,7 +145,7 @@ export function ComparisonPageTemplate({
                   )}
 
                   <CardHeader className="text-center pb-6">
-                    <CardTitle className="font-bebas text-h3 mb-2">
+                    <CardTitle className="mb-2">
                       {option.name}
                     </CardTitle>
                     {option.description && (
@@ -159,7 +155,7 @@ export function ComparisonPageTemplate({
                     )}
                     {option.price && (
                       <div className="mt-4">
-                        <SectionHeader className="font-bebas text-h2 text-ghxst-primary">
+                        <SectionHeader className="text-ghxst-primary">
                           {formatPrice(option.price)}
                         </SectionHeader>
                       </div>
@@ -176,10 +172,10 @@ export function ComparisonPageTemplate({
                             {feature?.included ? (
                               <Check className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
                             ) : (
-                              <X className="w-5 h-5 text-gray-300 flex-shrink-0 mt-0.5" />
+                              <X className="w-5 h-5 text-grey-300 flex-shrink-0 mt-0.5" />
                             )}
                             <div className="flex-1">
-                              <BodyText className={feature?.included ? '' : 'text-gray-400'}>
+                              <BodyText className={feature?.included ? '' : 'text-grey-400'}>
                                 {featureLabel}
                               </BodyText>
                               {feature?.value && (
@@ -223,11 +219,7 @@ export function ComparisonPageTemplate({
             {options.map((option) => (
               <Card
                 key={option.id}
-                className={`relative ${
-                  option.highlighted
-                    ? 'border-2 border-ghxst-primary shadow-lg'
-                    : ''
-                }`}
+                className={`relative ${ option.highlighted ? 'border-2 border-ghxst-primary shadow-lg' : '' }`}
               >
                 {option.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -238,7 +230,7 @@ export function ComparisonPageTemplate({
                 )}
 
                 <CardHeader className="text-center pb-6">
-                  <CardTitle className="font-bebas text-h3 mb-2">
+                  <CardTitle className="mb-2">
                     {option.name}
                   </CardTitle>
                   {option.description && (
@@ -248,7 +240,7 @@ export function ComparisonPageTemplate({
                   )}
                   {option.price && (
                     <div className="mt-4">
-                      <SectionHeader className="font-bebas text-h2 text-ghxst-primary">
+                      <SectionHeader className="text-ghxst-primary">
                         {formatPrice(option.price)}
                       </SectionHeader>
                     </div>
@@ -263,10 +255,10 @@ export function ComparisonPageTemplate({
                         {feature.included ? (
                           <Check className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
                         ) : (
-                          <X className="w-5 h-5 text-gray-300 flex-shrink-0 mt-0.5" />
+                          <X className="w-5 h-5 text-grey-300 flex-shrink-0 mt-0.5" />
                         )}
                         <div className="flex-1">
-                          <BodyText className={feature.included ? '' : 'text-gray-400'}>
+                          <BodyText className={feature.included ? '' : 'text-grey-400'}>
                             {feature.label}
                           </BodyText>
                           {feature.value && (

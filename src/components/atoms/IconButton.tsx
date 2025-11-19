@@ -7,10 +7,10 @@ const iconButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white text-gray-900 hover:bg-gray-100 border border-gray-200",
-        primary: "bg-gray-900 text-white hover:bg-gray-800",
-        outline: "border-2 border-gray-300 bg-transparent hover:bg-gray-100",
-        ghost: "hover:bg-gray-100 text-gray-700",
+        default: "bg-white text-grey-900 hover:bg-grey-100 border border-grey-200",
+        primary: "bg-grey-900 text-white hover:bg-grey-800",
+        outline: "border-2 border-grey-300 bg-transparent hover:bg-grey-100",
+        ghost: "hover:bg-grey-100 text-grey-700",
         gvteway: "bg-gvteway-red-500 text-white hover:bg-gvteway-red-600",
         compvss: "bg-compvss-cyan-500 text-white hover:bg-compvss-cyan-600",
         atlvs: "bg-atlvs-green-500 text-black hover:bg-atlvs-green-600",

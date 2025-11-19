@@ -9,6 +9,7 @@ import { ReactNode } from 'react';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader } from '@/components/atoms/Card';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
 
 // ============================================================================
 // PATTERN 1: Data Fetching with Loading/Error States
@@ -38,7 +39,7 @@ export function DataFetchingPattern<T>({
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-          <p className="text-gray-400">{loadingMessage}</p>
+          <p className="text-grey-400">{loadingMessage}</p>
         </div>
       </div>
     );
@@ -46,12 +47,12 @@ export function DataFetchingPattern<T>({
 
   if (error) {
     return (
-      <Card variant="atlvs" className="bg-gray-900/50">
+      <Card variant="atlvs" className="bg-grey-900/50">
         <CardHeader>
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h3 className="text-h6 font-bebas mb-2">Failed to Load Data</h3>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SubsectionHeader className="mb-2">Failed to Load Data</SubsectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={refetch}>
               Try Again
             </Button>
@@ -63,10 +64,10 @@ export function DataFetchingPattern<T>({
 
   if (!data) {
     return emptyState || (
-      <Card variant="atlvs" className="bg-gray-900/50">
+      <Card variant="atlvs" className="bg-grey-900/50">
         <CardHeader>
-          <div className="text-center py-12 text-gray-400">
-            <p>No data available</p>
+          <div className="text-center py-12 text-grey-400">
+            <BodyText >No data available</BodyText>
           </div>
         </CardHeader>
       </Card>
@@ -259,8 +260,8 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
   return (
     <div className="text-center py-12">
       <div className="flex justify-center mb-4 opacity-50">{icon}</div>
-      <h3 className="text-h6 font-bebas mb-2">{title}</h3>
-      {description && <p className="text-gray-400 mb-4">{description}</p>}
+      <h3 className="mb-2">{title}</h3>
+      {description && <p className="text-grey-400 mb-4">{description}</p>}
       {action && (
         <Button variant="atlvs" onClick={action.onClick}>
           {action.label}
@@ -329,15 +330,15 @@ export function getStatusColor(status: string, _variant: 'atlvs' | 'compvss' | '
     pending: 'bg-warning-light text-warning border-warning-border',
     rejected: 'bg-error-light text-error border-error-border',
     'under-review': 'bg-info-light text-info border-info-border',
-    draft: 'bg-gray-500/20 text-gray-500 border-gray-500/50',
+    draft: 'bg-grey-500/20 text-grey-500 border-grey-500/50',
     active: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50',
-    inactive: 'bg-gray-500/20 text-gray-500 border-gray-500/50',
+    inactive: 'bg-grey-500/20 text-grey-500 border-grey-500/50',
     completed: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50',
     'in-progress': 'bg-info-light text-info border-info-border',
     cancelled: 'bg-error-light text-error border-error-border'
   };
 
-  return colors[status as keyof typeof colors] || 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+  return colors[status as keyof typeof colors] || 'bg-grey-500/20 text-grey-500 border-grey-500/50';
 }
 
 export function getPriorityColor(priority: string) {
@@ -348,5 +349,5 @@ export function getPriorityColor(priority: string) {
     low: 'bg-info'
   };
 
-  return colors[priority as keyof typeof colors] || 'bg-gray-500';
+  return colors[priority as keyof typeof colors] || 'bg-grey-500';
 }

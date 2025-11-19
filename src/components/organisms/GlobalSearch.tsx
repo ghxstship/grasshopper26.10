@@ -7,6 +7,7 @@ import { Input } from '@/components/atoms/Input';
 import { Card } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import Link from 'next/link';
+import { BodyText } from "@/components/atoms/Typography";
 
 export interface SearchResult {
   id: string;
@@ -121,9 +122,9 @@ export function GlobalSearch({
       case 'product': return 'bg-compvss-cyan-500/20 text-compvss-cyan-500';
       case 'task': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500';
       case 'project': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500';
-      case 'user': return 'bg-gray-500/20 text-gray-400';
+      case 'user': return 'bg-grey-500/20 text-grey-400';
       case 'page': return 'bg-info-light text-info';
-      default: return 'bg-gray-500/20 text-gray-400';
+      default: return 'bg-grey-500/20 text-grey-400';
     }
   };
 
@@ -131,7 +132,7 @@ export function GlobalSearch({
     <div ref={searchRef} className="relative w-full max-w-2xl">
       {/* Search Input */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
         <Input
           ref={inputRef}
           type="text"
@@ -139,7 +140,7 @@ export function GlobalSearch({
           onChange={(e) => handleQueryChange(e.target.value)}
           onFocus={() => setIsOpen(true)}
           placeholder={placeholder}
-          className="pl-10 pr-10 bg-black/50 border-gray-700"
+          className="pl-10 pr-10 bg-black/50 border-grey-700"
           variant={variant}
         />
         {query && (
@@ -148,37 +149,37 @@ export function GlobalSearch({
               setQuery('');
               clearResults();
             }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-grey-400 hover:text-white transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         )}
         {isLoading && (
-          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 animate-spin" />
+          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 animate-spin" />
         )}
       </div>
 
       {/* Keyboard Shortcut Hint */}
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-caption text-gray-500 bg-gray-800 border border-gray-700 rounded">
+        <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-caption text-grey-500 bg-grey-800 border border-grey-700 rounded">
           <span className="text-caption">⌘</span>K
         </kbd>
       </div>
 
       {/* Results Dropdown */}
       {isOpen && (
-        <Card className="absolute top-full mt-2 w-full max-h-96 overflow-y-auto bg-gray-900 border-gray-700 shadow-2xl z-50">
+        <Card className="absolute top-full mt-2 w-full max-h-96 overflow-y-auto bg-grey-900 border-grey-700 shadow-2xl z-50">
           {/* Recent Searches */}
           {!query && recentSearches.length > 0 && (
-            <div className="p-4 border-b border-gray-800">
+            <div className="p-4 border-b border-grey-800">
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 text-body-sm text-gray-400">
+                <div className="flex items-center gap-2 text-body-sm text-grey-400">
                   <Clock className="w-4 h-4" />
                   Recent Searches
                 </div>
                 <button
                   onClick={clearRecentSearches}
-                  className="text-caption text-gray-500 hover:text-white transition-colors"
+                  className="text-caption text-grey-500 hover:text-white transition-colors"
                 >
                   Clear
                 </button>
@@ -188,7 +189,7 @@ export function GlobalSearch({
                   <button
                     key={index}
                     onClick={() => handleRecentSearchClick(search)}
-                    className="w-full text-left px-3 py-2 text-body-sm text-gray-300 hover:bg-gray-800 rounded transition-colors"
+                    className="w-full text-left px-3 py-2 text-body-sm text-grey-300 hover:bg-grey-800 rounded transition-colors"
                   >
                     {search}
                   </button>
@@ -205,7 +206,7 @@ export function GlobalSearch({
                   key={result.id}
                   href={result.url}
                   onClick={() => handleResultClick(result)}
-                  className="block p-3 hover:bg-gray-800 rounded transition-colors"
+                  className="block p-3 hover:bg-grey-800 rounded transition-colors"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
@@ -218,7 +219,7 @@ export function GlobalSearch({
                         </h4>
                       </div>
                       {result.description && (
-                        <p className="text-caption text-gray-400 line-clamp-2">
+                        <p className="text-caption text-grey-400 line-clamp-2">
                           {result.description}
                         </p>
                       )}
@@ -231,16 +232,16 @@ export function GlobalSearch({
 
           {/* No Results */}
           {query && !isLoading && results.length === 0 && (
-            <div className="p-8 text-center text-gray-500">
+            <div className="p-8 text-center text-grey-500">
               <p className="text-body-sm">No results found for &quot;{query}&quot;</p>
-              <p className="text-caption mt-2">Try different keywords or check your spelling</p>
+              <BodyText className="text-caption mt-2">Try different keywords or check your spelling</BodyText>
             </div>
           )}
 
           {/* Trending/Popular (when no query) */}
           {!query && recentSearches.length === 0 && (
             <div className="p-4">
-              <div className="flex items-center gap-2 text-body-sm text-gray-400 mb-3">
+              <div className="flex items-center gap-2 text-body-sm text-grey-400 mb-3">
                 <TrendingUp className="w-4 h-4" />
                 Popular Searches
               </div>
@@ -249,7 +250,7 @@ export function GlobalSearch({
                   <button
                     key={term}
                     onClick={() => handleRecentSearchClick(term)}
-                    className="w-full text-left px-3 py-2 text-body-sm text-gray-300 hover:bg-gray-800 rounded transition-colors"
+                    className="w-full text-left px-3 py-2 text-body-sm text-grey-300 hover:bg-grey-800 rounded transition-colors"
                   >
                     {term}
                   </button>

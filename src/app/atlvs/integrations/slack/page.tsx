@@ -14,6 +14,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, MessageSquare, AlertCircle, ExternalLink, Bell } from 'lucide-react';
 import { useIntegrations } from '@/lib/hooks/atlvs/useIntegrations';
+import { BodyText, CardTitle, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/integrations/slack
 
 export default function SlackIntegrationPage() {
   const { integrations } = useIntegrations();
@@ -42,7 +45,7 @@ export default function SlackIntegrationPage() {
           className="space-y-6"
         >
           {/* Connection Status */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -50,8 +53,8 @@ export default function SlackIntegrationPage() {
                     <MessageSquare className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-h6">Slack</h3>
-                    <p className="text-body-sm text-gray-400">Team communication platform</p>
+                    <SubsectionHeader >Slack</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400">Team communication platform</BodyText>
                   </div>
                 </div>
                 {isConnected ? (
@@ -71,22 +74,22 @@ export default function SlackIntegrationPage() {
 
           {/* Workspace Info */}
           {isConnected && (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <h3 className="text-h6">Connected Workspace</h3>
+                <SubsectionHeader >Connected Workspace</SubsectionHeader>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   <div className="flex justify-between text-body-sm">
-                    <span className="text-gray-400">Workspace Name</span>
+                    <span className="text-grey-400">Workspace Name</span>
                     <span className="font-medium">ATLVS Team</span>
                   </div>
                   <div className="flex justify-between text-body-sm">
-                    <span className="text-gray-400">Team ID</span>
+                    <span className="text-grey-400">Team ID</span>
                     <span className="font-mono text-caption">T01234567</span>
                   </div>
                   <div className="flex justify-between text-body-sm">
-                    <span className="text-gray-400">Connected By</span>
+                    <span className="text-grey-400">Connected By</span>
                     <span>admin@atlvs.com</span>
                   </div>
                 </div>
@@ -96,13 +99,13 @@ export default function SlackIntegrationPage() {
 
           {/* Notification Settings */}
           {isConnected && (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Bell className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-h6">Notification Settings</h3>
+                  <SubsectionHeader >Notification Settings</SubsectionHeader>
                 </div>
-                <p className="text-body-sm text-gray-400">Configure when to send Slack notifications</p>
+                <BodyText className="text-body-sm text-grey-400">Configure when to send Slack notifications</BodyText>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -124,7 +127,7 @@ export default function SlackIntegrationPage() {
                   </FormField>
 
                   <div className="space-y-3 pt-4">
-                    <h4 className="text-body-sm">Notification Events</h4>
+                    <CardTitle className="text-body-sm">Notification Events</CardTitle>
                     {[
                       { label: 'Task created', enabled: true },
                       { label: 'Task completed', enabled: true },
@@ -133,7 +136,7 @@ export default function SlackIntegrationPage() {
                       { label: 'Project milestone reached', enabled: false },
                       { label: 'Budget threshold exceeded', enabled: true }
                     ].map((item) => (
-                      <div key={item.label} className="flex items-center justify-between p-3 rounded-lg bg-gray-800/50">
+                      <div key={item.label} className="flex items-center justify-between p-3 rounded-lg bg-grey-800/50">
                         <span className="text-body-sm">{item.label}</span>
                         {item.enabled && <Check className="w-4 h-4 text-atlvs-green-500" />}
                       </div>
@@ -146,10 +149,10 @@ export default function SlackIntegrationPage() {
 
           {/* Slash Commands */}
           {isConnected && (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <h3 className="text-h6">Available Slash Commands</h3>
-                <p className="text-body-sm text-gray-400">Use these commands in Slack</p>
+                <SubsectionHeader >Available Slash Commands</SubsectionHeader>
+                <BodyText className="text-body-sm text-grey-400">Use these commands in Slack</BodyText>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
@@ -159,9 +162,9 @@ export default function SlackIntegrationPage() {
                     { command: '/atlvs project status', description: 'Get project status' },
                     { command: '/atlvs help', description: 'Show help information' }
                   ].map((item) => (
-                    <div key={item.command} className="p-3 rounded-lg bg-gray-800/50">
+                    <div key={item.command} className="p-3 rounded-lg bg-grey-800/50">
                       <code className="text-body-sm text-atlvs-green-500">{item.command}</code>
-                      <p className="text-caption text-gray-400 mt-1">{item.description}</p>
+                      <p className="text-caption text-grey-400 mt-1">{item.description}</p>
                     </div>
                   ))}
                 </div>

@@ -53,7 +53,7 @@ describe('LoadingState', () => {
       render(<LoadingState message="Loading..." />);
       
       const message = screen.getByText('Loading...');
-      expect(message).toHaveClass('text-body-sm', 'text-gray-600', 'font-share-tech');
+      expect(message).toHaveClass('text-body-sm', 'text-grey-600', 'font-share-tech');
     });
   });
 

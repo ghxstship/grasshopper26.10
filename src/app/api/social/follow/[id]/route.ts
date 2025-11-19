@@ -2,6 +2,11 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { SocialService } from '@/lib/services/social/follow/id.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -20,7 +25,7 @@ export async function DELETE(
     requireAuth(context);
 
     // Find follow relationship
-    const follow = await prisma.follow.findUnique({
+    const follow = await new SocialService().findById({
       where: {
         followerId_followingId: {
           followerId: context.userId!,
@@ -34,7 +39,7 @@ export async function DELETE(
     }
 
     // Delete follow relationship
-    await prisma.follow.delete({
+    await new SocialService().delete({
       where: {
         followerId_followingId: {
           followerId: context.userId!,

@@ -11,9 +11,16 @@ import { passwordResetSchema } from '@/lib/validations/auth';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { AuthService } from '@/lib/services/auth/resetPassword.service';
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting - prevent password reset abuse
     const identifier = getClientIdentifier(request);
     if (!rateLimit(

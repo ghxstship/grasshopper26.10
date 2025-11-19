@@ -15,6 +15,9 @@ import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Check, FileText, AlertCircle, ExternalLink, RefreshCw } from 'lucide-react';
 import { useIntegrations } from '@/lib/hooks/atlvs/useIntegrations';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/integrations/quickbooks
 
 export default function QuickBooksIntegrationPage() {
   const { integrations, connect } = useIntegrations();
@@ -47,7 +50,7 @@ export default function QuickBooksIntegrationPage() {
           className="space-y-6"
         >
           {/* Connection Status */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -55,8 +58,8 @@ export default function QuickBooksIntegrationPage() {
                     <FileText className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-h6">QuickBooks</h3>
-                    <p className="text-body-sm text-gray-400">Accounting and financial management</p>
+                    <SubsectionHeader >QuickBooks</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400">Accounting and financial management</BodyText>
                   </div>
                 </div>
                 {isConnected ? (
@@ -75,13 +78,13 @@ export default function QuickBooksIntegrationPage() {
           </Card>
 
           {!isConnected ? (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardContent className="text-center py-12">
-                <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <h3 className="text-h6 mb-2">Connect to QuickBooks</h3>
-                <p className="text-body-sm text-gray-400 mb-6 max-w-md mx-auto">
+                <FileText className="w-16 h-16 text-grey-600 mx-auto mb-4" />
+                <SubsectionHeader className="mb-2">Connect to QuickBooks</SubsectionHeader>
+                <BodyText className="text-body-sm text-grey-400 mb-6 max-w-md mx-auto">
                   Authorize ATLVS to access your QuickBooks account to sync invoices, expenses, and customer data.
-                </p>
+                </BodyText>
                 <Button variant="atlvs" onClick={() => connect('quickbooks')}>
                   Connect QuickBooks Account
                 </Button>
@@ -90,10 +93,10 @@ export default function QuickBooksIntegrationPage() {
           ) : (
             <>
               {/* Sync Configuration */}
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
-                  <h3 className="text-h6">Sync Configuration</h3>
-                  <p className="text-body-sm text-gray-400">Configure how data syncs with QuickBooks</p>
+                  <SubsectionHeader >Sync Configuration</SubsectionHeader>
+                  <BodyText className="text-body-sm text-grey-400">Configure how data syncs with QuickBooks</BodyText>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -129,10 +132,10 @@ export default function QuickBooksIntegrationPage() {
               </Card>
 
               {/* Sync Features */}
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
-                  <h3 className="text-h6">Data Sync</h3>
-                  <p className="text-body-sm text-gray-400">Choose what data to sync</p>
+                  <SubsectionHeader >Data Sync</SubsectionHeader>
+                  <BodyText className="text-body-sm text-grey-400">Choose what data to sync</BodyText>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -144,7 +147,7 @@ export default function QuickBooksIntegrationPage() {
                       { label: 'Products', enabled: false },
                       { label: 'Payments', enabled: true }
                     ].map((item) => (
-                      <div key={item.label} className="flex items-center justify-between p-3 rounded-lg bg-gray-800/50">
+                      <div key={item.label} className="flex items-center justify-between p-3 rounded-lg bg-grey-800/50">
                         <span className="text-body-sm">{item.label}</span>
                         {item.enabled && <Check className="w-4 h-4 text-atlvs-green-500" />}
                       </div>
@@ -154,12 +157,12 @@ export default function QuickBooksIntegrationPage() {
               </Card>
 
               {/* Last Sync */}
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-h6">Last Sync</h3>
-                      <p className="text-body-sm text-gray-400">2 hours ago</p>
+                      <SubsectionHeader >Last Sync</SubsectionHeader>
+                      <BodyText className="text-body-sm text-grey-400">2 hours ago</BodyText>
                     </div>
                     <Button variant="outline" size="sm">
                       <RefreshCw className="w-4 h-4 mr-2" />

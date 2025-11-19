@@ -14,7 +14,7 @@ export interface LoadingStateProps {
 }
 
 const variantClasses = {
-  default: "text-gray-400",
+  default: "text-grey-400",
   gvteway: "text-accent",
   compvss: "text-info",
   atlvs: "text-success",

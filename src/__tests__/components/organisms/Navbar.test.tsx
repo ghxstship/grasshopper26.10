@@ -257,7 +257,7 @@ describe('Navbar', () => {
       const { container } = render(<Navbar variant="default" />);
       
       const header = container.querySelector('header');
-      expect(header).toHaveClass('bg-white', 'border-gray-200');
+      expect(header).toHaveClass('bg-white', 'border-grey-200');
     });
 
     it('should apply gvteway variant styles', () => {

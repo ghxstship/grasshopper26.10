@@ -4,6 +4,8 @@ import { transferTicketSchema } from '@/lib/validations/orders';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { TicketsService } from '@/lib/services/tickets/id.service';
+
 
 type RouteContext = {
   params: Promise<{
@@ -30,7 +32,7 @@ export async function GET(
       throw errors.rateLimitExceeded();
     }
 
-    const ticket = await prisma.ticket.findUnique({
+    const ticket = await new TicketsService().findById({
       where: { id: id },
       include: {
         ticketType: {
@@ -98,7 +100,7 @@ export async function POST(
 
     // Get ticket
     const { id } = await params;
-    const ticket = await prisma.ticket.findUnique({
+    const ticket = await new TicketsService().findById({
       where: { id: id },
       include: {
         event: true,
@@ -125,7 +127,7 @@ export async function POST(
     }
 
     // Find recipient user
-    const recipient = await prisma.user.findUnique({
+    const recipient = await new TicketsService().findById({
       where: { email: validatedData.recipientEmail },
     });
 
@@ -134,7 +136,7 @@ export async function POST(
     }
 
     // Update ticket status
-    await prisma.ticket.update({
+    await new TicketsService().update({
       where: { id: id },
       data: {
         status: 'TRANSFERRED',
@@ -144,7 +146,7 @@ export async function POST(
 
     // Create new ticket for recipient
     const existingMetadata = ticket.metadata as Record<string, unknown> | null;
-    const newTicket = await prisma.ticket.create({
+    const newTicket = await new TicketsService().create({
       data: {
         userId: recipient.id,
         eventId: ticket.eventId,
@@ -162,13 +164,13 @@ export async function POST(
     });
 
     // Send notification to recipient
-    const sender = await prisma.user.findUnique({
+    const sender = await new TicketsService().findById({
       where: { id: context.userId! },
       select: { name: true },
     });
 
     if (recipient) {
-      await prisma.notification.create({
+      await new TicketsService().create({
         data: {
           userId: recipient.id,
           type: 'TICKET_TRANSFER',

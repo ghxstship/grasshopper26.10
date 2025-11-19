@@ -67,7 +67,7 @@ describe('Alert', () => {
       render(<Alert variant="default">Default message</Alert>);
       
       const alert = screen.getByRole('alert');
-      expect(alert).toHaveClass('bg-gray-50', 'border-gray-200', 'text-gray-900');
+      expect(alert).toHaveClass('bg-grey-50', 'border-grey-200', 'text-grey-900');
     });
   });
 

@@ -11,6 +11,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useAlerts, Alert } from '@/lib/hooks/compvss/useAlerts';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/alerts
 
 export default function OperationsAlertsPage() {
   const { data, isLoading, error, refetch } = useAlerts({ status: 'active' });
@@ -29,7 +32,7 @@ export default function OperationsAlertsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading alerts...</p>
+              <BodyText className="text-grey-400">Loading alerts...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -50,8 +53,8 @@ export default function OperationsAlertsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircleIcon className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Alerts</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Alerts</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -71,7 +74,7 @@ export default function OperationsAlertsPage() {
         showToolbar={false}
         
       >
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Bell className="w-5 h-5 text-compvss-cyan-500" />
@@ -92,8 +95,8 @@ export default function OperationsAlertsPage() {
                     <div className="flex items-start gap-3 flex-1">
                       <AlertTriangle className={`w-5 h-5 flex-shrink-0 ${alert.severity === 'warning' ? 'text-warning' : 'text-info'}`} />
                       <div>
-                        <h3 className="font-oswald text-white mb-1">{alert.title}</h3>
-                        <p className="text-body-sm text-gray-400 font-share-tech">{alert.time}</p>
+                        <h3 className="text-white mb-1">{alert.title}</h3>
+                        <p className="text-body-sm text-grey-400 -tech">{alert.time}</p>
                       </div>
                     </div>
                     <Badge 

@@ -12,6 +12,7 @@ import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 import { Textarea } from '@/components/atoms/Textarea';
 import { Input } from '@/components/atoms/Input';
 import { Button } from '@/components/atoms/Button';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
 interface Message {
   id: string;
@@ -143,21 +144,21 @@ export default function CommunicationHubPage() {
     <AtlvsLayout>
       <div className="h-screen flex flex-col">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4">
+      <div className="bg-white border-b border-grey-200 p-4">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-h4 text-gray-900">Communication Hub</h1>
-          <p className="text-body-sm text-gray-600">Team messaging and collaboration</p>
+          <HeroTitle className="text-grey-900">Communication Hub</HeroTitle>
+          <BodyText className="text-body-sm text-grey-600">Team messaging and collaboration</BodyText>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 flex overflow-hidden max-w-7xl mx-auto w-full">
         {/* Sidebar - Channels List */}
-        <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
+        <div className="w-80 bg-white border-r border-grey-200 flex flex-col">
           {/* Search */}
-          <div className="p-4 border-b border-gray-200">
+          <div className="p-4 border-b border-grey-200">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 z-10" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-grey-400 w-4 h-4 z-10" />
               <Input
                 type="text"
                 placeholder="Search channels..."
@@ -175,14 +176,12 @@ export default function CommunicationHubPage() {
               <div
                 key={channel.id}
                 onClick={() => setSelectedChannel(channel.id)}
-                className={`p-4 cursor-pointer border-b border-gray-100 hover:bg-gray-50 ${
-                  selectedChannel === channel.id ? 'bg-success-light border-l-4 border-l-green-600' : ''
-                }`}
+                className={`p-4 cursor-pointer border-b border-grey-100 hover:bg-grey-50 ${ selectedChannel === channel.id ? 'bg-success-light border-l-4 border-l-green-600' : '' }`}
               >
                 <div className="flex items-start justify-between mb-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-h5">{getChannelIcon(channel.type)}</span>
-                    <span className="font-medium text-gray-900">{channel.name}</span>
+                    <span >{getChannelIcon(channel.type)}</span>
+                    <span className="font-medium text-grey-900">{channel.name}</span>
                   </div>
                   {channel.unreadCount > 0 && (
                     <span className="px-2 py-0.5 bg-success text-white text-caption rounded-full">
@@ -191,10 +190,10 @@ export default function CommunicationHubPage() {
                   )}
                 </div>
                 <div className="flex items-center justify-between text-body-sm">
-                  <span className="text-gray-600 truncate flex-1">{channel.lastMessage}</span>
-                  <span className="text-gray-400 text-caption ml-2">{channel.lastMessageTime}</span>
+                  <span className="text-grey-600 truncate flex-1">{channel.lastMessage}</span>
+                  <span className="text-grey-400 text-caption ml-2">{channel.lastMessageTime}</span>
                 </div>
-                <div className="flex items-center gap-1 mt-1 text-caption text-gray-500">
+                <div className="flex items-center gap-1 mt-1 text-caption text-grey-500">
                   <Users className="w-3 h-3" />
                   <span>{channel.members} members</span>
                 </div>
@@ -203,7 +202,7 @@ export default function CommunicationHubPage() {
           </div>
 
           {/* New Channel Button */}
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-4 border-t border-grey-200">
             <Button variant="atlvs" className="w-full">
               <MessageSquare className="w-4 h-4 mr-2" />
               New Channel
@@ -212,33 +211,33 @@ export default function CommunicationHubPage() {
         </div>
 
         {/* Main Chat Area */}
-        <div className="flex-1 flex flex-col bg-gray-50">
+        <div className="flex-1 flex flex-col bg-grey-50">
           {/* Chat Header */}
-          <div className="bg-white border-b border-gray-200 p-4">
+          <div className="bg-white border-b border-grey-200 p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="text-h4">{getChannelIcon(channels.find(c => c.id === selectedChannel)?.type || 'group')}</span>
+                <span >{getChannelIcon(channels.find(c => c.id === selectedChannel)?.type || 'group')}</span>
                 <div>
-                  <h2 className="font-semibold text-gray-900">
+                  <h2 className="font-semibold text-grey-900">
                     {channels.find(c => c.id === selectedChannel)?.name}
                   </h2>
-                  <p className="text-body-sm text-gray-600">
+                  <p className="text-body-sm text-grey-600">
                     {channels.find(c => c.id === selectedChannel)?.members} members
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" className="p-2">
-                  <Phone className="w-5 h-5 text-gray-600" />
+                  <Phone className="w-5 h-5 text-grey-600" />
                 </Button>
                 <Button variant="ghost" size="sm" className="p-2">
-                  <Video className="w-5 h-5 text-gray-600" />
+                  <Video className="w-5 h-5 text-grey-600" />
                 </Button>
                 <Button variant="ghost" size="sm" className="p-2">
-                  <Bell className="w-5 h-5 text-gray-600" />
+                  <Bell className="w-5 h-5 text-grey-600" />
                 </Button>
                 <Button variant="ghost" size="sm" className="p-2">
-                  <MoreVertical className="w-5 h-5 text-gray-600" />
+                  <MoreVertical className="w-5 h-5 text-grey-600" />
                 </Button>
               </div>
             </div>
@@ -253,18 +252,14 @@ export default function CommunicationHubPage() {
               >
                 <div className={`max-w-md ${message.senderId === 'current' ? 'order-2' : 'order-1'}`}>
                   {message.senderId !== 'current' && (
-                    <div className="text-body-sm text-gray-700 mb-1">{message.senderName}</div>
+                    <div className="text-body-sm text-grey-700 mb-1">{message.senderName}</div>
                   )}
                   <div
-                    className={`px-4 py-2 rounded-lg ${
-                      message.senderId === 'current'
-                        ? 'bg-success text-white'
-                        : 'bg-white text-gray-900 border border-gray-200'
-                    }`}
+                    className={`px-4 py-2 rounded-lg ${ message.senderId === 'current' ? 'bg-success text-white' : 'bg-white text-grey-900 border border-grey-200' }`}
                   >
                     <p>{message.content}</p>
                   </div>
-                  <div className="text-caption text-gray-500 mt-1">{message.timestamp}</div>
+                  <div className="text-caption text-grey-500 mt-1">{message.timestamp}</div>
                 </div>
                 {message.senderId !== 'current' && (
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white text-body-sm mr-2 order-0">
@@ -276,10 +271,10 @@ export default function CommunicationHubPage() {
           </div>
 
           {/* Message Input */}
-          <div className="bg-white border-t border-gray-200 p-4">
+          <div className="bg-white border-t border-grey-200 p-4">
             <div className="flex items-end gap-2">
               <Button variant="ghost" size="sm" className="p-2">
-                <Paperclip className="w-5 h-5 text-gray-600" />
+                <Paperclip className="w-5 h-5 text-grey-600" />
               </Button>
               <div className="flex-1 relative">
                 <Textarea
@@ -298,7 +293,7 @@ export default function CommunicationHubPage() {
                 />
               </div>
               <Button variant="ghost" size="sm" className="p-2">
-                <Smile className="w-5 h-5 text-gray-600" />
+                <Smile className="w-5 h-5 text-grey-600" />
               </Button>
               <Button
                 onClick={handleSendMessage}

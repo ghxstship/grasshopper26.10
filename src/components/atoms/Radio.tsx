@@ -9,14 +9,14 @@ export interface RadioProps
 const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   ({ className, variant = "default", ...props }, ref) => {
     const variantStyles = {
-      default: "border-gray-300 checked:border-gray-900 focus:ring-gray-500",
+      default: "border-grey-300 checked:border-grey-900 focus:ring-grey-500",
       gvteway: "border-gvteway-red-500 checked:border-gvteway-red-500 focus:ring-gvteway-red-500",
       compvss: "border-compvss-cyan-500 checked:border-compvss-cyan-500 focus:ring-compvss-cyan-500",
       atlvs: "border-atlvs-green-500 checked:border-atlvs-green-500 focus:ring-atlvs-green-500",
     };
 
     const dotStyles = {
-      default: "peer-checked:bg-gray-900",
+      default: "peer-checked:bg-grey-900",
       gvteway: "peer-checked:bg-gvteway-red-500",
       compvss: "peer-checked:bg-compvss-cyan-500",
       atlvs: "peer-checked:bg-atlvs-green-500",

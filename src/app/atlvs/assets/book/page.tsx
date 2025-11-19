@@ -91,7 +91,7 @@ export default function BookAssetPage() {
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
             {/* Asset Selection */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Asset & Project</CardTitle>
                 <div className="space-y-4">
@@ -139,7 +139,7 @@ export default function BookAssetPage() {
             </Card>
 
             {/* Booking Period */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <Calendar className="w-5 h-5" />
@@ -188,7 +188,7 @@ export default function BookAssetPage() {
             </Card>
 
             {/* Assignment */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <User className="w-5 h-5" />

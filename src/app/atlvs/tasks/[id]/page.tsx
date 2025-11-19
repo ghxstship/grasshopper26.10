@@ -14,6 +14,12 @@ import { Badge } from '@/components/atoms/Badge';
 import { Textarea } from '@/components/atoms/Textarea';
 import { Checkbox } from '@/components/atoms/Checkbox';
 import { useTask } from '@/lib/hooks/atlvs/useTasks';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/[id]
+
+// API: /api/atlvs/tasks/:id
+const API_ENDPOINT = '/api/atlvs/tasks/:id';
 
 export default function TaskDetailPage({ params }: { params: { id: string } }) {
   const { data: task, isLoading, error, refetch } = useTask(params.id) as any;
@@ -24,7 +30,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading task...</p>
+            <BodyText className="text-grey-400">Loading task...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -37,8 +43,8 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Task</h2>
-            <p className="text-gray-400 mb-4">{error?.message || 'Task not found'}</p>
+            <SectionHeader className="mb-2">Failed to Load Task</SectionHeader>
+            <p className="text-grey-400 mb-4">{error?.message || 'Task not found'}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -54,7 +60,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
       case 'high': return 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50';
       case 'medium': return 'bg-warning-light text-warning border-warning-border';
       case 'low': return 'bg-info-light text-info border-info-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -64,7 +70,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
       case 'in-progress': return 'bg-info-light text-info border-info-border';
       case 'review': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500 border-atlvs-purple-500/50';
       case 'todo': return 'bg-warning-light text-warning border-warning-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -89,7 +95,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
             {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
           </Badge>
           {task.tags.map((tag) => (
-            <Badge key={tag} variant="atlvs-outline" className="bg-gray-700/50">
+            <Badge key={tag} variant="atlvs-outline" className="bg-grey-700/50">
               <Tag className="w-3 h-3 mr-1" />
               {tag}
             </Badge>
@@ -100,23 +106,23 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Description */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Description</CardTitle>
-                <p className="text-gray-300">{task.description}</p>
+                <p className="text-grey-300">{task.description}</p>
               </CardHeader>
             </Card>
 
             {/* Progress */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Progress</CardTitle>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between text-body-sm">
-                    <span className="text-gray-400">Completion</span>
+                    <span className="text-grey-400">Completion</span>
                     <span className="font-medium">{task.progress}%</span>
                   </div>
-                  <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="w-full h-3 bg-grey-800 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${task.progress}%` }}
@@ -129,7 +135,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
             </Card>
 
             {/* Checklist */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-4">
                   <CheckSquare className="w-5 h-5" />
@@ -139,14 +145,14 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                   {task.checklist.map((item) => (
                     <div
                       key={item.id}
-                      className="flex items-center gap-3 p-3 bg-gray-800/50 rounded-lg"
+                      className="flex items-center gap-3 p-3 bg-grey-800/50 rounded-lg"
                     >
                       <Checkbox
                         checked={item.completed}
                         readOnly
                         variant="atlvs"
                       />
-                      <span className={item.completed ? 'line-through text-gray-500' : 'text-gray-300'}>
+                      <span className={item.completed ? 'line-through text-grey-500' : 'text-grey-300'}>
                         {item.text}
                       </span>
                     </div>
@@ -156,7 +162,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
             </Card>
 
             {/* Comments */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-4">
                   <MessageSquare className="w-5 h-5" />
@@ -165,19 +171,19 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 <div className="space-y-4">
                   {task.comments.map((comment) => (
                     <div key={comment.id} className="flex gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h6">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                         {comment.author.charAt(0)}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="font-medium">{comment.author}</span>
-                          <span className="text-body-sm text-gray-500">{comment.time}</span>
+                          <span className="text-body-sm text-grey-500">{comment.time}</span>
                         </div>
-                        <p className="text-gray-300">{comment.text}</p>
+                        <p className="text-grey-300">{comment.text}</p>
                       </div>
                     </div>
                   ))}
-                  <div className="pt-4 border-t border-gray-800">
+                  <div className="pt-4 border-t border-grey-800">
                     <Textarea
                       placeholder="Add a comment..."
                       rows={3}
@@ -197,30 +203,30 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Details */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Details</CardTitle>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-body-sm text-gray-400 mb-1">Project</div>
+                    <div className="text-body-sm text-grey-400 mb-1">Project</div>
                     <div className="font-medium">{task.project}</div>
                   </div>
                   <div>
-                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-grey-400 mb-1 flex items-center gap-1">
                       <User className="w-4 h-4" />
                       Assignee
                     </div>
                     <div className="font-medium">{task.assignee}</div>
                   </div>
                   <div>
-                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-grey-400 mb-1 flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       Due Date
                     </div>
                     <div className="font-medium">{new Date(task.dueDate).toLocaleDateString()}</div>
                   </div>
                   <div>
-                    <div className="text-body-sm text-gray-400 mb-1">Created</div>
+                    <div className="text-body-sm text-grey-400 mb-1">Created</div>
                     <div className="font-medium">{new Date(task.created).toLocaleDateString()}</div>
                   </div>
                 </div>
@@ -228,7 +234,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
             </Card>
 
             {/* Attachments */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-4">
                   <Paperclip className="w-5 h-5" />
@@ -238,11 +244,11 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                   {task.attachments.map((file) => (
                     <div
                       key={file.id}
-                      className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
+                      className="flex items-center justify-between p-3 bg-grey-800/50 rounded-lg hover:bg-grey-800 transition-colors cursor-pointer"
                     >
                       <div className="flex-1 min-w-0">
                         <div className="font-medium truncate">{file.name}</div>
-                        <div className="text-body-sm text-gray-400">{file.size}</div>
+                        <div className="text-body-sm text-grey-400">{file.size}</div>
                       </div>
                     </div>
                   ))}

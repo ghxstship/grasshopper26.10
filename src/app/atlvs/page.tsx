@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
 import { Button } from '@/components/atoms/Button';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs
 
 export default function ATLVSPage() {
   return (
@@ -35,15 +38,15 @@ export default function ATLVSPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="atlvs-text-gradient mb-6" id="hero-title">
+            <HeroTitle className="atlvs-text-gradient mb-6">
               ATLVS
-            </h1>
-            <p className="text-h3 font-bebas mb-4 text-gray-300">
+            </HeroTitle>
+            <BodyText className="mb-4 text-grey-300">
               PROFESSIONAL EVENT PRODUCTION PLATFORM
-            </p>
-            <p className="text-h5 text-gray-400 max-w-3xl mx-auto mb-12 font-oswald">
+            </BodyText>
+            <BodyText className="text-grey-400 max-w-3xl mx-auto mb-12">
               Manage projects, coordinate teams, track budgets, and automate workflows with enterprise-grade tools built for event professionals.
-            </p>
+            </BodyText>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Primary actions">
               <Link href="/atlvs/projects">

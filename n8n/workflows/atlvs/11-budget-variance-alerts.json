@@ -1,0 +1,176 @@
+{
+  "name": "ATLVS - Budget Variance Alerts",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 */6 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT b.id, b.projectId, p.name as projectName, b.allocatedAmount, b.spentAmount, b.category, pm.userId as managerId, u.email as managerEmail, u.name as managerName FROM budgets b JOIN projects p ON p.id = b.projectId JOIN project_members pm ON pm.projectId = p.id AND pm.role = 'MANAGER' JOIN users u ON u.id = pm.userId WHERE b.status = 'ACTIVE' AND (b.spentAmount / b.allocatedAmount) > 0.8"
+      },
+      "name": "Get Over-Budget Items",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const budget = item.json;\n  const variance = budget.spentAmount - budget.allocatedAmount;\n  const percentUsed = (budget.spentAmount / budget.allocatedAmount) * 100;\n  \n  let severity = 'warning';\n  if (percentUsed >= 100) severity = 'critical';\n  else if (percentUsed >= 90) severity = 'high';\n  \n  results.push({\n    json: {\n      ...budget,\n      variance,\n      percentUsed: percentUsed.toFixed(2),\n      severity,\n      remaining: budget.allocatedAmount - budget.spentAmount\n    }\n  });\n}\n\nreturn results;"
+      },
+      "name": "Calculate Variance",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"severity\"]}}",
+              "operation": "equals",
+              "value2": "critical"
+            }
+          ]
+        }
+      },
+      "name": "Critical Alert?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "alerts@atlvs.com",
+        "toEmail": "={{$json[\"managerEmail\"]}}",
+        "subject": "🚨 CRITICAL: Budget Exceeded - {{$json[\"projectName\"]}}",
+        "emailType": "html",
+        "message": "<h1 style=\"color: red;\">Critical Budget Alert</h1><p>Hi {{$json[\"managerName\"]}},</p><p>The budget for <strong>{{$json[\"category\"]}}</strong> in project <strong>{{$json[\"projectName\"]}}</strong> has been exceeded.</p><p><strong>Allocated:</strong> ${{$json[\"allocatedAmount\"]}}</p><p><strong>Spent:</strong> ${{$json[\"spentAmount\"]}}</p><p><strong>Variance:</strong> ${{$json[\"variance\"]}}</p><p><strong>Usage:</strong> {{$json[\"percentUsed\"]}}%</p><p>Immediate action required!</p><a href=\"https://atlvs.com/projects/{{$json[\"projectId\"]}}/budget\">Review Budget</a>"
+      },
+      "name": "Send Critical Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 200],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "alerts@atlvs.com",
+        "toEmail": "={{$json[\"managerEmail\"]}}",
+        "subject": "⚠️ Budget Warning - {{$json[\"projectName\"]}}",
+        "emailType": "html",
+        "message": "<h1 style=\"color: orange;\">Budget Warning</h1><p>Hi {{$json[\"managerName\"]}},</p><p>The budget for <strong>{{$json[\"category\"]}}</strong> in project <strong>{{$json[\"projectName\"]}}</strong> is approaching its limit.</p><p><strong>Allocated:</strong> ${{$json[\"allocatedAmount\"]}}</p><p><strong>Spent:</strong> ${{$json[\"spentAmount\"]}}</p><p><strong>Remaining:</strong> ${{$json[\"remaining\"]}}</p><p><strong>Usage:</strong> {{$json[\"percentUsed\"]}}%</p><a href=\"https://atlvs.com/projects/{{$json[\"projectId\"]}}/budget\">Review Budget</a>"
+      },
+      "name": "Send Warning Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 400],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"managerId\"]}}",
+        "title": "Budget Alert: {{$json[\"projectName\"]}}",
+        "message": "{{$json[\"category\"]}} budget at {{$json[\"percentUsed\"]}}% usage",
+        "type": "budget_alert",
+        "priority": "={{$json[\"severity\"]}}",
+        "actionUrl": "/projects/{{$json[\"projectId\"]}}/budget"
+      },
+      "name": "Create Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": {
+      "main": [
+        [
+          {
+            "node": "Get Over-Budget Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Over-Budget Items": {
+      "main": [
+        [
+          {
+            "node": "Calculate Variance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Variance": {
+      "main": [
+        [
+          {
+            "node": "Critical Alert?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Critical Alert?": {
+      "main": [
+        [
+          {
+            "node": "Send Critical Alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Warning Alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["atlvs", "budget", "alerts", "monitoring"]
+}

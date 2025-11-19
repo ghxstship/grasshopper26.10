@@ -58,7 +58,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         )}
       >
         {!isCurrentUser && (
-          <Text variant="caption" className="mb-1 px-1 text-gray-600">
+          <Text variant="caption" className="mb-1 px-1 text-grey-600">
             {senderName}
           </Text>
         )}
@@ -68,7 +68,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
             'rounded-2xl px-4 py-2',
             isCurrentUser
               ? 'bg-primary text-primary-foreground rounded-br-sm'
-              : 'bg-gray-100 text-gray-900 rounded-bl-sm'
+              : 'bg-grey-100 text-grey-900 rounded-bl-sm'
           )}
         >
           <Text variant="body" className={isCurrentUser ? 'text-white' : ''}>
@@ -77,12 +77,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         </div>
         
         <div className="flex items-center gap-2 mt-1 px-1">
-          <Text variant="caption" className="text-gray-500">
+          <Text variant="caption" className="text-grey-500">
             {formatTime(timestamp)}
           </Text>
           
           {isCurrentUser && status && (
-            <span className="text-caption text-gray-500">
+            <span className="text-caption text-grey-500">
               {status === 'sending' && '⏳'}
               {status === 'sent' && '✓'}
               {status === 'delivered' && '✓✓'}

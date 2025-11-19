@@ -3,6 +3,7 @@ import { Button } from "@/components/atoms/Button";
 import { SearchBar } from "@/components/atoms/SearchBar";
 import { Menu, X, Search } from "lucide-react";
 import Link from "next/link";
+import { BodyText } from "@/components/atoms/Typography";
 
 export const Navigation: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -28,7 +29,7 @@ export const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/home" className="font-anton text-h2 hover:text-ghxst-accent transition-colors tracking-tight">
+          <Link href="/home" className="hover:text-ghxst-accent transition-colors tracking-tight">
             GVTEWAY
           </Link>
 
@@ -38,7 +39,7 @@ export const Navigation: React.FC = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-bebas text-h5 hover:text-ghxst-accent transition-colors uppercase tracking-wide"
+                className="hover:text-ghxst-accent transition-colors uppercase tracking-wide"
               >
                 {item.label}
               </Link>
@@ -73,7 +74,7 @@ export const Navigation: React.FC = () => {
 
         {/* Search Bar (Desktop) */}
         {searchOpen && (
-          <div className="hidden lg:block py-4 border-t border-gray-200">
+          <div className="hidden lg:block py-4 border-t border-grey-200">
             <SearchBar showLocationSelector={false} />
           </div>
         )}
@@ -81,7 +82,7 @@ export const Navigation: React.FC = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-200 bg-white">
+        <div className="lg:hidden border-t border-grey-200 bg-white">
           <div className="max-w-7xl mx-auto px-8 py-6 space-y-6">
             {/* Search */}
             <SearchBar showLocationSelector={false} />
@@ -92,7 +93,7 @@ export const Navigation: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block font-bebas text-h4 hover:text-gray-700 transition-colors uppercase"
+                  className="block hover:text-grey-700 transition-colors uppercase"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
@@ -101,10 +102,10 @@ export const Navigation: React.FC = () => {
             </div>
 
             {/* Industry Nav */}
-            <div className="pt-6 border-t border-gray-200 space-y-4">
-              <p className="font-share-tech-mono text-caption text-gray-500 uppercase">
+            <div className="pt-6 border-t border-grey-200 space-y-4">
+              <BodyText className="-tech-mono text-caption text-grey-500 uppercase">
                 For the Industry
-              </p>
+              </BodyText>
               {industryNav.map((item) => (
                 <Link
                   key={item.href}
@@ -112,8 +113,8 @@ export const Navigation: React.FC = () => {
                   className="block"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <div className="font-bebas text-h5">{item.label}</div>
-                  <div className="font-share-tech-mono text-body-sm text-gray-600">
+                  <div >{item.label}</div>
+                  <div className="-tech-mono text-body-sm text-grey-600">
                     {item.subtitle}
                   </div>
                 </Link>
@@ -121,7 +122,7 @@ export const Navigation: React.FC = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col gap-3 pt-6 border-t border-gray-200">
+            <div className="flex flex-col gap-3 pt-6 border-t border-grey-200">
               <Button variant="secondary" size="md" className="w-full">
                 Sign In
               </Button>

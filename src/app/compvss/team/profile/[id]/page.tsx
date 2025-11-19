@@ -11,6 +11,9 @@ import { useTeam } from '@/lib/hooks/compvss/useTeam';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { BodyText } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/team/profile/[id]
 
 export default function TeamProfilePage() { 
   const { data,  } = useTeam();
@@ -56,7 +59,7 @@ export default function TeamProfilePage() {
       >
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-h4">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center text-black">
               {profile.avatar}
             </div>
             <Badge variant="compvss" className="bg-success-light text-success border-success/30">
@@ -77,10 +80,10 @@ export default function TeamProfilePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6 text-center">
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -95,7 +98,7 @@ export default function TeamProfilePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <User className="w-5 h-5 text-compvss-cyan-500" />
@@ -105,38 +108,38 @@ export default function TeamProfilePage() {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-gray-400" />
+                      <Mail className="w-5 h-5 text-grey-400" />
                       <div>
-                        <p className="text-caption text-gray-400 font-share-tech">Email</p>
-                        <p className="text-white font-oswald text-body-sm">{profile.email}</p>
+                        <BodyText className="text-caption text-grey-400 -tech">Email</BodyText>
+                        <p className="text-white text-body-sm">{profile.email}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-gray-400" />
+                      <Phone className="w-5 h-5 text-grey-400" />
                       <div>
-                        <p className="text-caption text-gray-400 font-share-tech">Phone</p>
-                        <p className="text-white font-oswald text-body-sm">{profile.phone}</p>
+                        <BodyText className="text-caption text-grey-400 -tech">Phone</BodyText>
+                        <p className="text-white text-body-sm">{profile.phone}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Building2 className="w-5 h-5 text-gray-400" />
+                      <Building2 className="w-5 h-5 text-grey-400" />
                       <div>
-                        <p className="text-caption text-gray-400 font-share-tech">Organization</p>
-                        <p className="text-white font-oswald text-body-sm">{profile.organization}</p>
+                        <BodyText className="text-caption text-grey-400 -tech">Organization</BodyText>
+                        <p className="text-white text-body-sm">{profile.organization}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <MapPin className="w-5 h-5 text-gray-400" />
+                      <MapPin className="w-5 h-5 text-grey-400" />
                       <div>
-                        <p className="text-caption text-gray-400 font-share-tech">Location</p>
-                        <p className="text-white font-oswald text-body-sm">{profile.location}</p>
+                        <BodyText className="text-caption text-grey-400 -tech">Location</BodyText>
+                        <p className="text-white text-body-sm">{profile.location}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-gray-400" />
+                      <Calendar className="w-5 h-5 text-grey-400" />
                       <div>
-                        <p className="text-caption text-gray-400 font-share-tech">Member Since</p>
-                        <p className="text-white font-oswald text-body-sm">{profile.joinedDate}</p>
+                        <BodyText className="text-caption text-grey-400 -tech">Member Since</BodyText>
+                        <p className="text-white text-body-sm">{profile.joinedDate}</p>
                       </div>
                     </div>
                   </div>
@@ -150,7 +153,7 @@ export default function TeamProfilePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Award className="w-5 h-5 text-compvss-cyan-500" />
@@ -165,11 +168,11 @@ export default function TeamProfilePage() {
                         className="p-3 rounded-lg bg-black/50 border border-compvss-cyan-500/20"
                       >
                         <div className="flex items-start justify-between mb-2">
-                          <h3 className="font-oswald text-white text-body-sm">{cert.name}</h3>
+                          <h3 className="text-white text-body-sm">{cert.name}</h3>
                           <CheckCircle2 className="w-4 h-4 text-success" />
                         </div>
-                        <p className="text-caption text-gray-400 font-share-tech mb-1">{cert.issuer}</p>
-                        <p className="text-caption text-gray-500 font-share-tech">Expires: {cert.expiry}</p>
+                        <p className="text-caption text-grey-400 -tech mb-1">{cert.issuer}</p>
+                        <p className="text-caption text-grey-500 -tech">Expires: {cert.expiry}</p>
                       </div>
                     ))}
                   </div>
@@ -185,7 +188,7 @@ export default function TeamProfilePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Clock className="w-5 h-5 text-compvss-cyan-500" />
@@ -201,8 +204,8 @@ export default function TeamProfilePage() {
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div>
-                            <h3 className="font-oswald text-white mb-1">{activity.event}</h3>
-                            <p className="text-body-sm text-gray-400 font-share-tech">{activity.role}</p>
+                            <h3 className="text-white mb-1">{activity.event}</h3>
+                            <p className="text-body-sm text-grey-400 -tech">{activity.role}</p>
                           </div>
                           <Badge 
                             variant={activity.status === 'completed' ? 'compvss' : 'compvss-outline'}
@@ -211,7 +214,7 @@ export default function TeamProfilePage() {
                             {activity.status}
                           </Badge>
                         </div>
-                        <p className="text-caption text-gray-500 font-share-tech">{activity.date}</p>
+                        <p className="text-caption text-grey-500 -tech">{activity.date}</p>
                       </div>
                     ))}
                   </div>

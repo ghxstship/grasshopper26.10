@@ -5,6 +5,8 @@ import { PageTitle, BodyText } from '@/components/atoms/Typography';
 
 const metadata = { title: 'Event Calendar | GVTEWAY' };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/events/calendar
+
 export default function CalendarPage() {
   return (
     <GvtewayLayout>

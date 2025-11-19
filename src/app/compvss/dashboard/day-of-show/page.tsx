@@ -13,6 +13,9 @@ import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/dashboard/day-of-show
 
 export default function DayOfShowDashboardPage() {
   const { data: _dayOfShowData, isLoading } = useDayOfShow();
@@ -73,22 +76,22 @@ function DayOfShowContent() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-h3 font-bebas compvss-text-gradient">Day-of-Show Dashboard</h1>
+                <HeroTitle className="compvss-text-gradient">Day-of-Show Dashboard</HeroTitle>
                 <Badge variant="compvss" className="bg-success-light text-success border-success/30 animate-pulse">
                   <Radio className="w-3 h-3 mr-1" />
                   LIVE
                 </Badge>
               </div>
-              <p className="text-gray-400 font-oswald">{eventInfo.name}</p>
+              <p className="text-grey-400">{eventInfo.name}</p>
             </div>
             <div className="text-right">
-              <div className="text-h4 font-bebas text-white">{eventInfo.currentTime}</div>
-              <div className="text-caption text-gray-400 font-share-tech">Event Time</div>
+              <div className="text-white">{eventInfo.currentTime}</div>
+              <div className="text-caption text-grey-400 -tech">Event Time</div>
             </div>
           </div>
         </div>
@@ -101,34 +104,34 @@ function DayOfShowContent() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <Card variant="compvss" className="bg-gray-900/50 border-compvss-cyan-500/30">
+          <Card variant="compvss" className="bg-grey-900/50 border-compvss-cyan-500/30">
             <CardContent className="pt-6">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-compvss-cyan-500" />
                   <div>
-                    <p className="text-caption text-gray-400 font-share-tech">Date</p>
-                    <p className="text-white font-oswald">{eventInfo.date}</p>
+                    <BodyText className="text-caption text-grey-400 -tech">Date</BodyText>
+                    <p className="text-white">{eventInfo.date}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="w-5 h-5 text-compvss-cyan-500" />
                   <div>
-                    <p className="text-caption text-gray-400 font-share-tech">Venue</p>
-                    <p className="text-white font-oswald">{eventInfo.venue}</p>
+                    <BodyText className="text-caption text-grey-400 -tech">Venue</BodyText>
+                    <p className="text-white">{eventInfo.venue}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Clock className="w-5 h-5 text-compvss-cyan-500" />
                   <div>
-                    <p className="text-caption text-gray-400 font-share-tech">Start Time</p>
-                    <p className="text-white font-oswald">{eventInfo.startTime}</p>
+                    <BodyText className="text-caption text-grey-400 -tech">Start Time</BodyText>
+                    <p className="text-white">{eventInfo.startTime}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Activity className="w-5 h-5 text-compvss-cyan-500" />
                   <div>
-                    <p className="text-caption text-gray-400 font-share-tech">Status</p>
+                    <BodyText className="text-caption text-grey-400 -tech">Status</BodyText>
                     <Badge variant="compvss" className="bg-success-light text-success border-success/30">
                       In Progress
                     </Badge>
@@ -148,20 +151,16 @@ function DayOfShowContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
-                    <div className={`p-2 rounded-lg ${
-                      metric.status === 'good' ? 'bg-success-light0/10 text-success' : 'bg-warning/10 text-warning'
-                    }`}>
+                    <div className={`p-2 rounded-lg ${ metric.status === 'good' ? 'bg-success-light0/10 text-success' : 'bg-warning/10 text-warning' }`}>
                       {metric.icon}
                     </div>
-                    <div className={`w-2 h-2 rounded-full ${
-                      metric.status === 'good' ? 'bg-success-light0' : 'bg-warning'
-                    } animate-pulse`} />
+                    <div className={`w-2 h-2 rounded-full ${ metric.status === 'good' ? 'bg-success-light0' : 'bg-warning' } animate-pulse`} />
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{metric.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{metric.label}</div>
+                  <div className="text-white mb-1">{metric.value}</div>
+                  <div className="text-body-sm text-grey-400">{metric.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -175,7 +174,7 @@ function DayOfShowContent() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-white flex items-center gap-2">
@@ -198,21 +197,21 @@ function DayOfShowContent() {
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex-1">
-                          <h3 className="font-oswald text-white mb-1">{task.task}</h3>
-                          <p className="text-body-sm text-gray-400 font-share-tech">{task.zone}</p>
+                          <h3 className="text-white mb-1">{task.task}</h3>
+                          <p className="text-body-sm text-grey-400 -tech">{task.zone}</p>
                         </div>
                         <Badge 
                           variant={task.status === 'completed' ? 'compvss' : 'compvss-outline'}
                           className={
                             task.status === 'completed' ? 'bg-success-light text-success border-success/30' :
                             task.status === 'in_progress' ? 'bg-info-light text-info border-info/30' :
-                            'bg-gray-500/20 text-gray-500 border-gray-500/30'
+                            'bg-grey-500/20 text-grey-500 border-grey-500/30'
                           }
                         >
                           {task.status.replace('_', ' ')}
                         </Badge>
                       </div>
-                      <p className="text-caption text-gray-500 font-share-tech">Scheduled: {task.time}</p>
+                      <p className="text-caption text-grey-500 -tech">Scheduled: {task.time}</p>
                     </div>
                   ))}
                 </div>
@@ -226,7 +225,7 @@ function DayOfShowContent() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Clock className="w-5 h-5 text-compvss-cyan-500" />
@@ -242,12 +241,12 @@ function DayOfShowContent() {
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="text-h4 font-bebas text-compvss-cyan-500 mb-1">
+                          <div className="text-compvss-cyan-500 mb-1">
                             {item.time}
                           </div>
-                          <p className="text-white font-oswald">{item.event}</p>
+                          <p className="text-white">{item.event}</p>
                         </div>
-                        <Clock className="w-5 h-5 text-gray-500" />
+                        <Clock className="w-5 h-5 text-grey-500" />
                       </div>
                     </div>
                   ))}

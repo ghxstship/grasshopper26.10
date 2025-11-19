@@ -11,6 +11,8 @@ import { Activity, AlertTriangle, CheckCircle } from 'lucide-react';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/monitoring
+
 export default function AutomationMonitoringPage() {
   const { data: _workflowsData, isLoading } = useWorkflows();
   
@@ -35,7 +37,7 @@ export default function AutomationMonitoringPage() {
       case 'error': return 'bg-error-light text-error border-error-border';
       case 'warning': return 'bg-warning-light text-warning border-warning-border';
       case 'info': return 'bg-info-light text-info border-info-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -51,33 +53,33 @@ export default function AutomationMonitoringPage() {
         ]}
       >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" role="region" aria-label="Monitoring statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Active Workflows</div>
-              <div className="text-h3 font-bebas atlvs-text-gradient">12</div>
+              <div className="text-body-sm text-grey-400 mb-1">Active Workflows</div>
+              <div className="atlvs-text-gradient">12</div>
             </CardHeader>
           </Card>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Healthy</div>
-              <div className="text-h3 font-bebas text-atlvs-green-500" aria-label="10 healthy _workflows">10</div>
+              <div className="text-body-sm text-grey-400 mb-1">Healthy</div>
+              <div className="text-atlvs-green-500" aria-label="10 healthy _workflows">10</div>
             </CardHeader>
           </Card>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Warnings</div>
-              <div className="text-h3 font-bebas text-warning" aria-label="1 warning">1</div>
+              <div className="text-body-sm text-grey-400 mb-1">Warnings</div>
+              <div className="text-warning" aria-label="1 warning">1</div>
             </CardHeader>
           </Card>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Errors</div>
-              <div className="text-h3 font-bebas text-error" aria-label="1 error">1</div>
+              <div className="text-body-sm text-grey-400 mb-1">Errors</div>
+              <div className="text-error" aria-label="1 error">1</div>
             </CardHeader>
           </Card>
         </div>
 
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6 flex items-center gap-2">
               <Activity className="w-5 h-5" aria-hidden="true" />
@@ -85,18 +87,18 @@ export default function AutomationMonitoringPage() {
             </CardTitle>
             <div className="space-y-3" role="list" aria-label="Recent monitoring alerts">
               {alerts.map((alert) => (
-                <div key={alert.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg" role="listitem">
+                <div key={alert.id} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg" role="listitem">
                   <div className="flex items-center gap-4 flex-1">
                     {alert.type === 'error' && <AlertTriangle className="w-5 h-5 text-error" />}
                     {alert.type === 'warning' && <AlertTriangle className="w-5 h-5 text-warning" />}
                     {alert.type === 'info' && <CheckCircle className="w-5 h-5 text-info" />}
                     <div className="flex-1">
                       <div className="font-medium mb-1">{alert.workflow}</div>
-                      <div className="text-body-sm text-gray-400">{alert.message}</div>
+                      <div className="text-body-sm text-grey-400">{alert.message}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-body-sm text-gray-400">{alert.time}</span>
+                    <span className="text-body-sm text-grey-400">{alert.time}</span>
                     <Badge variant="atlvs-outline" className={getAlertColor(alert.type)}>
                       {alert.type}
                     </Badge>

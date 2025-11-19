@@ -4,6 +4,9 @@ import { successResponse, createdResponse, handleApiError, errors } from '@/lib/
 import { validateRequest, requireAuth, getPaginationParams, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { Prisma, TaskStatus } from '@prisma/client';
+import { z } from 'zod';
+import { AtlvsService } from '@/lib/services/atlvs/tasks.service';
+
 
 export async function GET(request: NextRequest) {
   try {
@@ -64,7 +67,7 @@ export async function POST(request: NextRequest) {
     requireAuth(context);
 
     const body = await request.json();
-    const task = await prisma.task.create({
+    const task = await new AtlvsService().create({
       data: {
         ...body,
         createdBy: context.userId,

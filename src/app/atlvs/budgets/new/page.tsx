@@ -25,6 +25,8 @@ interface BudgetItem {
   amount: string;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets/new
+
 export default function NewBudgetPage() {
   const router = useRouter();
   const { mutate: createBudget, isPending: isLoading, error } = useCreateBudget();
@@ -84,7 +86,7 @@ export default function NewBudgetPage() {
           )}
           <div className="space-y-6">
             {/* Basic Information */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Basic Information</CardTitle>
                 <div className="space-y-4">
@@ -163,7 +165,7 @@ export default function NewBudgetPage() {
             </Card>
 
             {/* Budget Items */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-center justify-between mb-6">
                   <CardTitle>Budget Items</CardTitle>
@@ -174,9 +176,9 @@ export default function NewBudgetPage() {
                 </div>
                 <div className="space-y-4">
                   {items.map((item, index) => (
-                    <div key={item.id} className="p-4 bg-gray-800/50 rounded-lg">
+                    <div key={item.id} className="p-4 bg-grey-800/50 rounded-lg">
                       <div className="flex items-start justify-between mb-4">
-                        <div className="font-medium text-gray-400">Item {index + 1}</div>
+                        <div className="font-medium text-grey-400">Item {index + 1}</div>
                         {items.length > 1 && (
                           <IconButton
                             type="button"

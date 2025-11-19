@@ -13,6 +13,7 @@ import { Badge } from '@/components/atoms/Badge';
 import { useAdvancingRequests } from '@/lib/hooks/atlvs/useAdvancingRequestQuery';
 import { useState } from 'react';
 import Link from 'next/link';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
 
 interface AdvancingRequest {
   id: string;
@@ -49,7 +50,7 @@ export default function AdvancingHistoryPage() {
       case 'approved': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'pending': return 'bg-warning-light text-warning border-warning-border';
       case 'rejected': return 'bg-error-light text-error border-error-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -76,37 +77,37 @@ export default function AdvancingHistoryPage() {
             <Loader2 className="w-8 h-8 animate-spin text-atlvs-green-500" />
           </div>
         ) : error ? (
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-h6 font-bebas mb-2">Failed to Load History</h3>
-                <p className="text-gray-400 mb-4">{error.message}</p>
+                <SubsectionHeader className="mb-2">Failed to Load History</SubsectionHeader>
+                <p className="text-grey-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
             </CardHeader>
           </Card>
         ) : (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6 flex items-center gap-2">
                   <History className="w-5 h-5" aria-hidden="true" />
                   Past Requests ({history.length})
                 </CardTitle>
                 {history.length === 0 ? (
-                  <div className="text-center py-12 text-gray-400">
+                  <div className="text-center py-12 text-grey-400">
                     <History className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                    <p>No completed requests yet</p>
+                    <BodyText >No completed requests yet</BodyText>
                   </div>
                 ) : (
                   <div className="space-y-3" role="list" aria-label="Past advancing requests">
                     {history.map((item: AdvancingRequest) => (
                       <Link key={item.id} href={`/atlvs/advancing/${item.id}`}>
-                        <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer" role="listitem">
+                        <div className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg hover:bg-grey-800 transition-colors cursor-pointer" role="listitem">
                           <div className="flex-1">
                             <div className="font-medium mb-1">{item.title}</div>
-                            <div className="text-body-sm text-gray-400">{item.project} • {item.requestedAt ? new Date(item.requestedAt).toLocaleDateString() : 'N/A'}</div>
+                            <div className="text-body-sm text-grey-400">{item.project} • {item.requestedAt ? new Date(item.requestedAt).toLocaleDateString() : 'N/A'}</div>
                           </div>
                           <div className="flex items-center gap-3">
                             <Badge variant="atlvs-outline" className={getStatusColor(item.status)} role="status" aria-label={`Status: ${item.status}`}>

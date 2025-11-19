@@ -14,6 +14,7 @@ import { Checkbox } from '@/components/atoms/Checkbox';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { FormField } from '@/components/molecules/FormField';
 import { Select } from '@/components/atoms/Select';
+import { BodyText, HeroTitle, SubsectionHeader } from "@/components/atoms/Typography";
 
 export default function PrivacySettingsPage() {
   const breadcrumbs = [
@@ -57,11 +58,11 @@ export default function PrivacySettingsPage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
-            <h1 className="text-h3 font-bebas compvss-text-gradient">Privacy Settings</h1>
-            <p className="text-gray-400 font-oswald mt-1">Control your privacy and data</p>
+            <HeroTitle className="compvss-text-gradient">Privacy Settings</HeroTitle>
+            <BodyText className="text-grey-400 mt-1">Control your privacy and data</BodyText>
           </div>
         </div>
       </div>
@@ -73,13 +74,13 @@ export default function PrivacySettingsPage() {
           className="space-y-6"
         >
           {/* Profile Visibility */}
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Eye className="w-5 h-5 text-compvss-cyan-500" />
                 Profile Visibility
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Control who can see your profile information
               </CardDescription>
             </CardHeader>
@@ -114,10 +115,10 @@ export default function PrivacySettingsPage() {
           </Card>
 
           {/* Data & Privacy */}
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white">Data & Privacy</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Manage how your data is used
               </CardDescription>
             </CardHeader>
@@ -146,20 +147,20 @@ export default function PrivacySettingsPage() {
           </Card>
 
           {/* Data Management */}
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white">Data Management</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Download or delete your data
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
-                  <h3 className="font-oswald text-white mb-2">Download Your Data</h3>
-                  <p className="text-body-sm text-gray-400 font-share-tech mb-3">
+                  <SubsectionHeader className="text-white mb-2">Download Your Data</SubsectionHeader>
+                  <BodyText className="text-body-sm text-grey-400 -tech mb-3">
                     Request a copy of all your data in a portable format
-                  </p>
+                  </BodyText>
                   <Button variant="compvss-outline" size="sm">
                     <Download className="w-4 h-4 mr-2" />
                     Request Data Export
@@ -167,10 +168,10 @@ export default function PrivacySettingsPage() {
                 </div>
 
                 <div className="p-4 rounded-lg bg-black/50 border border-destructive/30">
-                  <h3 className="font-oswald text-white mb-2">Delete Account</h3>
-                  <p className="text-body-sm text-gray-400 font-share-tech mb-3">
+                  <SubsectionHeader className="text-white mb-2">Delete Account</SubsectionHeader>
+                  <BodyText className="text-body-sm text-grey-400 -tech mb-3">
                     Permanently delete your account and all associated data
-                  </p>
+                  </BodyText>
                   <Button variant="compvss-outline" size="sm" className="border-destructive/30 text-error hover:bg-error/10">
                     <Trash2 className="w-4 h-4 mr-2" />
                     Delete Account
@@ -211,8 +212,8 @@ function PrivacyToggle({
   return (
     <div className="flex items-start justify-between p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
       <div>
-        <h3 className="font-oswald text-white mb-1">{label}</h3>
-        <p className="text-body-sm text-gray-400 font-share-tech">{description}</p>
+        <h3 className="text-white mb-1">{label}</h3>
+        <p className="text-body-sm text-grey-400 -tech">{description}</p>
       </div>
       <Checkbox
         checked={checked}

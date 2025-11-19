@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { EventsService } from '@/lib/services/events/id/cancel.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -14,7 +22,7 @@ export async function POST(
 
     const { id } = await params;
 
-    const event = await prisma.event.update({
+    const event = await new EventsService().update({
       where: { id },
       data: {
         status: 'CANCELLED',
@@ -23,7 +31,6 @@ export async function POST(
 
     return NextResponse.json(event);
   } catch (error) {
-    console.error('Error cancelling event:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

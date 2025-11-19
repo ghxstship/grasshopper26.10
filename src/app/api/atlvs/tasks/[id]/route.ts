@@ -2,6 +2,12 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { z } from 'zod';
+import { AtlvsService } from '@/lib/services/atlvs/tasks/id.service';
+
+
 
 export async function GET(
   request: NextRequest,
@@ -12,7 +18,7 @@ export async function GET(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    const task = await prisma.task.findUnique({
+    const task = await new AtlvsService().findById({
       where: { id: id },
       include: {
         project: true,
@@ -42,7 +48,7 @@ export async function PUT(
     requireAuth(context);
 
     const body = await request.json();
-    const task = await prisma.task.update({
+    const task = await new AtlvsService().update({
       where: { id: id },
       data: body,
       include: {
@@ -66,7 +72,7 @@ export async function DELETE(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    await prisma.task.delete({
+    await new AtlvsService().delete({
       where: { id: id },
     });
 

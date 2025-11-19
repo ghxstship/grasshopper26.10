@@ -42,7 +42,7 @@ export const AdventureCard: React.FC<AdventureCardProps> = ({
   return (
     <Card className={cn("overflow-hidden group", className)}>
       <Link href={`/adventures/${slug}`}>
-        <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+        <div className="relative aspect-[4/3] overflow-hidden bg-grey-100">
           <Image
             src={image}
             alt={name}
@@ -52,21 +52,21 @@ export const AdventureCard: React.FC<AdventureCardProps> = ({
         </div>
         
         <div className="p-4 space-y-3">
-          <CardTitle className="line-clamp-2 group-hover:text-gray-700 transition-colors">
+          <CardTitle className="line-clamp-2 group-hover:text-grey-700 transition-colors">
             {name}
           </CardTitle>
           
-          <Metadata className="text-gray-700">
+          <Metadata className="text-grey-700">
             {categoryLabels[category]}
           </Metadata>
           
-          <BodyText className="text-body-sm text-gray-600 line-clamp-3">
+          <BodyText className="text-body-sm text-grey-600 line-clamp-3">
             {description}
           </BodyText>
           
           <div className="flex items-center justify-between">
             {duration && (
-              <Metadata className="flex items-center gap-2 text-gray-700">
+              <Metadata className="flex items-center gap-2 text-grey-700">
                 <Clock className="w-4 h-4" />
                 {duration}
               </Metadata>

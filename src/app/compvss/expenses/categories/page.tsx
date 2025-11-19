@@ -11,6 +11,9 @@ import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { useExpenseCategories } from '@/lib/hooks/compvss/useExpenses';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/expenses/categories
 
 export default function ExpenseCategoriesPage() {
   const { data: categories = [], isLoading, error, refetch } = useExpenseCategories();
@@ -28,7 +31,7 @@ export default function ExpenseCategoriesPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading categories...</p>
+              <BodyText className="text-grey-400">Loading categories...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -49,8 +52,8 @@ export default function ExpenseCategoriesPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Categories</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Categories</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -76,19 +79,19 @@ export default function ExpenseCategoriesPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all">
+              <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all">
                 <CardContent className="pt-6">
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4`}>
                     <Tag className="w-8 h-8" />
                   </div>
-                  <h3 className="text-h5 font-bebas text-white mb-2">{category.name}</h3>
+                  <h3 className="text-white mb-2">{category.name}</h3>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="text-h4 font-bebas text-compvss-cyan-500">{category.total}</div>
+                    <div className="text-compvss-cyan-500">{category.total}</div>
                     <Badge variant="compvss-outline" className="text-caption">
                       {category.count} expenses
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-2 text-caption text-success font-share-tech">
+                  <div className="flex items-center gap-2 text-caption text-success -tech">
                     <TrendingUp className="w-3 h-3" />
                     <span>Within budget</span>
                   </div>

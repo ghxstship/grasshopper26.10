@@ -12,7 +12,7 @@ const spinnerVariants = cva("animate-spin", {
       xl: "h-12 w-12",
     },
     variant: {
-      default: "text-gray-900 dark:text-gray-100",
+      default: "text-grey-900 dark:text-grey-100",
       gvteway: "text-gvteway-red-500",
       compvss: "text-compvss-cyan-500",
       atlvs: "text-atlvs-green-500",

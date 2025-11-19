@@ -272,7 +272,7 @@ Price is below face value - originally $75 each, selling both for $120 total ($6
               <div className="card p-6 space-y-4 sticky top-24">
                 <div className="space-y-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-h2 font-anton text-ghxst-primary">
+                    <span className="text-ghxst-primary">
                       ${item.price}
                     </span>
                     {item.originalPrice && (
@@ -412,7 +412,7 @@ Price is below face value - originally $75 each, selling both for $120 total ($6
                       {listing.type.toUpperCase()} • {listing.seller}
                     </Metadata>
                     <div className="flex items-center justify-between">
-                      <span className="text-h4 font-bebas text-ghxst-primary">${listing.price}</span>
+                      <span className="text-ghxst-primary">${listing.price}</span>
                       <Button variant="secondary" size="sm">View</Button>
                     </div>
                   </div>

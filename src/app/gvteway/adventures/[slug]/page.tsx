@@ -183,7 +183,7 @@ export default function AdventurePage({ params: { slug: _slug } }: AdventurePage
                       <Calendar className="w-4 h-4" />
                       Select Date & Time
                     </Metadata>
-                    <select className="w-full p-3 border-2 border-ghxst-border bg-ghxst-white font-share-tech">
+                    <select className="w-full p-3 border-2 border-ghxst-border bg-ghxst-white -tech">
                       <option>Choose availability...</option>
                       {adventure.availability.map((slot, idx) => (
                         <option key={idx}>{slot}</option>
@@ -196,7 +196,7 @@ export default function AdventurePage({ params: { slug: _slug } }: AdventurePage
                       <Users className="w-4 h-4" />
                       Number of Guests
                     </Metadata>
-                    <select className="w-full p-3 border-2 border-ghxst-border bg-ghxst-white font-share-tech">
+                    <select className="w-full p-3 border-2 border-ghxst-border bg-ghxst-white -tech">
                       <option>1 Guest</option>
                       <option>2 Guests</option>
                       <option>3 Guests</option>

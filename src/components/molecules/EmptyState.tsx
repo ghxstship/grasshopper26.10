@@ -17,7 +17,7 @@ export interface EmptyStateProps {
 }
 
 const variantClasses = {
-  default: "text-gray-600",
+  default: "text-grey-600",
   gvteway: "text-accent",
   compvss: "text-info",
   atlvs: "text-success",
@@ -41,10 +41,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       <div className={cn("mb-4", variantClasses[variant])}>
         {icon || <Inbox className="w-16 h-16" />}
       </div>
-      <h3 className="text-h4 font-bebas text-white uppercase mb-2">
+      <h3 className="text-white uppercase mb-2">
         {title}
       </h3>
-      <p className="text-gray-400 font-oswald max-w-md mb-6">{message}</p>
+      <p className="text-grey-400 max-w-md mb-6">{message}</p>
       {action || (actionLabel && onAction && (
         <Button variant={variant} onClick={onAction}>
           <Plus className="w-4 h-4 mr-2" />

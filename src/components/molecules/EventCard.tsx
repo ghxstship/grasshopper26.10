@@ -39,7 +39,7 @@ export const EventCard: React.FC<EventCardProps> = ({
   return (
     <Card className={cn("overflow-hidden group", className)}>
       <Link href={`/events/${slug}`}>
-        <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+        <div className="relative aspect-[4/3] overflow-hidden bg-grey-100">
           <Image
             src={image}
             alt={title}
@@ -49,22 +49,22 @@ export const EventCard: React.FC<EventCardProps> = ({
         </div>
         
         <div className="p-4 space-y-3">
-          <CardTitle className="line-clamp-2 group-hover:text-gray-700 transition-colors">
+          <CardTitle className="line-clamp-2 group-hover:text-grey-700 transition-colors">
             {title}
           </CardTitle>
           
           <div className="space-y-2">
-            <Metadata className="flex items-center gap-2 text-gray-700">
+            <Metadata className="flex items-center gap-2 text-grey-700">
               <MapPin className="w-4 h-4" />
               {venue}
             </Metadata>
             
-            <Metadata className="flex items-center gap-2 text-gray-700">
+            <Metadata className="flex items-center gap-2 text-grey-700">
               <Calendar className="w-4 h-4" />
               {date}
             </Metadata>
             
-            <Metadata className="flex items-center gap-2 text-gray-700">
+            <Metadata className="flex items-center gap-2 text-grey-700">
               <Clock className="w-4 h-4" />
               {time}
             </Metadata>

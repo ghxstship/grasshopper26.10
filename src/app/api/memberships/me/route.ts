@@ -3,10 +3,26 @@ import { prisma } from '@/lib/prisma';
 import { subscribeMembershipSchema, cancelMembershipSchema } from '@/lib/validations/memberships';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { MembershipsService } from '@/lib/services/memberships/me.service';
+
+
 
 // GET /api/memberships/me - Get current user's membership
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -50,6 +66,17 @@ export async function GET(request: NextRequest) {
 // POST /api/memberships/me - Subscribe to membership
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -57,7 +84,7 @@ export async function POST(request: NextRequest) {
     const validatedData = subscribeMembershipSchema.parse(body);
 
     // Check if tier exists
-    const tier = await prisma.membershipTier.findUnique({
+    const tier = await new MembershipsService().findById({
       where: { id: validatedData.tierId },
     });
 
@@ -98,7 +125,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create membership
-    const membership = await prisma.membership.create({
+    const membership = await new MembershipsService().create({
       data: {
         userId: context.userId!,
         tierId: validatedData.tierId,
@@ -136,7 +163,7 @@ export async function POST(request: NextRequest) {
       });
 
       // Update membership with payment intent
-      await prisma.membership.update({
+      await new MembershipsService().update({
         where: { id: membership.id },
         data: {
           metadata: JSON.parse(JSON.stringify({
@@ -148,12 +175,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Send confirmation email
-    const user = await prisma.user.findUnique({
+    const user = await new MembershipsService().findById({
       where: { id: context.userId! },
     });
 
     if (user?.email) {
-      await prisma.notification.create({
+      await new MembershipsService().create({
         data: {
           userId: context.userId!,
           type: 'MEMBERSHIP_ACTIVATED',
@@ -176,6 +203,17 @@ export async function POST(request: NextRequest) {
 // PATCH /api/memberships/me - Cancel membership
 export async function PATCH(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -195,7 +233,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Update membership
-    const updatedMembership = await prisma.membership.update({
+    const updatedMembership = await new MembershipsService().update({
       where: { id: membership.id },
       data: {
         status: validatedData.cancelAtPeriodEnd ? 'ACTIVE' : 'CANCELLED',

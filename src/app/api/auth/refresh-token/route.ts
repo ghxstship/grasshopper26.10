@@ -2,9 +2,31 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { sign } from 'jsonwebtoken';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { z } from 'zod';
+import { AuthService } from '@/lib/services/auth/refreshToken.service';
+
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const body = await request.json();
     const { refreshToken } = body;
 
@@ -13,7 +35,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify refresh token and get session
-    const session = await prisma.session.findUnique({
+    const session = await new AuthService().findById({
       where: { sessionToken: refreshToken },
       include: { user: true },
     });
@@ -24,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     // Check if session is expired
     if (session.expires < new Date()) {
-      await prisma.session.delete({ where: { id: session.id } });
+      await new AuthService().delete({ where: { id: session.id } });
       throw errors.unauthorized('Session expired');
     }
 

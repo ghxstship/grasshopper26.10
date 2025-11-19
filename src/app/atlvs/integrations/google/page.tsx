@@ -11,6 +11,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Calendar, AlertCircle, ExternalLink, Mail, FolderOpen } from 'lucide-react';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/integrations/google
 
 export default function GoogleIntegrationPage() {
   const [isConnected] = useState(true);
@@ -31,7 +34,7 @@ export default function GoogleIntegrationPage() {
           className="space-y-6"
         >
           {/* Connection Status */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -39,8 +42,8 @@ export default function GoogleIntegrationPage() {
                     <Calendar className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-h6">Google Workspace</h3>
-                    <p className="text-body-sm text-gray-400">Calendar, Drive, and Gmail integration</p>
+                    <SubsectionHeader >Google Workspace</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400">Calendar, Drive, and Gmail integration</BodyText>
                   </div>
                 </div>
                 {isConnected ? (
@@ -60,22 +63,22 @@ export default function GoogleIntegrationPage() {
 
           {/* Account Info */}
           {isConnected && (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <h3 className="text-h6">Connected Account</h3>
+                <SubsectionHeader >Connected Account</SubsectionHeader>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   <div className="flex justify-between text-body-sm">
-                    <span className="text-gray-400">Email</span>
+                    <span className="text-grey-400">Email</span>
                     <span className="font-medium">admin@atlvs.com</span>
                   </div>
                   <div className="flex justify-between text-body-sm">
-                    <span className="text-gray-400">Account Type</span>
+                    <span className="text-grey-400">Account Type</span>
                     <span>Google Workspace</span>
                   </div>
                   <div className="flex justify-between text-body-sm">
-                    <span className="text-gray-400">Connected Since</span>
+                    <span className="text-grey-400">Connected Since</span>
                     <span>January 15, 2024</span>
                   </div>
                 </div>
@@ -85,13 +88,13 @@ export default function GoogleIntegrationPage() {
 
           {/* Google Calendar */}
           {isConnected && (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-h6">Google Calendar</h3>
+                  <SubsectionHeader >Google Calendar</SubsectionHeader>
                 </div>
-                <p className="text-body-sm text-gray-400">Sync events and meetings</p>
+                <BodyText className="text-body-sm text-grey-400">Sync events and meetings</BodyText>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -114,13 +117,13 @@ export default function GoogleIntegrationPage() {
 
           {/* Google Drive */}
           {isConnected && (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <FolderOpen className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-h6">Google Drive</h3>
+                  <SubsectionHeader >Google Drive</SubsectionHeader>
                 </div>
-                <p className="text-body-sm text-gray-400">File storage and collaboration</p>
+                <BodyText className="text-body-sm text-grey-400">File storage and collaboration</BodyText>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -143,13 +146,13 @@ export default function GoogleIntegrationPage() {
 
           {/* Gmail */}
           {isConnected && (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Mail className="w-5 h-5 text-atlvs-green-500" />
-                  <h3 className="text-h6">Gmail</h3>
+                  <SubsectionHeader >Gmail</SubsectionHeader>
                 </div>
-                <p className="text-body-sm text-gray-400">Email integration and automation</p>
+                <BodyText className="text-body-sm text-grey-400">Email integration and automation</BodyText>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">

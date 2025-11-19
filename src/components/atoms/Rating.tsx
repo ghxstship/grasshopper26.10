@@ -30,7 +30,7 @@ export const Rating: React.FC<RatingProps> = ({
         <span className="font-semibold">{rating.toFixed(1)}</span>
       </div>
       {showCount && reviewCount && (
-        <span className="text-gray-600">({reviewCount})</span>
+        <span className="text-grey-600">({reviewCount})</span>
       )}
     </div>
   );

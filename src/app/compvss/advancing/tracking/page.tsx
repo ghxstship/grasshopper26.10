@@ -15,6 +15,7 @@ import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { useAdvancingRequests } from '@/lib/hooks/compvss';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
 
 interface AdvancingRequest {
   id: string;
@@ -28,6 +29,8 @@ interface AdvancingRequest {
   dueDate: string;
   unreadMessages: number;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/advancing/tracking
 
 export default function RequestTrackingPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -76,7 +79,7 @@ export default function RequestTrackingPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading requests...</p>
+              <BodyText className="text-grey-400">Loading requests...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -97,8 +100,8 @@ export default function RequestTrackingPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Requests</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Requests</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -139,7 +142,7 @@ export default function RequestTrackingPage() {
       case 'in-review':
         return <Clock className="w-5 h-5 text-warning" />;
       default:
-        return <AlertCircle className="w-5 h-5 text-gray-500" />;
+        return <AlertCircle className="w-5 h-5 text-grey-500" />;
     }
   };
 
@@ -165,13 +168,13 @@ export default function RequestTrackingPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
             <Link href="/compvss/advancing/dashboard">
-              <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
+              <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                 Request Tracking
-              </h1>
+              </HeroTitle>
             </Link>
-            <p className="text-gray-400 font-oswald">
+            <BodyText className="text-grey-400">
               Monitor and manage all advancing requests
-            </p>
+            </BodyText>
           </div>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
@@ -180,27 +183,23 @@ export default function RequestTrackingPage() {
             <Card
               key={status}
               variant="compvss"
-              className={`cursor-pointer transition-all ${
-                statusFilter === status
-                  ? 'bg-compvss-cyan-500/20 border-compvss-cyan-500'
-                  : 'bg-gray-900/80 border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40'
-              }`}
+              className={`cursor-pointer transition-all ${ statusFilter === status ? 'bg-compvss-cyan-500/20 border-compvss-cyan-500' : 'bg-grey-900/80 border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40' }`}
               onClick={() => setStatusFilter(status)}
             >
               <CardContent className="pt-6 text-center">
-                <p className="text-h4 font-bebas text-compvss-cyan-500">{count}</p>
-                <p className="text-caption text-gray-400 font-oswald capitalize">{status.replace('-', ' ')}</p>
+                <p className="text-compvss-cyan-500">{count}</p>
+                <p className="text-caption text-grey-400 capitalize">{status.replace('-', ' ')}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* Filters */}
-        <Card variant="compvss" className="mb-6 bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+        <Card variant="compvss" className="mb-6 bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                 <Input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -209,7 +208,7 @@ export default function RequestTrackingPage() {
                 />
               </div>
               <div className="relative">
-                  <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                   <Select
                     value={categoryFilter}
                     onChange={(e) => setCategoryFilter(e.target.value)}
@@ -236,21 +235,21 @@ export default function RequestTrackingPage() {
           {/* Requests List */}
           <div className="space-y-4">
             {filteredRequests.map((request) => (
-              <Card key={request.id} variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all">
+              <Card key={request.id} variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all">
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-3 flex-1">
                       {getStatusIcon(request.status)}
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white text-h6">{request.title}</h3>
+                          <h3 className="text-white">{request.title}</h3>
                           {request.unreadMessages > 0 && (
                             <Badge variant="error" className="text-caption">
                               {request.unreadMessages} new
                             </Badge>
                           )}
                         </div>
-                        <div className="flex flex-wrap gap-3 text-body-sm text-gray-400 font-share-tech mb-2">
+                        <div className="flex flex-wrap gap-3 text-body-sm text-grey-400 -tech mb-2">
                           <span>ID: {request.id}</span>
                           <span>•</span>
                           <span>{request.category}</span>
@@ -263,7 +262,7 @@ export default function RequestTrackingPage() {
                             </>
                           )}
                         </div>
-                        <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
+                        <div className="flex items-center gap-2 text-caption text-grey-500 -tech">
                           <Clock className="w-3 h-3" />
                           <span>Submitted: {new Date(request.submittedAt).toLocaleString()}</span>
                           <span>•</span>
@@ -295,10 +294,10 @@ export default function RequestTrackingPage() {
           </div>
 
           {filteredRequests.length === 0 && (
-            <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+            <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
               <CardContent className="pt-6 text-center py-12">
-                <AlertCircle className="w-12 h-12 text-gray-500 mx-auto mb-4" />
-                <p className="text-gray-400 font-oswald">No requests found matching your filters</p>
+                <AlertCircle className="w-12 h-12 text-grey-500 mx-auto mb-4" />
+                <BodyText className="text-grey-400">No requests found matching your filters</BodyText>
               </CardContent>
             </Card>
           )}

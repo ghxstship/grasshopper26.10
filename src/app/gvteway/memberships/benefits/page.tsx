@@ -4,6 +4,8 @@ import { ListPageTemplate } from '@/components/templates/ListPageTemplate';
 import { Check } from 'lucide-react';
 import { SectionHeader, BodyText } from '@/components/atoms/Typography';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/memberships/benefits
+
 export default function BenefitsPage() {
   const benefits = ['Early access', 'Exclusive events', 'Priority support', 'Discounts'];
   return (

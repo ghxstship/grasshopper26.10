@@ -11,6 +11,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useTeamAvailability } from '@/lib/hooks/compvss/useTeamMembers';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/team/availability
 
 export default function TeamAvailabilityPage() {
   const { data: availability = [], isLoading, error, refetch } = useTeamAvailability();
@@ -28,7 +31,7 @@ export default function TeamAvailabilityPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading availability...</p>
+              <BodyText className="text-grey-400">Loading availability...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -49,8 +52,8 @@ export default function TeamAvailabilityPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Availability</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Availability</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -82,7 +85,7 @@ export default function TeamAvailabilityPage() {
           }
         ]}
       >
-        <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+        <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Calendar className="w-5 h-5 text-compvss-cyan-500" />
@@ -101,9 +104,9 @@ export default function TeamAvailabilityPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="font-oswald text-white mb-1">{person.name}</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech mb-2">{person.role}</p>
-                      <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
+                      <h3 className="text-white mb-1">{person.name}</h3>
+                      <p className="text-body-sm text-grey-400 -tech mb-2">{person.role}</p>
+                      <div className="flex items-center gap-2 text-caption text-grey-500 -tech">
                         <Clock className="w-3 h-3" />
                         <span>{person.shift}</span>
                       </div>

@@ -36,7 +36,7 @@ const Accordion: React.FC<AccordionProps> = ({
   };
 
   return (
-    <div className={cn("divide-y divide-gray-200 border border-gray-200 rounded-lg", className)}>
+    <div className={cn("divide-y divide-grey-200 border border-grey-200 rounded-lg", className)}>
       {items.map((item) => {
         const isOpen = openItems.includes(item.id);
         return (
@@ -44,23 +44,23 @@ const Accordion: React.FC<AccordionProps> = ({
             <Button
               onClick={() => toggleItem(item.id)}
               variant="ghost"
-              className="flex w-full items-center justify-between px-4 py-4 text-left hover:bg-gray-50 transition-colors"
+              className="flex w-full items-center justify-between px-4 py-4 text-left hover:bg-grey-50 transition-colors"
             >
               <div className="flex items-center gap-3">
                 {item.icon}
-                <span className="font-medium text-gray-900 font-share-tech">
+                <span className="font-medium text-grey-900 -tech">
                   {item.title}
                 </span>
               </div>
               <ChevronDown
                 className={cn(
-                  "h-5 w-5 text-gray-500 transition-transform",
+                  "h-5 w-5 text-grey-500 transition-transform",
                   isOpen && "transform rotate-180"
                 )}
               />
             </Button>
             {isOpen && (
-              <div className="px-4 pb-4 pt-2 text-gray-700 font-share-tech">
+              <div className="px-4 pb-4 pt-2 text-grey-700 -tech">
                 {item.content}
               </div>
             )}

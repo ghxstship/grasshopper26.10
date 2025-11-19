@@ -88,7 +88,7 @@ function StatCard({ icon, title, value, href }: StatCardProps) {
       <div className="text-ghxst-primary group-hover:text-ghxst-black transition-colors mb-4">
         {icon}
       </div>
-      <div className="text-h2 font-anton text-ghxst-primary mb-2">{value}</div>
+      <div className="text-ghxst-primary mb-2">{value}</div>
       <CardTitle className="text-ghxst-text-secondary">{title}</CardTitle>
     </div>
   );

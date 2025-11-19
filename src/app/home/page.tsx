@@ -2,7 +2,7 @@
 
 import { HeroSection } from "@/components/organisms/HeroSection";
 import { JourneyStep } from "@/components/organisms/JourneyStep";
-import { PageTitle, SectionHeader, BodyText } from "@/components/atoms/Typography";
+import { BodyText, CardTitle, PageTitle, SectionHeader } from "@/components/atoms/Typography";
 import { EventCard } from "@/components/molecules/EventCard";
 import { ArtistCard } from "@/components/molecules/ArtistCard";
 import { CategoryTab } from "@/components/atoms/CategoryTab";
@@ -111,7 +111,7 @@ export default function LandingPage() {
       <section className="bg-ghxst-white">
         <div className="max-w-7xl mx-auto px-8 py-16 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">How GVTEWAY Works</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto">
             Five steps to becoming part of the premier live entertainment community
           </BodyText>
         </div>
@@ -264,17 +264,17 @@ export default function LandingPage() {
       <section className="section-padding bg-ghxst-black text-ghxst-white">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase">The GVTEWAY Community</PageTitle>
-          <BodyText className="text-gray-300 max-w-2xl mx-auto mb-12">
+          <BodyText className="text-grey-300 max-w-2xl mx-auto mb-12">
             More than tickets. More than brands. More than trips. A thriving community of creators, collaborators, and culture enthusiasts.
           </BodyText>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <Card variant="default" className="bg-gray-900 border-gray-800 text-white p-8 space-y-4">
+            <Card variant="default" className="bg-grey-900 border-grey-800 text-white p-8 space-y-4">
               <Users className="w-12 h-12 mx-auto" />
-              <h4 className="font-bebas text-h4 text-center">Social Feed</h4>
-              <p className="font-share-tech text-body-sm text-gray-400 text-center">
+              <CardTitle className="text-center">Social Feed</CardTitle>
+              <BodyText className="-tech text-body-sm text-grey-400 text-center">
                 Connect with members, share experiences, reviews, finds
-              </p>
+              </BodyText>
               <div className="flex justify-center">
                 <Button variant="secondary" size="sm">
                   Explore Feed
@@ -282,12 +282,12 @@ export default function LandingPage() {
               </div>
             </Card>
 
-            <Card variant="default" className="bg-gray-900 border-gray-800 text-white p-8 space-y-4">
+            <Card variant="default" className="bg-grey-900 border-grey-800 text-white p-8 space-y-4">
               <ShoppingBag className="w-12 h-12 mx-auto" />
-              <h4 className="font-bebas text-h4 text-center">Marketplace</h4>
-              <p className="font-share-tech text-body-sm text-gray-400 text-center">
+              <CardTitle className="text-center">Marketplace</CardTitle>
+              <BodyText className="-tech text-body-sm text-grey-400 text-center">
                 Buy, sell, and trade tickets, merch, and exclusive items
-              </p>
+              </BodyText>
               <div className="flex justify-center">
                 <Button variant="secondary" size="sm">
                   Browse Market
@@ -295,12 +295,12 @@ export default function LandingPage() {
               </div>
             </Card>
 
-            <Card variant="default" className="bg-gray-900 border-gray-800 text-white p-8 space-y-4">
+            <Card variant="default" className="bg-grey-900 border-grey-800 text-white p-8 space-y-4">
               <Sparkles className="w-12 h-12 mx-auto" />
-              <h4 className="font-bebas text-h4 text-center">Opportunities</h4>
-              <p className="font-share-tech text-body-sm text-gray-400 text-center">
+              <CardTitle className="text-center">Opportunities</CardTitle>
+              <BodyText className="-tech text-body-sm text-grey-400 text-center">
                 Volunteer, collaborate, and create opportunities
-              </p>
+              </BodyText>
               <div className="flex justify-center">
                 <Button variant="secondary" size="sm">
                   Get Involved
@@ -309,9 +309,9 @@ export default function LandingPage() {
             </Card>
           </div>
 
-          <p className="font-share-tech-mono text-body-sm text-gray-400 mb-8">
+          <BodyText className="-tech-mono text-body-sm text-grey-400 mb-8">
             5,000+ Active Members • 15,000+ Connections • 2,000+ Monthly Transactions • 500+ Open Opportunities
-          </p>
+          </BodyText>
 
           <Button variant="primary" size="lg">
             Join the Community

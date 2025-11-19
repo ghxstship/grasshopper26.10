@@ -18,7 +18,7 @@ export const SocialProof: React.FC<SocialProofProps> = ({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 font-share-tech-mono text-body-sm text-gray-700",
+        "inline-flex items-center gap-2 font-share-tech-mono text-body-sm text-grey-700",
         className
       )}
       {...props}

@@ -33,7 +33,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
   return (
     <Card className={cn("overflow-hidden group", className)}>
       <Link href={`/music/artists/${slug}`}>
-        <div className="relative aspect-square overflow-hidden bg-gray-100">
+        <div className="relative aspect-square overflow-hidden bg-grey-100">
           <Image
             src={image}
             alt={name}
@@ -43,11 +43,11 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
         </div>
         
         <div className="p-4 space-y-3">
-          <CardTitle className="line-clamp-1 group-hover:text-gray-700 transition-colors text-center">
+          <CardTitle className="line-clamp-1 group-hover:text-grey-700 transition-colors text-center">
             {name}
           </CardTitle>
           
-          <Metadata className="text-center text-gray-700 flex items-center justify-center gap-2">
+          <Metadata className="text-center text-grey-700 flex items-center justify-center gap-2">
             <Music className="w-4 h-4" />
             {genre}
           </Metadata>
@@ -59,7 +59,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
           )}
           
           {followers && (
-            <Metadata className="text-center text-gray-600">
+            <Metadata className="text-center text-grey-600">
               {followers.toLocaleString()} followers
             </Metadata>
           )}

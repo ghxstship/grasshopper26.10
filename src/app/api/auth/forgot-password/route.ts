@@ -11,9 +11,16 @@ import { SendGrid } from '@/lib/integrations';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { AuthService } from '@/lib/services/auth/forgotPassword.service';
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting - prevent password reset spam/enumeration
     const identifier = getClientIdentifier(request);
     if (!rateLimit(
@@ -29,7 +36,7 @@ export async function POST(request: NextRequest) {
     const { email } = validatedData;
 
     // Find user
-    const user = await prisma.user.findUnique({
+    const user = await new AuthService().findById({
       where: { email },
     });
 
@@ -45,7 +52,7 @@ export async function POST(request: NextRequest) {
     const tokenHash = hashToken(token);
 
     // Store token in database
-    await prisma.passwordResetToken.create({
+    await new AuthService().create({
       data: {
         userId: user.id,
         token: tokenHash,

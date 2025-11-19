@@ -18,6 +18,8 @@ interface AssetUsage {
   avgDuration: number;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/assets/analytics
+
 export default function AssetAnalyticsPage() {
   const { data: _assetsData, isLoading } = useAssets();
   
@@ -53,45 +55,45 @@ export default function AssetAnalyticsPage() {
       >
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Total Assets</div>
-                <div className="text-h4 text-white">{totalAssets}</div>
+                <div className="text-body-sm text-grey-400 mb-1">Total Assets</div>
+                <div className="text-white">{totalAssets}</div>
               </div>
               <Package className="w-8 h-8 text-info" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Active</div>
-                <div className="text-h4 text-atlvs-green-500">{activeAssets}</div>
+                <div className="text-body-sm text-grey-400 mb-1">Active</div>
+                <div className="text-atlvs-green-500">{activeAssets}</div>
               </div>
               <TrendingUp className="w-8 h-8 text-atlvs-green-500" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Avg Utilization</div>
-                <div className="text-h4 text-atlvs-purple-500">{avgUtilization}%</div>
+                <div className="text-body-sm text-grey-400 mb-1">Avg Utilization</div>
+                <div className="text-atlvs-purple-500">{avgUtilization}%</div>
               </div>
               <BarChart3 className="w-8 h-8 text-atlvs-purple-500" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-body-sm text-gray-400 mb-1">Total Bookings</div>
-                <div className="text-h4 text-atlvs-orange-500">135</div>
+                <div className="text-body-sm text-grey-400 mb-1">Total Bookings</div>
+                <div className="text-atlvs-orange-500">135</div>
               </div>
               <Clock className="w-8 h-8 text-atlvs-orange-500" />
             </div>
@@ -100,43 +102,40 @@ export default function AssetAnalyticsPage() {
       </div>
 
       {/* Usage Table */}
-      <Card variant="atlvs" className="bg-gray-900/50">
+      <Card variant="atlvs" className="bg-grey-900/50">
         <CardHeader>
           <CardTitle>Asset Usage Statistics</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-800/50 border-b border-gray-700">
+              <thead className="bg-grey-800/50 border-b border-grey-700">
                 <tr>
-                  <th className="px-4 py-3 text-left text-body-sm text-gray-900">Asset</th>
-                  <th className="px-4 py-3 text-left text-body-sm text-gray-900">Category</th>
-                  <th className="px-4 py-3 text-center text-body-sm text-gray-900">Bookings</th>
-                  <th className="px-4 py-3 text-center text-body-sm text-gray-900">Utilization</th>
-                  <th className="px-4 py-3 text-center text-body-sm text-gray-900">Avg Duration</th>
+                  <th className="px-4 py-3 text-left text-body-sm text-grey-900">Asset</th>
+                  <th className="px-4 py-3 text-left text-body-sm text-grey-900">Category</th>
+                  <th className="px-4 py-3 text-center text-body-sm text-grey-900">Bookings</th>
+                  <th className="px-4 py-3 text-center text-body-sm text-grey-900">Utilization</th>
+                  <th className="px-4 py-3 text-center text-body-sm text-grey-900">Avg Duration</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-grey-200">
                 {assetUsage.map((asset, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-body-sm text-gray-900">{asset.assetName}</td>
-                    <td className="px-4 py-3 text-body-sm text-gray-600">{asset.category}</td>
-                    <td className="px-4 py-3 text-body-sm text-gray-900 text-center">{asset.totalBookings}</td>
+                  <tr key={idx} className="hover:bg-grey-50">
+                    <td className="px-4 py-3 text-body-sm text-grey-900">{asset.assetName}</td>
+                    <td className="px-4 py-3 text-body-sm text-grey-600">{asset.category}</td>
+                    <td className="px-4 py-3 text-body-sm text-grey-900 text-center">{asset.totalBookings}</td>
                     <td className="px-4 py-3 text-center">
                       <div className="flex items-center justify-center gap-2">
-                        <div className="w-24 bg-gray-200 rounded-full h-2">
+                        <div className="w-24 bg-grey-200 rounded-full h-2">
                           <div
-                            className={`h-2 rounded-full ${
-                              asset.utilizationRate >= 80 ? 'bg-success' : 
-                              asset.utilizationRate >= 60 ? 'bg-warning' : 'bg-destructive'
-                            }`}
+                            className={`h-2 rounded-full ${ asset.utilizationRate >= 80 ? 'bg-success' : asset.utilizationRate >= 60 ? 'bg-warning' : 'bg-destructive' }`}
                             style={{ width: `${asset.utilizationRate}%` }}
                           />
                         </div>
-                        <span className="text-body-sm text-gray-900">{asset.utilizationRate}%</span>
+                        <span className="text-body-sm text-grey-900">{asset.utilizationRate}%</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-body-sm text-gray-900 text-center">{asset.avgDuration} days</td>
+                    <td className="px-4 py-3 text-body-sm text-grey-900 text-center">{asset.avgDuration} days</td>
                   </tr>
                 ))}
               </tbody>

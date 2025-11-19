@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { CompvssService } from '@/lib/services/compvss/affiliates/id.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -13,7 +21,7 @@ export async function GET(
     }
 
     const { id } = await params;
-    const affiliate = await prisma.affiliateProfile.findUnique({
+    const affiliate = await new CompvssService().findById({
       where: { id },
     });
 
@@ -23,8 +31,7 @@ export async function GET(
 
     return NextResponse.json(affiliate);
   } catch (error) {
-    console.error('Error getting affiliate:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }
 
@@ -40,14 +47,13 @@ export async function PATCH(
 
     const { id } = await params;
     const body = await req.json();
-    const affiliate = await prisma.affiliateProfile.update({
+    const affiliate = await new CompvssService().update({
       where: { id },
       data: body,
     });
 
     return NextResponse.json(affiliate);
   } catch (error) {
-    console.error('Error updating affiliate:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

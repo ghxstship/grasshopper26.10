@@ -13,6 +13,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useBudgetExpenses } from '@/lib/hooks/atlvs/useBudgets';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets/expenses
 
 export default function BudgetExpensesPage() {
   const [statusFilter, setStatusFilter] = useState('all');
@@ -26,7 +29,7 @@ export default function BudgetExpensesPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading expenses...</p>
+            <BodyText className="text-grey-400">Loading expenses...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -39,8 +42,8 @@ export default function BudgetExpensesPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Expenses</h2>
-            <p className="text-gray-400 mb-4">Unable to load budget expenses</p>
+            <SectionHeader className="mb-2">Failed to Load Expenses</SectionHeader>
+            <BodyText className="text-grey-400 mb-4">Unable to load budget expenses</BodyText>
             <Button onClick={() => refetch()} variant="atlvs">Retry</Button>
           </div>
         </div>
@@ -58,7 +61,7 @@ export default function BudgetExpensesPage() {
       case 'approved': return 'bg-atlvs-green-500/20 text-atlvs-green-500';
       case 'pending': return 'bg-warning/20 text-warning';
       case 'rejected': return 'bg-error/20 text-error';
-      default: return 'bg-gray-700 text-gray-300';
+      default: return 'bg-grey-700 text-grey-300';
     }
   };
 
@@ -83,32 +86,32 @@ export default function BudgetExpensesPage() {
       >
         {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
-            <CardDescription className="text-gray-400 mb-1">Total Expenses</CardDescription>
-            <CardTitle className="text-h4 font-bebas">${totalExpenses.toLocaleString()}</CardTitle>
+            <CardDescription className="text-grey-400 mb-1">Total Expenses</CardDescription>
+            <CardTitle >${totalExpenses.toLocaleString()}</CardTitle>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
-            <CardDescription className="text-gray-400 mb-1">Pending Approval</CardDescription>
-            <CardTitle className="text-h4 font-bebas text-warning">${pendingExpenses.toLocaleString()}</CardTitle>
+            <CardDescription className="text-grey-400 mb-1">Pending Approval</CardDescription>
+            <CardTitle className="text-warning">${pendingExpenses.toLocaleString()}</CardTitle>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
-            <CardDescription className="text-gray-400 mb-1">This Month</CardDescription>
-            <CardTitle className="text-h4 font-bebas text-info">${totalExpenses.toLocaleString()}</CardTitle>
+            <CardDescription className="text-grey-400 mb-1">This Month</CardDescription>
+            <CardTitle className="text-info">${totalExpenses.toLocaleString()}</CardTitle>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters and Actions */}
-      <Card variant="atlvs" className="bg-gray-900/50 mb-4">
+      <Card variant="atlvs" className="bg-grey-900/50 mb-4">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Filter className="w-5 h-5 text-gray-400" />
+              <Filter className="w-5 h-5 text-grey-400" />
           <Select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
@@ -129,26 +132,26 @@ export default function BudgetExpensesPage() {
       </Card>
 
       {/* Expenses Table */}
-      <Card variant="atlvs" className="bg-gray-900/50">
+      <Card variant="atlvs" className="bg-grey-900/50">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-800/50 border-b border-gray-700">
+            <thead className="bg-grey-800/50 border-b border-grey-700">
               <tr>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-400">Description</th>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-400">Category</th>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-400">Submitted By</th>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-400">Date</th>
-                <th className="px-4 py-3 text-right text-body-sm text-gray-400">Amount</th>
-                <th className="px-4 py-3 text-center text-body-sm text-gray-400">Status</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-400">Description</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-400">Category</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-400">Submitted By</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-400">Date</th>
+                <th className="px-4 py-3 text-right text-body-sm text-grey-400">Amount</th>
+                <th className="px-4 py-3 text-center text-body-sm text-grey-400">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-800">
+            <tbody className="divide-y divide-grey-800">
               {filteredExpenses.map(expense => (
-                <tr key={expense.id} className="hover:bg-gray-800/50">
+                <tr key={expense.id} className="hover:bg-grey-800/50">
                   <td className="px-4 py-3 text-body-sm text-white">{expense.description}</td>
-                  <td className="px-4 py-3 text-body-sm text-gray-400">{expense.category}</td>
-                  <td className="px-4 py-3 text-body-sm text-gray-400">{expense.submittedBy}</td>
-                  <td className="px-4 py-3 text-body-sm text-gray-400">
+                  <td className="px-4 py-3 text-body-sm text-grey-400">{expense.category}</td>
+                  <td className="px-4 py-3 text-body-sm text-grey-400">{expense.submittedBy}</td>
+                  <td className="px-4 py-3 text-body-sm text-grey-400">
                     {new Date(expense.date).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-3 text-body-sm text-white text-right">

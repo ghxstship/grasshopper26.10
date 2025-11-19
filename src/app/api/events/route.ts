@@ -4,6 +4,8 @@ import { createEventSchema, eventFiltersSchema } from '@/lib/validations/events'
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, getPaginationParams, getSortParams, validateRequest, requireAuth, rateLimit, getClientIdentifier,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { EventsService } from '@/lib/services/events.service';
+
 
 // GET /api/events - List events with filters
 export async function GET(request: NextRequest) {
@@ -56,7 +58,7 @@ export async function GET(request: NextRequest) {
     const total = await prisma.event.count({ where });
 
     // Get events
-    const events = await prisma.event.findMany({
+    const events = await new EventsService().findAll({
       where,
       skip,
       take: limit,
@@ -150,7 +152,7 @@ export async function POST(request: NextRequest) {
         .replace(/(^-|-$)/g, '');
 
     // Check if slug is unique
-    const existingEvent = await prisma.event.findUnique({
+    const existingEvent = await new EventsService().findById({
       where: { slug },
     });
 
@@ -159,7 +161,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create event
-    const event = await prisma.event.create({
+    const event = await new EventsService().create({
       data: {
         organizationId: validatedData.organizationId,
         name: validatedData.name,

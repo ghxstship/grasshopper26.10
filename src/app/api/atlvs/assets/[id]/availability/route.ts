@@ -6,6 +6,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { AssetService } from '@/lib/services/atlvs/asset.service';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { handleApiError } from '@/lib/api/response';
+
+
 
 export async function GET(
   request: NextRequest,
@@ -37,11 +43,6 @@ export async function GET(
 
     return NextResponse.json(availability);
   } catch (error) {
-    console.error('Error checking asset availability:', error);
-    
-    return NextResponse.json(
-      { error: 'Failed to check asset availability' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

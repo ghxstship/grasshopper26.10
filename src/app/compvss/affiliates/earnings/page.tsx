@@ -10,6 +10,9 @@ import { DollarSign, TrendingUp, Calendar, Loader2, AlertCircle } from 'lucide-r
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Button } from '@/components/atoms/Button';
 import { useAffiliates } from '@/lib/hooks/compvss';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/affiliates/earnings
 
 export default function AffiliateEarningsPage() {
   const { data: affiliateData, isLoading, error, refetch } = useAffiliates();
@@ -28,7 +31,7 @@ export default function AffiliateEarningsPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading earnings...</p>
+            <BodyText className="text-grey-400">Loading earnings...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -41,8 +44,8 @@ export default function AffiliateEarningsPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Earnings</h2>
-            <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+            <SectionHeader className="mb-2">Failed to Load Earnings</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -60,10 +63,10 @@ export default function AffiliateEarningsPage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-h3 font-bebas compvss-text-gradient">Earnings</h1>
-          <p className="text-gray-400 font-oswald mt-1">Track your affiliate earnings</p>
+          <HeroTitle className="compvss-text-gradient">Earnings</HeroTitle>
+          <BodyText className="text-grey-400 mt-1">Track your affiliate earnings</BodyText>
         </div>
       </div>
 
@@ -71,20 +74,20 @@ export default function AffiliateEarningsPage() {
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           {stats.map((stat, index) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}>
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500 w-fit mb-2">
                     {stat.icon}
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </div>
 
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white">Monthly Earnings</CardTitle>
           </CardHeader>
@@ -94,12 +97,12 @@ export default function AffiliateEarningsPage() {
                 <div key={index} className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-oswald text-white mb-1">{earning.month}</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech">{earning.conversions} conversions</p>
+                      <h3 className="text-white mb-1">{earning.month}</h3>
+                      <p className="text-body-sm text-grey-400 -tech">{earning.conversions} conversions</p>
                     </div>
                     <div className="text-right">
-                      <div className="text-h4 font-bebas text-white mb-1">{earning.amount}</div>
-                      <div className={`text-caption font-share-tech ${earning.status === 'paid' ? 'text-success' : 'text-warning'}`}>
+                      <div className="text-white mb-1">{earning.amount}</div>
+                      <div className={`text-caption -tech ${earning.status === 'paid' ? 'text-success' : 'text-warning'}`}>
                         {earning.status}
                       </div>
                     </div>

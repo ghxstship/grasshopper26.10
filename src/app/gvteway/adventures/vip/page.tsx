@@ -7,6 +7,8 @@ import { Button } from '@/components/atoms/Button';
 
 
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/adventures/vip
+
 export default function VIPPage() {
   const experiences = [{ id: '1', title: 'VIP Backstage Pass', description: 'Exclusive access', price: 299 }];
   return (
@@ -18,7 +20,7 @@ export default function VIPPage() {
             <CardTitle className="mb-2 text-ghxst-primary">{exp.title}</CardTitle>
             <BodyText className="text-ghxst-text-secondary mb-4">{exp.description}</BodyText>
             <div className="flex items-center justify-between">
-              <span className="text-h4 font-anton text-ghxst-primary">${exp.price}</span>
+              <span className="text-ghxst-primary">${exp.price}</span>
               <Button variant="primary" size="sm">Book Now</Button>
             </div>
           </div>

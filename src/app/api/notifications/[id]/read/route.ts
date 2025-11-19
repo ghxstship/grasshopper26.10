@@ -2,6 +2,11 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { NotificationsService } from '@/lib/services/notifications/id/read.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -20,7 +25,7 @@ export async function PATCH(
     requireAuth(context);
 
     // Check if notification exists and belongs to user
-    const notification = await prisma.notification.findUnique({
+    const notification = await new NotificationsService().findById({
       where: { id: id },
     });
 
@@ -33,7 +38,7 @@ export async function PATCH(
     }
 
     // Mark as read
-    const updatedNotification = await prisma.notification.update({
+    const updatedNotification = await new NotificationsService().update({
       where: { id: id },
       data: {
         read: true,

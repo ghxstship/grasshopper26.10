@@ -2,6 +2,11 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { SocialService } from '@/lib/services/social/posts/id/like.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -20,7 +25,7 @@ export async function POST(
     requireAuth(context);
 
     // Check if post exists
-    const post = await prisma.socialPost.findUnique({
+    const post = await new SocialService().findById({
       where: { id: id },
     });
 
@@ -38,7 +43,7 @@ export async function POST(
 
     if (existingLike) {
       // Unlike
-      await prisma.socialLike.delete({
+      await new SocialService().delete({
         where: { id: existingLike.id },
       });
 
@@ -48,7 +53,7 @@ export async function POST(
       });
     } else {
       // Like
-      await prisma.socialLike.create({
+      await new SocialService().create({
         data: {
           postId: id,
           userId: context.userId!,
@@ -57,12 +62,12 @@ export async function POST(
 
       // Create notification for post author (if not liking own post)
       if (post.userId !== context.userId) {
-        const liker = await prisma.user.findUnique({
+        const liker = await new SocialService().findById({
           where: { id: context.userId! },
           select: { name: true, image: true },
         });
 
-        await prisma.notification.create({
+        await new SocialService().create({
           data: {
             userId: post.userId,
             type: 'POST_LIKED',

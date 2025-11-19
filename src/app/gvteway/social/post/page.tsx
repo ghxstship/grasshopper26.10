@@ -10,6 +10,9 @@ import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Textarea } from '@/components/atoms/Textarea';
 import { Button } from '@/components/atoms/Button';
+import { HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/social/post
 
 export default function CreatePostPage() {
   const [content, setContent] = useState('');
@@ -20,9 +23,9 @@ export default function CreatePostPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-h1 font-anton mb-8 gvteway-text-gradient">CREATE POST</h1>
+              <HeroTitle className="mb-8 gvteway-text-gradient">CREATE POST</HeroTitle>
               
-              <Card variant="gvteway" className="bg-gray-900/50">
+              <Card variant="gvteway" className="bg-grey-900/50">
                 <CardContent className="p-6">
                   <Textarea
                     value={content}

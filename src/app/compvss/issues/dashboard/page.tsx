@@ -15,6 +15,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 import { useIssues } from '@/lib/hooks/compvss/useIssues';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/issues/dashboard
 
 export default function IssuesDashboardPage() {
   const router = useRouter();
@@ -60,7 +63,7 @@ function IssuesDashboardContent() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-blue-500" />
-          <p className="text-gray-400">Loading issues...</p>
+          <BodyText className="text-grey-400">Loading issues...</BodyText>
         </div>
       </div>
     );
@@ -71,8 +74,8 @@ function IssuesDashboardContent() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-          <h2 className="text-h5 font-bebas mb-2">Failed to Load Issues</h2>
-          <p className="text-gray-400 mb-4">{error.message}</p>
+          <SectionHeader className="mb-2">Failed to Load Issues</SectionHeader>
+          <p className="text-grey-400 mb-4">{error.message}</p>
           <Button variant="compvss" onClick={() => refetch()}>
             Try Again
           </Button>
@@ -99,7 +102,7 @@ function IssuesDashboardContent() {
       case 'low':
         return 'bg-success-light text-success border-success/30';
       default:
-        return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
+        return 'bg-grey-500/20 text-grey-500 border-grey-500/30';
     }
   };
 
@@ -112,7 +115,7 @@ function IssuesDashboardContent() {
       case 'resolved':
         return 'bg-success-light text-success border-success/30';
       default:
-        return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
+        return 'bg-grey-500/20 text-grey-500 border-grey-500/30';
     }
   };
 
@@ -127,13 +130,13 @@ function IssuesDashboardContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className={`p-2 bg-black/50 rounded-lg ${stat.color} w-fit mb-2`}>
                     {stat.icon}
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -148,10 +151,10 @@ function IssuesDashboardContent() {
           className="mb-6"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
             <Input
               placeholder="Search issues..."
-              className="pl-12 bg-gray-900/50 border-compvss-cyan-500/30 h-12"
+              className="pl-12 bg-grey-900/50 border-compvss-cyan-500/30 h-12"
             />
           </div>
         </motion.div>
@@ -162,7 +165,7 @@ function IssuesDashboardContent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <AlertCircle className="w-5 h-5 text-compvss-cyan-500" />
@@ -183,7 +186,7 @@ function IssuesDashboardContent() {
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-caption text-gray-500 font-share-tech">{issue.id}</span>
+                              <span className="text-caption text-grey-500 -tech">{issue.id}</span>
                               <Badge variant="compvss-outline" className={getPriorityColor(issue.priority)}>
                                 {issue.priority}
                               </Badge>
@@ -191,11 +194,11 @@ function IssuesDashboardContent() {
                                 {issue.status.replace('_', ' ')}
                               </Badge>
                             </div>
-                            <h3 className="font-oswald text-white text-h6 mb-1">{issue.title}</h3>
-                            <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                            <h3 className="text-white mb-1">{issue.title}</h3>
+                            <p className="text-body-sm text-grey-400 -tech mb-2">
                               {issue.category} • {issue.location}
                             </p>
-                            <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
+                            <div className="flex items-center gap-4 text-caption text-grey-500 -tech">
                               <span>Reported by {issue.reporter}</span>
                               <span>•</span>
                               <span>{issue.time}</span>

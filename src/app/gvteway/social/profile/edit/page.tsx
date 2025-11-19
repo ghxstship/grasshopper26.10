@@ -11,6 +11,9 @@ import { Input } from '@/components/atoms/Input';
 import { Textarea } from '@/components/atoms/Textarea';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { FormField } from '@/components/molecules/FormField';
+import { HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/social/profile/edit
 
 export default function EditProfilePage() {
   const [name, setName] = useState('Sarah Johnson');
@@ -22,9 +25,9 @@ export default function EditProfilePage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-h1 font-anton mb-8 gvteway-text-gradient">EDIT PROFILE</h1>
+              <HeroTitle className="mb-8 gvteway-text-gradient">EDIT PROFILE</HeroTitle>
               
-              <Card variant="gvteway" className="bg-gray-900/50">
+              <Card variant="gvteway" className="bg-grey-900/50">
                 <CardHeader>
                   <CardTitle className="text-white">Profile Information</CardTitle>
                 </CardHeader>

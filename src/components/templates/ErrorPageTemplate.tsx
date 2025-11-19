@@ -103,7 +103,7 @@ export function ErrorPageTemplate({
           {/* Error Code */}
           {errorCode && (
             <div className="mb-8">
-              <span className="font-anton text-hero text-ghxst-primary opacity-20">
+              <span className="text-hero text-ghxst-primary opacity-20">
                 {errorCode}
               </span>
             </div>

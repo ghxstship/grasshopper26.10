@@ -18,6 +18,7 @@ import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { Textarea } from '@/components/atoms/Textarea';
 import { FormField } from '@/components/molecules/FormField';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
 
 export default function NewIssuePage() {
   const breadcrumbs = [
@@ -81,13 +82,13 @@ function NewIssueContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <AlertCircle className="w-6 h-6 text-compvss-cyan-500" />
                 Issue Details
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Provide as much detail as possible to help resolve the issue quickly
               </CardDescription>
             </CardHeader>
@@ -145,7 +146,7 @@ function NewIssueContent() {
                 {/* Location */}
                 <FormField label="Location" hint="Specify where the issue is located">
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="location"
                       type="text"
@@ -179,12 +180,12 @@ function NewIssueContent() {
                         <Camera className="w-8 h-8 text-compvss-cyan-500" />
                       </div>
                       <div>
-                        <p className="text-white font-oswald mb-1">
+                        <BodyText className="text-white mb-1">
                           Click to upload or drag and drop
-                        </p>
-                        <p className="text-body-sm text-gray-400 font-share-tech">
+                        </BodyText>
+                        <BodyText className="text-body-sm text-grey-400 -tech">
                           PNG, JPG, MP4 up to 10MB
-                        </p>
+                        </BodyText>
                       </div>
                       <Button variant="compvss-outline" size="sm" type="button">
                         <Upload className="w-4 h-4 mr-2" />
@@ -227,10 +228,10 @@ function NewIssueContent() {
             transition={{ delay: 0.2 }}
             className="mt-6"
           >
-            <Card variant="compvss" className="bg-gray-900/30 border-compvss-cyan-500/20">
+            <Card variant="compvss" className="bg-grey-900/30 border-compvss-cyan-500/20">
               <CardContent className="pt-6">
-                <h3 className="text-h6 font-bebas text-white mb-3">Reporting Tips</h3>
-                <ul className="space-y-2 text-body-sm text-gray-400 font-share-tech">
+                <SubsectionHeader className="text-white mb-3">Reporting Tips</SubsectionHeader>
+                <ul className="space-y-2 text-body-sm text-grey-400 -tech">
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-compvss-cyan-500 rounded-full mt-2" />
                     <span>Be specific and include all relevant details</span>

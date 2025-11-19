@@ -5,6 +5,8 @@ import { PageTitle, BodyText } from '@/components/atoms/Typography';
 
 const metadata = { title: 'Privacy Settings | GVTEWAY' };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/settings/privacy
+
 export default function PrivacySettingsPage() {
   return (
     <GvtewayLayout>

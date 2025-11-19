@@ -12,6 +12,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms
 import { Badge } from '@/components/atoms/Badge';
 import { DataTable, DataTableColumn } from '@/components/atlvs/DataTable';
 import { useBudgets } from '@/lib/hooks/atlvs/useBudgets';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface BudgetItem extends Record<string, unknown> {
   id: string;
@@ -22,6 +23,8 @@ interface BudgetItem extends Record<string, unknown> {
   status: 'on-track' | 'warning' | 'over-budget';
   lastUpdated: string;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets
 
 export default function BudgetsPage() {
   const { data: budgets, isLoading, error, refetch } = useBudgets();
@@ -51,7 +54,7 @@ export default function BudgetsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading budgets...</p>
+            <BodyText className="text-grey-400">Loading budgets...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -64,8 +67,8 @@ export default function BudgetsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Budgets</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Budgets</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -141,14 +144,14 @@ export default function BudgetsPage() {
       >
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" role="region" aria-label="Budget summary statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Budget
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`Total budget: ${formatCurrency(stats.totalBudget)}`}>
+                  <CardTitle  aria-label={`Total budget: ${formatCurrency(stats.totalBudget)}`}>
                     {formatCurrency(stats.totalBudget)}
                   </CardTitle>
                 </div>
@@ -159,17 +162,17 @@ export default function BudgetsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Spent
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`Total spent: ${formatCurrency(stats.totalSpent)}, ${stats.percentageSpent.toFixed(1)} percent of budget`}>
+                  <CardTitle  aria-label={`Total spent: ${formatCurrency(stats.totalSpent)}, ${stats.percentageSpent.toFixed(1)} percent of budget`}>
                     {formatCurrency(stats.totalSpent)}
                   </CardTitle>
-                  <div className="text-caption text-gray-400 mt-1" aria-hidden="true">
+                  <div className="text-caption text-grey-400 mt-1" aria-hidden="true">
                     {stats.percentageSpent.toFixed(1)}% of budget
                   </div>
                 </div>
@@ -180,22 +183,18 @@ export default function BudgetsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Remaining
                   </CardDescription>
-                  <CardTitle className={`text-h3 font-bebas ${
-                    stats.totalRemaining < 0 ? 'text-error' : 'text-atlvs-green-500'
-                  }`} aria-label={`Remaining budget: ${formatCurrency(stats.totalRemaining)}${stats.totalRemaining < 0 ? ', over budget' : ''}`}>
+                  <CardTitle className={`${ stats.totalRemaining < 0 ? 'text-error' : 'text-atlvs-green-500' }`} aria-label={`Remaining budget: ${formatCurrency(stats.totalRemaining)}${stats.totalRemaining < 0 ? ', over budget' : ''}`}>
                     {formatCurrency(stats.totalRemaining)}
                   </CardTitle>
                 </div>
-                <div className={`p-3 rounded-xl ${
-                  stats.totalRemaining < 0 ? 'bg-error/10' : 'bg-atlvs-green-500/10'
-                }`}>
+                <div className={`p-3 rounded-xl ${ stats.totalRemaining < 0 ? 'bg-error/10' : 'bg-atlvs-green-500/10' }`}>
                   {stats.totalRemaining < 0 ? (
                     <TrendingDown className="w-6 h-6 text-error" />
                   ) : (
@@ -206,14 +205,14 @@ export default function BudgetsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Over Budget Items
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-error">
+                  <CardTitle className="text-error">
                     {budgetData.filter((item: BudgetItem) => item.status === 'over-budget').length}
                   </CardTitle>
                 </div>
@@ -226,7 +225,7 @@ export default function BudgetsPage() {
         </div>
 
         {/* Budget Progress */}
-        <Card variant="atlvs" className="bg-gray-900/50 mb-8">
+        <Card variant="atlvs" className="bg-grey-900/50 mb-8">
           <CardHeader>
             <div className="flex items-center justify-between mb-4">
               <CardTitle>Overall Budget Progress</CardTitle>
@@ -234,13 +233,9 @@ export default function BudgetsPage() {
                 {stats.percentageSpent.toFixed(1)}% Used
               </Badge>
             </div>
-            <div className="h-4 bg-gray-800 rounded-full overflow-hidden">
+            <div className="h-4 bg-grey-800 rounded-full overflow-hidden">
               <motion.div
-                className={`h-full ${
-                  stats.percentageSpent > 100 ? 'bg-error' :
-                  stats.percentageSpent > 90 ? 'bg-warning' :
-                  'bg-atlvs-green-500'
-                }`}
+                className={`h-full ${ stats.percentageSpent > 100 ? 'bg-error' : stats.percentageSpent > 90 ? 'bg-warning' : 'bg-atlvs-green-500' }`}
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(stats.percentageSpent, 100)}%` }}
                 transition={{ duration: 1 }}
@@ -252,11 +247,11 @@ export default function BudgetsPage() {
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <Filter className="w-4 h-4 mr-2" />
               Filter
             </Button>
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <PieChart className="w-4 h-4 mr-2" />
               View Chart
             </Button>

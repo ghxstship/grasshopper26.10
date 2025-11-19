@@ -13,6 +13,9 @@ import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/dashboard/tasks
 
 export default function TasksDashboardPage() {
   const { data: tasksData, isLoading } = useCompvssTasks();
@@ -98,7 +101,7 @@ function TasksContent() {
       case 'low':
         return 'bg-success-light text-success border-success/30';
       default:
-        return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
+        return 'bg-grey-500/20 text-grey-500 border-grey-500/30';
     }
   };
 
@@ -111,19 +114,19 @@ function TasksContent() {
       case 'overdue':
         return 'bg-error-light text-error border-destructive/30';
       default:
-        return 'bg-gray-500/20 text-gray-500 border-gray-500/30';
+        return 'bg-grey-500/20 text-grey-500 border-grey-500/30';
     }
   };
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-h3 font-bebas compvss-text-gradient">My Tasks</h1>
-              <p className="text-gray-400 font-oswald mt-1">Manage your assigned _tasks</p>
+              <HeroTitle className="compvss-text-gradient">My Tasks</HeroTitle>
+              <BodyText className="text-grey-400 mt-1">Manage your assigned _tasks</BodyText>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="compvss-ghost" size="sm">
@@ -151,10 +154,10 @@ function TasksContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6 text-center">
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -167,7 +170,7 @@ function TasksContent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <CheckSquare className="w-5 h-5 text-compvss-cyan-500" />
@@ -195,11 +198,11 @@ function TasksContent() {
                                 {task.status.replace('_', ' ')}
                               </Badge>
                             </div>
-                            <h3 className="font-oswald text-white text-h6 mb-1">{task.title}</h3>
-                            <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                            <h3 className="text-white mb-1">{task.title}</h3>
+                            <p className="text-body-sm text-grey-400 -tech mb-2">
                               {task.project}
                             </p>
-                            <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
+                            <div className="flex items-center gap-4 text-caption text-grey-500 -tech">
                               <span className="flex items-center gap-1">
                                 <Calendar className="w-3 h-3" />
                                 {task.dueDate}

@@ -3,10 +3,26 @@ import { prisma } from '@/lib/prisma';
 import { createProductSchema, productFiltersSchema } from '@/lib/validations/products';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { getPaginationParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { ProductsService } from '@/lib/services/products.service';
+
+
 
 // GET /api/products - List products
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const { searchParams } = new URL(request.url);
     const { page, limit, skip } = getPaginationParams(request);
 
@@ -65,6 +81,17 @@ export async function GET(request: NextRequest) {
 // POST /api/products - Create product
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -80,7 +107,7 @@ export async function POST(request: NextRequest) {
         .replace(/(^-|-$)/g, '');
 
     // Check if slug is unique for this organization
-    const existingProduct = await prisma.product.findUnique({
+    const existingProduct = await new ProductsService().findById({
       where: { slug },
     });
 
@@ -89,7 +116,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create product
-    const product = await prisma.product.create({
+    const product = await new ProductsService().create({
       data: {
         organization: validatedData.organizationId ? { connect: { id: validatedData.organizationId } } : undefined,
         name: validatedData.name,

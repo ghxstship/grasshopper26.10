@@ -124,6 +124,8 @@ interface TeamData {
   }>;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/teams
+
 export default function TeamsPage() {
   const { data: teams = [], isLoading: _isLoading, error: _error, refetch: _refetch } = useTeams();
   const [searchQuery, setSearchQuery] = useState('');
@@ -136,8 +138,8 @@ export default function TeamsPage() {
       case 'available': return 'bg-atlvs-green-500';
       case 'busy': return 'bg-error';
       case 'away': return 'bg-warning';
-      case 'offline': return 'bg-gray-500';
-      default: return 'bg-gray-500';
+      case 'offline': return 'bg-grey-500';
+      default: return 'bg-grey-500';
     }
   };
 
@@ -183,14 +185,14 @@ export default function TeamsPage() {
       >
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" role="region" aria-label="Team statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Members
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${totalMembers} total team members`}>
+                  <CardTitle  aria-label={`${totalMembers} total team members`}>
                     {totalMembers}
                   </CardTitle>
                 </div>
@@ -201,14 +203,14 @@ export default function TeamsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Available Now
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500" aria-label={`${availableMembers} members available now`}>
+                  <CardTitle className="text-atlvs-green-500" aria-label={`${availableMembers} members available now`}>
                     {availableMembers}
                   </CardTitle>
                 </div>
@@ -219,14 +221,14 @@ export default function TeamsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Hours This Week
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {totalHours}
                   </CardTitle>
                 </div>
@@ -237,14 +239,14 @@ export default function TeamsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Avg Tasks Done
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {avgTasksCompleted}
                   </CardTitle>
                 </div>
@@ -260,7 +262,7 @@ export default function TeamsPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
               <Input
                 type="text"
                 placeholder="Search team members..."
@@ -283,7 +285,7 @@ export default function TeamsPage() {
           </Select>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <Filter className="w-4 h-4 mr-2" />
               More Filters
             </Button>
@@ -308,23 +310,23 @@ export default function TeamsPage() {
               <Link href={`/atlvs/teams/${member.id}`}>
                 <Card 
                   variant="atlvs" 
-                  className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer h-full"
+                  className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer h-full"
                 >
                   <CardHeader>
                     {/* Avatar and Status */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <div className="relative">
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h6">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                             {member.avatar}
                           </div>
-                          <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-gray-900 ${getStatusColor(member.status)}`} />
+                          <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-grey-900 ${getStatusColor(member.status)}`} />
                         </div>
                         <div>
-                          <CardTitle className="text-white text-h6">
+                          <CardTitle className="text-white">
                             {member.name}
                           </CardTitle>
-                          <CardDescription className="text-gray-400 text-body-sm">
+                          <CardDescription className="text-grey-400 text-body-sm">
                             {member.role}
                           </CardDescription>
                         </div>
@@ -336,29 +338,29 @@ export default function TeamsPage() {
 
                     {/* Contact Info */}
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-body-sm text-gray-400">
+                      <div className="flex items-center gap-2 text-body-sm text-grey-400">
                         <Mail className="w-3 h-3" />
                         <span className="truncate">{member.email}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-body-sm text-gray-400">
+                      <div className="flex items-center gap-2 text-body-sm text-grey-400">
                         <Phone className="w-3 h-3" />
                         <span>{member.phone}</span>
                       </div>
                     </div>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-800">
+                    <div className="grid grid-cols-3 gap-4 pt-4 border-t border-grey-800">
                       <div>
-                        <div className="text-caption text-gray-400 mb-1">Projects</div>
-                        <div className="text-h6 font-bebas text-white">{member.projects}</div>
+                        <div className="text-caption text-grey-400 mb-1">Projects</div>
+                        <div className="text-white">{member.projects}</div>
                       </div>
                       <div>
-                        <div className="text-caption text-gray-400 mb-1">Tasks</div>
-                        <div className="text-h6 font-bebas text-white">{member.tasksCompleted}</div>
+                        <div className="text-caption text-grey-400 mb-1">Tasks</div>
+                        <div className="text-white">{member.tasksCompleted}</div>
                       </div>
                       <div>
-                        <div className="text-caption text-gray-400 mb-1">Hours</div>
-                        <div className="text-h6 font-bebas text-white">{member.hoursThisWeek}</div>
+                        <div className="text-caption text-grey-400 mb-1">Hours</div>
+                        <div className="text-white">{member.hoursThisWeek}</div>
                       </div>
                     </div>
                   </CardHeader>

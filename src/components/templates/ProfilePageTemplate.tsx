@@ -212,7 +212,7 @@ export function ProfilePageTemplate({
                         href={stat.href}
                         className="block hover:text-ghxst-primary transition-colors"
                       >
-                        <SectionHeader className="font-bebas text-h3 mb-1">
+                        <SectionHeader className="mb-1">
                           {stat.value}
                         </SectionHeader>
                         <Metadata className="text-ghxst-text-secondary">
@@ -221,7 +221,7 @@ export function ProfilePageTemplate({
                       </a>
                     ) : (
                       <>
-                        <SectionHeader className="font-bebas text-h3 mb-1">
+                        <SectionHeader className="mb-1">
                           {stat.value}
                         </SectionHeader>
                         <Metadata className="text-ghxst-text-secondary">

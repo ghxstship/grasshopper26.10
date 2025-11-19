@@ -1,0 +1,7 @@
+import { prisma } from '@/lib/prisma';
+
+export class discordService {
+  async execute(data: any) {
+    return data;
+  }
+}

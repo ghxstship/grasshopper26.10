@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { CompvssService } from '@/lib/services/compvss/issues/id/resolve.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -14,7 +22,7 @@ export async function POST(
 
     const { id } = await params;
 
-    const issue = await prisma.issueReport.update({
+    const issue = await new CompvssService().update({
       where: { id },
       data: {
         status: 'RESOLVED',
@@ -23,7 +31,6 @@ export async function POST(
 
     return NextResponse.json(issue);
   } catch (error) {
-    console.error('Error resolving issue:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

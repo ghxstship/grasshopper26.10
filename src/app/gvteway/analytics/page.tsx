@@ -10,6 +10,8 @@ const metadata = {
   description: 'View your event history, spending insights, and personalized recommendations',
 };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/analytics
+
 export default function AnalyticsPage() {
   return (
     <DashboardPageTemplate

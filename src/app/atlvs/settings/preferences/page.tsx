@@ -13,6 +13,8 @@ import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Select } from '@/components/atoms/Select';
 import { FormField } from '@/components/molecules/FormField';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/settings/preferences
+
 export default function PreferencesPage() {
   return (
     <AtlvsLayout>
@@ -25,7 +27,7 @@ export default function PreferencesPage() {
         ]}
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6">Display Settings</CardTitle>
             <div className="space-y-4">

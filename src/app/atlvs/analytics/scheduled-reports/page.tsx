@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Calendar, Clock, Mail, Users, Plus, Play, Pause, Edit, Trash2,  } from 'lucide-react';
 import { useReports } from '@/lib/hooks/atlvs/useReports';
+import { SubsectionHeader } from "@/components/atoms/Typography";
 
 interface ScheduledReport {
   id: string;
@@ -98,7 +99,7 @@ export default function ScheduledReportsPage() {
   const getStatusBadge = (status: string) => {
     const badges: Record<string, { bg: string; text: string }> = {
       active: { bg: 'bg-atlvs-green-500/20', text: 'text-atlvs-green-500' },
-      paused: { bg: 'bg-gray-700', text: 'text-gray-300' }
+      paused: { bg: 'bg-grey-700', text: 'text-grey-300' }
     };
     return badges[status] || badges.active;
   };
@@ -123,43 +124,43 @@ export default function ScheduledReportsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
             <Calendar className="w-8 h-8 text-success" />
             <div>
-              <div className="text-body-sm text-gray-600">Total Scheduled</div>
-              <div className="text-h4 text-gray-900">{scheduledReports.length}</div>
+              <div className="text-body-sm text-grey-600">Total Scheduled</div>
+              <div className="text-grey-900">{scheduledReports.length}</div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
             <Play className="w-8 h-8 text-success" />
             <div>
-              <div className="text-body-sm text-gray-600">Active</div>
-              <div className="text-h4 text-gray-900">
+              <div className="text-body-sm text-grey-600">Active</div>
+              <div className="text-grey-900">
                 {scheduledReports.filter(r => r.status === 'active').length}
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
-            <Pause className="w-8 h-8 text-gray-600" />
+            <Pause className="w-8 h-8 text-grey-600" />
             <div>
-              <div className="text-body-sm text-gray-600">Paused</div>
-              <div className="text-h4 text-gray-900">
+              <div className="text-body-sm text-grey-600">Paused</div>
+              <div className="text-grey-900">
                 {scheduledReports.filter(r => r.status === 'paused').length}
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
             <Mail className="w-8 h-8 text-info" />
             <div>
-              <div className="text-body-sm text-gray-600">Recipients</div>
-              <div className="text-h4 text-gray-900">
+              <div className="text-body-sm text-grey-600">Recipients</div>
+              <div className="text-grey-900">
                 {new Set(scheduledReports.flatMap(r => r.recipients)).size}
               </div>
             </div>
@@ -168,44 +169,44 @@ export default function ScheduledReportsPage() {
       </div>
 
       {/* Reports List */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg border border-grey-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-grey-50 border-b border-grey-200">
               <tr>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Report
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Frequency
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Schedule
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Recipients
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Next Run
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Status
                 </th>
-                <th className="px-6 py-3 text-right text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-right text-caption text-grey-500 uppercaser">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-grey-200">
               {scheduledReports.map(report => {
                 const frequencyStyle = getFrequencyBadge(report.frequency);
                 const statusStyle = getStatusBadge(report.status);
                 
                 return (
-                  <tr key={report.id} className="hover:bg-gray-50">
+                  <tr key={report.id} className="hover:bg-grey-50">
                     <td className="px-6 py-4">
-                      <div className="font-medium text-gray-900">{report.name}</div>
-                      <div className="text-body-sm text-gray-500">{report.format.toUpperCase()}</div>
+                      <div className="font-medium text-grey-900">{report.name}</div>
+                      <div className="text-body-sm text-grey-500">{report.format.toUpperCase()}</div>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 ${frequencyStyle.bg} ${frequencyStyle.text} text-caption rounded capitalize`}>
@@ -213,18 +214,18 @@ export default function ScheduledReportsPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-1 text-body-sm text-gray-600">
+                      <div className="flex items-center gap-1 text-body-sm text-grey-600">
                         <Clock className="w-4 h-4" />
                         {report.time}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-1 text-body-sm text-gray-600">
+                      <div className="flex items-center gap-1 text-body-sm text-grey-600">
                         <Users className="w-4 h-4" />
                         {report.recipients.length} recipients
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-body-sm text-gray-600">{report.nextRun}</td>
+                    <td className="px-6 py-4 text-body-sm text-grey-600">{report.nextRun}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 ${statusStyle.bg} ${statusStyle.text} text-caption rounded capitalize`}>
                         {report.status}
@@ -261,7 +262,7 @@ export default function ScheduledReportsPage() {
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-lg w-full mx-4">
-            <h3 className="text-h6 text-gray-900 mb-4">Schedule New Report</h3>
+            <SubsectionHeader className="text-grey-900 mb-4">Schedule New Report</SubsectionHeader>
             <div className="space-y-4">
               <FormField label="Report Name">
                 <Input

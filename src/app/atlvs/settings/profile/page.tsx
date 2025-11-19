@@ -15,6 +15,8 @@ import { Input } from '@/components/atoms/Input';
 import { Textarea } from '@/components/atoms/Textarea';
 import { FormField } from '@/components/molecules/FormField';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/settings/profile
+
 export default function ProfileSettingsPage() {
   const { data: profileData } = useProfile();
   const updateProfileMutation = useUpdateProfile();
@@ -49,11 +51,11 @@ export default function ProfileSettingsPage() {
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Profile Photo</CardTitle>
                 <div className="flex items-center gap-6">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h2">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                     {profile.name.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <Button variant="atlvs" size="sm">
@@ -64,7 +66,7 @@ export default function ProfileSettingsPage() {
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Personal Information</CardTitle>
                 <div className="space-y-4">

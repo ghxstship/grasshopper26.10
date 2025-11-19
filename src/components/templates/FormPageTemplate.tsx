@@ -155,31 +155,17 @@ export function FormPageTemplate({
                     <button
                       onClick={() => handleStepClick(index)}
                       disabled={!completedSteps.has(index) && index > currentStep}
-                      className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${
-                        index === currentStep
-                          ? 'bg-ghxst-primary border-ghxst-primary text-white'
-                          : completedSteps.has(index)
-                          ? 'bg-success-light0 border-success text-white'
-                          : 'bg-white border-ghxst-border text-ghxst-text-secondary'
-                      } ${
-                        completedSteps.has(index) || index < currentStep
-                          ? 'cursor-pointer hover:scale-110'
-                          : 'cursor-not-allowed opacity-50'
-                      }`}
+                      className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${ index === currentStep ? 'bg-ghxst-primary border-ghxst-primary text-white' : completedSteps.has(index) ? 'bg-success-light0 border-success text-white' : 'bg-white border-ghxst-border text-ghxst-text-secondary' } ${ completedSteps.has(index) || index < currentStep ? 'cursor-pointer hover:scale-110' : 'cursor-not-allowed opacity-50' }`}
                     >
                       {completedSteps.has(index) ? (
                         <Check className="w-5 h-5" />
                       ) : (
-                        <span className="font-bebas text-h6">{index + 1}</span>
+                        <span >{index + 1}</span>
                       )}
                     </button>
                     {index < steps.length - 1 && (
                       <div
-                        className={`flex-1 h-1 mx-2 rounded-full transition-all ${
-                          completedSteps.has(index) || index < currentStep
-                            ? 'bg-success-light0'
-                            : 'bg-ghxst-border'
-                        }`}
+                        className={`flex-1 h-1 mx-2 rounded-full transition-all ${ completedSteps.has(index) || index < currentStep ? 'bg-success-light0' : 'bg-ghxst-border' }`}
                       />
                     )}
                   </div>
@@ -192,13 +178,7 @@ export function FormPageTemplate({
                     className={`flex-1 text-center ${index < steps.length - 1 ? 'mr-2' : ''}`}
                   >
                     <Metadata
-                      className={`font-bebas ${
-                        index === currentStep
-                          ? 'text-ghxst-primary'
-                          : completedSteps.has(index)
-                          ? 'text-success'
-                          : 'text-ghxst-text-secondary'
-                      }`}
+                      className={`${ index === currentStep ? 'text-ghxst-primary' : completedSteps.has(index) ? 'text-success' : 'text-ghxst-text-secondary' }`}
                     >
                       {step.title}
                     </Metadata>
@@ -212,7 +192,7 @@ export function FormPageTemplate({
           <Card className="mb-6">
             {isMultiStep && steps && (
               <CardHeader>
-                <CardTitle className="font-bebas text-h4">
+                <CardTitle >
                   {steps[currentStep].title}
                 </CardTitle>
                 {steps[currentStep].description && (

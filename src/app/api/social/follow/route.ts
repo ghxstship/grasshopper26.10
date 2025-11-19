@@ -4,6 +4,8 @@ import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { z } from 'zod';
+import { SocialService } from '@/lib/services/social/follow.service';
+
 
 const followSchema = z.object({
   followingId: z.string().cuid(),
@@ -32,7 +34,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user exists
-    const userToFollow = await prisma.user.findUnique({
+    const userToFollow = await new SocialService().findById({
       where: { id: validatedData.followingId },
     });
 
@@ -41,7 +43,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if already following
-    const existingFollow = await prisma.follow.findUnique({
+    const existingFollow = await new SocialService().findById({
       where: {
         followerId_followingId: {
           followerId: context.userId!,
@@ -55,7 +57,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create follow relationship
-    const follow = await prisma.follow.create({
+    const follow = await new SocialService().create({
       data: {
         followerId: context.userId!,
         followingId: validatedData.followingId,
@@ -72,12 +74,12 @@ export async function POST(request: NextRequest) {
     });
 
     // Create notification for followed user
-    const follower = await prisma.user.findUnique({
+    const follower = await new SocialService().findById({
       where: { id: context.userId! },
       select: { name: true, image: true },
     });
 
-    await prisma.notification.create({
+    await new SocialService().create({
       data: {
         userId: validatedData.followingId,
         type: 'NEW_FOLLOWER',

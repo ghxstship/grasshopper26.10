@@ -30,24 +30,24 @@ export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       <form onSubmit={handleSubmit} className={cn("relative w-full", className)}>
         <div className="flex items-center gap-2 border-2 border-black bg-white">
           <div className="flex-1 flex items-center gap-3 px-4 py-3">
-            <Search className="w-5 h-5 text-gray-700 flex-shrink-0" />
+            <Search className="w-5 h-5 text-grey-700 flex-shrink-0" />
             <input
               ref={ref}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={placeholder}
-              className="flex-1 bg-transparent font-share-tech text-body outline-none placeholder:text-gray-500"
+              className="flex-1 bg-transparent -tech text-body outline-none placeholder:text-grey-500"
               {...props}
             />
           </div>
           
           {showLocationSelector && (
             <>
-              <div className="h-8 w-px bg-gray-300" />
-              <div className="flex items-center gap-2 px-4 cursor-pointer hover:bg-gray-100 transition-colors">
-                <MapPin className="w-4 h-4 text-gray-700" />
-                <span className="font-share-tech-mono text-body-sm whitespace-nowrap">
+              <div className="h-8 w-px bg-grey-300" />
+              <div className="flex items-center gap-2 px-4 cursor-pointer hover:bg-grey-100 transition-colors">
+                <MapPin className="w-4 h-4 text-grey-700" />
+                <span className="-tech-mono text-body-sm whitespace-nowrap">
                   {location || "Location"}
                 </span>
               </div>

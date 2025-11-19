@@ -7,7 +7,7 @@ describe('Badge Component', () => {
       render(<Badge>Default Badge</Badge>)
       const badge = screen.getByText('Default Badge')
       expect(badge).toBeInTheDocument()
-      expect(badge).toHaveClass('bg-gray-200', 'text-gray-900')
+      expect(badge).toHaveClass('bg-grey-200', 'text-grey-900')
     })
 
     it('renders children correctly', () => {
@@ -99,7 +99,7 @@ describe('Badge Component', () => {
       expect(badge).toHaveClass(
         'inline-flex',
         'items-center',
-        'rounded-full',
+        'rounded-none',
         'px-3',
         'py-1',
         'font-share-tech',

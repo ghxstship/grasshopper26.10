@@ -13,6 +13,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, DollarSign, AlertCircle, ExternalLink } from 'lucide-react';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/integrations/stripe
 
 export default function StripeIntegrationPage() {
   const [isConnected] = useState(true);
@@ -38,7 +41,7 @@ export default function StripeIntegrationPage() {
           className="space-y-6"
         >
           {/* Connection Status */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -46,8 +49,8 @@ export default function StripeIntegrationPage() {
                     <DollarSign className="w-6 h-6 text-atlvs-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-h6">Stripe</h3>
-                    <p className="text-body-sm text-gray-400">Payment processing platform</p>
+                    <SubsectionHeader >Stripe</SubsectionHeader>
+                    <BodyText className="text-body-sm text-grey-400">Payment processing platform</BodyText>
                   </div>
                 </div>
                 {isConnected ? (
@@ -66,10 +69,10 @@ export default function StripeIntegrationPage() {
           </Card>
 
           {/* API Configuration */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <h3 className="text-h6">API Configuration</h3>
-              <p className="text-body-sm text-gray-400">Configure your Stripe API credentials</p>
+              <SubsectionHeader >API Configuration</SubsectionHeader>
+              <BodyText className="text-body-sm text-grey-400">Configure your Stripe API credentials</BodyText>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -116,10 +119,10 @@ export default function StripeIntegrationPage() {
           </Card>
 
           {/* Features */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <h3 className="text-h6">Enabled Features</h3>
-              <p className="text-body-sm text-gray-400">Stripe features available in ATLVS</p>
+              <SubsectionHeader >Enabled Features</SubsectionHeader>
+              <BodyText className="text-body-sm text-grey-400">Stripe features available in ATLVS</BodyText>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">

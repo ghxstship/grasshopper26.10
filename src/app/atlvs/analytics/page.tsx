@@ -15,6 +15,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Select } from '@/components/atoms/Select';
+import { BodyText } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics
 
 export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d');
@@ -93,7 +96,7 @@ export default function AnalyticsPage() {
         >
           <div className="flex flex-col items-center justify-center h-64 gap-4">
             <AlertCircle className="w-12 h-12 text-error" />
-            <p className="text-gray-400">Failed to load analytics data</p>
+            <BodyText className="text-grey-400">Failed to load analytics data</BodyText>
             <Button variant="atlvs" size="sm" onClick={() => window.location.reload()}>
               Retry
             </Button>
@@ -125,7 +128,7 @@ export default function AnalyticsPage() {
               <option value="90d">Last 90 Days</option>
               <option value="1y">Last Year</option>
             </Select>
-            <Button variant="ghost" size="sm" className="text-gray-400" aria-label="Open filter options">
+            <Button variant="ghost" size="sm" className="text-grey-400" aria-label="Open filter options">
               <Filter className="w-4 h-4 mr-2" aria-hidden="true" />
               Filter
             </Button>
@@ -155,17 +158,17 @@ export default function AnalyticsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <CardDescription className="text-gray-400">
+                    <CardDescription className="text-grey-400">
                       {stat.label}
                     </CardDescription>
-                    <div className={`p-2 bg-gray-800 rounded-lg ${stat.color}`} aria-hidden="true">
+                    <div className={`p-2 bg-grey-800 rounded-lg ${stat.color}`} aria-hidden="true">
                       <stat.icon className="w-4 h-4" aria-hidden="true" />
                     </div>
                   </div>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${stat.label}: ${stat.value}, ${stat.change} ${stat.trend === 'up' ? 'increase' : 'decrease'} versus last period`}>
+                  <CardTitle  aria-label={`${stat.label}: ${stat.value}, ${stat.change} ${stat.trend === 'up' ? 'increase' : 'decrease'} versus last period`}>
                     {stat.value}
                   </CardTitle>
                   <div className="flex items-center gap-2 mt-2" aria-hidden="true">
@@ -177,7 +180,7 @@ export default function AnalyticsPage() {
                     <span className={`text-body-sm ${stat.trend === 'up' ? 'text-atlvs-green-500' : 'text-error'}`}>
                       {stat.change}
                     </span>
-                    <span className="text-body-sm text-gray-400">vs last period</span>
+                    <span className="text-body-sm text-grey-400">vs last period</span>
                   </div>
                 </CardHeader>
               </Card>
@@ -188,44 +191,44 @@ export default function AnalyticsPage() {
         {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Revenue Chart */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <CardTitle>Revenue Trend</CardTitle>
-                  <CardDescription className="text-gray-400">
+                  <CardDescription className="text-grey-400">
                     Monthly revenue over time
                   </CardDescription>
                 </div>
                 <LineChart className="w-5 h-5 text-atlvs-green-500" />
               </div>
-              <div className="h-64 flex items-center justify-center border-2 border-dashed border-gray-800 rounded-lg">
-                <p className="text-gray-500 font-oswald">Chart visualization coming soon</p>
+              <div className="h-64 flex items-center justify-center border-2 border-dashed border-grey-800 rounded-lg">
+                <BodyText className="text-grey-500">Chart visualization coming soon</BodyText>
               </div>
             </CardHeader>
           </Card>
 
           {/* Project Distribution */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <CardTitle>Project Distribution</CardTitle>
-                  <CardDescription className="text-gray-400">
+                  <CardDescription className="text-grey-400">
                     Projects by status
                   </CardDescription>
                 </div>
                 <PieChart className="w-5 h-5 text-info" />
               </div>
-              <div className="h-64 flex items-center justify-center border-2 border-dashed border-gray-800 rounded-lg">
-                <p className="text-gray-500 font-oswald">Chart visualization coming soon</p>
+              <div className="h-64 flex items-center justify-center border-2 border-dashed border-grey-800 rounded-lg">
+                <BodyText className="text-grey-500">Chart visualization coming soon</BodyText>
               </div>
             </CardHeader>
           </Card>
         </div>
 
         {/* Performance Metrics */}
-        <Card variant="atlvs" className="bg-gray-900/50 mb-8">
+        <Card variant="atlvs" className="bg-grey-900/50 mb-8">
           <CardHeader>
             <CardTitle className="mb-4">Team Performance</CardTitle>
             <div className="space-y-4">
@@ -235,11 +238,11 @@ export default function AnalyticsPage() {
                 </div>
               ) : teams && teams.length > 0 ? (
                 teams.map((team: any, index: number) => (
-                <div key={team.id || index} className="p-4 bg-gray-800/50 rounded-lg">
+                <div key={team.id || index} className="p-4 bg-grey-800/50 rounded-lg">
                   <div className="flex items-center justify-between mb-3">
                     <div>
-                      <h4 className="font-oswald text-white">{team.name}</h4>
-                      <p className="text-body-sm text-gray-400">{team.memberCount || 0} members</p>
+                      <h4 className="text-white">{team.name}</h4>
+                      <p className="text-body-sm text-grey-400">{team.memberCount || 0} members</p>
                     </div>
                     <Badge variant="atlvs-outline">
                       Active
@@ -247,14 +250,14 @@ export default function AnalyticsPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <div className="text-caption text-gray-400 mb-1">Task Completion</div>
-                      <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="text-caption text-grey-400 mb-1">Task Completion</div>
+                      <div className="h-2 bg-grey-700 rounded-full overflow-hidden">
                         <div className="h-full bg-atlvs-green-500 w-3/4" />
                       </div>
                     </div>
                     <div>
-                      <div className="text-caption text-gray-400 mb-1">Budget Efficiency</div>
-                      <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="text-caption text-grey-400 mb-1">Budget Efficiency</div>
+                      <div className="h-2 bg-grey-700 rounded-full overflow-hidden">
                         <div className="h-full bg-info w-4/5" />
                       </div>
                     </div>
@@ -262,7 +265,7 @@ export default function AnalyticsPage() {
                 </div>
               ))
               ) : (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-grey-400">
                   No team performance data available
                 </div>
               )}
@@ -283,15 +286,15 @@ export default function AnalyticsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer">
+              <Card variant="atlvs" className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-3">
                     <div className="p-3 bg-atlvs-green-500/10 rounded-lg">
                       <report.icon className="w-5 h-5 text-atlvs-green-500" />
                     </div>
-                    <CardTitle className="text-h6">{report.title}</CardTitle>
+                    <CardTitle >{report.title}</CardTitle>
                   </div>
-                  <CardDescription className="text-gray-400">
+                  <CardDescription className="text-grey-400">
                     {report.description}
                   </CardDescription>
                   <Button variant="ghost" size="sm" className="mt-4 text-atlvs-green-500">

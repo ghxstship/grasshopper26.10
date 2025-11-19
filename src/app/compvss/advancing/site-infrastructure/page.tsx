@@ -15,6 +15,8 @@ import { CompvssLayout } from '@/components/templates/CompvssLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
 import { useAdvancingForm } from '@/lib/hooks/compvss/useAdvancingForm';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/advancing/site-infrastructure
+
 export default function SiteInfrastructureAdvancingPage() {
   const { formData, errors, isSubmitting, handleChange, handleSubmit, handleSaveDraft } = useAdvancingForm({
     category: 'site-infrastructure',
@@ -31,13 +33,13 @@ export default function SiteInfrastructureAdvancingPage() {
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <Card variant="compvss" className="bg-gray-900/50">
+            <Card variant="compvss" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-compvss-cyan-500" />
                   Site Infrastructure Details
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-grey-400">
                   Standard advancing request form - Site Infrastructure category
                 </CardDescription>
               </CardHeader>

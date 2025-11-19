@@ -165,11 +165,7 @@ export default function BrandPage({ params: { slug } }: BrandPageProps) {
             {categories.map((category) => (
               <button
                 key={category}
-                className={`px-6 py-2 font-bebas text-h6 uppercase whitespace-nowrap transition-colors ${
-                  category === "All"
-                    ? "bg-ghxst-black text-ghxst-white"
-                    : "bg-ghxst-surface text-ghxst-text-primary hover:bg-ghxst-border"
-                }`}
+                className={`px-6 py-2 uppercase whitespace-nowrap transition-colors ${ category === "All" ? "bg-ghxst-black text-ghxst-white" : "bg-ghxst-surface text-ghxst-text-primary hover:bg-ghxst-border" }`}
               >
                 {category}
               </button>
@@ -203,7 +199,7 @@ export default function BrandPage({ params: { slug } }: BrandPageProps) {
                   )}
                   {!product.inStock && (
                     <div className="absolute inset-0 bg-ghxst-black/50 flex items-center justify-center">
-                      <span className="font-bebas text-h4 text-ghxst-white">SOLD OUT</span>
+                      <span className="text-ghxst-white">SOLD OUT</span>
                     </div>
                   )}
                 </div>
@@ -214,7 +210,7 @@ export default function BrandPage({ params: { slug } }: BrandPageProps) {
                   </CardTitle>
                   
                   <div className="flex items-center justify-between">
-                    <span className="font-share-tech-mono text-h6 text-ghxst-primary">
+                    <span className="-tech-mono text-ghxst-primary">
                       ${product.price.toFixed(2)}
                     </span>
                   </div>
@@ -279,7 +275,7 @@ export default function BrandPage({ params: { slug } }: BrandPageProps) {
                     className="object-cover group-hover:scale-110 transition-transform"
                   />
                 </div>
-                <CardTitle className="text-ghxst-primary mb-2 text-h6">Brand Name</CardTitle>
+                <CardTitle className="text-ghxst-primary mb-2">Brand Name</CardTitle>
                 <Metadata className="text-ghxst-text-secondary text-body-sm">Artist Brand</Metadata>
               </div>
             ))}

@@ -20,6 +20,8 @@ interface Credential {
   status: string;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/credentials
+
 export default function WorkflowCredentialsPage() {
   const [showKeys, setShowKeys] = useState<Record<string, boolean>>({});
   const { data,  } = useAutomation();
@@ -45,7 +47,7 @@ export default function WorkflowCredentialsPage() {
         ]}
       >
 
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6 flex items-center gap-2">
               <Key className="w-5 h-5" />
@@ -53,15 +55,15 @@ export default function WorkflowCredentialsPage() {
             </CardTitle>
             <div className="space-y-3">
               {credentials.map((cred) => (
-                <div key={cred.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                <div key={cred.id} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg">
                   <div className="flex-1">
                     <div className="font-medium mb-1">{cred.name}</div>
-                    <div className="text-body-sm text-gray-400">{cred.type} • Last used {cred.lastUsed}</div>
+                    <div className="text-body-sm text-grey-400">{cred.type} • Last used {cred.lastUsed}</div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Badge
                       variant="atlvs-outline"
-                      className={cred.status === 'active' ? 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50' : 'bg-gray-500/20 text-gray-500 border-gray-500/50'}
+                      className={cred.status === 'active' ? 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50' : 'bg-grey-500/20 text-grey-500 border-grey-500/50'}
                     >
                       {cred.status}
                     </Badge>

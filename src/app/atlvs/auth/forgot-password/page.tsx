@@ -12,6 +12,7 @@ import { FormField } from '@/components/molecules/FormField';
 import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
 export default function AtlvsForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -66,17 +67,17 @@ export default function AtlvsForgotPasswordPage() {
           >
             <div className="text-center mb-8">
               <Link href="/atlvs">
-                <h1 className="text-h1 font-anton atlvs-text-gradient mb-2 cursor-pointerr">
+                <HeroTitle className="atlvs-text-gradient mb-2 cursor-pointerr">
                   ATLVS
-                </h1>
+                </HeroTitle>
               </Link>
-              <p className="text-gray-400 font-roboto-condensed">Reset your password</p>
+              <BodyText className="text-grey-400 font-roboto-condensed">Reset your password</BodyText>
             </div>
 
-            <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="atlvs" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="text-white text-h4">Forgot Password?</CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardTitle className="text-white">Forgot Password?</CardTitle>
+                <CardDescription className="text-grey-400">
                   {submitted 
                     ? 'Check your email for reset instructions'
                     : 'Enter your email and we will send you reset instructions'}
@@ -95,7 +96,7 @@ export default function AtlvsForgotPasswordPage() {
                     <form onSubmit={handleSubmit} className="space-y-6" aria-label="Password reset form">
                       <FormField label="Email Address" required>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" aria-hidden="true" />
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" aria-hidden="true" />
                           <Input
                             type="email"
                             placeholder="you@company.com"
@@ -125,7 +126,7 @@ export default function AtlvsForgotPasswordPage() {
                     <div className="w-16 h-16 bg-atlvs-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                       <Mail className="w-8 h-8 text-atlvs-orange-500" aria-hidden="true" />
                     </div>
-                    <p className="text-gray-300 mb-6">
+                    <p className="text-grey-300 mb-6">
                       We have sent password reset instructions to <strong>{email}</strong>
                     </p>
                     <Button 
@@ -140,7 +141,7 @@ export default function AtlvsForgotPasswordPage() {
                 )}
 
                 <div className="mt-6 text-center">
-                  <Link href="/atlvs/auth/login" className="inline-flex items-center text-body-sm text-gray-400 hover:text-gray-300">
+                  <Link href="/atlvs/auth/login" className="inline-flex items-center text-body-sm text-grey-400 hover:text-grey-300">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Sign In
                   </Link>

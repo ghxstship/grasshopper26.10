@@ -6,6 +6,8 @@ import { Button } from '@/components/atoms/Button';
 
 const metadata = { title: 'Checkout | GVTEWAY' };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/marketplace/checkout
+
 export default function CheckoutPage() {
   return (
     <GvtewayLayout>

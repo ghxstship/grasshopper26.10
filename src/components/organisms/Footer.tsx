@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Instagram, Twitter, Music, Linkedin } from "lucide-react";
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 export const Footer: React.FC = () => {
   const footerSections = [
@@ -85,23 +86,23 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-8 py-16">
         {/* Brand */}
         <div className="mb-12">
-          <h2 className="font-anton text-display mb-2 tracking-tight">GVTEWAY</h2>
-          <p className="font-share-tech text-body text-gray-400">
+          <SectionHeader className="text-display mb-2 tracking-tight">GVTEWAY</SectionHeader>
+          <BodyText className="-tech text-body text-grey-400">
             Discover Live Experiences
-          </p>
+          </BodyText>
         </div>
 
         {/* Links Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="font-bebas text-h4 mb-4 tracking-wide">{section.title}</h3>
+              <h3 className="mb-4 tracking-wide">{section.title}</h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="font-share-tech text-body-sm text-gray-400 hover:text-ghxst-accent transition-colors"
+                      className="-tech text-body-sm text-grey-400 hover:text-ghxst-accent transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -113,7 +114,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-800">
+        <div className="pt-8 border-t border-grey-800">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             {/* Legal */}
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -121,21 +122,21 @@ export const Footer: React.FC = () => {
                 <React.Fragment key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-share-tech text-body-sm text-gray-400 hover:text-ghxst-accent transition-colors"
+                    className="-tech text-body-sm text-grey-400 hover:text-ghxst-accent transition-colors"
                   >
                     {link.label}
                   </Link>
                   {idx < legalLinks.length - 1 && (
-                    <span className="text-gray-600">•</span>
+                    <span className="text-grey-600">•</span>
                   )}
                 </React.Fragment>
               ))}
             </div>
 
             {/* Copyright */}
-            <p className="font-share-tech-mono text-body-sm text-gray-500">
+            <BodyText className="-tech-mono text-body-sm text-grey-500">
               © 2025 GHXSTSHIP INDUSTRIES
-            </p>
+            </BodyText>
 
             {/* Social */}
             <div className="flex gap-4">
@@ -145,7 +146,7 @@ export const Footer: React.FC = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-ghxst-accent transition-colors"
+                  className="text-grey-400 hover:text-ghxst-accent transition-colors"
                   aria-label={social.label}
                 >
                   {social.icon}

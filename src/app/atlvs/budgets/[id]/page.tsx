@@ -13,6 +13,11 @@ import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useBudget } from '@/lib/hooks/atlvs/useBudgets';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets/[id]
+
+// API: /api/atlvs/budgets/:id
+const API_ENDPOINT = '/api/atlvs/budgets/:id';
+
 export default function BudgetDetailPage({ params }: { params: { id: string } }) {
   // Fetch budget data with React Query
   const { data: budget, isLoading, error, refetch } = useBudget(params.id);
@@ -22,7 +27,7 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
       case 'on-track': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'warning': return 'bg-warning-light text-warning border-warning-border';
       case 'over-budget': return 'bg-error-light text-error border-error-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -60,11 +65,11 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
             { label: 'Error' }
           ]}
         >
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-8">
                 <AlertCircle className="w-12 h-12 text-error mx-auto mb-4" />
-                <p className="text-gray-400 mb-4">
+                <p className="text-grey-400 mb-4">
                   {error instanceof Error ? error.message : 'Failed to load budget details'}
                 </p>
                 <Button variant="atlvs" onClick={() => refetch()}>
@@ -106,64 +111,60 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
 
         {/* Overview Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-body-sm text-gray-400">Total Budget</div>
-                <DollarSign className="w-5 h-5 text-gray-400" />
+                <div className="text-body-sm text-grey-400">Total Budget</div>
+                <DollarSign className="w-5 h-5 text-grey-400" />
               </div>
-              <div className="text-h3 font-bebas atlvs-text-gradient">
+              <div className="atlvs-text-gradient">
                 ${budget.totalBudget.toLocaleString()}
               </div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-body-sm text-gray-400">Total Spent</div>
+                <div className="text-body-sm text-grey-400">Total Spent</div>
                 <TrendingDown className="w-5 h-5 text-destructive" />
               </div>
-              <div className="text-h3 font-bebas text-destructive">
+              <div className="text-destructive">
                 ${budget.totalSpent.toLocaleString()}
               </div>
-              <div className="text-body-sm text-gray-500">{percentSpent.toFixed(1)}% of budget</div>
+              <div className="text-body-sm text-grey-500">{percentSpent.toFixed(1)}% of budget</div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <div className="text-body-sm text-gray-400">Remaining</div>
+                <div className="text-body-sm text-grey-400">Remaining</div>
                 <TrendingUp className="w-5 h-5 text-atlvs-green-500" />
               </div>
-              <div className="text-h3 font-bebas text-atlvs-green-500">
+              <div className="text-atlvs-green-500">
                 ${budget.totalRemaining.toLocaleString()}
               </div>
-              <div className="text-body-sm text-gray-500">{(100 - percentSpent).toFixed(1)}% remaining</div>
+              <div className="text-body-sm text-grey-500">{(100 - percentSpent).toFixed(1)}% remaining</div>
             </CardHeader>
           </Card>
         </div>
 
         {/* Budget Progress */}
-        <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+        <Card variant="atlvs" className="bg-grey-900/50 mb-6">
           <CardHeader>
             <CardTitle className="mb-4">Overall Progress</CardTitle>
             <div className="space-y-3">
               <div className="flex items-center justify-between text-body-sm">
-                <span className="text-gray-400">Budget Utilization</span>
+                <span className="text-grey-400">Budget Utilization</span>
                 <span className="font-medium">{percentSpent.toFixed(1)}%</span>
               </div>
-              <div className="w-full h-4 bg-gray-800 rounded-full overflow-hidden">
+              <div className="w-full h-4 bg-grey-800 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${percentSpent}%` }}
                   transition={{ duration: 1, ease: 'easeOut' }}
-                  className={`h-full ${
-                    percentSpent > 90 ? 'bg-error' : 
-                    percentSpent > 75 ? 'bg-warning' : 
-                    'bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500'
-                  }`}
+                  className={`h-full ${ percentSpent > 90 ? 'bg-error' : percentSpent > 75 ? 'bg-warning' : 'bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500' }`}
                 />
               </div>
             </div>
@@ -173,18 +174,18 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Budget Items */}
           <div className="lg:col-span-2 space-y-6">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Budget Breakdown</CardTitle>
                 <div className="space-y-4">
                   {budget.items.map((item: any) => {
                     const itemPercent = (item.spent / item.allocated) * 100;
                     return (
-                      <div key={item.id} className="p-4 bg-gray-800/50 rounded-lg">
+                      <div key={item.id} className="p-4 bg-grey-800/50 rounded-lg">
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex-1">
                             <div className="font-medium mb-1">{item.category}</div>
-                            <div className="text-body-sm text-gray-400">{item.description}</div>
+                            <div className="text-body-sm text-grey-400">{item.description}</div>
                           </div>
                           <Badge variant="atlvs-outline" className={getStatusColor(item.status)}>
                             {item.status.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
@@ -192,25 +193,21 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
                         </div>
                         <div className="grid grid-cols-3 gap-4 mb-3 text-body-sm">
                           <div>
-                            <div className="text-gray-500">Allocated</div>
+                            <div className="text-grey-500">Allocated</div>
                             <div className="font-medium">${item.allocated.toLocaleString()}</div>
                           </div>
                           <div>
-                            <div className="text-gray-500">Spent</div>
+                            <div className="text-grey-500">Spent</div>
                             <div className="font-medium text-destructive">${item.spent.toLocaleString()}</div>
                           </div>
                           <div>
-                            <div className="text-gray-500">Remaining</div>
+                            <div className="text-grey-500">Remaining</div>
                             <div className="font-medium text-atlvs-green-500">${item.remaining.toLocaleString()}</div>
                           </div>
                         </div>
-                        <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+                        <div className="w-full h-2 bg-grey-700 rounded-full overflow-hidden">
                           <div
-                            className={`h-full ${
-                              itemPercent > 100 ? 'bg-error' :
-                              itemPercent > 90 ? 'bg-warning' :
-                              'bg-atlvs-green-500'
-                            }`}
+                            className={`h-full ${ itemPercent > 100 ? 'bg-error' : itemPercent > 90 ? 'bg-warning' : 'bg-atlvs-green-500' }`}
                             style={{ width: `${Math.min(itemPercent, 100)}%` }}
                           />
                         </div>
@@ -225,19 +222,19 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Recent Transactions */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Recent Transactions</CardTitle>
                 <div className="space-y-3">
                   {budget.recentTransactions.map((transaction: any) => (
-                    <div key={transaction.id} className="p-3 bg-gray-800/50 rounded-lg">
+                    <div key={transaction.id} className="p-3 bg-grey-800/50 rounded-lg">
                       <div className="flex items-center justify-between mb-1">
                         <div className="text-body-sm">{transaction.description}</div>
                         <div className="text-body-sm text-destructive">
                           -${transaction.amount.toLocaleString()}
                         </div>
                       </div>
-                      <div className="flex items-center justify-between text-caption text-gray-500">
+                      <div className="flex items-center justify-between text-caption text-grey-500">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
                           {new Date(transaction.date).toLocaleDateString()}
@@ -254,7 +251,7 @@ export default function BudgetDetailPage({ params }: { params: { id: string } })
             </Card>
 
             {/* Quick Actions */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Quick Actions</CardTitle>
                 <div className="space-y-2">

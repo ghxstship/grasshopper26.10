@@ -14,6 +14,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useTasks } from '@/lib/hooks/atlvs/useTasks';
+import { BodyText, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/calendar
 
 export default function TasksCalendarPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -88,7 +91,7 @@ export default function TasksCalendarPage() {
       case 'high': return 'bg-warning-light0';
       case 'medium': return 'bg-warning';
       case 'low': return 'bg-info';
-      default: return 'bg-gray-500';
+      default: return 'bg-grey-500';
     }
   };
 
@@ -109,7 +112,7 @@ export default function TasksCalendarPage() {
             <Button variant="ghost" size="sm" onClick={previousMonth}>
               <ChevronLeft className="w-4 h-4" />
             </Button>
-            <div className="text-h4 font-bebas">
+            <div >
               {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
             </div>
             <Button variant="ghost" size="sm" onClick={nextMonth}>
@@ -119,13 +122,13 @@ export default function TasksCalendarPage() {
 
           <div className="flex items-center gap-2">
             <Link href="/atlvs/tasks/list">
-              <Button variant="ghost" size="sm" className="text-gray-400">
+              <Button variant="ghost" size="sm" className="text-grey-400">
                 <List className="w-4 h-4 mr-2" />
                 List View
               </Button>
             </Link>
             <Link href="/atlvs/tasks">
-              <Button variant="ghost" size="sm" className="text-gray-400">
+              <Button variant="ghost" size="sm" className="text-grey-400">
                 <CalendarIcon className="w-4 h-4 mr-2" />
                 Kanban View
               </Button>
@@ -148,12 +151,12 @@ export default function TasksCalendarPage() {
 
         {/* Error State */}
         {isError && (
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-h6 font-bebas mb-2">Failed to Load Tasks</h3>
-                <p className="text-gray-400 mb-4">Unable to fetch calendar data</p>
+                <SubsectionHeader className="mb-2">Failed to Load Tasks</SubsectionHeader>
+                <BodyText className="text-grey-400 mb-4">Unable to fetch calendar data</BodyText>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
             </CardHeader>
@@ -162,12 +165,12 @@ export default function TasksCalendarPage() {
 
         {/* Calendar */}
         {!isLoading && !isError && (
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             {/* Weekday Headers */}
             <div className="grid grid-cols-7 gap-2 mb-2">
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                <div key={day} className="text-center font-oswald text-gray-400 text-body-sm py-2">
+                <div key={day} className="text-center text-grey-400 text-body-sm py-2">
                   {day}
                 </div>
               ))}
@@ -193,21 +196,17 @@ export default function TasksCalendarPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: i * 0.01 }}
-                    className={`aspect-square p-2 rounded-lg border transition-colors cursor-pointer ${
-                      isTodayDate
-                        ? 'bg-atlvs-green-500/10 border-atlvs-green-500'
-                        : 'bg-gray-800/50 border-gray-700 hover:border-gray-600'
-                    }`}
+                    className={`aspect-square p-2 rounded-lg border transition-colors cursor-pointer ${ isTodayDate ? 'bg-atlvs-green-500/10 border-atlvs-green-500' : 'bg-grey-800/50 border-grey-700 hover:border-grey-600' }`}
                   >
                     <div className="flex flex-col h-full">
-                      <div className={`text-body-sm mb-1 ${isTodayDate ? 'text-atlvs-green-500' : 'text-gray-300'}`}>
+                      <div className={`text-body-sm mb-1 ${isTodayDate ? 'text-atlvs-green-500' : 'text-grey-300'}`}>
                         {day}
                       </div>
                       <div className="flex-1 overflow-hidden">
                         {tasks.slice(0, 3).map((task: any) => (
                           <Link key={task.id} href={`/atlvs/tasks/${task.id}`}>
                             <div
-                              className="mb-1 text-caption truncate bg-gray-900/50 rounded px-1 py-0.5 flex items-center gap-1 hover:bg-gray-900 transition-colors"
+                              className="mb-1 text-caption truncate bg-grey-900/50 rounded px-1 py-0.5 flex items-center gap-1 hover:bg-grey-900 transition-colors"
                             >
                               <div className={`w-1.5 h-1.5 rounded-full ${getPriorityColor(task.priority)}`} />
                               <span className="truncate">{task.title}</span>
@@ -215,7 +214,7 @@ export default function TasksCalendarPage() {
                           </Link>
                         ))}
                         {tasks.length > 3 && (
-                          <div className="text-caption text-gray-500">+{tasks.length - 3} more</div>
+                          <div className="text-caption text-grey-500">+{tasks.length - 3} more</div>
                         )}
                       </div>
                     </div>
@@ -230,25 +229,25 @@ export default function TasksCalendarPage() {
         {/* Today's Tasks */}
         {!isLoading && !isError && todaysTasks.length > 0 && (
         <div className="mt-6">
-          <h2 className="text-h4 font-bebas mb-4 atlvs-text-gradient">TODAY&apos;S TASKS</h2>
+          <SectionHeader className="mb-4 atlvs-text-gradient">TODAY&apos;S TASKS</SectionHeader>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {todaysTasks.map((task: any) => (
               <Link key={task.id} href={`/atlvs/tasks/${task.id}`}>
-                <Card variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900/70 transition-colors">
+                <Card variant="atlvs" className="bg-grey-900/50 hover:bg-grey-900/70 transition-colors">
                   <CardHeader>
                     <div className="flex items-start justify-between mb-2">
                       <Badge variant="atlvs-outline" className={`${getPriorityColor(task.priority)}/20 text-white`}>
                         {task.priority.toUpperCase()}
                       </Badge>
                       {task.dueDate && (
-                        <span className="text-body-sm text-gray-400">
+                        <span className="text-body-sm text-grey-400">
                           {new Date(task.dueDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       )}
                     </div>
                     <div className="font-medium">{task.title}</div>
                     {task.description && (
-                      <p className="text-body-sm text-gray-400 mt-2 line-clamp-2">{task.description}</p>
+                      <p className="text-body-sm text-grey-400 mt-2 line-clamp-2">{task.description}</p>
                     )}
                   </CardHeader>
                 </Card>

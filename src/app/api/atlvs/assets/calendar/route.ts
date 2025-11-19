@@ -6,9 +6,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { AssetService } from '@/lib/services/atlvs/asset.service';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { handleApiError } from '@/lib/api/response';
+
+
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -34,11 +54,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(calendar);
   } catch (error) {
-    console.error('Error fetching asset calendar:', error);
-    
-    return NextResponse.json(
-      { error: 'Failed to fetch asset calendar' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

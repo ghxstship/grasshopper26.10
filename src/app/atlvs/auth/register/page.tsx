@@ -14,6 +14,7 @@ import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { Checkbox } from '@/components/atoms/Checkbox';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
 
 export default function AtlvsRegisterPage() {
   const router = useRouter();
@@ -109,17 +110,17 @@ export default function AtlvsRegisterPage() {
     return (
       <AtlvsLayout>
         <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
-          <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm max-w-md w-full">
+          <Card variant="atlvs" className="bg-grey-900/50 backdrop-blur-sm max-w-md w-full">
             <CardContent className="pt-6">
               <div className="text-center py-8">
                 <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                   <CheckCircle className="w-10 h-10 text-success" aria-hidden="true" />
                 </div>
-                <h2 className="text-h4 font-bebas text-white mb-2" role="status" aria-live="polite">Registration Successful!</h2>
-                <p className="text-gray-400 mb-6">
+                <SectionHeader className="text-white mb-2">Registration Successful!</SectionHeader>
+                <BodyText className="text-grey-400 mb-6">
                   Please check your email to verify your account.
-                </p>
-                <p className="text-body-sm text-gray-500">Redirecting to verification page...</p>
+                </BodyText>
+                <BodyText className="text-body-sm text-grey-500">Redirecting to verification page...</BodyText>
               </div>
             </CardContent>
           </Card>
@@ -149,17 +150,17 @@ export default function AtlvsRegisterPage() {
           >
             <div className="text-center mb-8">
               <Link href="/atlvs">
-                <h1 className="text-h1 font-anton atlvs-text-gradient mb-2 cursor-pointerr">
+                <HeroTitle className="atlvs-text-gradient mb-2 cursor-pointerr">
                   ATLVS
-                </h1>
+                </HeroTitle>
               </Link>
-              <p className="text-gray-400 font-roboto-condensed">Request Team Access</p>
+              <BodyText className="text-grey-400 font-roboto-condensed">Request Team Access</BodyText>
             </div>
 
-            <Card variant="atlvs" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="atlvs" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="text-white text-h4">Create Account</CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardTitle className="text-white">Create Account</CardTitle>
+                <CardDescription className="text-grey-400">
                   Join the internal team platform
                 </CardDescription>
               </CardHeader>
@@ -174,7 +175,7 @@ export default function AtlvsRegisterPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <FormField label="Full Name" required>
                     <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                       <Input
                         type="text"
                         placeholder="John Doe"
@@ -190,7 +191,7 @@ export default function AtlvsRegisterPage() {
 
                   <FormField label="Email Address" required>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                       <Input
                         type="email"
                         placeholder="you@company.com"
@@ -206,7 +207,7 @@ export default function AtlvsRegisterPage() {
 
                   <FormField label="Company" required>
                     <div className="relative">
-                      <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                       <Input
                         type="text"
                         placeholder="Your Company"
@@ -222,7 +223,7 @@ export default function AtlvsRegisterPage() {
 
                   <FormField label="Password" required>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                       <Input
                         type={showPassword ? 'text' : 'password'}
                         placeholder="••••••••"
@@ -238,7 +239,7 @@ export default function AtlvsRegisterPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 h-auto p-2"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 text-grey-500 hover:text-grey-300 h-auto p-2"
                         disabled={isLoading}
                       >
                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -248,7 +249,7 @@ export default function AtlvsRegisterPage() {
 
                   <FormField label="Confirm Password" required>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                       <Input
                         type={showConfirmPassword ? 'text' : 'password'}
                         placeholder="••••••••"
@@ -264,7 +265,7 @@ export default function AtlvsRegisterPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 h-auto p-2"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 text-grey-500 hover:text-grey-300 h-auto p-2"
                         disabled={isLoading}
                       >
                         {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -280,7 +281,7 @@ export default function AtlvsRegisterPage() {
                       required
                       disabled={isLoading}
                     />
-                    <span className="ml-2 text-body-sm text-gray-400">
+                    <span className="ml-2 text-body-sm text-grey-400">
                       I agree to the{' '}
                       <Link href="/terms" className="text-atlvs-orange-500 hover:text-atlvs-orange-400">
                         Terms of Service
@@ -304,7 +305,7 @@ export default function AtlvsRegisterPage() {
                 </form>
 
                 <div className="mt-6 text-center">
-                  <p className="text-body-sm text-gray-400">
+                  <p className="text-body-sm text-grey-400">
                     Already have an account?{' '}
                     <Link href="/atlvs/auth/login" className="text-atlvs-orange-500 hover:text-atlvs-orange-400">
                       Sign in
@@ -315,7 +316,7 @@ export default function AtlvsRegisterPage() {
             </Card>
 
             <div className="mt-6 text-center">
-              <Link href="/" className="text-body-sm text-gray-500 hover:text-gray-400">
+              <Link href="/" className="text-body-sm text-grey-500 hover:text-grey-400">
                 ← Back to Home
               </Link>
             </div>

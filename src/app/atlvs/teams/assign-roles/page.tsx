@@ -16,6 +16,7 @@ import { Checkbox } from '@/components/atoms/Checkbox';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface _TeamMember {
   id: string;
@@ -164,11 +165,11 @@ export default function RoleAssignmentPage() {
       >
 
       {/* Filters and Search */}
-      <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+      <Card variant="atlvs" className="bg-grey-900/50 mb-6">
         <CardContent className="pt-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 z-10" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-grey-400 w-5 h-5 z-10" />
             <Input
               type="text"
               placeholder="Search members..."
@@ -180,7 +181,7 @@ export default function RoleAssignmentPage() {
           </div>
 
           <div className="relative">
-            <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-grey-400 w-5 h-5" />
             <Select
               value={selectedDepartment}
               onChange={(e) => setSelectedDepartment(e.target.value)}
@@ -251,10 +252,10 @@ export default function RoleAssignmentPage() {
       )}
 
       {/* Members List */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg border border-grey-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-grey-50 border-b border-grey-200">
               <tr>
                 <th className="px-6 py-3 text-left">
                   <Checkbox
@@ -263,23 +264,23 @@ export default function RoleAssignmentPage() {
                     variant="atlvs"
                   />
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Member
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Department
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Current Role
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                   Assign New Role
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-grey-200">
               {filteredMembers.map(member => (
-                <tr key={member.id} className="hover:bg-gray-50">
+                <tr key={member.id} className="hover:bg-grey-50">
                   <td className="px-6 py-4">
                     <Checkbox
                       checked={selectedMembers.includes(member.id)}
@@ -293,13 +294,13 @@ export default function RoleAssignmentPage() {
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
-                        <div className="font-medium text-gray-900">{member.name}</div>
-                        <div className="text-body-sm text-gray-500">{member.email}</div>
+                        <div className="font-medium text-grey-900">{member.name}</div>
+                        <div className="text-body-sm text-grey-500">{member.email}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-gray-100 text-gray-700 text-body-sm rounded">
+                    <span className="px-2 py-1 bg-grey-100 text-grey-700 text-body-sm rounded">
                       {member.department}
                     </span>
                   </td>
@@ -333,29 +334,29 @@ export default function RoleAssignmentPage() {
 
         {filteredMembers.length === 0 && (
           <div className="text-center py-12">
-            <Users className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-500">No members found</p>
+            <Users className="w-12 h-12 text-grey-400 mx-auto mb-3" />
+            <BodyText className="text-grey-500">No members found</BodyText>
           </div>
         )}
       </div>
 
       {/* Summary Stats */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-body-sm text-gray-600 mb-1">Total Members</div>
-          <div className="text-h4 text-gray-900">{members.length}</div>
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
+          <div className="text-body-sm text-grey-600 mb-1">Total Members</div>
+          <div className="text-grey-900">{members.length}</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-body-sm text-gray-600 mb-1">Filtered</div>
-          <div className="text-h4 text-gray-900">{filteredMembers.length}</div>
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
+          <div className="text-body-sm text-grey-600 mb-1">Filtered</div>
+          <div className="text-grey-900">{filteredMembers.length}</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-body-sm text-gray-600 mb-1">Selected</div>
-          <div className="text-h4 text-success">{selectedMembers.length}</div>
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
+          <div className="text-body-sm text-grey-600 mb-1">Selected</div>
+          <div className="text-success">{selectedMembers.length}</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-body-sm text-gray-600 mb-1">Roles Available</div>
-          <div className="text-h4 text-gray-900">{roles.length}</div>
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
+          <div className="text-body-sm text-grey-600 mb-1">Roles Available</div>
+          <div className="text-grey-900">{roles.length}</div>
         </div>
       </div>
       </ContentLayout>

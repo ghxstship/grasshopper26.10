@@ -11,6 +11,9 @@ import { Card, CardContent } from '@/components/atoms/Card';
 import { Button } from '@/components/atoms/Button';
 import { useAffiliates } from '@/lib/hooks/compvss';
 import { useMemo } from 'react';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/affiliates/stats
 
 export default function AffiliateStatsPage() {
   const { data: affiliateData, isLoading, error, refetch } = useAffiliates();
@@ -42,7 +45,7 @@ export default function AffiliateStatsPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading stats...</p>
+            <BodyText className="text-grey-400">Loading stats...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -55,8 +58,8 @@ export default function AffiliateStatsPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Stats</h2>
-            <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+            <SectionHeader className="mb-2">Failed to Load Stats</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -74,10 +77,10 @@ export default function AffiliateStatsPage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-h3 font-bebas compvss-text-gradient">Performance Stats</h1>
-          <p className="text-gray-400 font-oswald mt-1">View detailed performance metrics</p>
+          <HeroTitle className="compvss-text-gradient">Performance Stats</HeroTitle>
+          <BodyText className="text-grey-400 mt-1">View detailed performance metrics</BodyText>
         </div>
       </div>
 
@@ -90,13 +93,13 @@ export default function AffiliateStatsPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${metric.color} flex items-center justify-center text-white mb-4`}>
                     {metric.icon}
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{metric.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{metric.label}</div>
+                  <div className="text-white mb-1">{metric.value}</div>
+                  <div className="text-body-sm text-grey-400">{metric.label}</div>
                 </CardContent>
               </Card>
             </motion.div>

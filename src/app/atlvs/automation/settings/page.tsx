@@ -14,6 +14,8 @@ import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { Textarea } from '@/components/atoms/Textarea';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/settings
+
 export default function AutomationSettingsPage() {
   return (
     <AtlvsLayout>
@@ -35,7 +37,7 @@ export default function AutomationSettingsPage() {
         ]}
       >
         <div className="space-y-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6 flex items-center gap-2">
                 <Settings className="w-5 h-5" />
@@ -77,7 +79,7 @@ export default function AutomationSettingsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Notification Settings</CardTitle>
               <div className="space-y-4">
@@ -106,7 +108,7 @@ export default function AutomationSettingsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Advanced Settings</CardTitle>
               <div className="space-y-4">

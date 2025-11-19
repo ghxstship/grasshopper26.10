@@ -44,7 +44,7 @@ export const BrandCard: React.FC<BrandCardProps> = ({
   return (
     <Card className={cn("overflow-hidden group", className)}>
       <Link href={`/gvteway/brands/${slug}`}>
-        <div className="relative aspect-square overflow-hidden bg-gray-100 flex items-center justify-center p-8">
+        <div className="relative aspect-square overflow-hidden bg-grey-100 flex items-center justify-center p-8">
           <Image
             src={logo}
             alt={name}
@@ -55,17 +55,17 @@ export const BrandCard: React.FC<BrandCardProps> = ({
         </div>
         
         <div className="p-4 space-y-3">
-          <CardTitle className="line-clamp-1 group-hover:text-gray-700 transition-colors">
+          <CardTitle className="line-clamp-1 group-hover:text-grey-700 transition-colors">
             {name}
           </CardTitle>
           
-          <Metadata className="text-gray-700 flex items-center gap-2">
+          <Metadata className="text-grey-700 flex items-center gap-2">
             <Icon className="w-4 h-4" />
             {config.label}
           </Metadata>
           
           {description && (
-            <p className="font-share-tech text-body-sm text-gray-600 line-clamp-2">
+            <p className="-tech text-body-sm text-grey-600 line-clamp-2">
               {description}
             </p>
           )}
@@ -73,7 +73,7 @@ export const BrandCard: React.FC<BrandCardProps> = ({
           {featuredProducts.length > 0 && (
             <div className="flex gap-2 overflow-hidden">
               {featuredProducts.slice(0, 3).map((product, idx) => (
-                <div key={idx} className="relative w-16 h-16 rounded border border-gray-200">
+                <div key={idx} className="relative w-16 h-16 rounded border border-grey-200">
                   <Image
                     src={product}
                     alt="Product"

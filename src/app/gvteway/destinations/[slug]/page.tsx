@@ -114,7 +114,7 @@ export default function DestinationPage({ params: { slug } }: DestinationPagePro
                   {destination.amenities.map((amenity, idx) => (
                     <span
                       key={idx}
-                      className="px-4 py-2 bg-ghxst-surface text-ghxst-text-primary font-share-tech text-body-sm rounded-full"
+                      className="px-4 py-2 bg-ghxst-surface text-ghxst-text-primary -tech text-body-sm rounded-full"
                     >
                       {amenity}
                     </span>

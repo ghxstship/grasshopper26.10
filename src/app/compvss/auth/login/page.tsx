@@ -14,6 +14,9 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Input } from '@/components/atoms/Input';
 import { FormField } from '@/components/molecules/FormField';
 import { Checkbox } from '@/components/atoms/Checkbox';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/auth/login
 
 export default function CompvssLoginPage() {
   const router = useRouter();
@@ -70,21 +73,21 @@ export default function CompvssLoginPage() {
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <Link href="/compvss">
-              <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
+              <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                 COMPVSS
-              </h1>
+              </HeroTitle>
             </Link>
-            <p className="text-gray-400 font-oswald">External Teams Portal</p>
+            <BodyText className="text-grey-400">External Teams Portal</BodyText>
           </div>
 
           {/* Login Card */}
-          <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <LogIn className="w-6 h-6 text-compvss-cyan-500" />
                 Sign In
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Access your COMPVSS account
               </CardDescription>
             </CardHeader>
@@ -94,14 +97,14 @@ export default function CompvssLoginPage() {
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-body-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error -tech">{error}</p>
                   </div>
                 )}
 
                 {/* Email Field */}
                 <FormField label="Email Address" required>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="email"
                       type="email"
@@ -118,7 +121,7 @@ export default function CompvssLoginPage() {
                 {/* Password Field */}
                 <FormField label="Password" required>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="password"
                       type={showPassword ? 'text' : 'password'}
@@ -134,7 +137,7 @@ export default function CompvssLoginPage() {
                       variant="ghost"
                       size="sm"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-compvss-cyan-500 h-auto p-2"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 text-grey-400 hover:text-compvss-cyan-500 h-auto p-2"
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </Button>
@@ -150,11 +153,11 @@ export default function CompvssLoginPage() {
                       onChange={(e) => setRememberMe(e.target.checked)}
                       disabled={isLoading}
                     />
-                    <span className="text-gray-400 font-share-tech">Remember me</span>
+                    <span className="text-grey-400 -tech">Remember me</span>
                   </div>
                   <Link
                     href="/compvss/auth/forgot-password"
-                    className="text-compvss-cyan-500 hover:text-compvss-teal-500 transition-colors font-share-tech"
+                    className="text-compvss-cyan-500 hover:text-compvss-teal-500 transition-colors -tech"
                   >
                     Forgot password?
                   </Link>
@@ -181,10 +184,10 @@ export default function CompvssLoginPage() {
                 {/* Divider */}
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-700" />
+                    <div className="w-full border-t border-grey-700" />
                   </div>
                   <div className="relative flex justify-center text-body-sm">
-                    <span className="px-2 bg-gray-900 text-gray-400 font-share-tech">
+                    <span className="px-2 bg-grey-900 text-grey-400 -tech">
                       Don&apos;t have an account?
                     </span>
                   </div>
@@ -207,10 +210,10 @@ export default function CompvssLoginPage() {
 
           {/* Footer Links */}
           <div className="mt-6 text-center space-y-2">
-            <p className="text-body-sm text-gray-500 font-share-tech">
+            <p className="text-body-sm text-grey-500 -tech">
               Need help? <Link href="/contact" className="text-compvss-cyan-500 hover:text-compvss-teal-500">Contact Support</Link>
             </p>
-            <Link href="/" className="text-body-sm text-gray-500 hover:text-gray-400 font-share-tech block">
+            <Link href="/" className="text-body-sm text-grey-500 hover:text-grey-400 -tech block">
               ← Back to Home
             </Link>
           </div>

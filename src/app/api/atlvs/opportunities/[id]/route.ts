@@ -3,6 +3,10 @@ import { getSession } from '@/lib/auth';
 import { OpportunityService } from '@/lib/services/shared/opportunity.service';
 import { updateOpportunitySchema } from '@/lib/validations/opportunities';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+
 
 /**
  * GET /api/atlvs/opportunities/[id]

@@ -1,7 +1,7 @@
 'use client';
 
 import { GvtewayLayout } from "@/components/templates/GvtewayLayout";
-import { PageTitle, SectionHeader, BodyText } from "@/components/atoms/Typography";
+import { BodyText, CardTitle, PageTitle, SectionHeader } from "@/components/atoms/Typography";
 import { ArtistCard } from "@/components/molecules/ArtistCard";
 import { CategoryTab } from "@/components/atoms/CategoryTab";
 import { SearchBar } from "@/components/atoms/SearchBar";
@@ -67,7 +67,7 @@ export default function MusicPage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Discover Music</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto mb-8">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto mb-8">
             Explore artists playing locally. Follow favorites, discover new sounds, 
             see upcoming shows, and shop exclusive merch—all powered by Spotify.
           </BodyText>
@@ -121,30 +121,30 @@ export default function MusicPage() {
               <div className="w-16 h-16 bg-ghxst-black rounded-full flex items-center justify-center mx-auto">
                 <Music className="w-8 h-8 text-ghxst-white" />
               </div>
-              <h4 className="font-bebas text-h4 text-ghxst-primary">Artist Pages</h4>
-              <p className="font-share-tech text-body-sm text-ghxst-text-secondary">
+              <CardTitle className="text-ghxst-primary">Artist Pages</CardTitle>
+              <BodyText className="-tech text-body-sm text-ghxst-text-secondary">
                 Spotify bio, tracks, tour dates, merch
-              </p>
+              </BodyText>
             </div>
 
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-ghxst-black rounded-full flex items-center justify-center mx-auto">
                 <Calendar className="w-8 h-8 text-ghxst-white" />
               </div>
-              <h4 className="font-bebas text-h4 text-ghxst-primary">Show Calendar</h4>
-              <p className="font-share-tech text-body-sm text-ghxst-text-secondary">
+              <CardTitle className="text-ghxst-primary">Show Calendar</CardTitle>
+              <BodyText className="-tech text-body-sm text-ghxst-text-secondary">
                 See all upcoming shows locally
-              </p>
+              </BodyText>
             </div>
 
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-ghxst-black rounded-full flex items-center justify-center mx-auto">
                 <TrendingUp className="w-8 h-8 text-ghxst-white" />
               </div>
-              <h4 className="font-bebas text-h4 text-ghxst-primary">Artist Shops</h4>
-              <p className="font-share-tech text-body-sm text-ghxst-text-secondary">
+              <CardTitle className="text-ghxst-primary">Artist Shops</CardTitle>
+              <BodyText className="-tech text-body-sm text-ghxst-text-secondary">
                 Exclusive merch, vinyl, and drops direct
-              </p>
+              </BodyText>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function MusicPage() {
       <section className="section-padding bg-ghxst-black text-ghxst-white">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <SectionHeader className="mb-4 uppercase">Connect Your Spotify</SectionHeader>
-          <BodyText className="text-gray-300 max-w-2xl mx-auto mb-8">
+          <BodyText className="text-grey-300 max-w-2xl mx-auto mb-8">
             Get personalized artist recommendations based on your listening history
           </BodyText>
           <Button variant="primary" size="lg">

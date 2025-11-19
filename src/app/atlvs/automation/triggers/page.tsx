@@ -10,6 +10,7 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useAutomation } from '@/lib/hooks/atlvs/useAutomation';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface Trigger {
   id: string;
@@ -21,6 +22,8 @@ interface Trigger {
   status: string;
   lastTriggered?: string;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/triggers
 
 export default function WorkflowTriggersPage() {
   const { data, isLoading, error, refetch } = useAutomation({ type: 'triggers' });
@@ -41,7 +44,7 @@ export default function WorkflowTriggersPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading triggers...</p>
+              <BodyText className="text-grey-400">Loading triggers...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -64,8 +67,8 @@ export default function WorkflowTriggersPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Triggers</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Triggers</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -103,7 +106,7 @@ export default function WorkflowTriggersPage() {
         ]}
       >
 
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6 flex items-center gap-2">
               <Zap className="w-5 h-5" />
@@ -111,18 +114,18 @@ export default function WorkflowTriggersPage() {
             </CardTitle>
             <div className="space-y-3">
               {triggers.map((trigger) => (
-                <div key={trigger.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                <div key={trigger.id} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg">
                   <div className="flex-1">
                     <div className="font-medium mb-1">{trigger.name}</div>
-                    <div className="text-body-sm text-gray-400">
-                      <code className="px-2 py-1 bg-gray-900 rounded text-caption">{trigger.event}</code>
+                    <div className="text-body-sm text-grey-400">
+                      <code className="px-2 py-1 bg-grey-900 rounded text-caption">{trigger.event}</code>
                       <span className="ml-3">{trigger.workflows} workflow{trigger.workflows !== 1 ? 's' : ''}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Badge
                       variant="atlvs-outline"
-                      className={trigger.status === 'active' ? 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50' : 'bg-gray-500/20 text-gray-500 border-gray-500/50'}
+                      className={trigger.status === 'active' ? 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50' : 'bg-grey-500/20 text-grey-500 border-grey-500/50'}
                     >
                       {trigger.status}
                     </Badge>

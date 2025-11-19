@@ -3,10 +3,26 @@ import { prisma } from '@/lib/prisma';
 import { createOrganizationSchema } from '@/lib/validations/organizations';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, getPaginationParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { OrganizationsService } from '@/lib/services/organizations.service';
+
+
 
 // GET /api/organizations - List organizations
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -41,7 +57,7 @@ export async function GET(request: NextRequest) {
     const total = await prisma.organization.count({ where });
 
     // Get organizations
-    const organizations = await prisma.organization.findMany({
+    const organizations = await new OrganizationsService().findAll({
       where,
       skip,
       take: limit,
@@ -70,6 +86,17 @@ export async function GET(request: NextRequest) {
 // POST /api/organizations - Create organization
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -85,7 +112,7 @@ export async function POST(request: NextRequest) {
         .replace(/(^-|-$)/g, '');
 
     // Check if slug is unique
-    const existingOrg = await prisma.organization.findUnique({
+    const existingOrg = await new OrganizationsService().findById({
       where: { slug },
     });
 
@@ -94,7 +121,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create organization with creator as owner
-    const organization = await prisma.organization.create({
+    const organization = await new OrganizationsService().create({
       data: {
         ...validatedData,
         slug,

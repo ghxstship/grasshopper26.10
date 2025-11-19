@@ -4,6 +4,11 @@ import { updateOrderStatusSchema } from '@/lib/validations/orders';
 import type { Prisma as _Prisma } from '@prisma/client';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { OrdersService } from '@/lib/services/orders/id.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -21,7 +26,7 @@ export async function GET(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    const order = await prisma.order.findUnique({
+    const order = await new OrdersService().findById({
       where: { id: id },
       include: {
         user: {
@@ -94,7 +99,7 @@ export async function PATCH(
     const validatedData = updateOrderStatusSchema.parse(body);
 
     // Check if order exists
-    const existingOrder = await prisma.order.findUnique({
+    const existingOrder = await new OrdersService().findById({
       where: { id: id },
     });
 
@@ -108,7 +113,7 @@ export async function PATCH(
     }
 
     // Update order
-    const order = await prisma.order.update({
+    const order = await new OrdersService().update({
       where: { id: id },
       data: {
         status: validatedData.status,
@@ -121,7 +126,7 @@ export async function PATCH(
     });
 
     // Send status update notification
-    await prisma.notification.create({
+    await new OrdersService().create({
       data: {
         userId: order.userId,
         type: 'ORDER_STATUS_UPDATE',

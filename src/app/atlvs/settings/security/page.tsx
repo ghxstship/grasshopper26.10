@@ -15,6 +15,8 @@ import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 import { FormField } from '@/components/molecules/FormField';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/settings/security
+
 export default function SecuritySettingsPage() {
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
   const { settings, isLoading, error } = useSettings();
@@ -69,7 +71,7 @@ export default function SecuritySettingsPage() {
         ]}
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Change Password</CardTitle>
               <div className="space-y-4">
@@ -99,16 +101,16 @@ export default function SecuritySettingsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6 flex items-center gap-2">
                 <Smartphone className="w-5 h-5" />
                 Two-Factor Authentication
               </CardTitle>
-              <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg mb-4">
+              <div className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg mb-4">
                 <div>
                   <div className="font-medium mb-1">2FA Status</div>
-                  <div className="text-body-sm text-gray-400">
+                  <div className="text-body-sm text-grey-400">
                     {twoFactorEnabled ? 'Enabled - Your account is protected' : 'Disabled - Enable for extra security'}
                   </div>
                 </div>
@@ -122,7 +124,7 @@ export default function SecuritySettingsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6 flex items-center gap-2">
                 <Shield className="w-5 h-5" />
@@ -130,7 +132,7 @@ export default function SecuritySettingsPage() {
               </CardTitle>
               <div className="space-y-3">
                 {sessions.map((session) => (
-                  <div key={session.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                  <div key={session.id} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium">{session.device}</span>
@@ -140,7 +142,7 @@ export default function SecuritySettingsPage() {
                           </Badge>
                         )}
                       </div>
-                      <div className="text-body-sm text-gray-400">{session.location} • {session.lastActive}</div>
+                      <div className="text-body-sm text-grey-400">{session.location} • {session.lastActive}</div>
                     </div>
                     {!session.current && (
                       <Button variant="ghost" size="sm" className="text-error">

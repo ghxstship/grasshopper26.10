@@ -12,6 +12,9 @@ import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { FormField } from '@/components/molecules/FormField';
+import { HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/tickets/transfer
 
 export default function TransferTicketPage() {
   const [email, setEmail] = useState('');
@@ -26,9 +29,9 @@ export default function TransferTicketPage() {
                 <Button variant="ghost" size="sm" className="mb-6">← Back</Button>
               </Link>
 
-              <h1 className="text-h1 font-anton mb-4 gvteway-text-gradient">TRANSFER TICKET</h1>
+              <HeroTitle className="mb-4 gvteway-text-gradient">TRANSFER TICKET</HeroTitle>
 
-              <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-white">Recipient Information</CardTitle>
                 </CardHeader>
@@ -36,7 +39,7 @@ export default function TransferTicketPage() {
                   <form className="space-y-6">
                     <FormField label="Recipient Email">
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-500" />
                         <Input
                           type="email"
                           value={email}
@@ -50,7 +53,7 @@ export default function TransferTicketPage() {
 
                     <FormField label="Recipient Name">
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-500" />
                         <Input placeholder="John Doe" variant="gvteway" className="pl-10" />
                       </div>
                     </FormField>

@@ -13,6 +13,8 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Checkbox } from '@/components/atoms/Checkbox';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/settings/notifications
+
 export default function NotificationSettingsPage() {
   const { settings: settingsData, updateSettings, isUpdating } = useSettings();
   const [notifications, setNotifications] = useState({
@@ -38,15 +40,15 @@ export default function NotificationSettingsPage() {
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6 flex items-center gap-2">
                   <Bell className="w-5 h-5" />
                   Email Notifications
                 </CardTitle>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
-                    <span className="font-oswald">Enable Email Notifications</span>
+                  <div className="flex items-center justify-between p-3 bg-grey-800/50 rounded-lg">
+                    <span >Enable Email Notifications</span>
                     <Checkbox
                       checked={notifications.email}
                       onChange={(e) => setNotifications({...notifications, email: e.target.checked})}
@@ -57,12 +59,12 @@ export default function NotificationSettingsPage() {
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Push Notifications</CardTitle>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
-                    <span className="font-oswald">Enable Push Notifications</span>
+                  <div className="flex items-center justify-between p-3 bg-grey-800/50 rounded-lg">
+                    <span >Enable Push Notifications</span>
                     <Checkbox
                       checked={notifications.push}
                       onChange={(e) => setNotifications({...notifications, push: e.target.checked})}
@@ -73,12 +75,12 @@ export default function NotificationSettingsPage() {
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">SMS Notifications</CardTitle>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
-                    <span className="font-oswald">Enable SMS Notifications</span>
+                  <div className="flex items-center justify-between p-3 bg-grey-800/50 rounded-lg">
+                    <span >Enable SMS Notifications</span>
                     <Checkbox
                       checked={notifications.sms}
                       onChange={(e) => setNotifications({...notifications, sms: e.target.checked})}

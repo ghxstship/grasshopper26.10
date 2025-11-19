@@ -4,6 +4,8 @@ import { Calendar, MapPin } from 'lucide-react';
 import { CardTitle, Metadata } from '@/components/atoms/Typography';
 import { Badge } from '@/components/atoms/Badge';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/adventures/bookings
+
 export default function BookingsPage() {
   const bookings = [{ id: '1', title: 'VIP Tour', date: 'Dec 15, 2025', location: 'Tampa', status: 'Confirmed' }];
   return (

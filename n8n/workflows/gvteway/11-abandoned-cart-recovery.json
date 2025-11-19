@@ -1,0 +1,171 @@
+{
+  "name": "GVTEWAY - Abandoned Cart Recovery",
+  "nodes": [
+    {
+      "parameters": {
+        "event": "order.created"
+      },
+      "name": "Order Created Trigger",
+      "type": "n8n-nodes-base.gvtewayEventTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 30,
+        "unit": "minutes"
+      },
+      "name": "Wait 30 Minutes",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "orderId": "={{$json[\"orderId\"]}}"
+      },
+      "name": "Check Order Status",
+      "type": "n8n-nodes-base.gvtewayOrder",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": {
+        "gvtewayApi": {
+          "id": "1",
+          "name": "GVTEWAY API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"status\"]}}",
+              "operation": "equals",
+              "value2": "pending"
+            }
+          ]
+        }
+      },
+      "name": "Still Pending?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "checkout@gvteway.com",
+        "toEmail": "={{$json[\"userEmail\"]}}",
+        "subject": "Complete Your Order - {{$json[\"eventName\"]}}",
+        "emailType": "html",
+        "message": "<h1>You Left Items in Your Cart</h1><p>Hi {{$json[\"userName\"]}},</p><p>You were about to purchase tickets for <strong>{{$json[\"eventName\"]}}</strong>.</p><p>Complete your order now before tickets sell out!</p><a href=\"https://gvteway.com/checkout/{{$json[\"orderId\"]}}\">Complete Purchase</a><p><strong>Special Offer:</strong> Use code COMEBACK10 for 10% off (valid for 24 hours)</p>"
+      },
+      "name": "Send Recovery Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1050, 250],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SendGrid SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "userId": "={{$json[\"userId\"]}}",
+        "title": "Complete Your Order",
+        "message": "You have items waiting in your cart for {{$json[\"eventName\"]}}",
+        "type": "cart_reminder",
+        "actionUrl": "/checkout/{{$json[\"orderId\"]}}"
+      },
+      "name": "Create Notification",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1050, 400]
+    },
+    {
+      "parameters": {
+        "to": "={{$json[\"userPhone\"]}}",
+        "message": "Don't miss out! Complete your order for {{$json[\"eventName\"]}}. Use code COMEBACK10 for 10% off: https://gvteway.com/checkout/{{$json[\"orderId\"]}}"
+      },
+      "name": "Send SMS (Optional)",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [1050, 550],
+      "credentials": {
+        "twilioApi": {
+          "id": "3",
+          "name": "Twilio"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Order Created Trigger": {
+      "main": [
+        [
+          {
+            "node": "Wait 30 Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 30 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Check Order Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Order Status": {
+      "main": [
+        [
+          {
+            "node": "Still Pending?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Still Pending?": {
+      "main": [
+        [
+          {
+            "node": "Send Recovery Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Notification",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send SMS (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": ["gvteway", "cart", "recovery", "conversion"]
+}

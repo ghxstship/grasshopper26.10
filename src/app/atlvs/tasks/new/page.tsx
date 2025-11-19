@@ -19,6 +19,8 @@ import { FormField } from '@/components/molecules/FormField';
 import { useCreateTask } from '@/lib/hooks/atlvs/useCreateTask';
 import { useAuth } from '@/lib/hooks/auth/useAuth';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/new
+
 export default function NewTaskPage() {
   const router = useRouter();
   const { user } = useAuth();
@@ -77,7 +79,7 @@ export default function NewTaskPage() {
         <form onSubmit={handleSubmit}>
           <div className="space-y-6">
             {/* Task Details */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Task Details</CardTitle>
                 <div className="space-y-4">
@@ -120,7 +122,7 @@ export default function NewTaskPage() {
             </Card>
 
             {/* Assignment */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <User className="w-5 h-5" />
@@ -153,7 +155,7 @@ export default function NewTaskPage() {
             </Card>
 
             {/* Status & Priority */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <Flag className="w-5 h-5" />
@@ -191,7 +193,7 @@ export default function NewTaskPage() {
             </Card>
 
             {/* Tags */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 mb-6">
                   <Tag className="w-5 h-5" />

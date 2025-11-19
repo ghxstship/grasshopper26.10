@@ -10,6 +10,9 @@ import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 
 import { Card, CardContent } from '@/components/atoms/Card';
+import { BodyText, HeroTitle, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/tickets/success
 
 export default function TicketSuccessPage() {
   return (
@@ -22,7 +25,7 @@ export default function TicketSuccessPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
             >
-              <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm text-center">
+              <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm text-center">
                 <CardContent className="p-12">
                   {/* Success Icon */}
                   <motion.div
@@ -37,31 +40,31 @@ export default function TicketSuccessPage() {
                   </motion.div>
 
                   {/* Success Message */}
-                  <h1 className="text-h2 font-bebas text-white mb-4">
+                  <HeroTitle className="text-white mb-4">
                     TICKETS PURCHASED!
-                  </h1>
-                  <p className="text-h5 text-gray-300 mb-8">
+                  </HeroTitle>
+                  <BodyText className="text-grey-300 mb-8">
                     Your order has been confirmed
-                  </p>
+                  </BodyText>
 
                   {/* Order Details */}
-                  <div className="bg-gray-800/50 rounded-xl p-6 mb-8 text-left">
+                  <div className="bg-grey-800/50 rounded-xl p-6 mb-8 text-left">
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Order Number</span>
+                        <span className="text-grey-400">Order Number</span>
                         <span className="text-white font-mono">ORD-2025-001234</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Event</span>
+                        <span className="text-grey-400">Event</span>
                         <span className="text-white">Summer Music Festival 2025</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Tickets</span>
+                        <span className="text-grey-400">Tickets</span>
                         <span className="text-white">2x VIP Pass</span>
                       </div>
-                      <div className="flex justify-between pt-3 border-t border-gray-700">
-                        <span className="text-gray-400">Total Paid</span>
-                        <span className="text-h4 font-bebas text-gvteway-red-500">$179.98</span>
+                      <div className="flex justify-between pt-3 border-t border-grey-700">
+                        <span className="text-grey-400">Total Paid</span>
+                        <span className="text-gvteway-red-500">$179.98</span>
                       </div>
                     </div>
                   </div>
@@ -70,9 +73,9 @@ export default function TicketSuccessPage() {
                   <div className="mb-8 p-4 bg-gvteway-blue-500/10 border border-gvteway-blue-500/30 rounded-lg">
                     <div className="flex items-start text-left">
                       <Mail className="w-5 h-5 text-gvteway-blue-500 mr-3 mt-0.5 flex-shrink-0" />
-                      <div className="text-body-sm text-gray-300">
-                        <p className="font-medium text-white mb-1">Confirmation Email Sent</p>
-                        <p>Check your email for order details and tickets</p>
+                      <div className="text-body-sm text-grey-300">
+                        <BodyText className="font-medium text-white mb-1">Confirmation Email Sent</BodyText>
+                        <BodyText >Check your email for order details and tickets</BodyText>
                       </div>
                     </div>
                   </div>
@@ -97,20 +100,20 @@ export default function TicketSuccessPage() {
                   </div>
 
                   {/* Next Steps */}
-                  <div className="mt-8 pt-8 border-t border-gray-800 text-left">
-                    <h3 className="text-white font-bebas text-h5 mb-4">What&apos;s Next?</h3>
-                    <div className="space-y-3 text-body-sm text-gray-300">
+                  <div className="mt-8 pt-8 border-t border-grey-800 text-left">
+                    <SubsectionHeader className="text-white mb-4">What&apos;s Next?</SubsectionHeader>
+                    <div className="space-y-3 text-body-sm text-grey-300">
                       <div className="flex items-start">
                         <Calendar className="w-4 h-4 text-gvteway-red-500 mr-3 mt-1 flex-shrink-0" />
-                        <p>Add the event to your calendar and set reminders</p>
+                        <BodyText >Add the event to your calendar and set reminders</BodyText>
                       </div>
                       <div className="flex items-start">
                         <Smartphone className="w-4 h-4 text-gvteway-red-500 mr-3 mt-1 flex-shrink-0" />
-                        <p>Download the GVTEWAY app for easy access to your tickets</p>
+                        <BodyText >Download the GVTEWAY app for easy access to your tickets</BodyText>
                       </div>
                       <div className="flex items-start">
                         <CheckCircle className="w-4 h-4 text-gvteway-red-500 mr-3 mt-1 flex-shrink-0" />
-                        <p>Arrive at least 30 minutes early for smooth entry</p>
+                        <BodyText >Arrive at least 30 minutes early for smooth entry</BodyText>
                       </div>
                     </div>
                   </div>

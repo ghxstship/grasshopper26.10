@@ -12,6 +12,12 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useAsset } from '@/lib/hooks/atlvs/useAssets';
+import { SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/assets/[id]
+
+// API: /api/atlvs/assets/:id
+const API_ENDPOINT = '/api/atlvs/assets/:id';
 
 export default function AssetDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -33,12 +39,12 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
     return (
       <AtlvsLayout>
         <ContentLayout title="Error" description="Asset Details" variant="atlvs">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-h6 font-bebas mb-2">Failed to Load Asset</h3>
-                <p className="text-gray-400 mb-4">{error?.message || 'Asset not found'}</p>
+                <SubsectionHeader className="mb-2">Failed to Load Asset</SubsectionHeader>
+                <p className="text-grey-400 mb-4">{error?.message || 'Asset not found'}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
             </CardHeader>
@@ -54,7 +60,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
       case 'in-use': return 'bg-info-light text-info border-info-border';
       case 'maintenance': return 'bg-warning-light text-warning border-warning-border';
       case 'unavailable': return 'bg-error-light text-error border-error-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -76,10 +82,10 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
         >
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
-              <h1 className="text-h1 font-anton mb-2 atlvs-text-gradient">
+              <h1 className="mb-2 atlvs-text-gradient">
                 {asset.name}
               </h1>
-              <p className="text-gray-400 font-oswald">
+              <p className="text-grey-400">
                 Asset ID: {asset.id} • {asset.category}
               </p>
             </div>
@@ -102,7 +108,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
               {asset.status}
             </Badge>
             {asset.type && (
-              <Badge variant="atlvs-outline" className="bg-gray-700/50">
+              <Badge variant="atlvs-outline" className="bg-grey-700/50">
                 {asset.type}
               </Badge>
             )}
@@ -114,36 +120,36 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
           <div className="lg:col-span-2 space-y-6">
             {/* Description */}
             {asset.description && (
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <CardTitle className="mb-4">Description</CardTitle>
-                  <p className="text-gray-300">{asset.description}</p>
+                  <p className="text-grey-300">{asset.description}</p>
                 </CardHeader>
               </Card>
             )}
 
             {/* Asset Information */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Asset Information</CardTitle>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-body-sm text-gray-400 mb-1">Asset Type</div>
+                  <div className="p-4 bg-grey-800/50 rounded-lg">
+                    <div className="text-body-sm text-grey-400 mb-1">Asset Type</div>
                     <div className="font-medium">{asset.type || 'N/A'}</div>
                   </div>
-                  <div className="p-4 bg-gray-800/50 rounded-lg">
-                    <div className="text-body-sm text-gray-400 mb-1">Status</div>
+                  <div className="p-4 bg-grey-800/50 rounded-lg">
+                    <div className="text-body-sm text-grey-400 mb-1">Status</div>
                     <div className="font-medium">{asset.status}</div>
                   </div>
                   {asset.location && (
-                    <div className="p-4 bg-gray-800/50 rounded-lg">
-                      <div className="text-body-sm text-gray-400 mb-1">Location</div>
+                    <div className="p-4 bg-grey-800/50 rounded-lg">
+                      <div className="text-body-sm text-grey-400 mb-1">Location</div>
                       <div className="font-medium">{asset.location}</div>
                     </div>
                   )}
                   {asset.serialNumber && (
-                    <div className="p-4 bg-gray-800/50 rounded-lg">
-                      <div className="text-body-sm text-gray-400 mb-1">Serial Number</div>
+                    <div className="p-4 bg-grey-800/50 rounded-lg">
+                      <div className="text-body-sm text-grey-400 mb-1">Serial Number</div>
                       <div className="font-medium">{asset.serialNumber}</div>
                     </div>
                   )}
@@ -155,13 +161,13 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Asset Details */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Asset Details</CardTitle>
                 <div className="space-y-4">
                   {asset.location && (
                     <div>
-                      <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
+                      <div className="text-body-sm text-grey-400 mb-1 flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
                         Location
                       </div>
@@ -170,7 +176,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
                   )}
                   {asset.value && (
                     <div>
-                      <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
+                      <div className="text-body-sm text-grey-400 mb-1 flex items-center gap-1">
                         <DollarSign className="w-4 h-4" />
                         Asset Value
                       </div>
@@ -179,13 +185,13 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
                   )}
                   {asset.purchaseDate && (
                     <div>
-                      <div className="text-body-sm text-gray-400 mb-1">Purchase Date</div>
+                      <div className="text-body-sm text-grey-400 mb-1">Purchase Date</div>
                       <div className="font-medium">{new Date(asset.purchaseDate).toLocaleDateString()}</div>
                     </div>
                   )}
                   {asset.assignedTo ? (
                     <div>
-                      <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
+                      <div className="text-body-sm text-grey-400 mb-1 flex items-center gap-1">
                         <User className="w-4 h-4" />
                         Assigned To
                       </div>
@@ -204,7 +210,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ id: stri
             </Card>
 
             {/* Quick Actions */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Quick Actions</CardTitle>
                 <div className="space-y-2">

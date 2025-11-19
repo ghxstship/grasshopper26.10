@@ -96,7 +96,7 @@ export default function ConnectWalletPage() {
                 className="w-full p-6 border-2 border-ghxst-border rounded-lg hover:border-ghxst-primary transition-all text-left disabled:opacity-50 disabled:cursor-not-allowed group"
               >
                 <div className="flex items-center gap-4">
-                  <div className="text-h2">{wallet.icon}</div>
+                  <div >{wallet.icon}</div>
                   <div className="flex-1">
                     <SectionHeader className="text-ghxst-primary mb-1 group-hover:text-ghxst-black transition-colors">
                       {wallet.name}

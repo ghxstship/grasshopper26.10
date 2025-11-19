@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Modal } from '@/components/organisms/Modal';
 import { Button } from '@/components/atoms/Button';
 import type { ConflictInfo, ResolvedData } from '@/lib/realtime/conflict-resolution';
+import { SubsectionHeader } from "@/components/atoms/Typography";
 
 interface ConflictResolutionModalProps<T> {
   isOpen: boolean;
@@ -59,12 +60,12 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
     const remoteValue = conflict.remote.data[field];
 
     return (
-      <div key={field} className="border-b border-gray-200 py-3">
-        <div className="font-medium text-body-sm text-gray-700 mb-2">{field}</div>
+      <div key={field} className="border-b border-grey-200 py-3">
+        <div className="font-medium text-body-sm text-grey-700 mb-2">{field}</div>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-conflict-local-bg p-3 rounded">
             <div className="text-caption text-conflict-local mb-1">Your Version</div>
-            <div className="text-body-sm text-gray-900">
+            <div className="text-body-sm text-grey-900">
               {typeof localValue === 'object' 
                 ? JSON.stringify(localValue, null, 2)
                 : String(localValue)}
@@ -72,7 +73,7 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
           </div>
           <div className="bg-conflict-remote-bg p-3 rounded">
             <div className="text-caption text-conflict-remote mb-1">Remote Version</div>
-            <div className="text-body-sm text-gray-900">
+            <div className="text-body-sm text-grey-900">
               {typeof remoteValue === 'object'
                 ? JSON.stringify(remoteValue, null, 2)
                 : String(remoteValue)}
@@ -106,9 +107,9 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
               />
             </svg>
             <div>
-              <h3 className="text-body-sm text-warning-foreground">
+              <SubsectionHeader className="text-body-sm text-warning-foreground">
                 Concurrent Modifications Detected
-              </h3>
+              </SubsectionHeader>
               <p className="mt-1 text-body-sm text-warning-foreground">
                 This {entityName} was modified by multiple users at the same time.
                 Please choose which version to keep or create a custom resolution.
@@ -119,23 +120,19 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
 
         {/* Version Selection */}
         <div className="space-y-3">
-          <label className="block text-body-sm text-gray-700">
+          <label className="block text-body-sm text-grey-700">
             Choose Resolution
           </label>
 
           {/* Local Version */}
           <div
-            className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${
-              selectedVersion === 'local'
-                ? 'border-conflict-local bg-conflict-local-bg'
-                : 'border-border hover:border-gray-400'
-            }`}
+            className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${ selectedVersion === 'local' ? 'border-conflict-local bg-conflict-local-bg' : 'border-border hover:border-grey-400' }`}
             onClick={() => setSelectedVersion('local')}
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="font-medium text-gray-900">Keep Your Version</div>
-                <div className="text-body-sm text-gray-500">
+                <div className="font-medium text-grey-900">Keep Your Version</div>
+                <div className="text-body-sm text-grey-500">
                   Modified by you at {formatDate(conflict.local.timestamp)}
                 </div>
               </div>
@@ -150,17 +147,13 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
 
           {/* Remote Version */}
           <div
-            className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${
-              selectedVersion === 'remote'
-                ? 'border-conflict-remote bg-conflict-remote-bg'
-                : 'border-border hover:border-gray-400'
-            }`}
+            className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${ selectedVersion === 'remote' ? 'border-conflict-remote bg-conflict-remote-bg' : 'border-border hover:border-grey-400' }`}
             onClick={() => setSelectedVersion('remote')}
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="font-medium text-gray-900">Keep Remote Version</div>
-                <div className="text-body-sm text-gray-500">
+                <div className="font-medium text-grey-900">Keep Remote Version</div>
+                <div className="text-body-sm text-grey-500">
                   Modified by {conflict.remote.userId} at {formatDate(conflict.remote.timestamp)}
                 </div>
               </div>
@@ -175,17 +168,13 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
 
           {/* Custom Resolution */}
           <div
-            className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${
-              selectedVersion === 'custom'
-                ? 'border-conflict-custom bg-conflict-custom-bg'
-                : 'border-border hover:border-gray-400'
-            }`}
+            className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${ selectedVersion === 'custom' ? 'border-conflict-custom bg-conflict-custom-bg' : 'border-border hover:border-grey-400' }`}
             onClick={() => setSelectedVersion('custom')}
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="font-medium text-gray-900">Custom Resolution</div>
-                <div className="text-body-sm text-gray-500">
+                <div className="font-medium text-grey-900">Custom Resolution</div>
+                <div className="text-body-sm text-grey-500">
                   Manually merge the changes
                 </div>
               </div>
@@ -202,10 +191,10 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
         {/* Conflicting Fields */}
         {conflict.conflictingFields && conflict.conflictingFields.length > 0 && (
           <div>
-            <h4 className="text-body-sm text-gray-900 mb-3">
+            <h4 className="text-body-sm text-grey-900 mb-3">
               Conflicting Fields ({conflict.conflictingFields.length})
             </h4>
-            <div className="border border-gray-200 rounded-lg divide-y divide-gray-200">
+            <div className="border border-grey-200 rounded-lg divide-y divide-grey-200">
               {conflict.conflictingFields.map(renderFieldComparison)}
             </div>
           </div>
@@ -214,7 +203,7 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
         {/* Custom Editor */}
         {selectedVersion === 'custom' && (
           <div>
-            <label className="block text-body-sm text-gray-700 mb-2">
+            <label className="block text-body-sm text-grey-700 mb-2">
               Custom Data (JSON)
             </label>
             <textarea
@@ -226,13 +215,13 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
                   // Invalid JSON, ignore
                 }
               }}
-              className="w-full h-64 px-3 py-2 border border-gray-300 rounded-lg font-mono text-body-sm"
+              className="w-full h-64 px-3 py-2 border border-grey-300 rounded-lg font-mono text-body-sm"
             />
           </div>
         )}
 
         {/* Actions */}
-        <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+        <div className="flex justify-end space-x-3 pt-4 border-t border-grey-200">
           <Button
             variant="outline"
             onClick={onClose}

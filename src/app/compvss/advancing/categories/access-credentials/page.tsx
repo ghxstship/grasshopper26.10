@@ -19,6 +19,7 @@ import { FormField } from '@/components/molecules/FormField';
 import { FileUpload } from '@/components/atoms/FileUpload';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
 interface AccessRequest {
   personName: string;
@@ -100,19 +101,19 @@ export default function AccessCredentialsRequestPage() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <div className="mb-8">
                 <Link href="/compvss/advancing/dashboard">
-                  <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
+                  <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                     Access & Credentials Request
-                  </h1>
+                  </HeroTitle>
                 </Link>
-                <p className="text-gray-400 font-oswald">
+                <BodyText className="text-grey-400">
                   Request access passes, credentials, and security clearances
-                </p>
+                </BodyText>
               </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Request Details */}
             {requests.map((request, index) => (
-              <Card key={index} variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+              <Card key={index} variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -214,13 +215,13 @@ export default function AccessCredentialsRequestPage() {
             </Button>
 
             {/* File Attachments */}
-            <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+            <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Upload className="w-5 h-5 text-compvss-cyan-500" />
                   Supporting Documents
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-grey-400">
                   Upload ID copies, insurance certificates, or other required documents
                 </CardDescription>
               </CardHeader>
@@ -233,15 +234,15 @@ export default function AccessCredentialsRequestPage() {
                   dragDropText="Drag and drop files or click to browse"
                   browseText="Choose Files"
                 />
-                <p className="text-caption text-gray-500 font-share-tech mt-2 text-center">
+                <BodyText className="text-caption text-grey-500 -tech mt-2 text-center">
                   PDF, JPG, PNG, DOC (Max 10MB each)
-                </p>
+                </BodyText>
 
                 {attachments.length > 0 && (
                   <div className="mt-4 space-y-2">
                     {attachments.map((file, index) => (
                       <div key={index} className="flex items-center justify-between bg-black/50 p-3 rounded-lg">
-                        <span className="text-body-sm text-gray-300 font-share-tech">{file.name}</span>
+                        <span className="text-body-sm text-grey-300 -tech">{file.name}</span>
                         <Button
                           type="button"
                           variant="compvss-outline"
@@ -258,7 +259,7 @@ export default function AccessCredentialsRequestPage() {
             </Card>
 
             {/* Priority & Notes */}
-            <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+            <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
               <CardContent className="pt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField label="Priority Level">

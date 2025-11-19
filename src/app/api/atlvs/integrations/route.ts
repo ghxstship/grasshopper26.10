@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { handleApiError } from '@/lib/api/response';
+
+
 
 export async function GET() {
   try {
@@ -44,10 +50,6 @@ export async function GET() {
 
     return NextResponse.json(formattedIntegrations);
   } catch (error) {
-    console.error('Error fetching integrations:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch integrations' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

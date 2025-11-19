@@ -12,14 +12,14 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white border-gray-200 text-gray-900",
+        default: "bg-white border-grey-200 text-grey-900",
         success: "bg-success-light border-success-border text-success-foreground",
         error: "bg-error-light border-error-border text-error-foreground",
         warning: "bg-warning-light border-warning-border text-warning-foreground",
         info: "bg-info-light border-info-border text-info-foreground",
-        gvteway: "bg-gradient-to-r from-gvteway-red-50 to-gvteway-yellow-50 border-gvteway-red-200 text-gray-900",
-        compvss: "bg-gradient-to-r from-compvss-cyan-50 to-compvss-teal-50 border-compvss-cyan-200 text-gray-900",
-        atlvs: "bg-gradient-to-r from-atlvs-green-50 to-atlvs-orange-50 border-atlvs-green-200 text-gray-900",
+        gvteway: "bg-gradient-to-r from-gvteway-red-50 to-gvteway-yellow-50 border-gvteway-red-200 text-grey-900",
+        compvss: "bg-gradient-to-r from-compvss-cyan-50 to-compvss-teal-50 border-compvss-cyan-200 text-grey-900",
+        atlvs: "bg-gradient-to-r from-atlvs-green-50 to-atlvs-orange-50 border-atlvs-green-200 text-grey-900",
       },
     },
     defaultVariants: {
@@ -31,7 +31,7 @@ const toastVariants = cva(
 const iconVariants = cva("h-5 w-5 flex-shrink-0", {
   variants: {
     variant: {
-      default: "text-gray-500",
+      default: "text-grey-500",
       success: "text-success",
       error: "text-error",
       warning: "text-warning",

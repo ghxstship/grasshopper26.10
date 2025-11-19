@@ -5,9 +5,32 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { z } from 'zod';
+import { handleApiError } from '@/lib/api/response';
+import { WebhooksService } from '@/lib/services/webhooks/sendgrid.service';
+
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const events = await request.json();
 
     if (!Array.isArray(events)) {
@@ -54,11 +77,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error('SendGrid webhook error:', error);
-    return NextResponse.json(
-      { error: 'Webhook handler failed' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -67,7 +86,7 @@ async function handleEmailDelivered(event: any) {
   
   // Update email status in database
   const { prisma } = await import('@/lib/prisma');
-  await prisma.auditLog.create({
+  await new WebhooksService().create({
     data: {
       action: 'EMAIL_DELIVERED',
       entity: 'Email',
@@ -85,7 +104,7 @@ async function handleEmailOpened(event: any) {
   
   // Track email open in analytics
   const { prisma } = await import('@/lib/prisma');
-  await prisma.auditLog.create({
+  await new WebhooksService().create({
     data: {
       action: 'EMAIL_OPENED',
       entity: 'Email',
@@ -104,7 +123,7 @@ async function handleEmailClicked(event: any) {
   
   // Track link click in analytics
   const { prisma } = await import('@/lib/prisma');
-  await prisma.auditLog.create({
+  await new WebhooksService().create({
     data: {
       action: 'EMAIL_CLICKED',
       entity: 'Email',
@@ -122,7 +141,7 @@ async function handleEmailBounced(event: any) {
   console.log('Email bounced:', event.email);
   
   // Mark email as invalid in database
-  await prisma.user.updateMany({
+  await new WebhooksService().updateMany({
     where: { email: event.email },
     data: {
       emailVerified: null,
@@ -134,7 +153,7 @@ async function handleEmailDropped(event: any) {
   console.log('Email dropped:', event.email);
   
   // Log dropped email
-  await prisma.auditLog.create({
+  await new WebhooksService().create({
     data: {
       action: 'EMAIL_DROPPED',
       entity: 'Email',
@@ -151,7 +170,7 @@ async function handleSpamReport(event: any) {
   console.log('Spam report:', event.email);
   
   // Unsubscribe user from emails
-  await prisma.user.updateMany({
+  await new WebhooksService().updateMany({
     where: { email: event.email },
     data: {
       emailVerified: null,
@@ -163,7 +182,7 @@ async function handleUnsubscribe(event: any) {
   console.log('User unsubscribed:', event.email);
   
   // Update user email preferences
-  await prisma.user.updateMany({
+  await new WebhooksService().updateMany({
     where: { email: event.email },
     data: {
       emailVerified: null,

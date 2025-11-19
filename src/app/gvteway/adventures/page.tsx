@@ -77,7 +77,7 @@ export default function AdventuresPage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Find Adventures</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto">
             Turn every event into an experience. Discover nearby points of interest, tours, 
             excursions, and activities to make your trip unforgettable.
           </BodyText>
@@ -154,7 +154,7 @@ export default function AdventuresPage() {
                   </div>
 
                   <div className="flex items-center justify-between pt-3 border-t border-ghxst-border">
-                    <span className="text-h4 font-bebas text-ghxst-primary">
+                    <span className="text-ghxst-primary">
                       ${adventure.price}
                     </span>
                     <Button variant="primary" size="sm">View Details</Button>

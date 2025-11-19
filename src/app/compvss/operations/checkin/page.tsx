@@ -12,6 +12,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 import { useCheckIns, CheckIn } from '@/lib/hooks/compvss/useCheckIns';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/checkin
 
 export default function CheckInPage() {
   const { data: checkInsData = [], isLoading, error, refetch } = useCheckIns();
@@ -42,7 +45,7 @@ export default function CheckInPage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading check-ins...</p>
+            <BodyText className="text-grey-400">Loading check-ins...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -55,8 +58,8 @@ export default function CheckInPage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Check-Ins</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Check-Ins</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
           </div>
         </div>
@@ -80,12 +83,12 @@ export default function CheckInPage() {
   return (
     <CompvssLayout>
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-h3 font-bebas compvss-text-gradient">Crew Check-In</h1>
-              <p className="text-gray-400 font-oswald mt-1">Track crew arrival and attendance</p>
+              <HeroTitle className="compvss-text-gradient">Crew Check-In</HeroTitle>
+              <BodyText className="text-grey-400 mt-1">Track crew arrival and attendance</BodyText>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="compvss-ghost" size="sm">
@@ -111,13 +114,13 @@ export default function CheckInPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className={`p-2 bg-black/50 rounded-lg ${stat.color} w-fit mb-2`}>
                     {stat.icon}
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -132,12 +135,12 @@ export default function CheckInPage() {
           className="mb-6"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
             <Input
               placeholder="Search crew by name, role, or organization..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 bg-gray-900/50 border-compvss-cyan-500/30 h-12"
+              className="pl-12 bg-grey-900/50 border-compvss-cyan-500/30 h-12"
             />
           </div>
         </motion.div>
@@ -148,7 +151,7 @@ export default function CheckInPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Users2 className="w-5 h-5 text-compvss-cyan-500" />
@@ -167,15 +170,15 @@ export default function CheckInPage() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 flex-1">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-h6">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center text-black">
                           {member.name.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-oswald text-white mb-1">{member.name}</h3>
-                          <p className="text-body-sm text-gray-400 font-share-tech">
+                          <h3 className="text-white mb-1">{member.name}</h3>
+                          <p className="text-body-sm text-grey-400 -tech">
                             {member.role} • {member.organization}
                           </p>
-                          <p className="text-caption text-gray-500 font-share-tech mt-1">
+                          <p className="text-caption text-grey-500 -tech mt-1">
                             Zone: {member.zone}
                           </p>
                         </div>
@@ -183,10 +186,10 @@ export default function CheckInPage() {
                       <div className="flex items-center gap-4">
                         {member.checkInTime && (
                           <div className="text-right mr-4">
-                            <div className="text-body-sm text-compvss-cyan-500 font-share-tech">
+                            <div className="text-body-sm text-compvss-cyan-500 -tech">
                               {member.checkInTime}
                             </div>
-                            <div className="text-caption text-gray-500 font-share-tech">
+                            <div className="text-caption text-grey-500 -tech">
                               Check-in time
                             </div>
                           </div>

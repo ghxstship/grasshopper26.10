@@ -57,12 +57,12 @@ const Toolbar: React.FC<ToolbarProps> = ({
       {(title || description) && (
         <div>
           {title && (
-            <h2 className="text-h4 font-bebas text-gray-900">
+            <h2 className="text-grey-900">
               {title}
             </h2>
           )}
           {description && (
-            <p className="mt-1 text-body-sm text-gray-600 font-share-tech">
+            <p className="mt-1 text-body-sm text-grey-600 -tech">
               {description}
             </p>
           )}

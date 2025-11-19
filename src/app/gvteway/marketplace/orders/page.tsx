@@ -4,6 +4,8 @@ import { Package } from 'lucide-react';
 import { CardTitle, Metadata } from '@/components/atoms/Typography';
 import { Badge } from '@/components/atoms/Badge';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/marketplace/orders
+
 export default function OrdersPage() {
   const orders = [{ id: '1', title: 'Order #1234', date: 'Nov 18, 2025', status: 'Delivered', total: 75 }];
   return (

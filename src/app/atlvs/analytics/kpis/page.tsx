@@ -10,6 +10,8 @@ import { ContentLayout } from '@/components/templates/ContentLayout';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { DollarSign, Users, TrendingUp, Target, Activity, Shield, Leaf, Smartphone } from 'lucide-react';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics/kpis
+
 export default function KPIsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
@@ -69,11 +71,7 @@ export default function KPIsPage() {
               <button
                 key={cat.value}
                 onClick={() => setSelectedCategory(cat.value)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
-                  selectedCategory === cat.value
-                    ? 'bg-atlvs-green-500 text-black'
-                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                }`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${ selectedCategory === cat.value ? 'bg-atlvs-green-500 text-black' : 'bg-grey-800 text-grey-400 hover:bg-grey-700' }`}
               >
                 <Icon className="h-4 w-4" />
                 {cat.label}
@@ -85,10 +83,10 @@ export default function KPIsPage() {
         {/* KPI Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {getMetricsForCategory(selectedCategory).map((metric, index) => (
-            <Card key={index} variant="atlvs" className="bg-gray-900/50">
+            <Card key={index} variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <CardTitle className="text-body-sm text-gray-400 mb-2">{metric.title}</CardTitle>
-                <div className="text-h4 font-bebas text-white">
+                <CardTitle className="text-body-sm text-grey-400 mb-2">{metric.title}</CardTitle>
+                <div className="text-white">
                   {metric.format === 'currency' && '$'}
                   {metric.format === 'currency' ? (metric.value / 1000000).toFixed(1) + 'M' : metric.value.toLocaleString()}
                   {metric.format === 'percentage' && '%'}
@@ -102,8 +100,8 @@ export default function KPIsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <Card variant="atlvs" className="bg-gradient-to-br from-atlvs-green-500/20 to-atlvs-green-600/20 border-atlvs-green-500/30">
             <CardHeader>
-              <CardTitle className="text-body-sm text-gray-400">Total Revenue</CardTitle>
-              <div className="text-h3 font-bebas text-atlvs-green-500 mt-2">
+              <CardTitle className="text-body-sm text-grey-400">Total Revenue</CardTitle>
+              <div className="text-atlvs-green-500 mt-2">
                 $2.4M
               </div>
             </CardHeader>
@@ -111,8 +109,8 @@ export default function KPIsPage() {
           
           <Card variant="atlvs" className="bg-gradient-to-br from-info/20 to-info/20 border-info/30">
             <CardHeader>
-              <CardTitle className="text-body-sm text-gray-400">Active Projects</CardTitle>
-              <div className="text-h3 font-bebas text-info mt-2">
+              <CardTitle className="text-body-sm text-grey-400">Active Projects</CardTitle>
+              <div className="text-info mt-2">
                 {analyticsData?.length || 0}
               </div>
             </CardHeader>
@@ -120,8 +118,8 @@ export default function KPIsPage() {
           
           <Card variant="atlvs" className="bg-gradient-to-br from-atlvs-purple-500/20 to-atlvs-purple-600/20 border-atlvs-purple-500/30">
             <CardHeader>
-              <CardTitle className="text-body-sm text-gray-400">ROI</CardTitle>
-              <div className="text-h3 font-bebas text-atlvs-purple-500 mt-2">
+              <CardTitle className="text-body-sm text-grey-400">ROI</CardTitle>
+              <div className="text-atlvs-purple-500 mt-2">
                 24.3%
               </div>
             </CardHeader>

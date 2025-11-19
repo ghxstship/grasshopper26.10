@@ -34,7 +34,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className }) => {
           </HeroTitle>
 
           {/* Subtitle */}
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto">
             Community First Experiences<br />
             Experience First Communities
           </BodyText>
@@ -69,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className }) => {
           </div>
 
           {/* Stats */}
-          <Metadata className="text-gray-600 pt-8">
+          <Metadata className="text-grey-600 pt-8">
             5,000+ Members • 200+ Monthly Events • 500+ Artists • 160+ Brands
           </Metadata>
         </div>

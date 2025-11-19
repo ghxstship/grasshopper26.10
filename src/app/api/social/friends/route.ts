@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { SocialService } from '@/lib/services/social/friends.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function GET(_req: NextRequest) {
   try {
     const session = await getSession();
@@ -9,7 +17,7 @@ export async function GET(_req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const friends = await prisma.friendship.findMany({
+    const friends = await new SocialService().findAll({
       where: {
         OR: [
           { userId: session.user.id, status: 'ACCEPTED' },
@@ -24,7 +32,6 @@ export async function GET(_req: NextRequest) {
 
     return NextResponse.json({ friends });
   } catch (error) {
-    console.error('Error getting friends:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

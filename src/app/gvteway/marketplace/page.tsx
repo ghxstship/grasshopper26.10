@@ -124,7 +124,7 @@ export default function MarketplacePage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Marketplace</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto">
             Buy, sell, and trade tickets, merch, and exclusive experiences. 
             Secure payments. Authenticity guaranteed. Community-driven.
           </BodyText>
@@ -272,7 +272,7 @@ export default function MarketplacePage() {
                     </div>
                     <div className="text-right">
                       <div className="flex items-center gap-2">
-                        <span className="text-h4 font-bebas text-ghxst-primary">
+                        <span className="text-ghxst-primary">
                           ${item.price}
                         </span>
                       </div>

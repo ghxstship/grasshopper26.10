@@ -3,10 +3,26 @@ import { prisma } from '@/lib/prisma';
 import { createMembershipTierSchema } from '@/lib/validations/memberships';
 import { successResponse, createdResponse, handleApiError,  } from '@/lib/api/response';
 import { parseBody, getPaginationParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { MembershipsService } from '@/lib/services/memberships/tiers.service';
+
+
 
 // GET /api/memberships/tiers - List membership tiers
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const { searchParams } = new URL(request.url);
     const { page, limit, skip } = getPaginationParams(request);
 
@@ -25,7 +41,7 @@ export async function GET(request: NextRequest) {
     const total = await prisma.membershipTier.count({ where });
 
     // Get tiers
-    const tiers = await prisma.membershipTier.findMany({
+    const tiers = await new MembershipsService().findAll({
       where,
       skip,
       take: limit,
@@ -46,6 +62,17 @@ export async function GET(request: NextRequest) {
 // POST /api/memberships/tiers - Create membership tier
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -53,7 +80,7 @@ export async function POST(request: NextRequest) {
     const validatedData = createMembershipTierSchema.parse(body);
 
     // Create tier
-    const tier = await prisma.membershipTier.create({
+    const tier = await new MembershipsService().create({
       data: {
         organization: { connect: { id: validatedData.organizationId } },
         name: validatedData.name,

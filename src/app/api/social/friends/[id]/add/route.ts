@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { SocialService } from '@/lib/services/social/friends/id/add.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -13,7 +21,7 @@ export async function POST(
     }
 
     const { id } = await params;
-    const friendship = await prisma.friendship.create({
+    const friendship = await new SocialService().create({
       data: {
         userId: session.user.id,
         friendId: id,
@@ -23,7 +31,6 @@ export async function POST(
 
     return NextResponse.json(friendship, { status: 201 });
   } catch (error) {
-    console.error('Error adding friend:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

@@ -12,6 +12,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface Template {
   id: string;
@@ -22,6 +23,8 @@ interface Template {
   lastUsed: string;
   isFavorite: boolean;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/templates
 
 export default function TemplatesPage() {  
   const { documents: documentsData,  } = useDocuments('template');
@@ -53,7 +56,7 @@ export default function TemplatesPage() {
       Financial: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50',
       Operations: 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50'
     };
-    return colors[category] || 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+    return colors[category] || 'bg-grey-500/20 text-grey-500 border-grey-500/50';
   };
 
   return (
@@ -79,7 +82,7 @@ export default function TemplatesPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400" />
               <Input
                 type="text"
                 placeholder="Search templates..."
@@ -108,11 +111,11 @@ export default function TemplatesPage() {
         {/* Templates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           {filteredTemplates.map(template => (
-            <Card key={template.id} variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900 transition-all">
+            <Card key={template.id} variant="atlvs" className="bg-grey-900/50 hover:bg-grey-900 transition-all">
               <CardHeader>
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <FileText className="w-6 h-6 text-gray-400" />
+                    <FileText className="w-6 h-6 text-grey-400" />
                     {template.isFavorite && (
                       <Star className="w-5 h-5 text-warning fill-yellow-500" />
                     )}
@@ -123,9 +126,9 @@ export default function TemplatesPage() {
                 </div>
 
                 <CardTitle className="text-white mb-2">{template.name}</CardTitle>
-                <p className="text-body-sm text-gray-400 mb-4">{template.description}</p>
+                <p className="text-body-sm text-grey-400 mb-4">{template.description}</p>
 
-                <div className="flex items-center justify-between text-body-sm text-gray-400 mb-4 pb-4 border-b border-gray-700">
+                <div className="flex items-center justify-between text-body-sm text-grey-400 mb-4 pb-4 border-b border-grey-700">
                   <span>Used {template.usageCount} times</span>
                   <span>Last: {template.lastUsed}</span>
                 </div>
@@ -148,20 +151,20 @@ export default function TemplatesPage() {
         </div>
 
         {filteredTemplates.length === 0 && (
-          <Card variant="atlvs" className="bg-gray-900/50 p-12 text-center">
-            <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-400">No templates found</p>
+          <Card variant="atlvs" className="bg-grey-900/50 p-12 text-center">
+            <FileText className="w-12 h-12 text-grey-400 mx-auto mb-3" />
+            <BodyText className="text-grey-400">No templates found</BodyText>
           </Card>
         )}
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Total Templates</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">{templates.length}</CardTitle>
+                  <CardDescription className="text-grey-400 mb-1">Total Templates</CardDescription>
+                  <CardTitle >{templates.length}</CardTitle>
                 </div>
                 <div className="p-3 bg-atlvs-green-500/10 rounded-xl">
                   <FileText className="w-6 h-6 text-atlvs-green-500" />
@@ -170,12 +173,12 @@ export default function TemplatesPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Favorites</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Favorites</CardDescription>
+                  <CardTitle >
                     {templates.filter(t => t.isFavorite).length}
                   </CardTitle>
                 </div>
@@ -186,12 +189,12 @@ export default function TemplatesPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Total Uses</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Total Uses</CardDescription>
+                  <CardTitle >
                     {templates.reduce((sum, t) => sum + t.usageCount, 0)}
                   </CardTitle>
                 </div>
@@ -202,12 +205,12 @@ export default function TemplatesPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Categories</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">{categories.length - 1}</CardTitle>
+                  <CardDescription className="text-grey-400 mb-1">Categories</CardDescription>
+                  <CardTitle >{categories.length - 1}</CardTitle>
                 </div>
                 <div className="p-3 bg-accent/100/10 rounded-xl">
                   <FileText className="w-6 h-6 text-atlvs-purple-500" />

@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# GHXSTSHIP Design System Enforcement
+# Zero tolerance for design system violations
+
+echo "🎨 Enforcing GHXSTSHIP Design System..."
+npm run design:enforce
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ GHXSTSHIP Design System violations detected!"
+  echo "   Fix violations before committing."
+  echo "   Run 'npm run design:enforce' to see details."
+  echo ""
+  exit 1
+fi
+
+echo "✅ Design system compliance verified"

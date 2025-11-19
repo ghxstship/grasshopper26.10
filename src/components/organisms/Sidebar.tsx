@@ -45,14 +45,14 @@ const Sidebar: React.FC<SidebarProps> = ({
   const pathname = usePathname();
 
   const variantStyles = {
-    default: "bg-white border-gray-200 text-gray-900",
-    gvteway: "bg-gray-950 border-gvteway-red-900/20 text-gray-100",
-    compvss: "bg-gray-950 border-compvss-cyan-900/20 text-gray-100",
-    atlvs: "bg-gray-950 border-atlvs-green-900/20 text-gray-100",
+    default: "bg-white border-grey-200 text-grey-900",
+    gvteway: "bg-grey-950 border-gvteway-red-900/20 text-grey-100",
+    compvss: "bg-grey-950 border-compvss-cyan-900/20 text-grey-100",
+    atlvs: "bg-grey-950 border-atlvs-green-900/20 text-grey-100",
   };
 
   const activeStyles = {
-    default: "bg-gray-100 text-gray-900 border-l-4 border-gray-900",
+    default: "bg-grey-100 text-grey-900 border-l-4 border-grey-900",
     gvteway: "bg-gvteway-red-900/20 text-gvteway-red-400 border-l-4 border-gvteway-red-500",
     compvss: "bg-compvss-cyan-900/20 text-compvss-cyan-400 border-l-4 border-compvss-cyan-500",
     atlvs: "bg-atlvs-green-900/20 text-atlvs-green-400 border-l-4 border-atlvs-green-500",
@@ -84,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             depth > 0 && "pl-8",
             isActive
               ? activeStyles[variant]
-              : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+              : "text-grey-700 hover:bg-grey-50 hover:text-grey-900"
           )}
         >
           {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
@@ -92,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <>
               <span className="flex-1 truncate">{item.label}</span>
               {item.badge && (
-                <span className="flex-shrink-0 rounded-full bg-gray-200 px-2 py-0.5 text-caption">
+                <span className="flex-shrink-0 rounded-full bg-grey-200 px-2 py-0.5 text-caption">
                   {item.badge}
                 </span>
               )}
@@ -108,7 +108,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           )}
         </Link>
         {hasChildren && isExpanded && !isCollapsed && (
-          <div className="bg-gray-50/50">
+          <div className="bg-grey-50/50">
             {item.children!.map((child) => renderItem(child, depth + 1))}
           </div>
         )}
@@ -127,7 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     >
       {/* Header */}
       {header && (
-        <div className="flex items-center justify-between border-b border-gray-200 p-4">
+        <div className="flex items-center justify-between border-b border-grey-200 p-4">
           {!isCollapsed && header}
           {collapsible && (
             <IconButton
@@ -145,7 +145,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         {sections.map((section, index) => (
           <div key={index}>
             {section.title && !isCollapsed && (
-              <div className="px-4 py-2 text-caption text-gray-500 uppercaser">
+              <div className="px-4 py-2 text-caption text-grey-500 uppercaser">
                 {section.title}
               </div>
             )}
@@ -159,7 +159,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Footer */}
       {footer && !isCollapsed && (
-        <div className="border-t border-gray-200 p-4">
+        <div className="border-t border-grey-200 p-4">
           {footer}
         </div>
       )}

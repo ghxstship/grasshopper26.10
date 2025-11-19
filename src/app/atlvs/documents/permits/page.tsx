@@ -24,6 +24,8 @@ interface _Permit {
   authority: string;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/permits
+
 export default function PermitsPage() {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const { documents: permits, isLoading, error } = useDocuments('permit');
@@ -78,7 +80,7 @@ export default function PermitsPage() {
       case 'pending': return <Clock className="w-5 h-5 text-warning" />;
       case 'expired': return <AlertCircle className="w-5 h-5 text-error" />;
       case 'expiring-soon': return <AlertCircle className="w-5 h-5 text-atlvs-orange-500" />;
-      default: return <FileCheck className="w-5 h-5 text-gray-600" />;
+      default: return <FileCheck className="w-5 h-5 text-grey-600" />;
     }
   };
 
@@ -121,12 +123,12 @@ export default function PermitsPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Total Permits</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">{permits.length}</CardTitle>
+                  <CardDescription className="text-grey-400 mb-1">Total Permits</CardDescription>
+                  <CardTitle >{permits.length}</CardTitle>
                 </div>
                 <div className="p-3 bg-atlvs-green-500/10 rounded-xl">
                   <FileCheck className="w-6 h-6 text-atlvs-green-500" />
@@ -135,12 +137,12 @@ export default function PermitsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Active</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Active</CardDescription>
+                  <CardTitle >
                     {permits.filter(p => p.status === 'active').length}
                   </CardTitle>
                 </div>
@@ -151,12 +153,12 @@ export default function PermitsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Expiring Soon</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Expiring Soon</CardDescription>
+                  <CardTitle >
                     {permits.filter(p => p.status === 'expiring-soon').length}
                   </CardTitle>
                 </div>
@@ -167,12 +169,12 @@ export default function PermitsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Total Cost</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Total Cost</CardDescription>
+                  <CardTitle >
                     ${permits.reduce((sum, p) => sum + p.cost, 0).toLocaleString()}
                   </CardTitle>
                 </div>
@@ -185,10 +187,10 @@ export default function PermitsPage() {
         </div>
 
         {/* Filter */}
-        <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+        <Card variant="atlvs" className="bg-grey-900/50 mb-6">
           <CardHeader>
             <div className="flex items-center gap-4">
-              <span className="text-body-sm text-gray-300">Filter by status:</span>
+              <span className="text-body-sm text-grey-300">Filter by status:</span>
               <div className="flex gap-2">
                 {['all', 'active', 'pending', 'expiring-soon', 'expired'].map(status => (
                   <Button
@@ -207,59 +209,59 @@ export default function PermitsPage() {
         </Card>
 
         {/* Permits List */}
-        <Card variant="atlvs" className="bg-gray-900/50 overflow-hidden mb-6">
+        <Card variant="atlvs" className="bg-grey-900/50 overflow-hidden mb-6">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-800/50 border-b border-gray-700">
+              <thead className="bg-grey-800/50 border-b border-grey-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                  <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                     Permit
                   </th>
-                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                  <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                     Type
                   </th>
-                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                  <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                     Venue
                   </th>
-                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                  <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                     Expiry Date
                   </th>
-                  <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                  <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-right text-caption text-gray-400 uppercaser">
+                  <th className="px-6 py-3 text-right text-caption text-grey-400 uppercaser">
                     Cost
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-700">
+              <tbody className="divide-y divide-grey-700">
                 {filteredPermits.map(permit => {
                   const daysUntilExpiry = getDaysUntilExpiry(permit.expiryDate);
                   
                   return (
-                    <tr key={permit.id} className="hover:bg-gray-800/50 transition-colors">
+                    <tr key={permit.id} className="hover:bg-grey-800/50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           {getStatusIcon(permit.status)}
                           <div>
                             <div className="font-medium text-white">{permit.name}</div>
-                            <div className="text-body-sm text-gray-400">{permit.authority}</div>
+                            <div className="text-body-sm text-grey-400">{permit.authority}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <Badge variant="atlvs-outline" className="bg-gray-700/50">
+                        <Badge variant="atlvs-outline" className="bg-grey-700/50">
                           {permit.type}
                         </Badge>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1 text-body-sm text-gray-300">
+                        <div className="flex items-center gap-1 text-body-sm text-grey-300">
                           <MapPin className="w-4 h-4" />
                           {permit.venue}
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1 text-body-sm text-gray-300">
+                        <div className="flex items-center gap-1 text-body-sm text-grey-300">
                           <Calendar className="w-4 h-4" />
                           {permit.expiryDate}
                         </div>
@@ -294,10 +296,10 @@ export default function PermitsPage() {
             </CardTitle>
             <div className="space-y-3">
               {permits.filter(p => p.status === 'expiring-soon' || p.status === 'expired').map(permit => (
-                <div key={permit.id} className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
+                <div key={permit.id} className="flex items-center justify-between p-3 bg-grey-900/50 rounded-lg">
                   <div>
                     <div className="font-medium text-white">{permit.name}</div>
-                    <div className="text-body-sm text-gray-400">
+                    <div className="text-body-sm text-grey-400">
                       {permit.status === 'expired' ? 'Expired on' : 'Expires on'} {permit.expiryDate}
                     </div>
                   </div>

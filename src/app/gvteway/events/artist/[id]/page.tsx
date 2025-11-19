@@ -12,6 +12,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useArtist, useEvents } from '@/lib/hooks/gvteway';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/events/artist/[id]
 
 export default function ArtistPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -35,7 +38,7 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
         <div className="min-h-screen bg-black pt-20 pb-16 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 text-error mx-auto mb-4" />
-            <p className="text-white mb-4">Failed to load artist</p>
+            <BodyText className="text-white mb-4">Failed to load artist</BodyText>
             <Button variant="gvteway" onClick={() => window.location.reload()}>
               Retry
             </Button>
@@ -56,25 +59,25 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
               </div>
               
               <div className="text-center mb-12">
-                <h1 className="text-h1 font-anton text-white mb-4">{artist.name}</h1>
+                <h1 className="text-white mb-4">{artist.name}</h1>
                 <Badge variant="gvteway" className="mb-4">{artist.genre}</Badge>
-                <div className="flex items-center justify-center gap-2 text-gray-400">
+                <div className="flex items-center justify-center gap-2 text-grey-400">
                   <Users className="w-5 h-5" />
                   <span>{artist.followers.toLocaleString()} followers</span>
                 </div>
-                <p className="text-gray-300 mt-4 max-w-2xl mx-auto">{artist.bio}</p>
+                <p className="text-grey-300 mt-4 max-w-2xl mx-auto">{artist.bio}</p>
                 <Button variant="gvteway" size="lg" className="mt-6">Follow Artist</Button>
               </div>
 
-              <h2 className="text-h3 font-bebas text-white mb-6">Upcoming Shows</h2>
+              <SectionHeader className="text-white mb-6">Upcoming Shows</SectionHeader>
               <div className="grid md:grid-cols-2 gap-6">
                 {events && events.length > 0 ? (
                   events.map((event) => (
                     <Link key={event.id} href={`/gvteway/events/${event.id}`}>
-                      <Card variant="gvteway" className="bg-gray-900/50 hover:scale-105 transition-transform cursor-pointer">
+                      <Card variant="gvteway" className="bg-grey-900/50 hover:scale-105 transition-transform cursor-pointer">
                         <CardContent className="p-6">
-                          <h3 className="text-h4 font-bebas text-white mb-3">{event.name}</h3>
-                          <div className="space-y-2 text-gray-400 text-body-sm mb-4">
+                          <h3 className="text-white mb-3">{event.name}</h3>
+                          <div className="space-y-2 text-grey-400 text-body-sm mb-4">
                             <div className="flex items-center">
                               <Calendar className="w-4 h-4 mr-2" />
                               {new Date(event.startDate).toLocaleDateString()}
@@ -82,7 +85,7 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
                             <div>{event.location || 'Venue TBA'}</div>
                           </div>
                           <div className="flex items-center justify-between">
-                            <span className="text-h6 font-bebas text-gvteway-red-500">View Event</span>
+                            <span className="text-gvteway-red-500">View Event</span>
                             <Button variant="gvteway" size="sm">Get Tickets</Button>
                           </div>
                         </CardContent>
@@ -90,7 +93,7 @@ export default function ArtistPage({ params }: { params: Promise<{ id: string }>
                     </Link>
                   ))
                 ) : (
-                  <p className="text-gray-400 col-span-2">No upcoming events</p>
+                  <BodyText className="text-grey-400 col-span-2">No upcoming events</BodyText>
                 )}
               </div>
             </motion.div>

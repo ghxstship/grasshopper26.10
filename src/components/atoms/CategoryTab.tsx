@@ -15,7 +15,7 @@ export const CategoryTab = React.forwardRef<HTMLButtonElement, CategoryTabProps>
           "font-bebas text-h6 px-6 py-3 border-b-2 transition-all uppercase",
           active 
             ? "border-black text-black" 
-            : "border-transparent text-gray-500 hover:text-black hover:border-gray-300",
+            : "border-transparent text-grey-500 hover:text-black hover:border-grey-300",
           className
         )}
         {...props}

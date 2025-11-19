@@ -15,6 +15,9 @@ import { useCheckIns } from '@/lib/hooks/compvss/useCheckIns';
 import { useCompvssTasks } from '@/lib/hooks/compvss/useTasks';
 import { useIssues } from '@/lib/hooks/compvss/useIssues';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/hub
 
 export default function OperationsHubPage() {
   const { data: checkIns = [], isLoading: checkInsLoading, error: checkInsError, refetch: refetchCheckIns } = useCheckIns();
@@ -54,7 +57,7 @@ export default function OperationsHubPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading operations data...</p>
+              <BodyText className="text-grey-400">Loading operations data...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -75,8 +78,8 @@ export default function OperationsHubPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircleIcon className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Operations</h2>
-              <p className="text-gray-400 mb-4">{checkInsError.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Operations</SectionHeader>
+              <p className="text-grey-400 mb-4">{checkInsError.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetchCheckIns()}>
                 Try Again
               </Button>
@@ -128,20 +131,16 @@ export default function OperationsHubPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
-                    <div className={`p-2 rounded-lg ${
-                      stat.status === 'good' ? 'bg-success-light0/10 text-success' : 'bg-warning/10 text-warning'
-                    }`}>
+                    <div className={`p-2 rounded-lg ${ stat.status === 'good' ? 'bg-success-light0/10 text-success' : 'bg-warning/10 text-warning' }`}>
                       {stat.icon}
                     </div>
-                    <div className={`w-2 h-2 rounded-full ${
-                      stat.status === 'good' ? 'bg-success-light0' : 'bg-warning'
-                    } animate-pulse`} />
+                    <div className={`w-2 h-2 rounded-full ${ stat.status === 'good' ? 'bg-success-light0' : 'bg-warning' } animate-pulse`} />
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -155,7 +154,7 @@ export default function OperationsHubPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-white flex items-center gap-2">
@@ -180,7 +179,7 @@ export default function OperationsHubPage() {
                       className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all"
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-oswald text-white">{zone.name}</h3>
+                        <h3 className="text-white">{zone.name}</h3>
                         <Badge 
                           variant={zone.status === 'operational' ? 'compvss' : 'compvss-outline'}
                           className={zone.status === 'operational' 
@@ -191,7 +190,7 @@ export default function OperationsHubPage() {
                           {zone.status}
                         </Badge>
                       </div>
-                      <div className="flex items-center justify-between text-body-sm text-gray-400 font-share-tech">
+                      <div className="flex items-center justify-between text-body-sm text-grey-400 -tech">
                         <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1">
                             <Users2 className="w-4 h-4" />
@@ -218,7 +217,7 @@ export default function OperationsHubPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Clock className="w-5 h-5 text-compvss-cyan-500" />
@@ -235,14 +234,10 @@ export default function OperationsHubPage() {
                       transition={{ delay: 0.6 + index * 0.1 }}
                       className="flex items-start gap-3 p-3 rounded-lg bg-black/50 border border-compvss-cyan-500/20"
                     >
-                      <div className={`w-2 h-2 rounded-full mt-2 ${
-                        update.type === 'success' ? 'bg-success-light0' :
-                        update.type === 'warning' ? 'bg-warning' :
-                        'bg-info'
-                      }`} />
+                      <div className={`w-2 h-2 rounded-full mt-2 ${ update.type === 'success' ? 'bg-success-light0' : update.type === 'warning' ? 'bg-warning' : 'bg-info' }`} />
                       <div className="flex-1">
-                        <p className="text-white font-oswald text-body-sm">{update.message}</p>
-                        <p className="text-caption text-gray-500 font-share-tech mt-1">{update.time}</p>
+                        <p className="text-white text-body-sm">{update.message}</p>
+                        <p className="text-caption text-grey-500 -tech mt-1">{update.time}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -259,37 +254,37 @@ export default function OperationsHubPage() {
           transition={{ delay: 0.7 }}
           className="mt-8"
         >
-          <h2 className="text-h4 font-bebas text-white mb-4">Quick Actions</h2>
+          <SectionHeader className="text-white mb-4">Quick Actions</SectionHeader>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link href="/compvss/operations/checkin">
-              <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer">
+              <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer">
                 <CardContent className="pt-6 text-center">
                   <CheckCircle2 className="w-8 h-8 text-compvss-cyan-500 mx-auto mb-3" />
-                  <p className="font-oswald text-white">Check In</p>
+                  <BodyText className="text-white">Check In</BodyText>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/compvss/issues/new">
-              <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer">
+              <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer">
                 <CardContent className="pt-6 text-center">
                   <AlertTriangle className="w-8 h-8 text-compvss-cyan-500 mx-auto mb-3" />
-                  <p className="font-oswald text-white">Report Issue</p>
+                  <BodyText className="text-white">Report Issue</BodyText>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/compvss/operations/tasks">
-              <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer">
+              <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer">
                 <CardContent className="pt-6 text-center">
                   <Activity className="w-8 h-8 text-compvss-cyan-500 mx-auto mb-3" />
-                  <p className="font-oswald text-white">View Tasks</p>
+                  <BodyText className="text-white">View Tasks</BodyText>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/compvss/operations/schedule">
-              <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer">
+              <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer">
                 <CardContent className="pt-6 text-center">
                   <Clock className="w-8 h-8 text-compvss-cyan-500 mx-auto mb-3" />
-                  <p className="font-oswald text-white">Schedule</p>
+                  <BodyText className="text-white">Schedule</BodyText>
                 </CardContent>
               </Card>
             </Link>

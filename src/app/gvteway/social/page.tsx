@@ -12,6 +12,8 @@ const metadata = {
   description: 'Connect with the community, share experiences, and discover new friends',
 };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/social
+
 export default function SocialPage() {
   return (
     <DashboardPageTemplate

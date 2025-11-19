@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { CompvssService } from '@/lib/services/compvss/checkin/stats.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function GET(_req: NextRequest) {
   try {
     const session = await getSession();
@@ -27,7 +35,6 @@ export async function GET(_req: NextRequest) {
 
     return NextResponse.json(stats);
   } catch (error) {
-    console.error('Error getting check-in stats:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

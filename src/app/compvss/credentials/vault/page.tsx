@@ -15,6 +15,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { IconButton } from '@/components/atoms/IconButton';
 import { useCredentials, Credential } from '@/lib/hooks/compvss/useCredentials';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/credentials/vault
 
 export default function CredentialVaultPage() {
   const router = useRouter();
@@ -58,7 +61,7 @@ export default function CredentialVaultPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading credentials...</p>
+              <BodyText className="text-grey-400">Loading credentials...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -84,8 +87,8 @@ export default function CredentialVaultPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Credentials</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Credentials</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -134,15 +137,15 @@ export default function CredentialVaultPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
                     <div className={`p-2 bg-compvss-cyan-500/10 rounded-lg ${stat.color || 'text-compvss-cyan-500'}`}>
                       {stat.icon}
                     </div>
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -155,7 +158,7 @@ export default function CredentialVaultPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Shield className="w-5 h-5 text-compvss-cyan-500" />
@@ -176,12 +179,12 @@ export default function CredentialVaultPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <FileCheck className="w-4 h-4 text-compvss-cyan-500" />
-                          <h3 className="font-oswald text-white">{cred.name}</h3>
+                          <h3 className="text-white">{cred.name}</h3>
                         </div>
-                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-grey-400 -tech mb-2">
                           {cred.type}
                         </p>
-                        <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
+                        <div className="flex items-center gap-4 text-caption text-grey-500 -tech">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             Issued: {cred.issuedDate || 'N/A'}
@@ -202,8 +205,8 @@ export default function CredentialVaultPage() {
                         />
                       </div>
                     </div>
-                    <div className="flex items-center justify-between pt-3 border-t border-gray-800">
-                      <span className="text-caption text-gray-500 font-share-tech">
+                    <div className="flex items-center justify-between pt-3 border-t border-grey-800">
+                      <span className="text-caption text-grey-500 -tech">
                         ID: {cred.id}
                       </span>
                       <Link href={`/compvss/credentials/detail/${cred.id}`}>
@@ -226,10 +229,10 @@ export default function CredentialVaultPage() {
           transition={{ delay: 0.8 }}
           className="mt-6"
         >
-          <Card variant="compvss" className="bg-gray-900/30 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="bg-grey-900/30 border-compvss-cyan-500/20">
             <CardContent className="pt-6">
-              <h3 className="text-h6 font-bebas text-white mb-3">Credential Requirements</h3>
-              <ul className="space-y-2 text-body-sm text-gray-400 font-share-tech">
+              <SubsectionHeader className="text-white mb-3">Credential Requirements</SubsectionHeader>
+              <ul className="space-y-2 text-body-sm text-grey-400 -tech">
                 <li className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 bg-compvss-cyan-500 rounded-full mt-2" />
                   <span>Upload clear, legible copies of all certifications</span>

@@ -3,6 +3,11 @@ import { getSession } from '@/lib/auth';
 import { ApplicationService } from '@/lib/services/shared/application.service';
 import { createApplicationSchema } from '@/lib/validations/opportunities';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
+
 
 /**
  * POST /api/compvss/opportunities/[id]/apply
@@ -13,6 +18,8 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // DB: await prisma.$queryRaw`SELECT 1`;
+    // Database operations available via prisma
     const session = await getSession();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

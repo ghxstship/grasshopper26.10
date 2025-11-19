@@ -13,6 +13,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { useQRCodes, QRCode } from '@/lib/hooks/compvss/useQRCodes';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/qr/hub
 
 export default function QRHubPage() {
   const { data: qrCodes = [], isLoading, error, refetch } = useQRCodes();
@@ -96,7 +99,7 @@ export default function QRHubPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading QR codes...</p>
+              <BodyText className="text-grey-400">Loading QR codes...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -117,8 +120,8 @@ export default function QRHubPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load QR Codes</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load QR Codes</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -161,15 +164,15 @@ export default function QRHubPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
                     <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500">
                       {stat.icon}
                     </div>
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -183,7 +186,7 @@ export default function QRHubPage() {
           transition={{ delay: 0.4 }}
           className="mb-8"
         >
-          <h2 className="text-h4 font-bebas text-white mb-6">QR Code Categories</h2>
+          <SectionHeader className="text-white mb-6">QR Code Categories</SectionHeader>
           <div className="grid md:grid-cols-3 gap-6">
             {qrCategories.map((category, index) => (
               <motion.div
@@ -193,17 +196,17 @@ export default function QRHubPage() {
                 transition={{ delay: 0.5 + index * 0.1 }}
               >
                 <Link href={`/compvss/qr/category/${category.id}`}>
-                  <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer h-full">
+                  <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer h-full">
                     <CardContent className="pt-6">
                       <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4`}>
                         {category.icon}
                       </div>
-                      <h3 className="text-h5 font-bebas text-white mb-2">{category.name}</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech mb-4">
+                      <h3 className="text-white mb-2">{category.name}</h3>
+                      <p className="text-body-sm text-grey-400 -tech mb-4">
                         {category.description}
                       </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                        <span className="text-body-sm text-gray-500 font-share-tech">Active Codes</span>
+                      <div className="flex items-center justify-between pt-4 border-t border-grey-800">
+                        <span className="text-body-sm text-grey-500 -tech">Active Codes</span>
                         <Badge variant="compvss" className="bg-compvss-cyan-500/20 text-compvss-cyan-500">
                           {category.count}
                         </Badge>
@@ -222,7 +225,7 @@ export default function QRHubPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-white flex items-center gap-2">
@@ -245,8 +248,8 @@ export default function QRHubPage() {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div>
-                        <h3 className="font-oswald text-white">{scan.user}</h3>
-                        <p className="text-body-sm text-gray-400 font-share-tech">{scan.type}</p>
+                        <h3 className="text-white">{scan.user}</h3>
+                        <p className="text-body-sm text-grey-400 -tech">{scan.type}</p>
                       </div>
                       <Badge 
                         variant={scan.status === 'valid' ? 'compvss' : 'compvss-outline'}
@@ -255,7 +258,7 @@ export default function QRHubPage() {
                         {scan.status}
                       </Badge>
                     </div>
-                    <div className="flex items-center justify-between text-caption text-gray-500 font-share-tech">
+                    <div className="flex items-center justify-between text-caption text-grey-500 -tech">
                       <span>{scan.location}</span>
                       <span>{scan.time}</span>
                     </div>

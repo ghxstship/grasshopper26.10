@@ -16,6 +16,7 @@ import { FormField } from '@/components/molecules/FormField';
 import { useToast } from '@/lib/hooks/useToast';
 import { useEvent } from '@/lib/hooks/gvteway/useEvents';
 import { AlertCircle } from 'lucide-react';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
 
 function CheckoutContent() {
   const _router = useRouter();
@@ -51,7 +52,7 @@ function CheckoutContent() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-gvteway-red-500" />
-            <p className="text-gray-400">Loading event details...</p>
+            <BodyText className="text-grey-400">Loading event details...</BodyText>
           </div>
         </div>
       </GvtewayLayout>
@@ -65,8 +66,8 @@ function CheckoutContent() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Event</h2>
-            <p className="text-gray-400 mb-4">{error?.message || 'Event not found'}</p>
+            <SectionHeader className="mb-2">Failed to Load Event</SectionHeader>
+            <p className="text-grey-400 mb-4">{error?.message || 'Event not found'}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -178,24 +179,24 @@ function CheckoutContent() {
             >
               {/* Back Button */}
               <Link href="/gvteway/events">
-                <Button variant="ghost" size="sm" className="mb-6 text-gray-400 hover:text-white">
+                <Button variant="ghost" size="sm" className="mb-6 text-grey-400 hover:text-white">
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   Back to Event
                 </Button>
               </Link>
 
-              <h1 className="text-h1 font-anton mb-4 gvteway-text-gradient">
+              <HeroTitle className="mb-4 gvteway-text-gradient">
                 CHECKOUT
-              </h1>
-              <p className="text-h5 text-gray-400 font-oswald mb-12">
+              </HeroTitle>
+              <BodyText className="text-grey-400 mb-12">
                 Complete your ticket purchase
-              </p>
+              </BodyText>
 
               <div className="grid lg:grid-cols-3 gap-8">
                 {/* Main Content */}
                 <div className="lg:col-span-2 space-y-6">
                   {/* Ticket Selection */}
-                  <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
+                  <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm">
                     <CardHeader>
                       <CardTitle className="text-white">Select Tickets</CardTitle>
                     </CardHeader>
@@ -206,24 +207,20 @@ function CheckoutContent() {
                             key={type.id}
                             onClick={() => setTicketType(type.id)}
                             variant="ghost"
-                            className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
-                              ticketType === type.id
-                                ? 'border-gvteway-red-500 bg-gvteway-red-500/10'
-                                : 'border-gray-700 hover:border-gray-600'
-                            }`}
+                            className={`w-full p-4 rounded-xl border-2 transition-all text-left ${ ticketType === type.id ? 'border-gvteway-red-500 bg-gvteway-red-500/10' : 'border-grey-700 hover:border-grey-600' }`}
                           >
                             <div className="flex items-center justify-between">
                               <div>
                                 <h3 className="text-white mb-1">{type.name}</h3>
-                                <p className="text-gray-400 text-body-sm">
+                                <p className="text-grey-400 text-body-sm">
                                   {type.available} available
                                 </p>
                               </div>
                               <div className="text-right">
-                                <p className="text-h4 font-bebas text-gvteway-red-500">
+                                <p className="text-gvteway-red-500">
                                   ${type.price}
                                 </p>
-                                <p className="text-gray-400 text-body-sm">per ticket</p>
+                                <BodyText className="text-grey-400 text-body-sm">per ticket</BodyText>
                               </div>
                             </div>
                           </Button>
@@ -231,7 +228,7 @@ function CheckoutContent() {
                       </div>
 
                       {/* Quantity Selector */}
-                      <div className="mt-6 pt-6 border-t border-gray-800">
+                      <div className="mt-6 pt-6 border-t border-grey-800">
                         <FormField label="Quantity">
                           <div className="flex items-center gap-4">
                             <Button
@@ -242,7 +239,7 @@ function CheckoutContent() {
                             >
                               <Minus className="w-4 h-4" />
                             </Button>
-                            <span className="text-h4 font-bebas text-white w-12 text-center">
+                            <span className="text-white w-12 text-center">
                               {quantity}
                             </span>
                             <Button
@@ -253,7 +250,7 @@ function CheckoutContent() {
                             >
                               <Plus className="w-4 h-4" />
                             </Button>
-                            <span className="text-gray-400 text-body-sm ml-4">
+                            <span className="text-grey-400 text-body-sm ml-4">
                               Max 10 tickets per order
                             </span>
                           </div>
@@ -263,7 +260,7 @@ function CheckoutContent() {
                   </Card>
 
                   {/* Payment Information */}
-                  <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
+                  <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center">
                         <Lock className="w-5 h-5 mr-2 text-gvteway-red-500" />
@@ -274,7 +271,7 @@ function CheckoutContent() {
                       <form className="space-y-4">
                         <FormField label="Card Number">
                           <div className="relative">
-                            <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                            <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-500" />
                             <Input
                               type="text"
                               placeholder="1234 5678 9012 3456"
@@ -299,18 +296,18 @@ function CheckoutContent() {
                         </FormField>
                       </form>
 
-                      <div className="mt-6 p-4 bg-gray-800/50 rounded-lg flex items-start">
+                      <div className="mt-6 p-4 bg-grey-800/50 rounded-lg flex items-start">
                         <Shield className="w-5 h-5 text-success mr-3 mt-0.5 flex-shrink-0" />
-                        <div className="text-body-sm text-gray-300">
-                          <p className="font-medium text-white mb-1">Secure Payment</p>
-                          <p>Your payment information is encrypted and secure</p>
+                        <div className="text-body-sm text-grey-300">
+                          <BodyText className="font-medium text-white mb-1">Secure Payment</BodyText>
+                          <BodyText >Your payment information is encrypted and secure</BodyText>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
                   {/* Billing Address */}
-                  <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
+                  <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm">
                     <CardHeader>
                       <CardTitle className="text-white">Billing Address</CardTitle>
                     </CardHeader>
@@ -344,17 +341,17 @@ function CheckoutContent() {
 
                 {/* Order Summary Sidebar */}
                 <div className="lg:col-span-1">
-                  <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm sticky top-24">
+                  <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm sticky top-24">
                     <CardHeader>
                       <CardTitle className="text-white">Order Summary</CardTitle>
                     </CardHeader>
                     <CardContent>
                       {/* Event Info */}
-                      <div className="mb-6 pb-6 border-b border-gray-800">
-                        <h3 className="text-h5 font-bebas text-white mb-3">
+                      <div className="mb-6 pb-6 border-b border-grey-800">
+                        <h3 className="text-white mb-3">
                           {event.name}
                         </h3>
-                        <div className="space-y-2 text-body-sm text-gray-400">
+                        <div className="space-y-2 text-body-sm text-grey-400">
                           <div className="flex items-center">
                             <Calendar className="w-4 h-4 mr-2" />
                             {new Date(event.startDate).toLocaleDateString()} • {new Date(event.startDate).toLocaleTimeString()}
@@ -372,17 +369,17 @@ function CheckoutContent() {
 
                       {/* Price Breakdown */}
                       <div className="space-y-3 mb-6">
-                        <div className="flex justify-between text-gray-300">
+                        <div className="flex justify-between text-grey-300">
                           <span>Tickets ({quantity}x ${Number(selectedTicket.price).toFixed(2)})</span>
                           <span>${subtotal.toFixed(2)}</span>
                         </div>
-                        <div className="flex justify-between text-gray-300">
+                        <div className="flex justify-between text-grey-300">
                           <span>Service Fee</span>
                           <span>${serviceFee.toFixed(2)}</span>
                         </div>
-                        <div className="pt-3 border-t border-gray-800 flex justify-between">
-                          <span className="text-white text-h6">Total</span>
-                          <span className="text-h4 font-bebas text-gvteway-red-500">
+                        <div className="pt-3 border-t border-grey-800 flex justify-between">
+                          <span className="text-white">Total</span>
+                          <span className="text-gvteway-red-500">
                             ${total.toFixed(2)}
                           </span>
                         </div>
@@ -410,7 +407,7 @@ function CheckoutContent() {
                         )}
                       </Button>
 
-                      <p className="text-caption text-gray-500 text-center">
+                      <p className="text-caption text-grey-500 text-center">
                         By completing this purchase, you agree to our{' '}
                         <Link href="/terms" className="text-gvteway-red-500 hover:underline">
                           Terms of Service

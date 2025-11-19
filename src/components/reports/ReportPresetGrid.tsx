@@ -2,6 +2,7 @@
 
 import { ReportPresetCard } from './ReportPresetCard';
 import { Loader2 } from 'lucide-react';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface ReportPreset {
   id: string;
@@ -35,7 +36,7 @@ export function ReportPresetGrid({
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-          <p className="text-gray-400">Loading report presets...</p>
+          <BodyText className="text-grey-400">Loading report presets...</BodyText>
         </div>
       </div>
     );
@@ -44,7 +45,7 @@ export function ReportPresetGrid({
   if (!presets || presets.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-400">No report presets found</p>
+        <BodyText className="text-grey-400">No report presets found</BodyText>
       </div>
     );
   }

@@ -9,6 +9,9 @@ import { TrendingUp, AlertTriangle, DollarSign, Loader2, AlertCircle } from 'luc
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { useBudgetForecast } from '@/lib/hooks/atlvs/useBudgets';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets/forecast
 
 export default function BudgetForecastPage() {
   const { data, isLoading, error, refetch } = useBudgetForecast();
@@ -32,7 +35,7 @@ export default function BudgetForecastPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading budget forecast...</p>
+              <BodyText className="text-grey-400">Loading budget forecast...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -55,8 +58,8 @@ export default function BudgetForecastPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Forecast</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Forecast</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -78,34 +81,34 @@ export default function BudgetForecastPage() {
       >
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <CardDescription className="text-gray-400 mb-1">Total Projected</CardDescription>
-                <CardTitle className="text-h4 font-bebas">${totalProjected.toLocaleString()}</CardTitle>
+                <CardDescription className="text-grey-400 mb-1">Total Projected</CardDescription>
+                <CardTitle >${totalProjected.toLocaleString()}</CardTitle>
               </div>
               <TrendingUp className="w-8 h-8 text-info" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <CardDescription className="text-gray-400 mb-1">Actual Spend</CardDescription>
-                <CardTitle className="text-h4 font-bebas text-atlvs-green-500">${totalActual.toLocaleString()}</CardTitle>
+                <CardDescription className="text-grey-400 mb-1">Actual Spend</CardDescription>
+                <CardTitle className="text-atlvs-green-500">${totalActual.toLocaleString()}</CardTitle>
               </div>
               <DollarSign className="w-8 h-8 text-atlvs-green-500" />
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <CardDescription className="text-gray-400 mb-1">Variance</CardDescription>
-                <CardTitle className={`text-h4 font-bebas ${totalVariance > 0 ? 'text-atlvs-green-500' : 'text-error'}`}>
+                <CardDescription className="text-grey-400 mb-1">Variance</CardDescription>
+                <CardTitle className={`${totalVariance > 0 ? 'text-atlvs-green-500' : 'text-error'}`}>
                   ${Math.abs(totalVariance).toLocaleString()}
                 </CardTitle>
               </div>
@@ -116,24 +119,24 @@ export default function BudgetForecastPage() {
       </div>
 
       {/* Forecast Table */}
-      <Card variant="atlvs" className="bg-gray-900/50">
+      <Card variant="atlvs" className="bg-grey-900/50">
         <CardHeader>
           <CardTitle>Monthly Forecast</CardTitle>
         </CardHeader>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-800/50 border-b border-gray-700">
+            <thead className="bg-grey-800/50 border-b border-grey-700">
               <tr>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-400">Month</th>
-                <th className="px-4 py-3 text-right text-body-sm text-gray-400">Projected</th>
-                <th className="px-4 py-3 text-right text-body-sm text-gray-400">Actual</th>
-                <th className="px-4 py-3 text-right text-body-sm text-gray-400">Variance</th>
-                <th className="px-4 py-3 text-center text-body-sm text-gray-400">Status</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-400">Month</th>
+                <th className="px-4 py-3 text-right text-body-sm text-grey-400">Projected</th>
+                <th className="px-4 py-3 text-right text-body-sm text-grey-400">Actual</th>
+                <th className="px-4 py-3 text-right text-body-sm text-grey-400">Variance</th>
+                <th className="px-4 py-3 text-center text-body-sm text-grey-400">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-800">
+            <tbody className="divide-y divide-grey-800">
               {forecastData.map(data => (
-                <tr key={data.month} className="hover:bg-gray-800/50">
+                <tr key={data.month} className="hover:bg-grey-800/50">
                   <td className="px-4 py-3 text-body-sm text-white">{data.month}</td>
                   <td className="px-4 py-3 text-body-sm text-white text-right">
                     ${data.projected.toLocaleString()}
@@ -141,20 +144,16 @@ export default function BudgetForecastPage() {
                   <td className="px-4 py-3 text-body-sm text-white text-right">
                     {data.actual > 0 ? `$${data.actual.toLocaleString()}` : '-'}
                   </td>
-                  <td className={`px-4 py-3 text-body-sm text-right ${
-                    data.variance < 0 ? 'text-error' : data.variance > 0 ? 'text-atlvs-green-500' : 'text-gray-400'
-                  }`}>
+                  <td className={`px-4 py-3 text-body-sm text-right ${ data.variance < 0 ? 'text-error' : data.variance > 0 ? 'text-atlvs-green-500' : 'text-grey-400' }`}>
                     {data.variance !== 0 ? `$${Math.abs(data.variance).toLocaleString()}` : '-'}
                   </td>
                   <td className="px-4 py-3 text-center">
                     {data.actual > 0 ? (
-                      <span className={`px-3 py-1 rounded-full text-caption ${
-                        data.variance < 0 ? 'bg-atlvs-green-500/20 text-atlvs-green-500' : 'bg-error/20 text-error'
-                      }`}>
+                      <span className={`px-3 py-1 rounded-full text-caption ${ data.variance < 0 ? 'bg-atlvs-green-500/20 text-atlvs-green-500' : 'bg-error/20 text-error' }`}>
                         {data.variance < 0 ? 'Under Budget' : 'Over Budget'}
                       </span>
                     ) : (
-                      <span className="px-3 py-1 rounded-full text-caption bg-gray-700 text-gray-300">
+                      <span className="px-3 py-1 rounded-full text-caption bg-grey-700 text-grey-300">
                         Pending
                       </span>
                     )}

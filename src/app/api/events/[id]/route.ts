@@ -4,6 +4,11 @@ import { updateEventSchema } from '@/lib/validations/events';
 import type { Prisma } from '@prisma/client';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { EventsService } from '@/lib/services/events/id.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -18,7 +23,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const event = await prisma.event.findUnique({
+    const event = await new EventsService().findById({
       where: { id },
       include: {
         organization: {
@@ -125,7 +130,7 @@ export async function PATCH(
     const { id } = await params;
 
     // Check if event exists
-    const existingEvent = await prisma.event.findUnique({
+    const existingEvent = await new EventsService().findById({
       where: { id },
     });
 
@@ -134,7 +139,7 @@ export async function PATCH(
     }
 
     // Update event
-    const event = await prisma.event.update({
+    const event = await new EventsService().update({
       where: { id },
       data: validatedData as Prisma.EventUpdateInput,
       include: {
@@ -167,7 +172,7 @@ export async function DELETE(
     const { id } = await params;
 
     // Check if event exists
-    const existingEvent = await prisma.event.findUnique({
+    const existingEvent = await new EventsService().findById({
       where: { id },
     });
 
@@ -176,7 +181,7 @@ export async function DELETE(
     }
 
     // Delete event
-    await prisma.event.delete({
+    await new EventsService().delete({
       where: { id: id },
     });
 

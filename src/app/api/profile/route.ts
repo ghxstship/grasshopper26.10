@@ -9,6 +9,8 @@ import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { z } from 'zod';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { ProfileService } from '@/lib/services/profile.service';
+
 
 const updateProfileSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -39,7 +41,7 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const user = await prisma.user.findUnique({
+    const user = await new ProfileService().findById({
       where: { id: context.userId },
       select: {
         id: true,
@@ -107,7 +109,7 @@ export async function PATCH(request: NextRequest) {
     const data = validation.data;
 
     // Update user profile
-    const updatedUser = await prisma.user.update({
+    const updatedUser = await new ProfileService().update({
       where: { id: context.userId },
       data: {
         ...data,

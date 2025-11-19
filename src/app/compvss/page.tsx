@@ -4,6 +4,9 @@ import { CompvssLayout } from '@/components/templates/CompvssLayout';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss
 
 export default function COMPVSSPage() {
   return (
@@ -33,15 +36,15 @@ export default function COMPVSSPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="compvss-text-gradient mb-6">
+            <HeroTitle className="compvss-text-gradient mb-6">
               COMPVSS
-            </h1>
-            <p className="text-h3 font-bebas mb-4 text-gray-300">
+            </HeroTitle>
+            <BodyText className="mb-4 text-grey-300">
               EXTERNAL TEAMS & DAY-OF-SHOW OPERATIONS
-            </p>
-            <p className="text-h5 text-gray-400 max-w-3xl mx-auto mb-12 font-oswald">
+            </BodyText>
+            <BodyText className="text-grey-400 max-w-3xl mx-auto mb-12">
               Onboard production crews, manage affiliates, submit advancing requests, and coordinate day-of-show operations—all in one powerful platform.
-            </p>
+            </BodyText>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/compvss/dashboard">

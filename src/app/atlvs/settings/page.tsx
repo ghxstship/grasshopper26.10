@@ -14,6 +14,9 @@ import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { FormField } from '@/components/molecules/FormField';
 import { useSettings } from '@/lib/hooks/atlvs/useSettings';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/settings
 
 export default function SettingsPage() {  
   const [activeTab, setActiveTab] = useState('general');
@@ -41,7 +44,7 @@ export default function SettingsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <nav className="space-y-1" role="navigation" aria-label="Settings navigation">
                   {tabs.map((tab) => (
@@ -49,16 +52,12 @@ export default function SettingsPage() {
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
                       variant="ghost"
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                        activeTab === tab.id
-                          ? 'bg-atlvs-green-500 text-white'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-800'
-                      }`}
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${ activeTab === tab.id ? 'bg-atlvs-green-500 text-white' : 'text-grey-400 hover:text-white hover:bg-grey-800' }`}
                       aria-pressed={activeTab === tab.id}
                       aria-label={`${tab.label} settings`}
                     >
                       <tab.icon className="w-5 h-5" aria-hidden="true" />
-                      <span className="font-oswald">{tab.label}</span>
+                      <span >{tab.label}</span>
                     </Button>
                   ))}
                 </nav>
@@ -68,7 +67,7 @@ export default function SettingsPage() {
 
           {/* Content */}
           <div className="lg:col-span-3">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 {activeTab === 'general' && (
                   <div>
@@ -107,7 +106,7 @@ export default function SettingsPage() {
                     <CardTitle className="mb-6">Profile Settings</CardTitle>
                     <div className="space-y-6">
                       <div className="flex items-center gap-6">
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h4">
+                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                           JD
                         </div>
                         <Button variant="atlvs-outline" size="sm" aria-label="Change profile avatar">
@@ -155,10 +154,10 @@ export default function SettingsPage() {
                         { label: 'Budget Alerts', description: 'Alert when budgets exceed thresholds' },
                         { label: 'Team Updates', description: 'Updates from your team members' }
                       ].map((item, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg" role="group" aria-label={`${item.label} notification setting`}>
+                        <div key={index} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg" role="group" aria-label={`${item.label} notification setting`}>
                           <div>
-                            <div className="font-oswald text-white">{item.label}</div>
-                            <div className="text-body-sm text-gray-400">{item.description}</div>
+                            <div className="text-white">{item.label}</div>
+                            <div className="text-body-sm text-grey-400">{item.description}</div>
                           </div>
                           <Checkbox defaultChecked variant="atlvs" />
                         </div>
@@ -172,7 +171,7 @@ export default function SettingsPage() {
                     <CardTitle className="mb-6">Security Settings</CardTitle>
                     <div className="space-y-6">
                       <div>
-                        <h3 className="font-oswald text-white mb-4">Change Password</h3>
+                        <SubsectionHeader className="text-white mb-4">Change Password</SubsectionHeader>
                         <div className="space-y-4">
                           <Input
                             type="password"
@@ -194,11 +193,11 @@ export default function SettingsPage() {
                           </Button>
                         </div>
                       </div>
-                      <div className="pt-6 border-t border-gray-800">
-                        <h3 className="font-oswald text-white mb-4">Two-Factor Authentication</h3>
-                        <p className="text-gray-400 mb-4">
+                      <div className="pt-6 border-t border-grey-800">
+                        <SubsectionHeader className="text-white mb-4">Two-Factor Authentication</SubsectionHeader>
+                        <BodyText className="text-grey-400 mb-4">
                           Add an extra layer of security to your account
-                        </p>
+                        </BodyText>
                         <Button variant="atlvs-outline">
                           Enable 2FA
                         </Button>
@@ -212,7 +211,7 @@ export default function SettingsPage() {
                     <CardTitle className="mb-4">
                       {tabs.find(t => t.id === activeTab)?.label}
                     </CardTitle>
-                    <CardDescription className="text-gray-400">
+                    <CardDescription className="text-grey-400">
                       Settings for {tabs.find(t => t.id === activeTab)?.label.toLowerCase()} coming soon...
                     </CardDescription>
                   </div>

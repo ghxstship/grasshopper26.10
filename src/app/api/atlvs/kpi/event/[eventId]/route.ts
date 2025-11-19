@@ -3,13 +3,38 @@ import { createClient } from '@/lib/supabase/server';
 import { measureAsync } from '@/lib/performance/monitoring';
 import { withCache, CACHE_TTL, CACHE_PREFIX } from '@/lib/performance/cache';
 import { addCacheHeaders } from '@/lib/performance/compression';
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { errors , handleApiError } from '@/lib/api/response';
+import { z } from 'zod';
+import { prisma } from '@/lib/prisma';
+
+const eventIdSchema = z.object({
+  eventId: z.string().cuid(),
+});
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ eventId: string }> }
 ) {
   try {
-    const { eventId } = await params;
+    // Database: await prisma.$queryRaw`SELECT 1`;
+    // Database operations available via prisma
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.READ_OPERATIONS.limit,
+        RATE_LIMITS.READ_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
+    const { eventId } = eventIdSchema.parse(await params);
 
     // Use caching for KPI data (5 minute TTL)
     const metrics = await measureAsync(
@@ -51,11 +76,7 @@ export async function GET(
       staleWhileRevalidate: 600,
     });
   } catch (error) {
-    console.error('Error in KPI metrics API:', error);
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 

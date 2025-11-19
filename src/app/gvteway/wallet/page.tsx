@@ -12,6 +12,8 @@ const metadata = {
   description: 'Manage your digital passes, NFTs, credentials, and loyalty points.',
 };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/wallet
+
 export default function WalletPage() {
   return (
     <GvtewayLayout>
@@ -118,7 +120,7 @@ function WalletCard({ icon, title, count, href }: WalletCardProps) {
       <div className="text-ghxst-primary group-hover:text-ghxst-black transition-colors mb-4">
         {icon}
       </div>
-      <div className="text-h2 font-anton text-ghxst-primary mb-2">{count}</div>
+      <div className="text-ghxst-primary mb-2">{count}</div>
       <CardTitle className="text-ghxst-text-secondary">{title}</CardTitle>
     </Link>
   );

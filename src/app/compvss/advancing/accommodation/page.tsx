@@ -16,6 +16,8 @@ import { Select } from '@/components/atoms/Select';
 import { Textarea } from '@/components/atoms/Textarea';
 import { useAdvancingForm } from '@/lib/hooks/compvss/useAdvancingForm';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/advancing/accommodation
+
 export default function AccommodationAdvancingPage() {
   const router = useRouter();
   const { formData: rawFormData, errors, isSubmitting, handleChange, handleSubmit, handleSaveDraft } = useAdvancingForm({
@@ -35,13 +37,13 @@ export default function AccommodationAdvancingPage() {
       >
         <div className="max-w-4xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <Card variant="compvss" className="bg-gray-900/50">
+          <Card variant="compvss" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Hotel className="w-5 h-5 text-compvss-cyan-500" />
                 Accommodation Details
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Provide hotel and lodging requirements
               </CardDescription>
             </CardHeader>

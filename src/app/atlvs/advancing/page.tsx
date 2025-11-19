@@ -19,6 +19,7 @@ import { Input } from '@/components/atoms/Input';
 import { useAdvancingRequests } from '@/lib/hooks/atlvs/useAdvancingRequestQuery';
 import { useAdvancingStore } from '@/lib/stores';
 import { useDebounce } from 'use-debounce';
+import { BodyText, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
 
 interface AdvancingRequest {
   id: string;
@@ -91,7 +92,7 @@ export default function AdvancingPage() {
       case 'approved': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'rejected': return 'bg-error-light text-error border-error-border';
       case 'needs-info': return 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -101,7 +102,7 @@ export default function AdvancingPage() {
       case 'high': return 'bg-warning-light0';
       case 'medium': return 'bg-warning';
       case 'low': return 'bg-info';
-      default: return 'bg-gray-500';
+      default: return 'bg-grey-500';
     }
   };
 
@@ -155,7 +156,7 @@ export default function AdvancingPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading requests...</p>
+            <BodyText className="text-grey-400">Loading requests...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -169,8 +170,8 @@ export default function AdvancingPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Requests</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Requests</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -190,30 +191,30 @@ export default function AdvancingPage() {
       >
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8" role="region" aria-label="Advancing request statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Requests
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${statusCounts.all} total requests`}>
+                  <CardTitle  aria-label={`${statusCounts.all} total requests`}>
                     {statusCounts.all}
                   </CardTitle>
                 </div>
-                <Inbox className="w-6 h-6 text-gray-400" aria-hidden="true" />
+                <Inbox className="w-6 h-6 text-grey-400" aria-hidden="true" />
               </div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Pending
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-warning">
+                  <CardTitle className="text-warning">
                     {statusCounts.pending}
                   </CardTitle>
                 </div>
@@ -222,14 +223,14 @@ export default function AdvancingPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Under Review
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-info">
+                  <CardTitle className="text-info">
                     {statusCounts['under-review']}
                   </CardTitle>
                 </div>
@@ -238,14 +239,14 @@ export default function AdvancingPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Approved
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500">
+                  <CardTitle className="text-atlvs-green-500">
                     {statusCounts.approved}
                   </CardTitle>
                 </div>
@@ -254,14 +255,14 @@ export default function AdvancingPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Rejected
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-error">
+                  <CardTitle className="text-error">
                     {statusCounts.rejected}
                   </CardTitle>
                 </div>
@@ -275,7 +276,7 @@ export default function AdvancingPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
               <Input
                 type="text"
                 placeholder="Search requests..."
@@ -298,7 +299,7 @@ export default function AdvancingPage() {
           </Select>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <Filter className="w-4 h-4 mr-2" />
               More Filters
             </Button>
@@ -337,12 +338,12 @@ export default function AdvancingPage() {
         {/* Requests List */}
         <div className="space-y-4">
           {filteredRequests.length === 0 ? (
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="text-center py-12">
-                  <Inbox className="w-12 h-12 mx-auto mb-4 text-gray-500" />
-                  <h3 className="text-h6 font-bebas mb-2">No Requests Found</h3>
-                  <p className="text-gray-400">
+                  <Inbox className="w-12 h-12 mx-auto mb-4 text-grey-500" />
+                  <SubsectionHeader className="mb-2">No Requests Found</SubsectionHeader>
+                  <p className="text-grey-400">
                     {debouncedSearch ? 'Try adjusting your search or filters' : 'No advancing requests at this time'}
                   </p>
                 </div>
@@ -359,7 +360,7 @@ export default function AdvancingPage() {
               <Link href={`/atlvs/advancing/${request.id}`}>
                 <Card 
                   variant="atlvs" 
-                  className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer"
+                  className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer"
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between gap-4">
@@ -377,7 +378,7 @@ export default function AdvancingPage() {
                         <CardTitle className="text-white mb-2">
                           {request.title}
                         </CardTitle>
-                        <div className="flex items-center gap-4 text-body-sm text-gray-400">
+                        <div className="flex items-center gap-4 text-body-sm text-grey-400">
                           <span>{request.requestedBy || 'Unknown'}</span>
                           <span>•</span>
                           <span>{request.project || 'N/A'}</span>

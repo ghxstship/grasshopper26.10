@@ -13,6 +13,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 import { useQRCodes, QRCode } from '@/lib/hooks/compvss/useQRCodes';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/qr/history
 
 export default function QRHistoryPage() {
   const { data: qrCodes = [], isLoading, error, refetch } = useQRCodes();
@@ -45,7 +48,7 @@ export default function QRHistoryPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading scan history...</p>
+              <BodyText className="text-grey-400">Loading scan history...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -66,8 +69,8 @@ export default function QRHistoryPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load History</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load History</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -123,10 +126,10 @@ export default function QRHistoryPage() {
           className="mb-6"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
             <Input
               placeholder="Search by user, location, or QR ID..."
-              className="pl-12 bg-gray-900/50 border-compvss-cyan-500/30 h-12"
+              className="pl-12 bg-grey-900/50 border-compvss-cyan-500/30 h-12"
             />
           </div>
         </motion.div>
@@ -137,7 +140,7 @@ export default function QRHistoryPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <History className="w-5 h-5 text-compvss-cyan-500" />
@@ -162,11 +165,11 @@ export default function QRHistoryPage() {
                           </Badge>
                           {getStatusBadge(scan.status)}
                         </div>
-                        <h3 className="font-oswald text-white mb-1">{scan.user}</h3>
-                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                        <h3 className="text-white mb-1">{scan.user}</h3>
+                        <p className="text-body-sm text-grey-400 -tech mb-2">
                           {scan.location}
                         </p>
-                        <div className="flex items-center gap-4 text-caption text-gray-500 font-share-tech">
+                        <div className="flex items-center gap-4 text-caption text-grey-500 -tech">
                           <span>QR ID: {scan.qrId}</span>
                           <span>•</span>
                           <span>{typeof scan.timestamp === 'string' ? scan.timestamp : new Date(scan.timestamp).toLocaleString()}</span>

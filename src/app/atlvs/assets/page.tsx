@@ -17,6 +17,7 @@ import { Select } from '@/components/atoms/Select';
 import { Input } from '@/components/atoms/Input';
 import { useAssets } from '@/lib/hooks/atlvs/useAssets';
 import { useDebounce } from 'use-debounce';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface _Asset {
   id: string;
@@ -31,6 +32,8 @@ interface _Asset {
   nextMaintenance: string;
   value: number;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/assets
 
 export default function AssetsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -167,7 +170,7 @@ export default function AssetsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading assets...</p>
+            <BodyText className="text-grey-400">Loading assets...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -180,8 +183,8 @@ export default function AssetsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Assets</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Assets</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -206,8 +209,8 @@ export default function AssetsPage() {
       case 'available': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'in-use': return 'bg-info-light text-info border-info-border';
       case 'maintenance': return 'bg-warning-light text-warning border-warning-border';
-      case 'retired': return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      case 'retired': return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -239,14 +242,14 @@ export default function AssetsPage() {
       >
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" role="region" aria-label="_Asset statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Assets
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${statusCounts.all} total assets`}>
+                  <CardTitle  aria-label={`${statusCounts.all} total assets`}>
                     {statusCounts.all}
                   </CardTitle>
                 </div>
@@ -257,14 +260,14 @@ export default function AssetsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Available
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500" aria-label={`${statusCounts.available} assets available`}>
+                  <CardTitle className="text-atlvs-green-500" aria-label={`${statusCounts.available} assets available`}>
                     {statusCounts.available}
                   </CardTitle>
                 </div>
@@ -275,14 +278,14 @@ export default function AssetsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     In Use
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-info" aria-label={`${statusCounts['in-use']} assets in use`}>
+                  <CardTitle className="text-info" aria-label={`${statusCounts['in-use']} assets in use`}>
                     {statusCounts['in-use']}
                   </CardTitle>
                 </div>
@@ -293,14 +296,14 @@ export default function AssetsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Value
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${formatCurrency(totalValue)} total asset value`}>
+                  <CardTitle  aria-label={`${formatCurrency(totalValue)} total asset value`}>
                     {formatCurrency(totalValue)}
                   </CardTitle>
                 </div>
@@ -316,7 +319,7 @@ export default function AssetsPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" aria-hidden="true" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" aria-hidden="true" />
               <Input
                 type="text"
                 placeholder="Search assets..."
@@ -339,7 +342,7 @@ export default function AssetsPage() {
           </Select>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <Filter className="w-4 h-4 mr-2" />
               More Filters
             </Button>
@@ -387,7 +390,7 @@ export default function AssetsPage() {
               <Link href={`/atlvs/assets/${asset.id}`}>
                 <Card 
                   variant="atlvs" 
-                  className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer h-full"
+                  className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer h-full"
                 >
                   <CardHeader>
                     {/* Header */}
@@ -423,30 +426,30 @@ export default function AssetsPage() {
                     {/* Details */}
                     <div className="space-y-2 text-body-sm">
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Location:</span>
+                        <span className="text-grey-400">Location:</span>
                         <span className="text-white">{asset.location}</span>
                       </div>
                       {asset.assignedTo && (
                         <div className="flex justify-between">
-                          <span className="text-gray-400">Assigned:</span>
+                          <span className="text-grey-400">Assigned:</span>
                           <span className="text-white">{asset.assignedTo}</span>
                         </div>
                       )}
                       {asset.project && (
                         <div className="flex justify-between">
-                          <span className="text-gray-400">Project:</span>
+                          <span className="text-grey-400">Project:</span>
                           <span className="text-white truncate ml-2">{asset.project}</span>
                         </div>
                       )}
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Value:</span>
-                        <span className="text-white font-bebas">{formatCurrency(asset.value)}</span>
+                        <span className="text-grey-400">Value:</span>
+                        <span className="text-white">{formatCurrency(asset.value)}</span>
                       </div>
                     </div>
 
                     {/* QR Code */}
-                    <div className="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-caption text-gray-400">
+                    <div className="mt-4 pt-4 border-t border-grey-800 flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-caption text-grey-400">
                         <QrCode className="w-3 h-3" />
                         <span>{asset.qrCode}</span>
                       </div>

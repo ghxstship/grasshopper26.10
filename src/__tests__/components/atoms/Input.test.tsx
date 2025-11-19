@@ -9,7 +9,7 @@ describe('Input Component', () => {
       render(<Input placeholder="Enter text" />)
       const input = screen.getByPlaceholderText('Enter text')
       expect(input).toBeInTheDocument()
-      expect(input).toHaveClass('focus:ring-gray-500', 'focus:border-gray-500')
+      expect(input).toHaveClass('focus:ring-grey-500', 'focus:border-grey-500')
     })
 
     it('renders as input element', () => {
@@ -255,9 +255,9 @@ describe('Input Component', () => {
         'flex',
         'h-11',
         'w-full',
-        'rounded-lg',
+        'rounded-none',
         'border-2',
-        'border-gray-300',
+        'border-grey-300',
         'bg-white',
         'px-4',
         'py-2',
@@ -280,13 +280,13 @@ describe('Input Component', () => {
     it('has placeholder styles', () => {
       render(<Input data-testid="input" />)
       const input = screen.getByTestId('input')
-      expect(input).toHaveClass('placeholder:text-gray-400')
+      expect(input).toHaveClass('placeholder:text-grey-400')
     })
 
     it('has dark mode styles', () => {
       render(<Input data-testid="input" />)
       const input = screen.getByTestId('input')
-      expect(input).toHaveClass('dark:bg-gray-900', 'dark:border-gray-700', 'dark:text-white')
+      expect(input).toHaveClass('dark:bg-grey-900', 'dark:border-grey-700', 'dark:text-white')
     })
   })
 

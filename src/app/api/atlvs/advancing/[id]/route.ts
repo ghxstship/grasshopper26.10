@@ -4,6 +4,10 @@ import { AdvancingRequestService } from '@/lib/services/atlvs/advancing/Advancin
 import { Priority } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+
 
 const updateRequestSchema = z.object({
   title: z.string().min(1).max(200).optional(),

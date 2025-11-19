@@ -7,9 +7,32 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { hashToken, isTokenExpired } from '@/lib/auth/tokens';
 import { emailVerificationSchema } from '@/lib/validations/auth';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { z } from 'zod';
+import { handleApiError } from '@/lib/api/response';
+import { AuthService } from '@/lib/services/auth/verifyEmail.service';
+
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const body = await request.json();
     
     // Validate request
@@ -66,10 +89,6 @@ export async function POST(request: NextRequest) {
       message: 'Email verified successfully',
     });
   } catch (error) {
-    console.error('Email verification error:', error);
-    return NextResponse.json(
-      { error: 'Failed to verify email' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

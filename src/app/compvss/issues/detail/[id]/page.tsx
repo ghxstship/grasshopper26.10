@@ -12,6 +12,9 @@ import { Button } from '@/components/atoms/Button';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { BodyText } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/issues/detail/[id]
 
 export default function IssueDetailPage() {
   const breadcrumbs = [
@@ -52,12 +55,12 @@ function IssueDetailContent() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-h3 font-bebas compvss-text-gradient">{issue.id}</h1>
+                <h1 className="compvss-text-gradient">{issue.id}</h1>
                 <Badge variant="compvss" className="bg-error-light text-error border-destructive/30">
                   {issue.priority}
                 </Badge>
@@ -65,7 +68,7 @@ function IssueDetailContent() {
                   {issue.status.replace('_', ' ')}
                 </Badge>
               </div>
-              <p className="text-gray-400 font-oswald">{issue.title}</p>
+              <p className="text-grey-400">{issue.title}</p>
             </div>
             <div className="flex gap-3">
               <Button variant="compvss-outline" size="sm">
@@ -85,12 +88,12 @@ function IssueDetailContent() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardHeader>
                   <CardTitle className="text-white">Description</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300 font-share-tech">
+                  <p className="text-grey-300 -tech">
                     {issue.description}
                   </p>
                 </CardContent>
@@ -98,7 +101,7 @@ function IssueDetailContent() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <MessageSquare className="w-5 h-5 text-compvss-cyan-500" />
@@ -108,15 +111,15 @@ function IssueDetailContent() {
                 <CardContent>
                   <div className="space-y-4">
                     {updates.map((update, index) => (
-                      <div key={index} className="flex gap-3 pb-4 border-b border-gray-800 last:border-0">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-body-sm flex-shrink-0">
+                      <div key={index} className="flex gap-3 pb-4 border-b border-grey-800 last:border-0">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center text-black text-body-sm flex-shrink-0">
                           {update.user.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div className="flex-1">
-                          <p className="text-body-sm text-gray-300 font-share-tech">
-                            <span className="text-white font-oswald">{update.user}</span> {update.action}
+                          <p className="text-body-sm text-grey-300 -tech">
+                            <span className="text-white">{update.user}</span> {update.action}
                           </p>
-                          <p className="text-caption text-gray-500 font-share-tech mt-1">{update.time}</p>
+                          <p className="text-caption text-grey-500 -tech mt-1">{update.time}</p>
                         </div>
                       </div>
                     ))}
@@ -129,50 +132,50 @@ function IssueDetailContent() {
           {/* Sidebar */}
           <div className="space-y-6">
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardHeader>
                   <CardTitle className="text-white">Details</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <p className="text-caption text-gray-500 font-oswald mb-1">Reporter</p>
+                    <BodyText className="text-caption text-grey-500 mb-1">Reporter</BodyText>
                     <div className="flex items-center gap-2">
-                      <User className="w-4 h-4 text-gray-400" />
-                      <span className="text-body-sm text-white font-share-tech">{issue.reporter}</span>
+                      <User className="w-4 h-4 text-grey-400" />
+                      <span className="text-body-sm text-white -tech">{issue.reporter}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-caption text-gray-500 font-oswald mb-1">Assignee</p>
+                    <BodyText className="text-caption text-grey-500 mb-1">Assignee</BodyText>
                     <div className="flex items-center gap-2">
-                      <User className="w-4 h-4 text-gray-400" />
-                      <span className="text-body-sm text-white font-share-tech">{issue.assignee}</span>
+                      <User className="w-4 h-4 text-grey-400" />
+                      <span className="text-body-sm text-white -tech">{issue.assignee}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-caption text-gray-500 font-oswald mb-1">Location</p>
+                    <BodyText className="text-caption text-grey-500 mb-1">Location</BodyText>
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-gray-400" />
-                      <span className="text-body-sm text-white font-share-tech">{issue.location}</span>
+                      <MapPin className="w-4 h-4 text-grey-400" />
+                      <span className="text-body-sm text-white -tech">{issue.location}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-caption text-gray-500 font-oswald mb-1">Category</p>
+                    <BodyText className="text-caption text-grey-500 mb-1">Category</BodyText>
                     <Badge variant="compvss-outline" className="text-caption">
                       {issue.category}
                     </Badge>
                   </div>
                   <div>
-                    <p className="text-caption text-gray-500 font-oswald mb-1">Created</p>
+                    <BodyText className="text-caption text-grey-500 mb-1">Created</BodyText>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-gray-400" />
-                      <span className="text-body-sm text-white font-share-tech">{issue.created}</span>
+                      <Clock className="w-4 h-4 text-grey-400" />
+                      <span className="text-body-sm text-white -tech">{issue.created}</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-caption text-gray-500 font-oswald mb-1">Last Updated</p>
+                    <BodyText className="text-caption text-grey-500 mb-1">Last Updated</BodyText>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-gray-400" />
-                      <span className="text-body-sm text-white font-share-tech">{issue.updated}</span>
+                      <Clock className="w-4 h-4 text-grey-400" />
+                      <span className="text-body-sm text-white -tech">{issue.updated}</span>
                     </div>
                   </div>
                 </CardContent>

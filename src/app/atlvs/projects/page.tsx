@@ -29,6 +29,8 @@ interface Project {
   tasks: { total: number; completed: number };
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/projects
+
 export default function ProjectsPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
@@ -56,7 +58,7 @@ export default function ProjectsPage() {
       case 'active': return 'bg-atlvs-green-500';
       case 'planning': return 'bg-info';
       case 'on-hold': return 'bg-warning';
-      case 'completed': return 'bg-gray-500';
+      case 'completed': return 'bg-grey-500';
     }
   };
 
@@ -103,11 +105,11 @@ export default function ProjectsPage() {
           variant="atlvs"
           showToolbar={false}
         >
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-8">
                 <AlertCircle className="w-12 h-12 text-error mx-auto mb-4" />
-                <p className="text-gray-400 mb-4">
+                <p className="text-grey-400 mb-4">
                   {error instanceof Error ? error.message : 'Failed to load projects'}
                 </p>
                 <Button variant="atlvs" onClick={() => refetch()}>
@@ -131,14 +133,14 @@ export default function ProjectsPage() {
       >
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" role="region" aria-label="Project statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Projects
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.total} total projects`}>
+                  <CardTitle  aria-label={`${stats.total} total projects`}>
                     {stats.total}
                   </CardTitle>
                 </div>
@@ -149,14 +151,14 @@ export default function ProjectsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Active Projects
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.active} active projects`}>
+                  <CardTitle  aria-label={`${stats.active} active projects`}>
                     {stats.active}
                   </CardTitle>
                 </div>
@@ -167,14 +169,14 @@ export default function ProjectsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Budget
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${formatCurrency(stats.totalBudget)} total budget`}>
+                  <CardTitle  aria-label={`${formatCurrency(stats.totalBudget)} total budget`}>
                     {formatCurrency(stats.totalBudget)}
                   </CardTitle>
                 </div>
@@ -185,14 +187,14 @@ export default function ProjectsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Team Members
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {stats.totalTeam}
                   </CardTitle>
                 </div>
@@ -208,7 +210,7 @@ export default function ProjectsPage() {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4 flex-1">
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
               <Input
                 type="text"
                 placeholder="Search projects..."
@@ -218,7 +220,7 @@ export default function ProjectsPage() {
                 className="pl-10"
               />
             </div>
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <Filter className="w-4 h-4 mr-2" />
               Filter
             </Button>
@@ -262,7 +264,7 @@ export default function ProjectsPage() {
               <Link href={`/atlvs/projects/${project.id}`}>
                 <Card 
                   variant="atlvs" 
-                  className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer h-full"
+                  className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer h-full"
                 >
                   <CardHeader>
                     {/* Header */}
@@ -271,7 +273,7 @@ export default function ProjectsPage() {
                         <CardTitle className="text-white mb-1">
                           {project.name}
                         </CardTitle>
-                        <CardDescription className="text-gray-400">
+                        <CardDescription className="text-grey-400">
                           {project.client}
                         </CardDescription>
                       </div>
@@ -286,10 +288,10 @@ export default function ProjectsPage() {
                     {/* Progress */}
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-caption text-gray-400 font-oswald">Progress</span>
-                        <span className="text-caption text-white font-bebas">{project.progress}%</span>
+                        <span className="text-caption text-grey-400">Progress</span>
+                        <span className="text-caption text-white">{project.progress}%</span>
                       </div>
-                      <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                      <div className="h-2 bg-grey-800 rounded-full overflow-hidden">
                         <motion.div
                           className="h-full bg-atlvs-green-500"
                           initial={{ width: 0 }}
@@ -302,21 +304,21 @@ export default function ProjectsPage() {
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div>
-                        <div className="text-caption text-gray-400 mb-1">Budget</div>
-                        <div className="text-body-sm font-bebas text-white">
+                        <div className="text-caption text-grey-400 mb-1">Budget</div>
+                        <div className="text-body-sm text-white">
                           {formatCurrency(project.budget)}
                         </div>
                       </div>
                       <div>
-                        <div className="text-caption text-gray-400 mb-1">Spent</div>
-                        <div className="text-body-sm font-bebas text-white">
+                        <div className="text-caption text-grey-400 mb-1">Spent</div>
+                        <div className="text-body-sm text-white">
                           {formatCurrency(project.spent)}
                         </div>
                       </div>
                     </div>
 
                     {/* Meta */}
-                    <div className="flex items-center justify-between text-caption text-gray-400">
+                    <div className="flex items-center justify-between text-caption text-grey-400">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
                         <span>{new Date(project.endDate).toLocaleDateString()}</span>

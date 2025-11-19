@@ -10,6 +10,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { useReferralLeaderboard } from '@/lib/hooks/compvss/useReferrals';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/referrals/leaderboard
 
 export default function ReferralLeaderboardPage() {
   const breadcrumbs = [
@@ -27,7 +30,7 @@ export default function ReferralLeaderboardPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading leaderboard...</p>
+            <BodyText className="text-grey-400">Loading leaderboard...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -40,8 +43,8 @@ export default function ReferralLeaderboardPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Leaderboard</h2>
-            <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+            <SectionHeader className="mb-2">Failed to Load Leaderboard</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -55,15 +58,15 @@ export default function ReferralLeaderboardPage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-h3 font-bebas compvss-text-gradient">Referral Leaderboard</h1>
-          <p className="text-gray-400 font-oswald mt-1">Top referrers this month</p>
+          <HeroTitle className="compvss-text-gradient">Referral Leaderboard</HeroTitle>
+          <BodyText className="text-grey-400 mt-1">Top referrers this month</BodyText>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Trophy className="w-5 h-5 text-warning" />
@@ -82,24 +85,15 @@ export default function ReferralLeaderboardPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bebas text-h4 ${
-                        leader.rank === 1 ? 'bg-gradient-to-r from-yellow-500 to-amber-600 text-black' :
-                        leader.rank === 2 ? 'bg-gradient-to-r from-gray-400 to-gray-500 text-black' :
-                        leader.rank === 3 ? 'bg-gradient-to-r from-orange-600 to-orange-700 text-black' :
-                        'bg-gray-800 text-white'
-                      }`}>
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${ leader.rank === 1 ? 'bg-gradient-to-r from-yellow-500 to-amber-600 text-black' : leader.rank === 2 ? 'bg-gradient-to-r from-grey-400 to-grey-500 text-black' : leader.rank === 3 ? 'bg-gradient-to-r from-orange-600 to-orange-700 text-black' : 'bg-grey-800 text-white' }`}>
                         {leader.rank}
                       </div>
                       <div>
-                        <h3 className="font-oswald text-white mb-1">{leader.name}</h3>
-                        <div className="flex items-center gap-3 text-body-sm text-gray-400 font-share-tech">
+                        <h3 className="text-white mb-1">{leader.name}</h3>
+                        <div className="flex items-center gap-3 text-body-sm text-grey-400 -tech">
                           <span>{leader.referrals} referrals</span>
                           {leader.badge && (
-                            <Badge variant="compvss" className={`text-caption ${
-                              leader.badge === 'Gold' ? 'bg-warning-light text-warning' :
-                              leader.badge === 'Silver' ? 'bg-gray-400/20 text-gray-400' :
-                              'bg-warning/20 text-atlvs-orange-500'
-                            }`}>
+                            <Badge variant="compvss" className={`text-caption ${ leader.badge === 'Gold' ? 'bg-warning-light text-warning' : leader.badge === 'Silver' ? 'bg-grey-400/20 text-grey-400' : 'bg-warning/20 text-atlvs-orange-500' }`}>
                               <Award className="w-3 h-3 mr-1" />
                               {leader.badge}
                             </Badge>
@@ -108,8 +102,8 @@ export default function ReferralLeaderboardPage() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-h5 font-bebas text-compvss-cyan-500">{leader.earnings}</div>
-                      <div className="flex items-center gap-1 text-caption text-success font-share-tech">
+                      <div className="text-compvss-cyan-500">{leader.earnings}</div>
+                      <div className="flex items-center gap-1 text-caption text-success -tech">
                         <TrendingUp className="w-3 h-3" />
                         <span>+{leader.referrals * 2}%</span>
                       </div>

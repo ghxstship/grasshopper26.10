@@ -4,6 +4,8 @@ import { successResponse, createdResponse, handleApiError, errors,  } from '@/li
 import { validateRequest, requireAuth, parseBody, parseQuery, rateLimit,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { createAdvancingRequestSchema, queryAdvancingRequestsSchema,  } from '@/lib/validations/advancing';
+import { CompvssService } from '@/lib/services/compvss/advancing.service';
+
 
 // GET /api/compvss/advancing - List advancing requests
 export async function GET(request: NextRequest) {
@@ -90,7 +92,7 @@ export async function POST(request: NextRequest) {
     const body = await parseBody(request);
     const validatedData = createAdvancingRequestSchema.parse(body);
 
-    const advancingRequest = await prisma.advancingRequest.create({
+    const advancingRequest = await new CompvssService().create({
       data: {
         userId: validatedData.requestedBy,
         eventId: validatedData.eventId,

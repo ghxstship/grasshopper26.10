@@ -15,6 +15,7 @@ import { FormField } from '@/components/molecules/FormField';
 import { Select } from '@/components/atoms/Select';
 import { Textarea } from '@/components/atoms/Textarea';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { BodyText, HeroTitle, SubsectionHeader } from "@/components/atoms/Typography";
 
 export default function InvitePage() {
   const [emails, setEmails] = useState(['']);
@@ -68,21 +69,21 @@ export default function InvitePage() {
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <Link href="/compvss">
-              <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
+              <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                 COMPVSS
-              </h1>
+              </HeroTitle>
             </Link>
-            <p className="text-gray-400 font-oswald">Invite Team Members</p>
+            <BodyText className="text-grey-400">Invite Team Members</BodyText>
           </div>
 
           {/* Invite Card */}
-          <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <UserPlus className="w-5 h-5 text-compvss-cyan-500" />
                 Send Invitations
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Invite crew members and staff to join your team
               </CardDescription>
             </CardHeader>
@@ -93,7 +94,7 @@ export default function InvitePage() {
                   <div className="space-y-3">
                     {emails.map((email, index) => (
                       <div key={index} className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                         <Input
                           type="email"
                           placeholder="email@example.com"
@@ -143,9 +144,9 @@ export default function InvitePage() {
                 {sent ? (
                   <div className="p-4 rounded-lg bg-success-light0/10 border border-success/30 text-center">
                     <CheckCircle2 className="w-6 h-6 text-success mx-auto mb-2" />
-                    <p className="text-success font-oswald">
+                    <BodyText className="text-success">
                       Invitations sent successfully!
-                    </p>
+                    </BodyText>
                   </div>
                 ) : (
                   <Button
@@ -162,8 +163,8 @@ export default function InvitePage() {
 
               {/* Info */}
               <div className="mt-6 p-4 rounded-lg bg-black/30 border border-compvss-cyan-500/20">
-                <h3 className="text-body-sm font-oswald text-white mb-2">What happens next?</h3>
-                <ul className="space-y-2 text-caption text-gray-400 font-share-tech">
+                <SubsectionHeader className="text-body-sm text-white mb-2">What happens next?</SubsectionHeader>
+                <ul className="space-y-2 text-caption text-grey-400 -tech">
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-compvss-cyan-500 rounded-full mt-1.5" />
                     <span>Recipients will receive an email invitation</span>

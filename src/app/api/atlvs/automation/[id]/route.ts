@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { AtlvsService } from '@/lib/services/atlvs/automation/id.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -13,7 +21,7 @@ export async function GET(
     }
 
     const { id } = await params;
-    const workflow = await prisma.automation.findUnique({
+    const workflow = await new AtlvsService().findById({
       where: { id },
     });
 
@@ -23,11 +31,7 @@ export async function GET(
 
     return NextResponse.json(workflow);
   } catch (error) {
-    console.error('Error getting automation workflow:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -43,18 +47,14 @@ export async function PATCH(
 
     const { id } = await params;
     const body = await req.json();
-    const workflow = await prisma.automation.update({
+    const workflow = await new AtlvsService().update({
       where: { id },
       data: body,
     });
 
     return NextResponse.json(workflow);
   } catch (error) {
-    console.error('Error updating automation workflow:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -69,16 +69,12 @@ export async function DELETE(
     }
 
     const { id } = await params;
-    await prisma.automation.delete({
+    await new AtlvsService().delete({
       where: { id },
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error deleting automation workflow:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

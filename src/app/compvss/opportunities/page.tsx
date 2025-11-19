@@ -14,6 +14,9 @@ import { OpportunityBadge } from '@/components/atoms/OpportunityBadge';
 import { usePublicOpportunities } from '@/lib/hooks/shared/useOpportunities';
 import { Loader2, Search, Briefcase, MapPin, DollarSign } from 'lucide-react';
 import Link from 'next/link';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/opportunities
 
 export default function OpportunitiesPage() {
   const [search, setSearch] = useState('');
@@ -45,7 +48,7 @@ export default function OpportunitiesPage() {
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-grey-400" />
                 <Input
                   placeholder="Search opportunities..."
                   value={search}
@@ -96,7 +99,7 @@ export default function OpportunitiesPage() {
         {error && (
           <Card className="border-error">
             <div className="p-6 text-center">
-              <p className="text-error mb-4">Failed to load opportunities</p>
+              <BodyText className="text-error mb-4">Failed to load opportunities</BodyText>
               <Button onClick={() => window.location.reload()} variant="compvss">
                 Retry
               </Button>
@@ -107,7 +110,7 @@ export default function OpportunitiesPage() {
         {/* Opportunities Grid */}
         {data && (
           <>
-            <div className="mb-4 text-body-sm text-gray-600">
+            <div className="mb-4 text-body-sm text-grey-600">
               {data.pagination.total} opportunities found
             </div>
 
@@ -122,21 +125,21 @@ export default function OpportunitiesPage() {
                       <div className="flex items-start justify-between mb-3">
                         <OpportunityBadge category={opportunity.category as string} />
                         {opportunity.compensationType && (
-                          <span className="text-caption text-gray-500 capitalize">
+                          <span className="text-caption text-grey-500 capitalize">
                             {opportunity.compensationType as string}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="font-bebas text-h5 mb-2 text-gray-900">
+                      <h3 className="mb-2 text-grey-900">
                         {opportunity.title as string}
                       </h3>
 
-                      <p className="text-body-sm text-gray-600 mb-4 line-clamp-2">
+                      <p className="text-body-sm text-grey-600 mb-4 line-clamp-2">
                         {opportunity.description as string}
                       </p>
 
-                      <div className="space-y-2 text-body-sm text-gray-500">
+                      <div className="space-y-2 text-body-sm text-grey-500">
                         {opportunity.organization && (
                           <div className="flex items-center gap-2">
                             <Briefcase className="h-4 w-4" />
@@ -164,7 +167,7 @@ export default function OpportunitiesPage() {
                         )}
                       </div>
 
-                      <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="mt-4 pt-4 border-t border-grey-200">
                         <Button variant="compvss" size="sm" className="w-full">
                           View Details
                         </Button>
@@ -179,13 +182,13 @@ export default function OpportunitiesPage() {
             {data.opportunities.length === 0 && (
               <Card>
                 <div className="p-12 text-center">
-                  <Briefcase className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="font-bebas text-h5 text-gray-900 mb-2">
+                  <Briefcase className="h-12 w-12 text-grey-400 mx-auto mb-4" />
+                  <SubsectionHeader className="text-grey-900 mb-2">
                     No Opportunities Found
-                  </h3>
-                  <p className="text-gray-600">
+                  </SubsectionHeader>
+                  <BodyText className="text-grey-600">
                     Try adjusting your filters to see more results
-                  </p>
+                  </BodyText>
                 </div>
               </Card>
             )}

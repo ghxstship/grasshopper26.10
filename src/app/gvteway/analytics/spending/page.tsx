@@ -14,6 +14,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { TrendingUp, TrendingDown, DollarSign, PieChart, Loader2, AlertCircle } from 'lucide-react';
 import { useSpendingAnalytics } from '@/lib/hooks/gvteway/useAnalytics';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/analytics/spending
 
 export default function SpendingInsightsPage() {
   const currentYear = new Date().getFullYear();
@@ -22,10 +25,10 @@ export default function SpendingInsightsPage() {
   if (isLoading) {
     return (
       <GvtewayLayout>
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-black via-grey-900 to-black flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-gvteway-red-500" />
-            <p className="text-gray-400">Loading spending insights...</p>
+            <BodyText className="text-grey-400">Loading spending insights...</BodyText>
           </div>
         </div>
       </GvtewayLayout>
@@ -35,11 +38,11 @@ export default function SpendingInsightsPage() {
   if (error) {
     return (
       <GvtewayLayout>
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-black via-grey-900 to-black flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Analytics</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Analytics</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -55,11 +58,11 @@ export default function SpendingInsightsPage() {
 
   return (
     <GvtewayLayout>
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-grey-900 to-black p-6">
       <div className="max-w-6xl mx-auto space-y-6">
         <div>
-          <h1 className="text-h2 text-white mb-2">Spending Insights</h1>
-          <p className="text-gray-400">Track your event spending and trends</p>
+          <HeroTitle className="text-white mb-2">Spending Insights</HeroTitle>
+          <BodyText className="text-grey-400">Track your event spending and trends</BodyText>
         </div>
 
         {/* Total Spending */}
@@ -67,8 +70,8 @@ export default function SpendingInsightsPage() {
           <CardContent className="p-8">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-body-sm mb-2">Total Spending (2024)</p>
-                <p className="text-h1 text-white">${total.toLocaleString()}</p>
+                <BodyText className="text-grey-400 text-body-sm mb-2">Total Spending (2024)</BodyText>
+                <p className="text-white">${total.toLocaleString()}</p>
                 <div className="flex items-center gap-2 mt-3">
                   <Badge className={yearOverYearChange >= 0 ? "bg-success-light0/20 text-success border-success/50" : "bg-destructive/100/20 text-destructive border-destructive/50"}>
                     {yearOverYearChange >= 0 ? <TrendingUp className="w-3 h-3 mr-1" /> : <TrendingDown className="w-3 h-3 mr-1" />}
@@ -85,42 +88,42 @@ export default function SpendingInsightsPage() {
 
         {/* Monthly Breakdown */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="bg-gray-900/50 border-gray-800">
+          <Card className="bg-grey-900/50 border-grey-800">
             <CardHeader>
-              <CardTitle className="text-white text-h6">This Month</CardTitle>
+              <CardTitle className="text-white">This Month</CardTitle>
               <CardDescription>January 2024</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-h3 text-white">${thisMonth.amount}</p>
-              <p className="text-body-sm text-gray-400 mt-2">{thisMonth.eventsAttended} events attended</p>
+              <p className="text-white">${thisMonth.amount}</p>
+              <p className="text-body-sm text-grey-400 mt-2">{thisMonth.eventsAttended} events attended</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900/50 border-gray-800">
+          <Card className="bg-grey-900/50 border-grey-800">
             <CardHeader>
-              <CardTitle className="text-white text-h6">Last Month</CardTitle>
+              <CardTitle className="text-white">Last Month</CardTitle>
               <CardDescription>December 2023</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-h3 text-white">${lastMonth.amount}</p>
-              <p className="text-body-sm text-gray-400 mt-2">{lastMonth.eventsAttended} events attended</p>
+              <p className="text-white">${lastMonth.amount}</p>
+              <p className="text-body-sm text-grey-400 mt-2">{lastMonth.eventsAttended} events attended</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900/50 border-gray-800">
+          <Card className="bg-grey-900/50 border-grey-800">
             <CardHeader>
-              <CardTitle className="text-white text-h6">Average/Month</CardTitle>
+              <CardTitle className="text-white">Average/Month</CardTitle>
               <CardDescription>2024 Average</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-h3 text-white">${average.amount}</p>
-              <p className="text-body-sm text-gray-400 mt-2">{average.eventsPerMonth} events/month</p>
+              <p className="text-white">${average.amount}</p>
+              <p className="text-body-sm text-grey-400 mt-2">{average.eventsPerMonth} events/month</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Category Breakdown */}
-        <Card className="bg-gray-900/50 border-gray-800">
+        <Card className="bg-grey-900/50 border-grey-800">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <PieChart className="w-5 h-5" />
@@ -143,10 +146,10 @@ export default function SpendingInsightsPage() {
                   </div>
                   <div className="text-right">
                     <p className="text-white">${category.amount}</p>
-                    <p className="text-body-sm text-gray-400">{category.percentage}%</p>
+                    <p className="text-body-sm text-grey-400">{category.percentage}%</p>
                   </div>
                 </div>
-                <div className="w-full bg-gray-800 rounded-full h-2">
+                <div className="w-full bg-grey-800 rounded-full h-2">
                   <div
                     className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
                     style={{ width: `${category.percentage}%` }}
@@ -158,7 +161,7 @@ export default function SpendingInsightsPage() {
         </Card>
 
         {/* Insights */}
-        <Card className="bg-gray-900/50 border-gray-800">
+        <Card className="bg-grey-900/50 border-grey-800">
           <CardHeader>
             <CardTitle className="text-white">Smart Insights</CardTitle>
             <CardDescription>Personalized spending recommendations</CardDescription>
@@ -167,20 +170,12 @@ export default function SpendingInsightsPage() {
             {insights.map((insight, index) => (
               <div 
                 key={index}
-                className={`p-4 rounded-lg ${
-                  insight.type === 'tip' ? 'bg-info/10 border border-info/30' :
-                  insight.type === 'achievement' ? 'bg-success-light0/10 border border-success/30' :
-                  'bg-accent/100/10 border border-accent/30'
-                }`}
+                className={`p-4 rounded-lg ${ insight.type === 'tip' ? 'bg-info/10 border border-info/30' : insight.type === 'achievement' ? 'bg-success-light0/10 border border-success/30' : 'bg-accent/100/10 border border-accent/30' }`}
               >
-                <p className={`font-medium mb-1 ${
-                  insight.type === 'tip' ? 'text-info' :
-                  insight.type === 'achievement' ? 'text-success' :
-                  'text-atlvs-purple-500'
-                }`}>
+                <p className={`font-medium mb-1 ${ insight.type === 'tip' ? 'text-info' : insight.type === 'achievement' ? 'text-success' : 'text-atlvs-purple-500' }`}>
                   {insight.type === 'tip' ? '💡' : insight.type === 'achievement' ? '✨' : '📊'} {insight.title}
                 </p>
-                <p className="text-gray-300 text-body-sm">{insight.message}</p>
+                <p className="text-grey-300 text-body-sm">{insight.message}</p>
               </div>
             ))}
           </CardContent>

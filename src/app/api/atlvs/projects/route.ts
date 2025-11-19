@@ -5,6 +5,8 @@ import { successResponse, createdResponse, handleApiError, errors } from '@/lib/
 import { validateRequest, requireAuth, getPaginationParams, parseBody, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import type { Prisma, ProjectStatus } from '@prisma/client';
+import { AtlvsService } from '@/lib/services/atlvs/projects.service';
+
 
 // Validation schemas
 const createProjectSchema = z.object({
@@ -98,7 +100,7 @@ export async function POST(request: NextRequest) {
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '');
     
-    const project = await prisma.project.create({
+    const project = await new AtlvsService().create({
       data: {
         name: validatedData.name,
         slug,

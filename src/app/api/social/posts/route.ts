@@ -5,6 +5,8 @@ import { createPostSchema, postFiltersSchema } from '@/lib/validations/social';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, getPaginationParams, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { SocialService } from '@/lib/services/social/posts.service';
+
 
 // GET /api/social/posts - List posts
 export async function GET(request: NextRequest) {
@@ -42,7 +44,7 @@ export async function GET(request: NextRequest) {
     const total = await prisma.socialPost.count({ where });
 
     // Get posts
-    const posts = await prisma.socialPost.findMany({
+    const posts = await new SocialService().findAll({
       where,
       skip,
       take: limit,
@@ -129,7 +131,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Create post
-    const post = await prisma.socialPost.create({
+    const post = await new SocialService().create({
       data: createData,
       include: {
         user: {

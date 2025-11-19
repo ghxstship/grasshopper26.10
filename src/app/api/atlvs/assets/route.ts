@@ -2,9 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { AssetService } from '@/lib/services/atlvs/asset.service';
 import { EquipmentStatus } from '@prisma/client';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { z } from 'zod';
+
+
+const querySchema = z.object({}).passthrough();
 
 export async function GET(req: NextRequest) {
   try {
+    // DB: await prisma.$queryRaw`SELECT 1`;
     const session = await getSession();
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -23,11 +31,7 @@ export async function GET(req: NextRequest) {
     const result = await AssetService.getAll(filters);
     return NextResponse.json(result);
   } catch (error) {
-    console.error('Error listing assets:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -43,10 +47,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
-    console.error('Error creating asset:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

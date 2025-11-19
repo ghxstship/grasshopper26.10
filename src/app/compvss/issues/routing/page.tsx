@@ -14,6 +14,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { Select } from '@/components/atoms/Select';
 import { useIssues } from '@/lib/hooks/compvss/useIssues';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface Issue {
   id: string;
@@ -114,34 +115,34 @@ export default function IssueRoutingPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           {/* Stats */}
           <div className="grid grid-cols-4 gap-4 mb-6">
-            <Card variant="compvss" className="bg-gray-900/80 border-compvss-cyan-500/20">
+            <Card variant="compvss" className="bg-grey-900/80 border-compvss-cyan-500/20">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-white">{issues.length}</p>
-                <p className="text-body-sm text-gray-400 font-oswald">Total</p>
+                <p className="text-white">{issues.length}</p>
+                <BodyText className="text-body-sm text-grey-400">Total</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-_error/10 border-destructive/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-_error">
+                <p className="text-_error">
                   {issues.filter(i => i.status === 'unassigned').length}
                 </p>
-                <p className="text-body-sm text-gray-400 font-oswald">Unassigned</p>
+                <BodyText className="text-body-sm text-grey-400">Unassigned</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-warning/10 border-warning/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-warning">
+                <p className="text-warning">
                   {issues.filter(i => i.status === 'in-progress').length}
                 </p>
-                <p className="text-body-sm text-gray-400 font-oswald">In Progress</p>
+                <BodyText className="text-body-sm text-grey-400">In Progress</BodyText>
               </CardContent>
             </Card>
             <Card variant="compvss" className="bg-success-light0/10 border-success/30">
               <CardContent className="pt-6 text-center">
-                <p className="text-h3 font-bebas text-success">
+                <p className="text-success">
                   {issues.filter(i => i.status === 'resolved').length}
                 </p>
-                <p className="text-body-sm text-gray-400 font-oswald">Resolved</p>
+                <BodyText className="text-body-sm text-grey-400">Resolved</BodyText>
               </CardContent>
             </Card>
           </div>
@@ -149,22 +150,20 @@ export default function IssueRoutingPage() {
           {/* Issues List */}
           <div className="space-y-4">
             {issues.map((issue) => (
-              <Card key={issue.id} variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+              <Card key={issue.id} variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-3 flex-1">
-                      <AlertTriangle className={`w-5 h-5 flex-shrink-0 mt-1 ${
-                        issue.priority === 'critical' || issue.priority === 'high' ? 'text-_error' : 'text-warning'
-                      }`} />
+                      <AlertTriangle className={`w-5 h-5 flex-shrink-0 mt-1 ${ issue.priority === 'critical' || issue.priority === 'high' ? 'text-_error' : 'text-warning' }`} />
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <CardTitle className="text-white">{issue.title}</CardTitle>
                           <Badge variant="default" className="text-caption">{issue.id}</Badge>
                         </div>
-                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-grey-400 -tech mb-2">
                           {issue.description}
                         </p>
-                        <div className="flex flex-wrap gap-3 text-caption text-gray-500 font-share-tech">
+                        <div className="flex flex-wrap gap-3 text-caption text-grey-500 -tech">
                           <span>Category: {issue.category}</span>
                           <span>•</span>
                           <span>Submitted by: {issue.submittedBy}</span>
@@ -223,7 +222,7 @@ export default function IssueRoutingPage() {
                     )
                   ) : (
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
+                      <div className="flex items-center gap-2 text-body-sm text-grey-400 -tech">
                         <User className="w-4 h-4" />
                         <span>Assigned to: {issue.assignedTo}</span>
                       </div>

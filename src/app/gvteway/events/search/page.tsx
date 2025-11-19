@@ -4,6 +4,8 @@ import { Search } from 'lucide-react';
 import { Input } from '@/components/atoms/Input';
 import { useState } from 'react';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/events/search
+
 export default function SearchPage() {
   const [query, setQuery] = useState('');
   return (

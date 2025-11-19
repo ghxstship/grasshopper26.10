@@ -13,6 +13,11 @@ import { LoadingState } from '@/components/molecules/LoadingState';
 import { EmptyState } from '@/components/molecules/EmptyState';
 import { useWorkflow, useExecuteWorkflow } from '@/lib/hooks/atlvs/useAutomation';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/[id]
+
+// API: /api/atlvs/automation/:id
+const API_ENDPOINT = '/api/atlvs/automation/:id';
+
 export default function WorkflowDetailPage({ params }: { params: { id: string } }) {
   const { data: workflow, isLoading, error } = useWorkflow(params.id);
   const executeWorkflow = useExecuteWorkflow();
@@ -65,7 +70,7 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
       case 'active': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'paused': return 'bg-warning-light text-warning border-warning-border';
       case 'error': return 'bg-error-light text-error border-error-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -74,7 +79,7 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
       case 'success': return 'text-atlvs-green-500';
       case 'failed': return 'text-error';
       case 'running': return 'text-info';
-      default: return 'text-gray-500';
+      default: return 'text-grey-500';
     }
   };
 
@@ -111,44 +116,44 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
             <Activity className="w-3 h-3 mr-1" />
             {workflow.status.charAt(0).toUpperCase() + workflow.status.slice(1)}
           </Badge>
-          <Badge variant="atlvs-outline" className="bg-gray-700/50">
+          <Badge variant="atlvs-outline" className="bg-grey-700/50">
             {workflow.category}
           </Badge>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Total Executions</div>
-              <div className="text-h3 font-bebas atlvs-text-gradient">
+              <div className="text-body-sm text-grey-400 mb-1">Total Executions</div>
+              <div className="atlvs-text-gradient">
                 {workflow.executions.total.toLocaleString()}
               </div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Successful</div>
-              <div className="text-h3 font-bebas text-atlvs-green-500">
+              <div className="text-body-sm text-grey-400 mb-1">Successful</div>
+              <div className="text-atlvs-green-500">
                 {workflow.executions.successful.toLocaleString()}
               </div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Failed</div>
-              <div className="text-h3 font-bebas text-error">
+              <div className="text-body-sm text-grey-400 mb-1">Failed</div>
+              <div className="text-error">
                 {workflow.executions.failed}
               </div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Success Rate</div>
-              <div className="text-h3 font-bebas text-atlvs-green-500">
+              <div className="text-body-sm text-grey-400 mb-1">Success Rate</div>
+              <div className="text-atlvs-green-500">
                 {workflow.executions.successRate}%
               </div>
             </CardHeader>
@@ -159,29 +164,25 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Workflow Steps */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Workflow Steps</CardTitle>
                 <div className="space-y-4">
                   {workflow.steps?.map((step: any, index: number) => (
                     <div key={step.id} className="flex items-start gap-4">
                       <div className="relative">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bebas text-h6 ${
-                          step.type === 'trigger' 
-                            ? 'bg-atlvs-purple-500' 
-                            : 'bg-atlvs-green-500'
-                        }`}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${ step.type === 'trigger' ? 'bg-atlvs-purple-500' : 'bg-atlvs-green-500' }`}>
                           {index + 1}
                         </div>
                         {index < workflow.steps.length - 1 && (
-                          <div className="absolute top-10 left-5 w-0.5 h-full bg-gray-700" />
+                          <div className="absolute top-10 left-5 w-0.5 h-full bg-grey-700" />
                         )}
                       </div>
                       <div className="flex-1 pb-6">
                         <div className="flex items-center justify-between mb-2">
                           <div>
                             <div className="font-medium mb-1">{step.name}</div>
-                            <Badge variant="atlvs-outline" className="bg-gray-700/50 text-caption">
+                            <Badge variant="atlvs-outline" className="bg-grey-700/50 text-caption">
                               {step.type.charAt(0).toUpperCase() + step.type.slice(1)}
                             </Badge>
                           </div>
@@ -197,12 +198,12 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
             </Card>
 
             {/* Recent Executions */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Recent Executions</CardTitle>
                 <div className="space-y-2">
                   {workflow.recentExecutions?.map((execution: any) => (
-                    <div key={execution.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                    <div key={execution.id} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg">
                       <div className="flex items-center gap-4">
                         {execution.status === 'success' ? (
                           <CheckCircle className={`w-5 h-5 ${getExecutionStatusColor(execution.status)}`} />
@@ -219,7 +220,7 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        <div className="text-body-sm text-gray-400 flex items-center gap-1">
+                        <div className="text-body-sm text-grey-400 flex items-center gap-1">
                           <Clock className="w-4 h-4" />
                           {execution.duration}
                         </div>
@@ -243,26 +244,26 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Workflow Info */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Workflow Info</CardTitle>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-grey-400 mb-1 flex items-center gap-1">
                       <Zap className="w-4 h-4" />
                       Trigger
                     </div>
                     <div className="font-medium">{workflow.trigger}</div>
                   </div>
                   <div>
-                    <div className="text-body-sm text-gray-400 mb-1 flex items-center gap-1">
+                    <div className="text-body-sm text-grey-400 mb-1 flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       Last Run
                     </div>
                     <div className="font-medium">{new Date(workflow.lastRun).toLocaleString()}</div>
                   </div>
                   <div>
-                    <div className="text-body-sm text-gray-400 mb-1">Next Run</div>
+                    <div className="text-body-sm text-grey-400 mb-1">Next Run</div>
                     <div className="font-medium">{new Date(workflow.nextRun).toLocaleString()}</div>
                   </div>
                 </div>
@@ -270,7 +271,7 @@ export default function WorkflowDetailPage({ params }: { params: { id: string } 
             </Card>
 
             {/* Actions */}
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-4">Actions</CardTitle>
                 <div className="space-y-2">

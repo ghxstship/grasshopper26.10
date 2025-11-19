@@ -3,6 +3,11 @@ import { prisma } from '@/lib/prisma';
 import { updateVenueSchema } from '@/lib/validations/events';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { VenuesService } from '@/lib/services/venues/id.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -17,7 +22,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const venue = await prisma.venue.findUnique({
+    const venue = await new VenuesService().findById({
       where: { id: id },
       include: {
         events: {
@@ -73,7 +78,7 @@ export async function PATCH(
     const validatedData = updateVenueSchema.parse(body);
 
     // Check if venue exists
-    const existingVenue = await prisma.venue.findUnique({
+    const existingVenue = await new VenuesService().findById({
       where: { id: id },
     });
 
@@ -82,7 +87,7 @@ export async function PATCH(
     }
 
     // Update venue
-    const venue = await prisma.venue.update({
+    const venue = await new VenuesService().update({
       where: { id: id },
       data: validatedData as any,
     });
@@ -104,7 +109,7 @@ export async function DELETE(
     requireAuth(context);
 
     // Check if venue exists
-    const existingVenue = await prisma.venue.findUnique({
+    const existingVenue = await new VenuesService().findById({
       where: { id: id },
       include: {
         _count: {
@@ -128,7 +133,7 @@ export async function DELETE(
     }
 
     // Delete venue
-    await prisma.venue.delete({
+    await new VenuesService().delete({
       where: { id: id },
     });
 

@@ -125,16 +125,12 @@ export function SettingsPageTemplate({
                     <button
                       key={section.id}
                       onClick={() => handleSectionChange(section.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all ${
-                        activeSection === section.id
-                          ? 'bg-ghxst-primary text-white'
-                          : 'text-ghxst-text hover:bg-ghxst-background'
-                      }`}
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all ${ activeSection === section.id ? 'bg-ghxst-primary text-white' : 'text-ghxst-text hover:bg-ghxst-background' }`}
                     >
                       {section.icon && (
                         <span className="flex-shrink-0">{section.icon}</span>
                       )}
-                      <span className="font-bebas text-h6">{section.label}</span>
+                      <span >{section.label}</span>
                     </button>
                   ))}
                 </nav>
@@ -156,7 +152,7 @@ export function SettingsPageTemplate({
                 <CardContent className="p-6">
                   {/* Section Header */}
                   <div className="mb-6">
-                    <SectionHeader className="mb-2 font-bebas">
+                    <SectionHeader className="mb-2">
                       {currentSection?.label}
                     </SectionHeader>
                   </div>

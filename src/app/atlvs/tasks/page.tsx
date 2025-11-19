@@ -12,6 +12,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms/Card';
 import { KanbanBoard, KanbanColumn } from '@/components/atlvs/KanbanBoard';
 import { useTasks } from '@/lib/hooks/atlvs/useTasks';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks
 
 export default function TasksPage() {
   const [viewMode, setViewMode] = useState<'kanban' | 'list'>('kanban');
@@ -24,7 +27,7 @@ export default function TasksPage() {
       {
         id: 'backlog',
         title: 'Backlog',
-        color: 'bg-gray-500',
+        color: 'bg-grey-500',
         tasks: tasks.filter((t: any) => t.status === 'backlog').map((t: any) => ({
           id: t.id,
           title: t.title,
@@ -86,7 +89,7 @@ export default function TasksPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading tasks...</p>
+            <BodyText className="text-grey-400">Loading tasks...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -99,8 +102,8 @@ export default function TasksPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Tasks</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Tasks</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -119,12 +122,12 @@ export default function TasksPage() {
         showToolbar={false}
       >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" role="region" aria-label="Task statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <CardDescription className="text-gray-400 mb-1">
+              <CardDescription className="text-grey-400 mb-1">
                 Total Tasks
               </CardDescription>
-              <CardTitle className="text-h3 font-bebas" aria-label={`${tasks?.length || 0} total tasks`}>
+              <CardTitle  aria-label={`${tasks?.length || 0} total tasks`}>
                 {tasks?.length || 0}
               </CardTitle>
             </CardHeader>
@@ -133,14 +136,14 @@ export default function TasksPage() {
 
         <div className="flex items-center justify-between mb-6" role="toolbar" aria-label="Task management controls">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" className="text-gray-400" aria-label="Open filter options">
+            <Button variant="ghost" size="sm" className="text-grey-400" aria-label="Open filter options">
               <Filter className="w-4 h-4 mr-2" aria-hidden="true" />
               Filter
             </Button>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 p-1 bg-gray-900 rounded-lg" role="group" aria-label="View mode selection">
+            <div className="flex items-center gap-1 p-1 bg-grey-900 rounded-lg" role="group" aria-label="View mode selection">
               <Button
                 onClick={() => setViewMode('kanban')}
                 variant={viewMode === 'kanban' ? 'atlvs' : 'ghost'}
@@ -176,7 +179,7 @@ export default function TasksPage() {
         )}
 
         {viewMode === 'list' && (
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle>List view coming soon...</CardTitle>
             </CardHeader>

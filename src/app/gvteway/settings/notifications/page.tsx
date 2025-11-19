@@ -5,6 +5,8 @@ import { PageTitle, BodyText } from '@/components/atoms/Typography';
 
 const metadata = { title: 'Notification Settings | GVTEWAY' };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/settings/notifications
+
 export default function NotificationSettingsPage() {
   return (
     <GvtewayLayout>

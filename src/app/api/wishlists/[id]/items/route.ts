@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { WishlistsService } from '@/lib/services/wishlists/id/items.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function POST(
   req: NextRequest,
   { params: _params }: { params: Promise<{ id: string }> }
@@ -14,7 +22,7 @@ export async function POST(
 
     const body = await req.json();
 
-    const item = await prisma.wishlist.create({
+    const item = await new WishlistsService().create({
       data: {
         userId: session.user.id,
         eventId: body.eventId,
@@ -23,7 +31,6 @@ export async function POST(
 
     return NextResponse.json(item, { status: 201 });
   } catch (error) {
-    console.error('Error adding wishlist item:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

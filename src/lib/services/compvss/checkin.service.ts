@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { BaseService } from '../base/BaseService';
 
-export class CheckInService extends BaseService {
+export class CompvssService extends BaseService {
   /**
    * Check in user
    */
@@ -176,4 +176,4 @@ export class CheckInService extends BaseService {
   }
 }
 
-export const checkInService = new CheckInService();
+export const checkInService = new CompvssService();

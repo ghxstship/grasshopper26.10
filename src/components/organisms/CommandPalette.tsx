@@ -113,8 +113,8 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           onClick={(e) => e.stopPropagation()}
         >
           {/* Search Input */}
-          <div className="flex items-center gap-3 border-b border-gray-200 px-4 py-3">
-            <Search className="h-5 w-5 text-gray-400" />
+          <div className="flex items-center gap-3 border-b border-grey-200 px-4 py-3">
+            <Search className="h-5 w-5 text-grey-400" />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -128,13 +128,13 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Results */}
           <div className="max-h-[400px] overflow-y-auto p-2">
             {Object.keys(groupedItems).length === 0 ? (
-              <div className="py-12 text-center text-body-sm text-gray-500 font-share-tech">
+              <div className="py-12 text-center text-body-sm text-grey-500 -tech">
                 No results found
               </div>
             ) : (
               Object.entries(groupedItems).map(([category, categoryItems]) => (
                 <div key={category} className="mb-4 last:mb-0">
-                  <div className="px-3 py-2 text-caption text-gray-500 uppercaser">
+                  <div className="px-3 py-2 text-caption text-grey-500 uppercaser">
                     {category}
                   </div>
                   {categoryItems.map((item, _index) => {
@@ -152,27 +152,27 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
                         className={cn(
                           "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors",
                           isSelected
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700 hover:bg-gray-50"
+                            ? "bg-grey-100 text-grey-900"
+                            : "text-grey-700 hover:bg-grey-50"
                         )}
                       >
                         {item.icon && (
-                          <div className="flex-shrink-0 text-gray-500">
+                          <div className="flex-shrink-0 text-grey-500">
                             {item.icon}
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <div className="text-body-sm font-share-tech truncate">
+                          <div className="text-body-sm -tech truncate">
                             {item.label}
                           </div>
                           {item.description && (
-                            <div className="text-caption text-gray-500 font-share-tech truncate">
+                            <div className="text-caption text-grey-500 -tech truncate">
                               {item.description}
                             </div>
                           )}
                         </div>
                         {item.shortcut && (
-                          <div className="flex-shrink-0 text-caption text-gray-400 font-mono">
+                          <div className="flex-shrink-0 text-caption text-grey-400 font-mono">
                             {item.shortcut}
                           </div>
                         )}
@@ -185,7 +185,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="border-t border-gray-200 px-4 py-2 text-caption text-gray-500 font-share-tech">
+          <div className="border-t border-grey-200 px-4 py-2 text-caption text-grey-500 -tech">
             <span className="mr-4">↑↓ Navigate</span>
             <span className="mr-4">↵ Select</span>
             <span>ESC Close</span>

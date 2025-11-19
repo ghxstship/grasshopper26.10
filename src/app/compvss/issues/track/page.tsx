@@ -10,6 +10,9 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Button } from '@/components/atoms/Button';
 import { useIssues } from '@/lib/hooks/compvss/useIssues';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/issues/track
 
 export default function IssueTrackingPage() {
   const { data, isLoading, error, refetch } = useIssues({ type: 'tracking' });
@@ -28,7 +31,7 @@ export default function IssueTrackingPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading issue tracking...</p>
+              <BodyText className="text-grey-400">Loading issue tracking...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -49,8 +52,8 @@ export default function IssueTrackingPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Tracking Data</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Tracking Data</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -76,14 +79,14 @@ export default function IssueTrackingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500 w-fit mb-2">
                     {metric.icon}
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{metric.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald mb-1">{metric.label}</div>
-                  <div className="text-caption text-success font-share-tech">{metric.trend}</div>
+                  <div className="text-white mb-1">{metric.value}</div>
+                  <div className="text-body-sm text-grey-400 mb-1">{metric.label}</div>
+                  <div className="text-caption text-success -tech">{metric.trend}</div>
                 </CardContent>
               </Card>
             </motion.div>

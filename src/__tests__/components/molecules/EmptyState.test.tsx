@@ -42,7 +42,7 @@ describe('EmptyState', () => {
     it('should not render icon when not provided', () => {
       const { container } = render(<EmptyState title="No items" />);
       
-      const iconContainer = container.querySelector('.rounded-full.bg-gray-100');
+      const iconContainer = container.querySelector('.rounded-none.bg-grey-100');
       expect(iconContainer).not.toBeInTheDocument();
     });
 
@@ -54,7 +54,7 @@ describe('EmptyState', () => {
         />
       );
       
-      const iconContainer = container.querySelector('.rounded-full.bg-gray-100');
+      const iconContainer = container.querySelector('.rounded-none.bg-grey-100');
       expect(iconContainer).toBeInTheDocument();
     });
   });
@@ -87,7 +87,7 @@ describe('EmptyState', () => {
       );
       
       const description = screen.getByText('Description text');
-      expect(description).toHaveClass('text-body-sm', 'text-gray-500');
+      expect(description).toHaveClass('text-body-sm', 'text-grey-500');
     });
   });
 

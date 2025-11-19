@@ -8,7 +8,10 @@ import { Smartphone } from 'lucide-react';
 import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/wallet/apple-wallet
 
 export default function AppleWalletPage() {
   return (
@@ -17,11 +20,11 @@ export default function AppleWalletPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <Card variant="gvteway" className="bg-gray-900/50 text-center">
+              <Card variant="gvteway" className="bg-grey-900/50 text-center">
                 <CardContent className="p-12">
                   <Smartphone className="w-24 h-24 text-gvteway-red-500 mx-auto mb-6" />
-                  <h1 className="text-h2 font-bebas text-white mb-4">APPLE WALLET</h1>
-                  <p className="text-gray-300 mb-8">Add your tickets to Apple Wallet for easy access</p>
+                  <HeroTitle className="text-white mb-4">APPLE WALLET</HeroTitle>
+                  <BodyText className="text-grey-300 mb-8">Add your tickets to Apple Wallet for easy access</BodyText>
                   <Button variant="gvteway" size="lg">Add to Apple Wallet</Button>
                 </CardContent>
               </Card>

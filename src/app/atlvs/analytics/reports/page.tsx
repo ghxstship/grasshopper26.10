@@ -10,6 +10,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useReports, type Report } from '@/lib/hooks/atlvs/useReports';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics/reports
 
 export default function ReportsPage() {
   const { data: reports, isLoading, error, refetch } = useReports();
@@ -29,7 +32,7 @@ export default function ReportsPage() {
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading reports...</p>
+              <BodyText className="text-grey-400">Loading reports...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -52,8 +55,8 @@ export default function ReportsPage() {
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Reports</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Reports</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -80,7 +83,7 @@ export default function ReportsPage() {
       case 'budget': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'team': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500 border-atlvs-purple-500/50';
       case 'asset': return 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -97,31 +100,31 @@ export default function ReportsPage() {
       >
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Total Reports</div>
-              <div className="text-h3 font-bebas atlvs-text-gradient">24</div>
+              <div className="text-body-sm text-grey-400 mb-1">Total Reports</div>
+              <div className="atlvs-text-gradient">24</div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">This Month</div>
-              <div className="text-h3 font-bebas text-atlvs-green-500">8</div>
+              <div className="text-body-sm text-grey-400 mb-1">This Month</div>
+              <div className="text-atlvs-green-500">8</div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Scheduled</div>
-              <div className="text-h3 font-bebas text-atlvs-purple-500">5</div>
+              <div className="text-body-sm text-grey-400 mb-1">Scheduled</div>
+              <div className="text-atlvs-purple-500">5</div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Downloads</div>
-              <div className="text-h3 font-bebas text-info">142</div>
+              <div className="text-body-sm text-grey-400 mb-1">Downloads</div>
+              <div className="text-info">142</div>
             </CardHeader>
           </Card>
         </div>
@@ -139,14 +142,14 @@ export default function ReportsPage() {
         </div>
 
         {/* Reports List */}
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6">Recent Reports</CardTitle>
             <div className="space-y-3">
               {(reports || []).map((report: Report) => (
                 <div
                   key={report.id}
-                  className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors"
+                  className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg hover:bg-grey-800 transition-colors"
                 >
                   <div className="flex items-center gap-4 flex-1">
                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${getTypeColor(report.type)}`}>
@@ -154,7 +157,7 @@ export default function ReportsPage() {
                     </div>
                     <div className="flex-1">
                       <div className="font-medium mb-1">{report.name}</div>
-                      <div className="flex items-center gap-3 text-body-sm text-gray-400">
+                      <div className="flex items-center gap-3 text-body-sm text-grey-400">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
                           {report.period}
@@ -182,7 +185,7 @@ export default function ReportsPage() {
 
         {/* Report Templates */}
         <div className="mt-6">
-          <h2 className="text-h4 font-bebas mb-4 atlvs-text-gradient">REPORT TEMPLATES</h2>
+          <SectionHeader className="mb-4 atlvs-text-gradient">REPORT TEMPLATES</SectionHeader>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { name: 'Project Summary', type: 'project', icon: <BarChart3 className="w-6 h-6" /> },
@@ -193,7 +196,7 @@ export default function ReportsPage() {
               <Card
                 key={index}
                 variant="atlvs"
-                className="bg-gray-900/50 cursor-pointer hover:bg-gray-900 transition-colors"
+                className="bg-grey-900/50 cursor-pointer hover:bg-grey-900 transition-colors"
               >
                 <CardHeader>
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-3 ${getTypeColor(template.type)}`}>

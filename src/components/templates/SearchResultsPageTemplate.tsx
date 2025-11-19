@@ -139,7 +139,7 @@ export function SearchResultsPageTemplate({
                 <Card className="sticky top-24">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-4">
-                      <SectionHeader className="font-bebas text-h5">
+                      <SectionHeader >
                         Filters
                       </SectionHeader>
                       {hasActiveFilters && onClearFilters && (

@@ -17,6 +17,8 @@ import { Database, Plus, Check, AlertCircle, RefreshCw, Trash2 } from 'lucide-re
 import { useAnalytics } from '@/lib/hooks/atlvs/useAnalytics';
 import { DataSource } from '@/types/atlvs';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics/data-sources
+
 export default function DataSourcesPage() {  
   const { data,  } = useAnalytics();
   const dataSources: DataSource[] = (data as { sources?: DataSource[] })?.sources || [
@@ -45,9 +47,9 @@ export default function DataSourcesPage() {
       case 'error':
         return 'bg-error-light text-error border-error-border';
       case 'disconnected':
-        return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+        return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
       default:
-        return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+        return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -89,37 +91,37 @@ export default function DataSourcesPage() {
         >
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Total Sources</div>
-                <div className="text-h3 font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-grey-400 mb-1">Total Sources</div>
+                <div className="atlvs-text-gradient">
                   {dataSources.length}
                 </div>
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Connected</div>
-                <div className="text-h3 font-bebas text-atlvs-green-500">
+                <div className="text-body-sm text-grey-400 mb-1">Connected</div>
+                <div className="text-atlvs-green-500">
                   {dataSources.filter((ds: DataSource) => ds.status === 'connected').length}
                 </div>
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Errors</div>
-                <div className="text-h3 font-bebas text-error">
+                <div className="text-body-sm text-grey-400 mb-1">Errors</div>
+                <div className="text-error">
                   {dataSources.filter(ds => ds.status === '_error').length}
                 </div>
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Total Records</div>
-                <div className="text-h3 font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-grey-400 mb-1">Total Records</div>
+                <div className="atlvs-text-gradient">
                   {dataSources.reduce((sum: number, ds: DataSource) => sum + (ds.recordCount || 0), 0).toLocaleString()}
                 </div>
               </CardHeader>
@@ -129,7 +131,7 @@ export default function DataSourcesPage() {
           {/* Data Sources List */}
           <div className="space-y-4">
             {dataSources.map((source) => (
-              <Card key={source.id} variant="atlvs" className="bg-gray-900/50">
+              <Card key={source.id} variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-4 flex-1">
@@ -138,7 +140,7 @@ export default function DataSourcesPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-h6">{source.name}</h3>
+                          <h3 >{source.name}</h3>
                           <Badge variant="atlvs-outline" className={getStatusColor(source.status || 'unknown')}>
                             {getStatusIcon(source.status || 'unknown')}
                             <span className="ml-1">{(source.status || 'unknown').toUpperCase()}</span>
@@ -146,15 +148,15 @@ export default function DataSourcesPage() {
                         </div>
                         <div className="grid grid-cols-3 gap-4 text-body-sm">
                           <div>
-                            <div className="text-gray-400 mb-1">Type</div>
+                            <div className="text-grey-400 mb-1">Type</div>
                             <div>{source.type}</div>
                           </div>
                           <div>
-                            <div className="text-gray-400 mb-1">Last Sync</div>
+                            <div className="text-grey-400 mb-1">Last Sync</div>
                             <div>{source.lastSync}</div>
                           </div>
                           <div>
-                            <div className="text-gray-400 mb-1">Records</div>
+                            <div className="text-grey-400 mb-1">Records</div>
                             <div className="font-medium text-atlvs-green-500">
                               {(source.recordCount || 0).toLocaleString()}
                             </div>
@@ -177,7 +179,7 @@ export default function DataSourcesPage() {
           </div>
 
           {/* Add New Data Source Form */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Add New Data Source</CardTitle>
             </CardHeader>

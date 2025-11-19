@@ -38,10 +38,10 @@ const Navbar: React.FC<NavbarProps> = ({
   className,
 }) => {
   const variantStyles = {
-    default: "bg-white border-gray-200 text-gray-900",
-    gvteway: "bg-gray-950 border-gvteway-red-900/20 text-gray-100",
-    compvss: "bg-gray-950 border-compvss-cyan-900/20 text-gray-100",
-    atlvs: "bg-gray-950 border-atlvs-green-900/20 text-gray-100",
+    default: "bg-white border-grey-200 text-grey-900",
+    gvteway: "bg-grey-950 border-gvteway-red-900/20 text-grey-100",
+    compvss: "bg-grey-950 border-compvss-cyan-900/20 text-grey-100",
+    atlvs: "bg-grey-950 border-atlvs-green-900/20 text-grey-100",
   };
 
   return (
@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* Logo */}
       {logo && (
-        <Link href="/" className="flex items-center gap-2 font-bebas text-h5">
+        <Link href="/" className="flex items-center gap-2">
           {logo}
         </Link>
       )}
@@ -113,7 +113,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* User Menu */}
       {user && (
-        <Button variant="ghost" className="flex items-center gap-2 rounded-lg p-1.5 hover:bg-gray-100 transition-colors">
+        <Button variant="ghost" className="flex items-center gap-2 rounded-lg p-1.5 hover:bg-grey-100 transition-colors">
           <Avatar
             src={user.avatar}
             alt={user.name}
@@ -121,11 +121,11 @@ const Navbar: React.FC<NavbarProps> = ({
             size="sm"
           />
           <div className="hidden lg:block text-left">
-            <div className="text-body-sm text-gray-900 font-share-tech">
+            <div className="text-body-sm text-grey-900 -tech">
               {user.name}
             </div>
             {user.email && (
-              <div className="text-caption text-gray-500 font-share-tech">
+              <div className="text-caption text-grey-500 -tech">
                 {user.email}
               </div>
             )}

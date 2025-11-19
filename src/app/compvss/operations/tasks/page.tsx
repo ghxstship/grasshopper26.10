@@ -13,6 +13,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useCompvssTasks, CompvssTask } from '@/lib/hooks/compvss/useTasks';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/tasks
 
 export default function TaskManagementPage() {
   const breadcrumbs = [
@@ -44,7 +47,7 @@ export default function TaskManagementPage() {
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-            <p className="text-gray-400">Loading tasks...</p>
+            <BodyText className="text-grey-400">Loading tasks...</BodyText>
           </div>
         </div>
       </CompvssLayout>
@@ -57,8 +60,8 @@ export default function TaskManagementPage() {
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Tasks</h2>
-            <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+            <SectionHeader className="mb-2">Failed to Load Tasks</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
             <Button variant="compvss" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -70,7 +73,7 @@ export default function TaskManagementPage() {
 
   const getPriorityColor = (priority: CompvssTask['priority']) => {
     const colors = {
-      low: 'text-gray-500',
+      low: 'text-grey-500',
       medium: 'text-warning',
       high: 'text-atlvs-orange-500',
       urgent: 'text-error',
@@ -99,13 +102,13 @@ export default function TaskManagementPage() {
             <div className="flex items-center justify-between mb-8">
               <div>
                 <Link href="/compvss/operations/dashboard">
-                  <h1 className="compvss-text-gradient text-h2 font-anton mb-2 cursor-pointer">
+                  <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                     Task Management
-                  </h1>
+                  </HeroTitle>
                 </Link>
-                <p className="text-gray-400 font-oswald">
+                <BodyText className="text-grey-400">
                   Day-of-show task coordination
-                </p>
+                </BodyText>
               </div>
               <Button variant="compvss" onClick={() => setShowAddTask(!showAddTask)}>
                 <Plus className="w-4 h-4 mr-2" />
@@ -115,22 +118,22 @@ export default function TaskManagementPage() {
 
             {/* Task Stats */}
             <div className="grid grid-cols-3 gap-4 mb-6">
-              <Card variant="compvss" className="bg-gray-900/80 border-compvss-cyan-500/20">
+              <Card variant="compvss" className="bg-grey-900/80 border-compvss-cyan-500/20">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-h3 font-bebas text-gray-400">{tasksByStatus.todo.length}</p>
-                  <p className="text-body-sm text-gray-500 font-oswald">To Do</p>
+                  <p className="text-grey-400">{tasksByStatus.todo.length}</p>
+                  <BodyText className="text-body-sm text-grey-500">To Do</BodyText>
                 </CardContent>
               </Card>
               <Card variant="compvss" className="bg-warning/10 border-warning/30">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-h3 font-bebas text-warning">{tasksByStatus['in-progress'].length}</p>
-                  <p className="text-body-sm text-gray-400 font-oswald">In Progress</p>
+                  <p className="text-warning">{tasksByStatus['in-progress'].length}</p>
+                  <BodyText className="text-body-sm text-grey-400">In Progress</BodyText>
                 </CardContent>
               </Card>
               <Card variant="compvss" className="bg-success-light0/10 border-success/30">
                 <CardContent className="pt-6 text-center">
-                  <p className="text-h3 font-bebas text-success">{tasksByStatus.completed.length}</p>
-                  <p className="text-body-sm text-gray-400 font-oswald">Completed</p>
+                  <p className="text-success">{tasksByStatus.completed.length}</p>
+                  <BodyText className="text-body-sm text-grey-400">Completed</BodyText>
                 </CardContent>
               </Card>
             </div>
@@ -139,7 +142,7 @@ export default function TaskManagementPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {Object.entries(tasksByStatus).map(([status, statusTasks]) => (
                 <div key={status}>
-                  <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20 mb-3">
+                  <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20 mb-3">
                     <CardHeader>
                       <CardTitle className="text-white capitalize flex items-center justify-between">
                         <span>{status.replace('-', ' ')}</span>
@@ -150,22 +153,22 @@ export default function TaskManagementPage() {
 
                   <div className="space-y-3">
                     {statusTasks.map((task: CompvssTask) => (
-                      <Card key={task.id} variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all cursor-pointer">
+                      <Card key={task.id} variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20 hover:border-compvss-cyan-500/40 transition-all cursor-pointer">
                         <CardContent className="pt-6">
                           <div className="flex items-start justify-between mb-2">
-                            <h3 className="font-oswald text-white text-body-sm">{task.title}</h3>
+                            <h3 className="text-white text-body-sm">{task.title}</h3>
                             <Flag className={`w-4 h-4 ${getPriorityColor(task.priority)}`} />
                           </div>
-                          <p className="text-caption text-gray-400 font-share-tech mb-3">
+                          <p className="text-caption text-grey-400 -tech mb-3">
                             {task.description || 'No description'}
                           </p>
                           <div className="flex items-center justify-between text-caption">
-                            <div className="flex items-center gap-1 text-gray-500 font-share-tech">
+                            <div className="flex items-center gap-1 text-grey-500 -tech">
                               <User className="w-3 h-3" />
                               <span>{task.assignee || 'Unassigned'}</span>
                             </div>
                             {task.dueDate && (
-                              <div className="flex items-center gap-1 text-gray-500 font-share-tech">
+                              <div className="flex items-center gap-1 text-grey-500 -tech">
                                 <Clock className="w-3 h-3" />
                                 <span>{new Date(task.dueDate).toLocaleDateString()}</span>
                               </div>

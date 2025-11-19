@@ -48,7 +48,7 @@ export const JourneyStep: React.FC<JourneyStepProps> = ({
           {/* Image */}
           {image && (
             <div className={cn(
-              "relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100",
+              "relative aspect-[4/3] rounded-lg overflow-hidden bg-grey-100",
               isImageLeft ? "" : "lg:col-start-2"
             )}>
               <Image
@@ -66,7 +66,7 @@ export const JourneyStep: React.FC<JourneyStepProps> = ({
             isImageLeft ? "" : "lg:col-start-1 lg:row-start-1"
           )}>
             {/* Step Number */}
-            <div className="font-anton text-hero text-gray-200">
+            <div className="text-hero text-grey-200">
               {step.toString().padStart(2, '0')}
             </div>
 
@@ -76,7 +76,7 @@ export const JourneyStep: React.FC<JourneyStepProps> = ({
             </SectionHeader>
 
             {/* Description */}
-            <BodyText className="text-h6 text-gray-700">
+            <BodyText className="text-grey-700">
               {description}
             </BodyText>
 
@@ -89,8 +89,8 @@ export const JourneyStep: React.FC<JourneyStepProps> = ({
                       <Check className="w-4 h-4" />
                     </div>
                     <div className="flex-1">
-                      <h5 className="font-bebas text-h5 mb-1">{feature.title}</h5>
-                      <p className="font-share-tech text-body-sm text-gray-600">
+                      <h5 className="mb-1">{feature.title}</h5>
+                      <p className="-tech text-body-sm text-grey-600">
                         {feature.description}
                       </p>
                     </div>
@@ -101,7 +101,7 @@ export const JourneyStep: React.FC<JourneyStepProps> = ({
 
             {/* Stats */}
             {stats && (
-              <Metadata className="text-gray-600 pt-4">
+              <Metadata className="text-grey-600 pt-4">
                 {stats}
               </Metadata>
             )}

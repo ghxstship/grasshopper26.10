@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { EventsService } from '@/lib/services/events/id/analytics.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -13,7 +21,7 @@ export async function GET(
     }
 
     const { id } = await params;
-    const event = await prisma.event.findUnique({ where: { id } });
+    const event = await new EventsService().findById({ where: { id } });
 
     if (!event) {
       return NextResponse.json({ error: 'Event not found' }, { status: 404 });
@@ -37,7 +45,6 @@ export async function GET(
 
     return NextResponse.json(analytics);
   } catch (error) {
-    console.error('Error getting event analytics:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

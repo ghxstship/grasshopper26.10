@@ -15,6 +15,9 @@ import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 import { useTeamMembers, TeamMember } from '@/lib/hooks/compvss/useTeamMembers';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/team/members
 
 export default function TeamMembersPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,7 +66,7 @@ export default function TeamMembersPage() {
       case 'on-break':
         return <Badge variant="compvss-outline" className="border-warning/30 text-warning">On Break</Badge>;
       case 'inactive':
-        return <Badge variant="compvss-outline" className="border-gray-500/30 text-gray-400">Inactive</Badge>;
+        return <Badge variant="compvss-outline" className="border-grey-500/30 text-grey-400">Inactive</Badge>;
       case 'pending':
         return <Badge variant="compvss-outline" className="border-info/30 text-info">Pending</Badge>;
       default:
@@ -84,7 +87,7 @@ export default function TeamMembersPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading team members...</p>
+              <BodyText className="text-grey-400">Loading team members...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -105,8 +108,8 @@ export default function TeamMembersPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Team Members</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Team Members</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -149,10 +152,10 @@ export default function TeamMembersPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6 text-center">
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -167,10 +170,10 @@ export default function TeamMembersPage() {
           className="mb-6"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
             <Input
               placeholder="Search members by name, role, or email..."
-              className="pl-12 bg-gray-900/50 border-compvss-cyan-500/30 h-12"
+              className="pl-12 bg-grey-900/50 border-compvss-cyan-500/30 h-12"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -187,24 +190,24 @@ export default function TeamMembersPage() {
               transition={{ delay: 0.5 + index * 0.1 }}
             >
               <Link href={`/compvss/team/profile/${member.id}`}>
-                <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer">
+                <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer">
                   <CardContent className="pt-6">
                     <div className="flex items-start gap-4">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center font-bebas text-black text-h4 flex-shrink-0">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 flex items-center justify-center text-black flex-shrink-0">
                         {member.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-bebas text-h5 text-white truncate">{member.name}</h3>
+                          <h3 className="text-white truncate">{member.name}</h3>
                           {getStatusBadge(member.status)}
                         </div>
-                        <p className="text-body-sm text-gray-400 font-oswald mb-3">{member.role}</p>
+                        <p className="text-body-sm text-grey-400 mb-3">{member.role}</p>
                         <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
+                          <div className="flex items-center gap-2 text-caption text-grey-500 -tech">
                             <Mail className="w-3 h-3" />
                             <span className="truncate">{member.email}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-caption text-gray-500 font-share-tech">
+                          <div className="flex items-center gap-2 text-caption text-grey-500 -tech">
                             <Phone className="w-3 h-3" />
                             <span>{member.phone}</span>
                           </div>

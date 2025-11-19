@@ -75,15 +75,15 @@ export function FieldConflictIndicator({
       </div>
 
       {showDetails && (
-        <div className="absolute z-10 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg p-4">
-          <div className="text-body-sm text-gray-900 mb-2">
+        <div className="absolute z-10 mt-2 w-80 bg-white border border-grey-200 rounded-lg shadow-lg p-4">
+          <div className="text-body-sm text-grey-900 mb-2">
             Conflict in &ldquo;{fieldName}&rdquo;
           </div>
           
           <div className="space-y-2 mb-3">
             <div className="bg-conflict-local-bg p-2 rounded">
               <div className="text-caption text-conflict-local mb-1">Your Value</div>
-              <div className="text-body-sm text-gray-900 break-all">
+              <div className="text-body-sm text-grey-900 break-all">
                 {typeof localValue === 'object'
                   ? JSON.stringify(localValue)
                   : String(localValue)}
@@ -92,7 +92,7 @@ export function FieldConflictIndicator({
             
             <div className="bg-conflict-remote-bg p-2 rounded">
               <div className="text-caption text-conflict-remote mb-1">Remote Value</div>
-              <div className="text-body-sm text-gray-900 break-all">
+              <div className="text-body-sm text-grey-900 break-all">
                 {typeof remoteValue === 'object'
                   ? JSON.stringify(remoteValue)
                   : String(remoteValue)}

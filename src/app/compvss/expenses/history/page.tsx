@@ -13,6 +13,8 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/expenses/history
+
 export default function ExpenseHistoryPage() {
   const { data: expenses, isLoading } = useExpenses({ status: 'all' });
   
@@ -45,15 +47,15 @@ export default function ExpenseHistoryPage() {
       >
         <div className="mb-6">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
             <Input
               placeholder="Search expenses..."
-              className="pl-12 bg-gray-900/50 border-compvss-cyan-500/30 h-12"
+              className="pl-12 bg-grey-900/50 border-compvss-cyan-500/30 h-12"
             />
           </div>
         </div>
 
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <History className="w-5 h-5 text-compvss-cyan-500" />
@@ -72,8 +74,8 @@ export default function ExpenseHistoryPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="font-oswald text-white mb-1">{expense.description}</h3>
-                      <div className="flex items-center gap-3 text-body-sm text-gray-400 font-share-tech">
+                      <h3 className="text-white mb-1">{expense.description}</h3>
+                      <div className="flex items-center gap-3 text-body-sm text-grey-400 -tech">
                         <Badge variant="compvss-outline" className="text-caption">{expense.category}</Badge>
                         <span>{expense.date}</span>
                         <span>•</span>
@@ -81,7 +83,7 @@ export default function ExpenseHistoryPage() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-h5 font-bebas text-white mb-1">{expense.amount}</div>
+                      <div className="text-white mb-1">{expense.amount}</div>
                       <Badge 
                         variant="compvss" 
                         className={expense.status === 'approved' ? 'bg-success-light text-success' : 'bg-error-light text-error'}

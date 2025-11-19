@@ -38,7 +38,7 @@ const ActionDrawer: React.FC<ActionDrawerProps> = ({
   };
 
   const variantStyles = {
-    default: "border-gray-200",
+    default: "border-grey-200",
     gvteway: "border-gvteway-red-200",
     compvss: "border-compvss-cyan-200",
     atlvs: "border-atlvs-green-200",
@@ -77,13 +77,13 @@ const ActionDrawer: React.FC<ActionDrawerProps> = ({
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-gray-200 p-6">
+        <div className="flex items-start justify-between border-b border-grey-200 p-6">
           <div className="flex-1">
-            <h2 className="text-h5 font-bebas text-gray-900">
+            <h2 className="text-grey-900">
               {title}
             </h2>
             {description && (
-              <p className="mt-1 text-body-sm text-gray-600 font-share-tech">
+              <p className="mt-1 text-body-sm text-grey-600 -tech">
                 {description}
               </p>
             )}
@@ -102,7 +102,7 @@ const ActionDrawer: React.FC<ActionDrawerProps> = ({
 
         {/* Footer */}
         {footer && (
-          <div className="border-t border-gray-200 p-6">
+          <div className="border-t border-grey-200 p-6">
             {footer}
           </div>
         )}

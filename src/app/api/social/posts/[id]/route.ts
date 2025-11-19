@@ -5,6 +5,8 @@ import { updatePostSchema } from '@/lib/validations/social';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth, rateLimit, getClientIdentifier,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { SocialService } from '@/lib/services/social/posts/id.service';
+
 
 type RouteContext = {
   params: Promise<{
@@ -29,7 +31,7 @@ export async function GET(
       throw errors.rateLimitExceeded();
     }
 
-    const post = await prisma.socialPost.findUnique({
+    const post = await new SocialService().findById({
       where: { id: id },
       include: {
         user: {
@@ -93,7 +95,7 @@ export async function PATCH(
     };
 
     // Check if post exists
-    const existingPost = await prisma.socialPost.findUnique({
+    const existingPost = await new SocialService().findById({
       where: { id: id },
     });
 
@@ -107,7 +109,7 @@ export async function PATCH(
     }
 
     // Update post
-    const post = await prisma.socialPost.update({
+    const post = await new SocialService().update({
       where: { id: id },
       data: updateData,
       include: {
@@ -153,7 +155,7 @@ export async function DELETE(
     }
 
     // Check if post exists
-    const existingPost = await prisma.socialPost.findUnique({
+    const existingPost = await new SocialService().findById({
       where: { id: id },
     });
 
@@ -167,7 +169,7 @@ export async function DELETE(
     }
 
     // Delete post (cascade will handle likes and comments)
-    await prisma.socialPost.delete({
+    await new SocialService().delete({
       where: { id: id },
     });
 

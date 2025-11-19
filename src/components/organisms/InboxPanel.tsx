@@ -83,7 +83,7 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
       <div className="flex-1 overflow-y-auto">
         {conversations.length === 0 ? (
           <div className="flex items-center justify-center h-full p-4">
-            <Text variant="body" className="text-gray-500 text-center">
+            <Text variant="body" className="text-grey-500 text-center">
               No conversations yet
             </Text>
           </div>
@@ -94,7 +94,7 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
               onClick={() => onSelectConversation(conversation.id)}
               variant="ghost"
               className={cn(
-                'w-full p-4 flex items-start gap-3 hover:bg-gray-50 transition-colors border-b',
+                'w-full p-4 flex items-start gap-3 hover:bg-grey-50 transition-colors border-b',
                 selectedConversationId === conversation.id && 'bg-accent'
               )}
             >
@@ -121,7 +121,7 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
                     {conversation.participantName}
                   </Text>
                   
-                  <Text variant="caption" className="text-gray-500 flex-shrink-0 ml-2">
+                  <Text variant="caption" className="text-grey-500 flex-shrink-0 ml-2">
                     {formatTime(conversation.lastMessageTime)}
                   </Text>
                 </div>
@@ -132,8 +132,8 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
                     className={cn(
                       'truncate',
                       conversation.unreadCount > 0
-                        ? 'text-gray-900'
-                        : 'text-gray-600'
+                        ? 'text-grey-900'
+                        : 'text-grey-600'
                     )}
                   >
                     {conversation.lastMessage}

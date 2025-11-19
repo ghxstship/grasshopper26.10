@@ -66,10 +66,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     <div className={cn("space-y-4", className)}>
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-h6 font-bebas text-gray-900">
+        <h3 className="text-grey-900">
           Filters
           {totalFilters > 0 && (
-            <span className="ml-2 text-body-sm text-gray-500">({totalFilters})</span>
+            <span className="ml-2 text-body-sm text-grey-500">({totalFilters})</span>
           )}
         </h3>
         {totalFilters > 0 && (
@@ -96,15 +96,15 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 variant="ghost"
                 className="flex w-full items-center justify-between text-left"
               >
-                <span className="text-body-sm text-gray-900 font-share-tech">
+                <span className="text-body-sm text-grey-900 -tech">
                   {group.label}
                   {groupValues.length > 0 && (
-                    <span className="ml-2 text-gray-500">({groupValues.length})</span>
+                    <span className="ml-2 text-grey-500">({groupValues.length})</span>
                   )}
                 </span>
                 <ChevronDown
                   className={cn(
-                    "h-4 w-4 text-gray-500 transition-transform",
+                    "h-4 w-4 text-grey-500 transition-transform",
                     isExpanded && "rotate-180"
                   )}
                 />
@@ -129,11 +129,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                         }
                         variant={variant}
                       />
-                      <span className="flex-1 text-body-sm text-gray-700 group-hover:text-gray-900 font-share-tech cursor-pointer">
+                      <span className="flex-1 text-body-sm text-grey-700 group-hover:text-grey-900 -tech cursor-pointer">
                         {option.label}
                       </span>
                       {option.count !== undefined && (
-                        <span className="text-caption text-gray-500">
+                        <span className="text-caption text-grey-500">
                           {option.count}
                         </span>
                       )}

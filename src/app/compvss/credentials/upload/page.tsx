@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { Input } from '@/components/atoms/Input';
 import { FormField } from '@/components/molecules/FormField';
+import { BodyText } from "@/components/atoms/Typography";
 
 export default function CredentialUploadPage() {
   const router = useRouter();
@@ -95,10 +96,10 @@ export default function CredentialUploadPage() {
       >
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <Card variant="compvss" className="bg-gray-900/50">
+          <Card variant="compvss" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="text-white">Credential Details</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Enter information about your certification
               </CardDescription>
             </CardHeader>
@@ -108,7 +109,7 @@ export default function CredentialUploadPage() {
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-body-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error -tech">{error}</p>
                   </div>
                 )}
 
@@ -116,7 +117,7 @@ export default function CredentialUploadPage() {
                 {success && (
                   <div className="p-3 rounded-lg bg-success/10 border border-success/30 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-success" />
-                    <p className="text-body-sm text-success font-share-tech">Credential uploaded successfully! Redirecting...</p>
+                    <BodyText className="text-body-sm text-success -tech">Credential uploaded successfully! Redirecting...</BodyText>
                   </div>
                 )}
 
@@ -191,19 +192,19 @@ export default function CredentialUploadPage() {
                     htmlFor="credential-file"
                     className="block border-2 border-dashed border-compvss-cyan-500/30 rounded-lg p-8 text-center hover:border-compvss-cyan-500/50 transition-colors cursor-pointer"
                   >
-                    <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <Upload className="w-12 h-12 text-grey-400 mx-auto mb-4" />
                     {file ? (
-                      <p className="text-compvss-cyan-500 font-share-tech mb-2">
+                      <p className="text-compvss-cyan-500 -tech mb-2">
                         {file.name}
                       </p>
                     ) : (
-                      <p className="text-gray-400 font-share-tech mb-2">
+                      <BodyText className="text-grey-400 -tech mb-2">
                         Click to upload or drag and drop
-                      </p>
+                      </BodyText>
                     )}
-                    <p className="text-caption text-gray-500 font-share-tech">
+                    <BodyText className="text-caption text-grey-500 -tech">
                       PDF, JPG, PNG up to 10MB
-                    </p>
+                    </BodyText>
                   </label>
                 </FormField>
 

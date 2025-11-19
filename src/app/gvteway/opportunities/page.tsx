@@ -64,7 +64,7 @@ export default function OpportunitiesPage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Opportunities</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto">
             Go from attendee to insider. Volunteer, collaborate, create, and shape the culture.
             Integrated with COMPVSS for professional opportunities.
           </BodyText>
@@ -142,7 +142,7 @@ export default function OpportunitiesPage() {
                       {opp.roles.map((role, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-ghxst-surface text-ghxst-text-primary font-share-tech-mono text-caption rounded-full"
+                          className="px-3 py-1 bg-ghxst-surface text-ghxst-text-primary -tech-mono text-caption rounded-full"
                         >
                           {role}
                         </span>
@@ -228,20 +228,20 @@ export default function OpportunitiesPage() {
           <SectionHeader className="mb-4 uppercase">Impact Stats</SectionHeader>
           <div className="grid md:grid-cols-4 gap-8 mt-8">
             <div>
-              <div className="font-anton text-h1 mb-2">500+</div>
-              <Metadata className="text-gray-400">Opportunities Posted</Metadata>
+              <div className="mb-2">500+</div>
+              <Metadata className="text-grey-400">Opportunities Posted</Metadata>
             </div>
             <div>
-              <div className="font-anton text-h1 mb-2">2,000+</div>
-              <Metadata className="text-gray-400">Volunteer Hours</Metadata>
+              <div className="mb-2">2,000+</div>
+              <Metadata className="text-grey-400">Volunteer Hours</Metadata>
             </div>
             <div>
-              <div className="font-anton text-h1 mb-2">100+</div>
-              <Metadata className="text-gray-400">Active Collaborators</Metadata>
+              <div className="mb-2">100+</div>
+              <Metadata className="text-grey-400">Active Collaborators</Metadata>
             </div>
             <div>
-              <div className="font-anton text-h1 mb-2">50+</div>
-              <Metadata className="text-gray-400">Member-Created Events</Metadata>
+              <div className="mb-2">50+</div>
+              <Metadata className="text-grey-400">Member-Created Events</Metadata>
             </div>
           </div>
         </div>

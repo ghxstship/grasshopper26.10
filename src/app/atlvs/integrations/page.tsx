@@ -12,6 +12,7 @@ import { Card, CardHeader, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import Link from 'next/link';
 import { useIntegrations } from '@/lib/hooks/atlvs/useIntegrations';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   DollarSign,
@@ -21,6 +22,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Mail,
   Zap,
 };
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/integrations
 
 export default function IntegrationsPage() {
   const { integrations, isLoading, error, refetch } = useIntegrations();
@@ -85,7 +88,7 @@ export default function IntegrationsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading integrations...</p>
+            <BodyText className="text-grey-400">Loading integrations...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -98,8 +101,8 @@ export default function IntegrationsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Integrations</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Integrations</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -128,7 +131,7 @@ export default function IntegrationsPage() {
               const _IconComponent = typeof integration.icon === 'string' ? iconMap[integration.icon] || Zap : integration.icon;
               const Icon = integration.icon;
               return (
-                <Card key={integration.id} variant="atlvs" className="bg-gray-900/50" role="listitem">
+                <Card key={integration.id} variant="atlvs" className="bg-grey-900/50" role="listitem">
                   <CardHeader>
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -136,7 +139,7 @@ export default function IntegrationsPage() {
                           <Icon className="w-6 h-6 text-atlvs-green-500" aria-hidden="true" />
                         </div>
                         <div>
-                          <div className="font-medium text-h6">{integration.name}</div>
+                          <div className="font-medium">{integration.name}</div>
                           {integration.connected && (
                             <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50 mt-1" role="status" aria-label="Integration connected">
                               <Check className="w-3 h-3 mr-1" aria-hidden="true" />
@@ -148,7 +151,7 @@ export default function IntegrationsPage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-body-sm text-gray-400 mb-4">{integration.description}</p>
+                    <p className="text-body-sm text-grey-400 mb-4">{integration.description}</p>
                     <div className="flex gap-2">
                       <Link href={integration.href} className="flex-1">
                         <Button variant="atlvs" size="sm" className="w-full" aria-label={`Configure ${integration.name} integration`}>

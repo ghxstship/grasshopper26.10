@@ -29,6 +29,8 @@ interface BudgetItem {
   currency: string;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets/currency
+
 export default function MultiCurrencyPage() {
   const [baseCurrency, setBaseCurrency] = useState('USD');
   const [showConverter, setShowConverter] = useState(false);
@@ -113,12 +115,12 @@ export default function MultiCurrencyPage() {
         ]}
       >
         <div className="space-y-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle>Base Currency</CardTitle>
-                  <CardDescription className="text-gray-400">All amounts will be converted to this currency</CardDescription>
+                  <CardDescription className="text-grey-400">All amounts will be converted to this currency</CardDescription>
                 </div>
               <Select
                 value={baseCurrency}
@@ -135,7 +137,7 @@ export default function MultiCurrencyPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-4">
                 <CardTitle>Current Exchange Rates</CardTitle>
@@ -146,22 +148,22 @@ export default function MultiCurrencyPage() {
             </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {currencies.filter((c: any) => c.code !== baseCurrency).map((currency: any) => (
-                  <div key={currency.code} className="p-4 border border-gray-700 rounded-lg bg-gray-800/50">
+                  <div key={currency.code} className="p-4 border border-grey-700 rounded-lg bg-grey-800/50">
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium text-white">{currency.code}</span>
                       <TrendingUp className="w-4 h-4 text-atlvs-green-500" />
                     </div>
-                    <div className="text-h4 text-white mb-1">
+                    <div className="text-white mb-1">
                       {currency.symbol}{currency.rate.toFixed(4)}
                     </div>
-                    <div className="text-body-sm text-gray-400">per {baseCurrency}</div>
+                    <div className="text-body-sm text-grey-400">per {baseCurrency}</div>
                   </div>
                 ))}
               </div>
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-4">
                 <CardTitle>Currency Converter</CardTitle>
@@ -218,19 +220,19 @@ export default function MultiCurrencyPage() {
                   <div className="p-4 bg-atlvs-green-500/10 border border-atlvs-green-500/30 rounded-lg">
                     <div className="flex items-center justify-center gap-3">
                       <div className="text-center">
-                        <div className="text-body-sm text-gray-400 mb-1">From</div>
-                        <div className="text-h4 text-white">
+                        <div className="text-body-sm text-grey-400 mb-1">From</div>
+                        <div className="text-white">
                           {getCurrencySymbol(fromCurrency)}{parseFloat(convertAmount).toLocaleString()}
                         </div>
-                        <div className="text-body-sm text-gray-400">{fromCurrency}</div>
+                        <div className="text-body-sm text-grey-400">{fromCurrency}</div>
                       </div>
-                      <ArrowLeftRight className="w-6 h-6 text-gray-400" />
+                      <ArrowLeftRight className="w-6 h-6 text-grey-400" />
                       <div className="text-center">
-                        <div className="text-body-sm text-gray-400 mb-1">To</div>
-                        <div className="text-h4 text-atlvs-green-500">
+                        <div className="text-body-sm text-grey-400 mb-1">To</div>
+                        <div className="text-atlvs-green-500">
                           {getCurrencySymbol(toCurrency)}{convertedAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </div>
-                        <div className="text-body-sm text-gray-400">{toCurrency}</div>
+                        <div className="text-body-sm text-grey-400">{toCurrency}</div>
                       </div>
                     </div>
                   </div>
@@ -242,24 +244,24 @@ export default function MultiCurrencyPage() {
         </div>
 
       {/* Budget Items by Currency */}
-      <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+      <Card variant="atlvs" className="bg-grey-900/50 mb-6">
         <CardHeader>
           <CardTitle className="mb-4">Budget Items</CardTitle>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-800/50 border-b border-gray-700">
+              <thead className="bg-grey-800/50 border-b border-grey-700">
                 <tr>
-                  <th className="px-4 py-3 text-left text-body-sm text-gray-400">Item</th>
-                  <th className="px-4 py-3 text-right text-body-sm text-gray-400">Original Amount</th>
-                  <th className="px-4 py-3 text-right text-body-sm text-gray-400">Currency</th>
-                  <th className="px-4 py-3 text-right text-body-sm text-gray-400">
+                  <th className="px-4 py-3 text-left text-body-sm text-grey-400">Item</th>
+                  <th className="px-4 py-3 text-right text-body-sm text-grey-400">Original Amount</th>
+                  <th className="px-4 py-3 text-right text-body-sm text-grey-400">Currency</th>
+                  <th className="px-4 py-3 text-right text-body-sm text-grey-400">
                   In {baseCurrency}
                 </th>
               </tr>
             </thead>
-              <tbody className="divide-y divide-gray-800">
+              <tbody className="divide-y divide-grey-800">
                 {budgetItems.map((item: any) => (
-                  <tr key={item.id} className="hover:bg-gray-800/50">
+                  <tr key={item.id} className="hover:bg-grey-800/50">
                     <td className="px-4 py-3 text-body-sm text-white">{item.name}</td>
                     <td className="px-4 py-3 text-body-sm text-right text-white">
                       {getCurrencySymbol(item.currency)}{item.amount.toLocaleString()}
@@ -276,7 +278,7 @@ export default function MultiCurrencyPage() {
                 </tr>
               ))}
             </tbody>
-              <tfoot className="bg-gray-800/50 border-t-2 border-gray-700">
+              <tfoot className="bg-grey-800/50 border-t-2 border-grey-700">
                 <tr>
                   <td colSpan={3} className="px-4 py-3 text-body-sm text-white">
                     Total (in {baseCurrency})
@@ -294,48 +296,48 @@ export default function MultiCurrencyPage() {
 
       {/* Summary Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <DollarSign className="w-8 h-8 text-atlvs-green-500" />
               <div>
-                <CardDescription className="text-gray-400">Base Currency</CardDescription>
-                <CardTitle className="text-h5 font-bebas">{baseCurrency}</CardTitle>
+                <CardDescription className="text-grey-400">Base Currency</CardDescription>
+                <CardTitle >{baseCurrency}</CardTitle>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <Settings className="w-8 h-8 text-info" />
               <div>
-                <CardDescription className="text-gray-400">Currencies Used</CardDescription>
-                <CardTitle className="text-h5 font-bebas">
+                <CardDescription className="text-grey-400">Currencies Used</CardDescription>
+                <CardTitle >
                   {new Set(budgetItems.map((i: any) => i.currency)).size}
                 </CardTitle>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <TrendingUp className="w-8 h-8 text-atlvs-purple-500" />
               <div>
-                <CardDescription className="text-gray-400">Budget Items</CardDescription>
-                <CardTitle className="text-h5 font-bebas">{budgetItems.length}</CardTitle>
+                <CardDescription className="text-grey-400">Budget Items</CardDescription>
+                <CardTitle >{budgetItems.length}</CardTitle>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <ArrowLeftRight className="w-8 h-8 text-atlvs-orange-500" />
               <div>
-                <CardDescription className="text-gray-400">Total Value</CardDescription>
-                <CardTitle className="text-h5 font-bebas">
+                <CardDescription className="text-grey-400">Total Value</CardDescription>
+                <CardTitle >
                   {getCurrencySymbol(baseCurrency)}
                   {(getTotalInBaseCurrency() / 1000).toFixed(0)}K
                 </CardTitle>

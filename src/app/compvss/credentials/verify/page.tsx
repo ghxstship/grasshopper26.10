@@ -15,6 +15,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Input } from '@/components/atoms/Input';
 import { Badge } from '@/components/atoms/Badge';
 import { useCredential } from '@/lib/hooks/compvss/useCredentials';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/credentials/verify
 
 export default function CredentialVerifyPage() {
   const [searchId, setSearchId] = useState('');
@@ -45,7 +48,7 @@ export default function CredentialVerifyPage() {
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Shield className="w-5 h-5 text-compvss-cyan-500" />
@@ -55,7 +58,7 @@ export default function CredentialVerifyPage() {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="relative">
-                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                       <Input
                         placeholder="Enter credential ID or certificate number..."
                         className="pl-12 bg-black/50 border-compvss-cyan-500/30 h-12"
@@ -91,7 +94,7 @@ export default function CredentialVerifyPage() {
             {/* Search Results */}
             {queriedId && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-6">
-                <Card variant="compvss" className="bg-gray-900/50">
+                <Card variant="compvss" className="bg-grey-900/50">
                   <CardHeader>
                     <CardTitle className="text-white">Verification Result</CardTitle>
                   </CardHeader>
@@ -99,8 +102,8 @@ export default function CredentialVerifyPage() {
                     {error ? (
                       <div className="text-center py-8">
                         <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                        <h3 className="text-h6 font-bebas text-white mb-2">Credential Not Found</h3>
-                        <p className="text-gray-400 text-body-sm">The credential ID you entered could not be verified.</p>
+                        <SubsectionHeader className="text-white mb-2">Credential Not Found</SubsectionHeader>
+                        <BodyText className="text-grey-400 text-body-sm">The credential ID you entered could not be verified.</BodyText>
                       </div>
                     ) : credential ? (
                       <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
@@ -108,12 +111,12 @@ export default function CredentialVerifyPage() {
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
                               <Shield className="w-5 h-5 text-compvss-cyan-500" />
-                              <h3 className="font-oswald text-white text-h6">{credential.name}</h3>
+                              <h3 className="text-white">{credential.name}</h3>
                             </div>
-                            <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                            <p className="text-body-sm text-grey-400 -tech mb-2">
                               {credential.type}
                             </p>
-                            <div className="flex gap-4 text-caption text-gray-500 font-share-tech">
+                            <div className="flex gap-4 text-caption text-grey-500 -tech">
                               <span>Issued: {credential.issuedDate ? new Date(credential.issuedDate).toLocaleDateString() : 'N/A'}</span>
                               {credential.expiryDate && (
                                 <span>Expires: {new Date(credential.expiryDate).toLocaleDateString()}</span>
@@ -138,15 +141,15 @@ export default function CredentialVerifyPage() {
 
           <div>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardHeader>
                   <CardTitle className="text-white text-body-sm">Verification Info</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3 text-body-sm text-gray-400 font-share-tech">
-                    <p>Enter a credential ID to verify its authenticity and check expiration status.</p>
-                    <div className="pt-3 border-t border-gray-800">
-                      <p className="text-caption text-gray-500">Supported credentials:</p>
+                  <div className="space-y-3 text-body-sm text-grey-400 -tech">
+                    <BodyText >Enter a credential ID to verify its authenticity and check expiration status.</BodyText>
+                    <div className="pt-3 border-t border-grey-800">
+                      <BodyText className="text-caption text-grey-500">Supported credentials:</BodyText>
                       <ul className="mt-2 space-y-1 text-caption">
                         <li>• Safety certifications</li>
                         <li>• Professional licenses</li>

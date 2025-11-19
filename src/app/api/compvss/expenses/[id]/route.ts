@@ -2,6 +2,12 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { z } from 'zod';
+import { CompvssService } from '@/lib/services/compvss/expenses/id.service';
+
+
 
 export async function GET(
   request: NextRequest,
@@ -12,7 +18,7 @@ export async function GET(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    const expense = await prisma.expenseReport.findUnique({
+    const expense = await new CompvssService().findById({
       where: { id: id },
       include: {
         user: { select: { id: true, name: true, email: true } },
@@ -39,7 +45,7 @@ export async function PUT(
     requireAuth(context);
 
     const body = await request.json();
-    const expense = await prisma.expenseReport.update({
+    const expense = await new CompvssService().update({
       where: { id: id },
       data: body,
     });
@@ -59,7 +65,7 @@ export async function DELETE(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    await prisma.expenseReport.delete({
+    await new CompvssService().delete({
       where: { id: id },
     });
 

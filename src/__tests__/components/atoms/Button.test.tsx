@@ -51,7 +51,7 @@ describe('Button Component', () => {
     it('renders ghost variant correctly', () => {
       render(<Button variant="ghost">Ghost Button</Button>)
       const button = screen.getByRole('button')
-      expect(button).toHaveClass('hover:bg-gray-100')
+      expect(button).toHaveClass('hover:bg-grey-100')
     })
   })
 
@@ -88,20 +88,20 @@ describe('Button Component', () => {
   })
 
   describe('Rounded', () => {
-    it('renders with default rounded corners', () => {
-      render(<Button rounded="default">Button</Button>)
+    it('renders with default rounded-none corners', () => {
+      render(<Button rounded-none="default">Button</Button>)
       const button = screen.getByRole('button')
-      expect(button).toHaveClass('rounded-lg')
+      expect(button).toHaveClass('rounded-none')
     })
 
-    it('renders with fully rounded corners', () => {
-      render(<Button rounded="full">Button</Button>)
+    it('renders with fully rounded-none corners', () => {
+      render(<Button rounded-none="full">Button</Button>)
       const button = screen.getByRole('button')
-      expect(button).toHaveClass('rounded-full')
+      expect(button).toHaveClass('rounded-none')
     })
 
-    it('renders with no rounded corners', () => {
-      render(<Button rounded="none">Button</Button>)
+    it('renders with no rounded-none corners', () => {
+      render(<Button rounded-none="none">Button</Button>)
       const button = screen.getByRole('button')
       expect(button).toHaveClass('rounded-none')
     })

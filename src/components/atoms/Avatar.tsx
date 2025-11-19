@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const avatarVariants = cva(
-  "relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800",
+  "relative inline-flex items-center justify-center overflow-hidden rounded-full bg-grey-200 dark:bg-grey-800",
   {
     variants: {
       size: {
@@ -59,13 +59,13 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             onError={() => setImageError(true)}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-800">
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-grey-300 to-grey-400 dark:from-grey-700 dark:to-grey-800">
             {fallback ? (
-              <span className="text-body-sm text-gray-700 dark:text-gray-300 font-bebas">
+              <span className="text-body-sm text-grey-700 dark:text-grey-300">
                 {getInitials(fallback)}
               </span>
             ) : (
-              <User className="h-1/2 w-1/2 text-gray-500 dark:text-gray-400" />
+              <User className="h-1/2 w-1/2 text-grey-500 dark:text-grey-400" />
             )}
           </div>
         )}

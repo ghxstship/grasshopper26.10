@@ -15,7 +15,7 @@ import { useState, useEffect } from 'react';
  * 
  * @example
  * ```tsx
- * const isMobile = useMediaQuery('(max-width: 768px)');
+ * const isMobile = useMediaQuery('(max-width: 48rem)');
  * const isDark = useMediaQuery('(prefers-color-scheme: dark)');
  * 
  * return (
@@ -69,8 +69,8 @@ export function useMediaQuery(query: string): boolean {
 /**
  * Common breakpoint hooks
  */
-export const useIsMobile = () => useMediaQuery('(max-width: 768px)');
-export const useIsTablet = () => useMediaQuery('(min-width: 769px) and (max-width: 1024px)');
-export const useIsDesktop = () => useMediaQuery('(min-width: 1025px)');
+export const useIsMobile = () => useMediaQuery('(max-width: 48rem)');
+export const useIsTablet = () => useMediaQuery('(min-width: 48.0625rem) and (max-width: 64rem)');
+export const useIsDesktop = () => useMediaQuery('(min-width: 64.0625rem)');
 export const useIsDarkMode = () => useMediaQuery('(prefers-color-scheme: dark)');
 export const usePrefersReducedMotion = () => useMediaQuery('(prefers-reduced-motion: reduce)');

@@ -44,7 +44,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
 
   const backgroundStyles = {
-    default: "bg-gray-50",
+    default: "bg-grey-50",
     gvteway: "bg-black",
     compvss: "bg-black",
     atlvs: "bg-black",

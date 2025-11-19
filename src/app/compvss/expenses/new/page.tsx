@@ -15,6 +15,9 @@ import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { Input } from '@/components/atoms/Input';
+import { BodyText } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/expenses/new
 
 export default function NewExpensePage() {
   const [formData, setFormData] = useState({
@@ -56,13 +59,13 @@ export default function NewExpensePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <DollarSign className="w-6 h-6 text-compvss-cyan-500" />
                 Expense Details
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Fill in the expense information and attach your receipt
               </CardDescription>
             </CardHeader>
@@ -91,7 +94,7 @@ export default function NewExpensePage() {
                     required
                   >
                     <div className="relative">
-                      <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                       <Input
                         id="amount"
                         type="number"
@@ -111,7 +114,7 @@ export default function NewExpensePage() {
                     required
                   >
                     <div className="relative">
-                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                       <Input
                         id="date"
                         type="date"
@@ -190,12 +193,12 @@ export default function NewExpensePage() {
                         <Receipt className="w-8 h-8 text-compvss-cyan-500" />
                       </div>
                       <div>
-                        <p className="text-white font-oswald mb-1">
+                        <BodyText className="text-white mb-1">
                           Upload receipt image
-                        </p>
-                        <p className="text-body-sm text-gray-400 font-share-tech">
+                        </BodyText>
+                        <BodyText className="text-body-sm text-grey-400 -tech">
                           PNG, JPG, PDF up to 5MB
-                        </p>
+                        </BodyText>
                       </div>
                       <Button variant="compvss-outline" size="sm" type="button">
                         <Upload className="w-4 h-4 mr-2" />
@@ -203,9 +206,9 @@ export default function NewExpensePage() {
                       </Button>
                     </div>
                   </div>
-                  <p className="text-caption text-gray-500 font-share-tech">
+                  <BodyText className="text-caption text-grey-500 -tech">
                     Clear, readable receipt required for reimbursement
-                  </p>
+                  </BodyText>
                 </FormField>
 
                 {/* Action Buttons */}

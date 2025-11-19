@@ -49,28 +49,28 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         <AlertCircle className="w-16 h-16" />
       </div>
 
-      <h2 className="text-h4 font-bebas text-white uppercase mb-2">
+      <h2 className="text-white uppercase mb-2">
         {title}
       </h2>
 
-      <p className="text-gray-400 font-oswald max-w-md mb-6">{message}</p>
+      <p className="text-grey-400 max-w-md mb-6">{message}</p>
 
       {errorMessage && showDetails && (
         <div className="mb-6 w-full max-w-2xl">
           <button
             onClick={() => setShowErrorDetails(!showErrorDetails)}
-            className="text-body-sm text-gray-500 hover:text-gray-400 font-oswald mb-2"
+            className="text-body-sm text-grey-500 hover:text-grey-400 mb-2"
           >
             {showErrorDetails ? 'Hide' : 'Show'} error details
           </button>
 
           {showErrorDetails && (
-            <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 text-left">
+            <div className="bg-grey-900 border border-grey-800 rounded-lg p-4 text-left">
               <p className="text-body-sm text-destructive font-mono mb-2">
                 {errorMessage}
               </p>
               {errorStack && (
-                <pre className="text-caption text-gray-500 font-mono overflow-x-auto">
+                <pre className="text-caption text-grey-500 font-mono overflow-x-auto">
                   {errorStack}
                 </pre>
               )}

@@ -11,6 +11,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useIntegrations } from '@/lib/hooks/atlvs/useIntegrations';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/settings/integrations
 
 export default function IntegrationsSettingsPage() {
   const { integrations, isLoading, error, refetch } = useIntegrations();
@@ -29,7 +32,7 @@ export default function IntegrationsSettingsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading integrations...</p>
+              <BodyText className="text-grey-400">Loading integrations...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -51,8 +54,8 @@ export default function IntegrationsSettingsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Integrations</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Integrations</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -74,14 +77,14 @@ export default function IntegrationsSettingsPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {integrations.map((integration) => (
-            <Card key={integration.id} variant="atlvs" className="bg-gray-900/50">
+            <Card key={integration.id} variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-4 flex-1">
-                    <div className="text-h2">{integration.icon}</div>
+                    <div >{integration.icon}</div>
                     <div className="flex-1">
-                      <div className="font-medium text-h6 mb-1">{integration.name}</div>
-                      <div className="text-body-sm text-gray-400 mb-3">{integration.description}</div>
+                      <div className="font-medium mb-1">{integration.name}</div>
+                      <div className="text-body-sm text-grey-400 mb-3">{integration.description}</div>
                       {integration.connected ? (
                         <Badge variant="atlvs-outline" className="bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50">
                           <Check className="w-3 h-3 mr-1" />

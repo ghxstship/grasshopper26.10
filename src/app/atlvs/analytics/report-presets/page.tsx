@@ -20,6 +20,7 @@ interface ReportPreset {
 }
 
 import { Star, DollarSign, Ticket, Settings, TrendingUp, Users, Shield, Leaf, Cpu, Loader2, AlertCircle } from 'lucide-react';
+import { BodyText } from "@/components/atoms/Typography";
 
 const categories = [
   { id: 'all', label: 'All Reports', icon: Star },
@@ -137,25 +138,25 @@ export default function ReportPresetsPage() {
 
           {/* Summary Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-body-sm text-gray-400 mb-1">Total Presets</p>
-              <p className="text-h4 text-white">
+            <div className="bg-grey-800/50 rounded-lg p-4 border border-grey-700">
+              <BodyText className="text-body-sm text-grey-400 mb-1">Total Presets</BodyText>
+              <p className="text-white">
                 {allPresetsData?.total || 200}
               </p>
             </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-body-sm text-gray-400 mb-1">Categories</p>
-              <p className="text-h4 text-white">8</p>
+            <div className="bg-grey-800/50 rounded-lg p-4 border border-grey-700">
+              <BodyText className="text-body-sm text-grey-400 mb-1">Categories</BodyText>
+              <BodyText className="text-white">8</BodyText>
             </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-body-sm text-gray-400 mb-1">Your Favorites</p>
-              <p className="text-h4 text-atlvs-green-500">
+            <div className="bg-grey-800/50 rounded-lg p-4 border border-grey-700">
+              <BodyText className="text-body-sm text-grey-400 mb-1">Your Favorites</BodyText>
+              <p className="text-atlvs-green-500">
                 {favoriteIds.length}
               </p>
             </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="text-body-sm text-gray-400 mb-1">Showing</p>
-              <p className="text-h4 text-white">
+            <div className="bg-grey-800/50 rounded-lg p-4 border border-grey-700">
+              <BodyText className="text-body-sm text-grey-400 mb-1">Showing</BodyText>
+              <p className="text-white">
                 {displayedPresets.length}
               </p>
             </div>
@@ -167,13 +168,13 @@ export default function ReportPresetsPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading report presets...</p>
+              <BodyText className="text-grey-400">Loading report presets...</BodyText>
             </div>
           </div>
         ) : displayedPresets.length === 0 ? (
           <div className="text-center py-12">
-            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-gray-500" />
-            <p className="text-gray-400">
+            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-grey-500" />
+            <p className="text-grey-400">
               {showFavoritesOnly 
                 ? 'No favorite reports yet. Star some reports to add them to favorites!' 
                 : 'No reports found in this category'}
@@ -190,7 +191,7 @@ export default function ReportPresetsPage() {
 
         {/* Help Text */}
         <div className="mt-8 p-4 bg-atlvs-green-500/10 border border-atlvs-green-500/30 rounded-lg">
-          <p className="text-body-sm text-gray-300">
+          <p className="text-body-sm text-grey-300">
             <strong className="text-atlvs-green-500">💡 Tip:</strong> Each report preset is linked to a KPI calculation function. 
             Click &quot;Generate&quot; to create a report for a specific event or project. Star your most-used reports for quick access!
           </p>

@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
 
 interface ComplianceItem {
   id: string;
@@ -23,6 +24,8 @@ interface ComplianceItem {
   lastChecked?: string;
   required: boolean;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/team/onboarding/compliance
 
 export default function ComplianceTrackingPage() {
   const { data } = useTeam();
@@ -89,7 +92,7 @@ export default function ComplianceTrackingPage() {
       case 'pending':
         return <FileCheck className="w-5 h-5 text-warning" />;
       default:
-        return <Shield className="w-5 h-5 text-gray-500" />;
+        return <Shield className="w-5 h-5 text-grey-500" />;
     }
   };
 
@@ -139,8 +142,8 @@ export default function ComplianceTrackingPage() {
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-body-sm text-gray-400 font-share-tech mb-1">Compliant</p>
-                    <p className="text-h3 font-bebas text-success">{compliantCount}/{totalRequired}</p>
+                    <BodyText className="text-body-sm text-grey-400 -tech mb-1">Compliant</BodyText>
+                    <p className="text-success">{compliantCount}/{totalRequired}</p>
                   </div>
                   <CheckCircle2 className="w-8 h-8 text-success" />
                 </div>
@@ -151,8 +154,8 @@ export default function ComplianceTrackingPage() {
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-body-sm text-gray-400 font-share-tech mb-1">Pending</p>
-                    <p className="text-h3 font-bebas text-warning">{pendingCount}</p>
+                    <BodyText className="text-body-sm text-grey-400 -tech mb-1">Pending</BodyText>
+                    <p className="text-warning">{pendingCount}</p>
                   </div>
                   <FileCheck className="w-8 h-8 text-warning" />
                 </div>
@@ -163,8 +166,8 @@ export default function ComplianceTrackingPage() {
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-body-sm text-gray-400 font-share-tech mb-1">Expired</p>
-                    <p className="text-h3 font-bebas text-error">{expiredCount}</p>
+                    <BodyText className="text-body-sm text-grey-400 -tech mb-1">Expired</BodyText>
+                    <p className="text-error">{expiredCount}</p>
                   </div>
                   <AlertTriangle className="w-8 h-8 text-error" />
                 </div>
@@ -180,20 +183,20 @@ export default function ComplianceTrackingPage() {
                   <>
                     <CheckCircle2 className="w-6 h-6 text-success flex-shrink-0" />
                     <div>
-                      <h3 className="font-oswald text-white mb-1">Fully Compliant</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech">
+                      <SubsectionHeader className="text-white mb-1">Fully Compliant</SubsectionHeader>
+                      <BodyText className="text-body-sm text-grey-400 -tech">
                         All required compliance items are up to date. You&apos;re cleared to work!
-                      </p>
+                      </BodyText>
                     </div>
                   </>
                 ) : (
                   <>
                     <AlertTriangle className="w-6 h-6 text-warning flex-shrink-0" />
                     <div>
-                      <h3 className="font-oswald text-white mb-1">Action Required</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech">
+                      <SubsectionHeader className="text-white mb-1">Action Required</SubsectionHeader>
+                      <BodyText className="text-body-sm text-grey-400 -tech">
                         Please complete all pending items to maintain compliance status.
-                      </p>
+                      </BodyText>
                     </div>
                   </>
                 )}
@@ -204,24 +207,24 @@ export default function ComplianceTrackingPage() {
           {/* Compliance Items List */}
           <div className="space-y-4 mb-6">
             {complianceItems.map((item) => (
-              <Card key={item.id} variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card key={item.id} variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-start gap-3 flex-1">
                       {getStatusIcon(item.status)}
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white">{item.title}</h3>
+                          <h3 className="text-white">{item.title}</h3>
                           {item.required && (
                             <Badge variant="error" className="text-caption">Required</Badge>
                           )}
                         </div>
-                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-grey-400 -tech mb-2">
                           {item.description}
                         </p>
                         
                         {/* Dates */}
-                        <div className="flex flex-wrap gap-4 text-caption text-gray-500 font-share-tech">
+                        <div className="flex flex-wrap gap-4 text-caption text-grey-500 -tech">
                           {item.expiryDate && (
                             <div className="flex items-center gap-1">
                               <Calendar className="w-3 h-3" />

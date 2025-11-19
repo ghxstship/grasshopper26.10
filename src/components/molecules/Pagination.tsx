@@ -75,7 +75,7 @@ const Pagination: React.FC<PaginationProps> = ({
         if (typeof page === "string") {
           return (
             <div key={page} className="flex h-9 w-9 items-center justify-center">
-              <MoreHorizontal className="h-4 w-4 text-gray-400" />
+              <MoreHorizontal className="h-4 w-4 text-grey-400" />
             </div>
           );
         }

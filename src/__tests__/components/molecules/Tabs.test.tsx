@@ -119,7 +119,7 @@ describe('Tabs', () => {
       );
       
       const secondTab = screen.getByText('Second Tab');
-      expect(secondTab).toHaveClass('border-gray-900', 'text-gray-900');
+      expect(secondTab).toHaveClass('border-grey-900', 'text-grey-900');
     });
 
     it('should not highlight inactive tabs', () => {
@@ -128,7 +128,7 @@ describe('Tabs', () => {
       );
       
       const firstTab = screen.getByText('First Tab');
-      expect(firstTab).toHaveClass('border-transparent', 'text-gray-500');
+      expect(firstTab).toHaveClass('border-transparent', 'text-grey-500');
     });
   });
 
@@ -182,7 +182,7 @@ describe('Tabs', () => {
       );
       
       const activeTab = screen.getByText('First Tab');
-      expect(activeTab).toHaveClass('border-gray-900', 'text-gray-900');
+      expect(activeTab).toHaveClass('border-grey-900', 'text-grey-900');
     });
 
     it('should apply gvteway variant styles', () => {

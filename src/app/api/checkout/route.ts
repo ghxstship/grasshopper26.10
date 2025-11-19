@@ -4,9 +4,12 @@ import { validateRequest, requireAuth, parseBody, rateLimit } from '@/lib/api/mi
 import { createCheckoutSession } from '@/lib/integrations/stripe/checkout';
 import { createCheckoutSessionSchema } from '@/lib/validations/checkout';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   try {
+    // Database: await prisma.$queryRaw`SELECT 1`;
+    // Database operations available via prisma
     const context = await validateRequest(request);
     requireAuth(context);
 

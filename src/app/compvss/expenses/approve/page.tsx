@@ -11,6 +11,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useExpenses, useApproveExpense } from '@/lib/hooks/compvss/useExpenses';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/expenses/approve
 
 export default function ExpenseApprovePage() {
   const { data: expenses = [], isLoading, error, refetch } = useExpenses({ status: 'PENDING' });
@@ -45,7 +48,7 @@ export default function ExpenseApprovePage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading expenses...</p>
+              <BodyText className="text-grey-400">Loading expenses...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -66,8 +69,8 @@ export default function ExpenseApprovePage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Expenses</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Expenses</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -87,7 +90,7 @@ export default function ExpenseApprovePage() {
         showToolbar={false}
         
       >
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-white flex items-center gap-2">
@@ -101,7 +104,7 @@ export default function ExpenseApprovePage() {
               {expenses.length === 0 ? (
                 <div className="text-center py-12">
                   <CheckCircle2 className="w-12 h-12 mx-auto mb-4 text-success" />
-                  <p className="text-gray-400">No expenses pending approval</p>
+                  <BodyText className="text-grey-400">No expenses pending approval</BodyText>
                 </div>
               ) : (
                 expenses.map((expense: any, index: number) => (
@@ -114,17 +117,17 @@ export default function ExpenseApprovePage() {
                 >
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex-1">
-                      <h3 className="font-oswald text-white mb-1">{expense.description}</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                      <h3 className="text-white mb-1">{expense.description}</h3>
+                      <p className="text-body-sm text-grey-400 -tech mb-2">
                         Submitted by {expense.user} • {expense.date}
                       </p>
                       <Badge variant="compvss-outline" className="text-caption">
                         {expense.category}
                       </Badge>
                     </div>
-                    <div className="text-h4 font-bebas text-white">{expense.amount}</div>
+                    <div className="text-white">{expense.amount}</div>
                   </div>
-                  <div className="flex gap-3 pt-3 border-t border-gray-800">
+                  <div className="flex gap-3 pt-3 border-t border-grey-800">
                     <Button 
                       variant="compvss" 
                       size="sm" 

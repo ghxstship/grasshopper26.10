@@ -4,6 +4,8 @@ import { addToCartSchema } from '@/lib/validations/products';
 import { createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { CartService } from '@/lib/services/cart/items.service';
+
 
 // POST /api/cart/items - Add item to cart
 export async function POST(request: NextRequest) {
@@ -23,7 +25,7 @@ export async function POST(request: NextRequest) {
     const validatedData = addToCartSchema.parse(body);
 
     // Check if product exists and has stock
-    const product = await prisma.product.findUnique({
+    const product = await new CartService().findById({
       where: { id: validatedData.productId },
     });
 
@@ -36,12 +38,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Get or create cart
-    let cart = await prisma.cart.findUnique({
+    let cart = await new CartService().findById({
       where: { userId: context.userId },
     });
 
     if (!cart) {
-      cart = await prisma.cart.create({
+      cart = await new CartService().create({
         data: { userId: context.userId! },
       });
     }
@@ -64,7 +66,7 @@ export async function POST(request: NextRequest) {
         throw errors.badRequest('Insufficient stock for requested quantity');
       }
 
-      cartItem = await prisma.cartItem.update({
+      cartItem = await new CartService().update({
         where: { id: existingItem.id },
         data: { quantity: newQuantity },
         include: {
@@ -81,7 +83,7 @@ export async function POST(request: NextRequest) {
       });
     } else {
       // Add new item
-      cartItem = await prisma.cartItem.create({
+      cartItem = await new CartService().create({
         data: {
           cartId: cart.id,
           productId: validatedData.productId,

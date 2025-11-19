@@ -3,10 +3,26 @@ import { prisma } from '@/lib/prisma';
 import { createArtistSchema } from '@/lib/validations/events';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, getPaginationParams, getSortParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { ArtistsService } from '@/lib/services/artists.service';
+
+
 
 // GET /api/artists - List artists
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byIP(getClientIdentifier(request)),
+        RATE_LIMITS.PUBLIC_ENDPOINT.limit,
+        RATE_LIMITS.PUBLIC_ENDPOINT.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const { searchParams } = new URL(request.url);
     const { page, limit, skip } = getPaginationParams(request);
     const { sortBy, sortOrder } = getSortParams(request, 'name');
@@ -33,7 +49,7 @@ export async function GET(request: NextRequest) {
     const total = await prisma.artist.count({ where });
 
     // Get artists
-    const artists = await prisma.artist.findMany({
+    const artists = await new ArtistsService().findAll({
       where,
       skip,
       take: limit,
@@ -61,6 +77,17 @@ export async function GET(request: NextRequest) {
 // POST /api/artists - Create artist
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byIP(getClientIdentifier(request)),
+        RATE_LIMITS.PUBLIC_ENDPOINT.limit,
+        RATE_LIMITS.PUBLIC_ENDPOINT.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -76,7 +103,7 @@ export async function POST(request: NextRequest) {
         .replace(/(^-|-$)/g, '');
 
     // Check if slug is unique
-    const existingArtist = await prisma.artist.findUnique({
+    const existingArtist = await new ArtistsService().findById({
       where: { slug },
     });
 
@@ -85,7 +112,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create artist
-    const artist = await prisma.artist.create({
+    const artist = await new ArtistsService().create({
       data: {
         ...validatedData,
         slug,

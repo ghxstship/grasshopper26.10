@@ -13,6 +13,7 @@ import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Select } from '@/components/atoms/Select';
 import { FormField } from '@/components/molecules/FormField';
+import { SubsectionHeader } from "@/components/atoms/Typography";
 
 interface Version {
   id: string;
@@ -30,6 +31,8 @@ interface VersionedDocument {
   type: string;
   versions: Version[];
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/version-control
 
 export default function VersionControlPage() {
   const [selectedDoc, setSelectedDoc] = useState<string>('1');
@@ -75,7 +78,7 @@ export default function VersionControlPage() {
     const badges: Record<string, string> = {
       current: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50',
       previous: 'bg-info/20 text-info border-info/50',
-      archived: 'bg-gray-700 text-gray-300 border-gray-600'
+      archived: 'bg-grey-700 text-grey-300 border-grey-600'
     };
     return badges[status] || badges.archived;
   };
@@ -95,7 +98,7 @@ export default function VersionControlPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Document List */}
         <div className="lg:col-span-1">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle>Documents</CardTitle>
             </CardHeader>
@@ -105,18 +108,14 @@ export default function VersionControlPage() {
                   <div
                     key={doc.id}
                     onClick={() => setSelectedDoc(doc.id)}
-                    className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                      selectedDoc === doc.id
-                        ? 'bg-atlvs-green-500/20 border-2 border-atlvs-green-500'
-                        : 'bg-gray-800/50 border-2 border-transparent hover:bg-gray-800'
-                    }`}
+                    className={`p-3 rounded-lg cursor-pointer transition-colors ${ selectedDoc === doc.id ? 'bg-atlvs-green-500/20 border-2 border-atlvs-green-500' : 'bg-grey-800/50 border-2 border-transparent hover:bg-grey-800' }`}
                   >
                     <div className="flex items-start gap-2">
-                      <FileText className="w-5 h-5 text-gray-400 mt-0.5" />
+                      <FileText className="w-5 h-5 text-grey-400 mt-0.5" />
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-white text-body-sm truncate">{doc.name}</div>
-                        <div className="text-caption text-gray-400 mt-1">{doc.type}</div>
-                        <div className="flex items-center gap-1 mt-1 text-caption text-gray-500">
+                        <div className="text-caption text-grey-400 mt-1">{doc.type}</div>
+                        <div className="flex items-center gap-1 mt-1 text-caption text-grey-500">
                           <GitBranch className="w-3 h-3" />
                           <span>{doc.versions.length} versions</span>
                         </div>
@@ -131,12 +130,12 @@ export default function VersionControlPage() {
 
         {/* Version History */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-lg border border-grey-200 p-6">
             <div className="mb-6">
-              <h2 className="text-h6 text-gray-900 mb-1">
+              <h2 className="text-grey-900 mb-1">
                 {selectedDocument?.name}
               </h2>
-              <p className="text-body-sm text-gray-600">{selectedDocument?.type}</p>
+              <p className="text-body-sm text-grey-600">{selectedDocument?.type}</p>
             </div>
 
             <div className="space-y-3">
@@ -145,12 +144,12 @@ export default function VersionControlPage() {
                 const statusStyle = getStatusBadge(version.status);
                 
                 return (
-                  <div key={version.id} className="border border-gray-200 rounded-lg overflow-hidden">
-                    <div className="p-4 bg-gray-50">
+                  <div key={version.id} className="border border-grey-200 rounded-lg overflow-hidden">
+                    <div className="p-4 bg-grey-50">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <span className="text-h5 text-gray-900">v{version.version}</span>
+                            <span className="text-grey-900">v{version.version}</span>
                             <Badge variant="atlvs-outline" className={statusStyle}>
                               {version.status}
                             </Badge>
@@ -160,7 +159,7 @@ export default function VersionControlPage() {
                               </Badge>
                             )}
                           </div>
-                          <div className="flex items-center gap-4 text-body-sm text-gray-600">
+                          <div className="flex items-center gap-4 text-body-sm text-grey-600">
                             <div className="flex items-center gap-1">
                               <User className="w-4 h-4" />
                               <span>{version.author}</span>
@@ -182,19 +181,19 @@ export default function VersionControlPage() {
                           className="p-2"
                         >
                           {isExpanded ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                            <ChevronUp className="w-5 h-5 text-grey-600" />
                           ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                            <ChevronDown className="w-5 h-5 text-grey-600" />
                           )}
                         </Button>
                       </div>
                     </div>
 
                     {isExpanded && (
-                      <div className="p-4 border-t border-gray-200">
+                      <div className="p-4 border-t border-grey-200">
                         <div className="mb-4">
-                          <div className="text-body-sm text-gray-700 mb-1">Changes:</div>
-                          <p className="text-body-sm text-gray-600">{version.changes}</p>
+                          <div className="text-body-sm text-grey-700 mb-1">Changes:</div>
+                          <p className="text-body-sm text-grey-600">{version.changes}</p>
                         </div>
                         <div className="flex gap-2">
                           <Button variant="atlvs" size="sm">
@@ -221,8 +220,8 @@ export default function VersionControlPage() {
           </div>
 
           {/* Version Comparison */}
-          <div className="mt-6 bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-h6 text-gray-900 mb-4">Compare Versions</h3>
+          <div className="mt-6 bg-white rounded-lg border border-grey-200 p-6">
+            <SubsectionHeader className="text-grey-900 mb-4">Compare Versions</SubsectionHeader>
             <div className="grid grid-cols-2 gap-4">
               <FormField label="Version A">
                 <Select variant="atlvs">
@@ -248,43 +247,43 @@ export default function VersionControlPage() {
 
       {/* Stats */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
             <FileText className="w-8 h-8 text-success" />
             <div>
-              <div className="text-body-sm text-gray-600">Total Documents</div>
-              <div className="text-h4 text-gray-900">{documents.length}</div>
+              <div className="text-body-sm text-grey-600">Total Documents</div>
+              <div className="text-grey-900">{documents.length}</div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
             <GitBranch className="w-8 h-8 text-info" />
             <div>
-              <div className="text-body-sm text-gray-600">Total Versions</div>
-              <div className="text-h4 text-gray-900">
+              <div className="text-body-sm text-grey-600">Total Versions</div>
+              <div className="text-grey-900">
                 {documents.reduce((sum: number, doc: VersionedDocument) => sum + doc.versions.length, 0)}
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
             <Clock className="w-8 h-8 text-atlvs-purple-500" />
             <div>
-              <div className="text-body-sm text-gray-600">Recent Updates</div>
-              <div className="text-h4 text-gray-900">
+              <div className="text-body-sm text-grey-600">Recent Updates</div>
+              <div className="text-grey-900">
                 {documents.filter((d: VersionedDocument) => d.versions.some((v: Version) => v.status === 'current')).length}
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center gap-3">
             <User className="w-8 h-8 text-atlvs-orange-500" />
             <div>
-              <div className="text-body-sm text-gray-600">Contributors</div>
-              <div className="text-h4 text-gray-900">
+              <div className="text-body-sm text-grey-600">Contributors</div>
+              <div className="text-grey-900">
                 {new Set(documents.flatMap(d => d.versions.map(v => v.author))).size}
               </div>
             </div>

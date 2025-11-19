@@ -10,6 +10,9 @@ import { FileText, Download, TrendingUp, Loader2, AlertCircle } from 'lucide-rea
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { useOperationsReports } from '@/lib/hooks/compvss/useOperations';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/reports
 
 export default function OperationsReportsPage() {
   const { data, isLoading, error, refetch } = useOperationsReports();
@@ -29,7 +32,7 @@ export default function OperationsReportsPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading reports...</p>
+              <BodyText className="text-grey-400">Loading reports...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -50,8 +53,8 @@ export default function OperationsReportsPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Reports</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Reports</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -77,11 +80,11 @@ export default function OperationsReportsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
-                  <div className="text-h3 font-bebas text-white mb-1">{metric.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald mb-2">{metric.label}</div>
-                  <div className="flex items-center gap-1 text-caption text-success font-share-tech">
+                  <div className="text-white mb-1">{metric.value}</div>
+                  <div className="text-body-sm text-grey-400 mb-2">{metric.label}</div>
+                  <div className="flex items-center gap-1 text-caption text-success -tech">
                     <TrendingUp className="w-3 h-3" />
                     <span>{metric.trend}</span>
                   </div>
@@ -91,7 +94,7 @@ export default function OperationsReportsPage() {
           ))}
         </div>
 
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white">Available Reports</CardTitle>
           </CardHeader>
@@ -111,8 +114,8 @@ export default function OperationsReportsPage() {
                         <FileText className="w-6 h-6 text-compvss-cyan-500" />
                       </div>
                       <div>
-                        <h3 className="font-oswald text-white mb-1">{report.name}</h3>
-                        <p className="text-body-sm text-gray-400 font-share-tech">
+                        <h3 className="text-white mb-1">{report.name}</h3>
+                        <p className="text-body-sm text-grey-400 -tech">
                           {report.type} • {report.date} • {report.size}
                         </p>
                       </div>

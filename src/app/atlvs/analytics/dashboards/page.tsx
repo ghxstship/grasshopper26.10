@@ -11,6 +11,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { useToast } from '@/lib/hooks/useToast';
 import { useDashboards, useCreateDashboard } from '@/lib/hooks/atlvs/useDashboards';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics/dashboards
 
 export default function DashboardsPage() {
   const { addToast } = useToast();
@@ -61,23 +64,23 @@ export default function DashboardsPage() {
             <Loader2 className="w-8 h-8 animate-spin text-atlvs-green-500" />
           </div>
         ) : error ? (
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-h6 font-bebas mb-2">Failed to Load Dashboards</h3>
-                <p className="text-gray-400 mb-4">{error.message}</p>
+                <SubsectionHeader className="mb-2">Failed to Load Dashboards</SubsectionHeader>
+                <p className="text-grey-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={handleRetry}>Try Again</Button>
               </div>
             </CardHeader>
           </Card>
         ) : !dashboards || dashboards.length === 0 ? (
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-12">
-                <BarChart3 className="w-12 h-12 mx-auto mb-4 text-gray-500 opacity-50" />
-                <h3 className="text-h6 font-bebas mb-2">No Dashboards Yet</h3>
-                <p className="text-gray-400 mb-4">Create your first dashboard to get started</p>
+                <BarChart3 className="w-12 h-12 mx-auto mb-4 text-grey-500 opacity-50" />
+                <SubsectionHeader className="mb-2">No Dashboards Yet</SubsectionHeader>
+                <BodyText className="text-grey-400 mb-4">Create your first dashboard to get started</BodyText>
                 <Button variant="atlvs" onClick={handleCreateDashboard} disabled={createDashboard.isPending}>
                   {createDashboard.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Plus className="w-4 h-4 mr-2" />}
                   Create Dashboard
@@ -88,13 +91,13 @@ export default function DashboardsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {(dashboards || []).map((dashboard: any) => (
-            <Card key={dashboard.id} variant="atlvs" className="bg-gray-900/50 cursor-pointer hover:bg-gray-900 transition-colors">
+            <Card key={dashboard.id} variant="atlvs" className="bg-grey-900/50 cursor-pointer hover:bg-grey-900 transition-colors">
               <CardHeader>
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center mb-4">
                   <BarChart3 className="w-6 h-6" />
                 </div>
                 <CardTitle className="mb-2">{dashboard.name}</CardTitle>
-                <div className="text-body-sm text-gray-400 mb-4">
+                <div className="text-body-sm text-grey-400 mb-4">
                   {dashboard.widgets} widgets • Updated {dashboard.lastUpdated}
                 </div>
                 <Button variant="atlvs" size="sm" className="w-full">

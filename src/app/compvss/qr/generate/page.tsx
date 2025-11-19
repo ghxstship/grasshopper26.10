@@ -16,6 +16,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { Input } from '@/components/atoms/Input';
 import { useGenerateQR } from '@/lib/hooks/compvss/useQRCodes';
+import { BodyText } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/qr/generate
 
 export default function GenerateQRPage() {
   const [formData, setFormData] = useState({
@@ -99,10 +102,10 @@ export default function GenerateQRPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-white">QR Code Details</CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-grey-400">
                   Configure your QR code settings
                 </CardDescription>
               </CardHeader>
@@ -224,10 +227,10 @@ export default function GenerateQRPage() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-white">QR Code Preview</CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-grey-400">
                   {generated ? 'Your QR code is ready' : 'Preview will appear here'}
                 </CardDescription>
               </CardHeader>
@@ -249,11 +252,11 @@ export default function GenerateQRPage() {
 
                     {/* QR Details */}
                     <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
-                      <h3 className="font-oswald text-white mb-2">{formData.name}</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech mb-3">
+                      <h3 className="text-white mb-2">{formData.name}</h3>
+                      <p className="text-body-sm text-grey-400 -tech mb-3">
                         Type: {formData.type}
                       </p>
-                      <div className="text-caption text-gray-500 font-share-tech">
+                      <div className="text-caption text-grey-500 -tech">
                         ID: {qrData?.id || 'Generating...'}
                       </div>
                     </div>
@@ -292,10 +295,10 @@ export default function GenerateQRPage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-96 text-gray-600">
+                  <div className="flex items-center justify-center h-96 text-grey-600">
                     <div className="text-center">
                       <QrCode className="w-24 h-24 mx-auto mb-4 opacity-20" />
-                      <p className="font-share-tech">Fill out the form to generate a QR code</p>
+                      <BodyText className="-tech">Fill out the form to generate a QR code</BodyText>
                     </div>
                   </div>
                 )}

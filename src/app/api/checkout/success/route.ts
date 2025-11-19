@@ -2,9 +2,30 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError } from '@/lib/api/response';
 import { retrieveCheckoutSession } from '@/lib/integrations/stripe/checkout';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { CheckoutService } from '@/lib/services/checkout/success.service';
+
+
+
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get('session_id');
 
@@ -20,7 +41,7 @@ export async function GET(request: NextRequest) {
 
       if (userId && eventId) {
         // Create order
-        const order = await prisma.order.create({
+        const order = await new CheckoutService().create({
           data: {
             userId,
             eventId,

@@ -11,6 +11,8 @@ import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Button } from '@/components/atoms/Button';
 import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/teams/performance
+
 export default function TeamPerformancePage() {
   const { data: members = [], isLoading, error, refetch } = useTeams();
 
@@ -47,7 +49,7 @@ export default function TeamPerformancePage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -70,37 +72,37 @@ export default function TeamPerformancePage() {
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Avg Efficiency</div>
-              <div className="text-h3 font-bebas atlvs-text-gradient">91%</div>
+              <div className="text-body-sm text-grey-400 mb-1">Avg Efficiency</div>
+              <div className="atlvs-text-gradient">91%</div>
               <div className="flex items-center gap-1 text-body-sm text-atlvs-green-500 mt-2">
                 <TrendingUp className="w-4 h-4" />
                 <span>+5%</span>
               </div>
             </CardHeader>
           </Card>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Tasks Completed</div>
-              <div className="text-h3 font-bebas text-atlvs-green-500">125</div>
+              <div className="text-body-sm text-grey-400 mb-1">Tasks Completed</div>
+              <div className="text-atlvs-green-500">125</div>
             </CardHeader>
           </Card>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Avg Rating</div>
-              <div className="text-h3 font-bebas text-atlvs-purple-500">4.7</div>
+              <div className="text-body-sm text-grey-400 mb-1">Avg Rating</div>
+              <div className="text-atlvs-purple-500">4.7</div>
             </CardHeader>
           </Card>
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
-              <div className="text-body-sm text-gray-400 mb-1">Active Members</div>
-              <div className="text-h3 font-bebas text-info">24</div>
+              <div className="text-body-sm text-grey-400 mb-1">Active Members</div>
+              <div className="text-info">24</div>
             </CardHeader>
           </Card>
         </div>
 
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6 flex items-center gap-2">
               <Award className="w-5 h-5" />
@@ -108,19 +110,19 @@ export default function TeamPerformancePage() {
             </CardTitle>
             <div className="space-y-3">
               {typedMembers.map((member: any, index: number) => (
-                <div key={member.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                <div key={member.id} className="flex items-center justify-between p-4 bg-grey-800/50 rounded-lg">
                   <div className="flex items-center gap-4 flex-1">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas text-h5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                       {index + 1}
                     </div>
                     <div className="flex-1">
                       <div className="font-medium mb-1">{member.name}</div>
-                      <div className="text-body-sm text-gray-400">
+                      <div className="text-body-sm text-grey-400">
                         {member.tasksCompleted} tasks • {member.efficiency}% efficiency
                       </div>
                     </div>
                   </div>
-                  <div className="text-h4 font-bebas atlvs-text-gradient">
+                  <div className="atlvs-text-gradient">
                     {member.rating} ⭐
                   </div>
                 </div>

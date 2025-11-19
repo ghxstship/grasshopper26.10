@@ -1,7 +1,7 @@
 'use client';
 
 import { GvtewayLayout } from "@/components/templates/GvtewayLayout";
-import { PageTitle, SectionHeader, BodyText } from "@/components/atoms/Typography";
+import { BodyText, CardTitle, PageTitle, SectionHeader } from "@/components/atoms/Typography";
 import { DestinationCard } from "@/components/molecules/DestinationCard";
 import { CategoryTab } from "@/components/atoms/CategoryTab";
 import { SearchBar } from "@/components/atoms/SearchBar";
@@ -51,7 +51,7 @@ export default function DestinationsPage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Plan Your Trip</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto mb-8">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto mb-8">
             Make every event an adventure. Discover nearby stays, dining, shopping, 
             and wellness spots curated by locals and members.
           </BodyText>
@@ -103,40 +103,40 @@ export default function DestinationsPage() {
               <div className="w-16 h-16 bg-ghxst-black rounded-full flex items-center justify-center mx-auto">
                 <Hotel className="w-8 h-8 text-ghxst-white" />
               </div>
-              <h4 className="font-bebas text-h4 text-ghxst-primary">Stays</h4>
-              <p className="font-share-tech text-body-sm text-ghxst-text-secondary">
+              <CardTitle className="text-ghxst-primary">Stays</CardTitle>
+              <BodyText className="-tech text-body-sm text-ghxst-text-secondary">
                 Hotels, Airbnbs, and unique accommodations
-              </p>
+              </BodyText>
             </div>
 
             <div className="card p-8 text-center space-y-4 hover:border-ghxst-black transition-colors cursor-pointer">
               <div className="w-16 h-16 bg-ghxst-black rounded-full flex items-center justify-center mx-auto">
                 <UtensilsCrossed className="w-8 h-8 text-ghxst-white" />
               </div>
-              <h4 className="font-bebas text-h4 text-ghxst-primary">Dining</h4>
-              <p className="font-share-tech text-body-sm text-ghxst-text-secondary">
+              <CardTitle className="text-ghxst-primary">Dining</CardTitle>
+              <BodyText className="-tech text-body-sm text-ghxst-text-secondary">
                 Restaurants, bars, and local food spots
-              </p>
+              </BodyText>
             </div>
 
             <div className="card p-8 text-center space-y-4 hover:border-ghxst-black transition-colors cursor-pointer">
               <div className="w-16 h-16 bg-ghxst-black rounded-full flex items-center justify-center mx-auto">
                 <ShoppingBag className="w-8 h-8 text-ghxst-white" />
               </div>
-              <h4 className="font-bebas text-h4 text-ghxst-primary">Shopping</h4>
-              <p className="font-share-tech text-body-sm text-ghxst-text-secondary">
+              <CardTitle className="text-ghxst-primary">Shopping</CardTitle>
+              <BodyText className="-tech text-body-sm text-ghxst-text-secondary">
                 Local shops, boutiques, and markets
-              </p>
+              </BodyText>
             </div>
 
             <div className="card p-8 text-center space-y-4 hover:border-ghxst-black transition-colors cursor-pointer">
               <div className="w-16 h-16 bg-ghxst-black rounded-full flex items-center justify-center mx-auto">
                 <Sparkles className="w-8 h-8 text-ghxst-white" />
               </div>
-              <h4 className="font-bebas text-h4 text-ghxst-primary">Wellness</h4>
-              <p className="font-share-tech text-body-sm text-ghxst-text-secondary">
+              <CardTitle className="text-ghxst-primary">Wellness</CardTitle>
+              <BodyText className="-tech text-body-sm text-ghxst-text-secondary">
                 Spas, yoga studios, and health centers
-              </p>
+              </BodyText>
             </div>
           </div>
         </div>
@@ -164,10 +164,10 @@ export default function DestinationsPage() {
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-ghxst-surface" />
                   <div className="flex-1">
-                    <h5 className="font-bebas text-h5 text-ghxst-primary">Member Name</h5>
-                    <p className="font-share-tech-mono text-body-sm text-ghxst-text-secondary">
+                    <CardTitle className="text-ghxst-primary">Member Name</CardTitle>
+                    <BodyText className="-tech-mono text-body-sm text-ghxst-text-secondary">
                       &ldquo;Amazing spot for pre-show dinner! Great atmosphere and close to the venue.&rdquo;
-                    </p>
+                    </BodyText>
                   </div>
                 </div>
               </div>
@@ -185,7 +185,7 @@ export default function DestinationsPage() {
       <section className="section-padding bg-ghxst-black text-ghxst-white">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <SectionHeader className="mb-4 uppercase">Save Your Favorite Spots</SectionHeader>
-          <BodyText className="text-gray-300 max-w-2xl mx-auto mb-8">
+          <BodyText className="text-grey-300 max-w-2xl mx-auto mb-8">
             Create trip itineraries and share plans with friends
           </BodyText>
           <Button variant="primary" size="lg">

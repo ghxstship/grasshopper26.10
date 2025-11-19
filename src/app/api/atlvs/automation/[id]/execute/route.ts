@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { AtlvsService } from '@/lib/services/atlvs/automation/id/execute.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -15,7 +23,7 @@ export async function POST(
     const { id } = await params;
     const body = await req.json();
     
-    const workflow = await prisma.automation.findUnique({
+    const workflow = await new AtlvsService().findById({
       where: { id },
     });
 
@@ -24,7 +32,7 @@ export async function POST(
     }
 
     // Create execution record
-    const execution = await prisma.automationExecution.create({
+    const execution = await new AtlvsService().create({
       data: {
         automationId: id,
         status: 'RUNNING',
@@ -35,7 +43,7 @@ export async function POST(
 
     // In a real implementation, this would trigger the actual workflow execution
     // For now, we'll just mark it as completed
-    await prisma.automationExecution.update({
+    await new AtlvsService().update({
       where: { id: execution.id },
       data: {
         status: 'COMPLETED',
@@ -45,10 +53,6 @@ export async function POST(
 
     return NextResponse.json(execution);
   } catch (error) {
-    console.error('Error executing automation workflow:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

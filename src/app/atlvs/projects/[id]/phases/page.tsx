@@ -13,6 +13,7 @@ import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
+import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typography";
 
 interface _Phase {
   id: string;
@@ -24,6 +25,8 @@ interface _Phase {
   tasks: number;
   completedTasks: number;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/projects/[id]/phases
 
 export default function ProjectPhasesPage({ params }: { params: { id: string } }) {
   const { data: phases = [], isLoading, error, refetch } = useProjectPhases(params.id);
@@ -40,7 +43,7 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading project phases...</p>
+              <BodyText className="text-grey-400">Loading project phases...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -60,8 +63,8 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Phases</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Phases</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -77,8 +80,8 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
       case 'completed': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'in-progress': return 'bg-info-light text-info border-info-border';
       case 'delayed': return 'bg-error-light text-error border-error-border';
-      case 'not-started': return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      case 'not-started': return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -110,12 +113,12 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h1 className="text-h1 font-anton mb-2 atlvs-text-gradient">
+                    <HeroTitle className="mb-2 atlvs-text-gradient">
                       PROJECT PHASES
-                    </h1>
-                    <p className="text-gray-400 font-oswald">
+                    </HeroTitle>
+                    <BodyText className="text-grey-400">
                       Manage project phases and milestones
-                    </p>
+                    </BodyText>
                   </div>
                   <Button variant="atlvs">
                     <Plus className="w-4 h-4 mr-2" />
@@ -126,12 +129,12 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
             </div>
 
         {/* Timeline Overview */}
-        <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+        <Card variant="atlvs" className="bg-grey-900/50 mb-6">
           <CardHeader>
             <CardTitle className="mb-6">Timeline Overview</CardTitle>
             <div className="relative">
               {/* Timeline Bar */}
-              <div className="h-2 bg-gray-800 rounded-full overflow-hidden mb-8">
+              <div className="h-2 bg-grey-800 rounded-full overflow-hidden mb-8">
                 <div className="h-full bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500 w-2/5" />
               </div>
 
@@ -139,12 +142,8 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
               <div className="flex justify-between text-body-sm">
                 {phases.map((phase) => (
                   <div key={phase.id} className="text-center flex-1">
-                    <div className={`w-3 h-3 rounded-full mx-auto mb-2 ${
-                      phase.status === 'completed' ? 'bg-atlvs-green-500' :
-                      phase.status === 'in-progress' ? 'bg-info' :
-                      'bg-gray-600'
-                    }`} />
-                    <div className="text-gray-400">{phase.name}</div>
+                    <div className={`w-3 h-3 rounded-full mx-auto mb-2 ${ phase.status === 'completed' ? 'bg-atlvs-green-500' : phase.status === 'in-progress' ? 'bg-info' : 'bg-grey-600' }`} />
+                    <div className="text-grey-400">{phase.name}</div>
                   </div>
                 ))}
               </div>
@@ -161,27 +160,23 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="atlvs" className="bg-gray-900/50">
+              <Card variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-4 flex-1">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bebas text-h5 ${
-                        phase.status === 'completed' ? 'bg-atlvs-green-500' :
-                        phase.status === 'in-progress' ? 'bg-info' :
-                        'bg-gray-700'
-                      }`}>
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${ phase.status === 'completed' ? 'bg-atlvs-green-500' : phase.status === 'in-progress' ? 'bg-info' : 'bg-grey-700' }`}>
                         {index + 1}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="text-h4 font-bebas">{phase.name}</h3>
+                          <h3 >{phase.name}</h3>
                           <Badge variant="atlvs-outline" className={getStatusColor(phase.status)}>
                             {phase.status === 'completed' && <CheckCircle className="w-3 h-3 mr-1" />}
                             {phase.status === 'in-progress' && <Clock className="w-3 h-3 mr-1" />}
                             {phase.status.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-4 text-body-sm text-gray-400 mb-4">
+                        <div className="flex items-center gap-4 text-body-sm text-grey-400 mb-4">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
                             {new Date(phase.startDate).toLocaleDateString()} - {new Date(phase.endDate).toLocaleDateString()}
@@ -193,16 +188,12 @@ export default function ProjectPhasesPage({ params }: { params: { id: string } }
                         {/* Progress Bar */}
                         <div className="space-y-2">
                           <div className="flex items-center justify-between text-body-sm">
-                            <span className="text-gray-400">Progress</span>
+                            <span className="text-grey-400">Progress</span>
                             <span className="font-medium">{phase.progress}%</span>
                           </div>
-                          <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                          <div className="w-full h-2 bg-grey-800 rounded-full overflow-hidden">
                             <div
-                              className={`h-full transition-all ${
-                                phase.status === 'completed' ? 'bg-atlvs-green-500' :
-                                phase.status === 'in-progress' ? 'bg-info' :
-                                'bg-gray-600'
-                              }`}
+                              className={`h-full transition-all ${ phase.status === 'completed' ? 'bg-atlvs-green-500' : phase.status === 'in-progress' ? 'bg-info' : 'bg-grey-600' }`}
                               style={{ width: `${phase.progress}%` }}
                             />
                           </div>

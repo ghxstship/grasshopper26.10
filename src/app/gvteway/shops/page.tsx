@@ -1,7 +1,7 @@
 'use client';
 
 import { GvtewayLayout } from "@/components/templates/GvtewayLayout";
-import { PageTitle, SectionHeader, BodyText } from "@/components/atoms/Typography";
+import { BodyText, CardTitle, PageTitle, SectionHeader } from "@/components/atoms/Typography";
 import { ShopCard } from "@/components/molecules/ShopCard";
 import { CategoryTab } from "@/components/atoms/CategoryTab";
 import { SearchBar } from "@/components/atoms/SearchBar";
@@ -46,7 +46,7 @@ export default function ShopsPage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Shop The Scene</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto mb-8">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto mb-8">
             Exclusive merch, vinyl, apparel, and experiences from your favorite 
             artists, venues, labels, and brands—all in one place.
           </BodyText>
@@ -111,9 +111,9 @@ export default function ShopsPage() {
                   />
                 </div>
                 <div className="p-4 space-y-2">
-                  <p className="font-share-tech-mono text-caption text-ghxst-text-secondary">Artist Name</p>
-                  <h5 className="font-bebas text-h5 text-ghxst-primary">Limited Edition Tee</h5>
-                  <p className="font-share-tech-mono text-body text-ghxst-primary">$35.00</p>
+                  <BodyText className="-tech-mono text-caption text-ghxst-text-secondary">Artist Name</BodyText>
+                  <CardTitle className="text-ghxst-primary">Limited Edition Tee</CardTitle>
+                  <BodyText className="-tech-mono text-body text-ghxst-primary">$35.00</BodyText>
                   <Button variant="primary" size="sm" className="w-full">
                     Add to Cart
                   </Button>
@@ -127,7 +127,7 @@ export default function ShopsPage() {
       <section className="section-padding bg-ghxst-black text-ghxst-white">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <SectionHeader className="mb-4 uppercase">Exclusive Member Drops</SectionHeader>
-          <BodyText className="text-gray-300 max-w-2xl mx-auto mb-8">
+          <BodyText className="text-grey-300 max-w-2xl mx-auto mb-8">
             Get early access to limited edition releases and exclusive collaborations
           </BodyText>
           <Button variant="primary" size="lg">

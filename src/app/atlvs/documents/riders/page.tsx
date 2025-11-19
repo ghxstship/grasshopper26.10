@@ -14,6 +14,7 @@ import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface _Rider {
   id: string;
@@ -25,6 +26,8 @@ interface _Rider {
   status: 'approved' | 'pending' | 'draft';
   size: string;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/riders
 
 export default function RidersPage() {  
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,14 +60,14 @@ export default function RidersPage() {
       hospitality: 'bg-atlvs-purple-500/20 text-atlvs-purple-500 border-atlvs-purple-500/50',
       production: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50'
     };
-    return colors[type] || 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+    return colors[type] || 'bg-grey-500/20 text-grey-500 border-grey-500/50';
   };
 
   const getStatusBadge = (status: string) => {
     const badges: Record<string, string> = {
       approved: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50',
       pending: 'bg-warning-light text-warning border-warning-border',
-      draft: 'bg-gray-500/20 text-gray-500 border-gray-500/50'
+      draft: 'bg-grey-500/20 text-grey-500 border-grey-500/50'
     };
     return badges[status] || badges.draft;
   };
@@ -92,7 +95,7 @@ export default function RidersPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400" />
               <Input
                 type="text"
                 placeholder="Search riders..."
@@ -128,10 +131,10 @@ export default function RidersPage() {
         {/* Riders Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           {filteredRiders.map(rider => (
-            <Card key={rider.id} variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900 transition-all">
+            <Card key={rider.id} variant="atlvs" className="bg-grey-900/50 hover:bg-grey-900 transition-all">
               <CardHeader>
                 <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-gray-800 rounded-lg">
+                  <div className="p-3 bg-grey-800 rounded-lg">
                     {getTypeIcon(rider.type)}
                   </div>
                   <Badge variant="atlvs-outline" className={getStatusBadge(rider.status)}>
@@ -141,7 +144,7 @@ export default function RidersPage() {
                 
                 <CardTitle className="text-white mb-4">{rider.name}</CardTitle>
                 
-                <div className="space-y-2 mb-4 text-body-sm text-gray-400">
+                <div className="space-y-2 mb-4 text-body-sm text-grey-400">
                   <div className="flex items-center justify-between">
                     <span>Artist:</span>
                     <span className="font-medium text-white">{rider.artist}</span>
@@ -160,7 +163,7 @@ export default function RidersPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-4 border-t border-gray-700">
+                <div className="flex gap-2 pt-4 border-t border-grey-700">
                   <Button variant="ghost" size="sm" className="flex-1">
                     <Eye className="w-4 h-4 mr-1" />
                     View
@@ -179,20 +182,20 @@ export default function RidersPage() {
         </div>
 
         {filteredRiders.length === 0 && (
-          <Card variant="atlvs" className="bg-gray-900/50 p-12 text-center">
-            <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-400">No riders found</p>
+          <Card variant="atlvs" className="bg-grey-900/50 p-12 text-center">
+            <FileText className="w-12 h-12 text-grey-400 mx-auto mb-3" />
+            <BodyText className="text-grey-400">No riders found</BodyText>
           </Card>
         )}
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Total Riders</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">{riders.length}</CardTitle>
+                  <CardDescription className="text-grey-400 mb-1">Total Riders</CardDescription>
+                  <CardTitle >{riders.length}</CardTitle>
                 </div>
                 <div className="p-3 bg-atlvs-green-500/10 rounded-xl">
                   <FileText className="w-6 h-6 text-atlvs-green-500" />
@@ -201,12 +204,12 @@ export default function RidersPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Technical</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Technical</CardDescription>
+                  <CardTitle >
                     {riders.filter(r => r.type === 'technical').length}
                   </CardTitle>
                 </div>
@@ -217,12 +220,12 @@ export default function RidersPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Hospitality</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Hospitality</CardDescription>
+                  <CardTitle >
                     {riders.filter(r => r.type === 'hospitality').length}
                   </CardTitle>
                 </div>
@@ -233,12 +236,12 @@ export default function RidersPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">Production</CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardDescription className="text-grey-400 mb-1">Production</CardDescription>
+                  <CardTitle >
                     {riders.filter(r => r.type === 'production').length}
                   </CardTitle>
                 </div>

@@ -16,6 +16,8 @@ import { Select } from '@/components/atoms/Select';
 import { Input } from '@/components/atoms/Input';
 import { useDocuments } from '@/lib/hooks/atlvs/useDocuments';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents
+
 export default function DocumentsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState('All Types');
@@ -32,7 +34,7 @@ export default function DocumentsPage() {
       case 'xlsx': return <FileSpreadsheet className="w-5 h-5 text-success" />;
       case 'jpg':
       case 'png': return <Image className="w-5 h-5 text-atlvs-purple-500" aria-label="Image file" />;
-      default: return <FileText className="w-5 h-5 text-gray-500" />;
+      default: return <FileText className="w-5 h-5 text-grey-500" />;
     }
   };
 
@@ -42,7 +44,7 @@ export default function DocumentsPage() {
       case 'rider': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500 border-atlvs-purple-500/50';
       case 'permit': return 'bg-success-light text-success border-success-border';
       case 'invoice': return 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -101,11 +103,11 @@ export default function DocumentsPage() {
           variant="atlvs"
           showToolbar={false}
         >
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-8">
                 <AlertCircle className="w-12 h-12 text-error mx-auto mb-4" />
-                <p className="text-gray-400 mb-4">
+                <p className="text-grey-400 mb-4">
                   {error instanceof Error ? error.message : 'Failed to load documents'}
                 </p>
                 <Button variant="atlvs" onClick={() => refetch()}>
@@ -129,14 +131,14 @@ export default function DocumentsPage() {
       >
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" role="region" aria-label="_Document statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Documents
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.totalDocs} total documents`}>
+                  <CardTitle  aria-label={`${stats.totalDocs} total documents`}>
                     {stats.totalDocs}
                   </CardTitle>
                 </div>
@@ -147,14 +149,14 @@ export default function DocumentsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Contracts
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.contracts} contracts`}>
+                  <CardTitle  aria-label={`${stats.contracts} contracts`}>
                     {stats.contracts}
                   </CardTitle>
                 </div>
@@ -165,14 +167,14 @@ export default function DocumentsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Storage Used
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.totalSize.toFixed(1)} megabytes storage used`}>
+                  <CardTitle  aria-label={`${stats.totalSize.toFixed(1)} megabytes storage used`}>
                     {stats.totalSize.toFixed(1)} MB
                   </CardTitle>
                 </div>
@@ -183,14 +185,14 @@ export default function DocumentsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Recent Uploads
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {stats.recentUploads}
                   </CardTitle>
                 </div>
@@ -206,7 +208,7 @@ export default function DocumentsPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
               <Input
                 type="text"
                 placeholder="Search documents..."
@@ -229,7 +231,7 @@ export default function DocumentsPage() {
           </Select>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <Filter className="w-4 h-4 mr-2" />
               More Filters
             </Button>
@@ -251,13 +253,13 @@ export default function DocumentsPage() {
             >
               <Card 
                 variant="atlvs" 
-                className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer"
+                className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer"
               >
                 <CardHeader>
                   <div className="flex items-center justify-between gap-4">
                     {/* Left Side */}
                     <div className="flex items-center gap-4 flex-1">
-                      <div className="p-3 bg-gray-800 rounded-lg">
+                      <div className="p-3 bg-grey-800 rounded-lg">
                         {getFileIcon(doc.fileType)}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -269,7 +271,7 @@ export default function DocumentsPage() {
                             v{doc.version}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-4 text-body-sm text-gray-400">
+                        <div className="flex items-center gap-4 text-body-sm text-grey-400">
                           <span>{doc.uploadedBy}</span>
                           <span>•</span>
                           <span>{new Date(doc.uploadedDate).toLocaleDateString()}</span>

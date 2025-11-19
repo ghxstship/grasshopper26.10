@@ -26,25 +26,25 @@ const Tabs: React.FC<TabsProps> = ({
 }) => {
   const variantStyles = {
     default: {
-      active: "border-gray-900 text-gray-900",
-      inactive: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
+      active: "border-grey-900 text-grey-900",
+      inactive: "border-transparent text-grey-500 hover:text-grey-700 hover:border-grey-300",
     },
     gvteway: {
       active: "border-gvteway-red-500 text-gvteway-red-500",
-      inactive: "border-transparent text-gray-500 hover:text-gvteway-red-500 hover:border-gvteway-red-300",
+      inactive: "border-transparent text-grey-500 hover:text-gvteway-red-500 hover:border-gvteway-red-300",
     },
     compvss: {
       active: "border-compvss-cyan-500 text-compvss-cyan-500",
-      inactive: "border-transparent text-gray-500 hover:text-compvss-cyan-500 hover:border-compvss-cyan-300",
+      inactive: "border-transparent text-grey-500 hover:text-compvss-cyan-500 hover:border-compvss-cyan-300",
     },
     atlvs: {
       active: "border-atlvs-green-500 text-atlvs-green-500",
-      inactive: "border-transparent text-gray-500 hover:text-atlvs-green-500 hover:border-atlvs-green-300",
+      inactive: "border-transparent text-grey-500 hover:text-atlvs-green-500 hover:border-atlvs-green-300",
     },
   };
 
   return (
-    <div className={cn("border-b border-gray-200", className)}>
+    <div className={cn("border-b border-grey-200", className)}>
       <nav className="-mb-px flex space-x-8" aria-label="Tabs">
         {tabs.map((tab) => {
           const isActive = tab.id === activeTab;

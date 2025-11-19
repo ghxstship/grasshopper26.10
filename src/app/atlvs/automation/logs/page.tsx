@@ -19,6 +19,8 @@ interface WorkflowLog {
   message: string;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/logs
+
 export default function WorkflowLogsPage() {
   const { data: logs = [] as WorkflowLog[], isLoading } = useWorkflowLogs(undefined);
 
@@ -37,7 +39,7 @@ export default function WorkflowLogsPage() {
       case 'error': return 'bg-error-light text-error border-error-border';
       case 'warning': return 'bg-warning-light text-warning border-warning-border';
       case 'info': return 'bg-info-light text-info border-info-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -61,7 +63,7 @@ export default function WorkflowLogsPage() {
         ]}
       >
 
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6 flex items-center gap-2">
               <FileText className="w-5 h-5" />
@@ -69,14 +71,14 @@ export default function WorkflowLogsPage() {
             </CardTitle>
             <div className="space-y-3" role="list" aria-label="Workflow logs">
               {logs.map((log: WorkflowLog) => (
-                <div key={log.id} className="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg font-mono text-body-sm" role="listitem">
+                <div key={log.id} className="flex items-start gap-4 p-4 bg-grey-800/50 rounded-lg font-mono text-body-sm" role="listitem">
                   <Badge variant="atlvs-outline" className={getLevelColor(log.level)} role="status" aria-label={`Log level: ${log.level}`}>
                     {log.level.toUpperCase()}
                   </Badge>
                   <div className="flex-1">
-                    <div className="text-gray-400 mb-1">{log.time}</div>
+                    <div className="text-grey-400 mb-1">{log.time}</div>
                     <div className="text-white mb-1">[{log.workflow}]</div>
-                    <div className="text-gray-300">{log.message}</div>
+                    <div className="text-grey-300">{log.message}</div>
                   </div>
                 </div>
               ))}

@@ -10,6 +10,9 @@ import { FileText, Download, Calendar, Loader2, AlertCircle } from 'lucide-react
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { useExpenseReports } from '@/lib/hooks/compvss/useExpenses';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/expenses/reports
 
 export default function ExpenseReportsPage() {
   const { data: reports = [], isLoading, error, refetch } = useExpenseReports();
@@ -27,7 +30,7 @@ export default function ExpenseReportsPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading reports...</p>
+              <BodyText className="text-grey-400">Loading reports...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -48,8 +51,8 @@ export default function ExpenseReportsPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Reports</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Reports</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -67,7 +70,7 @@ export default function ExpenseReportsPage() {
         showToolbar={false}
         
       >
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white">Monthly Reports</CardTitle>
           </CardHeader>
@@ -87,8 +90,8 @@ export default function ExpenseReportsPage() {
                         <FileText className="w-6 h-6 text-compvss-cyan-500" />
                       </div>
                       <div>
-                        <h3 className="font-oswald text-white mb-1">{report.name}</h3>
-                        <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
+                        <h3 className="text-white mb-1">{report.name}</h3>
+                        <div className="flex items-center gap-2 text-body-sm text-grey-400 -tech">
                           <Calendar className="w-4 h-4" />
                           <span>{report.period}</span>
                         </div>
@@ -96,8 +99,8 @@ export default function ExpenseReportsPage() {
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="text-right">
-                        <div className="text-h5 font-bebas text-white">{report.total}</div>
-                        <div className="text-caption text-gray-500 font-share-tech">{report.status}</div>
+                        <div className="text-white">{report.total}</div>
+                        <div className="text-caption text-grey-500 -tech">{report.status}</div>
                       </div>
                       <Button variant="compvss-outline" size="sm">
                         <Download className="w-4 h-4 mr-2" />

@@ -4,6 +4,11 @@ import { createTicketTypeSchema } from '@/lib/validations/events';
 import type { Prisma as _Prisma } from '@prisma/client';
 import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { EventsService } from '@/lib/services/events/id/tickets.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -19,7 +24,7 @@ export async function GET(
   try {
     const { id } = await params;
     // Check if event exists
-    const event = await prisma.event.findUnique({
+    const event = await new EventsService().findById({
       where: { id: id },
     });
 
@@ -28,7 +33,7 @@ export async function GET(
     }
 
     // Get ticket types
-    const ticketTypes = await prisma.ticketType.findMany({
+    const ticketTypes = await new EventsService().findAll({
       where: { eventId: id },
       orderBy: { price: 'asc' },
     });
@@ -56,7 +61,7 @@ export async function POST(
     });
 
     // Check if event exists
-    const event = await prisma.event.findUnique({
+    const event = await new EventsService().findById({
       where: { id: id },
     });
 
@@ -66,7 +71,7 @@ export async function POST(
 
     // Create ticket type
     const { eventId, metadata, ...ticketData } = validatedData;
-    const ticketType = await prisma.ticketType.create({
+    const ticketType = await new EventsService().create({
       data: {
         ...ticketData,
         event: {

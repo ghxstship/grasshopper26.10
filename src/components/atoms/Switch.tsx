@@ -9,7 +9,7 @@ export interface SwitchProps
 const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   ({ className, variant = "default", ...props }, ref) => {
     const variantStyles = {
-      default: "peer-checked:bg-gray-900 peer-focus:ring-gray-500",
+      default: "peer-checked:bg-grey-900 peer-focus:ring-grey-500",
       gvteway: "peer-checked:bg-gvteway-red-500 peer-focus:ring-gvteway-red-500",
       compvss: "peer-checked:bg-compvss-cyan-500 peer-focus:ring-compvss-cyan-500",
       atlvs: "peer-checked:bg-atlvs-green-500 peer-focus:ring-atlvs-green-500",
@@ -24,7 +24,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           {...props}
         />
         <div className={cn(
-          "w-11 h-6 bg-gray-300 rounded-full peer transition-colors",
+          "w-11 h-6 bg-grey-300 rounded-full peer transition-colors",
           "peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-offset-2",
           "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
           variantStyles[variant],

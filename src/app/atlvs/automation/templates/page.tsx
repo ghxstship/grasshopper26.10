@@ -21,6 +21,8 @@ interface WorkflowTemplate {
   uses: number;
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/templates
+
 export default function WorkflowTemplatesPage() {
   const { data: templates = [], isLoading } = useWorkflows({ type: 'template' });
 
@@ -47,18 +49,18 @@ export default function WorkflowTemplatesPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {templates.map((template: WorkflowTemplate) => (
-            <Card key={template.id} variant="atlvs" className="bg-gray-900/50">
+            <Card key={template.id} variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                     <Zap className="w-6 h-6" />
                   </div>
-                  <Badge variant="atlvs-outline" className="bg-gray-700/50">
+                  <Badge variant="atlvs-outline" className="bg-grey-700/50">
                     {template.uses} uses
                   </Badge>
                 </div>
                 <CardTitle className="mb-2">{template.name}</CardTitle>
-                <p className="text-body-sm text-gray-400 mb-4">{template.description}</p>
+                <p className="text-body-sm text-grey-400 mb-4">{template.description}</p>
                 <div className="flex items-center gap-2">
                   <Button variant="atlvs" size="sm" className="flex-1">
                     <Copy className="w-4 h-4 mr-2" />

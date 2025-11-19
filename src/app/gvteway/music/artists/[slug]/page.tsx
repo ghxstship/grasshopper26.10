@@ -1,7 +1,7 @@
 'use client';
 
 import { GvtewayLayout } from "@/components/templates/GvtewayLayout";
-import { HeroTitle, SectionHeader, BodyText, Metadata } from "@/components/atoms/Typography";
+import { BodyText, CardTitle, HeroTitle, Metadata, SectionHeader } from "@/components/atoms/Typography";
 import { EventCard } from "@/components/molecules/EventCard";
 import { Button } from "@/components/atoms/Button";
 import { IntegrationBadge } from "@/components/atoms/IntegrationBadge";
@@ -153,11 +153,11 @@ export default function ArtistPage({ params: { slug } }: ArtistPageProps) {
                 className="flex items-center justify-between p-4 bg-ghxst-white border border-ghxst-border hover:border-ghxst-black transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <span className="font-share-tech-mono text-ghxst-text-secondary w-8">
+                  <span className="-tech-mono text-ghxst-text-secondary w-8">
                     {idx + 1}
                   </span>
                   <div>
-                    <h5 className="font-bebas text-h5 text-ghxst-primary">{track.name}</h5>
+                    <h5 className="text-ghxst-primary">{track.name}</h5>
                     <Metadata className="text-ghxst-text-secondary">{track.plays} plays</Metadata>
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export default function ArtistPage({ params: { slug } }: ArtistPageProps) {
                   />
                 </div>
                 <div className="p-4 space-y-2">
-                  <h5 className="font-bebas text-h5 text-ghxst-primary">Limited Edition Tee</h5>
+                  <CardTitle className="text-ghxst-primary">Limited Edition Tee</CardTitle>
                   <Metadata className="text-ghxst-text-primary">$35.00</Metadata>
                   <Button variant="primary" size="sm" className="w-full">
                     Add to Cart

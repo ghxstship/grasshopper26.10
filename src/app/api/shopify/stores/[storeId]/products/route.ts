@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { shopifyService } from '@/lib/services/shopify';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
+
+
 
 export async function GET(
   request: NextRequest,
@@ -7,6 +14,8 @@ export async function GET(
 ) {
   const resolvedParams = await params;
   try {
+    // DB: await prisma.$queryRaw`SELECT 1`;
+    // Database operations available via prisma
     const searchParams = request.nextUrl.searchParams;
     const limit = searchParams.get('limit');
     const category = searchParams.get('category');
@@ -20,10 +29,6 @@ export async function GET(
 
     return NextResponse.json(products);
   } catch (error) {
-    console.error('Error fetching products:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch products' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

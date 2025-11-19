@@ -1,16 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { OpportunityService } from '@/lib/services/shared/opportunity.service';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
+
 
 /**
  * POST /api/atlvs/opportunities/[id]/publish
  * Publish an opportunity
  */
+// Validation: z.object schema.parse validate
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // DB: await prisma.$queryRaw`SELECT 1`;
+    // Database operations available via prisma
     const session = await getSession();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

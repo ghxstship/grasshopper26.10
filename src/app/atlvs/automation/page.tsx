@@ -14,6 +14,7 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useWorkflows } from '@/lib/hooks/atlvs/useAutomation';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface WorkflowItem {
   id: string;
@@ -25,6 +26,8 @@ interface WorkflowItem {
   successRate: number;
   category: string;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation
 
 export default function AutomationPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -46,7 +49,7 @@ export default function AutomationPage() {
       case 'active': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'paused': return 'bg-warning-light text-warning border-warning-border';
       case 'error': return 'bg-error-light text-error border-error-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -79,7 +82,7 @@ export default function AutomationPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-            <p className="text-gray-400">Loading workflows...</p>
+            <BodyText className="text-grey-400">Loading workflows...</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -92,8 +95,8 @@ export default function AutomationPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Workflows</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Workflows</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="atlvs" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -113,14 +116,14 @@ export default function AutomationPage() {
       >
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" role="region" aria-label="Automation workflow statistics">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Workflows
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${workflows?.length || 0} total workflows`}>
+                  <CardTitle  aria-label={`${workflows?.length || 0} total workflows`}>
                     {workflows?.length || 0}
                   </CardTitle>
                 </div>
@@ -131,14 +134,14 @@ export default function AutomationPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Active
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas text-atlvs-green-500" aria-label={`${stats.active} active workflows`}>
+                  <CardTitle className="text-atlvs-green-500" aria-label={`${stats.active} active workflows`}>
                     {stats.active}
                   </CardTitle>
                 </div>
@@ -149,14 +152,14 @@ export default function AutomationPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Executions
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas" aria-label={`${stats.totalExecutions.toLocaleString()} total executions`}>
+                  <CardTitle  aria-label={`${stats.totalExecutions.toLocaleString()} total executions`}>
                     {stats.totalExecutions.toLocaleString()}
                   </CardTitle>
                 </div>
@@ -167,14 +170,14 @@ export default function AutomationPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Avg Success Rate
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {stats.avgSuccessRate.toFixed(1)}%
                   </CardTitle>
                 </div>
@@ -220,13 +223,13 @@ export default function AutomationPage() {
               <Link href={`/atlvs/automation/${workflow.id}`}>
                 <Card 
                   variant="atlvs" 
-                  className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer"
+                  className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer"
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between gap-4">
                       {/* Left Side */}
                       <div className="flex items-center gap-4 flex-1">
-                        <div className="p-3 bg-gray-800 rounded-lg">
+                        <div className="p-3 bg-grey-800 rounded-lg">
                           <Workflow className="w-6 h-6 text-atlvs-green-500" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -241,7 +244,7 @@ export default function AutomationPage() {
                               {workflow.category}
                             </Badge>
                           </div>
-                          <CardDescription className="text-gray-400">
+                          <CardDescription className="text-grey-400">
                             {workflow.description}
                           </CardDescription>
                         </div>
@@ -250,19 +253,19 @@ export default function AutomationPage() {
                       {/* Right Side */}
                       <div className="flex items-center gap-6">
                         <div className="text-center">
-                          <div className="text-caption text-gray-400 mb-1">Executions</div>
-                          <div className="text-h6 font-bebas text-white">
+                          <div className="text-caption text-grey-400 mb-1">Executions</div>
+                          <div className="text-white">
                             {workflow.executions.toLocaleString()}
                           </div>
                         </div>
                         <div className="text-center">
-                          <div className="text-caption text-gray-400 mb-1">Success Rate</div>
-                          <div className="text-h6 font-bebas text-atlvs-green-500">
+                          <div className="text-caption text-grey-400 mb-1">Success Rate</div>
+                          <div className="text-atlvs-green-500">
                             {workflow.successRate}%
                           </div>
                         </div>
                         <div className="text-center min-w-[100px]">
-                          <div className="text-caption text-gray-400 mb-1">Last Run</div>
+                          <div className="text-caption text-grey-400 mb-1">Last Run</div>
                           <div className="text-body-sm text-white flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             {workflow.lastRun}

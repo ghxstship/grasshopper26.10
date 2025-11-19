@@ -12,6 +12,7 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useTickets } from '@/lib/hooks/gvteway/useTickets';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface ExtendedTicket {
   id: string;
@@ -34,6 +35,8 @@ interface ExtendedTicket {
   qrCode?: string;
   [key: string]: any; // Allow additional properties from Prisma model
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/tickets/[id]
 
 export default function TicketDetailPage({ params }: { params: { id: string } }) {  
   const [showQR, setShowQR] = useState(false);
@@ -73,19 +76,19 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
             >
               {/* Back Button */}
               <Link href="/gvteway/tickets">
-                <Button variant="ghost" size="sm" className="mb-6 text-gray-400 hover:text-white">
+                <Button variant="ghost" size="sm" className="mb-6 text-grey-400 hover:text-white">
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   Back to Tickets
                 </Button>
               </Link>
 
               {/* Ticket Card */}
-              <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm mb-6">
+              <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm mb-6">
                 <CardContent className="p-8">
                   {/* Header */}
                   <div className="flex items-start justify-between mb-6">
                     <div>
-                      <h1 className="text-h2 font-bebas text-white mb-2">
+                      <h1 className="text-white mb-2">
                         {ticket.eventName}
                       </h1>
                       <Badge variant="gvteway">{ticket.ticketType}</Badge>
@@ -97,26 +100,26 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                   <div className="bg-white rounded-xl p-8 mb-6 text-center">
                     {showQR ? (
                       <div>
-                        <div className="w-64 h-64 bg-gray-200 mx-auto mb-4 flex items-center justify-center">
-                          <QrCode className="w-32 h-32 text-gray-400" />
+                        <div className="w-64 h-64 bg-grey-200 mx-auto mb-4 flex items-center justify-center">
+                          <QrCode className="w-32 h-32 text-grey-400" />
                         </div>
-                        <p className="text-gray-600 text-body-sm mb-2">Scan at venue entrance</p>
-                        <p className="text-gray-800 font-mono text-caption">{ticket.qrCode}</p>
+                        <BodyText className="text-grey-600 text-body-sm mb-2">Scan at venue entrance</BodyText>
+                        <p className="text-grey-800 font-mono text-caption">{ticket.qrCode}</p>
                       </div>
                     ) : (
                       <div className="py-12">
-                        <QrCode className="w-24 h-24 text-gray-400 mx-auto mb-4" />
+                        <QrCode className="w-24 h-24 text-grey-400 mx-auto mb-4" />
                         <Button 
                           variant="default" 
                           size="lg" 
                           onClick={() => setShowQR(true)}
-                          className="bg-black text-white hover:bg-gray-800"
+                          className="bg-black text-white hover:bg-grey-800"
                         >
                           Show QR Code
                         </Button>
-                        <p className="text-gray-600 text-body-sm mt-4">
+                        <BodyText className="text-grey-600 text-body-sm mt-4">
                           Only show this at the venue entrance
-                        </p>
+                        </BodyText>
                       </div>
                     )}
                   </div>
@@ -127,18 +130,18 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                       <div className="flex items-start">
                         <Calendar className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-body-sm">Date & Time</p>
+                          <BodyText className="text-grey-400 text-body-sm">Date & Time</BodyText>
                           <p className="text-white">{ticket.date}</p>
-                          <p className="text-gray-300">{ticket.time}</p>
+                          <p className="text-grey-300">{ticket.time}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start">
                         <MapPin className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-body-sm">Venue</p>
+                          <BodyText className="text-grey-400 text-body-sm">Venue</BodyText>
                           <p className="text-white">{ticket.venue}</p>
-                          <p className="text-gray-300">{ticket.location}</p>
+                          <p className="text-grey-300">{ticket.location}</p>
                         </div>
                       </div>
                     </div>
@@ -147,16 +150,16 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                       <div className="flex items-start">
                         <Ticket className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-body-sm">Seating</p>
+                          <BodyText className="text-grey-400 text-body-sm">Seating</BodyText>
                           <p className="text-white">Section {ticket.section}</p>
-                          <p className="text-gray-300">Row {ticket.row}, Seats {ticket.seat}</p>
+                          <p className="text-grey-300">Row {ticket.row}, Seats {ticket.seat}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start">
                         <User className="w-5 h-5 text-gvteway-red-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-gray-400 text-body-sm">Quantity</p>
+                          <BodyText className="text-grey-400 text-body-sm">Quantity</BodyText>
                           <p className="text-white">{ticket.quantity} Tickets</p>
                         </div>
                       </div>
@@ -164,22 +167,22 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                   </div>
 
                   {/* Order Info */}
-                  <div className="pt-6 border-t border-gray-800">
+                  <div className="pt-6 border-t border-grey-800">
                     <div className="grid sm:grid-cols-2 gap-4 text-body-sm">
                       <div>
-                        <p className="text-gray-400">Order Number</p>
+                        <BodyText className="text-grey-400">Order Number</BodyText>
                         <p className="text-white font-mono">{ticket.orderNumber}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400">Purchase Date</p>
+                        <BodyText className="text-grey-400">Purchase Date</BodyText>
                         <p className="text-white">{ticket.purchaseDate}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400">Total Paid</p>
+                        <BodyText className="text-grey-400">Total Paid</BodyText>
                         <p className="text-white">${(ticket.price * ticket.quantity).toFixed(2)}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400">Price per Ticket</p>
+                        <BodyText className="text-grey-400">Price per Ticket</BodyText>
                         <p className="text-white">${ticket.price}</p>
                       </div>
                     </div>
@@ -216,12 +219,12 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
               </div>
 
               {/* Additional Info */}
-              <Card variant="gvteway" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card variant="gvteway" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-white">Important Information</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-3 text-gray-300 text-body-sm">
+                  <ul className="space-y-3 text-grey-300 text-body-sm">
                     <li className="flex items-start">
                       <span className="text-gvteway-red-500 mr-2">•</span>
                       <span>Please arrive at least 30 minutes before the event starts</span>

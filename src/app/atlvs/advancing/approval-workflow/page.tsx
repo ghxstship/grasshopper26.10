@@ -11,6 +11,7 @@ import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { useMemo } from 'react';
 import { useAdvancingRequests } from '@/lib/hooks/atlvs/useAdvancingRequestQuery';
+import { SubsectionHeader } from "@/components/atoms/Typography";
 
 interface ApprovalStep {
   id: string;
@@ -21,6 +22,8 @@ interface ApprovalStep {
   date?: string;
   comments?: string;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/advancing/approval-workflow
 
 export default function ApprovalWorkflowPage() {
   const { data: requests, isLoading, error, refetch } = useAdvancingRequests();
@@ -105,27 +108,27 @@ export default function ApprovalWorkflowPage() {
             <Loader2 className="w-8 h-8 animate-spin text-atlvs-green-500" />
           </div>
         ) : error ? (
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="text-center py-12">
                 <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-                <h3 className="text-h6 font-bebas mb-2">Failed to Load Workflow</h3>
-                <p className="text-gray-400 mb-4">{error.message}</p>
+                <SubsectionHeader className="mb-2">Failed to Load Workflow</SubsectionHeader>
+                <p className="text-grey-400 mb-4">{error.message}</p>
                 <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
               </div>
             </CardHeader>
           </Card>
         ) : (
           <div className="space-y-6">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-body-sm text-gray-400">Overall Progress</span>
+                  <span className="text-body-sm text-grey-400">Overall Progress</span>
                   <span className="text-body-sm">
                     {progress.approved} of {progress.total} approved ({progress.percentage}%)
                   </span>
                 </div>
-                <div className="w-full bg-gray-800 rounded-full h-3">
+                <div className="w-full bg-grey-800 rounded-full h-3">
                   <div
                     className="bg-gradient-to-r from-atlvs-green-500 to-atlvs-purple-500 h-3 rounded-full transition-all"
                     style={{ width: `${progress.percentage}%` }}
@@ -134,41 +137,41 @@ export default function ApprovalWorkflowPage() {
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
                 <CardTitle className="mb-6">Approval Steps</CardTitle>
                 <div className="relative">
                   {approvalSteps.map((step, index) => (
                     <div key={step.id} className="relative">
                       {index < approvalSteps.length - 1 && (
-                        <div className="absolute left-6 top-12 w-0.5 h-full bg-gray-700" />
+                        <div className="absolute left-6 top-12 w-0.5 h-full bg-grey-700" />
                       )}
 
                       <div className="relative flex gap-4 mb-6">
-                        <div className="flex-shrink-0 z-10 bg-gray-900">
+                        <div className="flex-shrink-0 z-10 bg-grey-900">
                           {getStatusIcon(step.status)}
                         </div>
-                        <div className="flex-1 bg-gray-800/50 rounded-lg p-4">
+                        <div className="flex-1 bg-grey-800/50 rounded-lg p-4">
                           <div className="flex items-start justify-between mb-2">
                             <div>
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="text-body-sm text-gray-400">Step {step.step}</span>
+                                <span className="text-body-sm text-grey-400">Step {step.step}</span>
                                 <Badge variant="atlvs-outline" className={getStatusColor(step.status)}>
                                   {step.status.charAt(0).toUpperCase() + step.status.slice(1)}
                                 </Badge>
                               </div>
                               <div className="font-semibold">{step.approver}</div>
-                              <div className="text-body-sm text-gray-400">{step.role}</div>
+                              <div className="text-body-sm text-grey-400">{step.role}</div>
                             </div>
                             {step.date && (
-                              <p className="text-caption text-gray-500">
+                              <p className="text-caption text-grey-500">
                                 Last updated: {new Date().toLocaleString()}
                               </p>
                             )}
                           </div>
                           {step.comments && (
-                            <div className="mt-3 pt-3 border-t border-gray-700">
-                              <div className="text-body-sm text-gray-300">{step.comments}</div>
+                            <div className="mt-3 pt-3 border-t border-grey-700">
+                              <div className="text-body-sm text-grey-300">{step.comments}</div>
                             </div>
                           )}
                         </div>
@@ -186,7 +189,7 @@ export default function ApprovalWorkflowPage() {
                     <Clock className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
                     <div>
                       <div className="font-medium text-warning mb-1">Pending Approval</div>
-                      <div className="text-body-sm text-gray-300">
+                      <div className="text-body-sm text-grey-300">
                         Waiting for {approvalSteps.find((s: ApprovalStep) => s.status === 'pending')?.approver} to review and approve.
                       </div>
                     </div>

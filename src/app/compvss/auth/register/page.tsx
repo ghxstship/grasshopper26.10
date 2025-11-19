@@ -15,6 +15,9 @@ import { useRegister } from '@/lib/hooks/auth/useAuthMutations';
 import { FormField } from '@/components/molecules/FormField';
 import { Checkbox } from '@/components/atoms/Checkbox';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/auth/register
 
 export default function CompvssRegisterPage() {
   const router = useRouter();
@@ -87,21 +90,21 @@ export default function CompvssRegisterPage() {
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <Link href="/compvss">
-              <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
+              <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                 COMPVSS
-              </h1>
+              </HeroTitle>
             </Link>
-            <p className="text-gray-400 font-oswald">Join the External Teams Portal</p>
+            <BodyText className="text-grey-400">Join the External Teams Portal</BodyText>
           </div>
 
           {/* Register Card */}
-          <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <UserPlus className="w-6 h-6 text-compvss-cyan-500" />
                 Create Account
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Get started with COMPVSS
               </CardDescription>
             </CardHeader>
@@ -111,7 +114,7 @@ export default function CompvssRegisterPage() {
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-body-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error -tech">{error}</p>
                   </div>
                 )}
 
@@ -119,7 +122,7 @@ export default function CompvssRegisterPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <FormField label="First Name" required>
                     <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                       <Input
                         id="firstName"
                         type="text"
@@ -135,7 +138,7 @@ export default function CompvssRegisterPage() {
 
                   <FormField label="Last Name" required>
                     <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                       <Input
                         id="lastName"
                         type="text"
@@ -153,7 +156,7 @@ export default function CompvssRegisterPage() {
                 {/* Email Field */}
                 <FormField label="Email Address" required>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="email"
                       type="email"
@@ -170,7 +173,7 @@ export default function CompvssRegisterPage() {
                 {/* Organization Field */}
                 <FormField label="Organization / Company" required>
                   <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                     <Input
                       id="organization"
                       type="text"
@@ -188,7 +191,7 @@ export default function CompvssRegisterPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField label="Password" required>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                       <Input
                         id="password"
                         type={showPassword ? 'text' : 'password'}
@@ -204,7 +207,7 @@ export default function CompvssRegisterPage() {
                         onClick={() => setShowPassword(!showPassword)}
                         variant="ghost"
                         size="sm"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 p-0 h-auto text-gray-400 hover:text-compvss-cyan-500"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-0 h-auto text-grey-400 hover:text-compvss-cyan-500"
                       >
                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </Button>
@@ -213,7 +216,7 @@ export default function CompvssRegisterPage() {
 
                   <FormField label="Confirm Password" required>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-grey-400" />
                       <Input
                         id="confirmPassword"
                         type={showConfirmPassword ? 'text' : 'password'}
@@ -229,7 +232,7 @@ export default function CompvssRegisterPage() {
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         variant="ghost"
                         size="sm"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 p-0 h-auto text-gray-400 hover:text-compvss-cyan-500"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-0 h-auto text-grey-400 hover:text-compvss-cyan-500"
                       >
                         {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </Button>
@@ -247,7 +250,7 @@ export default function CompvssRegisterPage() {
                     disabled={registerMutation.isPending}
                     required 
                   />
-                  <span className="text-body-sm text-gray-400 font-share-tech">
+                  <span className="text-body-sm text-grey-400 -tech">
                     I agree to the{' '}
                     <Link href="/terms" className="text-compvss-cyan-500 hover:text-compvss-teal-500">
                       Terms of Service
@@ -280,10 +283,10 @@ export default function CompvssRegisterPage() {
                 {/* Divider */}
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-700" />
+                    <div className="w-full border-t border-grey-700" />
                   </div>
                   <div className="relative flex justify-center text-body-sm">
-                    <span className="px-2 bg-gray-900 text-gray-400 font-share-tech">
+                    <span className="px-2 bg-grey-900 text-grey-400 -tech">
                       Already have an account?
                     </span>
                   </div>
@@ -306,10 +309,10 @@ export default function CompvssRegisterPage() {
 
           {/* Footer Links */}
           <div className="mt-6 text-center space-y-2">
-            <p className="text-body-sm text-gray-500 font-share-tech">
+            <p className="text-body-sm text-grey-500 -tech">
               Need help? <Link href="/contact" className="text-compvss-cyan-500 hover:text-compvss-teal-500">Contact Support</Link>
             </p>
-            <Link href="/" className="text-body-sm text-gray-500 hover:text-gray-400 font-share-tech block">
+            <Link href="/" className="text-body-sm text-grey-500 hover:text-grey-400 -tech block">
               ← Back to Home
             </Link>
           </div>

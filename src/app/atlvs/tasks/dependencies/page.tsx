@@ -13,6 +13,7 @@ import { useTaskDependencies } from '@/lib/hooks/atlvs/useTasks';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Alert } from '@/components/molecules/Alert';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface _TaskDependency {
   id: string;
@@ -23,6 +24,8 @@ interface _TaskDependency {
   type: 'finish-to-start' | 'start-to-start';
   lag: number;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/dependencies
 
 export default function TaskDependenciesPage() {
   const router = useRouter();
@@ -41,7 +44,7 @@ export default function TaskDependenciesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading task dependencies...</p>
+              <BodyText className="text-grey-400">Loading task dependencies...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -61,8 +64,8 @@ export default function TaskDependenciesPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Dependencies</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Dependencies</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -91,18 +94,18 @@ export default function TaskDependenciesPage() {
           }
         ]}
       >
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="mb-6">Dependency Chain</CardTitle>
 
             <div className="space-y-2">
               {dependencies.map(dep => (
-                <div key={dep.id} className="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors">
+                <div key={dep.id} className="p-4 bg-grey-800/50 rounded-lg hover:bg-grey-800 transition-colors">
                   <div className="flex items-start gap-4">
-                    <GitBranch className="w-5 h-5 text-gray-400 mt-1" />
+                    <GitBranch className="w-5 h-5 text-grey-400 mt-1" />
                     <div className="flex-1">
                       <div className="font-semibold mb-1">{dep.taskName}</div>
-                      <div className="text-body-sm text-gray-400">
+                      <div className="text-body-sm text-grey-400">
                         Depends on: <span className="font-medium">{dep.dependsOnName}</span>
                         <span className="mx-2">•</span>
                         <span className="capitalize">{dep.type.replace(/-/g, ' ')}</span>

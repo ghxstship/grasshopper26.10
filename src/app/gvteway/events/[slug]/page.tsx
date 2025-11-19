@@ -107,7 +107,7 @@ export default function EventPage({ params: { slug: _slug } }: EventPageProps) {
                 <div className="space-y-2">
                   <Metadata className="text-ghxst-text-secondary">Tickets from</Metadata>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-h2 font-anton text-ghxst-primary">
+                    <span className="text-ghxst-primary">
                       ${event.priceMin}
                     </span>
                     <Metadata className="text-ghxst-text-secondary">

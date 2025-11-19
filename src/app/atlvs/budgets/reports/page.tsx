@@ -14,6 +14,9 @@ import { Button } from '@/components/atoms/Button';
 import { Input } from '@/components/atoms/Input';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms/Card';
 import { useReports, type Report } from '@/lib/hooks/atlvs/useReports';
+import { BodyText, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets/reports
 
 export default function BudgetReportsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState('current-month');
@@ -37,7 +40,7 @@ export default function BudgetReportsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading budget reports...</p>
+              <BodyText className="text-grey-400">Loading budget reports...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -60,8 +63,8 @@ export default function BudgetReportsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Reports</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Reports</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -113,48 +116,48 @@ export default function BudgetReportsPage() {
       >
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <div className="flex items-center gap-3">
               <FileText className="w-8 h-8 text-atlvs-green-500" />
               <div>
-                <CardDescription className="text-gray-400">Total Reports</CardDescription>
-                <CardTitle className="text-h4 font-bebas">{reports.length}</CardTitle>
+                <CardDescription className="text-grey-400">Total Reports</CardDescription>
+                <CardTitle >{reports.length}</CardTitle>
               </div>
             </div>
           </CardHeader>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <div className="flex items-center gap-3">
               <CheckCircle className="w-8 h-8 text-info" />
               <div>
-                <CardDescription className="text-gray-400">Ready</CardDescription>
-                <CardTitle className="text-h4 font-bebas">
+                <CardDescription className="text-grey-400">Ready</CardDescription>
+                <CardTitle >
                   {reports.filter(r => r.status === 'ready').length}
                 </CardTitle>
               </div>
             </div>
           </CardHeader>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <div className="flex items-center gap-3">
               <AlertCircle className="w-8 h-8 text-atlvs-orange-500" />
               <div>
-                <CardDescription className="text-gray-400">Active Alerts</CardDescription>
-                <CardTitle className="text-h4 font-bebas">{alerts.length}</CardTitle>
+                <CardDescription className="text-grey-400">Active Alerts</CardDescription>
+                <CardTitle >{alerts.length}</CardTitle>
               </div>
             </div>
           </CardHeader>
         </Card>
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <div className="flex items-center gap-3">
               <TrendingUp className="w-8 h-8 text-atlvs-purple-500" />
               <div>
-                <CardDescription className="text-gray-400">Scheduled</CardDescription>
-                <CardTitle className="text-h4 font-bebas">
+                <CardDescription className="text-grey-400">Scheduled</CardDescription>
+                <CardTitle >
                   {reports.filter(r => r.status === 'scheduled').length}
                 </CardTitle>
               </div>
@@ -164,7 +167,7 @@ export default function BudgetReportsPage() {
       </div>
 
       {/* Budget Alerts */}
-      <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+      <Card variant="atlvs" className="bg-grey-900/50 mb-6">
         <CardHeader>
           <div className="flex items-center justify-between mb-4">
             <CardTitle>Budget Alerts</CardTitle>
@@ -179,8 +182,8 @@ export default function BudgetReportsPage() {
                   {getAlertIcon(alert.severity)}
                   <div className="flex-1">
                     <div className="font-medium text-white mb-1">{alert.message}</div>
-                    <div className="flex items-center gap-2 text-body-sm text-gray-400">
-                      <span className="px-2 py-0.5 bg-gray-800 rounded text-caption">
+                    <div className="flex items-center gap-2 text-body-sm text-grey-400">
+                      <span className="px-2 py-0.5 bg-grey-800 rounded text-caption">
                         {alert.category}
                       </span>
                       <span>•</span>
@@ -198,7 +201,7 @@ export default function BudgetReportsPage() {
       </Card>
 
       {/* Report Generation */}
-      <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+      <Card variant="atlvs" className="bg-grey-900/50 mb-6">
         <CardHeader>
           <CardTitle className="mb-4">Generate New Report</CardTitle>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -239,11 +242,11 @@ export default function BudgetReportsPage() {
       </Card>
 
       {/* Filters */}
-      <Card variant="atlvs" className="bg-gray-900/50 mb-6">
+      <Card variant="atlvs" className="bg-grey-900/50 mb-6">
         <CardHeader>
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-400" />
+              <Filter className="w-5 h-5 text-grey-400" />
               <span className="text-body-sm text-white">Filters:</span>
             </div>
           <Select
@@ -272,54 +275,54 @@ export default function BudgetReportsPage() {
       </Card>
 
       {/* Reports List */}
-      <Card variant="atlvs" className="bg-gray-900/50 overflow-hidden">
+      <Card variant="atlvs" className="bg-grey-900/50 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-800/50 border-b border-gray-700">
+            <thead className="bg-grey-800/50 border-b border-grey-700">
               <tr>
-                <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                   Report Name
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                   Type
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                   Period
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                   Generated
                 </th>
-                <th className="px-6 py-3 text-left text-caption text-gray-400 uppercaser">
+                <th className="px-6 py-3 text-left text-caption text-grey-400 uppercaser">
                   Status
                 </th>
-                <th className="px-6 py-3 text-right text-caption text-gray-400 uppercaser">
+                <th className="px-6 py-3 text-right text-caption text-grey-400 uppercaser">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-800">
+            <tbody className="divide-y divide-grey-800">
               {reports.map(report => {
                 const statusStyle = getStatusBadge(report.status);
                 return (
-                  <tr key={report.id} className="hover:bg-gray-800/50">
+                  <tr key={report.id} className="hover:bg-grey-800/50">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <FileText className="w-5 h-5 text-gray-400" />
+                        <FileText className="w-5 h-5 text-grey-400" />
                         <span className="font-medium text-white">{report.name}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="px-2 py-1 bg-gray-800 text-gray-300 text-caption rounded capitalize">
+                      <span className="px-2 py-1 bg-grey-800 text-grey-300 text-caption rounded capitalize">
                         {report.type}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-body-sm text-gray-400">
+                    <td className="px-6 py-4 text-body-sm text-grey-400">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         {report.period}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-body-sm text-gray-400">{report.generated || 'N/A'}</td>
+                    <td className="px-6 py-4 text-body-sm text-grey-400">{report.generated || 'N/A'}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 ${statusStyle.bg} ${statusStyle.text} text-caption rounded capitalize`}>
                         {report.status}
@@ -333,7 +336,7 @@ export default function BudgetReportsPage() {
                         </Button>
                       )}
                       {report.status === 'scheduled' && (
-                        <Button variant="ghost" size="sm" className="text-gray-400">
+                        <Button variant="ghost" size="sm" className="text-grey-400">
                           <Calendar className="w-4 h-4 mr-1" />
                           Edit Schedule
                         </Button>
@@ -348,15 +351,15 @@ export default function BudgetReportsPage() {
       </Card>
 
       {/* Alert Configuration */}
-      <Card variant="atlvs" className="mt-6 bg-gray-900/50">
+      <Card variant="atlvs" className="mt-6 bg-grey-900/50">
         <CardHeader>
           <CardTitle className="mb-4">Alert Configuration</CardTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-body-sm text-white mb-3">Budget Thresholds</h3>
+              <SubsectionHeader className="text-body-sm text-white mb-3">Budget Thresholds</SubsectionHeader>
               <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 border border-gray-700 rounded-lg">
-                  <span className="text-body-sm text-gray-300">Warning at</span>
+                <div className="flex items-center justify-between p-3 border border-grey-700 rounded-lg">
+                  <span className="text-body-sm text-grey-300">Warning at</span>
                 <div className="flex items-center gap-2">
                   <Input
                     type="number"
@@ -364,11 +367,11 @@ export default function BudgetReportsPage() {
                     className="w-16 text-body-sm text-center"
                     variant="atlvs"
                   />
-                  <span className="text-body-sm text-gray-400">%</span>
+                  <span className="text-body-sm text-grey-400">%</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between p-3 border border-gray-700 rounded-lg">
-                <span className="text-body-sm text-gray-300">Critical at</span>
+              <div className="flex items-center justify-between p-3 border border-grey-700 rounded-lg">
+                <span className="text-body-sm text-grey-300">Critical at</span>
                 <div className="flex items-center gap-2">
                   <Input
                     type="number"
@@ -376,30 +379,30 @@ export default function BudgetReportsPage() {
                     className="w-16 text-body-sm text-center"
                     variant="atlvs"
                   />
-                  <span className="text-body-sm text-gray-400">%</span>
+                  <span className="text-body-sm text-grey-400">%</span>
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <h3 className="text-body-sm text-white mb-3">Notification Settings</h3>
+            <SubsectionHeader className="text-body-sm text-white mb-3">Notification Settings</SubsectionHeader>
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Checkbox defaultChecked variant="atlvs" />
-                <span className="text-body-sm text-gray-300">Email notifications</span>
+                <span className="text-body-sm text-grey-300">Email notifications</span>
               </div>
               <div className="flex items-center gap-2">
                 <Checkbox defaultChecked variant="atlvs" />
-                <span className="text-body-sm text-gray-300">In-app notifications</span>
+                <span className="text-body-sm text-grey-300">In-app notifications</span>
               </div>
               <div className="flex items-center gap-2">
                 <Checkbox variant="atlvs" />
-                <span className="text-body-sm text-gray-300">SMS notifications</span>
+                <span className="text-body-sm text-grey-300">SMS notifications</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-4 pt-4 border-t border-gray-700">
+        <div className="mt-4 pt-4 border-t border-grey-700">
           <Button variant="atlvs">
             Save Alert Settings
           </Button>

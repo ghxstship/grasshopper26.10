@@ -11,6 +11,7 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useAnalytics } from '@/lib/hooks/atlvs/useAnalytics';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface Insight {
   id: string;
@@ -19,6 +20,8 @@ interface Insight {
   impact: string;
   category: string;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics/insights
 
 export default function AnalyticsInsightsPage() {
   const { data: analyticsData, isLoading, error } = useAnalytics();
@@ -45,7 +48,7 @@ export default function AnalyticsInsightsPage() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <p className="text-gray-400">Failed to load insights</p>
+            <BodyText className="text-grey-400">Failed to load insights</BodyText>
           </div>
         </div>
       </AtlvsLayout>
@@ -57,7 +60,7 @@ export default function AnalyticsInsightsPage() {
       case 'high': return 'bg-error-light text-error border-error-border';
       case 'positive': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'medium': return 'bg-warning-light text-warning border-warning-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -74,7 +77,7 @@ export default function AnalyticsInsightsPage() {
       >
         <div className="space-y-4" role="list" aria-label="AI insights and recommendations">
           {insights.map((insight: Insight) => (
-            <Card key={insight.id} variant="atlvs" className="bg-gray-900/50" role="listitem">
+            <Card key={insight.id} variant="atlvs" className="bg-grey-900/50" role="listitem">
               <CardHeader>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center flex-shrink-0" aria-hidden="true">
@@ -82,14 +85,14 @@ export default function AnalyticsInsightsPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-2">
-                      <CardTitle className="text-h5">{insight.title}</CardTitle>
+                      <CardTitle >{insight.title}</CardTitle>
                       <Badge variant="atlvs-outline" className={getImpactColor(insight.impact)} role="status" aria-label={`Impact level: ${insight.impact}`}>
                         {insight.impact}
                       </Badge>
                     </div>
-                    <p className="text-gray-400 mb-3">{insight.description}</p>
+                    <p className="text-grey-400 mb-3">{insight.description}</p>
                     <div className="flex items-center gap-2">
-                      <Badge variant="atlvs-outline" className="bg-gray-700/50">
+                      <Badge variant="atlvs-outline" className="bg-grey-700/50">
                         {insight.category}
                       </Badge>
                       <Button variant="atlvs" size="sm" aria-label={`View details for ${insight.title}`}>

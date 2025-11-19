@@ -12,6 +12,7 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/atoms/Card';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
 import { useResendVerification } from '@/lib/hooks/auth/useAuthMutations';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
 function VerifyEmailContent() {
   const searchParams = useSearchParams();
@@ -56,15 +57,15 @@ function VerifyEmailContent() {
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <Link href="/compvss">
-              <h1 className="compvss-text-gradient text-h1 font-anton mb-2 cursor-pointer">
+              <HeroTitle className="compvss-text-gradient mb-2 cursor-pointer">
                 COMPVSS
-              </h1>
+              </HeroTitle>
             </Link>
-            <p className="text-gray-400 font-oswald">Verify Your Email</p>
+            <BodyText className="text-grey-400">Verify Your Email</BodyText>
           </div>
 
           {/* Verification Card */}
-          <Card variant="compvss" className="bg-gray-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
+          <Card variant="compvss" className="bg-grey-900/80 backdrop-blur-sm border-2 border-compvss-cyan-500/20">
             <CardHeader>
               <div className="flex justify-center mb-4">
                 <div className="w-20 h-20 rounded-full bg-compvss-cyan-500/10 flex items-center justify-center">
@@ -74,7 +75,7 @@ function VerifyEmailContent() {
               <CardTitle className="text-white text-center">
                 Check Your Email
               </CardTitle>
-              <CardDescription className="text-gray-400 text-center">
+              <CardDescription className="text-grey-400 text-center">
                 We&apos;ve sent a verification link to your email address
               </CardDescription>
             </CardHeader>
@@ -82,19 +83,19 @@ function VerifyEmailContent() {
               <div className="space-y-6">
                 {/* Email Display */}
                 <div className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20 text-center">
-                  <p className="text-white font-oswald">{email}</p>
+                  <p className="text-white">{email}</p>
                 </div>
 
                 {/* Error Message */}
                 {error && (
                   <div className="p-3 rounded-lg bg-error/10 border border-error/30 flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-error" />
-                    <p className="text-body-sm text-error font-share-tech">{error}</p>
+                    <p className="text-body-sm text-error -tech">{error}</p>
                   </div>
                 )}
 
                 {/* Instructions */}
-                <div className="space-y-3 text-body-sm text-gray-400 font-share-tech">
+                <div className="space-y-3 text-body-sm text-grey-400 -tech">
                   <p className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-compvss-cyan-500 mt-0.5 flex-shrink-0" />
                     <span>Click the verification link in the email</span>
@@ -113,9 +114,9 @@ function VerifyEmailContent() {
                 <div className="pt-4">
                   {resent ? (
                     <div className="p-4 rounded-lg bg-success-light0/10 border border-success/30 text-center">
-                      <p className="text-success font-oswald">
+                      <BodyText className="text-success">
                         ✓ Verification email resent!
-                      </p>
+                      </BodyText>
                     </div>
                   ) : (
                     <Button
@@ -154,7 +155,7 @@ function VerifyEmailContent() {
 
           {/* Footer */}
           <div className="mt-6 text-center">
-            <p className="text-body-sm text-gray-500 font-share-tech">
+            <p className="text-body-sm text-grey-500 -tech">
               Need help? <Link href="/contact" className="text-compvss-cyan-500 hover:text-compvss-teal-500">Contact Support</Link>
             </p>
           </div>
@@ -165,10 +166,12 @@ function VerifyEmailContent() {
   );
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/auth/verify
+
 export default function CompvssVerifyPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+      <div className="min-h-screen bg-grey-950 flex items-center justify-center">
         <RefreshCw className="w-8 h-8 animate-spin text-info" />
       </div>
     }>

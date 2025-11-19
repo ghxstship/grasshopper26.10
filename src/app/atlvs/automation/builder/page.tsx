@@ -10,6 +10,8 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { useAutomation } from '@/lib/hooks/atlvs/useAutomation';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/builder
+
 export default function WorkflowBuilderPage() {
   const { data: _automationData, isLoading } = useAutomation();
   
@@ -47,12 +49,12 @@ export default function WorkflowBuilderPage() {
         ]}
       >
         <div className="grid grid-cols-4 gap-6">
-          <Card variant="atlvs" className="bg-gray-900/50 col-span-1">
+          <Card variant="atlvs" className="bg-grey-900/50 col-span-1">
             <CardHeader>
               <CardTitle className="mb-4">Nodes</CardTitle>
               <div className="space-y-2">
                 {['Trigger', 'Action', 'Condition', 'Loop', 'Delay'].map((node) => (
-                  <div key={node} className="p-3 bg-gray-800/50 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors">
+                  <div key={node} className="p-3 bg-grey-800/50 rounded-lg cursor-pointer hover:bg-grey-800 transition-colors">
                     <div className="font-medium text-body-sm">{node}</div>
                   </div>
                 ))}
@@ -64,13 +66,13 @@ export default function WorkflowBuilderPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50 col-span-3">
+          <Card variant="atlvs" className="bg-grey-900/50 col-span-3">
             <CardHeader>
               <CardTitle className="mb-4">Canvas</CardTitle>
-              <div className="h-[600px] bg-gray-800/30 rounded-lg border-2 border-dashed border-gray-700 flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <div className="text-h1 mb-4">🔧</div>
-                  <div className="font-oswald">Drag nodes here to build your workflow</div>
+              <div className="h-[600px] bg-grey-800/30 rounded-lg border-2 border-dashed border-grey-700 flex items-center justify-center">
+                <div className="text-center text-grey-400">
+                  <div className="mb-4">🔧</div>
+                  <div >Drag nodes here to build your workflow</div>
                 </div>
               </div>
             </CardHeader>

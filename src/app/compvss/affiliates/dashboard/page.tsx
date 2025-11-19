@@ -14,6 +14,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { useAffiliates } from '@/lib/hooks/compvss/useAffiliates';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/affiliates/dashboard
 
 export default function AffiliateDashboardPage() {
   const { data: affiliateData, isLoading, error, refetch } = useAffiliates();
@@ -59,7 +62,7 @@ export default function AffiliateDashboardPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading affiliate data...</p>
+              <BodyText className="text-grey-400">Loading affiliate data...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -80,8 +83,8 @@ export default function AffiliateDashboardPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Affiliate Data</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Affiliate Data</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -110,7 +113,7 @@ export default function AffiliateDashboardPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+              <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
                     <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500">
@@ -120,8 +123,8 @@ export default function AffiliateDashboardPage() {
                       {stat.change}
                     </Badge>
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -135,7 +138,7 @@ export default function AffiliateDashboardPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-white flex items-center gap-2">
@@ -158,8 +161,8 @@ export default function AffiliateDashboardPage() {
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h3 className="font-oswald text-white mb-1">{link.name}</h3>
-                          <div className="flex items-center gap-2 text-body-sm text-gray-400 font-share-tech">
+                          <h3 className="text-white mb-1">{link.name}</h3>
+                          <div className="flex items-center gap-2 text-body-sm text-grey-400 -tech">
                             <span>{link.url}</span>
                             <Button variant="ghost" size="sm" className="p-0 h-auto hover:text-compvss-cyan-500">
                               <Copy className="w-3 h-3" />
@@ -175,16 +178,16 @@ export default function AffiliateDashboardPage() {
                       </div>
                       <div className="grid grid-cols-3 gap-4 text-center">
                         <div>
-                          <div className="text-h6 font-bebas text-white">{link.clicks}</div>
-                          <div className="text-caption text-gray-400 font-share-tech">Clicks</div>
+                          <div className="text-white">{link.clicks}</div>
+                          <div className="text-caption text-grey-400 -tech">Clicks</div>
                         </div>
                         <div>
-                          <div className="text-h6 font-bebas text-compvss-cyan-500">{link.conversions}</div>
-                          <div className="text-caption text-gray-400 font-share-tech">Conversions</div>
+                          <div className="text-compvss-cyan-500">{link.conversions}</div>
+                          <div className="text-caption text-grey-400 -tech">Conversions</div>
                         </div>
                         <div>
-                          <div className="text-h6 font-bebas text-success">{link.earnings}</div>
-                          <div className="text-caption text-gray-400 font-share-tech">Earned</div>
+                          <div className="text-success">{link.earnings}</div>
+                          <div className="text-caption text-grey-400 -tech">Earned</div>
                         </div>
                       </div>
                     </div>
@@ -200,7 +203,7 @@ export default function AffiliateDashboardPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <BarChart2 className="w-5 h-5 text-compvss-cyan-500" />
@@ -217,11 +220,11 @@ export default function AffiliateDashboardPage() {
                       <div className="w-2 h-2 bg-compvss-cyan-500 rounded-full mt-2" />
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
-                          <p className="text-white font-oswald text-body-sm">{activity.event}</p>
-                          <span className="text-success font-bebas text-h6">{activity.amount}</span>
+                          <p className="text-white text-body-sm">{activity.event}</p>
+                          <span className="text-success">{activity.amount}</span>
                         </div>
-                        <p className="text-body-sm text-gray-400 font-share-tech">{activity.link}</p>
-                        <p className="text-caption text-gray-500 font-share-tech mt-1">{activity.date}</p>
+                        <p className="text-body-sm text-grey-400 -tech">{activity.link}</p>
+                        <p className="text-caption text-grey-500 -tech mt-1">{activity.date}</p>
                       </div>
                     </div>
                   ))}
@@ -230,10 +233,10 @@ export default function AffiliateDashboardPage() {
             </Card>
 
             {/* Commission Info */}
-            <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm mt-6">
+            <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm mt-6">
               <CardContent className="pt-6">
-                <h3 className="text-h6 font-bebas text-white mb-3">Commission Structure</h3>
-                <div className="space-y-2 text-body-sm text-gray-400 font-share-tech">
+                <SubsectionHeader className="text-white mb-3">Commission Structure</SubsectionHeader>
+                <div className="space-y-2 text-body-sm text-grey-400 -tech">
                   <div className="flex items-center justify-between p-2 rounded bg-black/50">
                     <span>Standard Tickets</span>
                     <span className="text-compvss-cyan-500">10%</span>

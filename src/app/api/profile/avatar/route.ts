@@ -3,9 +3,25 @@ import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
 import { uploadToSupabase } from '@/lib/storage';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { ProfileService } from '@/lib/services/profile/avatar.service';
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const context = await validateRequest(request);
     requireAuth(context);
 
@@ -30,7 +46,7 @@ export async function POST(request: NextRequest) {
     const fileUrl = await uploadToSupabase(file, `avatars/${context.userId}`);
 
     // Update user profile
-    const user = await prisma.user.update({
+    const user = await new ProfileService().update({
       where: { id: context.userId },
       data: { image: fileUrl },
       select: {

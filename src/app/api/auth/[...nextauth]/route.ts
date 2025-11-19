@@ -7,6 +7,13 @@ import { compare } from "bcryptjs";
 import type { NextAuthConfig, Session, User } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import { isLockedOut, recordFailedAttempt, clearFailedAttempts } from "@/lib/security/brute-force";
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { AuthService } from '@/lib/services/auth/nextauth.service';
+
+
+
 
 export const authConfig: NextAuthConfig = {
   adapter: PrismaAdapter(prisma) as NextAuthConfig['adapter'],
@@ -42,7 +49,7 @@ export const authConfig: NextAuthConfig = {
           throw new Error(`Account locked due to too many failed attempts. Try again in ${remainingMinutes} minutes.`);
         }
 
-        const user = await prisma.user.findUnique({
+        const user = await new AuthService().findById({
           where: { email },
           include: {
             compvssProfile: true,
@@ -136,7 +143,7 @@ export const authConfig: NextAuthConfig = {
       // For OAuth providers, ensure email is verified
       if (account?.provider !== "credentials") {
         if (user.email) {
-          await prisma.user.update({
+          await new AuthService().update({
             where: { email: user.email },
             data: { emailVerified: new Date() }
           });
@@ -175,7 +182,7 @@ export const authConfig: NextAuthConfig = {
   events: {
     async signIn({ user, account, isNewUser }) {
       // Log sign in event
-      await prisma.auditLog.create({
+      await new AuthService().create({
         data: {
           userId: user.id,
           action: "SIGN_IN",

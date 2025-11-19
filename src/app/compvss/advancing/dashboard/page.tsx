@@ -15,6 +15,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
 import { useAdvancingRequests } from '@/lib/hooks/compvss';
 import { useMemo, useState } from 'react';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/advancing/dashboard
 
 export default function AdvancingDashboardPage() {
   const router = useRouter();
@@ -69,7 +72,7 @@ export default function AdvancingDashboardPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading advancing requests...</p>
+              <BodyText className="text-grey-400">Loading advancing requests...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -95,8 +98,8 @@ export default function AdvancingDashboardPage() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Requests</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Requests</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -146,7 +149,7 @@ export default function AdvancingDashboardPage() {
       case 'rejected':
         return <XCircle className="w-4 h-4 text-error" />;
       default:
-        return <Clock className="w-4 h-4 text-gray-500" />;
+        return <Clock className="w-4 h-4 text-grey-500" />;
     }
   };
 
@@ -168,28 +171,28 @@ export default function AdvancingDashboardPage() {
       >
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card variant="compvss" className="bg-gray-900/50">
+          <Card variant="compvss" className="bg-grey-900/50">
             <CardContent className="pt-6">
-              <div className="text-h3 font-bebas text-white mb-1">{stats.total}</div>
-              <div className="text-body-sm text-gray-400 font-oswald">Total Requests</div>
+              <div className="text-white mb-1">{stats.total}</div>
+              <div className="text-body-sm text-grey-400">Total Requests</div>
             </CardContent>
           </Card>
-          <Card variant="compvss" className="bg-gray-900/50">
+          <Card variant="compvss" className="bg-grey-900/50">
             <CardContent className="pt-6">
-              <div className="text-h3 font-bebas text-success mb-1">{stats.approved}</div>
-              <div className="text-body-sm text-gray-400 font-oswald">Approved</div>
+              <div className="text-success mb-1">{stats.approved}</div>
+              <div className="text-body-sm text-grey-400">Approved</div>
             </CardContent>
           </Card>
-          <Card variant="compvss" className="bg-gray-900/50">
+          <Card variant="compvss" className="bg-grey-900/50">
             <CardContent className="pt-6">
-              <div className="text-h3 font-bebas text-warning mb-1">{stats.pending}</div>
-              <div className="text-body-sm text-gray-400 font-oswald">Pending</div>
+              <div className="text-warning mb-1">{stats.pending}</div>
+              <div className="text-body-sm text-grey-400">Pending</div>
             </CardContent>
           </Card>
-          <Card variant="compvss" className="bg-gray-900/50">
+          <Card variant="compvss" className="bg-grey-900/50">
             <CardContent className="pt-6">
-              <div className="text-h3 font-bebas text-info mb-1">{stats.inReview}</div>
-              <div className="text-body-sm text-gray-400 font-oswald">In Review</div>
+              <div className="text-info mb-1">{stats.inReview}</div>
+              <div className="text-body-sm text-grey-400">In Review</div>
             </CardContent>
           </Card>
         </div>
@@ -200,7 +203,7 @@ export default function AdvancingDashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h2 className="text-h4 font-bebas text-white mb-4">Request Categories</h2>
+          <SectionHeader className="text-white mb-4">Request Categories</SectionHeader>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {categories.map((category, index) => (
               <motion.div
@@ -210,12 +213,12 @@ export default function AdvancingDashboardPage() {
                 transition={{ delay: index * 0.05 }}
               >
                 <Link href={`/compvss/advancing/category/${category.name.toLowerCase().replace(/ /g, '-')}`}>
-                  <Card variant="compvss" className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer h-full">
+                  <Card variant="compvss" className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer h-full">
                     <CardContent className="pt-6 text-center">
                       <div className="p-3 bg-compvss-cyan-500/10 rounded-xl text-compvss-cyan-500 inline-flex mb-3">
                         {category.icon}
                       </div>
-                      <p className="font-oswald text-white text-body-sm mb-2">{category.name}</p>
+                      <p className="text-white text-body-sm mb-2">{category.name}</p>
                       <Badge variant="compvss-outline" className="text-caption">
                         {category.count} requests
                       </Badge>
@@ -233,7 +236,7 @@ export default function AdvancingDashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-white flex items-center gap-2">
@@ -246,7 +249,7 @@ export default function AdvancingDashboardPage() {
                     Filter
                   </Button>
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400" />
                     <Input
                       placeholder="Search..."
                       value={searchQuery}
@@ -266,15 +269,15 @@ export default function AdvancingDashboardPage() {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             {getStatusIcon(request.status)}
-                            <span className="font-oswald text-white">{request.title}</span>
+                            <span className="text-white">{request.title}</span>
                           </div>
-                          <p className="text-body-sm text-gray-400 font-share-tech">
+                          <p className="text-body-sm text-grey-400 -tech">
                             {request.category} • {request.eventId || 'No event'}
                           </p>
                         </div>
                         {getStatusBadge(request.status)}
                       </div>
-                      <div className="flex items-center justify-between text-caption text-gray-500 font-share-tech">
+                      <div className="flex items-center justify-between text-caption text-grey-500 -tech">
                         <span>ID: {request.id}</span>
                         <span>Submitted: {new Date(request.createdAt).toLocaleDateString()}</span>
                       </div>

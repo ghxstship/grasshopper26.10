@@ -70,7 +70,7 @@ export default function CreateTeamPage() {
           { label: 'Create' }
         ]}
       >
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-grey-200 p-6 space-y-6">
         {/* Team Name */}
         <FormField label="Team Name" required>
           <Input
@@ -134,8 +134,8 @@ export default function CreateTeamPage() {
           {members.length > 0 && (
             <div className="space-y-2">
               {members.map(member => (
-                <div key={member} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span className="text-gray-900">{member}</span>
+                <div key={member} className="flex items-center justify-between p-3 bg-grey-50 rounded-lg">
+                  <span className="text-grey-900">{member}</span>
                   <Button
                     type="button"
                     onClick={() => removeMember(member)}
@@ -152,7 +152,7 @@ export default function CreateTeamPage() {
         </FormField>
 
         {/* Actions */}
-        <div className="flex gap-3 pt-4 border-t border-gray-200">
+        <div className="flex gap-3 pt-4 border-t border-grey-200">
           <Button
             type="button"
             variant="ghost"

@@ -12,6 +12,9 @@ import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
 import { ADVANCING_CATEGORIES } from '@/lib/constants/categories';
 import { ADVANCING_CATEGORY_ICONS } from '@/lib/constants/advancing-icons';
+import { BodyText, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/advancing/new
 
 export default function NewAdvancingRequestPage() {
   const {  } = useAdvancing();
@@ -40,19 +43,19 @@ export default function NewAdvancingRequestPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <Card variant="compvss" className="bg-gray-900/50 border-compvss-cyan-500/30">
+          <Card variant="compvss" className="bg-grey-900/50 border-compvss-cyan-500/30">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-compvss-cyan-500/10 rounded-xl">
                   <ClipboardCheck className="w-6 h-6 text-compvss-cyan-500" />
                 </div>
                 <div>
-                  <h3 className="text-h6 font-bebas text-white mb-2">About Production Advancing</h3>
-                  <p className="text-gray-400 font-share-tech text-body-sm mb-3">
+                  <SubsectionHeader className="text-white mb-2">About Production Advancing</SubsectionHeader>
+                  <BodyText className="text-grey-400 -tech text-body-sm mb-3">
                     Production advancing allows external teams to submit requests for resources, equipment, and services needed for events. 
                     Your requests will be reviewed and approved by the internal ATLVS team.
-                  </p>
-                  <ul className="space-y-1 text-body-sm text-gray-400 font-share-tech">
+                  </BodyText>
+                  <ul className="space-y-1 text-body-sm text-grey-400 -tech">
                     <li className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 bg-compvss-cyan-500 rounded-full" />
                       Select the appropriate category for your request
@@ -82,7 +85,7 @@ export default function NewAdvancingRequestPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <h2 className="text-h4 font-bebas text-white mb-6">Select Request Category</h2>
+          <SectionHeader className="text-white mb-6">Select Request Category</SectionHeader>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category, index) => (
               <motion.div
@@ -94,21 +97,21 @@ export default function NewAdvancingRequestPage() {
                 <Link href={`/compvss/advancing/category/${category.id}`}>
                   <Card 
                     variant="compvss" 
-                    className="bg-gray-900/50 hover:bg-gray-900/70 transition-all cursor-pointer h-full"
+                    className="bg-grey-900/50 hover:bg-grey-900/70 transition-all cursor-pointer h-full"
                   >
                     <CardHeader>
                       <div className="flex items-start justify-between mb-4">
                         <div className="p-3 bg-compvss-cyan-500/10 rounded-xl text-compvss-cyan-500">
                           {category.icon}
                         </div>
-                        <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-compvss-cyan-500 transition-colors" />
+                        <ArrowRight className="w-5 h-5 text-grey-500 group-hover:text-compvss-cyan-500 transition-colors" />
                       </div>
                       <CardTitle className="text-white mb-2">{category.name}</CardTitle>
-                      <CardDescription className="text-gray-400 mb-3">
+                      <CardDescription className="text-grey-400 mb-3">
                         {category.description}
                       </CardDescription>
-                      <div className="pt-3 border-t border-gray-800">
-                        <p className="text-caption text-gray-500 font-share-tech">
+                      <div className="pt-3 border-t border-grey-800">
+                        <p className="text-caption text-grey-500 -tech">
                           Examples: {category.examples}
                         </p>
                       </div>

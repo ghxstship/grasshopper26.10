@@ -218,14 +218,7 @@ export function FileUpload({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
-        className={`
-          relative border-2 border-dashed rounded-xl p-8 text-center cursor-pointer
-          transition-all duration-200
-          ${isDragging
-            ? 'border-info bg-info-light0/10'
-            : 'border-gray-700 hover:border-gray-600 bg-gray-900/50'
-          }
-        `}
+        className={`relative border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 ${isDragging ? 'border-info bg-info-light0/10' : 'border-grey-700 hover:border-grey-600 bg-grey-900/50' }`}
       >
         <input
           ref={fileInputRef}
@@ -237,23 +230,15 @@ export function FileUpload({
         />
 
         <div className="flex flex-col items-center gap-3">
-          <div className={`p-4 rounded-full ${
-            variant === 'gvteway' ? 'bg-gvteway-red-500/10' :
-            variant === 'compvss' ? 'bg-compvss-cyan-500/10' :
-            'bg-atlvs-purple-500/10'
-          }`}>
-            <Upload className={`w-8 h-8 ${
-              variant === 'gvteway' ? 'text-gvteway-red-500' :
-              variant === 'compvss' ? 'text-compvss-cyan-500' :
-              'text-atlvs-purple-500'
-            }`} />
+          <div className={`p-4 rounded-full ${ variant === 'gvteway' ? 'bg-gvteway-red-500/10' : variant === 'compvss' ? 'bg-compvss-cyan-500/10' : 'bg-atlvs-purple-500/10' }`}>
+            <Upload className={`w-8 h-8 ${ variant === 'gvteway' ? 'text-gvteway-red-500' : variant === 'compvss' ? 'text-compvss-cyan-500' : 'text-atlvs-purple-500' }`} />
           </div>
 
           <div>
             <p className="text-white mb-1">
               {isDragging ? 'Drop files here' : 'Click to upload or drag and drop'}
             </p>
-            <p className="text-body-sm text-gray-400">
+            <p className="text-body-sm text-grey-400">
               {accept || 'Any file type'} • Max {formatFileSize(maxSize)} • Up to {maxFiles} files
             </p>
           </div>
@@ -264,7 +249,7 @@ export function FileUpload({
       {files.length > 0 && (
         <div className="space-y-2">
           {files.map((uploadedFile, index) => (
-            <Card key={index} className="p-4 bg-gray-900/50 border-gray-700">
+            <Card key={index} className="p-4 bg-grey-900/50 border-grey-700">
               <div className="flex items-center gap-4">
                 {/* Preview or Icon */}
                 <div className="flex-shrink-0">
@@ -273,7 +258,7 @@ export function FileUpload({
                       alt={uploadedFile.file.name}
                       className="w-12 h-12 object-cover rounded" width={500} height={500} />
                   ) : (
-                    <div className="w-12 h-12 flex items-center justify-center bg-gray-800 rounded">
+                    <div className="w-12 h-12 flex items-center justify-center bg-grey-800 rounded">
                       {getFileIcon(uploadedFile.file)}
                     </div>
                   )}
@@ -284,19 +269,15 @@ export function FileUpload({
                   <p className="text-body-sm text-white truncate">
                     {uploadedFile.file.name}
                   </p>
-                  <p className="text-caption text-gray-400">
+                  <p className="text-caption text-grey-400">
                     {formatFileSize(uploadedFile.file.size)}
                   </p>
 
                   {/* Progress Bar */}
                   {uploadedFile.status === 'uploading' && (
-                    <div className="mt-2 w-full bg-gray-800 rounded-full h-1.5">
+                    <div className="mt-2 w-full bg-grey-800 rounded-full h-1.5">
                       <div
-                        className={`h-1.5 rounded-full transition-all ${
-                          variant === 'gvteway' ? 'bg-gvteway-red-500' :
-                          variant === 'compvss' ? 'bg-compvss-cyan-500' :
-                          'bg-atlvs-purple-500'
-                        }`}
+                        className={`h-1.5 rounded-full transition-all ${ variant === 'gvteway' ? 'bg-gvteway-red-500' : variant === 'compvss' ? 'bg-compvss-cyan-500' : 'bg-atlvs-purple-500' }`}
                         style={{ width: `${uploadedFile.progress}%` }}
                       />
                     </div>

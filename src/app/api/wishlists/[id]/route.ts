@@ -2,6 +2,11 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { WishlistsService } from '@/lib/services/wishlists/id.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -20,7 +25,7 @@ export async function DELETE(
     requireAuth(context);
 
     // Find wishlist item
-    const wishlist = await prisma.wishlist.findUnique({
+    const wishlist = await new WishlistsService().findById({
       where: { id: id },
     });
 
@@ -34,7 +39,7 @@ export async function DELETE(
     }
 
     // Delete wishlist item
-    await prisma.wishlist.delete({
+    await new WishlistsService().delete({
       where: { id: id },
     });
 

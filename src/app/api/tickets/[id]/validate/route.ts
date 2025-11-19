@@ -2,6 +2,11 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { TicketsService } from '@/lib/services/tickets/id/validate.service';
+
+
 
 export async function POST(
   request: NextRequest,
@@ -12,7 +17,7 @@ export async function POST(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    const ticket = await prisma.ticket.findUnique({
+    const ticket = await new TicketsService().findById({
       where: { id },
       include: {
         event: true,
@@ -60,7 +65,7 @@ export async function POST(
     }
 
     // Mark ticket as used
-    const updatedTicket = await prisma.ticket.update({
+    const updatedTicket = await new TicketsService().update({
       where: { id },
       data: {
         status: 'USED',

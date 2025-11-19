@@ -21,7 +21,17 @@
     "db:seed:org": "tsx prisma/seeds/seed-organizational-catalog.ts",
     "db:seed:org:expanded": "tsx prisma/seeds/seed-organizational-catalog-expanded.ts",
     "db:studio": "prisma studio",
-    "db:reset": "prisma migrate reset"
+    "db:reset": "prisma migrate reset",
+    "atomic:validate": "node scripts/validate-atomic-design.mjs",
+    "atomic:fix": "node scripts/batch-fix-atomic-violations.mjs",
+    "atomic:fix:typography": "node scripts/advanced-typography-fixer.mjs",
+    "atomic:fix:all": "node scripts/fix-all-remaining-violations.mjs",
+    "atomic:fix:multiline": "node scripts/fix-multiline-components.mjs",
+    "atomic:cleanup": "node scripts/final-typography-cleanup.mjs",
+    "ghxstship:enforce": "node scripts/enforce-ghxstship-monochrome.mjs",
+    "design:enforce": "tsx scripts/enforce-ghxstship-design-system.ts",
+    "design:check": "tsx scripts/enforce-ghxstship-design-system.ts",
+    "design:validate": "tsx scripts/enforce-ghxstship-design-system.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -96,6 +106,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "glob": "^12.0.0",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
     "msw": "^2.12.1",

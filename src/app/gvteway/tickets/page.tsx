@@ -10,6 +10,8 @@ import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
 import { CategoryTab } from '@/components/atoms/CategoryTab';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/tickets
+
 export default function TicketsPage() {
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'past'>('all');
   

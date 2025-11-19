@@ -100,7 +100,7 @@ export default function FeedPage() {
                       />
                     </div>
                     <div className="p-4 space-y-2">
-                      <h5 className="font-bebas text-h5 text-ghxst-primary">{item.eventCard.title}</h5>
+                      <h5 className="text-ghxst-primary">{item.eventCard.title}</h5>
                       <Metadata className="text-ghxst-text-secondary">
                         {item.eventCard.venue} • {item.eventCard.date}
                       </Metadata>

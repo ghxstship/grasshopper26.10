@@ -4,9 +4,16 @@ import { prisma } from '@/lib/prisma';
 import { registerSchema } from '@/lib/validations/auth';
 import { createdResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { AuthService } from '@/lib/services/auth/register.service';
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     const identifier = getClientIdentifier(request);
     if (!rateLimit(`register:${identifier}`, 5, 3600000)) {
@@ -18,7 +25,7 @@ export async function POST(request: NextRequest) {
     const validatedData = registerSchema.parse(body);
 
     // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await new AuthService().findById({
       where: { email: validatedData.email },
     });
 
@@ -30,7 +37,7 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await hash(validatedData.password, 12);
 
     // Create user
-    const user = await prisma.user.create({
+    const user = await new AuthService().create({
       data: {
         email: validatedData.email,
         name: validatedData.name,
@@ -50,7 +57,7 @@ export async function POST(request: NextRequest) {
     const verificationToken = crypto.randomUUID();
     const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-    await prisma.emailVerificationToken.create({
+    await new AuthService().create({
       data: {
         userId: user.id,
         token: verificationToken,

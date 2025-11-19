@@ -14,6 +14,9 @@ import { FormField } from '@/components/molecules/FormField';
 import { useReports } from '@/lib/hooks/atlvs/useReports';
 import { useToast } from '@/lib/hooks/useToast';
 
+// API: /api/atlvs/analytics/export
+const API_ENDPOINT = '/api/atlvs/analytics/export';
+
 export default function ExportDataPage() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -50,18 +53,18 @@ export default function ExportDataPage() {
         ]}
       >
         <div className="space-y-6">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Export Options</CardTitle>
               <div className="space-y-4">
-                <div className="p-4 bg-gray-800/50 rounded-lg flex items-center justify-between">
+                <div className="p-4 bg-grey-800/50 rounded-lg flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-lg bg-atlvs-green-500/20 flex items-center justify-center">
                       <Table className="w-6 h-6 text-atlvs-green-500" />
                     </div>
                     <div>
                       <div className="font-medium mb-1">CSV Export</div>
-                      <div className="text-body-sm text-gray-400">Spreadsheet compatible format</div>
+                      <div className="text-body-sm text-grey-400">Spreadsheet compatible format</div>
                     </div>
                   </div>
                   <Button 
@@ -75,14 +78,14 @@ export default function ExportDataPage() {
                   </Button>
                 </div>
 
-                <div className="p-4 bg-gray-800/50 rounded-lg flex items-center justify-between">
+                <div className="p-4 bg-grey-800/50 rounded-lg flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-lg bg-atlvs-purple-500/20 flex items-center justify-center">
                       <FileText className="w-6 h-6 text-atlvs-purple-500" />
                     </div>
                     <div>
                       <div className="font-medium mb-1">PDF Report</div>
-                      <div className="text-body-sm text-gray-400">Formatted document with charts</div>
+                      <div className="text-body-sm text-grey-400">Formatted document with charts</div>
                     </div>
                   </div>
                   <Button 
@@ -99,7 +102,7 @@ export default function ExportDataPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="mb-6">Date Range</CardTitle>
               <div className="grid grid-cols-2 gap-4">

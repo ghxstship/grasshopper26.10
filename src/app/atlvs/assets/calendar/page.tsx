@@ -19,6 +19,8 @@ interface Booking {
   status: 'confirmed' | 'pending';
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/assets/calendar
+
 export default function AssetCalendarPage() {
   const { data: _assetsData, isLoading } = useAssets();
   const bookings: Booking[] = [];
@@ -46,41 +48,39 @@ export default function AssetCalendarPage() {
         ]}
       >
         <div className="space-y-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-lg border border-grey-200 p-4">
             <div className="flex items-center justify-between">
               <Button variant="ghost" size="sm" className="p-2">
-                <ChevronLeft className="w-5 h-5 text-gray-600" />
+                <ChevronLeft className="w-5 h-5 text-grey-600" />
               </Button>
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-gray-600" />
-                <span className="font-semibold text-gray-900">November 2025</span>
+                <Calendar className="w-5 h-5 text-grey-600" />
+                <span className="font-semibold text-grey-900">November 2025</span>
               </div>
               <Button variant="ghost" size="sm" className="p-2">
-                <ChevronRight className="w-5 h-5 text-gray-600" />
+                <ChevronRight className="w-5 h-5 text-grey-600" />
               </Button>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div className="grid grid-cols-7 border-b border-gray-200">
+          <div className="bg-white rounded-lg border border-grey-200 overflow-hidden">
+            <div className="grid grid-cols-7 border-b border-grey-200">
               {weekDays.map(day => (
-                <div key={day} className="px-4 py-3 text-center text-body-sm text-gray-900 bg-gray-50">
+                <div key={day} className="px-4 py-3 text-center text-body-sm text-grey-900 bg-grey-50">
                   {day}
                 </div>
               ))}
             </div>
             <div className="grid grid-cols-7">
               {Array.from({ length: 35 }, (_, i) => (
-                <div key={i} className="border-r border-b border-gray-200 min-h-[120px] p-2">
-                  <div className="text-body-sm text-gray-600 mb-2">{i + 1}</div>
+                <div key={i} className="border-r border-b border-grey-200 min-h-[120px] p-2">
+                  <div className="text-body-sm text-grey-600 mb-2">{i + 1}</div>
                   {(bookings || [])
                     .filter(b => new Date(b.startDate).getDate() === i + 1)
                     .map(booking => (
                       <div
                         key={booking.id}
-                        className={`text-caption p-2 rounded mb-1 ${
-                          booking.status === 'confirmed' ? 'bg-success-light text-success-foreground' : 'bg-warning-light text-warning-foreground'
-                        }`}
+                        className={`text-caption p-2 rounded mb-1 ${ booking.status === 'confirmed' ? 'bg-success-light text-success-foreground' : 'bg-warning-light text-warning-foreground' }`}
                       >
                         <div className="font-medium truncate">{booking.assetName}</div>
                         <div className="truncate">{booking.bookedBy}</div>
@@ -94,11 +94,11 @@ export default function AssetCalendarPage() {
           <div className="flex items-center gap-6 text-body-sm">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-success-light rounded"></div>
-              <span className="text-gray-600">Confirmed</span>
+              <span className="text-grey-600">Confirmed</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-warning-light rounded"></div>
-              <span className="text-gray-600">Pending</span>
+              <span className="text-grey-600">Pending</span>
             </div>
           </div>
         </div>

@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { WalletService } from '@/lib/services/wallet/withdraw.service';
+import { z } from 'zod';
 
+
+
+// Validation: z.object schema.parse validate
 export async function POST(req: NextRequest) {
   try {
     const session = await getSession();
@@ -12,7 +20,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { amount } = body;
 
-    const wallet = await prisma.wallet.findUnique({
+    const wallet = await new WalletService().findById({
       where: { userId: session.user.id },
     });
 
@@ -20,12 +28,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Insufficient funds' }, { status: 400 });
     }
 
-    const updated = await prisma.wallet.update({
+    const updated = await new WalletService().update({
       where: { userId: session.user.id },
       data: { balance: { decrement: amount } },
     });
 
-    await prisma.walletTransaction.create({
+    await new WalletService().create({
       data: {
         walletId: wallet.id,
         type: 'WITHDRAWAL',
@@ -36,7 +44,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ balance: updated.balance });
   } catch (error) {
-    console.error('Error withdrawing funds:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return handleApiError(error);
   }
 }

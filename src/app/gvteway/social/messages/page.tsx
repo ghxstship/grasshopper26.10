@@ -4,6 +4,8 @@ import { MessageCircle } from 'lucide-react';
 import { CardTitle, Metadata } from '@/components/atoms/Typography';
 import { Avatar } from '@/components/atoms/Avatar';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/social/messages
+
 export default function MessagesPage() {
   const messages = [{ id: '1', name: 'User 1', lastMessage: 'Hey!', time: '2h ago' }];
   return (

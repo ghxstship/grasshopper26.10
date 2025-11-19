@@ -2,6 +2,12 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, noContentResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { z } from 'zod';
+import { CompvssService } from '@/lib/services/compvss/tasks/id.service';
+
+
 
 export async function GET(
   request: NextRequest,
@@ -12,7 +18,7 @@ export async function GET(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    const task = await prisma.dayOfShowTask.findUnique({
+    const task = await new CompvssService().findById({
       where: { id },
     });
 
@@ -36,7 +42,7 @@ export async function PATCH(
     requireAuth(context);
 
     const body = await request.json();
-    const task = await prisma.dayOfShowTask.update({
+    const task = await new CompvssService().update({
       where: { id },
       data: body,
     });
@@ -56,7 +62,7 @@ export async function DELETE(
     const context = await validateRequest(request);
     requireAuth(context);
 
-    await prisma.dayOfShowTask.delete({
+    await new CompvssService().delete({
       where: { id },
     });
 

@@ -2,9 +2,32 @@ import { NextRequest, NextResponse } from 'next/server';
 import { mintNFT } from '@/lib/integrations/web3/nft';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { z } from 'zod';
+import { handleApiError } from '@/lib/api/response';
+import { NftService } from '@/lib/services/nft/mint.service';
+
+
+
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json(
@@ -24,7 +47,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch ticket details
-    const ticket = await prisma.ticket.findUnique({
+    const ticket = await new NftService().findById({
       where: { id: ticketId },
       include: {
         event: {
@@ -108,7 +131,7 @@ export async function POST(request: NextRequest) {
     const { tokenId, transactionHash } = mintResult.data;
 
     // Create NFT record
-    await prisma.nFTTicket.create({
+    await new NftService().create({
       data: {
         ticketId: ticket.id,
         tokenId: tokenId.toString(),
@@ -139,6 +162,20 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json(
@@ -194,10 +231,6 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('NFT fetch error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch NFT info' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

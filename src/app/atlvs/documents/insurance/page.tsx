@@ -24,6 +24,8 @@ interface InsurancePolicy {
   status: 'active' | 'expiring-soon' | 'expired';
 }
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/insurance
+
 export default function InsurancePage() {
   const { documents: policies, isLoading, error } = useDocuments('insurance');
 
@@ -76,7 +78,7 @@ export default function InsurancePage() {
       case 'expired':
         return 'bg-error-light text-error border-error-border';
       default:
-        return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+        return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -114,37 +116,37 @@ export default function InsurancePage() {
         <div className="space-y-6">
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Total Policies</div>
-                <div className="text-h3 font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-grey-400 mb-1">Total Policies</div>
+                <div className="atlvs-text-gradient">
                   {typedPolicies.length}
                 </div>
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Active</div>
-                <div className="text-h3 font-bebas text-atlvs-green-500">
+                <div className="text-body-sm text-grey-400 mb-1">Active</div>
+                <div className="text-atlvs-green-500">
                   {typedPolicies.filter((p: any) => p.status === 'active').length}
                 </div>
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Expiring Soon</div>
-                <div className="text-h3 font-bebas text-warning">
+                <div className="text-body-sm text-grey-400 mb-1">Expiring Soon</div>
+                <div className="text-warning">
                   {typedPolicies.filter((p: any) => p.status === 'expiring-soon').length}
                 </div>
               </CardHeader>
             </Card>
 
-            <Card variant="atlvs" className="bg-gray-900/50">
+            <Card variant="atlvs" className="bg-grey-900/50">
               <CardHeader>
-                <div className="text-body-sm text-gray-400 mb-1">Total Coverage</div>
-                <div className="text-h3 font-bebas atlvs-text-gradient">
+                <div className="text-body-sm text-grey-400 mb-1">Total Coverage</div>
+                <div className="atlvs-text-gradient">
                   ${(typedPolicies.reduce((sum: number, p: any) => sum + (p.coverage || 0), 0) / 1000000).toFixed(1)}M
                 </div>
               </CardHeader>
@@ -154,7 +156,7 @@ export default function InsurancePage() {
           {/* Policies List */}
           <div className="space-y-4">
             {typedPolicies.map((policy: any) => (
-              <Card key={policy.id} variant="atlvs" className="bg-gray-900/50">
+              <Card key={policy.id} variant="atlvs" className="bg-grey-900/50">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-4 flex-1">
@@ -163,7 +165,7 @@ export default function InsurancePage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <CardTitle className="text-h6">{policy.title}</CardTitle>
+                          <CardTitle >{policy.title}</CardTitle>
                           <Badge variant="atlvs-outline" className={getStatusColor(policy.status)}>
                             {getStatusIcon(policy.status)}
                             <span className="ml-1">{policy.status.replace('-', ' ').toUpperCase()}</span>
@@ -174,25 +176,25 @@ export default function InsurancePage() {
                         </CardDescription>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-body-sm">
                           <div>
-                            <div className="text-gray-400 mb-1">Policy Number</div>
+                            <div className="text-grey-400 mb-1">Policy Number</div>
                             <div className="font-mono text-caption">{policy.policyNumber}</div>
                           </div>
                           <div>
-                            <div className="text-gray-400 mb-1 flex items-center gap-1">
+                            <div className="text-grey-400 mb-1 flex items-center gap-1">
                               <Calendar className="w-3 h-3" />
                               Effective Date
                             </div>
                             <div>{new Date(policy.effectiveDate).toLocaleDateString()}</div>
                           </div>
                           <div>
-                            <div className="text-gray-400 mb-1 flex items-center gap-1">
+                            <div className="text-grey-400 mb-1 flex items-center gap-1">
                               <Calendar className="w-3 h-3" />
                               Expiry Date
                             </div>
                             <div>{new Date(policy.expiryDate).toLocaleDateString()}</div>
                           </div>
                           <div>
-                            <div className="text-gray-400 mb-1">Coverage</div>
+                            <div className="text-grey-400 mb-1">Coverage</div>
                             <div className="font-medium text-atlvs-green-500">
                               ${(policy.coverage / 1000000).toFixed(1)}M
                             </div>

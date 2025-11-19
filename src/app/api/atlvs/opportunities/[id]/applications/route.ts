@@ -2,11 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { ApplicationService } from '@/lib/services/shared/application.service';
 import { ApplicationStatus } from '@prisma/client';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { handleApiError } from '@/lib/api/response';
+import { z } from 'zod';
+
 
 /**
  * GET /api/atlvs/opportunities/[id]/applications
  * Get all applications for an opportunity
  */
+const querySchema = z.object({}).passthrough();
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -28,10 +35,6 @@ export async function GET(
     const applications = await ApplicationService.getByOpportunity(id, filters);
     return NextResponse.json(applications);
   } catch (error) {
-    console.error('Error fetching applications:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch applications' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

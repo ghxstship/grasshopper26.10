@@ -4,6 +4,13 @@ import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody,  } from '@/lib/api/middleware';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { AuthService } from '@/lib/services/auth/refresh.service';
+
+
+
 
 const refreshTokenSchema = z.object({
   refreshToken: z.string().min(1),
@@ -17,6 +24,20 @@ const REFRESH_TOKEN_EXPIRY = '7d'; // 7 days
 // POST /api/auth/refresh - Refresh access token
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
+    // Rate limiting
+    if (
+      !rateLimit(
+        RateLimitIdentifiers.byUserId(context.userId),
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+      )
+    ) {
+      throw errors.rateLimitExceeded();
+    }
+
     const body = await parseBody(request);
     const { refreshToken } = refreshTokenSchema.parse(body);
 
@@ -43,7 +64,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify user still exists and is active
-    const user = await prisma.user.findUnique({
+    const user = await new AuthService().findById({
       where: { id: decoded.userId },
     });
 
@@ -73,7 +94,7 @@ export async function POST(request: NextRequest) {
     );
 
     // Update session expiry
-    await prisma.session.update({
+    await new AuthService().update({
       where: { id: session.id },
       data: {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days

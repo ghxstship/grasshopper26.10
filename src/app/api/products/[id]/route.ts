@@ -3,6 +3,11 @@ import { prisma } from '@/lib/prisma';
 import { updateProductSchema } from '@/lib/validations/products';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { ProductsService } from '@/lib/services/products/id.service';
+
+
 
 type RouteContext = {
   params: Promise<{
@@ -17,7 +22,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const product = await prisma.product.findUnique({
+    const product = await new ProductsService().findById({
       where: { id },
     });
 
@@ -45,7 +50,7 @@ export async function PATCH(
     const validatedData = updateProductSchema.parse(body);
 
     // Check if product exists
-    const existingProduct = await prisma.product.findUnique({
+    const existingProduct = await new ProductsService().findById({
       where: { id },
     });
 
@@ -54,7 +59,7 @@ export async function PATCH(
     }
 
     // Update product
-    const product = await prisma.product.update({
+    const product = await new ProductsService().update({
       where: { id },
       data: validatedData as any,
     });
@@ -76,7 +81,7 @@ export async function DELETE(
     requireAuth(context);
 
     // Check if product exists
-    const existingProduct = await prisma.product.findUnique({
+    const existingProduct = await new ProductsService().findById({
       where: { id },
     });
 
@@ -85,7 +90,7 @@ export async function DELETE(
     }
 
     // Delete product
-    await prisma.product.delete({
+    await new ProductsService().delete({
       where: { id: id },
     });
 

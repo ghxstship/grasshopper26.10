@@ -13,6 +13,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { useExpenses } from '@/lib/hooks/compvss';
 import { useMemo } from 'react';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/expenses/dashboard
 
 export default function ExpensesDashboardPage() {
   const { data: expensesData, isLoading, error, refetch } = useExpenses();
@@ -57,7 +60,7 @@ export default function ExpensesDashboardPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-compvss-cyan-500" />
-              <p className="text-gray-400">Loading expenses...</p>
+              <BodyText className="text-grey-400">Loading expenses...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -78,8 +81,8 @@ export default function ExpensesDashboardPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Expenses</h2>
-              <p className="text-gray-400 mb-4">{error.message || 'An error occurred'}</p>
+              <SectionHeader className="mb-2">Failed to Load Expenses</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message || 'An error occurred'}</p>
               <Button variant="compvss" onClick={() => refetch()}>
                 Try Again
               </Button>
@@ -110,20 +113,20 @@ export default function ExpensesDashboardPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {stats.map((stat, index) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}>
-              <Card variant="compvss" className="bg-gray-900/50">
+              <Card variant="compvss" className="bg-grey-900/50">
                 <CardContent className="pt-6">
                   <div className="p-2 bg-compvss-cyan-500/10 rounded-lg text-compvss-cyan-500 w-fit mb-2">
                     {stat.icon}
                   </div>
-                  <div className="text-h3 font-bebas text-white mb-1">{stat.value}</div>
-                  <div className="text-body-sm text-gray-400 font-oswald">{stat.label}</div>
+                  <div className="text-white mb-1">{stat.value}</div>
+                  <div className="text-body-sm text-grey-400">{stat.label}</div>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </div>
 
-        <Card variant="compvss" className="bg-gray-900/50">
+        <Card variant="compvss" className="bg-grey-900/50">
           <CardHeader>
             <CardTitle className="text-white">Recent Expenses</CardTitle>
           </CardHeader>
@@ -133,11 +136,11 @@ export default function ExpensesDashboardPage() {
                 <div key={expense.id} className="p-4 rounded-lg bg-black/50 border border-compvss-cyan-500/20">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-oswald text-white mb-1">{expense.description}</h3>
-                      <p className="text-body-sm text-gray-400 font-share-tech">{expense.category} • {expense.date}</p>
+                      <h3 className="text-white mb-1">{expense.description}</h3>
+                      <p className="text-body-sm text-grey-400 -tech">{expense.category} • {expense.date}</p>
                     </div>
                     <div className="text-right">
-                      <div className="text-h5 font-bebas text-white mb-1">{expense.amount}</div>
+                      <div className="text-white mb-1">{expense.amount}</div>
                       <Badge variant="compvss" className={expense.status === 'approved' ? 'bg-success-light text-success' : 'bg-warning-light text-warning'}>
                         {expense.status}
                       </Badge>

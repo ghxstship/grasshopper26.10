@@ -15,6 +15,7 @@ import { Card, CardHeader } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { DataTable, DataTableColumn } from '@/components/atlvs/DataTable';
+import { BodyText } from "@/components/atoms/Typography";
 
 interface Task extends Record<string, unknown> {
   id: string;
@@ -77,6 +78,8 @@ const mockTasks: Task[] = [
 ];
 */
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/list
+
 export default function TasksListPage() {
   const { data: tasksData, isLoading, error, refetch } = useTasks() as any;
   const tasks = tasksData?.tasks || [];
@@ -99,7 +102,7 @@ export default function TasksListPage() {
       <AtlvsLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <p className="text-error mb-4">Failed to load tasks</p>
+            <BodyText className="text-error mb-4">Failed to load tasks</BodyText>
             <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
           </div>
         </div>
@@ -115,7 +118,7 @@ export default function TasksListPage() {
       case 'high': return 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50';
       case 'medium': return 'bg-warning-light text-warning border-warning-border';
       case 'low': return 'bg-info-light text-info border-info-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -125,8 +128,8 @@ export default function TasksListPage() {
       case 'in-progress': return 'bg-info-light text-info border-info-border';
       case 'review': return 'bg-atlvs-purple-500/20 text-atlvs-purple-500 border-atlvs-purple-500/50';
       case 'todo': return 'bg-warning-light text-warning border-warning-border';
-      case 'backlog': return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      case 'backlog': return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -157,7 +160,7 @@ export default function TasksListPage() {
       sortable: true,
       render: (value) => (
         <div className="flex items-center gap-2">
-          <User className="w-4 h-4 text-gray-400" />
+          <User className="w-4 h-4 text-grey-400" />
           <span>{value as string}</span>
         </div>
       )
@@ -190,7 +193,7 @@ export default function TasksListPage() {
       sortable: true,
       render: (value) => (
         <div className="flex items-center gap-2">
-          <Calendar className="w-4 h-4 text-gray-400" />
+          <Calendar className="w-4 h-4 text-grey-400" />
           <span>{new Date(value as string).toLocaleDateString()}</span>
         </div>
       )
@@ -212,7 +215,7 @@ export default function TasksListPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
               <Input
                 type="text"
                 placeholder="Search tasks..."
@@ -225,12 +228,12 @@ export default function TasksListPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="text-gray-400">
+            <Button variant="ghost" size="sm" className="text-grey-400">
               <Filter className="w-4 h-4 mr-2" />
               Filters
             </Button>
             <Link href="/atlvs/tasks">
-              <Button variant="ghost" size="sm" className="text-gray-400">
+              <Button variant="ghost" size="sm" className="text-grey-400">
                 <List className="w-4 h-4 mr-2" />
                 Kanban View
               </Button>
@@ -245,7 +248,7 @@ export default function TasksListPage() {
         </div>
 
         {/* Data Table */}
-        <Card variant="atlvs" className="bg-gray-900/50">
+        <Card variant="atlvs" className="bg-grey-900/50">
           <CardHeader>
             <DataTable
               data={displayTasks}

@@ -6,6 +6,8 @@ import { BodyText } from '@/components/atoms/Typography';
 
 const metadata = { title: 'Membership Dashboard | GVTEWAY' };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/memberships/dashboard
+
 export default function MembershipDashboardPage() {
   return (
     <DashboardPageTemplate

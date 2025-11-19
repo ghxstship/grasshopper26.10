@@ -105,13 +105,13 @@ export function DataTable<T extends Record<string, unknown>>({
   };
 
   return (
-    <div className="bg-black rounded-xl border border-gray-800 overflow-hidden">
+    <div className="bg-black rounded-xl border border-grey-800 overflow-hidden">
       {/* Toolbar */}
-      <div className="p-4 border-b border-gray-800 flex items-center justify-between gap-4">
+      <div className="p-4 border-b border-grey-800 flex items-center justify-between gap-4">
         <div className="flex items-center gap-4 flex-1">
           {searchable && (
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
               <Input
                 type="text"
                 placeholder="Search..."
@@ -122,7 +122,7 @@ export function DataTable<T extends Record<string, unknown>>({
               />
             </div>
           )}
-          <Button variant="ghost" size="sm" className="text-gray-400">
+          <Button variant="ghost" size="sm" className="text-grey-400">
             <Filter className="w-4 h-4 mr-2" />
             Filter
           </Button>
@@ -148,7 +148,7 @@ export function DataTable<T extends Record<string, unknown>>({
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-900/50">
+          <thead className="bg-grey-900/50">
             <tr>
               {columns.map((column) => (
                 <th
@@ -157,7 +157,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   style={{ width: column.width }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="font-bebas text-body-sm text-gray-400 uppercase">
+                    <span className="text-body-sm text-grey-400 uppercase">
                       {column.header}
                     </span>
                     {column.sortable && (
@@ -192,11 +192,11 @@ export function DataTable<T extends Record<string, unknown>>({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.02 }}
                 onClick={() => onRowClick?.(row)}
-                className="border-t border-gray-800 hover:bg-gray-900/50 transition-colors cursor-pointer"
+                className="border-t border-grey-800 hover:bg-grey-900/50 transition-colors cursor-pointer"
               >
                 {columns.map((column) => (
                   <td key={String(column.key)} className="px-6 py-4">
-                    <div className="text-body-sm text-white font-oswald">
+                    <div className="text-body-sm text-white">
                       {column.render 
                         ? column.render(row[column.key as keyof T], row)
                         : String(row[column.key as keyof T] || '-')
@@ -217,8 +217,8 @@ export function DataTable<T extends Record<string, unknown>>({
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="p-4 border-t border-gray-800 flex items-center justify-between">
-          <div className="text-body-sm text-gray-400 font-oswald">
+        <div className="p-4 border-t border-grey-800 flex items-center justify-between">
+          <div className="text-body-sm text-grey-400">
             Page {currentPage} of {totalPages}
           </div>
           <div className="flex items-center gap-2">
@@ -227,7 +227,7 @@ export function DataTable<T extends Record<string, unknown>>({
               size="sm"
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="text-gray-400 disabled:opacity-50"
+              className="text-grey-400 disabled:opacity-50"
             >
               Previous
             </Button>
@@ -239,7 +239,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   variant={currentPage === page ? 'atlvs' : 'ghost'}
                   size="sm"
                   onClick={() => setCurrentPage(page)}
-                  className={currentPage === page ? '' : 'text-gray-400'}
+                  className={currentPage === page ? '' : 'text-grey-400'}
                 >
                   {page}
                 </Button>
@@ -250,7 +250,7 @@ export function DataTable<T extends Record<string, unknown>>({
               size="sm"
               onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="text-gray-400 disabled:opacity-50"
+              className="text-grey-400 disabled:opacity-50"
             >
               Next
             </Button>

@@ -10,6 +10,8 @@ const metadata = {
   description: 'Manage your account settings and preferences',
 };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/settings
+
 export default function SettingsPage() {
   const settingsGroups = [
     {

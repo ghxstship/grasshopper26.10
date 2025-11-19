@@ -5,6 +5,8 @@ import { CardTitle, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/social/following
+
 export default function FollowingPage() {
   const following = [{ id: '1', name: 'User 1', username: '@user1' }];
   return (

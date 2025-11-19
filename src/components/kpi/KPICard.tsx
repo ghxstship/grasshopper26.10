@@ -68,9 +68,9 @@ export function KPICard({
   };
 
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow ${className}`}>
+    <div className={`bg-white rounded-lg border border-grey-200 p-6 hover:shadow-lg transition-shadow ${className}`}>
       <div className="flex items-start justify-between mb-2">
-        <h3 className="text-body-sm text-gray-600">{title}</h3>
+        <h3 className="text-body-sm text-grey-600">{title}</h3>
         {trend && (
           <div className={`flex items-center gap-1 ${getTrendColor()}`}>
             {getTrendIcon()}
@@ -84,16 +84,16 @@ export function KPICard({
       </div>
 
       <div className="flex items-baseline gap-2 mb-1">
-        <span className="text-h3 text-gray-900">
+        <span className="text-grey-900">
           {formatValue(value)}
         </span>
         {unit && !format && (
-          <span className="text-body-sm text-gray-500">{unit}</span>
+          <span className="text-body-sm text-grey-500">{unit}</span>
         )}
       </div>
 
       {description && (
-        <p className="text-caption text-gray-500 mt-2">{description}</p>
+        <p className="text-caption text-grey-500 mt-2">{description}</p>
       )}
     </div>
   );

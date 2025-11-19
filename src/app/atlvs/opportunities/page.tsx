@@ -14,6 +14,9 @@ import { Badge } from '@/components/atoms/Badge';
 import { useOpportunities } from '@/lib/hooks/atlvs/useOpportunities';
 import { Loader2, Search, Plus, Eye, Users } from 'lucide-react';
 import Link from 'next/link';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/opportunities
 
 export default function OpportunitiesManagementPage() {
   const [search, setSearch] = useState('');
@@ -53,7 +56,7 @@ export default function OpportunitiesManagementPage() {
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-grey-400" />
                 <Input
                   placeholder="Search opportunities..."
                   value={search}
@@ -100,7 +103,7 @@ export default function OpportunitiesManagementPage() {
         {error && (
           <Card className="border-error">
             <div className="p-6 text-center">
-              <p className="text-error mb-4">Failed to load opportunities</p>
+              <BodyText className="text-error mb-4">Failed to load opportunities</BodyText>
               <Button onClick={() => window.location.reload()} variant="atlvs">
                 Retry
               </Button>
@@ -111,49 +114,49 @@ export default function OpportunitiesManagementPage() {
         {/* Opportunities Table */}
         {data && (
           <>
-            <div className="mb-4 text-body-sm text-gray-600">
+            <div className="mb-4 text-body-sm text-grey-600">
               {data.pagination?.total || 0} opportunities found
             </div>
 
             <Card>
               <div className="overflow-x-auto">
                 <table className="w-full" role="table" aria-label="Opportunities list">
-                  <thead className="bg-gray-50 border-b border-gray-200" role="rowgroup">
+                  <thead className="bg-grey-50 border-b border-grey-200" role="rowgroup">
                     <tr role="row">
-                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                      <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                         Title
                       </th>
-                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                      <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                         Category
                       </th>
-                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                      <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                      <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                         Applications
                       </th>
-                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                      <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                         Views
                       </th>
-                      <th className="px-6 py-3 text-left text-caption text-gray-500 uppercaser">
+                      <th className="px-6 py-3 text-left text-caption text-grey-500 uppercaser">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200" role="rowgroup">
+                  <tbody className="bg-white divide-y divide-grey-200" role="rowgroup">
                     {data.opportunities?.map((opportunity: any) => (
-                      <tr key={opportunity.id} className="hover:bg-gray-50" role="row">
+                      <tr key={opportunity.id} className="hover:bg-grey-50" role="row">
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-grey-900">
                             {opportunity.title}
                           </div>
                           {opportunity.location && (
-                            <div className="text-body-sm text-gray-500">
+                            <div className="text-body-sm text-grey-500">
                               {opportunity.location}
                             </div>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-body-sm text-gray-500 capitalize">
+                        <td className="px-6 py-4 text-body-sm text-grey-500 capitalize">
                           {opportunity.category?.replace(/_/g, ' ').toLowerCase()}
                         </td>
                         <td className="px-6 py-4">
@@ -163,16 +166,16 @@ export default function OpportunitiesManagementPage() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
-                            <Users className="h-4 w-4 text-gray-400" aria-hidden="true" />
-                            <span className="text-body-sm text-gray-900" aria-label={`${opportunity.applicationCount || 0} applications`}>
+                            <Users className="h-4 w-4 text-grey-400" aria-hidden="true" />
+                            <span className="text-body-sm text-grey-900" aria-label={`${opportunity.applicationCount || 0} applications`}>
                               {opportunity.applicationCount || 0}
                             </span>
                           </div>
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
-                            <Eye className="h-4 w-4 text-gray-400" />
-                            <span className="text-body-sm text-gray-900">
+                            <Eye className="h-4 w-4 text-grey-400" />
+                            <span className="text-body-sm text-grey-900">
                               {opportunity.viewCount || 0}
                             </span>
                           </div>
@@ -195,12 +198,12 @@ export default function OpportunitiesManagementPage() {
             {(!data.opportunities || data.opportunities.length === 0) && (
               <Card>
                 <div className="p-12 text-center">
-                  <h3 className="font-bebas text-h5 text-gray-900 mb-2">
+                  <SubsectionHeader className="text-grey-900 mb-2">
                     No Opportunities Found
-                  </h3>
-                  <p className="text-gray-600 mb-4">
+                  </SubsectionHeader>
+                  <BodyText className="text-grey-600 mb-4">
                     Create your first opportunity to get started
-                  </p>
+                  </BodyText>
                   <Link href="/atlvs/opportunities/new">
                     <Button variant="atlvs">
                       <Plus className="h-4 w-4 mr-2" />

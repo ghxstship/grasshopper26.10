@@ -10,6 +10,9 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { useCompvssSchedule } from '@/lib/hooks/compvss/useOperations';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/dashboard/schedule
 
 export default function SchedulePage() {
   const breadcrumbs = [
@@ -93,7 +96,7 @@ function ScheduleContent() {
       case 'in_progress':
         return <Badge variant="compvss" className="bg-info-light text-info border-info/30 animate-pulse">In Progress</Badge>;
       case 'upcoming':
-        return <Badge variant="compvss-outline" className="border-gray-500/30 text-gray-400">Upcoming</Badge>;
+        return <Badge variant="compvss-outline" className="border-grey-500/30 text-grey-400">Upcoming</Badge>;
       default:
         return null;
     }
@@ -102,12 +105,12 @@ function ScheduleContent() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-h3 font-bebas compvss-text-gradient">Event Schedule</h1>
-              <p className="text-gray-400 font-oswald mt-1">Summer Music Festival 2025</p>
+              <HeroTitle className="compvss-text-gradient">Event Schedule</HeroTitle>
+              <BodyText className="text-grey-400 mt-1">Summer Music Festival 2025</BodyText>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="compvss-ghost" size="sm">
@@ -115,8 +118,8 @@ function ScheduleContent() {
                 Filter
               </Button>
               <div className="text-right">
-                <div className="text-h4 font-bebas text-white">15:32</div>
-                <div className="text-caption text-gray-400 font-share-tech">Current Time</div>
+                <div className="text-white">15:32</div>
+                <div className="text-caption text-grey-400 -tech">Current Time</div>
               </div>
             </div>
           </div>
@@ -129,7 +132,7 @@ function ScheduleContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-compvss-cyan-500" />
@@ -152,13 +155,7 @@ function ScheduleContent() {
                     )}
                     
                     {/* Timeline Dot */}
-                    <div className={`absolute left-0 top-2 w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      item.status === 'completed' 
-                        ? 'bg-success-light0 border-success' 
-                        : item.status === 'in_progress'
-                        ? 'bg-info border-info animate-pulse'
-                        : 'bg-black border-compvss-cyan-500/30'
-                    }`}>
+                    <div className={`absolute left-0 top-2 w-6 h-6 rounded-full border-2 flex items-center justify-center ${ item.status === 'completed' ? 'bg-success-light0 border-success' : item.status === 'in_progress' ? 'bg-info border-info animate-pulse' : 'bg-black border-compvss-cyan-500/30' }`}>
                       {item.status === 'completed' && (
                         <div className="w-2 h-2 bg-white rounded-full" />
                       )}
@@ -169,13 +166,13 @@ function ScheduleContent() {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <div className="text-h4 font-bebas text-compvss-cyan-500">
+                            <div className="text-compvss-cyan-500">
                               {item.time}
                             </div>
                             {getStatusBadge(item.status)}
                           </div>
-                          <h3 className="text-h5 font-bebas text-white mb-2">{item.title}</h3>
-                          <div className="flex flex-wrap items-center gap-4 text-body-sm text-gray-400 font-share-tech">
+                          <h3 className="text-white mb-2">{item.title}</h3>
+                          <div className="flex flex-wrap items-center gap-4 text-body-sm text-grey-400 -tech">
                             <span className="flex items-center gap-1">
                               <MapPin className="w-4 h-4" />
                               {item.location}

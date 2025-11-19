@@ -7,6 +7,8 @@ import { Button } from '@/components/atoms/Button';
 
 
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/adventures/tours
+
 export default function ToursPage() {
   const tours = [{ id: '1', title: 'City Tour', description: 'Explore the city', price: 79 }];
   return (
@@ -18,7 +20,7 @@ export default function ToursPage() {
             <CardTitle className="mb-2 text-ghxst-primary">{tour.title}</CardTitle>
             <BodyText className="text-ghxst-text-secondary mb-4">{tour.description}</BodyText>
             <div className="flex items-center justify-between">
-              <span className="text-h4 font-anton text-ghxst-primary">${tour.price}</span>
+              <span className="text-ghxst-primary">${tour.price}</span>
               <Button variant="primary" size="sm">Book Now</Button>
             </div>
           </div>

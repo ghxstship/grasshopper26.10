@@ -4,6 +4,8 @@ import { updateCartItemSchema } from '@/lib/validations/products';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { CartService } from '@/lib/services/cart/items/id.service';
+
 
 type RouteContext = {
   params: Promise<{
@@ -33,7 +35,7 @@ export async function PATCH(
     const validatedData = updateCartItemSchema.parse(body);
 
     // Get cart item
-    const cartItem = await prisma.cartItem.findUnique({
+    const cartItem = await new CartService().findById({
       where: { id: id },
       include: {
         cart: true,
@@ -56,7 +58,7 @@ export async function PATCH(
     }
 
     // Update quantity
-    const updatedItem = await prisma.cartItem.update({
+    const updatedItem = await new CartService().update({
       where: { id: id },
       data: { quantity: validatedData.quantity },
       include: {
@@ -97,7 +99,7 @@ export async function DELETE(
     }
 
     // Get cart item
-    const cartItem = await prisma.cartItem.findUnique({
+    const cartItem = await new CartService().findById({
       where: { id: id },
       include: {
         cart: true,
@@ -114,7 +116,7 @@ export async function DELETE(
     }
 
     // Delete item
-    await prisma.cartItem.delete({
+    await new CartService().delete({
       where: { id: id },
     });
 

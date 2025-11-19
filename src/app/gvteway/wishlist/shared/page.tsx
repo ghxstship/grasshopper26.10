@@ -9,6 +9,9 @@ import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { useWishlists } from '@/lib/hooks/gvteway/useWishlist';
+import { BodyText, HeroTitle, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/wishlist/shared
 
 export default function SharedWishlistsPage() {
   const { data: wishlistsData, isLoading, error, refetch } = useWishlists();
@@ -19,7 +22,7 @@ export default function SharedWishlistsPage() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-gvteway-red-500" />
-            <p className="text-gray-400">Loading shared wishlists...</p>
+            <BodyText className="text-grey-400">Loading shared wishlists...</BodyText>
           </div>
         </div>
       </GvtewayLayout>
@@ -32,8 +35,8 @@ export default function SharedWishlistsPage() {
         <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-            <h2 className="text-h5 font-bebas mb-2">Failed to Load Wishlists</h2>
-            <p className="text-gray-400 mb-4">{error.message}</p>
+            <SectionHeader className="mb-2">Failed to Load Wishlists</SectionHeader>
+            <p className="text-grey-400 mb-4">{error.message}</p>
             <Button variant="gvteway" onClick={() => refetch()}>
               Try Again
             </Button>
@@ -51,25 +54,25 @@ export default function SharedWishlistsPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-h1 font-anton mb-8 gvteway-text-gradient">SHARED WISHLISTS</h1>
+              <HeroTitle className="mb-8 gvteway-text-gradient">SHARED WISHLISTS</HeroTitle>
 
               <div className="space-y-4">
                 {shared.length === 0 ? (
                   <div className="text-center py-12">
-                    <Users className="w-16 h-16 mx-auto mb-4 text-gray-600" />
-                    <h3 className="text-h5 font-bebas text-white mb-2">No Shared Wishlists</h3>
-                    <p className="text-gray-400">No one has shared their wishlist with you yet</p>
+                    <Users className="w-16 h-16 mx-auto mb-4 text-grey-600" />
+                    <SubsectionHeader className="text-white mb-2">No Shared Wishlists</SubsectionHeader>
+                    <BodyText className="text-grey-400">No one has shared their wishlist with you yet</BodyText>
                   </div>
                 ) : (
                   shared.map((list: any) => (
-                    <Card key={list.id} variant="gvteway" className="bg-gray-900/50">
+                    <Card key={list.id} variant="gvteway" className="bg-grey-900/50">
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
                             <Users className="w-8 h-8 text-gvteway-blue-500" />
                             <div>
-                              <h3 className="text-h5 font-bebas text-white">{list.name}</h3>
-                              <p className="text-gray-400 text-body-sm">
+                              <h3 className="text-white">{list.name}</h3>
+                              <p className="text-grey-400 text-body-sm">
                                 Shared by {list.user?.name || 'User'} • {list.items?.length || 0} items
                               </p>
                             </div>

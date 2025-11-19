@@ -15,6 +15,7 @@ import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Checkbox } from '@/components/atoms/Checkbox';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface _Task {
   id: string;
@@ -69,7 +70,7 @@ export default function BulkAssignPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading tasks and team members...</p>
+              <BodyText className="text-grey-400">Loading tasks and team members...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -89,8 +90,8 @@ export default function BulkAssignPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Data</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Data</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => { refetchTasks(); refetchMembers(); }}>
                 Try Again
               </Button>
@@ -121,7 +122,7 @@ export default function BulkAssignPage() {
       case 'high': return 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50';
       case 'medium': return 'bg-warning-light text-warning border-warning-border';
       case 'low': return 'bg-info-light text-info border-info-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -139,7 +140,7 @@ export default function BulkAssignPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* _Task Selection */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between mb-6">
                 <CardTitle className="flex items-center gap-2">
@@ -160,11 +161,7 @@ export default function BulkAssignPage() {
                 {tasks.map((task) => (
                   <div
                     key={task.id}
-                    className={`flex items-center gap-4 p-4 rounded-lg transition-colors ${
-                      selectedTasks.includes(task.id)
-                        ? 'bg-atlvs-green-500/10 border border-atlvs-green-500/50'
-                        : 'bg-gray-800/50 border border-transparent hover:bg-gray-800'
-                    }`}
+                    className={`flex items-center gap-4 p-4 rounded-lg transition-colors ${ selectedTasks.includes(task.id) ? 'bg-atlvs-green-500/10 border border-atlvs-green-500/50' : 'bg-grey-800/50 border border-transparent hover:bg-grey-800' }`}
                   >
                     <Checkbox
                       checked={selectedTasks.includes(task.id)}
@@ -173,7 +170,7 @@ export default function BulkAssignPage() {
                     />
                     <div className="flex-1">
                       <div className="font-medium mb-1">{task.title}</div>
-                      <div className="text-body-sm text-gray-400">{task.project}</div>
+                      <div className="text-body-sm text-grey-400">{task.project}</div>
                     </div>
                     <Badge variant="atlvs-outline" className={getPriorityColor(task.priority)}>
                       {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
@@ -185,7 +182,7 @@ export default function BulkAssignPage() {
           </Card>
 
           {/* Team Member Selection */}
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 mb-6">
                 <Users className="w-5 h-5" />
@@ -195,30 +192,22 @@ export default function BulkAssignPage() {
                 {teamMembers.map((member) => (
                   <div
                     key={member.id}
-                    className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-colors ${
-                      selectedMember === member.id
-                        ? 'bg-atlvs-purple-500/10 border border-atlvs-purple-500/50'
-                        : 'bg-gray-800/50 border border-transparent hover:bg-gray-800'
-                    }`}
+                    className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-colors ${ selectedMember === member.id ? 'bg-atlvs-purple-500/10 border border-atlvs-purple-500/50' : 'bg-grey-800/50 border border-transparent hover:bg-grey-800' }`}
                     onClick={() => setSelectedMember(member.id)}
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        selectedMember === member.id 
-                          ? 'border-atlvs-purple-500 bg-atlvs-purple-500' 
-                          : 'border-gray-600 bg-transparent'
-                      }`}>
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${ selectedMember === member.id ? 'border-atlvs-purple-500 bg-atlvs-purple-500' : 'border-grey-600 bg-transparent' }`}>
                         {selectedMember === member.id && <div className="w-2 h-2 rounded-full bg-white" />}
                       </div>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center font-bebas">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-atlvs-green-500 to-atlvs-purple-500 flex items-center justify-center">
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
                         <div className="font-medium">{member.name}</div>
-                        <div className="text-body-sm text-gray-400">{member.role}</div>
+                        <div className="text-body-sm text-grey-400">{member.role}</div>
                       </div>
                     </div>
-                    <Badge variant="atlvs-outline" className="bg-gray-700/50">
+                    <Badge variant="atlvs-outline" className="bg-grey-700/50">
                       {member.currentTasks} tasks
                     </Badge>
                   </div>
@@ -228,7 +217,7 @@ export default function BulkAssignPage() {
               {/* Assignment Summary */}
               {selectedTasks.length > 0 && selectedMember && (
                 <div className="p-4 bg-atlvs-green-500/10 border border-atlvs-green-500/50 rounded-lg mb-4">
-                  <div className="text-body-sm text-gray-400 mb-1">Assignment Summary</div>
+                  <div className="text-body-sm text-grey-400 mb-1">Assignment Summary</div>
                   <div className="font-medium">
                     Assigning {selectedTasks.length} task{selectedTasks.length !== 1 ? 's' : ''} to{' '}
                     {teamMembers.find(m => m.id === selectedMember)?.name}

@@ -98,7 +98,7 @@ export function CheckoutPageTemplate({
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-bebas text-h4">
+                  <CardTitle className="flex items-center gap-2">
                     <CreditCard className="w-6 h-6" />
                     Payment Information
                   </CardTitle>
@@ -129,7 +129,7 @@ export function CheckoutPageTemplate({
             <aside className="lg:sticky lg:top-24 h-fit">
               <Card>
                 <CardHeader>
-                  <CardTitle className="font-bebas text-h4">Order Summary</CardTitle>
+                  <CardTitle >Order Summary</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {/* Items */}
@@ -204,8 +204,8 @@ export function CheckoutPageTemplate({
 
                   {/* Total */}
                   <div className="flex items-center justify-between">
-                    <SectionHeader className="font-bebas">Total</SectionHeader>
-                    <SectionHeader className="font-bebas text-ghxst-primary">
+                    <SectionHeader >Total</SectionHeader>
+                    <SectionHeader className="text-ghxst-primary">
                       {formatPrice(total)}
                     </SectionHeader>
                   </div>

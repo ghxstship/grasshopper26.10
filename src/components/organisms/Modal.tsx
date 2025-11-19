@@ -29,10 +29,10 @@ const sizeClasses = {
 };
 
 const variantClasses = {
-  default: 'bg-gray-900 border-gray-800',
+  default: 'bg-grey-900 border-grey-800',
   gvteway: 'bg-gvteway-red/10 border-gvteway-red/30',
   compvss: 'bg-compvss-cyan/10 border-compvss-cyan/30',
-  atlvs: 'bg-black border-gray-800',
+  atlvs: 'bg-black border-grey-800',
 };
 
 export const Modal: React.FC<ModalProps> = ({
@@ -96,15 +96,15 @@ export const Modal: React.FC<ModalProps> = ({
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-start justify-between p-6 border-b border-gray-800">
+          <div className="flex items-start justify-between p-6 border-b border-grey-800">
             <div className="flex-1">
               {title && (
-                <h2 className="text-h4 font-bebas text-white uppercase">
+                <h2 className="text-white uppercase">
                   {title}
                 </h2>
               )}
               {description && (
-                <p className="mt-1 text-body-sm text-gray-400 font-oswald">
+                <p className="mt-1 text-body-sm text-grey-400">
                   {description}
                 </p>
               )}
@@ -115,7 +115,7 @@ export const Modal: React.FC<ModalProps> = ({
                 onClick={onClose}
                 variant="ghost"
                 size="sm"
-                className="text-gray-400 hover:text-white"
+                className="text-grey-400 hover:text-white"
                 aria-label="Close modal"
               />
             )}
@@ -129,7 +129,7 @@ export const Modal: React.FC<ModalProps> = ({
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-800">
+          <div className="flex items-center justify-end gap-3 p-6 border-t border-grey-800">
             {footer}
           </div>
         )}
@@ -205,7 +205,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
         </>
       }
     >
-      <p className="text-gray-300 font-oswald">{message}</p>
+      <p className="text-grey-300">{message}</p>
     </Modal>
   );
 };

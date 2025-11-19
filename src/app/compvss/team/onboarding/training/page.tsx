@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
 
 interface TrainingModule {
   id: string;
@@ -23,6 +24,8 @@ interface TrainingModule {
   progress?: number;
   required: boolean;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/team/onboarding/training
 
 export default function TrainingModulesPage() {
   const { data } = useTeam();
@@ -83,7 +86,7 @@ export default function TrainingModulesPage() {
       case 'available':
         return <Play className="w-5 h-5 text-compvss-cyan-500" />;
       default:
-        return <Lock className="w-5 h-5 text-gray-500" />;
+        return <Lock className="w-5 h-5 text-grey-500" />;
     }
   };
 
@@ -115,25 +118,25 @@ export default function TrainingModulesPage() {
         >
 
           {/* Progress Overview */}
-          <Card variant="compvss" className="mb-6 bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="mb-6 bg-grey-900/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <Award className="w-8 h-8 text-compvss-cyan-500" />
                   <div>
-                    <h3 className="font-oswald text-white text-h6">Training Progress</h3>
-                    <p className="text-body-sm text-gray-400 font-share-tech">
+                    <SubsectionHeader className="text-white">Training Progress</SubsectionHeader>
+                    <p className="text-body-sm text-grey-400 -tech">
                       {completedCount} of {totalRequired} required modules completed
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-h3 font-bebas text-compvss-cyan-500">
+                  <p className="text-compvss-cyan-500">
                     {Math.round((completedCount / totalRequired) * 100)}%
                   </p>
                 </div>
               </div>
-              <div className="w-full bg-gray-800 rounded-full h-3">
+              <div className="w-full bg-grey-800 rounded-full h-3">
                 <div 
                   className="bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 h-3 rounded-full transition-all duration-500"
                   style={{ width: `${(completedCount / totalRequired) * 100}%` }}
@@ -145,22 +148,22 @@ export default function TrainingModulesPage() {
           {/* Training Modules List */}
           <div className="space-y-4 mb-6">
             {modules.map((module) => (
-              <Card key={module.id} variant="compvss" className="bg-gray-900/50 backdrop-blur-sm hover:bg-gray-900/70 transition-all">
+              <Card key={module.id} variant="compvss" className="bg-grey-900/50 backdrop-blur-sm hover:bg-grey-900/70 transition-all">
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-3 flex-1">
                       {getStatusIcon(module.status)}
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-oswald text-white">{module.title}</h3>
+                          <h3 className="text-white">{module.title}</h3>
                           {module.required && (
                             <Badge variant="error" className="text-caption">Required</Badge>
                           )}
                         </div>
-                        <p className="text-body-sm text-gray-400 font-share-tech mb-2">
+                        <p className="text-body-sm text-grey-400 -tech mb-2">
                           {module.description}
                         </p>
-                        <p className="text-caption text-gray-500 font-share-tech">
+                        <p className="text-caption text-grey-500 -tech">
                           Duration: {module.duration}
                         </p>
                       </div>
@@ -172,10 +175,10 @@ export default function TrainingModulesPage() {
                   {module.status === 'in-progress' && module.progress !== undefined && (
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-1">
-                        <p className="text-caption text-gray-400 font-share-tech">Progress</p>
-                        <p className="text-caption text-compvss-cyan-500 font-bebas">{module.progress}%</p>
+                        <BodyText className="text-caption text-grey-400 -tech">Progress</BodyText>
+                        <p className="text-caption text-compvss-cyan-500">{module.progress}%</p>
                       </div>
-                      <div className="w-full bg-gray-800 rounded-full h-2">
+                      <div className="w-full bg-grey-800 rounded-full h-2">
                         <div 
                           className="bg-gradient-to-r from-compvss-cyan-500 to-compvss-teal-500 h-2 rounded-full"
                           style={{ width: `${module.progress}%` }}

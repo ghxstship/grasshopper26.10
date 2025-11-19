@@ -37,14 +37,14 @@ function GvtewayNav() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/gvteway" className="flex items-center space-x-2">
-            <span className="text-h4 font-anton gvteway-text-gradient">GVTEWAY</span>
+            <span className="gvteway-text-gradient">GVTEWAY</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+                <Button variant="ghost" size="sm" className="text-grey-300 hover:text-white">
                   <item.icon className="w-4 h-4 mr-2" />
                   {item.label}
                 </Button>
@@ -54,17 +54,17 @@ function GvtewayNav() {
 
           {/* Right Actions */}
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white">
+            <Button variant="ghost" size="icon" className="text-grey-300 hover:text-white">
               <Search className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white">
+            <Button variant="ghost" size="icon" className="text-grey-300 hover:text-white">
               <Bell className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white">
+            <Button variant="ghost" size="icon" className="text-grey-300 hover:text-white">
               <Heart className="w-5 h-5" />
             </Button>
             <Link href="/gvteway/settings">
-              <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white">
+              <Button variant="ghost" size="icon" className="text-grey-300 hover:text-white">
                 <Settings className="w-5 h-5" />
               </Button>
             </Link>

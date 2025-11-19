@@ -18,6 +18,8 @@ import { FormField } from '@/components/molecules/FormField';
 import { useCreateProject } from '@/lib/hooks/atlvs/useCreateProject';
 import { useAuth } from '@/lib/hooks/auth/useAuth';
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/projects/create
+
 export default function CreateProjectPage() {
   const router = useRouter();
   const { user } = useAuth();
@@ -96,13 +98,13 @@ export default function CreateProjectPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Card className="bg-gray-900/50 backdrop-blur-sm">
+          <Card className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <FolderPlus className="w-5 h-5 text-atlvs-purple-500" />
                 Project Details
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Enter the basic information for your new project
               </CardDescription>
             </CardHeader>

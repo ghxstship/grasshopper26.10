@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/atoms
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { useDocuments } from '@/lib/hooks/atlvs/useDocuments';
+import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 interface ContractData {
   id: string;
@@ -21,6 +22,8 @@ interface ContractData {
   value: number;
   status: string;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/contracts
 
 export default function ContractsPage() {
   const { documents: _documents, isLoading, error, refetch } = useDocuments();
@@ -42,7 +45,7 @@ export default function ContractsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-atlvs-green-500" />
-              <p className="text-gray-400">Loading contracts...</p>
+              <BodyText className="text-grey-400">Loading contracts...</BodyText>
             </div>
           </div>
         </ContentLayout>
@@ -65,8 +68,8 @@ export default function ContractsPage() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="w-12 h-12 mx-auto mb-4 text-error" />
-              <h2 className="text-h5 font-bebas mb-2">Failed to Load Contracts</h2>
-              <p className="text-gray-400 mb-4">{error.message}</p>
+              <SectionHeader className="mb-2">Failed to Load Contracts</SectionHeader>
+              <p className="text-grey-400 mb-4">{error.message}</p>
               <Button variant="atlvs" onClick={() => refetch()}>Try Again</Button>
             </div>
           </div>
@@ -103,7 +106,7 @@ export default function ContractsPage() {
       case 'active': return 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50';
       case 'expiring-soon': return 'bg-warning-light text-warning border-warning-border';
       case 'expired': return 'bg-error-light text-error border-error-border';
-      default: return 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+      default: return 'bg-grey-500/20 text-grey-500 border-grey-500/50';
     }
   };
 
@@ -120,14 +123,14 @@ export default function ContractsPage() {
       >
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Contracts
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {contracts.length}
                   </CardTitle>
                 </div>
@@ -138,14 +141,14 @@ export default function ContractsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Active
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {contracts.filter((c: ContractData) => c.status === 'active').length}
                   </CardTitle>
                 </div>
@@ -156,14 +159,14 @@ export default function ContractsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Expiring Soon
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     {contracts.filter((c: ContractData) => c.status === 'expiring-soon').length}
                   </CardTitle>
                 </div>
@@ -174,14 +177,14 @@ export default function ContractsPage() {
             </CardHeader>
           </Card>
 
-          <Card variant="atlvs" className="bg-gray-900/50">
+          <Card variant="atlvs" className="bg-grey-900/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardDescription className="text-gray-400 mb-1">
+                  <CardDescription className="text-grey-400 mb-1">
                     Total Value
                   </CardDescription>
-                  <CardTitle className="text-h3 font-bebas">
+                  <CardTitle >
                     ${contracts.reduce((sum: number, c: ContractData) => sum + c.value, 0).toLocaleString()}
                   </CardTitle>
                 </div>
@@ -196,11 +199,11 @@ export default function ContractsPage() {
         {/* Contracts List */}
         <div className="space-y-4">
           {contracts.map((contract: ContractData) => (
-            <Card key={contract.id} variant="atlvs" className="bg-gray-900/50 hover:bg-gray-900 transition-all cursor-pointer">
+            <Card key={contract.id} variant="atlvs" className="bg-grey-900/50 hover:bg-grey-900 transition-all cursor-pointer">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-4 flex-1">
-                    <div className="p-3 bg-gray-800 rounded-lg">
+                    <div className="p-3 bg-grey-800 rounded-lg">
                       <FileText className="w-6 h-6 text-info" />
                     </div>
                     <div className="flex-1">
@@ -210,8 +213,8 @@ export default function ContractsPage() {
                           {contract.status.replace(/-/g, ' ')}
                         </Badge>
                       </div>
-                      <div className="text-body-sm text-gray-400 mb-2">{contract.vendor}</div>
-                      <div className="flex items-center gap-4 text-body-sm text-gray-400">
+                      <div className="text-body-sm text-grey-400 mb-2">{contract.vendor}</div>
+                      <div className="flex items-center gap-4 text-body-sm text-grey-400">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
                           <span>Expires: {new Date(contract.expiryDate).toLocaleDateString()}</span>

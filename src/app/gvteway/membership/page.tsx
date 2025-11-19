@@ -11,6 +11,8 @@ const metadata = {
   keywords: 'membership, subscription, benefits, exclusive access',
 };
 
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/membership
+
 export default function MembershipPage() {
   const tiers = [
     {
@@ -108,7 +110,7 @@ export default function MembershipPage() {
       <section className="section-padding bg-ghxst-surface">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <PageTitle className="mb-4 uppercase text-ghxst-primary">Membership</PageTitle>
-          <BodyText className="text-h6 text-ghxst-text-secondary max-w-2xl mx-auto">
+          <BodyText className="text-ghxst-text-secondary max-w-2xl mx-auto">
             Your all-access pass to the entertainment ecosystem. 
             One membership, infinite experiences.
           </BodyText>
@@ -122,11 +124,7 @@ export default function MembershipPage() {
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`card p-8 space-y-6 ${
-                  tier.popular
-                    ? 'border-4 border-ghxst-accent relative'
-                    : 'border-2 border-ghxst-border'
-                }`}
+                className={`card p-8 space-y-6 ${ tier.popular ? 'border-4 border-ghxst-accent relative' : 'border-2 border-ghxst-border' }`}
               >
                 {tier.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-ghxst-accent text-ghxst-white px-4 py-1 rounded-full">
@@ -137,7 +135,7 @@ export default function MembershipPage() {
                 <div className="text-center space-y-2">
                   <CardTitle className="text-ghxst-primary uppercase">{tier.name}</CardTitle>
                   <div className="flex items-baseline justify-center gap-2">
-                    <span className="font-anton text-h1 text-ghxst-primary">
+                    <span className="text-ghxst-primary">
                       ${tier.price}
                     </span>
                     <Metadata className="text-ghxst-text-secondary">{tier.period}</Metadata>
@@ -209,20 +207,20 @@ export default function MembershipPage() {
 
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="font-anton text-h1 mb-2">$500K+</div>
-              <Metadata className="text-gray-400">Saved by Members</Metadata>
+              <div className="mb-2">$500K+</div>
+              <Metadata className="text-grey-400">Saved by Members</Metadata>
             </div>
             <div className="text-center">
-              <div className="font-anton text-h1 mb-2">15,000+</div>
-              <Metadata className="text-gray-400">Connections Made</Metadata>
+              <div className="mb-2">15,000+</div>
+              <Metadata className="text-grey-400">Connections Made</Metadata>
             </div>
             <div className="text-center">
-              <div className="font-anton text-h1 mb-2">200+</div>
-              <Metadata className="text-gray-400">Monthly Events</Metadata>
+              <div className="mb-2">200+</div>
+              <Metadata className="text-grey-400">Monthly Events</Metadata>
             </div>
             <div className="text-center">
-              <div className="font-anton text-h1 mb-2">98%</div>
-              <Metadata className="text-gray-400">Satisfaction Rate</Metadata>
+              <div className="mb-2">98%</div>
+              <Metadata className="text-grey-400">Satisfaction Rate</Metadata>
             </div>
           </div>
         </div>

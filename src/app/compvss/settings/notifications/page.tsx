@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/atoms/Button';
 import { Checkbox } from '@/components/atoms/Checkbox';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
+import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
 export default function NotificationSettingsPage() {
   const breadcrumbs = [
@@ -58,11 +59,11 @@ export default function NotificationSettingsPage() {
 
   return (
     <CompvssLayout>
-      <div className="border-b border-gray-800 bg-gradient-to-r from-black via-gray-950 to-black">
+      <div className="border-b border-grey-800 bg-gradient-to-r from-black via-grey-950 to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div>
-            <h1 className="text-h3 font-bebas compvss-text-gradient">Notification Settings</h1>
-            <p className="text-gray-400 font-oswald mt-1">Manage how you receive notifications</p>
+            <HeroTitle className="compvss-text-gradient">Notification Settings</HeroTitle>
+            <BodyText className="text-grey-400 mt-1">Manage how you receive notifications</BodyText>
           </div>
         </div>
       </div>
@@ -74,13 +75,13 @@ export default function NotificationSettingsPage() {
           className="space-y-6"
         >
           {/* Delivery Methods */}
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Bell className="w-5 h-5 text-compvss-cyan-500" />
                 Delivery Methods
               </CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Choose how you want to receive notifications
               </CardDescription>
             </CardHeader>
@@ -112,10 +113,10 @@ export default function NotificationSettingsPage() {
           </Card>
 
           {/* Notification Types */}
-          <Card variant="compvss" className="bg-gray-900/50 backdrop-blur-sm">
+          <Card variant="compvss" className="bg-grey-900/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-white">Notification Types</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardDescription className="text-grey-400">
                 Select which types of notifications you want to receive
               </CardDescription>
             </CardHeader>
@@ -200,8 +201,8 @@ function NotificationToggle({
           </div>
         )}
         <div>
-          <h3 className="font-oswald text-white mb-1">{label}</h3>
-          <p className="text-body-sm text-gray-400 font-share-tech">{description}</p>
+          <h3 className="text-white mb-1">{label}</h3>
+          <p className="text-body-sm text-grey-400 -tech">{description}</p>
         </div>
       </div>
       <Checkbox

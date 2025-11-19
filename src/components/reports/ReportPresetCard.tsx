@@ -59,7 +59,7 @@ export function ReportPresetCard({
             </div>
             <div>
               <h3 className="font-semibold text-white">{preset.name}</h3>
-              <p className="text-body-sm text-gray-400">{preset.subcategory}</p>
+              <p className="text-body-sm text-grey-400">{preset.subcategory}</p>
             </div>
           </div>
           <Button
@@ -69,14 +69,12 @@ export function ReportPresetCard({
             className="p-1"
           >
             <Star
-              className={`w-5 h-5 ${
-                isFavorite ? 'fill-yellow-500 text-warning' : 'text-gray-400'
-              }`}
+              className={`w-5 h-5 ${ isFavorite ? 'fill-yellow-500 text-warning' : 'text-grey-400' }`}
             />
           </Button>
         </div>
 
-        <p className="text-body-sm text-gray-300 mb-4 line-clamp-2">
+        <p className="text-body-sm text-grey-300 mb-4 line-clamp-2">
           {preset.description}
         </p>
 

@@ -8,6 +8,7 @@ import { ContentLayout } from '@/components/templates/ContentLayout';
 import { Clock, TrendingUp, Calendar, User, Loader2, AlertCircle } from 'lucide-react';
 import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 import { Button } from '@/components/atoms/Button';
+import { SectionHeader } from "@/components/atoms/Typography";
 
 interface _TimeLog {
 
@@ -18,6 +19,8 @@ interface _TimeLog {
   date: string;
   hours: number;
 }
+
+// This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/teams/time-tracking
 
 export default function TeamTimeTrackingPage() {
   const { data, isLoading, error, refetch } = useTeams();
@@ -79,69 +82,69 @@ export default function TeamTimeTrackingPage() {
       >
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Today Total</div>
-              <div className="text-h4 text-gray-900">{totalHoursToday}h</div>
+              <div className="text-body-sm text-grey-600 mb-1">Today Total</div>
+              <div className="text-grey-900">{totalHoursToday}h</div>
             </div>
             <Clock className="w-8 h-8 text-info" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">This Week</div>
-              <div className="text-h4 text-gray-900">142h</div>
+              <div className="text-body-sm text-grey-600 mb-1">This Week</div>
+              <div className="text-grey-900">142h</div>
             </div>
             <Calendar className="w-8 h-8 text-success" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Avg/Member</div>
-              <div className="text-h4 text-gray-900">{avgHoursPerMember.toFixed(1)}h</div>
+              <div className="text-body-sm text-grey-600 mb-1">Avg/Member</div>
+              <div className="text-grey-900">{avgHoursPerMember.toFixed(1)}h</div>
             </div>
             <User className="w-8 h-8 text-atlvs-purple-500" />
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white rounded-lg border border-grey-200 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-body-sm text-gray-600 mb-1">Trend</div>
-              <div className="text-h4 text-success">+12%</div>
+              <div className="text-body-sm text-grey-600 mb-1">Trend</div>
+              <div className="text-success">+12%</div>
             </div>
             <TrendingUp className="w-8 h-8 text-success" />
           </div>
         </div>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-4 border-b border-gray-200">
-          <h2 className="text-h6 text-gray-900">Recent Time Logs</h2>
+          <div className="bg-white rounded-lg border border-grey-200">
+        <div className="p-4 border-b border-grey-200">
+          <SectionHeader className="text-grey-900">Recent Time Logs</SectionHeader>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-grey-50 border-b border-grey-200">
               <tr>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-900">Member</th>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-900">Project</th>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-900">Task</th>
-                <th className="px-4 py-3 text-left text-body-sm text-gray-900">Date</th>
-                <th className="px-4 py-3 text-right text-body-sm text-gray-900">Hours</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-900">Member</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-900">Project</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-900">Task</th>
+                <th className="px-4 py-3 text-left text-body-sm text-grey-900">Date</th>
+                <th className="px-4 py-3 text-right text-body-sm text-grey-900">Hours</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-grey-200">
               {timeLogs.map(log => (
-                <tr key={log.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-body-sm text-gray-900">{log.memberName}</td>
-                  <td className="px-4 py-3 text-body-sm text-gray-600">{log.project}</td>
-                  <td className="px-4 py-3 text-body-sm text-gray-600">{log.task}</td>
-                  <td className="px-4 py-3 text-body-sm text-gray-600">
+                <tr key={log.id} className="hover:bg-grey-50">
+                  <td className="px-4 py-3 text-body-sm text-grey-900">{log.memberName}</td>
+                  <td className="px-4 py-3 text-body-sm text-grey-600">{log.project}</td>
+                  <td className="px-4 py-3 text-body-sm text-grey-600">{log.task}</td>
+                  <td className="px-4 py-3 text-body-sm text-grey-600">
                     {new Date(log.date).toLocaleDateString()}
                   </td>
-                  <td className="px-4 py-3 text-body-sm text-gray-900 text-right">
+                  <td className="px-4 py-3 text-body-sm text-grey-900 text-right">
                     {log.hours}h
                   </td>
                 </tr>

@@ -8,7 +8,7 @@ const Card = React.forwardRef<
   }
 >(({ className, variant = "default", ...props }, ref) => {
   const variantStyles = {
-    default: "bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-800",
+    default: "bg-white border-grey-200 dark:bg-grey-900 dark:border-grey-800",
     gvteway: "bg-white border-gvteway-red-500/20 hover:border-gvteway-red-500/50",
     compvss: "bg-white border-compvss-cyan-500/20 hover:border-compvss-cyan-500/50",
     atlvs: "bg-white border-atlvs-green-500/20 hover:border-atlvs-green-500/50",
@@ -59,7 +59,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("font-share-tech text-body-sm text-gray-600 dark:text-gray-400", className)}
+    className={cn("font-share-tech text-body-sm text-grey-600 dark:text-grey-400", className)}
     {...props}
   />
 ));
