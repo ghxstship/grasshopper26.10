@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import { prisma as _prisma } from '@/lib/prisma';
 
 export class checkoutService {
   async execute(data: any) {

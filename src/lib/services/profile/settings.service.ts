@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class ProfileService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.profile.findMany(filters);
+    return await prisma.notificationPreferences.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.profile.findUnique({ where: { id } });
+  async findById(params: string | { where: { id?: string; userId?: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.notificationPreferences.findUnique({ where: { id: params } });
+    }
+    return await prisma.notificationPreferences.findUnique(params as any);
   }
 
   async create(data: any) {
-    return await prisma.profile.create({ data });
+    return await prisma.notificationPreferences.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.profile.update({ where: { id }, data });
+  async update(params: string | { where: { id?: string; userId?: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.notificationPreferences.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.notificationPreferences.update(params as any);
   }
 
-  async delete(id: string) {
-    return await prisma.profile.delete({ where: { id } });
+  async delete(params: string | { where: { id?: string; userId?: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.notificationPreferences.delete({ where: { id: params } });
+    }
+    return await prisma.notificationPreferences.delete(params as any);
   }
 }

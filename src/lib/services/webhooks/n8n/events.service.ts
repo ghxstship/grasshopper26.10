@@ -1,29 +1,41 @@
+import { BaseService } from '../../base/BaseService';
 import { prisma } from '@/lib/prisma';
 
 /**
- * EventsService
- * Business logic for /webhooks/n8n/events
+ * WebhooksService
+ * Business logic for webhook operations
  */
 
-export class WebhooksService {
-  // Add service methods here
+export class WebhooksService extends BaseService {
   async findAll(filters?: any) {
-    return await prisma.webhooks.findMany(filters);
+    return await prisma.event.findMany(filters);
   }
 
   async findById(id: string) {
-    return await prisma.webhooks.findUnique({ where: { id } });
+    return await prisma.event.findUnique({ where: { id } });
   }
 
   async create(data: any) {
-    return await prisma.webhooks.create({ data });
+    return await prisma.event.create({ data });
+  }
+
+  async createMany(data: any) {
+    return await prisma.event.createMany(data);
   }
 
   async update(id: string, data: any) {
-    return await prisma.webhooks.update({ where: { id }, data });
+    return await prisma.event.update({ where: { id }, data });
+  }
+
+  async updateMany(params: any) {
+    return await prisma.event.updateMany(params);
   }
 
   async delete(id: string) {
-    return await prisma.webhooks.delete({ where: { id } });
+    return await prisma.event.delete({ where: { id } });
+  }
+
+  async deleteMany(params: any) {
+    return await prisma.event.deleteMany(params);
   }
 }

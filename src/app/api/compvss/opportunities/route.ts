@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
+import { errors } from '@/lib/api/errors';
 
 
 /**
@@ -14,17 +15,6 @@ import { handleApiError } from '@/lib/api/response';
  */
 export async function GET(request: NextRequest) {
   try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
     const session = await getSession();
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

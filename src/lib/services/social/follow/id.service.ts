@@ -8,22 +8,34 @@ import { prisma } from '@/lib/prisma';
 export class SocialService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.social.findMany(filters);
+    return await prisma.socialPost.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.social.findUnique({ where: { id } });
+  async findById(params: string | { where: any; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.follow.findUnique({ where: { id: params } });
+    }
+    return await prisma.follow.findUnique(params as any);
   }
 
-  async create(data: any) {
-    return await prisma.social.create({ data });
+  async create(params: any) {
+    if (params.data) {
+      return await prisma.follow.create(params);
+    }
+    return await prisma.follow.create({ data: params });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.social.update({ where: { id }, data });
+  async update(params: string | { where: any; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.follow.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.follow.update(params as any);
   }
 
-  async delete(id: string) {
-    return await prisma.social.delete({ where: { id } });
+  async delete(params: string | { where: any }) {
+    if (typeof params === 'string') {
+      return await prisma.follow.delete({ where: { id: params } });
+    }
+    return await prisma.follow.delete(params as any);
   }
 }

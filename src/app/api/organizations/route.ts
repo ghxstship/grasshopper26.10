@@ -11,20 +11,29 @@ import { OrganizationsService } from '@/lib/services/organizations.service';
 
 // GET /api/organizations - List organizations
 export async function GET(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const { searchParams } = new URL(request.url);
     const { page, limit, skip } = getPaginationParams(request);
@@ -85,20 +94,29 @@ export async function GET(request: NextRequest) {
 
 // POST /api/organizations - Create organization
 export async function POST(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const body = await parseBody(request);
     const validatedData = createOrganizationSchema.parse(body);

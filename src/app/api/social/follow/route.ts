@@ -74,12 +74,12 @@ export async function POST(request: NextRequest) {
     });
 
     // Create notification for followed user
-    const follower = await new SocialService().findById({
+    const follower = await prisma.user.findUnique({
       where: { id: context.userId! },
       select: { name: true, image: true },
     });
 
-    await new SocialService().create({
+    await prisma.notification.create({
       data: {
         userId: validatedData.followingId,
         type: 'NEW_FOLLOWER',

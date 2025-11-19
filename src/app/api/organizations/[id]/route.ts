@@ -83,9 +83,10 @@ export async function GET(
       throw errors.forbidden();
     }
 
+    const orgWithCount = organization as any;
     return successResponse({
       ...organization,
-      memberCount: organization._count.members,
+      memberCount: orgWithCount._count.members,
     });
   } catch (error) {
     return handleApiError(error);
@@ -174,16 +175,17 @@ export async function DELETE(
       throw errors.notFound('Organization');
     }
 
-    const userMembership = existingOrg.members[0];
+    const orgWithRelations = existingOrg as any;
+    const userMembership = orgWithRelations.members[0];
     if (!userMembership || userMembership.role !== 'OWNER') {
       throw errors.forbidden();
     }
 
     // Prevent deletion if organization has events
-    if (existingOrg._count.events > 0) {
+    if (orgWithRelations._count.events > 0) {
       throw errors.badRequest(
         'Cannot delete organization with existing events',
-        { eventCount: existingOrg._count.events }
+        { eventCount: orgWithRelations._count.events }
       );
     }
 

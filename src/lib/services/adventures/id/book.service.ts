@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class AdventuresService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.adventures.findMany(filters);
+    return await prisma.adventure.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.adventures.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.adventure.findUnique({ where: { id: params } });
+    }
+    return await prisma.adventure.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.adventures.create({ data });
+    return await prisma.adventure.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.adventures.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.adventure.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.adventure.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.adventures.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.adventure.delete({ where: { id: params } });
+    }
+    return await prisma.adventure.delete(params);
   }
 }

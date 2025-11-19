@@ -12,7 +12,6 @@ import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { AuthService } from '@/lib/services/auth/forgotPassword.service';
 
 
 
@@ -36,7 +35,7 @@ export async function POST(request: NextRequest) {
     const { email } = validatedData;
 
     // Find user
-    const user = await new AuthService().findById({
+    const user = await prisma.user.findUnique({
       where: { email },
     });
 
@@ -52,7 +51,7 @@ export async function POST(request: NextRequest) {
     const tokenHash = hashToken(token);
 
     // Store token in database
-    await new AuthService().create({
+    await prisma.passwordResetToken.create({
       data: {
         userId: user.id,
         token: tokenHash,

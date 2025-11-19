@@ -1,16 +1,19 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { successResponse, handleApiError,  } from '@/lib/api/response';
-import { validateRequest, requireAuth,  } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { successResponse, handleApiError } from '@/lib/api/response';
+import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { CartService } from '@/lib/services/cart.service';
+import { errors } from '@/lib/api/errors';
 
 
 
 // GET /api/cart - Get user's cart
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -21,9 +24,6 @@ export async function GET(request: NextRequest) {
     ) {
       throw errors.rateLimitExceeded();
     }
-
-    const context = await validateRequest(request);
-    requireAuth(context);
 
     // Get or create cart
     let cart = await new CartService().findById({
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
       include: {
         product: true,
       },
-    });
+    }) as any[];
 
     // Calculate totals
     const subtotal = cartItems.reduce((sum: number, item) => {

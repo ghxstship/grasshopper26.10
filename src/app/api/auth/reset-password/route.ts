@@ -12,7 +12,7 @@ import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { AuthService } from '@/lib/services/auth/resetPassword.service';
+import { ResetPasswordService } from "@/lib/services/auth/resetPassword.service";
 
 
 

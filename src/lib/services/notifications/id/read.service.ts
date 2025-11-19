@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class NotificationsService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.notifications.findMany(filters);
+    return await prisma.notification.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.notifications.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.notification.findUnique({ where: { id: params } });
+    }
+    return await prisma.notification.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.notifications.create({ data });
+    return await prisma.notification.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.notifications.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.notification.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.notification.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.notifications.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.notification.delete({ where: { id: params } });
+    }
+    return await prisma.notification.delete(params);
   }
 }

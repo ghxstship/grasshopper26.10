@@ -11,19 +11,19 @@ export class CartService {
     return await prisma.cart.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.cart.findUnique({ where: { id } });
+  async findById(params: any) {
+    return await prisma.cart.findFirst(params);
   }
 
   async create(data: any) {
     return await prisma.cart.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.cart.update({ where: { id }, data });
+  async update(params: any) {
+    return await prisma.cart.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.cart.delete({ where: { id } });
+  async delete(params: any) {
+    return await prisma.cart.delete(params);
   }
 }

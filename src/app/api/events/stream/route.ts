@@ -1,8 +1,7 @@
 import { NextRequest } from 'next/server';
-import { rateLimit, validateRequest, requireAuth } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { errors } from '@/lib/api/response';
-import { prisma } from '@/lib/prisma';
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { handleApiError, errors } from '@/lib/api/response';
 import { z } from 'zod';
 
 const streamParamsSchema = z.object({
@@ -28,8 +27,8 @@ export async function GET(request: NextRequest) {
     const validated = streamParamsSchema.parse(Object.fromEntries(searchParams));
     const eventTypes = validated.types?.split(',') || ['all'];
 
-    // Log stream connection
-    await prisma.streamConnection.create({ data: { userId: context.userId, types: eventTypes } }).catch(() => {});
+    // Log stream connection (streamConnection model not yet implemented)
+    // await prisma.streamConnection.create({ data: { userId: context.userId, types: eventTypes } }).catch(() => {});
 
     const encoder = new TextEncoder();
 

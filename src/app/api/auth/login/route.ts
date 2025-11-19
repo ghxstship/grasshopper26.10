@@ -5,7 +5,7 @@ import { loginSchema } from '@/lib/validations/auth';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { AuthService } from '@/lib/services/auth/login.service';
+import { LoginService } from "@/lib/services/auth/login.service";
 
 
 
@@ -26,26 +26,14 @@ export async function POST(request: NextRequest) {
     const validatedData = loginSchema.parse(body);
 
     // Find user by email
-    const user = await new AuthService().findById({
-      where: { email: validatedData.email },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        password: true,
-        role: true,
-        emailVerified: true,
-        image: true,
-        createdAt: true,
-      },
-    });
+    const user = await new LoginService().findUserByEmail(validatedData.email);
 
     if (!user || !user.password) {
       throw errors.unauthorized();
     }
 
     // Verify password
-    const isValidPassword = await compare(validatedData.password, user.password);
+    const isValidPassword = await new LoginService().verifyPassword(validatedData.password, user.password);
 
     if (!isValidPassword) {
       throw errors.unauthorized();
@@ -55,7 +43,7 @@ export async function POST(request: NextRequest) {
     const sessionToken = crypto.randomUUID();
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
-    await new AuthService().create({
+    await prisma.session.create({
       data: {
         sessionToken,
         userId: user.id,

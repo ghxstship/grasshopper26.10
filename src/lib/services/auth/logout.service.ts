@@ -1,29 +1,37 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
 
 /**
  * LogoutService
  * Business logic for /auth/logout
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class LogoutService extends BaseService {
+  async findSessionByToken(sessionToken: string) {
+    return await prisma.session.findUnique({
+      where: { sessionToken },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async deleteSession(sessionToken: string) {
+    return await prisma.session.delete({
+      where: { sessionToken },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
+  async deleteUserSessions(userId: string) {
+    return await prisma.session.deleteMany({
+      where: { userId },
+    });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async deleteExpiredSessions() {
+    return await prisma.session.deleteMany({
+      where: {
+        expires: {
+          lt: new Date(),
+        },
+      },
+    });
   }
 }

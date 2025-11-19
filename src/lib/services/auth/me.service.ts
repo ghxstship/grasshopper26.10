@@ -1,29 +1,56 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
 
 /**
  * MeService
  * Business logic for /auth/me
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class MeService extends BaseService {
+  async findUserById(userId: string) {
+    return await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        accounts: true,
+        sessions: {
+          where: {
+            expires: {
+              gt: new Date(),
+            },
+          },
+        },
+        organizations: {
+          include: {
+            organization: true,
+          },
+        },
+        notificationPreferences: true,
+      },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async updateUser(userId: string, data: {
+    name?: string;
+    bio?: string;
+    image?: string;
+  }) {
+    return await prisma.user.update({
+      where: { id: userId },
+      data,
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
-  }
+  async getUserStats(userId: string) {
+    const [ticketCount, orderCount, wishlistCount] = await Promise.all([
+      prisma.ticket.count({ where: { userId } }),
+      prisma.order.count({ where: { userId } }),
+      prisma.wishlist.count({ where: { userId } }),
+    ]);
 
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+    return {
+      ticketCount,
+      orderCount,
+      wishlistCount,
+    };
   }
 }

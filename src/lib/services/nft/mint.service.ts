@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class NftService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.nft.findMany(filters);
+    return await prisma.nFTTicket.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.nft.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.nFTTicket.findUnique({ where: { id: params } });
+    }
+    return await prisma.nFTTicket.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.nft.create({ data });
+    return await prisma.nFTTicket.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.nft.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.nFTTicket.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.nFTTicket.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.nft.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.nFTTicket.delete({ where: { id: params } });
+    }
+    return await prisma.nFTTicket.delete(params);
   }
 }

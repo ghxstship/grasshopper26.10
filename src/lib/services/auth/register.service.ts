@@ -1,29 +1,41 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
+import bcrypt from 'bcryptjs';
 
 /**
  * RegisterService
  * Business logic for /auth/register
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class RegisterService extends BaseService {
+  async findUserByEmail(email: string) {
+    return await prisma.user.findUnique({ where: { email } });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async createUser(data: {
+    email: string;
+    password: string;
+    name?: string;
+  }) {
+    // Hash password
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+
+    return await prisma.user.create({
+      data: {
+        email: data.email,
+        password: hashedPassword,
+        name: data.name,
+      },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
-  }
-
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async createVerificationToken(userId: string, token: string) {
+    return await prisma.emailVerificationToken.create({
+      data: {
+        userId,
+        token,
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      },
+    });
   }
 }

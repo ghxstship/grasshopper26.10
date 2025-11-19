@@ -1,16 +1,16 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
-import { validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { z } from 'zod';
 import { CompvssService } from '@/lib/services/compvss/qr/scan.service';
 
 
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -21,9 +21,6 @@ export async function POST(request: NextRequest) {
     ) {
       throw errors.rateLimitExceeded();
     }
-
-    const context = await validateRequest(request);
-    requireAuth(context);
 
     const body = await request.json();
     const { code } = body;

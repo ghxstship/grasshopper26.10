@@ -5,12 +5,15 @@ import { validateRequest, getPaginationParams } from '@/lib/api/middleware';
 import type { Prisma } from '@prisma/client';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { SearchService } from '@/lib/services/search/organizations.service';
+import { OrganizationsService } from "@/lib/services/search/organizations.service";
+import { errors } from '@/lib/api/errors';
 
 
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    
     // Rate limiting
     if (
       !rateLimit(

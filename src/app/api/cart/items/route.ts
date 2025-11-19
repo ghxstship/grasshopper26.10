@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     // Check if product exists and has stock
     const product = await new CartService().findById({
       where: { id: validatedData.productId },
-    });
+    }) as any;
 
     if (!product) {
       throw errors.notFound('Product');
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     // Get or create cart
     let cart = await new CartService().findById({
       where: { userId: context.userId },
-    });
+    }) as any;
 
     if (!cart) {
       cart = await new CartService().create({

@@ -5,11 +5,14 @@ import { validateRequest } from '@/lib/api/middleware';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { SearchService } from '@/lib/services/search.service';
+import { errors } from '@/lib/api/errors';
 
 
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+
     // Rate limiting
     if (
       !rateLimit(

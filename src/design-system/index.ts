@@ -71,18 +71,18 @@ export {
   textVariants,
   Typography,
   HeroTitle,
-  DisplayTitle,
+  // DisplayTitle,
   PageTitle,
   SectionHeader,
   SubsectionHeader,
   SmallHeader,
   Subtitle,
   BodyText,
-  BodyTextLarge,
-  BodyTextSmall,
+  // BodyTextLarge,
+  // BodyTextSmall,
   Metadata,
   Caption,
-  Overline,
+  // Overline,
 } from '@/components';
 
 export type {
@@ -122,9 +122,9 @@ export {
   ChatMessage,
   ChatInput,
   BrandCard,
-  KPICard,
-  ReportPresetCard,
-  ConnectWalletButton,
+  // KPICard,
+  // ReportPresetCard,
+  // ConnectWalletButton,
 } from '@/components';
 
 export type {
@@ -160,8 +160,8 @@ export {
   DataTable,
   KanbanBoard,
   GanttChart,
-  KPIGrid,
-  ReportPresetGrid,
+  // KPIGrid,
+  // ReportPresetGrid,
 } from '@/components';
 
 export type {
@@ -181,10 +181,10 @@ export type {
   ChatWindowProps,
   InboxPanelProps,
   Conversation,
-  DataTableColumn,
-  KanbanColumn,
-  KanbanTask,
-  GanttTask,
+  // DataTableColumn,
+  // KanbanColumn,
+  // KanbanTask,
+  // GanttTask,
 } from '@/components';
 
 // Templates

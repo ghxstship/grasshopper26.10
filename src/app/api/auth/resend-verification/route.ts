@@ -10,7 +10,8 @@ import { validateRequest, requireAuth } from '@/lib/api/middleware';
 import { generateToken, hashToken } from '@/lib/auth/tokens';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { AuthService } from '@/lib/services/auth/resendVerification.service';
+import { ResendVerificationService } from "@/lib/services/auth/resendVerification.service";
+import { errors } from '@/lib/api/errors';
 
 
 
@@ -19,6 +20,9 @@ import { AuthService } from '@/lib/services/auth/resendVerification.service';
  */
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -30,11 +34,8 @@ export async function POST(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     // Get user
-    const user = await new AuthService().findById({
+    const user = await prisma.user.findUnique({
       where: { id: context.userId },
       select: {
         id: true,
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Invalidate old tokens
-    await new AuthService().updateMany({
+    await prisma.emailVerificationToken.updateMany({
       where: {
         userId: user.id,
         used: false,
@@ -70,7 +71,7 @@ export async function POST(request: NextRequest) {
     const tokenHash = hashToken(token);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-    await new AuthService().create({
+    await prisma.emailVerificationToken.create({
       data: {
         userId: user.id,
         token: tokenHash,
@@ -80,7 +81,7 @@ export async function POST(request: NextRequest) {
 
     // Send verification email using notification system
     // The actual email sending is handled by the notification service/worker
-    await new AuthService().create({
+    await prisma.notification.create({
       data: {
         userId: user.id,
         type: 'EMAIL_VERIFICATION',

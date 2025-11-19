@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import { prisma as _prisma } from '@/lib/prisma';
 
 export class webhooksimulatorService {
   async execute(data: any) {

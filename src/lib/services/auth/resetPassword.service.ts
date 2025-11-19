@@ -1,29 +1,47 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
+import bcrypt from 'bcryptjs';
 
 /**
  * ResetPasswordService
  * Business logic for /auth/reset-password
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class ResetPasswordService extends BaseService {
+  async findValidResetToken(token: string) {
+    return await prisma.passwordResetToken.findFirst({
+      where: {
+        token,
+        expiresAt: {
+          gt: new Date(),
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async updatePassword(userId: string, newPassword: string) {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    
+    return await prisma.user.update({
+      where: { id: userId },
+      data: {
+        password: hashedPassword,
+      },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
+  async deleteResetToken(token: string) {
+    return await prisma.passwordResetToken.deleteMany({
+      where: { token },
+    });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async deleteUserResetTokens(userId: string) {
+    return await prisma.passwordResetToken.deleteMany({
+      where: { userId },
+    });
   }
 }

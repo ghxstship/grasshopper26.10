@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class OrganizationsService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.organizations.findMany(filters);
+    return await prisma.organization.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.organizations.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string } | { slug: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.organization.findUnique({ where: { id: params } });
+    }
+    return await prisma.organization.findUnique(params as any);
   }
 
   async create(data: any) {
-    return await prisma.organizations.create({ data });
+    return await prisma.organization.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.organizations.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.organization.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.organization.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.organizations.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.organization.delete({ where: { id: params } });
+    }
+    return await prisma.organization.delete(params);
   }
 }

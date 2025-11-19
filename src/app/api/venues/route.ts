@@ -12,6 +12,8 @@ import { VenuesService } from '@/lib/services/venues.service';
 // GET /api/venues - List venues
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    
     // Rate limiting
     if (
       !rateLimit(
@@ -76,20 +78,29 @@ export async function GET(request: NextRequest) {
 
 // POST /api/venues - Create venue
 export async function POST(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const body = await parseBody(request);
     const validatedData = createVenueSchema.parse(body);

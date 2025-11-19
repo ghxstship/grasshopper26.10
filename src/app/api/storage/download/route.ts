@@ -13,19 +13,29 @@ export async function GET(request: NextRequest) {
   try {
     // Database: await prisma.$queryRaw`SELECT 1`;
     // Database operations available via prisma
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
     const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const { searchParams } = new URL(request.url);
     const bucket = searchParams.get('bucket') as StorageBucket;

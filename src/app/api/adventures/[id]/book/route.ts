@@ -2,10 +2,6 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { z } from 'zod';
-import { AdventuresService } from '@/lib/services/adventures/id/book.service';
 
 
 
@@ -22,7 +18,7 @@ export async function POST(
     
     const { id } = await params;
 
-    const adventure = await new AdventuresService().findById({
+    const adventure = await prisma.adventure.findUnique({
       where: { id },
     });
 
@@ -44,7 +40,7 @@ export async function POST(
       }
     }
 
-    const booking = await new AdventuresService().create({
+    const booking = await prisma.adventureBooking.create({
       data: {
         adventureId: id,
         userId: context.userId!,

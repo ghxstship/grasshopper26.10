@@ -1,16 +1,17 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { successResponse, createdResponse, handleApiError } from '@/lib/api/response';
-import { validateRequest, requireAuth } from '@/lib/api/middleware';
+import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { createAlertSchema } from '@/lib/validations/alerts';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { AlertsService } from '@/lib/services/alerts.service';
 
 
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -22,10 +23,7 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
-    const alerts = await new AlertsService().findAll({
+    const alerts = await prisma.alert.findMany({
       where: {
         userId: context.userId,
         active: true,
@@ -41,6 +39,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -52,13 +53,10 @@ export async function POST(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     const body = await request.json();
     const validatedData = createAlertSchema.parse(body);
     
-    const alert = await new AlertsService().create({
+    const alert = await prisma.alert.create({
       data: {
         ...validatedData,
         userId: context.userId,
@@ -73,6 +71,9 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -84,21 +85,28 @@ export async function DELETE(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     const { searchParams } = new URL(request.url);
     const alertId = searchParams.get('id');
 
     if (!alertId) {
-      throw new Error('Alert ID required');
+      throw errors.badRequest('Alert ID required');
     }
 
-    await new AlertsService().delete({
-      where: {
-        id: alertId,
-        userId: context.userId,
-      },
+    // Verify the alert exists and belongs to the user
+    const alert = await prisma.alert.findUnique({
+      where: { id: alertId },
+    });
+
+    if (!alert) {
+      throw errors.notFound('Alert');
+    }
+
+    if (alert.userId !== context.userId) {
+      throw errors.forbidden('You do not have permission to delete this alert');
+    }
+
+    await prisma.alert.delete({
+      where: { id: alertId },
     });
 
     return successResponse({ message: 'Alert deleted' });

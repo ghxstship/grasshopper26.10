@@ -10,7 +10,7 @@ import { isLockedOut, recordFailedAttempt, clearFailedAttempts } from "@/lib/sec
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { AuthService } from '@/lib/services/auth/nextauth.service';
+import { NextAuthService } from "@/lib/services/auth/nextauth.service";
 
 
 
@@ -49,7 +49,7 @@ export const authConfig: NextAuthConfig = {
           throw new Error(`Account locked due to too many failed attempts. Try again in ${remainingMinutes} minutes.`);
         }
 
-        const user = await new AuthService().findById({
+        const user = await prisma.user.findUnique({
           where: { email },
           include: {
             compvssProfile: true,
@@ -143,7 +143,7 @@ export const authConfig: NextAuthConfig = {
       // For OAuth providers, ensure email is verified
       if (account?.provider !== "credentials") {
         if (user.email) {
-          await new AuthService().update({
+          await prisma.user.update({
             where: { email: user.email },
             data: { emailVerified: new Date() }
           });
@@ -182,7 +182,7 @@ export const authConfig: NextAuthConfig = {
   events: {
     async signIn({ user, account, isNewUser }) {
       // Log sign in event
-      await new AuthService().create({
+      await prisma.auditLog.create({
         data: {
           userId: user.id,
           action: "SIGN_IN",

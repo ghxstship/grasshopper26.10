@@ -6,11 +6,15 @@ import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { z } from 'zod';
 import { CompvssService } from '@/lib/services/compvss/checkin.service';
+import { errors } from '@/lib/api/errors';
 
 
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -22,13 +26,10 @@ export async function POST(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     const body = await request.json();
     const { type, targetId, location, latitude, longitude, metadata } = body;
 
-    const checkIn = await new CompvssService().create({
+    const checkIn = await prisma.checkIn.create({
       data: {
         userId: context.userId!,
         type,

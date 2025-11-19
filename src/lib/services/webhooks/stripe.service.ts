@@ -1,29 +1,41 @@
+import { BaseService } from '../base/BaseService';
 import { prisma } from '@/lib/prisma';
 
 /**
- * StripeService
- * Business logic for /webhooks/stripe
+ * WebhooksService
+ * Business logic for webhook operations
  */
 
-export class WebhooksService {
-  // Add service methods here
+export class WebhooksService extends BaseService {
   async findAll(filters?: any) {
-    return await prisma.webhooks.findMany(filters);
+    return await prisma.order.findMany(filters);
   }
 
   async findById(id: string) {
-    return await prisma.webhooks.findUnique({ where: { id } });
+    return await prisma.order.findUnique({ where: { id } });
   }
 
   async create(data: any) {
-    return await prisma.webhooks.create({ data });
+    return await prisma.order.create({ data });
+  }
+
+  async createMany(data: any) {
+    return await prisma.order.createMany(data);
   }
 
   async update(id: string, data: any) {
-    return await prisma.webhooks.update({ where: { id }, data });
+    return await prisma.order.update({ where: { id }, data });
+  }
+
+  async updateMany(params: any) {
+    return await prisma.order.updateMany(params);
   }
 
   async delete(id: string) {
-    return await prisma.webhooks.delete({ where: { id } });
+    return await prisma.order.delete({ where: { id } });
+  }
+
+  async deleteMany(params: any) {
+    return await prisma.order.deleteMany(params);
   }
 }

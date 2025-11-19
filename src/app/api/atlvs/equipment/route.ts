@@ -1,16 +1,17 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { successResponse, createdResponse, handleApiError } from '@/lib/api/response';
+import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { z } from 'zod';
-import { AtlvsService } from '@/lib/services/atlvs/equipment.service';
 
 
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -22,9 +23,6 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
     const type = searchParams.get('type');
@@ -33,7 +31,7 @@ export async function GET(request: NextRequest) {
     if (status) where.status = status;
     if (type) where.type = type;
 
-    const equipment = await new AtlvsService().findAll({
+    const equipment = await prisma.equipment.findMany({
       where: where as never,
       include: {
         bookings: {
@@ -53,6 +51,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -64,11 +65,8 @@ export async function POST(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     const body = await request.json();
-    const equipment = await new AtlvsService().create({
+    const equipment = await prisma.equipment.create({
       data: body,
     });
 

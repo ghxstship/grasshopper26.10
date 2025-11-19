@@ -5,7 +5,7 @@ import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
-import { MarketplaceService } from '@/lib/services/marketplace/id.service';
+import { MarketplaceIdService } from '@/lib/services/marketplace/id.service';
 
 
 
@@ -16,9 +16,7 @@ export async function GET(
 ) {
   const resolvedParams = await params;
   try {
-    const item = await new MarketplaceService().findById({
-      where: { id: resolvedParams.id },
-    });
+    const item = await new MarketplaceIdService().findById(resolvedParams.id);
 
     if (!item) {
       return NextResponse.json(
@@ -41,10 +39,7 @@ export async function PATCH(
   try {
     const body = await request.json();
 
-    const item = await new MarketplaceService().update({
-      where: { id: resolvedParams.id },
-      data: body,
-    });
+    const item = await new MarketplaceIdService().update(resolvedParams.id, body);
 
     return NextResponse.json(item);
   } catch (error) {
@@ -58,9 +53,7 @@ export async function DELETE(
 ) {
   const resolvedParams = await params;
   try {
-    await new MarketplaceService().delete({
-      where: { id: resolvedParams.id },
-    });
+    await new MarketplaceIdService().delete(resolvedParams.id);
 
     return NextResponse.json({ success: true });
   } catch (error) {

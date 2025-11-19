@@ -11,20 +11,29 @@ import { MembershipsService } from '@/lib/services/memberships/me.service';
 
 // GET /api/memberships/me - Get current user's membership
 export async function GET(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const membership = await prisma.membership.findFirst({
       where: {
@@ -65,27 +74,39 @@ export async function GET(request: NextRequest) {
 
 // POST /api/memberships/me - Subscribe to membership
 export async function POST(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const body = await parseBody(request);
     const validatedData = subscribeMembershipSchema.parse(body);
 
-    // Check if tier exists
-    const tier = await new MembershipsService().findById({
+    // Validate tier exists
+    const tier = await prisma.membershipTier.findUnique({
       where: { id: validatedData.tierId },
+      include: {
+        organization: true,
+      },
     });
 
     if (!tier) {
@@ -175,20 +196,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Send confirmation email
-    const user = await new MembershipsService().findById({
+    const user = await prisma.user.findUnique({
       where: { id: context.userId! },
     });
 
     if (user?.email) {
-      await new MembershipsService().create({
+      const membershipWithTier = membership as any;
+      await prisma.notification.create({
         data: {
           userId: context.userId!,
           type: 'MEMBERSHIP_ACTIVATED',
           title: 'Membership Activated',
-          message: `Your ${tier.name} membership has been activated successfully!`,
+          message: `Your ${membershipWithTier.tier.name} membership has been activated successfully!`,
           metadata: {
             membershipId: membership.id,
-            tierName: tier.name,
+            tierName: membershipWithTier.tier.name,
           },
         },
       });
@@ -202,20 +224,29 @@ export async function POST(request: NextRequest) {
 
 // PATCH /api/memberships/me - Cancel membership
 export async function PATCH(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const body = await parseBody(request);
     const validatedData = cancelMembershipSchema.parse(body);

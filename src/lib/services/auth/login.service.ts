@@ -1,29 +1,33 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
+import bcrypt from 'bcryptjs';
 
 /**
  * LoginService
  * Business logic for /auth/login
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class LoginService extends BaseService {
+  async findUserByEmail(email: string) {
+    return await prisma.user.findUnique({
+      where: { email },
+      include: {
+        accounts: true,
+      },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async verifyPassword(plainPassword: string, hashedPassword: string) {
+    return await bcrypt.compare(plainPassword, hashedPassword);
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
-  }
-
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async createSession(userId: string, sessionToken: string, expiresAt: Date) {
+    return await prisma.session.create({
+      data: {
+        userId,
+        sessionToken,
+        expires: expiresAt,
+      },
+    });
   }
 }

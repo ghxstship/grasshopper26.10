@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { AuthService } from '@/lib/services/auth/refresh.service';
+import { RefreshService } from "@/lib/services/auth/refresh.service";
 
 
 
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify user still exists and is active
-    const user = await new AuthService().findById({
+    const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
     });
 
@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
     );
 
     // Update session expiry
-    await new AuthService().update({
+    await prisma.session.update({
       where: { id: session.id },
       data: {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days

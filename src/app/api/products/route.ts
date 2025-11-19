@@ -12,6 +12,8 @@ import { ProductsService } from '@/lib/services/products.service';
 // GET /api/products - List products
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    
     // Rate limiting
     if (
       !rateLimit(
@@ -80,20 +82,29 @@ export async function GET(request: NextRequest) {
 
 // POST /api/products - Create product
 export async function POST(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const body = await request.json();
     const validatedData = createProductSchema.parse(body);

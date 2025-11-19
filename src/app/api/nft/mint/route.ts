@@ -8,6 +8,7 @@ import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
 import { NftService } from '@/lib/services/nft/mint.service';
+import { errors } from '@/lib/api/errors';
 
 
 
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch ticket details
-    const ticket = await new NftService().findById({
+    const ticket = await prisma.ticket.findUnique({
       where: { id: ticketId },
       include: {
         event: {

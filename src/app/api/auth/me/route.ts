@@ -1,15 +1,17 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { successResponse, handleApiError,  } from '@/lib/api/response';
-import { validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { successResponse, handleApiError } from '@/lib/api/response';
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { AuthService } from '@/lib/services/auth/me.service';
+import { errors } from '@/lib/api/errors';
 
 
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -21,11 +23,8 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     // Get current user with relations
-    const user = await new AuthService().findById({
+    const user = await prisma.user.findUnique({
       where: { id: context.userId },
       select: {
         id: true,

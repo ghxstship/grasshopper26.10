@@ -6,6 +6,7 @@ import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
 import { prisma } from '@/lib/prisma';
+import { errors } from '@/lib/api/errors';
 
 
 

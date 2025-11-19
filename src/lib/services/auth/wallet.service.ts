@@ -1,29 +1,43 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
 
 /**
- * WalletService
+ * AuthWalletService
  * Business logic for /auth/wallet
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class AuthWalletService extends BaseService {
+  async findUserWallet(userId: string) {
+    return await prisma.wallet.findUnique({
+      where: { userId },
+      include: {
+        transactions: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 10,
+        },
+      },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async createWallet(userId: string) {
+    return await prisma.wallet.create({
+      data: {
+        userId,
+        balance: 0,
+      },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
-  }
-
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async updateWalletBalance(userId: string, amount: number) {
+    return await prisma.wallet.update({
+      where: { userId },
+      data: {
+        balance: {
+          increment: amount,
+        },
+      },
+    });
   }
 }

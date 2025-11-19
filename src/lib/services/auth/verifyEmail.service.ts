@@ -1,29 +1,44 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
 
 /**
  * VerifyEmailService
  * Business logic for /auth/verify-email
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class VerifyEmailService extends BaseService {
+  async findValidVerificationToken(token: string) {
+    return await prisma.emailVerificationToken.findFirst({
+      where: {
+        token,
+        expiresAt: {
+          gt: new Date(),
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async verifyUserEmail(userId: string) {
+    return await prisma.user.update({
+      where: { id: userId },
+      data: {
+        emailVerified: new Date(),
+      },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
+  async deleteVerificationToken(token: string) {
+    return await prisma.emailVerificationToken.deleteMany({
+      where: { token },
+    });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async deleteUserVerificationTokens(userId: string) {
+    return await prisma.emailVerificationToken.deleteMany({
+      where: { userId },
+    });
   }
 }

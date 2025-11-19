@@ -1,29 +1,35 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
+import crypto from 'crypto';
 
 /**
  * ResendVerificationService
  * Business logic for /auth/resend-verification
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class ResendVerificationService extends BaseService {
+  async findUserByEmail(email: string) {
+    return await prisma.user.findUnique({
+      where: { email },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async deleteExistingTokens(userId: string) {
+    return await prisma.emailVerificationToken.deleteMany({
+      where: { userId },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
-  }
+  async createVerificationToken(userId: string) {
+    const token = crypto.randomBytes(32).toString('hex');
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+    return await prisma.emailVerificationToken.create({
+      data: {
+        userId,
+        token,
+        expiresAt,
+      },
+    });
   }
 }

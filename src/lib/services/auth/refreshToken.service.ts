@@ -1,29 +1,34 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
 
 /**
  * RefreshTokenService
  * Business logic for /auth/refresh-token
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class RefreshTokenService extends BaseService {
+  async findSessionByToken(sessionToken: string) {
+    return await prisma.session.findUnique({
+      where: { sessionToken },
+      include: {
+        user: true,
+      },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async createSession(userId: string, sessionToken: string, expiresAt: Date) {
+    return await prisma.session.create({
+      data: {
+        userId,
+        sessionToken,
+        expires: expiresAt,
+      },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
-  }
-
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async deleteSession(sessionToken: string) {
+    return await prisma.session.delete({
+      where: { sessionToken },
+    });
   }
 }

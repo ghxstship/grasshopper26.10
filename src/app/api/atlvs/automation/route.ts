@@ -4,7 +4,6 @@ import { prisma } from '@/lib/prisma';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
-import { AtlvsService } from '@/lib/services/atlvs/automation.service';
 import { z } from 'zod';
 
 
@@ -53,9 +52,10 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const workflow = await new AtlvsService().create({
+    const workflow = await prisma.automation.create({
       data: {
         ...body,
+        userId: session.user.id,
         createdBy: session.user.id,
       },
     });

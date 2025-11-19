@@ -5,13 +5,12 @@
 
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { successResponse, handleApiError } from '@/lib/api/response';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { AccountService } from '@/lib/services/account/delete.service';
 
 
 
@@ -26,6 +25,9 @@ const deleteAccountSchema = z.object({
  */
 export async function DELETE(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -37,9 +39,6 @@ export async function DELETE(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     const body = await request.json();
     const validation = deleteAccountSchema.safeParse(body);
 
@@ -50,7 +49,7 @@ export async function DELETE(request: NextRequest) {
     const { password } = validation.data;
 
     // Get user with password for verification
-    const user = await new AccountService().findById({
+    const user = await prisma.user.findUnique({
       where: { id: context.userId },
       select: {
         id: true,
@@ -71,7 +70,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete user and all related data (cascade delete via Prisma schema)
-    await new AccountService().delete({
+    await prisma.user.delete({
       where: { id: context.userId },
     });
 

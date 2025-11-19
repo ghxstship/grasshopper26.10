@@ -1,29 +1,52 @@
 import { prisma } from '@/lib/prisma';
+import { BaseService } from '../base/BaseService';
 
 /**
- * [...nextauth]Service
+ * NextAuthService
  * Business logic for /auth/[...nextauth]
+ * Handles NextAuth.js integration
  */
 
-export class AuthService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.auth.findMany(filters);
+export class NextAuthService extends BaseService {
+  async findUserById(id: string) {
+    return await prisma.user.findUnique({
+      where: { id },
+      include: {
+        accounts: true,
+        sessions: true,
+      },
+    });
   }
 
-  async findById(id: string) {
-    return await prisma.auth.findUnique({ where: { id } });
+  async findUserByEmail(email: string) {
+    return await prisma.user.findUnique({
+      where: { email },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.auth.create({ data });
+  async findAccount(provider: string, providerAccountId: string) {
+    return await prisma.account.findUnique({
+      where: {
+        provider_providerAccountId: {
+          provider,
+          providerAccountId,
+        },
+      },
+    });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.auth.update({ where: { id }, data });
-  }
-
-  async delete(id: string) {
-    return await prisma.auth.delete({ where: { id } });
+  async createAccount(data: {
+    userId: string;
+    type: string;
+    provider: string;
+    providerAccountId: string;
+    access_token?: string;
+    refresh_token?: string;
+    expires_at?: number;
+    token_type?: string;
+    scope?: string;
+    id_token?: string;
+  }) {
+    return await prisma.account.create({ data });
   }
 }

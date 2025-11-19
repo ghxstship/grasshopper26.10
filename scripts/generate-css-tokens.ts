@@ -6,8 +6,8 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { ghxstshipColors, ghxstshipSemanticColors } from '../src/design-system/tokens/primitives/ghxstship-colors';
-import { ghxstshipTypography, ghxstshipTypographySemantics } from '../src/design-system/tokens/primitives/ghxstship-typography';
+import { colors, semanticColors } from '../src/design-system/tokens/primitives/colors';
+import { typography, typographySemantics } from '../src/design-system/tokens/primitives/typography';
 import { spacing } from '../src/design-system/tokens/primitives/spacing';
 import { borders, shadows } from '../src/design-system/tokens/primitives/borders';
 import { animations } from '../src/design-system/tokens/primitives/animations';
@@ -31,14 +31,14 @@ function generateCSSVariables(): string {
   /* ============================================ */
   
   /* Primary Colors - ONLY black and white */
-  --color-black: ${ghxstshipColors.black};
-  --color-white: ${ghxstshipColors.white};
+  --color-black: ${colors.black};
+  --color-white: ${colors.white};
   
   /* Greyscale Spectrum - 9 tones */
 `;
 
   // Generate grey scale
-  Object.entries(ghxstshipColors.grey).forEach(([key, value]) => {
+  Object.entries(colors.grey).forEach(([key, value]) => {
     const comment = getGreyComment(key);
     css += `  --grey-${key}: ${value};${comment ? `  /* ${comment} */` : ''}\n`;
   });
@@ -48,17 +48,17 @@ function generateCSSVariables(): string {
 `;
 
   // Generate semantic surface colors
-  Object.entries(ghxstshipSemanticColors.surface).forEach(([key, value]) => {
+  Object.entries(semanticColors.surface).forEach(([key, value]) => {
     css += `  --surface-${key}: ${value};\n`;
   });
 
   // Generate semantic text colors
-  Object.entries(ghxstshipSemanticColors.text).forEach(([key, value]) => {
+  Object.entries(semanticColors.text).forEach(([key, value]) => {
     css += `  --text-${key}: ${value};\n`;
   });
 
   // Generate semantic border colors
-  Object.entries(ghxstshipSemanticColors.border).forEach(([key, value]) => {
+  Object.entries(semanticColors.border).forEach(([key, value]) => {
     css += `  --border-${key}: ${value};\n`;
   });
 
@@ -68,7 +68,7 @@ function generateCSSVariables(): string {
   --background: var(--surface-primary);
   --foreground: var(--text-primary);
   --surface: var(--surface-secondary);
-  --surface-dark: ${ghxstshipColors.grey[900]};
+  --surface-dark: ${colors.grey[900]};
   --border: var(--border-default);
   --border-strong: var(--border-strong);
   --text-secondary: var(--text-secondary);
@@ -81,7 +81,7 @@ function generateCSSVariables(): string {
 `;
 
   // Generate typography tokens for each semantic level
-  Object.entries(ghxstshipTypographySemantics).forEach(([level, config]) => {
+  Object.entries(typographySemantics).forEach(([level, config]) => {
     const levelName = level === 'bodyLg' ? 'body-lg' : level === 'bodySm' ? 'body-sm' : level;
     css += `
   /* ${level.toUpperCase()} Typography */

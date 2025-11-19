@@ -12,6 +12,9 @@ import { MembershipsService } from '@/lib/services/memberships/cancel.service';
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -22,9 +25,6 @@ export async function POST(request: NextRequest) {
     ) {
       throw errors.rateLimitExceeded();
     }
-
-    const context = await validateRequest(request);
-    requireAuth(context);
 
     const body = await request.json();
     const { membershipId } = body;

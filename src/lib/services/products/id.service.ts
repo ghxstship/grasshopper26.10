@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class ProductsService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.products.findMany(filters);
+    return await prisma.product.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.products.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.product.findUnique({ where: { id: params } });
+    }
+    return await prisma.product.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.products.create({ data });
+    return await prisma.product.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.products.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.product.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.product.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.products.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.product.delete({ where: { id: params } });
+    }
+    return await prisma.product.delete(params);
   }
 }

@@ -6,25 +6,35 @@ import { getPaginationParams, validateRequest, requireAuth,  } from '@/lib/api/m
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { NotificationsService } from '@/lib/services/notifications.service';
+import { errors } from '@/lib/api/errors';
 
 
 
 // GET /api/notifications - List user notifications
 export async function GET(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const { searchParams } = new URL(request.url);
     const { page, limit, skip } = getPaginationParams(request);

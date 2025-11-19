@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class ProfileService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.profile.findMany(filters);
+    return await prisma.user.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.profile.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.user.findUnique({ where: { id: params } });
+    }
+    return await prisma.user.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.profile.create({ data });
+    return await prisma.user.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.profile.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any; select?: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.user.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.user.update(params as any);
   }
 
-  async delete(id: string) {
-    return await prisma.profile.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.user.delete({ where: { id: params } });
+    }
+    return await prisma.user.delete(params);
   }
 }

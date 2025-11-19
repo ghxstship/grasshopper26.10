@@ -8,22 +8,30 @@ import { prisma } from '@/lib/prisma';
 export class CartService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.cart.findMany(filters);
+    return await prisma.cartItem.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.cart.findUnique({ where: { id } });
+  async findById(params: any) {
+    // Check if looking for cart or product based on where clause
+    if (params.where?.userId) {
+      return await prisma.cart.findFirst(params);
+    }
+    return await prisma.product.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.cart.create({ data });
+    // Check if creating cart or cart item based on data structure
+    if (data.data?.userId && !data.data?.cartId) {
+      return await prisma.cart.create(data);
+    }
+    return await prisma.cartItem.create(data);
   }
 
-  async update(id: string, data: any) {
-    return await prisma.cart.update({ where: { id }, data });
+  async update(params: any) {
+    return await prisma.cartItem.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.cart.delete({ where: { id } });
+  async delete(params: any) {
+    return await prisma.cartItem.delete(params);
   }
 }

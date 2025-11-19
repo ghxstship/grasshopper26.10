@@ -12,7 +12,7 @@ import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
-import { AuthService } from '@/lib/services/auth/wallet.service';
+import { errors } from '@/lib/api/errors';
 
 
 
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user details
-    const user = await new AuthService().findById({
+    const user = await prisma.user.findUnique({
       where: { id: result.userId },
       select: {
         id: true,

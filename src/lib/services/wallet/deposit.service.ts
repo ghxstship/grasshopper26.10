@@ -11,19 +11,31 @@ export class WalletService {
     return await prisma.wallet.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.wallet.findUnique({ where: { id } });
+  async findById(params: string | { where: any; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.wallet.findUnique({ where: { id: params } });
+    }
+    return await prisma.wallet.findUnique(params as any);
   }
 
-  async create(data: any) {
-    return await prisma.wallet.create({ data });
+  async create(params: any) {
+    if (params.data) {
+      return await prisma.wallet.create(params);
+    }
+    return await prisma.wallet.create({ data: params });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.wallet.update({ where: { id }, data });
+  async update(params: string | { where: any; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.wallet.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.wallet.update(params as any);
   }
 
-  async delete(id: string) {
-    return await prisma.wallet.delete({ where: { id } });
+  async delete(params: string | { where: any }) {
+    if (typeof params === 'string') {
+      return await prisma.wallet.delete({ where: { id: params } });
+    }
+    return await prisma.wallet.delete(params as any);
   }
 }

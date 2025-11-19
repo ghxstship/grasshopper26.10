@@ -1,29 +1,71 @@
+import { BaseService } from '../base/BaseService';
 import { prisma } from '@/lib/prisma';
 
 /**
- * [id]Service
+ * MarketplaceIdService
  * Business logic for /marketplace/:id
+ * Handles individual marketplace product operations
  */
 
-export class MarketplaceService {
-  // Add service methods here
-  async findAll(filters?: any) {
-    return await prisma.marketplace.findMany(filters);
-  }
-
+export class MarketplaceIdService extends BaseService {
   async findById(id: string) {
-    return await prisma.marketplace.findUnique({ where: { id } });
+    return await prisma.product.findUnique({
+      where: { id },
+      include: {
+        cartItems: {
+          include: {
+            cart: {
+              select: {
+                id: true,
+                userId: true,
+              },
+            },
+          },
+        },
+        organization: true,
+      },
+    });
   }
 
-  async create(data: any) {
-    return await prisma.marketplace.create({ data });
+  async update(id: string, data: {
+    name?: string;
+    description?: string;
+    price?: number;
+    imageUrl?: string;
+    stock?: number;
+  }) {
+    return await prisma.product.update({
+      where: { id },
+      data,
+    });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.marketplace.update({ where: { id }, data });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.product.delete({ where: { id: params } });
+    }
+    return await prisma.product.delete(params);
   }
 
-  async delete(id: string) {
-    return await prisma.marketplace.delete({ where: { id } });
+  async incrementStock(id: string, amount: number) {
+    return await prisma.product.update({
+      where: { id },
+      data: {
+        stock: {
+          increment: amount,
+        },
+      },
+    });
+  }
+
+  async decrementStock(id: string, amount: number) {
+    return await prisma.product.update({
+      where: { id },
+      data: {
+        stock: {
+          decrement: amount,
+        },
+      },
+    });
   }
 }

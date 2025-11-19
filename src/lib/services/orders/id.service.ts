@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class OrdersService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.orders.findMany(filters);
+    return await prisma.order.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.orders.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.order.findUnique({ where: { id: params } });
+    }
+    return await prisma.order.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.orders.create({ data });
+    return await prisma.order.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.orders.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any; include?: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.order.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.order.update(params as any);
   }
 
-  async delete(id: string) {
-    return await prisma.orders.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.order.delete({ where: { id: params } });
+    }
+    return await prisma.order.delete(params);
   }
 }

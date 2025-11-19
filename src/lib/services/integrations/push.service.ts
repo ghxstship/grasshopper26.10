@@ -1,29 +1,69 @@
+import { BaseService } from '../base/BaseService';
 import { prisma } from '@/lib/prisma';
 
 /**
- * PushService
+ * IntegrationsService
  * Business logic for /integrations/push
+ * Handles push notification integrations using NotificationPreferences
  */
 
-export class IntegrationsService {
-  // Add service methods here
+export class IntegrationsService extends BaseService {
   async findAll(filters?: any) {
-    return await prisma.integrations.findMany(filters);
+    return await prisma.notificationPreferences.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.integrations.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.notificationPreferences.findUnique({ where: { id: params } });
+    }
+    return await prisma.notificationPreferences.findUnique(params);
+  }
+
+  async findByUserId(userId: string) {
+    return await prisma.notificationPreferences.findUnique({
+      where: { userId },
+    });
   }
 
   async create(data: any) {
-    return await prisma.integrations.create({ data });
+    return await prisma.notificationPreferences.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.integrations.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.notificationPreferences.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.notificationPreferences.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.integrations.delete({ where: { id } });
+  async updateByUserId(userId: string, data: any) {
+    return await prisma.notificationPreferences.update({
+      where: { userId },
+      data,
+    });
+  }
+
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.notificationPreferences.delete({ where: { id: params } });
+    }
+    return await prisma.notificationPreferences.delete(params);
+  }
+
+  async sendPushNotification(userId: string, notification: {
+    title: string;
+    body: string;
+    data?: Record<string, unknown>;
+  }) {
+    // Create notification record
+    return await prisma.notification.create({
+      data: {
+        userId,
+        title: notification.title,
+        message: notification.body,
+        type: 'PUSH',
+        read: false,
+      },
+    });
   }
 }

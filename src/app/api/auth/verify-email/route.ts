@@ -12,7 +12,8 @@ import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
-import { AuthService } from '@/lib/services/auth/verifyEmail.service';
+import { VerifyEmailService } from "@/lib/services/auth/verifyEmail.service";
+import { errors } from '@/lib/api/errors';
 
 
 

@@ -6,11 +6,15 @@ import { genericAdvancingSchema } from '@/lib/validations/advancing';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { CompvssService } from '@/lib/services/compvss/advancing/technical.service';
+import { errors } from '@/lib/api/errors';
 
 
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -21,9 +25,6 @@ export async function POST(request: NextRequest) {
     ) {
       throw errors.rateLimitExceeded();
     }
-
-    const context = await validateRequest(request);
-    requireAuth(context);
 
     const body = await request.json();
     const validatedData = genericAdvancingSchema.parse(body);

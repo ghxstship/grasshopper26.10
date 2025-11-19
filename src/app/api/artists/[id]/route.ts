@@ -1,11 +1,8 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { updateArtistSchema } from '@/lib/validations/events';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { ArtistsService } from '@/lib/services/artists/id.service';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
 
 
 
@@ -22,7 +19,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const artist = await new ArtistsService().findById({
+    const artist = await prisma.artist.findUnique({
       where: { id },
       include: {
         events: {
@@ -85,7 +82,7 @@ export async function PATCH(
     const { id } = await params;
 
     // Check if artist exists
-    const existingArtist = await new ArtistsService().findById({
+    const existingArtist = await prisma.artist.findUnique({
       where: { id },
     });
 
@@ -94,7 +91,7 @@ export async function PATCH(
     }
 
     // Update artist
-    const artist = await new ArtistsService().update({
+    const artist = await prisma.artist.update({
       where: { id },
       data: validatedData,
     });
@@ -117,7 +114,7 @@ export async function DELETE(
     const { id } = await params;
 
     // Check if artist exists
-    const existingArtist = await new ArtistsService().findById({
+    const existingArtist = await prisma.artist.findUnique({
       where: { id },
       include: {
         _count: {
@@ -141,7 +138,7 @@ export async function DELETE(
     }
 
     // Delete artist
-    await new ArtistsService().delete({
+    await prisma.artist.delete({
       where: { id },
     });
 

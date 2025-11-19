@@ -4,13 +4,17 @@ import { successResponse, handleApiError,  } from '@/lib/api/response';
 import { validateRequest, requireAuth,  } from '@/lib/api/middleware';
 import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { AuthService } from '@/lib/services/auth/logout.service';
+import { LogoutService } from "@/lib/services/auth/logout.service";
+import { errors } from '@/lib/api/errors';
 
 
 
 // POST /api/auth/logout - Logout user
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -22,18 +26,15 @@ export async function POST(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    const context = await validateRequest(request);
-    requireAuth(context);
-
     // Invalidate all active sessions for this user
-    await new AuthService().deleteMany({
+    await prisma.session.deleteMany({
       where: {
         userId: context.userId!,
       },
     });
 
     // Log audit event
-    await new AuthService().create({
+    await prisma.auditLog.create({
       data: {
         userId: context.userId!,
         action: 'USER_LOGOUT',

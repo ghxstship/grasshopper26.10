@@ -1,11 +1,9 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { createArtistSchema } from '@/lib/validations/events';
-import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, getPaginationParams, getSortParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, getPaginationParams, getSortParams, validateRequest, requireAuth, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { ArtistsService } from '@/lib/services/artists.service';
 
 
 
@@ -49,7 +47,7 @@ export async function GET(request: NextRequest) {
     const total = await prisma.artist.count({ where });
 
     // Get artists
-    const artists = await new ArtistsService().findAll({
+    const artists = await prisma.artist.findMany({
       where,
       skip,
       take: limit,
@@ -103,7 +101,7 @@ export async function POST(request: NextRequest) {
         .replace(/(^-|-$)/g, '');
 
     // Check if slug is unique
-    const existingArtist = await new ArtistsService().findById({
+    const existingArtist = await prisma.artist.findUnique({
       where: { slug },
     });
 
@@ -112,7 +110,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create artist
-    const artist = await new ArtistsService().create({
+    const artist = await prisma.artist.create({
       data: {
         ...validatedData,
         slug,

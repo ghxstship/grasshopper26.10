@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class TicketsService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.tickets.findMany(filters);
+    return await prisma.ticket.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.tickets.findUnique({ where: { id } });
+  async findById(params: string | { where: any; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.user.findUnique({ where: { id: params } });
+    }
+    return await prisma.user.findUnique(params as any);
   }
 
   async create(data: any) {
-    return await prisma.tickets.create({ data });
+    return await prisma.ticket.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.tickets.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.ticket.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.ticket.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.tickets.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.ticket.delete({ where: { id: params } });
+    }
+    return await prisma.ticket.delete(params);
   }
 }

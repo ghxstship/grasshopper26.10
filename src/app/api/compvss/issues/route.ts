@@ -6,11 +6,15 @@ import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { z } from 'zod';
 import { CompvssService } from '@/lib/services/compvss/issues.service';
+import { errors } from '@/lib/api/errors';
 
 
 
 export async function GET(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -21,9 +25,6 @@ export async function GET(request: NextRequest) {
     ) {
       throw errors.rateLimitExceeded();
     }
-
-    const context = await validateRequest(request);
-    requireAuth(context);
 
     const { searchParams } = new URL(request.url);
     const { page, limit, skip } = getPaginationParams(request);
@@ -61,6 +62,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await validateRequest(request);
+    requireAuth(context);
+
     // Rate limiting
     if (
       !rateLimit(
@@ -71,9 +75,6 @@ export async function POST(request: NextRequest) {
     ) {
       throw errors.rateLimitExceeded();
     }
-
-    const context = await validateRequest(request);
-    requireAuth(context);
 
     const body = await request.json();
     const issue = await new CompvssService().create({

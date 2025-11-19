@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
       let itemName = '';
 
       if (item.type === 'ticket') {
-        const ticketType = await new OrdersService().findById({
+        const ticketType = await prisma.ticketType.findUnique({
           where: { id: item.itemId },
           include: { event: true },
         });
@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
         itemPrice = new Decimal(ticketType.price.toString());
         itemName = `${ticketType.event.name} - ${ticketType.name}`;
       } else if (item.type === 'product') {
-        const product = await new OrdersService().findById({
+        const product = await prisma.product.findUnique({
           where: { id: item.itemId },
         });
 
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
         itemPrice = new Decimal(product.price.toString());
         itemName = product.name;
       } else if (item.type === 'adventure') {
-        const adventure = await new OrdersService().findById({
+        const adventure = await prisma.adventure.findUnique({
           where: { id: item.itemId },
         });
 

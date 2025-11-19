@@ -1,8 +1,7 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { updateCartItemSchema } from '@/lib/validations/products';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { CartService } from '@/lib/services/cart/items/id.service';
 
@@ -41,7 +40,7 @@ export async function PATCH(
         cart: true,
         product: true,
       },
-    });
+    }) as any;
 
     if (!cartItem) {
       throw errors.notFound('Cart item');
@@ -104,7 +103,7 @@ export async function DELETE(
       include: {
         cart: true,
       },
-    });
+    }) as any;
 
     if (!cartItem) {
       throw errors.notFound('Cart item');

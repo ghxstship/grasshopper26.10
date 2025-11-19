@@ -8,22 +8,31 @@ import { prisma } from '@/lib/prisma';
 export class CheckoutService {
   // Add service methods here
   async findAll(filters?: any) {
-    return await prisma.checkout.findMany(filters);
+    return await prisma.order.findMany(filters);
   }
 
-  async findById(id: string) {
-    return await prisma.checkout.findUnique({ where: { id } });
+  async findById(params: string | { where: { id: string }; include?: any; select?: any }) {
+    if (typeof params === 'string') {
+      return await prisma.order.findUnique({ where: { id: params } });
+    }
+    return await prisma.order.findUnique(params);
   }
 
   async create(data: any) {
-    return await prisma.checkout.create({ data });
+    return await prisma.order.create({ data });
   }
 
-  async update(id: string, data: any) {
-    return await prisma.checkout.update({ where: { id }, data });
+  async update(params: string | { where: { id: string }; data: any }, data?: any) {
+    if (typeof params === 'string') {
+      return await prisma.order.update({ where: { id: params }, data: data! });
+    }
+    return await prisma.order.update(params);
   }
 
-  async delete(id: string) {
-    return await prisma.checkout.delete({ where: { id } });
+  async delete(params: string | { where: { id: string } }) {
+    if (typeof params === 'string') {
+      return await prisma.order.delete({ where: { id: params } });
+    }
+    return await prisma.order.delete(params);
   }
 }
