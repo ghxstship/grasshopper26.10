@@ -2,8 +2,6 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { TicketsService } from '@/lib/services/tickets/id/validate.service';
 
 
@@ -54,9 +52,15 @@ export async function POST(
       });
     }
 
+    // Get event details
+    const event = await prisma.event.findUnique({
+      where: { id: ticket.eventId },
+      select: { startDate: true },
+    });
+
     // Check if event has started
     const now = new Date();
-    if (ticket.event.startDate > now) {
+    if (event && event.startDate > now) {
       return successResponse({
         valid: false,
         reason: 'Event has not started yet',
@@ -65,7 +69,7 @@ export async function POST(
     }
 
     // Mark ticket as used
-    const updatedTicket = await new TicketsService().update({
+    const updatedTicket = await prisma.ticket.update({
       where: { id },
       data: {
         status: 'USED',

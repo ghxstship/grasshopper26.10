@@ -3,34 +3,42 @@ import { prisma } from '@/lib/prisma';
 import { validateTicketSchema } from '@/lib/validations/orders';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { TicketsService } from '@/lib/services/tickets/validate.service';
 
 
 
 // POST /api/tickets/validate - Validate ticket (QR scan)
 export async function POST(request: NextRequest) {
-  try {
-    // Rate limiting
-    if (
-      !rateLimit(
-        RateLimitIdentifiers.byUserId(context.userId),
-        RATE_LIMITS.WRITE_OPERATIONS.limit,
-        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
-      )
-    ) {
-      throw errors.rateLimitExceeded();
-    }
-
-    const context = await validateRequest(request);
+  try {const context = await validateRequest(request);
     requireAuth(context);
+
+
+    // Rate limiting
+
+    if (
+
+      !rateLimit(
+
+        RateLimitIdentifiers.byUserId(context.userId),
+
+        RATE_LIMITS.WRITE_OPERATIONS.limit,
+
+        RATE_LIMITS.WRITE_OPERATIONS.windowMs,
+
+      )
+
+    ) {
+
+      throw errors.rateLimitExceeded();
+
+    }
 
     const body = await parseBody(request);
     const validatedData = validateTicketSchema.parse(body);
 
     // Find ticket by QR code
-    const ticket = await new TicketsService().findById({
+    const ticket = await prisma.ticket.findFirst({
       where: { qrCode: validatedData.qrCode },
       include: {
         event: {
@@ -109,7 +117,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Mark ticket as used
-    const updatedTicket = await new TicketsService().update({
+    const updatedTicket = await prisma.ticket.update({
       where: { id: ticket.id },
       data: {
         status: 'USED',

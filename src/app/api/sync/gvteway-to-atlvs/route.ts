@@ -92,10 +92,12 @@ export async function POST(request: NextRequest) {
         const budget = await prisma.budget.create({
           data: {
             projectId: project.id,
-            category: 'Event Production',
-            allocatedAmount: totalRevenue * 0.7, // 70% of revenue as budget
-            spentAmount: 0,
-            status: 'ACTIVE',
+            name: 'Event Production Budget',
+            amount: totalRevenue * 0.7, // 70% of revenue as budget
+            totalAmount: totalRevenue * 0.7,
+            spent: 0,
+            startDate: new Date(),
+            endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year from now
           },
         });
 

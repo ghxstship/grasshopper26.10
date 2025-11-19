@@ -121,13 +121,19 @@ export async function POST(
       throw errors.badRequest('Only valid tickets can be transferred');
     }
 
+    // Get event details
+    const event = await prisma.event.findUnique({
+      where: { id: ticket.eventId },
+      select: { startDate: true },
+    });
+
     // Check if event hasn't started
-    if (ticket.event.startDate < new Date()) {
+    if (event && event.startDate < new Date()) {
       throw errors.badRequest('Cannot transfer tickets for events that have already started');
     }
 
     // Find recipient user
-    const recipient = await new TicketsService().findById({
+    const recipient = await prisma.user.findUnique({
       where: { email: validatedData.recipientEmail },
     });
 
@@ -164,13 +170,13 @@ export async function POST(
     });
 
     // Send notification to recipient
-    const sender = await new TicketsService().findById({
+    const sender = await prisma.user.findUnique({
       where: { id: context.userId! },
       select: { name: true },
     });
 
     if (recipient) {
-      await new TicketsService().create({
+      await prisma.notification.create({
         data: {
           userId: recipient.id,
           type: 'TICKET_TRANSFER',

@@ -109,9 +109,7 @@ export async function POST(request: NextRequest) {
       const existing = await prisma.teamMember.findFirst({
         where: {
           team: {
-            projects: {
-              some: { id: project.id },
-            },
+            projectId: project.id,
           },
           userId: crew.userId,
         },

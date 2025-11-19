@@ -3,8 +3,6 @@ import { prisma } from '@/lib/prisma';
 import { updateVenueSchema } from '@/lib/validations/events';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { VenuesService } from '@/lib/services/venues/id.service';
 
 
@@ -109,7 +107,7 @@ export async function DELETE(
     requireAuth(context);
 
     // Check if venue exists
-    const existingVenue = await new VenuesService().findById({
+    const existingVenue = await prisma.venue.findUnique({
       where: { id: id },
       include: {
         _count: {

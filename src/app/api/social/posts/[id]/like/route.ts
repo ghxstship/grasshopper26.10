@@ -2,8 +2,6 @@ import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { SocialService } from '@/lib/services/social/posts/id/like.service';
 
 
@@ -62,12 +60,12 @@ export async function POST(
 
       // Create notification for post author (if not liking own post)
       if (post.userId !== context.userId) {
-        const liker = await new SocialService().findById({
+        const liker = await prisma.user.findUnique({
           where: { id: context.userId! },
           select: { name: true, image: true },
         });
 
-        await new SocialService().create({
+        await prisma.notification.create({
           data: {
             userId: post.userId,
             type: 'POST_LIKED',
