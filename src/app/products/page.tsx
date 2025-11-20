@@ -332,18 +332,19 @@ export default function ProductsPage() {
  <SubsectionHeader className="text-gvteway-red-500">
  ${product.price}
  </SubsectionHeader>
- {product.originalPrice && (
- <Caption className="line-through">
- ${product.originalPrice}
- </Caption>
- )}
- </Caption>
+              {product.originalPrice && (
+                <div>
+                  <Caption className="line-through">
+                    ${product.originalPrice}
+                  </Caption>
+                </div>
+              )}
+            </div>
  {product.originalPrice && (
  <Badge variant="error">
  Save {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
  </Badge>
  )}
- </Caption>
  </div>
  </div>
  <div className="flex items-center justify-between pt-4 border-t">

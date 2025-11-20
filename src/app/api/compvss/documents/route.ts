@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 const documentSchema = z.object({
   name: z.string().min(1),
   type: z.enum(['document', 'image', 'video', 'audio', 'archive', 'other']),
-  folder: z.string(),
+  folder: z.string().optional(),
   permissions: z.enum(['public', 'team', 'restricted', 'private']),
   tags: z.array(z.string()).optional(),
   fileUrl: z.string().url(),
@@ -25,22 +26,19 @@ export async function GET(req: NextRequest) {
     const permissions = searchParams.get('permissions');
     const search = searchParams.get('search');
 
-    // Mock data - replace with actual database query
-    // Filter based on user permissions
-    const documents = [
-      {
-        id: 'DOC-001',
-        name: 'Production Schedule Q4 2024.pdf',
-        type: 'document',
-        size: 2457600,
-        uploadedBy: 'Sarah Johnson',
-        uploadedDate: '2024-11-18',
-        folder: 'Production',
-        permissions: 'team',
-        tags: ['schedule', 'production', 'q4'],
-        fileUrl: '/files/doc-001.pdf'
-      }
-    ];
+    const where: Record<string, unknown> = {};
+    if (folder) where.folder = folder;
+    if (permissions) where.permissions = permissions;
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: 'insensitive' } }
+      ];
+    }
+
+    const documents = await prisma.compvssDocument.findMany({
+      where,
+      orderBy: { uploadedDate: 'desc' }
+    });
 
     // Apply RBAC filtering based on user role and document permissions
     const filtered = documents.filter(doc => {
@@ -51,7 +49,10 @@ export async function GET(req: NextRequest) {
       return false;
     });
 
-    return NextResponse.json({ documents: filtered, total: filtered.length });
+    return NextResponse.json({ 
+      documents: filtered.length > 0 ? filtered : [], 
+      total: filtered.length 
+    });
   } catch (error) {
     return handleApiError(error);
   }
@@ -73,14 +74,18 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const validated = documentSchema.parse(body);
 
-    // Mock response - replace with actual file upload and database insert
-    const document = {
-      id: `DOC-${Date.now()}`,
-      ...validated,
-      uploadedBy: session.user.id,
-      uploadedDate: new Date().toISOString(),
-      lastModified: new Date().toISOString()
-    };
+    const document = await prisma.compvssDocument.create({
+      data: {
+        name: validated.name,
+        type: validated.type,
+        folder: validated.folder,
+        permissions: validated.permissions,
+        tags: validated.tags || [],
+        fileUrl: validated.fileUrl,
+        size: validated.size,
+        uploadedBy: session.user.id
+      }
+    });
 
     return NextResponse.json(document, { status: 201 });
   } catch (error) {
@@ -107,7 +112,10 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Document ID required' }, { status: 400 });
     }
 
-    // Mock response - replace with actual database delete
+    await prisma.compvssDocument.delete({
+      where: { id: documentId }
+    });
+
     return NextResponse.json({ 
       success: true, 
       message: 'Document deleted successfully',

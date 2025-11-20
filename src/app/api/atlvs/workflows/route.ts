@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 const workflowSchema = z.object({
   name: z.string().min(1),
-  description: z.string(),
+  description: z.string().optional(),
   category: z.enum(['event-setup', 'production', 'logistics', 'maintenance', 'approval', 'communication']),
   steps: z.array(z.object({
     id: z.string(),
@@ -31,26 +32,25 @@ export async function GET(req: NextRequest) {
     const automationLevel = searchParams.get('automationLevel');
     const search = searchParams.get('search');
 
-    // Mock data for now - replace with actual database query
-    const workflows = [
-      {
-        id: 'WF-001',
-        name: 'Event Setup & Teardown',
-        description: 'Complete workflow for setting up and tearing down event infrastructure',
-        category: 'event-setup',
-        steps: 12,
-        estimatedTime: '4-6 hours',
-        usageCount: 45,
-        lastUsed: '2024-11-15',
-        tags: ['setup', 'infrastructure', 'logistics'],
-        automationLevel: 'semi-automated',
-        status: 'active',
-        createdBy: session.user.id,
-        createdAt: new Date().toISOString()
-      }
-    ];
+    const where: Record<string, unknown> = {};
+    if (category) where.category = category;
+    if (automationLevel) where.automationLevel = automationLevel;
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } }
+      ];
+    }
 
-    return NextResponse.json({ workflows, total: workflows.length });
+    const workflows = await prisma.workflow.findMany({
+      where,
+      orderBy: { usageCount: 'desc' }
+    });
+
+    return NextResponse.json({ 
+      workflows: workflows.length > 0 ? workflows : [], 
+      total: workflows.length 
+    });
   } catch (error) {
     return handleApiError(error);
   }
@@ -66,15 +66,19 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const validated = workflowSchema.parse(body);
 
-    // Mock response - replace with actual database insert
-    const workflow = {
-      id: `WF-${Date.now()}`,
-      ...validated,
-      usageCount: 0,
-      status: 'active',
-      createdBy: session.user.id,
-      createdAt: new Date().toISOString()
-    };
+    const workflow = await prisma.workflow.create({
+      data: {
+        name: validated.name,
+        description: validated.description,
+        category: validated.category,
+        steps: validated.steps,
+        automationLevel: validated.automationLevel,
+        tags: validated.tags || [],
+        usageCount: 0,
+        status: 'active',
+        createdBy: session.user.id
+      }
+    });
 
     return NextResponse.json(workflow, { status: 201 });
   } catch (error) {

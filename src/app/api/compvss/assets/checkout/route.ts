@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 const checkoutSchema = z.object({
   assetId: z.string(),
-  dueDate: z.string(),
+  dueDate: z.coerce.date(),
   purpose: z.string().optional(),
   notes: z.string().optional()
 });
 
 const checkinSchema = z.object({
-  assetId: z.string(),
+  checkoutId: z.string(),
   condition: z.enum(['excellent', 'good', 'fair', 'needs-repair']),
   notes: z.string().optional()
 });
@@ -35,29 +36,57 @@ export async function POST(req: NextRequest) {
     if (action === 'checkout') {
       const validated = checkoutSchema.parse(body);
       
-      // Mock response - replace with actual database update
-      const checkout = {
-        id: `CHK-${Date.now()}`,
-        ...validated,
-        userId: session.user.id,
-        checkedOutAt: new Date().toISOString(),
-        status: 'checked-out'
-      };
+      // Create checkout record and update asset status
+      const [checkout] = await prisma.$transaction([
+        prisma.compvssAssetCheckout.create({
+          data: {
+            assetId: validated.assetId,
+            userId: session.user.id,
+            dueDate: validated.dueDate,
+            purpose: validated.purpose,
+            notes: validated.notes,
+            status: 'checked-out'
+          }
+        }),
+        prisma.compvssAsset.update({
+          where: { id: validated.assetId },
+          data: { status: 'checked-out' }
+        })
+      ]);
 
       return NextResponse.json(checkout, { status: 201 });
     } else if (action === 'checkin') {
       const validated = checkinSchema.parse(body);
       
-      // Mock response - replace with actual database update
-      const checkin = {
-        id: `CHK-${Date.now()}`,
-        ...validated,
-        userId: session.user.id,
-        checkedInAt: new Date().toISOString(),
-        status: 'available'
-      };
+      // Update checkout record and asset status
+      const checkout = await prisma.compvssAssetCheckout.findUnique({
+        where: { id: validated.checkoutId }
+      });
 
-      return NextResponse.json(checkin);
+      if (!checkout) {
+        return NextResponse.json({ error: 'Checkout record not found' }, { status: 404 });
+      }
+
+      const [updated] = await prisma.$transaction([
+        prisma.compvssAssetCheckout.update({
+          where: { id: validated.checkoutId },
+          data: {
+            checkedInAt: new Date(),
+            condition: validated.condition,
+            notes: validated.notes,
+            status: 'returned'
+          }
+        }),
+        prisma.compvssAsset.update({
+          where: { id: checkout.assetId },
+          data: { 
+            status: 'available',
+            condition: validated.condition
+          }
+        })
+      ]);
+
+      return NextResponse.json(updated);
     }
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 });

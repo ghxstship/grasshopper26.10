@@ -257,6 +257,8 @@ export default function CartPage() {
  Category: {item.category}
  </Metadata>
  </div>
+ </div>
+ </div>
  <div className="flex items-center justify-between gap-4 pt-3 border-t-2">
  <div className="flex items-center gap-2">
  <Button
@@ -291,12 +293,12 @@ export default function CartPage() {
  <SubsectionHeader className="text-gvteway-red-500">
  ${(item.price * item.quantity).toFixed(2)}
  </SubsectionHeader>
- </div></div>
+ </div>
+ </div>
  </div>
  </CardContent>
  </Card>
  ))}
-
  {/* Clear Cart Button */}
  <Card variant="gvteway">
  <CardContent className="p-4">
@@ -381,11 +383,14 @@ export default function CartPage() {
  <SubsectionHeader className="text-gvteway-red-500">
  ${total.toFixed(2)}
  </SubsectionHeader>
- </div></div>
-
+ </div>
+ </div>
+ <div className="space-y-2">
  <BodyTextSmall className="text-center pt-2">
  Free shipping on orders over $500
  </BodyTextSmall>
+ </div>
+ </div>
  </CardContent>
  <CardFooter className="flex-col gap-3">
  <Button variant="gvteway" className="w-full" size="lg"
@@ -420,7 +425,9 @@ export default function CartPage() {
  </div>
  </CardContent>
  </Card>
- </div></div>
+ </div>
+ </div>
+ </div>
  </ContentLayout>
  </GvtewayLayout>
  );

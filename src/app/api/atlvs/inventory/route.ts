@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 const inventorySchema = z.object({
@@ -9,7 +10,7 @@ const inventorySchema = z.object({
   quantity: z.number().int().min(0),
   unit: z.string(),
   minStockLevel: z.number().int().min(0).optional(),
-  location: z.string(),
+  location: z.string().optional(),
   supplier: z.string().optional(),
   cost: z.number().min(0).optional()
 });
@@ -25,41 +26,22 @@ export async function GET(req: NextRequest) {
     const category = searchParams.get('category');
     const lowStock = searchParams.get('lowStock') === 'true';
 
-    // Mock data - replace with actual database query
-    const inventory = [
-      {
-        id: 'INV-001',
-        itemName: 'LED Panels',
-        category: 'Lighting',
-        quantity: 150,
-        unit: 'pieces',
-        minStockLevel: 100,
-        location: 'Warehouse A',
-        supplier: 'Tech Lighting Co',
-        cost: 250,
-        lastRestocked: '2024-11-18',
-        status: 'in-stock'
-      },
-      {
-        id: 'INV-002',
-        itemName: 'Audio Cables',
-        category: 'Audio',
-        quantity: 15,
-        unit: 'pieces',
-        minStockLevel: 50,
-        location: 'Storage Room B',
-        supplier: 'Sound Solutions',
-        cost: 25,
-        lastRestocked: '2024-11-10',
-        status: 'low-stock'
-      }
-    ];
+    const where: Record<string, unknown> = {};
+    if (category) where.category = category;
+
+    const inventory = await prisma.inventory.findMany({
+      where,
+      orderBy: { itemName: 'asc' }
+    });
 
     const filtered = lowStock 
-      ? inventory.filter(item => item.quantity < (item.minStockLevel || 0))
+      ? inventory.filter(item => item.minStockLevel && item.quantity < item.minStockLevel)
       : inventory;
 
-    return NextResponse.json({ inventory: filtered, total: filtered.length });
+    return NextResponse.json({ 
+      inventory: filtered.length > 0 ? filtered : [], 
+      total: filtered.length 
+    });
   } catch (error) {
     return handleApiError(error);
   }
@@ -75,14 +57,22 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const validated = inventorySchema.parse(body);
 
-    // Mock response - replace with actual database insert
-    const item = {
-      id: `INV-${Date.now()}`,
-      ...validated,
-      status: 'in-stock',
-      createdBy: session.user.id,
-      createdAt: new Date().toISOString()
-    };
+    const item = await prisma.inventory.create({
+      data: {
+        itemName: validated.itemName,
+        category: validated.category,
+        quantity: validated.quantity,
+        unit: validated.unit,
+        minStockLevel: validated.minStockLevel,
+        location: validated.location,
+        supplier: validated.supplier,
+        cost: validated.cost,
+        status: validated.minStockLevel && validated.quantity < validated.minStockLevel 
+          ? 'low-stock' 
+          : 'in-stock',
+        createdBy: session.user.id
+      }
+    });
 
     return NextResponse.json(item, { status: 201 });
   } catch (error) {
@@ -100,14 +90,29 @@ export async function PATCH(req: NextRequest) {
     const body = await req.json();
     const { id, quantity, action } = body;
 
-    // Mock response - replace with actual database update
-    const updated = {
-      id,
-      quantity,
-      action, // 'restock' or 'deplete'
-      updatedBy: session.user.id,
-      updatedAt: new Date().toISOString()
-    };
+    if (!id) {
+      return NextResponse.json({ error: 'Inventory item ID required' }, { status: 400 });
+    }
+
+    const item = await prisma.inventory.findUnique({ where: { id } });
+    if (!item) {
+      return NextResponse.json({ error: 'Inventory item not found' }, { status: 404 });
+    }
+
+    const newQuantity = action === 'restock' 
+      ? item.quantity + (quantity || 0) 
+      : item.quantity - (quantity || 0);
+
+    const updated = await prisma.inventory.update({
+      where: { id },
+      data: {
+        quantity: Math.max(0, newQuantity),
+        status: item.minStockLevel && newQuantity < item.minStockLevel 
+          ? 'low-stock' 
+          : 'in-stock',
+        lastRestocked: action === 'restock' ? new Date() : item.lastRestocked
+      }
+    });
 
     return NextResponse.json(updated);
   } catch (error) {

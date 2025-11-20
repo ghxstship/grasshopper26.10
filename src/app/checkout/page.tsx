@@ -378,8 +378,6 @@ export default function CheckoutPage() {
  </div>
  </CardContent>
  <CardFooter className="flex-col gap-3">
- <Button
- variant="gvteway"
  <BodyTextSmall className="text-center mb-0">
  <Lock className="inline h-3 w-3 me-1" />
  Secure checkout powered by Stripe
@@ -401,7 +399,9 @@ export default function CheckoutPage() {
  </div>
  </CardContent>
  </Card>
- </div></div>
+ </div>
+ </div>
+ </div>
  </ContentLayout>
  </GvtewayLayout>
  );

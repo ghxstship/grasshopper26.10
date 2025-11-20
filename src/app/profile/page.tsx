@@ -7,7 +7,7 @@ import { Button} from '@/components/atoms/Button';
 import { Avatar} from '@/components/atoms/Avatar';
 import { Badge} from '@/components/atoms/Badge';
 import { PageTitle, SubsectionHeader, BodyText, BodyTextSmall, Metadata} from '@/components/atoms/Typography';
-import { User, Settings, Camera, Mail, Calendar, MapPin } from 'lucide-react'
+import { User, Settings, Camera, Mail, Calendar, MapPin, ExternalLink } from 'lucide-react'
 import Link from 'next/link';
 
 export default function ProfilePage() {
@@ -81,7 +81,7 @@ export default function ProfilePage() {
  <BodyTextSmall className="mb-0">{user.location}</BodyTextSmall>
  </div>
  <div className="flex items-center gap-2">
- <LinkIcon className="h-4 w-4" />
+ <ExternalLink className="h-4 w-4" />
  <a
  href={user.website}
  target="_blank"
@@ -104,7 +104,9 @@ export default function ProfilePage() {
  Edit Profile
  </Button>
  </Link>
- </div></div>
+ </div>
+ </div>
+ </div>
  </CardContent>
  </Card>
 
