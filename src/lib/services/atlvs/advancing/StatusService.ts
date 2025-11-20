@@ -57,7 +57,7 @@ export class StatusService {
       [AdvancingStatus.CHANGES_REQUESTED]: 'bg-atlvs-orange-500/20 text-atlvs-orange-500 border-atlvs-orange-500/50',
       [AdvancingStatus.COMPLETED]: 'bg-success-light text-success border-success-border',
     };
-    return colors[status] || 'bg-gray-500/20 text-gray-500 border-gray-500/50';
+    return colors[status] || 'bg-grey-500/20 text-grey-500 border-grey-500/50';
   }
 
   /**

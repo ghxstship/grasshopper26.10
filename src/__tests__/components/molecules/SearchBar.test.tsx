@@ -201,21 +201,21 @@ describe('SearchBar', () => {
       const { container } = render(<SearchBar />);
       
       const searchIcon = container.querySelector('svg.lucide-search');
-      expect(searchIcon?.parentElement).toHaveClass('absolute', 'left-3');
+      expect(searchIcon?.parentElement).toHaveClass('absolute', 'start-3');
     });
 
     it('should add padding for search icon', () => {
       render(<SearchBar />);
       
       const input = screen.getByRole('searchbox');
-      expect(input).toHaveClass('pl-10');
+      expect(input).toHaveClass('ps-10');
     });
 
     it('should add padding for clear button when visible', () => {
       render(<SearchBar value="test" onClear={jest.fn()} />);
       
       const input = screen.getByRole('searchbox');
-      expect(input).toHaveClass('pr-10');
+      expect(input).toHaveClass('pe-10');
     });
   });
 
