@@ -138,7 +138,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <Overline className="px-3 py-2 text-grey-500">
                     {category}
                   </Overline>
-                  {categoryItems.map((item, index) => {
+                  {categoryItems.map((item, _index) => {
                     const globalIndex = filteredItems.indexOf(item);
                     const isSelected = globalIndex === selectedIndex;
 

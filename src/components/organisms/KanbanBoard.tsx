@@ -5,7 +5,7 @@ import { GripVertical, Plus, MoreVertical, Calendar, User } from "lucide-react";
 import { Card } from "@/components/atoms/Card";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { BodyText, CardTitle, SmallHeader, SubsectionHeader } from "@/components/atoms/Typography";
+import { BodyText, CardTitle, SectionHeader as _SectionHeader, SmallHeader as _SmallHeader, SubsectionHeader } from "@/components/atoms/Typography";
 export interface KanbanTask {
   id: string;
   title: string;
@@ -23,13 +23,13 @@ export interface KanbanColumn {
 }
 interface KanbanBoardProps {
   columns: KanbanColumn[];
-  onTaskMove?: (taskId: string, fromColumn: string, toColumn: string) => void;
+  onTaskMove?: (_taskId: string, _fromColumn: string, _toColumn: string) => void;
   onTaskClick?: (task: KanbanTask) => void;
   onAddTask?: (columnId: string) => void;
 }
 export function KanbanBoard({
   columns,
-  onTaskMove: onTaskMove,
+  onTaskMove: _onTaskMove,
   onTaskClick,
   onAddTask,
 }: KanbanBoardProps) {

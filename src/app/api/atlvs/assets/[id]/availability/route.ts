@@ -35,7 +35,7 @@ export async function GET(
     }
 
     const { id } = await params;
-    const availability = await AssetService.checkAvailability(
+    const availability = await AssetService.getAvailability(
       id,
       new Date(startDate),
       new Date(endDate)

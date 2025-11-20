@@ -40,7 +40,7 @@ export function FileUpload({
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { upload, isUploading: isUploading } = useFileUpload({
+  const { upload } = useFileUpload({
     bucket: 'gvteway-attachments',
     folder: 'uploads',
   });
@@ -145,7 +145,7 @@ export function FileUpload({
 
       try {
         // Update status to uploading
-        setFiles(prev => prev.map((f, idx) =>
+        setFiles(prev => prev.map((f, _idx) =>
           f.file === uploadedFile.file
             ? { ...f, status: 'uploading' as const }
             : f
@@ -249,8 +249,8 @@ export function FileUpload({
       {/* File List */}
       {files.length > 0 && (
         <div className="space-y-2">
-          {files.map((uploadedFile, index) => (
-            <Card key={index} className="p-4 bg-grey-900/50 border-grey-700">
+          {files.map((uploadedFile, _idx) => (
+            <Card key={uploadedFile.file.name} className="p-4 bg-grey-900/50 border-grey-700">
               <div className="flex items-center gap-4">
                 {/* Preview or Icon */}
                 <div className="flex-shrink-0">

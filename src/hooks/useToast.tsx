@@ -50,17 +50,17 @@ export const useToast = () => {
 
 // Convenience methods
 export const toast = {
-  success: (_title: string, description?: string) => {
+  success: (_title: string, _description?: string) => {
     // This will be implemented by the consumer using useToast hook
     console.warn("Toast provider not initialized. Wrap your app with ToastProvider.");
   },
-  error: (_title: string, description?: string) => {
+  error: (_title: string, _description?: string) => {
     console.warn("Toast provider not initialized. Wrap your app with ToastProvider.");
   },
-  warning: (_title: string, description?: string) => {
+  warning: (_title: string, _description?: string) => {
     console.warn("Toast provider not initialized. Wrap your app with ToastProvider.");
   },
-  info: (_title: string, description?: string) => {
+  info: (_title: string, _description?: string) => {
     console.warn("Toast provider not initialized. Wrap your app with ToastProvider.");
   },
 };

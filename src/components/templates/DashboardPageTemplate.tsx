@@ -1,6 +1,6 @@
 import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
-import { PageTitle, SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
+import { PageTitle, SectionHeader, BodyText, CardTitle, Metadata as _Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import Link from 'next/link';
 

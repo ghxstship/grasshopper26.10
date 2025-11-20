@@ -198,7 +198,7 @@ export class WebhookService {
   /**
    * Get webhook endpoints for event
    */
-  async getWebhookEndpoints(_event: string, organizationId?: string) {
+  async getWebhooksByOrganization(_organizationId: string): Promise<unknown[]> {
     try {
       // Fetch webhook endpoints from database
       // This would query a WebhookEndpoint model

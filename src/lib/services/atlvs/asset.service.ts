@@ -256,10 +256,13 @@ export class AssetService {
   /**
    * Check asset availability
    */
-  static async checkAvailability(equipmentId: string, startDate: Date, endDate: Date) {
+  static async getAvailability(assetId: string, startDate: Date, endDate: Date): Promise<{
+    available: boolean;
+    conflicts: any[];
+  }> {
     const conflicts = await prisma.equipmentBooking.findMany({
       where: {
-        equipmentId,
+        equipmentId: assetId,
         status: 'confirmed',
         OR: [
           {

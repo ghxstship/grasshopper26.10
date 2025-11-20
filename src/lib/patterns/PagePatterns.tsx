@@ -324,7 +324,7 @@ export function createDebouncedHandler<T extends any[]>(
 // PATTERN 8: Status Badge Helper
 // ============================================================================
 
-export function getStatusColor(status: string, variant: 'atlvs' | 'compvss' | 'gvteway' = 'atlvs') {
+export function getStatusColor(status: string, _variant: 'atlvs' | 'compvss' | 'gvteway' = 'atlvs') {
   const colors = {
     approved: 'bg-atlvs-green-500/20 text-atlvs-green-500 border-atlvs-green-500/50',
     pending: 'bg-warning-light text-warning border-warning-border',

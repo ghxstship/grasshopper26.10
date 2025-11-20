@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { SectionHeader, BodyText, Metadata, BodyTextSmall, HeroTitle } from "@/components/atoms/Typography";
+import { SectionHeader, BodyText, Metadata, BodyTextSmall as _BodyTextSmall, HeroTitle as _HeroTitle } from '@/components/atoms/Typography';
 import { Button } from "@/components/atoms/Button";
 import { Check } from "lucide-react";
 import Image from "next/image";

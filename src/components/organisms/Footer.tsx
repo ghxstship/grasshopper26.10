@@ -1,7 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Instagram, Twitter, Music, Linkedin } from "lucide-react";
-import { BodyText, SectionHeader, BodyTextSmall } from "@/components/atoms/Typography";
+import { BodyText, BodyTextSmall as _BodyTextSmall, SectionHeader } from "@/components/atoms/Typography";
 
 export const Footer: React.FC = () => {
   const footerSections = [

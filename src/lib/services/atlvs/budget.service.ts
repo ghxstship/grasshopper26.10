@@ -459,7 +459,7 @@ export class BudgetService {
   /**
    * Approve an expense
    */
-  static async approveExpense(id: string, approvedBy: string, notes?: string) {
+  static async approveExpense(id: string, userId: string, notes?: string) {
     const expense = await prisma.expense.findUnique({
       where: { id },
     });
@@ -476,7 +476,7 @@ export class BudgetService {
       where: { id },
       data: {
         status: ExpenseStatus.APPROVED,
-        approvedBy: approvedBy,
+        approvedBy: userId,
         approvedAt: new Date(),
         metadata: {
           ...(expense.metadata as object),
@@ -495,7 +495,7 @@ export class BudgetService {
     }
 
     await AuditService.log({
-      userId: approvedBy,
+      userId: userId,
       action: 'APPROVE',
       entity: 'Expense',
       entityId: id,
@@ -738,7 +738,7 @@ export class BudgetService {
   /**
    * Convenience method: Approve budget
    */
-  static async approve(budgetId: string, userId: string, notes?: string) {
+  static async approve(budgetId: string, _userId: string, _notes?: string) {
     return this.getById(budgetId);
   }
 }

@@ -190,13 +190,13 @@ export class AttachmentService {
     const bucketExists = buckets?.some(b => b.name === BUCKET_NAME);
 
     if (!bucketExists) {
-      const { error } = await supabase.storage.createBucket(BUCKET_NAME, {
+      const _uploadData = await supabase.storage.createBucket(BUCKET_NAME, {
         public: true,
         fileSizeLimit: 52428800, // 50MB
       });
 
-      if (error) {
-        throw new Error(`Failed to create bucket: ${error.message}`);
+      if (_uploadData.error) {
+        throw new Error(`Failed to create bucket: ${_uploadData.error.message}`);
       }
     }
   }

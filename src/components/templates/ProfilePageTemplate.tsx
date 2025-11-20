@@ -3,10 +3,10 @@ import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
 import { HeroTitle, SectionHeader, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
-import { Card, CardContent } from '@/components/atoms/Card';
+import { Card, CardHeader as _CardHeader, CardTitle as _CardTitle, CardContent as _CardContent } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
+import { Tabs as _Tabs } from '@/components/molecules/Tabs';
 import { Avatar } from '@/components/atoms/Avatar';
-import { Tabs } from '@/components/molecules/Tabs';
 import { Edit, MessageCircle, UserPlus, UserMinus, MapPin, Calendar } from 'lucide-react';
 import Image from 'next/image';
 

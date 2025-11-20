@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
-import { PageTitle, SectionHeader, BodyText, Metadata } from '@/components/atoms/Typography';
+import { PageTitle, SectionHeader as _SectionHeader, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Alert } from '@/components/molecules/Alert';
