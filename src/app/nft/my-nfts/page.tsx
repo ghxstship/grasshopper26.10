@@ -233,7 +233,9 @@ export default function MyNFTsPage() {
  <div className="flex items-center gap-1">
  <Eye className="w-4 h-4" />
  <Metadata>{nft.views}</Metadata>
- </div></div>
+ </div>
+ </div>
+ </div>
 
  <div className="grid grid-cols-2 gap-2 pt-2">
  <Button variant="gvteway-outline" size="sm"

@@ -253,7 +253,9 @@ export default function NFTDetailPage() {
  {nft.owner.verified && (
  <Verified className="w-4 h-4 text-gvteway-blue-500 fill-gvteway-blue-500" />
  )}
- </div></div>
+ </div>
+ </div>
+ </div>
  </div>
 
  <div className="flex items-center justify-between">
@@ -273,7 +275,9 @@ export default function NFTDetailPage() {
  {nft.creator.verified && (
  <Verified className="w-4 h-4 text-gvteway-blue-500 fill-gvteway-blue-500" />
  )}
- </div></div>
+ </div>
+ </div>
+ </div>
  </div>
  </CardContent>
  </Card>
@@ -455,7 +459,9 @@ export default function NFTDetailPage() {
  >
  Counter
  </Button>
- </div></div>
+ </div>
+ </div>
+ </div>
  </CardContent>
  </Card>
  ))

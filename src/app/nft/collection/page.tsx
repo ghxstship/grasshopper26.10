@@ -311,6 +311,7 @@ export default function CollectionPage() {
  </Button>
  </div>
  </div>
+ </div>
  </CardContent>
  </Card>
  ))}

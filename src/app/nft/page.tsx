@@ -279,7 +279,9 @@ export default function NFTPage() {
  <div className="flex items-center gap-1">
  <Eye className="w-4 h-4" />
  <Metadata>{nft.views}</Metadata>
- </div></div>
+ </div>
+ </div>
+ </div>
 
  <div className="flex gap-2 pt-2">
  <Button variant="gvteway" size="sm" className="flex-1"
