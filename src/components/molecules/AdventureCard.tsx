@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/atoms/Card";
-import { CardTitle, Metadata, BodyText } from "@/components/atoms/Typography";
+import { CardTitle, Metadata, BodyTextSmall } from "@/components/atoms/Typography";
 import { Button } from "@/components/atoms/Button";
 import { PriceTag } from "@/components/atoms/PriceTag";
 import { Clock, Bookmark } from "lucide-react";
@@ -60,9 +60,9 @@ export const AdventureCard: React.FC<AdventureCardProps> = ({
             {categoryLabels[category]}
           </Metadata>
           
-          <BodyText className="text-body-sm text-grey-600 line-clamp-3">
+          <BodyTextSmall className="text-grey-600 line-clamp-3">
             {description}
-          </BodyText>
+          </BodyTextSmall>
           
           <div className="flex items-center justify-between">
             {duration && (

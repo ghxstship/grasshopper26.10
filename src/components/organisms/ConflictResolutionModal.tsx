@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Modal } from '@/components/organisms/Modal';
 import { Button } from '@/components/atoms/Button';
 import type { ConflictInfo, ResolvedData } from '@/lib/realtime/conflict-resolution';
-import { SubsectionHeader } from "@/components/atoms/Typography";
+import { SubsectionHeader, BodyTextSmall, Caption } from "@/components/atoms/Typography";
 
 interface ConflictResolutionModalProps<T> {
   isOpen: boolean;
@@ -61,23 +61,23 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
 
     return (
       <div key={field} className="border-b border-grey-200 py-3">
-        <div className="font-medium text-body-sm text-grey-700 mb-2">{field}</div>
+        <BodyTextSmall className="font-medium text-grey-700 mb-2">{field}</BodyTextSmall>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-conflict-local-bg p-3 rounded">
-            <div className="text-caption text-conflict-local mb-1">Your Version</div>
-            <div className="text-body-sm text-grey-900">
+            <Caption className="text-conflict-local mb-1">Your Version</Caption>
+            <BodyTextSmall className="text-grey-900">
               {typeof localValue === 'object' 
                 ? JSON.stringify(localValue, null, 2)
                 : String(localValue)}
-            </div>
+            </BodyTextSmall>
           </div>
           <div className="bg-conflict-remote-bg p-3 rounded">
-            <div className="text-caption text-conflict-remote mb-1">Remote Version</div>
-            <div className="text-body-sm text-grey-900">
+            <Caption className="text-conflict-remote mb-1">Remote Version</Caption>
+            <BodyTextSmall className="text-grey-900">
               {typeof remoteValue === 'object'
                 ? JSON.stringify(remoteValue, null, 2)
                 : String(remoteValue)}
-            </div>
+            </BodyTextSmall>
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
         <div className="bg-warning-light border border-warning-border rounded-lg p-4">
           <div className="flex items-start">
             <svg
-              className="w-5 h-5 text-warning mt-0.5 mr-3"
+              className="w-5 h-5 text-warning mt-0.5 me-3"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -107,20 +107,20 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
               />
             </svg>
             <div>
-              <SubsectionHeader className="text-body-sm text-warning-foreground">
+              <SubsectionHeader className="text-warning-foreground">
                 Concurrent Modifications Detected
               </SubsectionHeader>
-              <p className="mt-1 text-body-sm text-warning-foreground">
+              <BodyTextSmall className="mt-1 text-warning-foreground">
                 This {entityName} was modified by multiple users at the same time.
                 Please choose which version to keep or create a custom resolution.
-              </p>
+              </BodyTextSmall>
             </div>
           </div>
         </div>
 
         {/* Version Selection */}
         <div className="space-y-3">
-          <label className="block text-body-sm text-grey-700">
+          <label className="block text-grey-700">
             Choose Resolution
           </label>
 
@@ -132,9 +132,9 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
             <div className="flex items-center justify-between">
               <div>
                 <div className="font-medium text-grey-900">Keep Your Version</div>
-                <div className="text-body-sm text-grey-500">
+                <BodyTextSmall className="text-grey-500">
                   Modified by you at {formatDate(conflict.local.timestamp)}
-                </div>
+                </BodyTextSmall>
               </div>
               <input
                 type="radio"
@@ -153,9 +153,9 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
             <div className="flex items-center justify-between">
               <div>
                 <div className="font-medium text-grey-900">Keep Remote Version</div>
-                <div className="text-body-sm text-grey-500">
+                <BodyTextSmall className="text-grey-500">
                   Modified by {conflict.remote.userId} at {formatDate(conflict.remote.timestamp)}
-                </div>
+                </BodyTextSmall>
               </div>
               <input
                 type="radio"
@@ -174,9 +174,9 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
             <div className="flex items-center justify-between">
               <div>
                 <div className="font-medium text-grey-900">Custom Resolution</div>
-                <div className="text-body-sm text-grey-500">
+                <BodyTextSmall className="text-grey-500">
                   Manually merge the changes
-                </div>
+                </BodyTextSmall>
               </div>
               <input
                 type="radio"
@@ -191,7 +191,7 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
         {/* Conflicting Fields */}
         {conflict.conflictingFields && conflict.conflictingFields.length > 0 && (
           <div>
-            <h4 className="text-body-sm text-grey-900 mb-3">
+            <h4 className="text-grey-900 mb-3">
               Conflicting Fields ({conflict.conflictingFields.length})
             </h4>
             <div className="border border-grey-200 rounded-lg divide-y divide-grey-200">
@@ -203,7 +203,7 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
         {/* Custom Editor */}
         {selectedVersion === 'custom' && (
           <div>
-            <label className="block text-body-sm text-grey-700 mb-2">
+            <label className="block text-grey-700 mb-2">
               Custom Data (JSON)
             </label>
             <textarea
@@ -215,7 +215,7 @@ export function ConflictResolutionModal<T extends Record<string, any>>({
                   // Invalid JSON, ignore
                 }
               }}
-              className="w-full h-64 px-3 py-2 border border-grey-300 rounded-lg font-mono text-body-sm"
+              className="w-full h-64 px-3 py-2 border border-grey-300 rounded-lg font-mono"
             />
           </div>
         )}

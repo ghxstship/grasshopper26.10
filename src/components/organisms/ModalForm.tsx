@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { IconButton } from "@/components/atoms/IconButton";
 import { Button } from "@/components/atoms/Button";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface ModalFormProps {
   isOpen: boolean;
@@ -80,9 +81,9 @@ const ModalForm: React.FC<ModalFormProps> = ({
                 {title}
               </h2>
               {description && (
-                <p className="mt-1 text-body-sm text-grey-600 -tech">
+                <BodyTextSmall className="mt-1 text-grey-600 -tech">
                   {description}
-                </p>
+                </BodyTextSmall>
               )}
             </div>
             <IconButton

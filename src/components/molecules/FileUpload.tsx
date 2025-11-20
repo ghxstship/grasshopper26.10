@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Upload, File, Image as ImageIcon, FileText, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useFileUpload } from '@/hooks/useFileUpload';
 import { Card } from '@/components/atoms/Card';
+import { BodyTextSmall, Caption } from '@/components/atoms/Typography';
 
 export interface FileUploadProps {
   accept?: string;
@@ -238,9 +239,9 @@ export function FileUpload({
             <p className="text-white mb-1">
               {isDragging ? 'Drop files here' : 'Click to upload or drag and drop'}
             </p>
-            <p className="text-body-sm text-grey-400">
+            <BodyTextSmall className="text-grey-400">
               {accept || 'Any file type'} • Max {formatFileSize(maxSize)} • Up to {maxFiles} files
-            </p>
+            </BodyTextSmall>
           </div>
         </div>
       </div>
@@ -266,12 +267,12 @@ export function FileUpload({
 
                 {/* File Info */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-body-sm text-white truncate">
+                  <BodyTextSmall className="text-white truncate">
                     {uploadedFile.file.name}
-                  </p>
-                  <p className="text-caption text-grey-400">
+                  </BodyTextSmall>
+                  <Caption className="text-grey-400">
                     {formatFileSize(uploadedFile.file.size)}
-                  </p>
+                  </Caption>
 
                   {/* Progress Bar */}
                   {uploadedFile.status === 'uploading' && (
@@ -285,7 +286,7 @@ export function FileUpload({
 
                   {/* Error Message */}
                   {uploadedFile.status === 'error' && uploadedFile.error && (
-                    <p className="text-caption text-destructive mt-1">{uploadedFile.error}</p>
+                    <Caption className="text-destructive mt-1">{uploadedFile.error}</Caption>
                   )}
                 </div>
 

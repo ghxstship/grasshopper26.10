@@ -6,6 +6,7 @@ import { ChevronUp, ChevronDown, ChevronsUpDown, Search, Filter, Download, MoreV
 import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface DataTableColumn<T> {
   key: keyof T | string;
@@ -111,19 +112,19 @@ export function DataTable<T extends Record<string, unknown>>({
         <div className="flex items-center gap-4 flex-1">
           {searchable && (
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
+              <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-grey-400 z-10" />
               <Input
                 type="text"
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 variant="atlvs"
-                className="pl-10"
+                className="ps-10"
               />
             </div>
           )}
           <Button variant="ghost" size="sm" className="text-grey-400">
-            <Filter className="w-4 h-4 mr-2" />
+            <Filter className="w-4 h-4 me-2" />
             Filter
           </Button>
         </div>
@@ -138,7 +139,7 @@ export function DataTable<T extends Record<string, unknown>>({
               size="sm"
               onClick={handleExport}
             >
-              <Download className="w-4 h-4 mr-2" />
+              <Download className="w-4 h-4 me-2" />
               Export
             </Button>
           )}
@@ -157,7 +158,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   style={{ width: column.width }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-body-sm text-grey-400 uppercase">
+                    <span className="text-grey-400 uppercase">
                       {column.header}
                     </span>
                     {column.sortable && (
@@ -196,7 +197,7 @@ export function DataTable<T extends Record<string, unknown>>({
               >
                 {columns.map((column) => (
                   <td key={String(column.key)} className="px-6 py-4">
-                    <div className="text-body-sm text-white">
+                    <div className="text-white">
                       {column.render 
                         ? column.render(row[column.key as keyof T], row)
                         : String(row[column.key as keyof T] || '-')
@@ -218,7 +219,7 @@ export function DataTable<T extends Record<string, unknown>>({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="p-4 border-t border-grey-800 flex items-center justify-between">
-          <div className="text-body-sm text-grey-400">
+          <div className="text-grey-400">
             Page {currentPage} of {totalPages}
           </div>
           <div className="flex items-center gap-2">

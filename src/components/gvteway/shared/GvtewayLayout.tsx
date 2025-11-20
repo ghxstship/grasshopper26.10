@@ -32,7 +32,7 @@ function GvtewayNav() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+    <nav className="fixed top-0 start-0 end-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -45,7 +45,7 @@ function GvtewayNav() {
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <Button variant="ghost" size="sm" className="text-grey-300 hover:text-white">
-                  <item.icon className="w-4 h-4 mr-2" />
+                  <item.icon className="w-4 h-4 me-2" />
                   {item.label}
                 </Button>
               </Link>

@@ -5,6 +5,7 @@ import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { IconButton } from '@/components/atoms/IconButton';
 import { Button } from '@/components/atoms/Button';
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface ModalProps {
   isOpen: boolean;
@@ -104,9 +105,9 @@ export const Modal: React.FC<ModalProps> = ({
                 </h2>
               )}
               {description && (
-                <p className="mt-1 text-body-sm text-grey-400">
+                <BodyTextSmall className="mt-1 text-grey-400">
                   {description}
-                </p>
+                </BodyTextSmall>
               )}
             </div>
             {showCloseButton && (

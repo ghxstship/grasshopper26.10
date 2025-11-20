@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
-import { PageTitle, SectionHeader, BodyText } from '@/components/atoms/Typography';
+import { PageTitle, SectionHeader, BodyText, BodyTextSmall } from "@/components/atoms/Typography";
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { Alert } from '@/components/molecules/Alert';
@@ -104,13 +104,13 @@ export function SettingsPageTemplate({
           {/* Success/Error Messages */}
           {successMessage && (
             <Alert variant="success" className="mb-6">
-              <Check className="w-5 h-5 mr-2" />
+              <Check className="w-5 h-5 me-2" />
               {successMessage}
             </Alert>
           )}
           {errorMessage && (
             <Alert variant="error" className="mb-6">
-              <X className="w-5 h-5 mr-2" />
+              <X className="w-5 h-5 me-2" />
               {errorMessage}
             </Alert>
           )}
@@ -139,7 +139,7 @@ export function SettingsPageTemplate({
               {/* Unsaved Changes Indicator */}
               {hasUnsavedChanges && (
                 <Card className="p-4 border-2 border-warning bg-warning-light">
-                  <BodyText className="text-body-sm text-warning-foreground">
+                  <BodyText className="text-warning-foreground">
                     You have unsaved changes
                   </BodyText>
                 </Card>
@@ -171,7 +171,7 @@ export function SettingsPageTemplate({
               {showSaveButton && onSave && (
                 <div className="flex items-center justify-end gap-4">
                   {hasUnsavedChanges && (
-                    <BodyText className="text-body-sm text-ghxst-text-secondary">
+                    <BodyText className="text-ghxst-text-secondary">
                       Unsaved changes
                     </BodyText>
                   )}

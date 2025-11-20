@@ -181,7 +181,7 @@ export function SearchResultsPageTemplate({
                                 <Metadata className="flex-1">
                                   {option.label}
                                   {option.count !== undefined && (
-                                    <span className="text-ghxst-text-secondary ml-1">
+                                    <span className="text-ghxst-text-secondary ms-1">
                                       ({option.count})
                                     </span>
                                   )}
@@ -214,7 +214,7 @@ export function SearchResultsPageTemplate({
                       className="lg:hidden"
                       onClick={() => setMobileFiltersOpen(true)}
                     >
-                      <SlidersHorizontal className="w-4 h-4 mr-2" />
+                      <SlidersHorizontal className="w-4 h-4 me-2" />
                       Filters
                     </Button>
                   )}
@@ -280,7 +280,7 @@ export function SearchResultsPageTemplate({
                         }}
                       >
                         {value}
-                        <X className="w-3 h-3 ml-2" />
+                        <X className="w-3 h-3 ms-2" />
                       </Button>
                     ))
                   )}

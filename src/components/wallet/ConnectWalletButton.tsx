@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import { Wallet, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 interface ConnectWalletButtonProps {
   onConnect?: (address: string) => void;
@@ -160,7 +161,7 @@ export function WalletConnectionCard({
             </div>
             <div>
               <p className="font-semibold">Wallet Connected</p>
-              <p className="text-body-sm text-grey-400">{formatAddress(address)}</p>
+              <BodyTextSmall className="text-grey-400">{formatAddress(address)}</BodyTextSmall>
             </div>
           </div>
           <Button
@@ -183,9 +184,9 @@ export function WalletConnectionCard({
         </div>
         <div>
           <h3 className="font-semibold mb-2">Connect Your Wallet</h3>
-          <p className="text-body-sm text-grey-400 mb-4">
+          <BodyTextSmall className="text-grey-400 mb-4">
             Connect your Web3 wallet to access exclusive features and NFT tickets
-          </p>
+          </BodyTextSmall>
         </div>
         <ConnectWalletButton
           onConnect={handleConnect}

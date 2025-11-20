@@ -10,17 +10,18 @@ import { useEffect, useState } from 'react';
 export type Theme = 'light' | 'dark' | 'high-contrast';
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>('light');
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme') as Theme | null;
+      return stored || 'light';
+    }
+    return 'light';
+  });
+  const mounted = true;
 
   useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem('theme') as Theme | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.classList.add(stored);
-    }
-  }, []);
+    document.documentElement.classList.add(theme);
+  }, [theme]);
 
   const updateTheme = (newTheme: Theme) => {
     document.documentElement.classList.remove('light', 'dark', 'high-contrast');

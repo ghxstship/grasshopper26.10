@@ -14,13 +14,13 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
   ({ className, onClear, variant = "default", value, ...props }, ref) => {
     return (
       <div className={cn("relative flex items-center", className)}>
-        <Search className="absolute left-3 h-5 w-5 text-grey-400 pointer-events-none" />
+        <Search className="absolute start-3 h-5 w-5 text-grey-400 pointer-events-none" />
         <Input
           ref={ref}
           type="search"
           variant={variant}
           value={value}
-          className="pl-10 pr-10"
+          className="ps-10 pe-10"
           {...props}
         />
         {value && onClear && (
@@ -29,7 +29,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             variant="ghost"
             size="sm"
             onClick={onClear}
-            className="absolute right-2"
+            className="absolute end-2"
             type="button"
           />
         )}

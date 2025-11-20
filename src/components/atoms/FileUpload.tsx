@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface FileUploadProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
@@ -92,7 +93,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
           className="flex flex-col items-center justify-center cursor-pointer w-full"
         >
           <Upload className={cn("w-10 h-10 mb-3", iconColorStyles[variant])} />
-          <p className="text-body-sm text-grey-400 -tech mb-3">
+          <p className="text-grey-400 -tech mb-3">
             {dragDropText}
           </p>
           <span className={cn(

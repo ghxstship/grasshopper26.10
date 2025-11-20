@@ -37,7 +37,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
           {...props}
         />
         <div className={cn(
-          "absolute left-1.5 top-1.5 h-2 w-2 rounded-full opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity",
+          "absolute start-1.5 top-1.5 h-2 w-2 rounded-full opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity",
           dotStyles[variant]
         )} />
       </div>

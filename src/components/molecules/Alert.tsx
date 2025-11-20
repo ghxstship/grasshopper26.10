@@ -3,6 +3,7 @@ import { AlertCircle, CheckCircle, Info, XCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { IconButton } from "@/components/atoms/IconButton";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 const alertVariants = cva(
   "relative w-full rounded-lg border-2 p-4 font-share-tech",
@@ -56,7 +57,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                 {title}
               </h5>
             )}
-            <div className="text-body-sm [&_p]:leading-relaxed">{children}</div>
+            <BodyTextSmall className="[&_p]:leading-relaxed">{children}</BodyTextSmall>
           </div>
           {onClose && (
             <IconButton

@@ -1,6 +1,7 @@
 'use client';
 
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { Caption } from "@/components/atoms/Typography";
 
 interface KPICardProps {
   title: string;
@@ -70,14 +71,14 @@ export function KPICard({
   return (
     <div className={`bg-white rounded-lg border border-grey-200 p-6 hover:shadow-lg transition-shadow ${className}`}>
       <div className="flex items-start justify-between mb-2">
-        <h3 className="text-body-sm text-grey-600">{title}</h3>
+        <h3 className="text-grey-600">{title}</h3>
         {trend && (
           <div className={`flex items-center gap-1 ${getTrendColor()}`}>
             {getTrendIcon()}
             {trendValue !== undefined && (
-              <span className="text-caption">
+              <Caption>
                 {trendValue > 0 ? '+' : ''}{trendValue.toFixed(1)}%
-              </span>
+              </Caption>
             )}
           </div>
         )}
@@ -88,12 +89,12 @@ export function KPICard({
           {formatValue(value)}
         </span>
         {unit && !format && (
-          <span className="text-body-sm text-grey-500">{unit}</span>
+          <span className="text-grey-500">{unit}</span>
         )}
       </div>
 
       {description && (
-        <p className="text-caption text-grey-500 mt-2">{description}</p>
+        <Caption className="text-grey-500 mt-2">{description}</Caption>
       )}
     </div>
   );

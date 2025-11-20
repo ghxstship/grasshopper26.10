@@ -71,7 +71,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             className="absolute inset-0 bg-black/50"
             onClick={() => setIsMobileSidebarOpen(false)}
           />
-          <div className="absolute inset-y-0 left-0 w-64">
+          <div className="absolute inset-y-0 start-0 w-64">
             <Sidebar
               sections={sidebarSections}
               header={sidebarHeader}

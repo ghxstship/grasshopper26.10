@@ -47,7 +47,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       <p className="text-grey-400 max-w-md mb-6">{message}</p>
       {action || (actionLabel && onAction && (
         <Button variant={variant} onClick={onAction}>
-          <Plus className="w-4 h-4 mr-2" />
+          <Plus className="w-4 h-4 me-2" />
           {actionLabel}
         </Button>
       ))}

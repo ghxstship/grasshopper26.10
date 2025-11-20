@@ -20,7 +20,7 @@ export const CategoryTab = React.forwardRef<HTMLButtonElement, CategoryTabProps>
         )}
         {...props}
       >
-        {icon && <span className="inline-flex mr-2">{icon}</span>}
+        {icon && <span className="inline-flex me-2">{icon}</span>}
         {children}
       </button>
     );

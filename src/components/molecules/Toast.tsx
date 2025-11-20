@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { IconButton } from "@/components/atoms/IconButton";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 const toastVariants = cva(
   "pointer-events-auto flex w-full max-w-md items-start gap-3 rounded-lg border p-4 shadow-lg transition-all",
@@ -123,16 +124,16 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
 
         {/* Content */}
         <div className="flex-1 space-y-1">
-          <div className="font-semibold text-body-sm">{title}</div>
+          <BodyTextSmall className="font-semibold">{title}</BodyTextSmall>
           {description && (
-            <div className="text-body-sm opacity-90">{description}</div>
+            <BodyTextSmall className="opacity-90">{description}</BodyTextSmall>
           )}
           {action && (
             <Button
               onClick={action.onClick}
               variant="ghost"
               size="sm"
-              className="mt-2 text-body-sm underline hover:no-underline"
+              className="mt-2 underline hover:no-underline"
             >
               {action.label}
             </Button>
@@ -165,12 +166,12 @@ export interface ToastContainerProps {
 }
 
 const positionClasses = {
-  "top-right": "top-4 right-4",
-  "top-left": "top-4 left-4",
-  "bottom-right": "bottom-4 right-4",
-  "bottom-left": "bottom-4 left-4",
-  "top-center": "top-4 left-1/2 -translate-x-1/2",
-  "bottom-center": "bottom-4 left-1/2 -translate-x-1/2",
+  "top-right": "top-4 end-4",
+  "top-left": "top-4 start-4",
+  "bottom-right": "bottom-4 end-4",
+  "bottom-left": "bottom-4 start-4",
+  "top-center": "top-4 start-1/2 -translate-x-1/2",
+  "bottom-center": "bottom-4 start-1/2 -translate-x-1/2",
 };
 
 export const ToastContainer: React.FC<ToastContainerProps> = ({

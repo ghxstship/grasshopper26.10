@@ -172,25 +172,25 @@ export function ProfilePageTemplate({
                   <div className="flex items-center gap-2">
                     {isOwnProfile ? (
                       <Button variant="secondary" onClick={onEdit}>
-                        <Edit className="w-4 h-4 mr-2" />
+                        <Edit className="w-4 h-4 me-2" />
                         Edit Profile
                       </Button>
                     ) : (
                       <>
                         {isFollowing ? (
                           <Button variant="secondary" onClick={onUnfollow}>
-                            <UserMinus className="w-4 h-4 mr-2" />
+                            <UserMinus className="w-4 h-4 me-2" />
                             Unfollow
                           </Button>
                         ) : (
                           <Button variant="primary" onClick={onFollow}>
-                            <UserPlus className="w-4 h-4 mr-2" />
+                            <UserPlus className="w-4 h-4 me-2" />
                             Follow
                           </Button>
                         )}
                         {onMessage && (
                           <Button variant="secondary" onClick={onMessage}>
-                            <MessageCircle className="w-4 h-4 mr-2" />
+                            <MessageCircle className="w-4 h-4 me-2" />
                             Message
                           </Button>
                         )}

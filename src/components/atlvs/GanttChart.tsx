@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
-import { SubsectionHeader } from "@/components/atoms/Typography";
+import { SubsectionHeader, Caption } from "@/components/atoms/Typography";
 
 export interface GanttTask {
   id: string;
@@ -81,17 +81,17 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
                 </Button>
               )}
               <div className="flex-1 min-w-0">
-                <div className="text-body-sm text-white truncate">
+                <div className="text-white truncate">
                   {task.name}
                 </div>
                 {task.assignee && (
-                  <div className="text-caption text-grey-400 mt-1">
+                  <Caption className="text-grey-400 mt-1">
                     {task.assignee}
-                  </div>
+                  </Caption>
                 )}
               </div>
-              <Badge variant="atlvs-outline" className="text-caption">
-                {task.progress}%
+              <Badge variant="atlvs-outline">
+                <Caption>{task.progress}%</Caption>
               </Badge>
             </div>
           </div>
@@ -113,9 +113,9 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
               
               {/* Task Label */}
               <div className="absolute inset-0 flex items-center px-3">
-                <span className="text-caption text-white truncate">
+                <Caption className="text-white truncate">
                   {task.name}
-                </span>
+                </Caption>
               </div>
             </motion.div>
           </div>
@@ -145,7 +145,7 @@ export function GanttChart({ tasks, startDate, endDate, onTaskClick }: GanttChar
               key={index}
               className="flex-1 p-4 border-r border-grey-800 last:border-r-0"
             >
-              <div className="text-body-sm text-grey-400">
+              <div className="text-grey-400">
                 {month.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
               </div>
             </div>

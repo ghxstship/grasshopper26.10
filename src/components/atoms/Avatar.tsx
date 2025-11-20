@@ -3,6 +3,7 @@ import Image from "next/image";
 import { User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 const avatarVariants = cva(
   "relative inline-flex items-center justify-center overflow-hidden rounded-full bg-grey-200 dark:bg-grey-800",
@@ -61,7 +62,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-grey-300 to-grey-400 dark:from-grey-700 dark:to-grey-800">
             {fallback ? (
-              <span className="text-body-sm text-grey-700 dark:text-grey-300">
+              <span className="text-grey-700 dark:text-grey-300">
                 {getInitials(fallback)}
               </span>
             ) : (

@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface BreadcrumbItem {
   label: string;
@@ -42,21 +43,23 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
             {item.href && !isLast ? (
               <Link
                 href={item.href}
-                className="flex items-center gap-1 text-body-sm -tech text-grey-500 hover:text-grey-900 transition-colors"
+                className="flex items-center gap-1 -tech text-grey-500 hover:text-grey-900 transition-colors"
               >
-                {item.icon}
-                {item.label}
+                <BodyTextSmall className="flex items-center gap-1">
+                  {item.icon}
+                  {item.label}
+                </BodyTextSmall>
               </Link>
             ) : (
-              <span
+              <BodyTextSmall
                 className={cn(
-                  "flex items-center gap-1 text-body-sm font-share-tech",
+                  "flex items-center gap-1 font-share-tech",
                   isLast ? "text-grey-900" : "text-grey-500"
                 )}
               >
                 {item.icon}
                 {item.label}
-              </span>
+              </BodyTextSmall>
             )}
             {!isLast && <ChevronRight className="h-4 w-4 text-grey-400" />}
           </React.Fragment>

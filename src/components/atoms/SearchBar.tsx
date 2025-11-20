@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Search, MapPin } from "lucide-react";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 interface SearchBarProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   onSearch?: (query: string) => void;
@@ -37,7 +38,7 @@ export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={placeholder}
-              className="flex-1 bg-transparent -tech text-body outline-none placeholder:text-grey-500"
+              className="flex-1 bg-transparent -tech outline-none placeholder:text-grey-500"
               {...props}
             />
           </div>
@@ -47,7 +48,7 @@ export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
               <div className="h-8 w-px bg-grey-300" />
               <div className="flex items-center gap-2 px-4 cursor-pointer hover:bg-grey-100 transition-colors">
                 <MapPin className="w-4 h-4 text-grey-700" />
-                <span className="-tech-mono text-body-sm whitespace-nowrap">
+                <span className="-tech-mono whitespace-nowrap">
                   {location || "Location"}
                 </span>
               </div>

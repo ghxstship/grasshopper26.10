@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { SectionHeader, BodyText, Metadata } from "@/components/atoms/Typography";
+import { SectionHeader, BodyText, Metadata, BodyTextSmall, HeroTitle } from "@/components/atoms/Typography";
 import { Button } from "@/components/atoms/Button";
 import { Check } from "lucide-react";
 import Image from "next/image";
@@ -66,7 +66,7 @@ export const JourneyStep: React.FC<JourneyStepProps> = ({
             isImageLeft ? "" : "lg:col-start-1 lg:row-start-1"
           )}>
             {/* Step Number */}
-            <div className="text-hero text-grey-200">
+            <div className="text-grey-200">
               {step.toString().padStart(2, '0')}
             </div>
 
@@ -90,7 +90,7 @@ export const JourneyStep: React.FC<JourneyStepProps> = ({
                     </div>
                     <div className="flex-1">
                       <h5 className="mb-1">{feature.title}</h5>
-                      <p className="-tech text-body-sm text-grey-600">
+                      <p className="-tech text-grey-600">
                         {feature.description}
                       </p>
                     </div>

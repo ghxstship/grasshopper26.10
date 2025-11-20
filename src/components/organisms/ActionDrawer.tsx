@@ -4,6 +4,7 @@ import * as React from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { IconButton } from "@/components/atoms/IconButton";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface ActionDrawerProps {
   isOpen: boolean;
@@ -69,7 +70,7 @@ const ActionDrawer: React.FC<ActionDrawerProps> = ({
       <div
         className={cn(
           "fixed inset-y-0 z-50 flex w-full flex-col bg-white shadow-xl",
-          side === "right" ? "right-0" : "left-0",
+          side === "right" ? "end-0" : "start-0",
           sizeStyles[size],
           variantStyles[variant],
           side === "right" ? "border-l-2" : "border-r-2",
@@ -83,9 +84,9 @@ const ActionDrawer: React.FC<ActionDrawerProps> = ({
               {title}
             </h2>
             {description && (
-              <p className="mt-1 text-body-sm text-grey-600 -tech">
+              <BodyTextSmall className="mt-1 text-grey-600 -tech">
                 {description}
-              </p>
+              </BodyTextSmall>
             )}
           </div>
           <IconButton

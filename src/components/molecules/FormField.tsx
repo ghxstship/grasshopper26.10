@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Label } from "@/components/atoms/Label";
 import { cn } from "@/lib/utils";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface FormFieldProps {
   label?: string;
@@ -24,10 +25,10 @@ const FormField: React.FC<FormFieldProps> = ({
       {label && <Label required={required}>{label}</Label>}
       {children}
       {hint && !error && (
-        <p className="text-body-sm text-grey-500 -tech">{hint}</p>
+        <BodyTextSmall className="text-grey-500 -tech">{hint}</BodyTextSmall>
       )}
       {error && (
-        <p className="text-body-sm text-error -tech">{error}</p>
+        <BodyTextSmall className="text-error -tech">{error}</BodyTextSmall>
       )}
     </div>
   );

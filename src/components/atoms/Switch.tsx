@@ -30,7 +30,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           variantStyles[variant],
           className
         )}>
-          <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-5" />
+          <div className="absolute start-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-5" />
         </div>
       </label>
     );

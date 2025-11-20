@@ -3,7 +3,7 @@ import { Button } from "@/components/atoms/Button";
 import { SearchBar } from "@/components/atoms/SearchBar";
 import { Menu, X, Search } from "lucide-react";
 import Link from "next/link";
-import { BodyText } from "@/components/atoms/Typography";
+import { BodyTextSmall, Overline } from "@/components/atoms/Typography";
 
 export const Navigation: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -103,9 +103,9 @@ export const Navigation: React.FC = () => {
 
             {/* Industry Nav */}
             <div className="pt-6 border-t border-grey-200 space-y-4">
-              <BodyText className="-tech-mono text-caption text-grey-500 uppercase">
+              <Overline className="text-grey-500">
                 For the Industry
-              </BodyText>
+              </Overline>
               {industryNav.map((item) => (
                 <Link
                   key={item.href}
@@ -114,9 +114,9 @@ export const Navigation: React.FC = () => {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <div >{item.label}</div>
-                  <div className="-tech-mono text-body-sm text-grey-600">
+                  <BodyTextSmall className="-tech-mono text-grey-600">
                     {item.subtitle}
-                  </div>
+                  </BodyTextSmall>
                 </Link>
               ))}
             </div>

@@ -105,7 +105,7 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
                   size="md"
                 />
                 {conversation.isOnline && (
-                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-success border-2 border-white rounded-full" />
+                  <span className="absolute bottom-0 end-0 w-3 h-3 bg-success border-2 border-white rounded-full" />
                 )}
               </div>
 
@@ -121,7 +121,7 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
                     {conversation.participantName}
                   </Text>
                   
-                  <Text variant="caption" className="text-grey-500 flex-shrink-0 ml-2">
+                  <Text variant="caption" className="text-grey-500 flex-shrink-0 ms-2">
                     {formatTime(conversation.lastMessageTime)}
                   </Text>
                 </div>
@@ -140,7 +140,7 @@ export const InboxPanel: React.FC<InboxPanelProps> = ({
                   </Text>
                   
                   {conversation.unreadCount > 0 && (
-                    <Badge variant="info" className="ml-2 flex-shrink-0">
+                    <Badge variant="info" className="ms-2 flex-shrink-0">
                       {conversation.unreadCount}
                     </Badge>
                   )}

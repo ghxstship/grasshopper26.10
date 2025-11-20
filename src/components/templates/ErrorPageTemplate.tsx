@@ -70,25 +70,25 @@ export function ErrorPageTemplate({
       label: 'Go Home',
       href: '/',
       variant: 'primary' as const,
-      icon: <Home className="w-4 h-4 mr-2" />,
+      icon: <Home className="w-4 h-4 me-2" />,
     },
     {
       label: 'Go Back',
       onClick: () => window.history.back(),
       variant: 'secondary' as const,
-      icon: <ArrowLeft className="w-4 h-4 mr-2" />,
+      icon: <ArrowLeft className="w-4 h-4 me-2" />,
     },
     {
       label: 'Search',
       href: '/search',
       variant: 'ghost' as const,
-      icon: <Search className="w-4 h-4 mr-2" />,
+      icon: <Search className="w-4 h-4 me-2" />,
     },
     {
       label: 'Contact Support',
       href: '/contact',
       variant: 'ghost' as const,
-      icon: <Mail className="w-4 h-4 mr-2" />,
+      icon: <Mail className="w-4 h-4 me-2" />,
     },
   ];
 
@@ -103,9 +103,9 @@ export function ErrorPageTemplate({
           {/* Error Code */}
           {errorCode && (
             <div className="mb-8">
-              <span className="text-hero text-ghxst-primary opacity-20">
+              <HeroTitle className="text-ghxst-primary opacity-20">
                 {errorCode}
-              </span>
+              </HeroTitle>
             </div>
           )}
 

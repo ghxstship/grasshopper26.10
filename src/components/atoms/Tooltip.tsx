@@ -17,10 +17,10 @@ const Tooltip: React.FC<TooltipProps> = ({
   const [isVisible, setIsVisible] = React.useState(false);
 
   const sideStyles = {
-    top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-    right: "left-full top-1/2 -translate-y-1/2 ml-2",
-    bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
-    left: "right-full top-1/2 -translate-y-1/2 mr-2",
+    top: "bottom-full start-1/2 -translate-x-1/2 mb-2",
+    right: "start-full top-1/2 -translate-y-1/2 ms-2",
+    bottom: "top-full start-1/2 -translate-x-1/2 mt-2",
+    left: "end-full top-1/2 -translate-y-1/2 me-2",
   };
 
   return (
@@ -42,10 +42,10 @@ const Tooltip: React.FC<TooltipProps> = ({
           <div
             className={cn(
               "absolute w-2 h-2 bg-grey-900 transform rotate-45",
-              side === "top" && "bottom-[-4px] left-1/2 -translate-x-1/2",
-              side === "right" && "left-[-4px] top-1/2 -translate-y-1/2",
-              side === "bottom" && "top-[-4px] left-1/2 -translate-x-1/2",
-              side === "left" && "right-[-4px] top-1/2 -translate-y-1/2"
+              side === "top" && "bottom-[-4px] start-1/2 -translate-x-1/2",
+              side === "right" && "start-[-4px] top-1/2 -translate-y-1/2",
+              side === "bottom" && "top-[-4px] start-1/2 -translate-x-1/2",
+              side === "left" && "end-[-4px] top-1/2 -translate-y-1/2"
             )}
           />
         </div>

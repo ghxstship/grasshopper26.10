@@ -9,6 +9,7 @@ import { Button } from "@/components/atoms/Button";
 import { IconButton } from "@/components/atoms/IconButton";
 import { Badge } from "@/components/atoms/Badge";
 import { Breadcrumb, type BreadcrumbItem } from "@/components/molecules/Breadcrumb";
+import { Caption } from "@/components/atoms/Typography";
 
 export interface NavbarProps {
   logo?: React.ReactNode;
@@ -104,9 +105,9 @@ const Navbar: React.FC<NavbarProps> = ({
           />
           <Badge
             variant="error"
-            className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-caption"
+            className="absolute -top-1 -end-1 h-5 w-5 flex items-center justify-center p-0"
           >
-            {notifications > 9 ? "9+" : notifications}
+            <Caption>{notifications > 9 ? "9+" : notifications}</Caption>
           </Badge>
         </div>
       )}
@@ -121,13 +122,13 @@ const Navbar: React.FC<NavbarProps> = ({
             size="sm"
           />
           <div className="hidden lg:block text-left">
-            <div className="text-body-sm text-grey-900 -tech">
+            <div className="text-grey-900 -tech">
               {user.name}
             </div>
             {user.email && (
-              <div className="text-caption text-grey-500 -tech">
+              <Caption className="text-grey-500">
                 {user.email}
-              </div>
+              </Caption>
             )}
           </div>
         </Button>

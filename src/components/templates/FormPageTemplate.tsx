@@ -175,7 +175,7 @@ export function FormPageTemplate({
                 {steps.map((step, index) => (
                   <div
                     key={`label-${step.id}`}
-                    className={`flex-1 text-center ${index < steps.length - 1 ? 'mr-2' : ''}`}
+                    className={`flex-1 text-center ${index < steps.length - 1 ? 'me-2' : ''}`}
                   >
                     <Metadata
                       className={`${ index === currentStep ? 'text-ghxst-primary' : completedSteps.has(index) ? 'text-success' : 'text-ghxst-text-secondary' }`}
@@ -216,7 +216,7 @@ export function FormPageTemplate({
                   onClick={handleBack}
                   disabled={isSubmitting}
                 >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  <ArrowLeft className="w-4 h-4 me-2" />
                   Back
                 </Button>
               )}
@@ -226,7 +226,7 @@ export function FormPageTemplate({
                   onClick={onSaveDraft}
                   disabled={isSubmitting}
                 >
-                  <Save className="w-4 h-4 mr-2" />
+                  <Save className="w-4 h-4 me-2" />
                   Save Draft
                 </Button>
               )}
@@ -240,7 +240,7 @@ export function FormPageTemplate({
                   disabled={isSubmitting}
                 >
                   Next
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-4 h-4 ms-2" />
                 </Button>
               ) : (
                 <Button

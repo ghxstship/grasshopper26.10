@@ -6,6 +6,7 @@ import { GripVertical, Plus, MoreVertical, Calendar, User } from 'lucide-react';
 import { Card } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
+import { BodyTextSmall, Caption, SubsectionHeader } from "@/components/atoms/Typography";
 
 export interface KanbanTask {
   id: string;
@@ -65,11 +66,11 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
               <div
                 className={`w-3 h-3 rounded-full ${column.color || 'bg-atlvs-green-500'}`}
               />
-              <h3 className="text-white">
+              <SubsectionHeader className="text-white">
                 {column.title}
-              </h3>
-              <Badge variant="atlvs-outline" className="text-caption">
-                {column.tasks.length}
+              </SubsectionHeader>
+              <Badge variant="atlvs-outline">
+                <Caption>{column.tasks.length}</Caption>
               </Badge>
             </div>
             <Button
@@ -111,9 +112,9 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-start gap-2 flex-1">
                         <GripVertical className="w-4 h-4 text-grey-500 mt-1 flex-shrink-0" />
-                        <h4 className="text-white text-body-sm">
+                        <BodyTextSmall className="text-white font-medium">
                           {task.title}
-                        </h4>
+                        </BodyTextSmall>
                       </div>
                       <Button variant="ghost" size="sm" className="h-auto p-0">
                         <MoreVertical className="w-4 h-4" />
@@ -122,9 +123,9 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
 
                     {/* Task Description */}
                     {task.description && (
-                      <p className="text-grey-400 text-caption mb-3 line-clamp-2">
+                      <Caption className="text-grey-400 mb-3 line-clamp-2">
                         {task.description}
-                      </p>
+                      </Caption>
                     )}
 
                     {/* Task Meta */}
@@ -137,16 +138,16 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
                           />
                         )}
                         {task.assignee && (
-                          <div className="flex items-center gap-1 text-grey-400 text-caption">
-                            <User className="w-3 h-3" />
-                            <span>{task.assignee}</span>
+                          <div className="flex items-center gap-1">
+                            <User className="w-3 h-3 text-grey-400" />
+                            <Caption className="text-grey-400">{task.assignee}</Caption>
                           </div>
                         )}
                       </div>
                       {task.dueDate && (
-                        <div className="flex items-center gap-1 text-grey-400 text-caption">
-                          <Calendar className="w-3 h-3" />
-                          <span>{task.dueDate}</span>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-grey-400" />
+                          <Caption className="text-grey-400">{task.dueDate}</Caption>
                         </div>
                       )}
                     </div>
@@ -158,9 +159,8 @@ export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onA
                           <Badge
                             key={tag}
                             variant="atlvs-outline"
-                            className="text-caption"
                           >
-                            {tag}
+                            <Caption>{tag}</Caption>
                           </Badge>
                         ))}
                       </div>

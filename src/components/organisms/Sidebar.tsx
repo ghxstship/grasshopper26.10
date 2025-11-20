@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight,  } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { IconButton } from "@/components/atoms/IconButton";
 import { Separator } from "@/components/atoms/Separator";
+import { Caption, Overline } from "@/components/atoms/Typography";
 
 export interface SidebarSection {
   title?: string;
@@ -81,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           }}
           className={cn(
             "flex items-center gap-3 px-4 py-3 text-body-sm font-share-tech transition-colors relative",
-            depth > 0 && "pl-8",
+            depth > 0 && "ps-8",
             isActive
               ? activeStyles[variant]
               : "text-grey-700 hover:bg-grey-50 hover:text-grey-900"
@@ -92,9 +93,9 @@ const Sidebar: React.FC<SidebarProps> = ({
             <>
               <span className="flex-1 truncate">{item.label}</span>
               {item.badge && (
-                <span className="flex-shrink-0 rounded-full bg-grey-200 px-2 py-0.5 text-caption">
+                <Caption className="flex-shrink-0 rounded-full bg-grey-200 px-2 py-0.5">
                   {item.badge}
-                </span>
+                </Caption>
               )}
               {hasChildren && (
                 <ChevronRight
@@ -145,9 +146,9 @@ const Sidebar: React.FC<SidebarProps> = ({
         {sections.map((section, index) => (
           <div key={index}>
             {section.title && !isCollapsed && (
-              <div className="px-4 py-2 text-caption text-grey-500 uppercaser">
+              <Overline className="px-4 py-2 text-grey-500">
                 {section.title}
-              </div>
+              </Overline>
             )}
             {section.items.map((item) => renderItem(item))}
             {index < sections.length - 1 && (

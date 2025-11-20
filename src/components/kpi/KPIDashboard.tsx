@@ -3,6 +3,7 @@
 import { memo, useMemo } from 'react';
 import { Card } from '@/components/atoms/Card';
 import { TrendingUp, TrendingDown, DollarSign, Users, Target, Activity } from 'lucide-react';
+import { BodyTextSmall, Caption } from "@/components/atoms/Typography";
 
 interface KPIMetric {
   name: string;
@@ -37,19 +38,18 @@ const categoryColors = {
 const MetricCard = memo(({ metric }: { metric: KPIMetric }) => (
   <Card className="p-6 hover:shadow-lg transition-shadow">
     <div className="flex items-start justify-between mb-2">
-      <p className="text-body-sm text-grey-600">{metric.name}</p>
+      <BodyTextSmall className="text-grey-600">{metric.name}</BodyTextSmall>
       {metric.trend && (
-        <div className={`flex items-center gap-1 text-caption ${ metric.trend === 'up' ? 'text-success' : metric.trend === 'down' ? 'text-destructive' : 'text-grey-600' }`}>
+        <Caption className={`flex items-center gap-1 ${ metric.trend === 'up' ? 'text-success' : metric.trend === 'down' ? 'text-destructive' : 'text-grey-600' }`}>
           {metric.trend === 'up' ? (
             <TrendingUp className="h-3 w-3" />
           ) : metric.trend === 'down' ? (
             <TrendingDown className="h-3 w-3" />
           ) : null}
           {metric.trendValue && `${metric.trendValue}%`}
-        </div>
+        </Caption>
       )}
     </div>
-    
     <div className="flex items-baseline gap-2">
       <span >
         {metric.value.toLocaleString(undefined, { 
@@ -57,7 +57,7 @@ const MetricCard = memo(({ metric }: { metric: KPIMetric }) => (
           minimumFractionDigits: metric.unit === 'USD' ? 2 : 0
         })}
       </span>
-      <span className="text-body-sm text-grey-500">{metric.unit}</span>
+      <span className="text-grey-500">{metric.unit}</span>
     </div>
   </Card>
 ));

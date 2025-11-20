@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/Button";
 import { IconButton } from "@/components/atoms/IconButton";
 import { SearchBar } from "@/components/molecules/SearchBar";
+import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface ToolbarAction {
   label: string;
@@ -62,9 +63,9 @@ const Toolbar: React.FC<ToolbarProps> = ({
             </h2>
           )}
           {description && (
-            <p className="mt-1 text-body-sm text-grey-600 -tech">
+            <BodyTextSmall className="mt-1 text-grey-600 -tech">
               {description}
-            </p>
+            </BodyTextSmall>
           )}
         </div>
       )}

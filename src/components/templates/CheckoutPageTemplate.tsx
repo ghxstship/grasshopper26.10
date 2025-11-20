@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
-import { PageTitle, SectionHeader, BodyText, Metadata } from '@/components/atoms/Typography';
+import { PageTitle, SectionHeader, BodyText, Metadata, BodyTextSmall } from "@/components/atoms/Typography";
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Separator } from '@/components/atoms/Separator';
@@ -117,7 +117,7 @@ export function CheckoutPageTemplate({
               {termsAndConditions && (
                 <Card className="bg-ghxst-background">
                   <CardContent className="p-4">
-                    <BodyText className="text-body-sm text-ghxst-text-secondary">
+                    <BodyText className="text-ghxst-text-secondary">
                       {termsAndConditions}
                     </BodyText>
                   </CardContent>
@@ -217,7 +217,7 @@ export function CheckoutPageTemplate({
                     onClick={onSubmit}
                     disabled={isProcessing}
                   >
-                    <Lock className="w-4 h-4 mr-2" />
+                    <Lock className="w-4 h-4 me-2" />
                     {isProcessing ? 'Processing...' : `Pay ${formatPrice(total)}`}
                   </Button>
 

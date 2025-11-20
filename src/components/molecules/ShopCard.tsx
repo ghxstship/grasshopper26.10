@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/atoms/Card";
-import { CardTitle, Metadata } from "@/components/atoms/Typography";
+import { CardTitle, Metadata, BodyTextSmall } from "@/components/atoms/Typography";
 import { Button } from "@/components/atoms/Button";
 import { IntegrationBadge } from "@/components/atoms/IntegrationBadge";
 import { Store } from "lucide-react";
@@ -61,9 +61,9 @@ export const ShopCard: React.FC<ShopCardProps> = ({
           </Metadata>
           
           {description && (
-            <p className="-tech text-body-sm text-grey-600 line-clamp-2">
+            <BodyTextSmall className="-tech text-grey-600 line-clamp-2">
               {description}
-            </p>
+            </BodyTextSmall>
           )}
           
           {featuredProducts.length > 0 && (

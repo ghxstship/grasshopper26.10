@@ -137,7 +137,7 @@ export function ComparisonPageTemplate({
                   className={`relative ${ option.highlighted ? 'border-2 border-ghxst-primary shadow-lg scale-105' : '' }`}
                 >
                   {option.badge && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <div className="absolute -top-3 start-1/2 -translate-x-1/2">
                       <Badge variant={option.badge.variant}>
                         {option.badge.label}
                       </Badge>
@@ -222,7 +222,7 @@ export function ComparisonPageTemplate({
                 className={`relative ${ option.highlighted ? 'border-2 border-ghxst-primary shadow-lg' : '' }`}
               >
                 {option.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="absolute -top-3 start-1/2 -translate-x-1/2">
                     <Badge variant={option.badge.variant}>
                       {option.badge.label}
                     </Badge>

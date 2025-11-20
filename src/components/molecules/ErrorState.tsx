@@ -4,6 +4,7 @@ import * as React from 'react';
 import { AlertCircle, RefreshCw, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/atoms/Button';
+import { BodyTextSmall, Caption } from '@/components/atoms/Typography';
 
 export interface ErrorStateProps {
   title?: string;
@@ -59,20 +60,20 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         <div className="mb-6 w-full max-w-2xl">
           <button
             onClick={() => setShowErrorDetails(!showErrorDetails)}
-            className="text-body-sm text-grey-500 hover:text-grey-400 mb-2"
+            className="text-grey-500 hover:text-grey-400 mb-2"
           >
             {showErrorDetails ? 'Hide' : 'Show'} error details
           </button>
 
           {showErrorDetails && (
             <div className="bg-grey-900 border border-grey-800 rounded-lg p-4 text-left">
-              <p className="text-body-sm text-destructive font-mono mb-2">
+              <BodyTextSmall className="text-destructive font-mono mb-2">
                 {errorMessage}
-              </p>
+              </BodyTextSmall>
               {errorStack && (
-                <pre className="text-caption text-grey-500 font-mono overflow-x-auto">
+                <Caption className="text-grey-500 font-mono overflow-x-auto block whitespace-pre">
                   {errorStack}
-                </pre>
+                </Caption>
               )}
             </div>
           )}
@@ -82,13 +83,13 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
       <div className="flex items-center gap-3">
         {onRetry && (
           <Button variant={variant} onClick={onRetry}>
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <RefreshCw className="w-4 h-4 me-2" />
             Try Again
           </Button>
         )}
         {onGoHome && (
           <Button variant="ghost" onClick={onGoHome}>
-            <Home className="w-4 h-4 mr-2" />
+            <Home className="w-4 h-4 me-2" />
             Go Home
           </Button>
         )}

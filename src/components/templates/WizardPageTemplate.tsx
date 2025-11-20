@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
-import { PageTitle, SectionHeader, BodyText, Metadata } from '@/components/atoms/Typography';
+import { PageTitle, SectionHeader, BodyText, Metadata } from "@/components/atoms/Typography";
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent } from '@/components/atoms/Card';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
@@ -151,7 +151,7 @@ export function WizardPageTemplate({
                     ) : null}
                   </div>
                   <Metadata
-                    className={`mt-2 text-center text-caption ${ index === currentStep ? 'text-ghxst-primary' : completedSteps.has(index) ? 'text-success' : 'text-ghxst-text-secondary' }`}
+                    className={`mt-2 text-center ${ index === currentStep ? 'text-ghxst-primary' : completedSteps.has(index) ? 'text-success' : 'text-ghxst-text-secondary' }`}
                   >
                     {step.title}
                   </Metadata>
@@ -172,7 +172,7 @@ export function WizardPageTemplate({
                 <SectionHeader className="mb-2">
                   {currentStepData.title}
                   {isOptionalStep && (
-                    <span className="ml-2 text-body-sm text-ghxst-text-secondary">
+                    <span className="ms-2 text-ghxst-text-secondary">
                       (Optional)
                     </span>
                   )}
@@ -194,7 +194,7 @@ export function WizardPageTemplate({
               onClick={handleBack}
               disabled={isFirstStep || isProcessing}
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <ArrowLeft className="w-4 h-4 me-2" />
               Back
             </Button>
 
@@ -218,7 +218,7 @@ export function WizardPageTemplate({
                   : isLastStep
                   ? 'Complete'
                   : 'Next'}
-                {!isLastStep && <ArrowRight className="w-4 h-4 ml-2" />}
+                {!isLastStep && <ArrowRight className="w-4 h-4 ms-2" />}
               </Button>
             </div>
           </div>

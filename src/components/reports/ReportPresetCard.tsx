@@ -5,6 +5,7 @@ import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
 import { Star, TrendingUp, DollarSign, Users, Activity } from 'lucide-react';
 import { useState } from 'react';
+import { BodyTextSmall, Caption } from "@/components/atoms/Typography";
 
 interface ReportPresetCardProps {
   preset: {
@@ -59,7 +60,7 @@ export function ReportPresetCard({
             </div>
             <div>
               <h3 className="font-semibold text-white">{preset.name}</h3>
-              <p className="text-body-sm text-grey-400">{preset.subcategory}</p>
+              <BodyTextSmall className="text-grey-400">{preset.subcategory}</BodyTextSmall>
             </div>
           </div>
           <Button
@@ -74,17 +75,17 @@ export function ReportPresetCard({
           </Button>
         </div>
 
-        <p className="text-body-sm text-grey-300 mb-4 line-clamp-2">
+        <BodyTextSmall className="text-grey-300 mb-4 line-clamp-2">
           {preset.description}
-        </p>
+        </BodyTextSmall>
 
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
-            <Badge variant="atlvs" className="text-caption">
-              {preset.category}
+            <Badge variant="atlvs">
+              <Caption>{preset.category}</Caption>
             </Badge>
-            <Badge variant="atlvs-outline" className="text-caption">
-              {preset.display_format}
+            <Badge variant="atlvs-outline">
+              <Caption>{preset.display_format}</Caption>
             </Badge>
           </div>
           <Button

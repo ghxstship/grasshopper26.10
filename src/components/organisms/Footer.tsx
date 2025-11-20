@@ -1,7 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Instagram, Twitter, Music, Linkedin } from "lucide-react";
-import { BodyText, SectionHeader } from "@/components/atoms/Typography";
+import { BodyText, SectionHeader, BodyTextSmall } from "@/components/atoms/Typography";
 
 export const Footer: React.FC = () => {
   const footerSections = [
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
         {/* Brand */}
         <div className="mb-12">
           <SectionHeader className="text-display mb-2 tracking-tight">GVTEWAY</SectionHeader>
-          <BodyText className="-tech text-body text-grey-400">
+          <BodyText className="-tech text-grey-400">
             Discover Live Experiences
           </BodyText>
         </div>
@@ -102,7 +102,7 @@ export const Footer: React.FC = () => {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="-tech text-body-sm text-grey-400 hover:text-ghxst-accent transition-colors"
+                      className="-tech text-grey-400 hover:text-ghxst-accent transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
                 <React.Fragment key={link.href}>
                   <Link
                     href={link.href}
-                    className="-tech text-body-sm text-grey-400 hover:text-ghxst-accent transition-colors"
+                    className="-tech text-grey-400 hover:text-ghxst-accent transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Copyright */}
-            <BodyText className="-tech-mono text-body-sm text-grey-500">
+            <BodyText className="-tech-mono text-grey-500">
               © 2025 GHXSTSHIP INDUSTRIES
             </BodyText>
 

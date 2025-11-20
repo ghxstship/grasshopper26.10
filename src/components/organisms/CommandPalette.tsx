@@ -5,6 +5,7 @@ import { Search,  } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
+import { BodyTextSmall, Caption, Overline } from "@/components/atoms/Typography";
 
 export interface CommandItem {
   id: string;
@@ -104,7 +105,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
       />
 
       {/* Command Palette */}
-      <div className="fixed left-1/2 top-[20%] z-50 w-full max-w-2xl -translate-x-1/2 px-4">
+      <div className="fixed start-1/2 top-[20%] z-50 w-full max-w-2xl -translate-x-1/2 px-4">
         <div
           className={cn(
             "bg-white rounded-2xl shadow-2xl border-2 overflow-hidden",
@@ -128,15 +129,15 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Results */}
           <div className="max-h-[400px] overflow-y-auto p-2">
             {Object.keys(groupedItems).length === 0 ? (
-              <div className="py-12 text-center text-body-sm text-grey-500 -tech">
+              <BodyTextSmall className="py-12 text-center text-grey-500 -tech">
                 No results found
-              </div>
+              </BodyTextSmall>
             ) : (
               Object.entries(groupedItems).map(([category, categoryItems]) => (
                 <div key={category} className="mb-4 last:mb-0">
-                  <div className="px-3 py-2 text-caption text-grey-500 uppercaser">
+                  <Overline className="px-3 py-2 text-grey-500">
                     {category}
-                  </div>
+                  </Overline>
                   {categoryItems.map((item, _index) => {
                     const globalIndex = filteredItems.indexOf(item);
                     const isSelected = globalIndex === selectedIndex;
@@ -162,19 +163,19 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <div className="text-body-sm -tech truncate">
+                          <BodyTextSmall className="-tech truncate">
                             {item.label}
-                          </div>
+                          </BodyTextSmall>
                           {item.description && (
-                            <div className="text-caption text-grey-500 -tech truncate">
+                            <Caption className="text-grey-500 truncate">
                               {item.description}
-                            </div>
+                            </Caption>
                           )}
                         </div>
                         {item.shortcut && (
-                          <div className="flex-shrink-0 text-caption text-grey-400 font-mono">
+                          <Caption className="flex-shrink-0 text-grey-400 font-mono">
                             {item.shortcut}
-                          </div>
+                          </Caption>
                         )}
                       </Button>
                     );
@@ -185,11 +186,11 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="border-t border-grey-200 px-4 py-2 text-caption text-grey-500 -tech">
-            <span className="mr-4">↑↓ Navigate</span>
-            <span className="mr-4">↵ Select</span>
+          <Caption className="border-t border-grey-200 px-4 py-2 text-grey-500">
+            <span className="me-4">↑↓ Navigate</span>
+            <span className="me-4">↵ Select</span>
             <span>ESC Close</span>
-          </div>
+          </Caption>
         </div>
       </div>
     </>

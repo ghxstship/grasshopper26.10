@@ -3,6 +3,7 @@
 import React from 'react';
 import { Avatar } from '../atoms/Avatar';
 import { Text } from '../atoms/Text';
+import { Caption } from '../atoms/Typography';
 import { cn } from '@/lib/utils';
 
 export interface ChatMessageProps {
@@ -82,13 +83,13 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
           </Text>
           
           {isCurrentUser && status && (
-            <span className="text-caption text-grey-500">
+            <Caption className="text-grey-500">
               {status === 'sending' && '⏳'}
               {status === 'sent' && '✓'}
               {status === 'delivered' && '✓✓'}
               {status === 'read' && '✓✓'}
               {status === 'failed' && '❌'}
-            </span>
+            </Caption>
           )}
         </div>
       </div>

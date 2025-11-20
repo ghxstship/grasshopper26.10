@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { BodyTextSmall, Caption } from '@/components/atoms/Typography';
 
 interface ConflictIndicatorProps {
   hasConflict: boolean;
@@ -20,11 +21,12 @@ export function ConflictIndicator({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center px-2.5 py-1 rounded-full text-caption bg-warning-light text-warning-foreground hover:bg-warning transition-colors ${className}`}
+      className={`inline-flex items-center px-2.5 py-1 rounded-full bg-warning-light text-warning-foreground hover:bg-warning transition-colors ${className}`}
       title="Click to resolve conflicts"
     >
+      <Caption className="flex items-center">
       <svg
-        className="w-4 h-4 mr-1"
+        className="w-4 h-4 me-1"
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -35,6 +37,7 @@ export function ConflictIndicator({
         />
       </svg>
       {conflictCount > 1 ? `${conflictCount} Conflicts` : 'Conflict'}
+      </Caption>
     </button>
   );
 }
@@ -57,7 +60,7 @@ export function FieldConflictIndicator({
   return (
     <div className="relative">
       <div
-        className="absolute -left-6 top-0 cursor-pointer"
+        className="absolute -start-6 top-0 cursor-pointer"
         onClick={() => setShowDetails(!showDetails)}
         title="Field has conflicting values"
       >
@@ -76,27 +79,27 @@ export function FieldConflictIndicator({
 
       {showDetails && (
         <div className="absolute z-10 mt-2 w-80 bg-white border border-grey-200 rounded-lg shadow-lg p-4">
-          <div className="text-body-sm text-grey-900 mb-2">
+          <BodyTextSmall className="text-grey-900 mb-2">
             Conflict in &ldquo;{fieldName}&rdquo;
-          </div>
+          </BodyTextSmall>
           
           <div className="space-y-2 mb-3">
             <div className="bg-conflict-local-bg p-2 rounded">
-              <div className="text-caption text-conflict-local mb-1">Your Value</div>
-              <div className="text-body-sm text-grey-900 break-all">
+              <Caption className="text-conflict-local mb-1">Your Value</Caption>
+              <BodyTextSmall className="text-grey-900 break-all">
                 {typeof localValue === 'object'
                   ? JSON.stringify(localValue)
                   : String(localValue)}
-              </div>
+              </BodyTextSmall>
             </div>
             
             <div className="bg-conflict-remote-bg p-2 rounded">
-              <div className="text-caption text-conflict-remote mb-1">Remote Value</div>
-              <div className="text-body-sm text-grey-900 break-all">
+              <Caption className="text-conflict-remote mb-1">Remote Value</Caption>
+              <BodyTextSmall className="text-grey-900 break-all">
                 {typeof remoteValue === 'object'
                   ? JSON.stringify(remoteValue)
                   : String(remoteValue)}
-              </div>
+              </BodyTextSmall>
             </div>
           </div>
 
@@ -107,18 +110,18 @@ export function FieldConflictIndicator({
                   onResolve(localValue);
                   setShowDetails(false);
                 }}
-                className="flex-1 px-3 py-1.5 text-caption text-conflict-local bg-conflict-local-bg rounded hover:bg-conflict-local-hover hover:text-white"
+                className="flex-1 px-3 py-1.5 text-conflict-local bg-conflict-local-bg rounded hover:bg-conflict-local-hover hover:text-white"
               >
-                Keep Mine
+                <Caption>Keep Mine</Caption>
               </button>
               <button
                 onClick={() => {
                   onResolve(remoteValue);
                   setShowDetails(false);
                 }}
-                className="flex-1 px-3 py-1.5 text-caption text-conflict-remote bg-conflict-remote-bg rounded hover:bg-conflict-remote-hover hover:text-white"
+                className="flex-1 px-3 py-1.5 text-conflict-remote bg-conflict-remote-bg rounded hover:bg-conflict-remote-hover hover:text-white"
               >
-                Keep Theirs
+                <Caption>Keep Theirs</Caption>
               </button>
             </div>
           )}

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
 import { Separator } from "@/components/atoms/Separator";
+import { Caption } from "@/components/atoms/Typography";
 
 export interface FilterOption {
   label: string;
@@ -69,12 +70,12 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         <h3 className="text-grey-900">
           Filters
           {totalFilters > 0 && (
-            <span className="ml-2 text-body-sm text-grey-500">({totalFilters})</span>
+            <span className="ms-2 text-grey-500">({totalFilters})</span>
           )}
         </h3>
         {totalFilters > 0 && (
           <Button variant="ghost" size="sm" onClick={onClear}>
-            <X className="h-4 w-4 mr-1" />
+            <X className="h-4 w-4 me-1" />
             Clear
           </Button>
         )}
@@ -96,10 +97,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 variant="ghost"
                 className="flex w-full items-center justify-between text-left"
               >
-                <span className="text-body-sm text-grey-900 -tech">
+                <span className="text-grey-900 -tech">
                   {group.label}
                   {groupValues.length > 0 && (
-                    <span className="ml-2 text-grey-500">({groupValues.length})</span>
+                    <span className="ms-2 text-grey-500">({groupValues.length})</span>
                   )}
                 </span>
                 <ChevronDown
@@ -112,7 +113,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
               {/* Group Options */}
               {isExpanded && (
-                <div className="space-y-2 pl-1">
+                <div className="space-y-2 ps-1">
                   {group.options.map((option) => (
                     <div
                       key={option.value}
@@ -129,13 +130,13 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                         }
                         variant={variant}
                       />
-                      <span className="flex-1 text-body-sm text-grey-700 group-hover:text-grey-900 -tech cursor-pointer">
+                      <span className="flex-1 text-grey-700 group-hover:text-grey-900 -tech cursor-pointer">
                         {option.label}
                       </span>
                       {option.count !== undefined && (
-                        <span className="text-caption text-grey-500">
+                        <Caption className="text-grey-500">
                           {option.count}
-                        </span>
+                        </Caption>
                       )}
                     </div>
                   ))}
