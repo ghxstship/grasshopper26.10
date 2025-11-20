@@ -228,9 +228,12 @@ export default function OrdersPage() {
  </Badge>
  </div>
  <CardDescription>
+ <div className="flex flex-col gap-1">
  <div className="flex items-center gap-2">
  <Calendar className="h-4 w-4" />
  <Caption>Ordered on {formatDate(order.createdAt)}</Caption>
+ </div>
+ </div>
  </CardDescription>
  </div>
  <div className="text-right">
@@ -263,13 +266,17 @@ export default function OrdersPage() {
  <Calendar className="h-3 w-3" />
  <Caption>{formatDate(order.event.startDate)}</Caption>
  {order.event.venue && (
- <div className="flex items-center gap-2">
+ <>
  <MapPin className="h-3 w-3" />
  <Caption>
  {order.event.venue.name}, {order.event.venue.city}
  </Caption>
+ </>
  )}
- </div></div>
+ </div>
+ </div>
+ </div>
+ </div>
  )}
 
  {/* Order Items */}
