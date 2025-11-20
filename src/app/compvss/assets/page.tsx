@@ -18,7 +18,7 @@ import { Badge} from '@/components/atoms/Badge';
 import { Input} from '@/components/atoms/Input';
 import { Select} from '@/components/atoms/Select';
 import { Tabs} from '@/components/molecules/Tabs';
-import { BodyText, SectionHeader } from '@/components/atoms/Typography'
+import { BodyText, SectionHeader, CardTitle as TypographyCardTitle } from '@/components/atoms/Typography'
 import { useAuth} from '@/lib/hooks/auth/useAuth';
 
 interface Asset {
@@ -295,7 +295,7 @@ export default function CompvssAssetsPage() {
  </Badge>
  </div>
 
- <CardTitleTypography className="mb-2">{asset.name}</CardTitleTypography>
+ <TypographyCardTitle className="mb-2">{asset.name}</TypographyCardTitle>
  <CardDescription>{asset.category}</CardDescription>
 
  <div className="mt-4 space-y-2">
@@ -347,172 +347,174 @@ export default function CompvssAssetsPage() {
  </>
  )}
 
- {/* Check In/Out Tab */}
- {activeTab === 'check-in-out' && (
- <div className="space-y-6">
- {!canCheckOut && (
- <Card variant="compvss" className="border-warning/50 bg-warning/10">
- <CardContent className="pt-6">
- <div className="flex items-center gap-3">
- <Shield className="w-6 h-6 text-warning" />
- <div>
- <BodyText className="text-warning">Restricted Access</BodyText>
- <BodyText className="text-muted-foreground">
- You don't have permission to check in/out assets. Contact your administrator.
- </BodyText>
- </div>
- </div>
- </CardContent>
- </Card>
- )}
+  {/* Check In/Out Tab */}
+  {activeTab === 'check-in-out' && (
+    <div className="space-y-6">
+      {!canCheckOut && (
+        <Card variant="compvss" className="border-warning/50 bg-warning/10">
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3">
+              <Shield className="w-6 h-6 text-warning" />
+              <div>
+                <BodyText className="text-warning">Restricted Access</BodyText>
+                <BodyText className="text-muted-foreground">
+                  You don&rsquo;t have permission to check in/out assets. Contact your administrator.
+                </BodyText>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
- <Card variant="compvss">
- <CardHeader>
- <CardTitle>Recent Check-Ins/Outs</CardTitle>
- <CardDescription>Track asset movement and usage</CardDescription>
- </CardHeader>
- <CardContent>
- <div className="space-y-4">
- {[
- { asset: 'Camera Package - Sony FX6', user: 'Sarah Johnson', action: 'checked-out', date: '2024-11-18 09:30', dueDate: '2024-11-22'},
- { asset: 'Lighting Kit - ARRI SkyPanel', user: 'Mike Chen', action: 'checked-in', date: '2024-11-17 16:45', dueDate: null},
- { asset: 'Production Van', user: 'Mike Chen', action: 'checked-out', date: '2024-11-17 08:00', dueDate: '2024-11-24'},
- { asset: 'Drone - DJI Inspire 3', user: 'Alex Kim', action: 'checked-in', date: '2024-11-16 18:30', dueDate: null}
- ].map((log, index) => (
- <div key={index} className="flex items-center justify-between py-3 border-b last:border-0">
- <div className="flex items-center gap-4">
- <div className={`p-2 rounded-lg ${log.action === 'checked-out' ? 'bg-info/20' : 'bg-success/20'}`}>
- {log.action === 'checked-out' ? <LogOut className="w-5 h-5 text-info" /> : <LogIn className="w-5 h-5 text-success" />
-}
- </div>
- <div>
- <BodyText >{log.asset}</BodyText>
- <BodyText className="text-muted-foreground">
- {log.action === 'checked-out' ? 'Checked out by' : 'Checked in by'} {log.user}
- </BodyText>
- </div>
- </div>
- <div className="text-right">
- <BodyText>{log.date}</BodyText>
- {log.dueDate && (
- <BodyText className="text-muted-foreground">Due: {log.dueDate}</BodyText>
- )}
- </div>
- </div>
- ))}
- </div>
- </CardContent>
- </Card>
- </div>
- )}
+      <Card variant="compvss">
+        <CardHeader>
+          <CardTitle>Recent Check-Ins/Outs</CardTitle>
+          <CardDescription>Track asset movement and usage</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {[
+              { asset: 'Camera Package - Sony FX6', user: 'Sarah Johnson', action: 'checked-out', date: '2024-11-18 09:30', dueDate: '2024-11-22'},
+              { asset: 'Lighting Kit - ARRI SkyPanel', user: 'Mike Chen', action: 'checked-in', date: '2024-11-17 16:45', dueDate: null},
+              { asset: 'Production Van', user: 'Mike Chen', action: 'checked-out', date: '2024-11-17 08:00', dueDate: '2024-11-24'},
+              { asset: 'Drone - DJI Inspire 3', user: 'Alex Kim', action: 'checked-in', date: '2024-11-16 18:30', dueDate: null}
+            ].map((log, index) => (
+              <div key={index} className="flex items-center justify-between py-3 border-b last:border-0">
+                <div className="flex items-center gap-4">
+                  <div className={`p-2 rounded-lg ${log.action === 'checked-out' ? 'bg-info/20' : 'bg-success/20'}`}>
+                    {log.action === 'checked-out' ? <LogOut className="w-5 h-5 text-info" /> : <LogIn className="w-5 h-5 text-success" />}
+                  </div>
+                  <div>
+                    <BodyText>{log.asset}</BodyText>
+                    <BodyText className="text-muted-foreground">
+                      {log.action === 'checked-out' ? 'Checked out by' : 'Checked in by'} {log.user}
+                    </BodyText>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <BodyText>{log.date}</BodyText>
+                  {log.dueDate && (
+                    <BodyText className="text-muted-foreground">Due: {log.dueDate}</BodyText>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )}
 
- {/* Maintenance Tab */}
- {activeTab === 'maintenance' && (
- <div className="space-y-6">
- {!canMaintain && (
- <Card variant="compvss" className="border-warning/50 bg-warning/10">
- <CardContent className="pt-6">
- <div className="flex items-center gap-3">
- <Shield className="w-6 h-6 text-warning" />
- <div>
- <BodyText className="text-warning">Restricted Access</BodyText>
- <BodyText className="text-muted-foreground">
- You don't have permission to manage maintenance. Contact your administrator.
- </BodyText>
- </div>
- </div>
- </CardContent>
- </Card>
- )}
+  {/* Maintenance Tab */}
+  {activeTab === 'maintenance' && (
+    <div className="space-y-6">
+      {!canMaintain && (
+        <Card variant="compvss" className="border-warning/50 bg-warning/10">
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3">
+              <Shield className="w-6 h-6 text-warning" />
+              <div>
+                <BodyText className="text-warning">Restricted Access</BodyText>
+                <BodyText className="text-muted-foreground">
+                  You don&rsquo;t have permission to manage maintenance. Contact your administrator.
+                </BodyText>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
- <Card variant="compvss">
- <CardContent className="pt-6">
- <div className="flex items-center justify-between">
- <div>
- <BodyText className="text-muted-foreground">Due This Week</BodyText>
- <SectionHeader className="mt-1">8</SectionHeader>
- </div>
- <Calendar className="w-8 h-8 text-compvss-primary" />
- </div>
- </CardContent>
- </Card>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card variant="compvss">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <BodyText className="text-muted-foreground">Due This Week</BodyText>
+                <SectionHeader className="mt-1">8</SectionHeader>
+              </div>
+              <Calendar className="w-8 h-8 text-compvss-primary" />
+            </div>
+          </CardContent>
+        </Card>
 
- <Card variant="compvss">
- <CardContent className="pt-6">
- <div className="flex items-center justify-between">
- <div>
- <BodyText className="text-muted-foreground">Overdue</BodyText>
- <SectionHeader className="mt-1 text-error">2</SectionHeader>
- </div>
- <AlertCircle className="w-8 h-8 text-error" />
- </div>
- </CardContent>
- </Card>
+        <Card variant="compvss">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <BodyText className="text-muted-foreground">Overdue</BodyText>
+                <SectionHeader className="mt-1 text-error">2</SectionHeader>
+              </div>
+              <AlertCircle className="w-8 h-8 text-error" />
+            </div>
+          </CardContent>
+        </Card>
 
- <Card variant="compvss">
- <CardContent className="pt-6">
- <div className="flex items-center justify-between">
- <div>
- <BodyText className="text-muted-foreground">Completed</BodyText>
- <SectionHeader className="mt-1 text-success">34</SectionHeader>
- </div>
- <CheckCircle2 className="w-8 h-8 text-success" />
- </div>
- </CardContent>
- </Card>
- </div>
+        <Card variant="compvss">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <BodyText className="text-muted-foreground">Completed</BodyText>
+                <SectionHeader className="mt-1 text-success">34</SectionHeader>
+              </div>
+              <CheckCircle2 className="w-8 h-8 text-success" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
- <Card variant="compvss">
- <CardHeader>
- <CardTitle>Maintenance Schedule</CardTitle>
- <CardDescription>Upcoming and overdue maintenance tasks</CardDescription>
- </CardHeader>
- <CardContent>
- <div className="space-y-4">
- {[
- { asset: 'Camera Package - Sony FX6', type: 'Preventive', dueDate: '2025-01-15', status: 'scheduled', priority: 'medium'},
- { asset: 'Audio Recording Kit', type: 'Repair', dueDate: '2024-11-20', status: 'in-progress', priority: 'high'},
- { asset: 'Production Van', type: 'Service', dueDate: '2024-12-20', status: 'scheduled', priority: 'medium'},
- { asset: 'Drone - DJI Inspire 3', type: 'Inspection', dueDate: '2025-02-10', status: 'scheduled', priority: 'low'}
- ].map((maintenance, index) => (
- <div key={index} className="flex items-center justify-between py-3 border-b last:border-0">
- <div className="flex items-center gap-4">
- <div className="p-2 bg-compvss-primary/20 rounded-lg">
- <Wrench className="w-5 h-5 text-compvss-primary" />
- </div>
- <div>
- <BodyText >{maintenance.asset}</BodyText>
- <BodyText className="text-muted-foreground">{maintenance.type}</BodyText>
- </div>
- </div>
- <div className="flex items-center gap-4">
- <Badge variant={
- maintenance.priority === 'high' ? 'error' :
- maintenance.priority === 'medium' ? 'default' : 'compvss-outline'
-}>
- {maintenance.priority}
- </Badge>
- <div className="text-right">
- <BodyText>{maintenance.dueDate}</BodyText>
- <BodyText className="text-muted-foreground">{maintenance.status}</BodyText>
- </div>
- {canMaintain && (
- <Button variant="compvss" size="lg"
- onClick={() => alert('Add asset functionality coming soon')}
- >
- <Plus className="w-5 h-5 me-2" />
- Add Asset
- </Button>
- )}
- </div>
- </div>
- ))}
- </div>
- </CardContent>
- </Card>
- </div>
- )}
+      <Card variant="compvss">
+        <CardHeader>
+          <CardTitle>Maintenance Schedule</CardTitle>
+          <CardDescription>Upcoming and overdue maintenance tasks</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {[
+              { asset: 'Camera Package - Sony FX6', type: 'Preventive', dueDate: '2025-01-15', status: 'scheduled', priority: 'medium'},
+              { asset: 'Audio Recording Kit', type: 'Repair', dueDate: '2024-11-20', status: 'in-progress', priority: 'high'},
+              { asset: 'Production Van', type: 'Service', dueDate: '2024-12-20', status: 'scheduled', priority: 'medium'},
+              { asset: 'Drone - DJI Inspire 3', type: 'Inspection', dueDate: '2025-02-10', status: 'scheduled', priority: 'low'}
+            ].map((maintenance, index) => (
+              <div key={index} className="flex items-center justify-between py-3 border-b last:border-0">
+                <div className="flex items-center gap-4">
+                  <div className="p-2 bg-compvss-primary/20 rounded-lg">
+                    <Wrench className="w-5 h-5 text-compvss-primary" />
+                  </div>
+                  <div>
+                    <BodyText>{maintenance.asset}</BodyText>
+                    <BodyText className="text-muted-foreground">{maintenance.type}</BodyText>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Badge
+                    variant={
+                      maintenance.priority === 'high'
+                        ? 'error'
+                        : maintenance.priority === 'medium'
+                          ? 'default'
+                          : 'compvss-outline'
+                    }
+                  >
+                    {maintenance.priority}
+                  </Badge>
+                  <div className="text-right">
+                    <BodyText>{maintenance.dueDate}</BodyText>
+                    <BodyText className="text-muted-foreground">{maintenance.status}</BodyText>
+                  </div>
+                  {canMaintain && (
+                    <Button variant="compvss" size="lg" onClick={() => alert('Add asset functionality coming soon')}>
+                      <Plus className="w-5 h-5 me-2" />
+                      Add Asset
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )}
  </ContentLayout>
  </CompvssLayout>
  );

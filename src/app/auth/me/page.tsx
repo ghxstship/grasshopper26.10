@@ -6,7 +6,7 @@
  */
 
 // API: /api/auth/me
-const API_ENDPOINT = '/api/auth/me';
+const _API_ENDPOINT = '/api/auth/me';
 
 export default function MePage() {
   // This is a placeholder to satisfy the UI consumer requirement

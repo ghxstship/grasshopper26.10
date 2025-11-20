@@ -9,7 +9,7 @@ import { Ticket, ShoppingBag, Sparkles, Calendar, MapPin, Users, TrendingUp, Shi
 import Image from "next/image";
 import Link from "next/link";
 
-const metadata = {
+const _metadata = {
   title: 'Marketplace | GVTEWAY Community',
   description: 'Buy, sell, and trade tickets, merch, and exclusive experiences in the GVTEWAY community marketplace.',
   keywords: 'marketplace, tickets, merch, experiences, buy, sell, trade',

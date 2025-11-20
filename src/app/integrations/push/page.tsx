@@ -6,7 +6,7 @@
  */
 
 // API: /api/integrations/push
-const API_ENDPOINT = '/api/integrations/push';
+const _API_ENDPOINT = '/api/integrations/push';
 
 export default function PushPage() {
   // This is a placeholder to satisfy the UI consumer requirement

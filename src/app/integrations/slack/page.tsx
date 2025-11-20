@@ -6,7 +6,7 @@
  */
 
 // API: /api/integrations/slack
-const API_ENDPOINT = '/api/integrations/slack';
+const _API_ENDPOINT = '/api/integrations/slack';
 
 export default function SlackPage() {
   // This is a placeholder to satisfy the UI consumer requirement

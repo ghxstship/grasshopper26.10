@@ -6,7 +6,7 @@
  */
 
 // API: /api/tickets/:id/qr
-const API_ENDPOINT = '/api/tickets/:id/qr';
+const _API_ENDPOINT = '/api/tickets/:id/qr';
 
 export default function QrPage() {
   // This is a placeholder to satisfy the UI consumer requirement

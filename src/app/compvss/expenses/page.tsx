@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/expenses
-const API_ENDPOINT = '/api/compvss/expenses';
+const _API_ENDPOINT = '/api/compvss/expenses';
 
 export default function ExpensesPage() {
   // This is a placeholder to satisfy the UI consumer requirement

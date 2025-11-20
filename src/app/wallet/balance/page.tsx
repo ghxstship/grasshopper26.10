@@ -6,7 +6,7 @@
  */
 
 // API: /api/wallet/balance
-const API_ENDPOINT = '/api/wallet/balance';
+const _API_ENDPOINT = '/api/wallet/balance';
 
 export default function BalancePage() {
   // This is a placeholder to satisfy the UI consumer requirement

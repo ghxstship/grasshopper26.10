@@ -16,7 +16,7 @@ import { useBudget } from '@/lib/hooks/atlvs/useBudgets';
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/budgets/[id]
 
 // API: /api/atlvs/budgets/:id
-const API_ENDPOINT = '/api/atlvs/budgets/:id';
+const _API_ENDPOINT = '/api/atlvs/budgets/:id';
 
 export default function BudgetDetailPage({ params }: { params: { id: string } }) {
   // Fetch budget data with React Query

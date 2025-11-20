@@ -6,7 +6,7 @@
  */
 
 // API: /api/social/posts/:id/like
-const API_ENDPOINT = '/api/social/posts/:id/like';
+const _API_ENDPOINT = '/api/social/posts/:id/like';
 
 export default function LikePage() {
   // This is a placeholder to satisfy the UI consumer requirement

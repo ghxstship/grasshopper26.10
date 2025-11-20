@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/teams/:id/members
-const API_ENDPOINT = '/api/compvss/teams/:id/members';
+const _API_ENDPOINT = '/api/compvss/teams/:id/members';
 
 export default function MembersPage() {
   // This is a placeholder to satisfy the UI consumer requirement

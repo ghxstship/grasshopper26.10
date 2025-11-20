@@ -6,7 +6,7 @@
  */
 
 // API: /api/webhooks/sendgrid
-const API_ENDPOINT = '/api/webhooks/sendgrid';
+const _API_ENDPOINT = '/api/webhooks/sendgrid';
 
 export default function SendgridPage() {
   // This is a placeholder to satisfy the UI consumer requirement

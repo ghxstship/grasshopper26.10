@@ -6,7 +6,7 @@
  */
 
 // API: /api/events/:id/cancel
-const API_ENDPOINT = '/api/events/:id/cancel';
+const _API_ENDPOINT = '/api/events/:id/cancel';
 
 export default function CancelPage() {
   // This is a placeholder to satisfy the UI consumer requirement

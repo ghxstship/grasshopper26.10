@@ -6,7 +6,7 @@
  */
 
 // API: /api/tickets/:id/validate
-const API_ENDPOINT = '/api/tickets/:id/validate';
+const _API_ENDPOINT = '/api/tickets/:id/validate';
 
 export default function ValidatePage() {
   // This is a placeholder to satisfy the UI consumer requirement

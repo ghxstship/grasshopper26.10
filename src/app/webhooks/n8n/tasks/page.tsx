@@ -6,7 +6,7 @@
  */
 
 // API: /api/webhooks/n8n/tasks
-const API_ENDPOINT = '/api/webhooks/n8n/tasks';
+const _API_ENDPOINT = '/api/webhooks/n8n/tasks';
 
 export default function TasksPage() {
   // This is a placeholder to satisfy the UI consumer requirement

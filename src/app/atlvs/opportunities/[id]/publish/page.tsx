@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/opportunities/:id/publish
-const API_ENDPOINT = '/api/atlvs/opportunities/:id/publish';
+const _API_ENDPOINT = '/api/atlvs/opportunities/:id/publish';
 
 export default function PublishPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -6,7 +6,7 @@
  */
 
 // API: /api/destinations/:slug
-const API_ENDPOINT = '/api/destinations/:slug';
+const _API_ENDPOINT = '/api/destinations/:slug';
 
 export default function slugPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -15,7 +15,7 @@ import { useScanQR, useQRCodes } from '@/lib/hooks/compvss/useQRCodes';
 import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 // API: /api/compvss/qr/scan
-const API_ENDPOINT = '/api/compvss/qr/scan';
+const _API_ENDPOINT = '/api/compvss/qr/scan';
 
 export default function QRScanPage() {
   const [isScanning, setIsScanning] = useState(false);

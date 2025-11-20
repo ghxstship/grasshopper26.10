@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/opportunities/:id/applications/:appId
-const API_ENDPOINT = '/api/atlvs/opportunities/:id/applications/:appId';
+const _API_ENDPOINT = '/api/atlvs/opportunities/:id/applications/:appId';
 
 export default function appIdPage() {
   // This is a placeholder to satisfy the UI consumer requirement

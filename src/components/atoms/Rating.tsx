@@ -11,7 +11,7 @@ interface RatingProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Rating: React.FC<RatingProps> = ({ 
   rating, 
-  maxRating = 5,
+  maxRating: maxRating = 5,
   reviewCount,
   showCount = true,
   className,

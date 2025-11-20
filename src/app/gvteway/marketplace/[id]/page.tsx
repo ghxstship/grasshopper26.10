@@ -14,13 +14,6 @@ interface MarketplaceItemPageProps {
   };
 }
 
-async function generateMetadata({ params: _params }: MarketplaceItemPageProps) {
-  return {
-    title: `Marketplace Item | GVTEWAY Marketplace`,
-    description: `View details and purchase this item from the GVTEWAY community marketplace.`,
-  };
-}
-
 export default function MarketplaceItemPage({ params: { id: _id } }: MarketplaceItemPageProps) {
   // Demo data - replace with actual API call using id
   const item = {

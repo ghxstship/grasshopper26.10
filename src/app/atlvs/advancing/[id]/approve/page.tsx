@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/advancing/:id/approve
-const API_ENDPOINT = '/api/atlvs/advancing/:id/approve';
+const _API_ENDPOINT = '/api/atlvs/advancing/:id/approve';
 
 export default function ApprovePage() {
   // This is a placeholder to satisfy the UI consumer requirement

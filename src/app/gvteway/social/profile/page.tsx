@@ -2,13 +2,10 @@
 
 import { DetailPageTemplate } from '@/components/templates/DetailPageTemplate';
 import { SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
-import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
-import { Avatar } from '@/components/atoms/Avatar';
 import { MapPin, Calendar, Link as LinkIcon, Edit } from 'lucide-react';
-import Link from 'next/link';
 
-const metadata = {
+const _metadata = {
   title: 'My Profile | GVTEWAY',
   description: 'View and edit your profile',
 };

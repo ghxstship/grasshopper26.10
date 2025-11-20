@@ -24,7 +24,7 @@ interface TimeEntry {
 
 export default function TimeTrackingPage() {  
   const { data: timeEntriesData,  } = useTimeEntries();
-  const [_activeTimer, _setActiveTimer] = useState<string | null>(null);
+  const [_activeTimer, setActiveTimer] = useState<string | null>(null);
 
   const timeEntries: TimeEntry[] = (timeEntriesData as any) || [
     { id: '1', taskName: 'Stage setup coordination', date: '2025-11-14', duration: 145, status: 'completed' },

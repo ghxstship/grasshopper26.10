@@ -6,7 +6,7 @@
  */
 
 // API: /api/sync/compvss-to-atlvs
-const API_ENDPOINT = '/api/sync/compvss-to-atlvs';
+const _API_ENDPOINT = '/api/sync/compvss-to-atlvs';
 
 export default function CompvssToAtlvsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

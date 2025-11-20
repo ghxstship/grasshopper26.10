@@ -5,7 +5,7 @@ import { PageTitle, SectionHeader, CardTitle, BodyText, Metadata } from "@/compo
 import { Button } from "@/components/atoms/Button";
 import { Check, Sparkles, TrendingUp, Users, Heart, Star } from "lucide-react";
 
-const metadata = {
+const _metadata = {
   title: 'Membership | Join GVTEWAY',
   description: 'Unlock exclusive access to events, early tickets, member pricing, and community perks.',
   keywords: 'membership, subscription, benefits, exclusive access',

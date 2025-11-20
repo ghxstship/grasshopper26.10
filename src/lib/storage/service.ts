@@ -66,7 +66,7 @@ export interface StorageFile {
  * Upload file to storage
  */
 export async function uploadFile(options: UploadOptions): Promise<UploadResult> {
-  const { bucket, userId, file, folder, onProgress: _onProgress } = options;
+  const { bucket, userId, file, folder, onProgress: onProgress } = options;
 
   // Validate file
   const validation = validateFileForBucket(file, bucket);

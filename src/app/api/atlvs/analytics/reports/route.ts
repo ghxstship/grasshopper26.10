@@ -7,7 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 
-const querySchema = z.object({}).passthrough();
+const _querySchema = z.object({}).passthrough();
 
 export async function GET(req: NextRequest) {
   try {

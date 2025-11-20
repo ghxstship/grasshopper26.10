@@ -6,7 +6,7 @@
  */
 
 // API: /api/test/mock-data-generator
-const API_ENDPOINT = '/api/test/mock-data-generator';
+const _API_ENDPOINT = '/api/test/mock-data-generator';
 
 export default function MockDataGeneratorPage() {
   // This is a placeholder to satisfy the UI consumer requirement

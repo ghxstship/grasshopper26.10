@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/issues/:id/resolve
-const API_ENDPOINT = '/api/compvss/issues/:id/resolve';
+const _API_ENDPOINT = '/api/compvss/issues/:id/resolve';
 
 export default function ResolvePage() {
   // This is a placeholder to satisfy the UI consumer requirement

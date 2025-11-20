@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/checkin/history
-const API_ENDPOINT = '/api/compvss/checkin/history';
+const _API_ENDPOINT = '/api/compvss/checkin/history';
 
 export default function HistoryPage() {
   // This is a placeholder to satisfy the UI consumer requirement

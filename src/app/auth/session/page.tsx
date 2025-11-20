@@ -6,7 +6,7 @@
  */
 
 // API: /api/auth/session
-const API_ENDPOINT = '/api/auth/session';
+const _API_ENDPOINT = '/api/auth/session';
 
 export default function SessionPage() {
   // This is a placeholder to satisfy the UI consumer requirement

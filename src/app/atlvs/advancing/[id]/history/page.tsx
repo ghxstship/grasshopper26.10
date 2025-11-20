@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/advancing/:id/history
-const API_ENDPOINT = '/api/atlvs/advancing/:id/history';
+const _API_ENDPOINT = '/api/atlvs/advancing/:id/history';
 
 export default function HistoryPage() {
   // This is a placeholder to satisfy the UI consumer requirement

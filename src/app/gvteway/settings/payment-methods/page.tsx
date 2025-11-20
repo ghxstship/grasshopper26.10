@@ -6,7 +6,7 @@ import { Button } from '@/components/atoms/Button';
 import { CreditCard, Plus } from 'lucide-react';
 import { BodyText } from "@/components/atoms/Typography";
 
-const metadata = { title: 'Payment Methods | GVTEWAY' };
+const _metadata = { title: 'Payment Methods | GVTEWAY' };
 
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/settings/payment-methods
 

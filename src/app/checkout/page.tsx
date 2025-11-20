@@ -26,7 +26,7 @@ interface CartItem {
 
 export default function CheckoutPage() {
  const router = useRouter();
- const [isProcessing, setIsProcessing] = useState(false);
+ const [_isProcessing, setIsProcessing] = useState(false);
  const [error, setError] = useState<string | null>(null);
  const [cartItems, setCartItems] = useState<CartItem[]>([
  {

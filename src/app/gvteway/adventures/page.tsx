@@ -9,7 +9,7 @@ import { Sparkles, MapPin, Clock, Users, Star, Compass } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const metadata = {
+const _metadata = {
   title: 'Adventures | Experiences & Tours | GVTEWAY',
   description: 'Discover tours, excursions, and points of interest. Turn every event into an unforgettable experience.',
   keywords: 'adventures, tours, excursions, experiences, activities',

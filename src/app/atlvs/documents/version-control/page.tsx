@@ -38,7 +38,7 @@ export default function VersionControlPage() {
   const [selectedDoc, setSelectedDoc] = useState<string>('1');
   const [expandedVersions, setExpandedVersions] = useState<Set<string>>(new Set());
 
-  const { documents: _docs } = useDocuments();
+  const { documents: docs } = useDocuments();
   const documents: VersionedDocument[] = [
     {
       id: '1',

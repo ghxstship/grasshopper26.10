@@ -417,7 +417,7 @@ export class AssetService {
   /**
    * Calculate utilization rate
    */
-  private static async calculateUtilizationRate(_startDate?: Date, _endDate?: Date) {
+  private static async calculateUtilizationRate(_startDate?: Date, endDate?: Date) {
     const totalAssets = await prisma.equipment.count({
       where: { status: { not: EquipmentStatus.RETIRED } },
     });

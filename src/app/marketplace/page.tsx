@@ -6,7 +6,7 @@
  */
 
 // API: /api/marketplace
-const API_ENDPOINT = '/api/marketplace';
+const _API_ENDPOINT = '/api/marketplace';
 
 export default function MarketplacePage() {
   // This is a placeholder to satisfy the UI consumer requirement

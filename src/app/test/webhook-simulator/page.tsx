@@ -6,7 +6,7 @@
  */
 
 // API: /api/test/webhook-simulator
-const API_ENDPOINT = '/api/test/webhook-simulator';
+const _API_ENDPOINT = '/api/test/webhook-simulator';
 
 export default function WebhookSimulatorPage() {
   // This is a placeholder to satisfy the UI consumer requirement

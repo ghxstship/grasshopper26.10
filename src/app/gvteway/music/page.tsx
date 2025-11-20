@@ -9,7 +9,7 @@ import { IntegrationBadge } from "@/components/atoms/IntegrationBadge";
 import { Button } from "@/components/atoms/Button";
 import { Music, TrendingUp, Calendar } from "lucide-react";
 
-const metadata = {
+const _metadata = {
   title: 'Music | Discover Artists & Shows | GVTEWAY',
   description: 'Explore artists, tour dates, and exclusive merch. Spotify-powered music discovery for GVTEWAY members.',
   keywords: 'music, artists, concerts, spotify, music discovery',

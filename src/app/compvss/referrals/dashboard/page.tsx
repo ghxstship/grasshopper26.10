@@ -19,13 +19,13 @@ import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typograph
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/referrals/dashboard
 
 export default function ReferralDashboardPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Referrals', href: '/compvss/referrals/dashboard' },
   ];
 
   const { data: referralsData, isLoading, error, refetch } = useReferrals();
-  const { data: leaderboardData, isLoading: _leaderboardLoading } = useReferralLeaderboard();
+  const { data: leaderboardData, isLoading: leaderboardLoading } = useReferralLeaderboard();
   
   const links = referralsData?.links || [];
   const apiStats = referralsData?.stats;

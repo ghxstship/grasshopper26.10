@@ -6,7 +6,7 @@
  */
 
 // API: /api/search/users
-const API_ENDPOINT = '/api/search/users';
+const _API_ENDPOINT = '/api/search/users';
 
 export default function UsersPage() {
   // This is a placeholder to satisfy the UI consumer requirement

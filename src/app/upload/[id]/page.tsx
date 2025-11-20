@@ -6,7 +6,7 @@
  */
 
 // API: /api/upload/:id
-const API_ENDPOINT = '/api/upload/:id';
+const _API_ENDPOINT = '/api/upload/:id';
 
 export default function idPage() {
   // This is a placeholder to satisfy the UI consumer requirement

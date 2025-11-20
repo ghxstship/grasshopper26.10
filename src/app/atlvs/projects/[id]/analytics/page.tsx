@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/projects/:id/analytics
-const API_ENDPOINT = '/api/atlvs/projects/:id/analytics';
+const _API_ENDPOINT = '/api/atlvs/projects/:id/analytics';
 
 export default function AnalyticsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

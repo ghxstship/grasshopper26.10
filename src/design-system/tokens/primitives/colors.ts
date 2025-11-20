@@ -53,12 +53,13 @@ export const semanticColors = {
     inverse: colors.white,
   },
   
-  // Border Colors
+  // Border Colors (BRUTALIST: favor bold black borders)
   border: {
-    default: colors.grey[200],
-    strong: colors.black,
-    subtle: colors.grey[100],
+    default: colors.black,        // Changed: bold black default
+    subtle: colors.grey[200],     // Subtle when needed
+    strong: colors.black,         // Emphasis
     inverse: colors.white,
+    light: colors.grey[200],      // Legacy support
   },
   
   // Interactive States

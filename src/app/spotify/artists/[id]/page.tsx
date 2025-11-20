@@ -6,7 +6,7 @@
  */
 
 // API: /api/spotify/artists/:id
-const API_ENDPOINT = '/api/spotify/artists/:id';
+const _API_ENDPOINT = '/api/spotify/artists/:id';
 
 export default function idPage() {
   // This is a placeholder to satisfy the UI consumer requirement

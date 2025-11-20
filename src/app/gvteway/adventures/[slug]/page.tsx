@@ -13,14 +13,7 @@ interface AdventurePageProps {
   };
 }
 
-async function generateMetadata({ params: _params }: AdventurePageProps) {
-  return {
-    title: `Adventure Name | GVTEWAY Adventures`,
-    description: `Book Adventure Name - an unforgettable experience.`,
-  };
-}
-
-export default function AdventurePage({ params: { slug: _slug } }: AdventurePageProps) {
+export default function AdventurePage({ params: { slug: slug } }: AdventurePageProps) {
   const adventure = {
     name: "Riverwalk Tour",
     category: "Guided Tour",

@@ -17,7 +17,7 @@ import { BodyText, HeroTitle, SubsectionHeader } from "@/components/atoms/Typogr
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/settings/security
 
 export default function SecuritySettingsPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Settings', href: '/compvss/settings/account' },
     { label: 'Security', href: '/compvss/settings/security' },

@@ -6,7 +6,7 @@
  */
 
 // API: /api/notifications/:id/read
-const API_ENDPOINT = '/api/notifications/:id/read';
+const _API_ENDPOINT = '/api/notifications/:id/read';
 
 export default function ReadPage() {
   // This is a placeholder to satisfy the UI consumer requirement

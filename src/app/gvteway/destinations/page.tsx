@@ -9,7 +9,7 @@ import { IntegrationBadge } from "@/components/atoms/IntegrationBadge";
 import { Button } from "@/components/atoms/Button";
 import { Hotel, UtensilsCrossed, ShoppingBag, Sparkles } from "lucide-react";
 
-const metadata = {
+const _metadata = {
   title: 'Destinations | Plan Your Trip | GVTEWAY',
   description: 'Discover stays, dining, shopping, and wellness near venues. Make every event an adventure.',
   keywords: 'hotels, restaurants, attractions, event planning',

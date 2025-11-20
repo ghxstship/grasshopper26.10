@@ -6,7 +6,7 @@
  */
 
 // API: /api/shopify/stores/:storeId/products
-const API_ENDPOINT = '/api/shopify/stores/:storeId/products';
+const _API_ENDPOINT = '/api/shopify/stores/:storeId/products';
 
 export default function ProductsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

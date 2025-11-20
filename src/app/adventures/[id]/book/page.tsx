@@ -6,7 +6,7 @@
  */
 
 // API: /api/adventures/:id/book
-const API_ENDPOINT = '/api/adventures/:id/book';
+const _API_ENDPOINT = '/api/adventures/:id/book';
 
 export default function BookPage() {
   // This is a placeholder to satisfy the UI consumer requirement

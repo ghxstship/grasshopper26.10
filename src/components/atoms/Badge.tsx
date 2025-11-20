@@ -3,36 +3,45 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full px-3 py-1 font-share-tech text-caption transition-colors",
+  "inline-flex items-center px-3 py-1 font-share-tech text-caption transition-colors uppercase tracking-wide",
   {
     variants: {
       variant: {
-        default: "bg-grey-200 text-grey-900",
-        gvteway: "bg-gvteway-red-500 text-white",
-        "gvteway-outline": "border-2 border-gvteway-red-500 text-gvteway-red-500",
-        compvss: "bg-compvss-cyan-500 text-white",
-        "compvss-outline": "border-2 border-compvss-cyan-500 text-compvss-cyan-500",
-        atlvs: "bg-atlvs-green-500 text-black",
-        "atlvs-outline": "border-2 border-atlvs-green-500 text-atlvs-green-500",
-        success: "bg-success text-success-foreground",
-        warning: "bg-warning text-warning-foreground",
-        error: "bg-error text-error-foreground",
-        info: "bg-info text-info-foreground",
+        // Brutalist: sharp edges, bold borders
+        default: "rounded-none bg-grey-200 text-black border-2 border-black",
+        gvteway: "rounded-none bg-black text-white border-2 border-black",
+        "gvteway-outline": "rounded-none border-2 border-black text-black bg-white",
+        compvss: "rounded-none bg-black text-white border-2 border-black",
+        "compvss-outline": "rounded-none border-2 border-black text-black bg-white",
+        atlvs: "rounded-none bg-black text-white border-2 border-black",
+        "atlvs-outline": "rounded-none border-2 border-black text-black bg-white",
+        success: "rounded-none bg-black text-white border-2 border-black",
+        warning: "rounded-none bg-white text-black border-2 border-black",
+        error: "rounded-none bg-black text-white border-2 border-black",
+        info: "rounded-none bg-grey-100 text-black border-2 border-black",
+      },
+      rounded: {
+        none: "rounded-none",
+        sm: "rounded-sm",
+        full: "rounded-full",  // For legacy support
       },
     },
     defaultVariants: {
       variant: "default",
+      rounded: "none",
     },
   }
 );
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+    VariantProps<typeof badgeVariants> {
+  brutalist?: boolean;  // Enable neobrutalist styling (default true)
+}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, rounded, brutalist: brutalist = true, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div className={cn(badgeVariants({ variant, rounded }), className)} {...props} />
   );
 }
 

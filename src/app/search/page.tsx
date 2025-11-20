@@ -6,7 +6,7 @@
  */
 
 // API: /api/search
-const API_ENDPOINT = '/api/search';
+const _API_ENDPOINT = '/api/search';
 
 export default function SearchPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -19,9 +19,7 @@ import { Heart,
  Eye,
  ShoppingCart,
  Tag,
- Verified,
- Copy,
- CheckCircle
+ Verified
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -113,7 +111,7 @@ export default function NFTDetailPage() {
  const params = useParams();
  const [nft, setNft] = useState<NFTData>(MOCK_NFT);
  const [activeTab, setActiveTab] = useState('details');
- const [copied, setCopied] = useState(false);
+ const [_copied, setCopied] = useState(false);
 
  const handleLike = () => {
  setNft(prev => ({
@@ -123,7 +121,7 @@ export default function NFTDetailPage() {
 }));
 };
 
- const handleCopy = (text: string) => {
+ const _handleCopy = (text: string) => {
  navigator.clipboard.writeText(text);
  setCopied(true);
  setTimeout(() => setCopied(false), 2000);

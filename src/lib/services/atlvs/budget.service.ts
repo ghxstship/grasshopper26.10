@@ -720,7 +720,7 @@ export class BudgetService {
   /**
    * Convenience method: Add expense to budget
    */
-  static async addExpense(budgetId: string, data: Record<string, unknown>, _userId: string) {
+  static async addExpense(budgetId: string, data: Record<string, unknown>, userId: string) {
     return this.createExpense({
       budgetId,
       categoryId: (data.categoryId as string) || '',
@@ -730,7 +730,7 @@ export class BudgetService {
       date: (data.date as Date) || new Date(),
       vendor: data.vendor as string,
       receiptUrl: data.receiptUrl as string,
-      createdBy: _userId,
+      createdBy: userId,
       metadata: data.metadata as Prisma.JsonValue,
     });
   }
@@ -738,7 +738,7 @@ export class BudgetService {
   /**
    * Convenience method: Approve budget
    */
-  static async approve(budgetId: string, _userId: string, _notes?: string) {
+  static async approve(budgetId: string, userId: string, notes?: string) {
     return this.getById(budgetId);
   }
 }

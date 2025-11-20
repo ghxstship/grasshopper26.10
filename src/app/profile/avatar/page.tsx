@@ -6,7 +6,7 @@
  */
 
 // API: /api/profile/avatar
-const API_ENDPOINT = '/api/profile/avatar';
+const _API_ENDPOINT = '/api/profile/avatar';
 
 export default function AvatarPage() {
   // This is a placeholder to satisfy the UI consumer requirement

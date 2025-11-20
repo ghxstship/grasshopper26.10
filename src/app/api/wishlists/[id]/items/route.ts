@@ -12,7 +12,7 @@ import { z } from 'zod';
 // Validation: z.object schema.parse validate
 export async function POST(
   req: NextRequest,
-  { params: _params }: { params: Promise<{ id: string }> }
+  { params: params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();

@@ -7,7 +7,7 @@ import { Badge } from '@/components/atoms/Badge';
 import { Wallet, CreditCard, Award, Key, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 
-const metadata = {
+const _metadata = {
   title: 'Universal Wallet | GVTEWAY',
   description: 'Manage your digital passes, NFTs, credentials, and loyalty points.',
 };

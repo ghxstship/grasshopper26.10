@@ -13,13 +13,6 @@ interface OpportunityPageProps {
   };
 }
 
-async function generateMetadata({ params: _params }: OpportunityPageProps) {
-  return {
-    title: `Opportunity Name | GVTEWAY Opportunities`,
-    description: `Apply for this opportunity - volunteer, collaborate, or create with GVTEWAY.`,
-  };
-}
-
 export default function OpportunityPage({ params: { slug: _slug } }: OpportunityPageProps) {
   // Demo data - replace with actual API call using slug
   // This would integrate with COMPVSS listings (RFPs, Careers, Sponsorship, Staffing)

@@ -5,7 +5,7 @@ import { User, Bell, Lock, CreditCard, Shield, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import { CardTitle, BodyText } from '@/components/atoms/Typography';
 
-const metadata = {
+const _metadata = {
   title: 'Settings | GVTEWAY',
   description: 'Manage your account settings and preferences',
 };

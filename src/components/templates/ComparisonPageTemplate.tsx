@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
 import { PageTitle, SectionHeader, BodyText, Metadata } from '@/components/atoms/Typography';

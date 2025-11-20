@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/assets/:id/book
-const API_ENDPOINT = '/api/atlvs/assets/:id/book';
+const _API_ENDPOINT = '/api/atlvs/assets/:id/book';
 
 export default function BookPage() {
   // This is a placeholder to satisfy the UI consumer requirement

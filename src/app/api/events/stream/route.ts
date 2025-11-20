@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
-import { handleApiError, errors } from '@/lib/api/response';
+import { errors } from '@/lib/api/response';
 import { z } from 'zod';
 
 const streamParamsSchema = z.object({
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
     const validated = streamParamsSchema.parse(Object.fromEntries(searchParams));
-    const eventTypes = validated.types?.split(',') || ['all'];
+    const _eventTypes = validated.types?.split(',') || ['all'];
 
     // Log stream connection (streamConnection model not yet implemented)
     // await prisma.streamConnection.create({ data: { userId: context.userId, types: eventTypes } }).catch(() => {});
@@ -61,6 +61,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
+    console.error('SSE stream error', error);
     return new Response(JSON.stringify({ error: 'Stream error' }), { status: 500 });
   }
 }

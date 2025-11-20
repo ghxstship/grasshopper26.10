@@ -6,7 +6,7 @@
  */
 
 // API: /api/n8n/workflows/status
-const API_ENDPOINT = '/api/n8n/workflows/status';
+const _API_ENDPOINT = '/api/n8n/workflows/status';
 
 export default function StatusPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -67,19 +67,19 @@ describe('Auth Validation Schemas', () => {
     })
 
     it('rejects missing email', () => {
-      const { email: _email, ...rest } = validData
+      const { email: email, ...rest } = validData
       const result = registerSchema.safeParse(rest)
       expect(result.success).toBe(false)
     })
 
     it('rejects missing password', () => {
-      const { password: _password, ...rest } = validData
+      const { password: password, ...rest } = validData
       const result = registerSchema.safeParse(rest)
       expect(result.success).toBe(false)
     })
 
     it('rejects missing name', () => {
-      const { name: _name, ...rest } = validData
+      const { name: name, ...rest } = validData
       const result = registerSchema.safeParse(rest)
       expect(result.success).toBe(false)
     })
@@ -105,13 +105,13 @@ describe('Auth Validation Schemas', () => {
     })
 
     it('rejects missing email', () => {
-      const { email: _email, ...rest } = validData
+      const { email: email, ...rest } = validData
       const result = loginSchema.safeParse(rest)
       expect(result.success).toBe(false)
     })
 
     it('rejects missing password', () => {
-      const { password: _password, ...rest } = validData
+      const { password: password, ...rest } = validData
       const result = loginSchema.safeParse(rest)
       expect(result.success).toBe(false)
     })
@@ -189,13 +189,13 @@ describe('Auth Validation Schemas', () => {
     })
 
     it('rejects missing token', () => {
-      const { token: _token, ...rest } = validData
+      const { token: token, ...rest } = validData
       const result = passwordResetSchema.safeParse(rest)
       expect(result.success).toBe(false)
     })
 
     it('rejects missing password', () => {
-      const { password: _password, ...rest } = validData
+      const { password: password, ...rest } = validData
       const result = passwordResetSchema.safeParse(rest)
       expect(result.success).toBe(false)
     })

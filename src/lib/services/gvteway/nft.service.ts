@@ -111,7 +111,7 @@ export class NFTService {
   /**
    * Transfer NFT
    */
-  async transferNFT(tokenId: string, _fromAddress: string, toAddress: string) {
+  async transferNFT(tokenId: string, fromAddress: string, toAddress: string) {
     try {
       if (!this.provider) {
         throw new Error('Ethereum provider not configured');
@@ -199,7 +199,7 @@ export class NFTService {
   /**
    * Verify NFT ownership
    */
-  async verifyOwnership(tokenId: string, _address: string): Promise<boolean> {
+  async verifyOwnership(tokenId: string, address: string): Promise<boolean> {
     try {
       if (!this.provider) {
         return false;
@@ -210,7 +210,7 @@ export class NFTService {
       const nftTicketExists = await prisma.nFTTicket.findFirst({
         where: {
           tokenId,
-          ownerAddress: _address,
+          ownerAddress: address,
         },
       });
 

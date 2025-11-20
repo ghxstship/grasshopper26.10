@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/advancing/:id/submit
-const API_ENDPOINT = '/api/atlvs/advancing/:id/submit';
+const _API_ENDPOINT = '/api/atlvs/advancing/:id/submit';
 
 export default function SubmitPage() {
   // This is a placeholder to satisfy the UI consumer requirement

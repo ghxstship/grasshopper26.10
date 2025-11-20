@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/kpi/operational/:projectId
-const API_ENDPOINT = '/api/atlvs/kpi/operational/:projectId';
+const _API_ENDPOINT = '/api/atlvs/kpi/operational/:projectId';
 
 export default function projectIdPage() {
   // This is a placeholder to satisfy the UI consumer requirement

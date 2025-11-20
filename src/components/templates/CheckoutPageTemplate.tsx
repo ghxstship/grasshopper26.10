@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import { Navigation } from '@/components/organisms/Navigation';
 import { Footer } from '@/components/organisms/Footer';
-import { PageTitle, SectionHeader, BodyText, Metadata, BodyTextSmall } from "@/components/atoms/Typography";
+import { PageTitle, SectionHeader, BodyText, Metadata } from "@/components/atoms/Typography";
 import { Button } from '@/components/atoms/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/atoms/Card';
 import { Separator } from '@/components/atoms/Separator';
-import { Badge } from '@/components/atoms/Badge';
 import { ShoppingCart, CreditCard, Lock } from 'lucide-react';
+import Image from 'next/image';
 
 export interface CheckoutItem {
   id: string;
@@ -137,11 +137,12 @@ export function CheckoutPageTemplate({
                     {items.map((item) => (
                       <div key={item.id} className="flex items-start gap-3">
                         {item.image && (
-                          <div className="w-16 h-16 rounded-lg bg-ghxst-background flex-shrink-0">
-                            <img
+                          <div className="w-16 h-16 rounded-lg bg-ghxst-background flex-shrink-0 relative overflow-hidden">
+                            <Image
                               src={item.image}
                               alt={item.name}
-                              className="w-full h-full object-cover rounded-lg"
+                              fill
+                              className="object-cover rounded-lg"
                             />
                           </div>
                         )}

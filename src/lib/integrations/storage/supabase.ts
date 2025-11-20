@@ -205,7 +205,7 @@ export async function moveFile(
   try {
     const supabase = getSupabaseClient();
 
-    const { data: _data, error } = await supabase.storage
+    const { data: data, error } = await supabase.storage
       .from(bucket)
       .move(fromPath, toPath);
 

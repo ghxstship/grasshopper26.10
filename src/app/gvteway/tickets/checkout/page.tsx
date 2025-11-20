@@ -30,7 +30,7 @@ function CheckoutContent() {
   const [quantity, setQuantity] = useState(1);
   const [ticketType, setTicketType] = useState('vip');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentMethod, _setPaymentMethod] = useState<'card' | 'crypto'>('card');
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'crypto'>('card');
   
   // Form state
   const [cardNumber, setCardNumber] = useState('');

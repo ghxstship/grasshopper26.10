@@ -6,7 +6,7 @@
  */
 
 // API: /api/social/posts/:id/comments
-const API_ENDPOINT = '/api/social/posts/:id/comments';
+const _API_ENDPOINT = '/api/social/posts/:id/comments';
 
 export default function CommentsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

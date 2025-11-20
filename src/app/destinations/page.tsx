@@ -6,7 +6,7 @@
  */
 
 // API: /api/destinations
-const API_ENDPOINT = '/api/destinations';
+const _API_ENDPOINT = '/api/destinations';
 
 export default function DestinationsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

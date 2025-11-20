@@ -21,7 +21,7 @@ import { Card, CardHeader, CardDescription, CardContent} from '@/components/atom
 import { Badge} from '@/components/atoms/Badge';
 import { Input} from '@/components/atoms/Input';
 import { Select} from '@/components/atoms/Select';
-import { BodyText, SectionHeader } from '@/components/atoms/Typography'
+import { BodyText, SectionHeader, CardTitle as TypographyCardTitle } from '@/components/atoms/Typography'
 
 interface WorkflowTemplate {
  id: string;
@@ -289,7 +289,7 @@ export default function WorkflowsPage() {
  <AutomationIcon className="w-5 h-5 text-muted-foreground" />
  </div>
 
- <CardTitleTypography className="mb-2">{workflow.name}</CardTitleTypography>
+ <TypographyCardTitle className="mb-2">{workflow.name}</TypographyCardTitle>
  <CardDescription>{workflow.description}</CardDescription>
 
  <div className="mt-4 space-y-2">

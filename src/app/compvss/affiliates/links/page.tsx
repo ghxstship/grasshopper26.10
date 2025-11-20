@@ -48,7 +48,7 @@ export default function AffiliateLinksPage() {
     );
   }
 
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
     { label: 'Links', href: '/compvss/affiliates/links' },

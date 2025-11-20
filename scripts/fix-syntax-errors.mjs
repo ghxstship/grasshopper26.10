@@ -5,8 +5,8 @@
  * Restores proper line breaks and formatting
  */
 
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
-import { join, extname, relative } from 'path';
+import { readFileSync, writeFileSync } from 'fs';
+import { join, relative } from 'path';
 import { execSync } from 'child_process';
 
 const SRC_DIR = '/Users/julianclarkson/Documents/Grasshopper26.10/src';

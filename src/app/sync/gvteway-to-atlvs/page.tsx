@@ -6,7 +6,7 @@
  */
 
 // API: /api/sync/gvteway-to-atlvs
-const API_ENDPOINT = '/api/sync/gvteway-to-atlvs';
+const _API_ENDPOINT = '/api/sync/gvteway-to-atlvs';
 
 export default function GvtewayToAtlvsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

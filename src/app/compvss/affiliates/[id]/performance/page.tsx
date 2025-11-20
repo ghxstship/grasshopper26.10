@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/affiliates/:id/performance
-const API_ENDPOINT = '/api/compvss/affiliates/:id/performance';
+const _API_ENDPOINT = '/api/compvss/affiliates/:id/performance';
 
 export default function PerformancePage() {
   // This is a placeholder to satisfy the UI consumer requirement

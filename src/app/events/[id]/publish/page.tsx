@@ -6,7 +6,7 @@
  */
 
 // API: /api/events/:id/publish
-const API_ENDPOINT = '/api/events/:id/publish';
+const _API_ENDPOINT = '/api/events/:id/publish';
 
 export default function PublishPage() {
   // This is a placeholder to satisfy the UI consumer requirement

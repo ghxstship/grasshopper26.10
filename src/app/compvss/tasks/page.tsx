@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/tasks
-const API_ENDPOINT = '/api/compvss/tasks';
+const _API_ENDPOINT = '/api/compvss/tasks';
 
 export default function TasksPage() {
   // This is a placeholder to satisfy the UI consumer requirement

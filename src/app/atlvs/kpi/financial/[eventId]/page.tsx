@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/kpi/financial/:eventId
-const API_ENDPOINT = '/api/atlvs/kpi/financial/:eventId';
+const _API_ENDPOINT = '/api/atlvs/kpi/financial/:eventId';
 
 export default function eventIdPage() {
   // This is a placeholder to satisfy the UI consumer requirement

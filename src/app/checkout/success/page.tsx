@@ -6,7 +6,7 @@
  */
 
 // API: /api/checkout/success
-const API_ENDPOINT = '/api/checkout/success';
+const _API_ENDPOINT = '/api/checkout/success';
 
 export default function SuccessPage() {
   // This is a placeholder to satisfy the UI consumer requirement

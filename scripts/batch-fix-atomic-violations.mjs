@@ -71,7 +71,7 @@ let stats = {
   errors: 0,
 };
 
-function fixTypographyInContent(content, filePath) {
+function fixTypographyInContent(content, _filePath) {
   let modified = false;
   let newContent = content;
   const componentsUsed = new Set();

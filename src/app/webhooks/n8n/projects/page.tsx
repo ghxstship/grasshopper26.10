@@ -6,7 +6,7 @@
  */
 
 // API: /api/webhooks/n8n/projects
-const API_ENDPOINT = '/api/webhooks/n8n/projects';
+const _API_ENDPOINT = '/api/webhooks/n8n/projects';
 
 export default function ProjectsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

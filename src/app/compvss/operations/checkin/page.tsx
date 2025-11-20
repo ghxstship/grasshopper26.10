@@ -31,7 +31,7 @@ export default function CheckInPage() {
     { label: 'Pending', value: pendingCount.toString(), icon: <Clock className="w-5 h-5" />, color: 'text-warning' },
     { label: 'Check-in Rate', value: `${checkInRate}%`, icon: <UserCheck className="w-5 h-5" />, color: 'text-compvss-cyan-500' },
   ];
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Operations', href: '/compvss/operations/hub' },
     { label: 'Check-In', href: '/compvss/operations/checkin' },

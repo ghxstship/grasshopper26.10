@@ -6,7 +6,7 @@
  */
 
 // API: /api/shopify/cart/add
-const API_ENDPOINT = '/api/shopify/cart/add';
+const _API_ENDPOINT = '/api/shopify/cart/add';
 
 export default function AddPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -7,7 +7,7 @@ import { CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
 
-const metadata = {
+const _metadata = {
   title: 'Social Hub | GVTEWAY',
   description: 'Connect with the community, share experiences, and discover new friends',
 };

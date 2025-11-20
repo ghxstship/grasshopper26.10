@@ -17,7 +17,7 @@ import { BodyText } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/issues/detail/[id]
 
 export default function IssueDetailPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Issues', href: '/compvss/issues/dashboard' },
     { label: 'Issue Detail', href: '/compvss/issues/detail' },

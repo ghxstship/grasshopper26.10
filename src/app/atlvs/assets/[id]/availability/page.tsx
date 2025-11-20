@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/assets/:id/availability
-const API_ENDPOINT = '/api/atlvs/assets/:id/availability';
+const _API_ENDPOINT = '/api/atlvs/assets/:id/availability';
 
 export default function AvailabilityPage() {
   // This is a placeholder to satisfy the UI consumer requirement

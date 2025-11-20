@@ -10,7 +10,7 @@ import { Button } from "@/components/atoms/Button";
 import { Store, Music, Building2, Users, Sparkles } from "lucide-react";
 import Image from "next/image";
 
-const metadata = {
+const _metadata = {
   title: 'Brands | Venues, Record Labels, Artist Brands & Communities | GVTEWAY',
   description: 'Shop exclusive merch, vinyl, and apparel from your favorite venues, record labels, artist brands, communities, and local stores.',
   keywords: 'merch, vinyl, apparel, artist merchandise, venue merch, record labels, communities, shopify',

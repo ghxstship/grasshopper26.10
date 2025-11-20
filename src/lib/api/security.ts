@@ -180,7 +180,7 @@ export const WebhookValidation = {
    * NOTE: Import from webhook-validation.ts for actual implementation
    * This is a placeholder to avoid Edge Runtime issues
    */
-  stripe: async (_payload: string, _signature: string, _secret: string): Promise<boolean> => {
+  stripe: async (_payload: string, signature: string, secret: string): Promise<boolean> => {
     throw new Error('Use validateStripeWebhook from webhook-validation.ts instead');
   },
   
@@ -189,7 +189,7 @@ export const WebhookValidation = {
    * NOTE: Import from webhook-validation.ts for actual implementation
    * This is a placeholder to avoid Edge Runtime issues
    */
-  sendgrid: async (_payload: string, _signature: string, _publicKey: string): Promise<boolean> => {
+  sendgrid: async (_payload: string, signature: string, publicKey: string): Promise<boolean> => {
     throw new Error('Use validateSendGridWebhook from webhook-validation.ts instead');
   },
   
@@ -198,7 +198,7 @@ export const WebhookValidation = {
    * NOTE: Import from webhook-validation.ts for actual implementation
    * This is a placeholder to avoid Edge Runtime issues
    */
-  twilio: async (_url: string, _params: Record<string, string>, _signature: string, _authToken: string): Promise<boolean> => {
+  twilio: async (_url: string, params: Record<string, string>, signature: string, authToken: string): Promise<boolean> => {
     throw new Error('Use validateTwilioWebhook from webhook-validation.ts instead');
   },
 } as const;

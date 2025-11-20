@@ -69,7 +69,7 @@ export default function AffiliateStatsPage() {
     );
   }
 
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
     { label: 'Stats', href: '/compvss/affiliates/stats' },

@@ -6,7 +6,7 @@
  */
 
 // API: /api/auth/login
-const API_ENDPOINT = '/api/auth/login';
+const _API_ENDPOINT = '/api/auth/login';
 
 export default function LoginPage() {
   // This is a placeholder to satisfy the UI consumer requirement

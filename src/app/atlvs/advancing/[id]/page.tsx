@@ -19,7 +19,7 @@ import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/advancing/[id]
 
 // API: /api/atlvs/advancing/:id
-const API_ENDPOINT = '/api/atlvs/advancing/:id';
+const _API_ENDPOINT = '/api/atlvs/advancing/:id';
 
 export default function AdvancingDetailPage({ params }: { params: { id: string } }) {
   // Data fetching with React Query

@@ -6,7 +6,7 @@
  */
 
 // API: /api/adventures
-const API_ENDPOINT = '/api/adventures';
+const _API_ENDPOINT = '/api/adventures';
 
 export default function AdventuresPage() {
   // This is a placeholder to satisfy the UI consumer requirement

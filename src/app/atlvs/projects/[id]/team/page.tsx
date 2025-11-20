@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/projects/:id/team
-const API_ENDPOINT = '/api/atlvs/projects/:id/team';
+const _API_ENDPOINT = '/api/atlvs/projects/:id/team';
 
 export default function TeamPage() {
   // This is a placeholder to satisfy the UI consumer requirement

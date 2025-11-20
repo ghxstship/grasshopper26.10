@@ -7,7 +7,7 @@ import { Avatar } from "@/components/atoms/Avatar";
 import { Heart, MessageCircle, Share2, Plus } from "lucide-react";
 import Image from "next/image";
 
-const metadata = {
+const _metadata = {
   title: 'Social Feed | GVTEWAY Community',
   description: 'Connect with members, share experiences, and discover what others are attending.',
   keywords: 'social feed, community, events, connections',

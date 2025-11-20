@@ -6,7 +6,7 @@
  */
 
 // API: /api/opportunities
-const API_ENDPOINT = '/api/opportunities';
+const _API_ENDPOINT = '/api/opportunities';
 
 export default function OpportunitiesPage() {
   // This is a placeholder to satisfy the UI consumer requirement

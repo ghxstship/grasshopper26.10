@@ -6,7 +6,7 @@
  */
 
 // API: /api/wallet/transactions
-const API_ENDPOINT = '/api/wallet/transactions';
+const _API_ENDPOINT = '/api/wallet/transactions';
 
 export default function TransactionsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

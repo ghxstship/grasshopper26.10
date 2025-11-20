@@ -6,7 +6,7 @@
  */
 
 // API: /api/webhooks/n8n/orders
-const API_ENDPOINT = '/api/webhooks/n8n/orders';
+const _API_ENDPOINT = '/api/webhooks/n8n/orders';
 
 export default function OrdersPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -14,14 +14,7 @@ interface EventPageProps {
   };
 }
 
-async function generateMetadata({ params: _params }: EventPageProps) {
-  return {
-    title: `Event Name | GVTEWAY Events`,
-    description: `Get tickets and discover everything about this event.`,
-  };
-}
-
-export default function EventPage({ params: { slug: _slug } }: EventPageProps) {
+export default function EventPage({ params: { slug: slug } }: EventPageProps) {
   const event = {
     title: "Summer Music Festival 2025",
     venue: "Curtis Hixon Waterfront Park",

@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/budgets/:id/approve
-const API_ENDPOINT = '/api/atlvs/budgets/:id/approve';
+const _API_ENDPOINT = '/api/atlvs/budgets/:id/approve';
 
 export default function ApprovePage() {
   // This is a placeholder to satisfy the UI consumer requirement

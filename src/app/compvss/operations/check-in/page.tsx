@@ -19,7 +19,7 @@ import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typograph
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/check-in
 
 export default function CheckInSystemPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Operations', href: '/compvss/operations/hub' },
     { label: 'Check-In System', href: '/compvss/operations/check-in' },

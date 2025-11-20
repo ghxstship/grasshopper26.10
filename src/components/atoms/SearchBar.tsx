@@ -16,7 +16,7 @@ export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     placeholder = "Search events, artists, brands, destinations...",
     onSearch,
     location,
-    onLocationChange: _onLocationChange,
+    onLocationChange: onLocationChange,
     showLocationSelector = true,
     ...props 
   }, ref) => {

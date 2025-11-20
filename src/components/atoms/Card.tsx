@@ -5,21 +5,26 @@ const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
     variant?: "default" | "gvteway" | "compvss" | "atlvs" | "glass";
+    brutalist?: boolean; // Enable neobrutalist styling
   }
->(({ className, variant = "default", ...props }, ref) => {
+>(({ className, variant = "default", brutalist = true, ...props }, ref) => {
+  // Platform variants
   const variantStyles = {
-    default: "bg-white border-grey-200 dark:bg-grey-900 dark:border-grey-800",
-    gvteway: "bg-white border-gvteway-red-500/20 hover:border-gvteway-red-500/50",
-    compvss: "bg-white border-compvss-cyan-500/20 hover:border-compvss-cyan-500/50",
-    atlvs: "bg-white border-atlvs-green-500/20 hover:border-atlvs-green-500/50",
-    glass: "glass border-white/20",
+    default: "bg-white border-black dark:bg-grey-900 dark:border-white",
+    gvteway: "bg-white border-black hover:border-gvteway-red-500",
+    compvss: "bg-white border-black hover:border-compvss-cyan-500",
+    atlvs: "bg-white border-black hover:border-atlvs-green-500",
+    glass: "glass border-black/30",
   };
 
   return (
     <div
       ref={ref}
       className={cn(
-        "rounded-2xl border-2 p-6 shadow-lg transition-all",
+        // Neobrutalist: sharp edges, bold borders, flat design
+        brutalist ? "rounded-none border-3" : "rounded-2xl border-2",
+        brutalist ? "shadow-none" : "shadow-lg",
+        "p-6 transition-all",
         variantStyles[variant],
         className
       )}

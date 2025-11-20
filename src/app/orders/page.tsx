@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useCallback} from 'react';
 import { useRouter} from 'next/navigation';
 import { GvtewayLayout} from '@/components/templates/GvtewayLayout';
 import { ContentLayout} from '@/components/templates/ContentLayout';
@@ -9,12 +9,11 @@ import { Button} from '@/components/atoms/Button';
 import { Badge} from '@/components/atoms/Badge';
 import { Input} from '@/components/atoms/Input';
 import { Select} from '@/components/atoms/Select';
-import { PageTitle, SectionHeader, BodyText, BodyTextSmall, Metadata,
+import { BodyText, BodyTextSmall,
  Caption} from '@/components/atoms/Typography';
 import { EmptyState} from '@/components/molecules/EmptyState';
 import { Spinner} from '@/components/atoms/Spinner';
 import { ShoppingBag, Calendar, MapPin, CreditCard, Search,
- Filter,
  Download,
  Eye,
  Package,
@@ -23,6 +22,7 @@ import { ShoppingBag, Calendar, MapPin, CreditCard, Search,
  XCircle,
  AlertCircle
 } from 'lucide-react';
+import Image from 'next/image';
 
 interface OrderItem {
  id: string;
@@ -88,11 +88,7 @@ export default function OrdersPage() {
  const [page, setPage] = useState(1);
  const [totalPages, setTotalPages] = useState(1);
 
- useEffect(() => {
- fetchOrders();
-}, [page, statusFilter]);
-
- const fetchOrders = async () => {
+ const fetchOrders = useCallback(async () => {
  try {
  setLoading(true);
  const params = new URLSearchParams({
@@ -115,7 +111,11 @@ export default function OrdersPage() {
 } finally {
  setLoading(false);
 }
-};
+}, [page, statusFilter]);
+
+ useEffect(() => {
+ fetchOrders();
+}, [fetchOrders]);
 
  const handleViewOrder = (orderId: string) => {
  router.push(`/orders/${orderId}`);
@@ -244,6 +244,7 @@ export default function OrdersPage() {
  {order.items.length} item{order.items.length !== 1 ? 's' : ''}
  </Caption>
  </div>
+ </div>
  </CardHeader>
 
  <CardContent>
@@ -251,9 +252,12 @@ export default function OrdersPage() {
  {order.event && (
  <div className="flex gap-4 p-4 rounded-lg mb-4">
  {order.event.imageUrl && (
- <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
- <img src={order.event.imageUrl} alt={order.event.name}
- className="w-full h-full object-cover"
+ <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 relative">
+ <Image
+ src={order.event.imageUrl}
+ alt={order.event.name}
+ fill
+ className="object-cover"
  />
  </div>
  )}
@@ -293,6 +297,7 @@ export default function OrdersPage() {
  <Caption>
  {formatCurrency(item.price * item.quantity, order.currency)}
  </Caption>
+ </div>
  ))}
  </div>
 
@@ -335,7 +340,7 @@ export default function OrdersPage() {
 
  {/* Pagination */}
  {!loading && filteredOrders.length > 0 && totalPages > 1 && (
- <div className="mt-8 flex justify-center gap-2">
+ <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
  <Button
  variant="gvteway-outline"
  onClick={() => setPage(p => Math.max(1, p - 1))}
@@ -347,6 +352,7 @@ export default function OrdersPage() {
  <Caption>
  Page {page} of {totalPages}
  </Caption>
+ </div>
  <Button
  variant="gvteway-outline"
  onClick={() => setPage(p => Math.min(totalPages, p + 1))}

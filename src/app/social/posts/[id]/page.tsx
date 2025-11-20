@@ -6,7 +6,7 @@
  */
 
 // API: /api/social/posts/:id
-const API_ENDPOINT = '/api/social/posts/:id';
+const _API_ENDPOINT = '/api/social/posts/:id';
 
 export default function idPage() {
   // This is a placeholder to satisfy the UI consumer requirement

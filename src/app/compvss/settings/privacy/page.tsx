@@ -17,7 +17,7 @@ import { Select } from '@/components/atoms/Select';
 import { BodyText, HeroTitle, SubsectionHeader } from "@/components/atoms/Typography";
 
 export default function PrivacySettingsPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Settings', href: '/compvss/settings/account' },
     { label: 'Privacy', href: '/compvss/settings/privacy' },

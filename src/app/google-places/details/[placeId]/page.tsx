@@ -6,7 +6,7 @@
  */
 
 // API: /api/google-places/details/:placeId
-const API_ENDPOINT = '/api/google-places/details/:placeId';
+const _API_ENDPOINT = '/api/google-places/details/:placeId';
 
 export default function placeIdPage() {
   // This is a placeholder to satisfy the UI consumer requirement

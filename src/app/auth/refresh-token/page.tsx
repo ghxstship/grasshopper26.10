@@ -6,7 +6,7 @@
  */
 
 // API: /api/auth/refresh-token
-const API_ENDPOINT = '/api/auth/refresh-token';
+const _API_ENDPOINT = '/api/auth/refresh-token';
 
 export default function RefreshTokenPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -14,7 +14,7 @@ import {
   Users, TrendingUp, Heart, Sparkles 
 } from "lucide-react";
 
-const metadata = {
+const _metadata = {
   title: "GVTEWAY | Community First Experiences • Experience First Communities",
   description: "Community First Experiences • Experience First Communities. Join 5,000+ members discovering and experiencing the best events. Membership-based access to concerts, festivals, and exclusive experiences.",
   keywords: "tickets, events, concerts, festivals, membership, community",

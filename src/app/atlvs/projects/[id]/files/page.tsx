@@ -33,7 +33,7 @@ export default function ProjectFilesPage({ params }: { params: { id: string } })
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   
-  const { data: _projectData, isLoading, error, refetch } = useProject(params.id);
+  const { data: projectData, isLoading, error, refetch } = useProject(params.id);
   
   // When files API is ready, transform the data here
   const files: FileItem[] = [];

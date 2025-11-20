@@ -6,7 +6,7 @@
  */
 
 // API: /api/events/:id/analytics
-const API_ENDPOINT = '/api/events/:id/analytics';
+const _API_ENDPOINT = '/api/events/:id/analytics';
 
 export default function AnalyticsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

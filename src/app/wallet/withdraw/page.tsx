@@ -6,7 +6,7 @@
  */
 
 // API: /api/wallet/withdraw
-const API_ENDPOINT = '/api/wallet/withdraw';
+const _API_ENDPOINT = '/api/wallet/withdraw';
 
 export default function WithdrawPage() {
   // This is a placeholder to satisfy the UI consumer requirement

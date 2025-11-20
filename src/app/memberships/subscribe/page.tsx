@@ -6,7 +6,7 @@
  */
 
 // API: /api/memberships/subscribe
-const API_ENDPOINT = '/api/memberships/subscribe';
+const _API_ENDPOINT = '/api/memberships/subscribe';
 
 export default function SubscribePage() {
   // This is a placeholder to satisfy the UI consumer requirement

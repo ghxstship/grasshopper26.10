@@ -6,7 +6,7 @@
  */
 
 // API: /api/webhooks/twilio
-const API_ENDPOINT = '/api/webhooks/twilio';
+const _API_ENDPOINT = '/api/webhooks/twilio';
 
 export default function TwilioPage() {
   // This is a placeholder to satisfy the UI consumer requirement

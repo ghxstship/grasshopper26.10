@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/tasks/:id/complete
-const API_ENDPOINT = '/api/atlvs/tasks/:id/complete';
+const _API_ENDPOINT = '/api/atlvs/tasks/:id/complete';
 
 export default function CompletePage() {
   // This is a placeholder to satisfy the UI consumer requirement

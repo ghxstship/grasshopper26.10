@@ -22,7 +22,7 @@ interface Booking {
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/assets/calendar
 
 export default function AssetCalendarPage() {
-  const { data: _assetsData, isLoading } = useAssets();
+  const { data: assetsData, isLoading } = useAssets();
   const bookings: Booking[] = [];
 
   if (isLoading) {

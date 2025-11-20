@@ -6,7 +6,7 @@
  */
 
 // API: /api/wallet/deposit
-const API_ENDPOINT = '/api/wallet/deposit';
+const _API_ENDPOINT = '/api/wallet/deposit';
 
 export default function DepositPage() {
   // This is a placeholder to satisfy the UI consumer requirement

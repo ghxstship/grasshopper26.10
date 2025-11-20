@@ -18,10 +18,15 @@ function VerifyEmailContent() {
 
   useEffect(() => {
     if (!token) {
-      setStatus('error');
-      setMessage('Invalid verification link');
+      queueMicrotask(() => {
+        setStatus('error');
+        setMessage('Invalid verification link');
+      });
       return;
     }
+
+    let isActive = true;
+    let redirectTimer: NodeJS.Timeout | null = null;
 
     const verifyEmail = async () => {
       try {
@@ -33,10 +38,12 @@ function VerifyEmailContent() {
 
         const data = await response.json();
 
+        if (!isActive) return;
+
         if (response.ok) {
           setStatus('success');
           setMessage('Email verified successfully!');
-          setTimeout(() => {
+          redirectTimer = setTimeout(() => {
             router.push('/gvteway/auth/login?verified=true');
           }, 3000);
         } else {
@@ -44,12 +51,20 @@ function VerifyEmailContent() {
           setMessage(data.error || 'Verification failed');
         }
       } catch {
+        if (!isActive) return;
         setStatus('error');
         setMessage('An unexpected error occurred');
       }
     };
 
-    verifyEmail();
+    void verifyEmail();
+
+    return () => {
+      isActive = false;
+      if (redirectTimer) {
+        clearTimeout(redirectTimer);
+      }
+    };
   }, [token, router]);
 
   return (

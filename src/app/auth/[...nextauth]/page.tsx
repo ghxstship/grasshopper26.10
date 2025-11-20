@@ -6,7 +6,7 @@
  */
 
 // API: /api/auth/[...nextauth]
-const API_ENDPOINT = '/api/auth/[...nextauth]';
+const _API_ENDPOINT = '/api/auth/[...nextauth]';
 
 export default function nextauthPage() {
   // This is a placeholder to satisfy the UI consumer requirement

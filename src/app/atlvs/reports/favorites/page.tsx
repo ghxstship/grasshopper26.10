@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/reports/favorites
-const API_ENDPOINT = '/api/atlvs/reports/favorites';
+const _API_ENDPOINT = '/api/atlvs/reports/favorites';
 
 export default function FavoritesPage() {
   // This is a placeholder to satisfy the UI consumer requirement

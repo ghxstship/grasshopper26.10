@@ -6,7 +6,7 @@
  */
 
 // API: /api/alerts
-const API_ENDPOINT = '/api/alerts';
+const _API_ENDPOINT = '/api/alerts';
 
 export default function AlertsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

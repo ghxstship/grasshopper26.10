@@ -2,7 +2,6 @@
 
 import { readFileSync, writeFileSync } from 'fs';
 import { glob } from 'glob';
-import { resolve } from 'path';
 
 const fixes = [
   // h1 -> HeroTitle or PageTitle
@@ -36,9 +35,7 @@ const fixes = [
   { pattern: /<\/h6>/g, replacement: '</SmallHeader>' },
 ];
 
-const importComponents = new Set();
-
-function applyFixes(content, filePath) {
+function applyFixes(content) {
   let modified = content;
   let changed = false;
   
@@ -109,7 +106,7 @@ async function main() {
       // Skip files with "UI implementation pending"
       if (content.includes('UI implementation pending')) continue;
       
-      const fixed = applyFixes(content, file);
+      const fixed = applyFixes(content);
       
       if (fixed !== content) {
         writeFileSync(file, fixed, 'utf-8');

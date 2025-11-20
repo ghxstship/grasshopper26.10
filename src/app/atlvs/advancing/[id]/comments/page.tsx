@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/advancing/:id/comments
-const API_ENDPOINT = '/api/atlvs/advancing/:id/comments';
+const _API_ENDPOINT = '/api/atlvs/advancing/:id/comments';
 
 export default function CommentsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

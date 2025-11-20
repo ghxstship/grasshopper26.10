@@ -6,7 +6,7 @@
  */
 
 // API: /api/webhooks/n8n/advancing
-const API_ENDPOINT = '/api/webhooks/n8n/advancing';
+const _API_ENDPOINT = '/api/webhooks/n8n/advancing';
 
 export default function AdvancingPage() {
   // This is a placeholder to satisfy the UI consumer requirement

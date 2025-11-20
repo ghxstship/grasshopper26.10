@@ -6,7 +6,7 @@
  */
 
 // API: /api/integrations/discord
-const API_ENDPOINT = '/api/integrations/discord';
+const _API_ENDPOINT = '/api/integrations/discord';
 
 export default function DiscordPage() {
   // This is a placeholder to satisfy the UI consumer requirement

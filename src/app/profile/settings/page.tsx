@@ -6,7 +6,7 @@
  */
 
 // API: /api/profile/settings
-const API_ENDPOINT = '/api/profile/settings';
+const _API_ENDPOINT = '/api/profile/settings';
 
 export default function SettingsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

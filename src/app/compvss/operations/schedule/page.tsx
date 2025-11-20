@@ -15,7 +15,7 @@ import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typograph
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/operations/schedule
 
 export default function OperationsSchedulePage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Operations', href: '/compvss/operations/hub' },
     { label: 'Schedule', href: '/compvss/operations/schedule' },

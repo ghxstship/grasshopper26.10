@@ -15,13 +15,13 @@ import { useReports } from '@/lib/hooks/atlvs/useReports';
 import { useToast } from '@/lib/hooks/useToast';
 
 // API: /api/atlvs/analytics/export
-const API_ENDPOINT = '/api/atlvs/analytics/export';
+const _API_ENDPOINT = '/api/atlvs/analytics/export';
 
 export default function ExportDataPage() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [isExporting, setIsExporting] = useState(false);
-  const { data: _reports } = useReports();
+  const { data: reports } = useReports();
   const { addToast } = useToast();
 
   const handleExport = async (format: 'csv' | 'pdf') => {

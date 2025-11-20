@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/projects/:id/timeline
-const API_ENDPOINT = '/api/atlvs/projects/:id/timeline';
+const _API_ENDPOINT = '/api/atlvs/projects/:id/timeline';
 
 export default function TimelinePage() {
   // This is a placeholder to satisfy the UI consumer requirement

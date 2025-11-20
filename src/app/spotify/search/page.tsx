@@ -6,7 +6,7 @@
  */
 
 // API: /api/spotify/search
-const API_ENDPOINT = '/api/spotify/search';
+const _API_ENDPOINT = '/api/spotify/search';
 
 export default function SearchPage() {
   // This is a placeholder to satisfy the UI consumer requirement

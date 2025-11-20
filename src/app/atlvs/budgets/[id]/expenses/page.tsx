@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/budgets/:id/expenses
-const API_ENDPOINT = '/api/atlvs/budgets/:id/expenses';
+const _API_ENDPOINT = '/api/atlvs/budgets/:id/expenses';
 
 export default function ExpensesPage() {
   // This is a placeholder to satisfy the UI consumer requirement

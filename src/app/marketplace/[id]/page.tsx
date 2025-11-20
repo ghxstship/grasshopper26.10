@@ -6,7 +6,7 @@
  */
 
 // API: /api/marketplace/:id
-const API_ENDPOINT = '/api/marketplace/:id';
+const _API_ENDPOINT = '/api/marketplace/:id';
 
 export default function idPage() {
   // This is a placeholder to satisfy the UI consumer requirement

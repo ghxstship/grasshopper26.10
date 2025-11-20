@@ -15,7 +15,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 
 export default function NotificationSettingsPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Settings', href: '/compvss/settings/account' },
     { label: 'Notifications', href: '/compvss/settings/notifications' },

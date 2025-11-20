@@ -55,7 +55,7 @@ export default function AffiliateEarningsPage() {
     );
   }
 
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
     { label: 'Earnings', href: '/compvss/affiliates/earnings' },

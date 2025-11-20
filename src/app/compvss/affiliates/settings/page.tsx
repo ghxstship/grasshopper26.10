@@ -52,7 +52,7 @@ export default function AffiliateSettingsPage() {
     saveSettingsMutation.mutate({ paymentMethod, accountDetails, minimumPayout });
   };
 
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Affiliates', href: '/compvss/affiliates/dashboard' },
     { label: 'Settings', href: '/compvss/affiliates/settings' },

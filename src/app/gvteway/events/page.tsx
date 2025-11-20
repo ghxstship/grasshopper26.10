@@ -11,7 +11,7 @@ import { Calendar, MapPin, Clock, Users, Music, Ticket } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const metadata = {
+const _metadata = {
   title: 'Events | Discover Live Experiences | GVTEWAY',
   description: 'Find concerts, festivals, and live entertainment. Your membership unlocks exclusive access.',
   keywords: 'events, concerts, festivals, live music, entertainment',

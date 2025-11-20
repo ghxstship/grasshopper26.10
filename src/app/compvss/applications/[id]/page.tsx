@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/applications/:id
-const API_ENDPOINT = '/api/compvss/applications/:id';
+const _API_ENDPOINT = '/api/compvss/applications/:id';
 
 export default function idPage() {
   // This is a placeholder to satisfy the UI consumer requirement

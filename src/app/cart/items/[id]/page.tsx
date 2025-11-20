@@ -6,7 +6,7 @@
  */
 
 // API: /api/cart/items/:id
-const API_ENDPOINT = '/api/cart/items/:id';
+const _API_ENDPOINT = '/api/cart/items/:id';
 
 export default function idPage() {
   // This is a placeholder to satisfy the UI consumer requirement

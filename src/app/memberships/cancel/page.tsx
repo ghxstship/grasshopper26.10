@@ -6,7 +6,7 @@
  */
 
 // API: /api/memberships/cancel
-const API_ENDPOINT = '/api/memberships/cancel';
+const _API_ENDPOINT = '/api/memberships/cancel';
 
 export default function CancelPage() {
   // This is a placeholder to satisfy the UI consumer requirement

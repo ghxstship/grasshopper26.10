@@ -5,7 +5,7 @@ import { HeroTitle, SectionHeader, CardTitle, BodyText, Metadata } from "@/compo
 import { Button } from "@/components/atoms/Button";
 import { Rating } from "@/components/atoms/Rating";
 import { IntegrationBadge } from "@/components/atoms/IntegrationBadge";
-import { MapPin, Phone, Globe, Clock, DollarSign, Heart, Share2 } from "lucide-react";
+import { MapPin, Phone, Globe, DollarSign, Heart, Share2 } from "lucide-react";
 import Image from "next/image";
 
 interface DestinationPageProps {
@@ -14,14 +14,7 @@ interface DestinationPageProps {
   };
 }
 
-async function generateMetadata({ params }: DestinationPageProps) {
-  return {
-    title: `Destination Name | GVTEWAY Destinations`,
-    description: `Discover Destination Name - the perfect spot for your adventure.`,
-  };
-}
-
-export default function DestinationPage({ params: { slug } }: DestinationPageProps) {
+export default function DestinationPage({ params: { slug: slug } }: DestinationPageProps) {
   const destination = {
     name: "The Epicurean Hotel",
     category: "Accommodation",

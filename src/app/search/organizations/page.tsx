@@ -6,7 +6,7 @@
  */
 
 // API: /api/search/organizations
-const API_ENDPOINT = '/api/search/organizations';
+const _API_ENDPOINT = '/api/search/organizations';
 
 export default function OrganizationsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

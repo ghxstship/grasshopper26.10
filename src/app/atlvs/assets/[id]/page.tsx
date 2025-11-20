@@ -17,7 +17,7 @@ import { SubsectionHeader } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/assets/[id]
 
 // API: /api/atlvs/assets/:id
-const API_ENDPOINT = '/api/atlvs/assets/:id';
+const _API_ENDPOINT = '/api/atlvs/assets/:id';
 
 export default function AssetDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);

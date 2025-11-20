@@ -13,7 +13,7 @@ import { errors } from '@/lib/api/errors';
  * GET /api/compvss/applications
  * Get current user's applications
  */
-const querySchema = z.object({}).passthrough();
+const _querySchema = z.object({}).passthrough();
 
 export async function GET(request: NextRequest) {
   try {

@@ -14,14 +14,7 @@ interface BrandPageProps {
   };
 }
 
-async function generateMetadata({ params }: BrandPageProps) {
-  return {
-    title: `Brand Name | GVTEWAY Brands`,
-    description: `Shop exclusive merchandise, vinyl, and apparel from Brand Name.`,
-  };
-}
-
-export default function BrandPage({ params: { slug } }: BrandPageProps) {
+export default function BrandPage({ params: { slug: slug } }: BrandPageProps) {
   // Demo data - replace with actual API call using slug
   const brand = {
     name: "The Midnight Collective",

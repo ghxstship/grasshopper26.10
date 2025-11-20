@@ -40,7 +40,7 @@ export function FileUpload({
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { upload, isUploading: _isUploading } = useFileUpload({
+  const { upload, isUploading: isUploading } = useFileUpload({
     bucket: 'gvteway-attachments',
     folder: 'uploads',
   });
@@ -145,7 +145,7 @@ export function FileUpload({
 
       try {
         // Update status to uploading
-        setFiles(prev => prev.map((f, _idx) =>
+        setFiles(prev => prev.map((f, idx) =>
           f.file === uploadedFile.file
             ? { ...f, status: 'uploading' as const }
             : f

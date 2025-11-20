@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/reports/presets/:category
-const API_ENDPOINT = '/api/atlvs/reports/presets/:category';
+const _API_ENDPOINT = '/api/atlvs/reports/presets/:category';
 
 export default function categoryPage() {
   // This is a placeholder to satisfy the UI consumer requirement

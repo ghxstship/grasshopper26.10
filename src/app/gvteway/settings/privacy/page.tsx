@@ -3,7 +3,7 @@
 import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { PageTitle, BodyText } from '@/components/atoms/Typography';
 
-const metadata = { title: 'Privacy Settings | GVTEWAY' };
+const _metadata = { title: 'Privacy Settings | GVTEWAY' };
 
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/settings/privacy
 

@@ -19,7 +19,7 @@ import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/tasks/[id]
 
 // API: /api/atlvs/tasks/:id
-const API_ENDPOINT = '/api/atlvs/tasks/:id';
+const _API_ENDPOINT = '/api/atlvs/tasks/:id';
 
 export default function TaskDetailPage({ params }: { params: { id: string } }) {
   const { data: task, isLoading, error, refetch } = useTask(params.id) as any;

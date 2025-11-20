@@ -198,7 +198,7 @@ export class WebhookService {
   /**
    * Get webhook endpoints for event
    */
-  async getWebhookEndpoints(_event: string, _organizationId?: string) {
+  async getWebhookEndpoints(_event: string, organizationId?: string) {
     try {
       // Fetch webhook endpoints from database
       // This would query a WebhookEndpoint model
@@ -242,7 +242,7 @@ export class WebhookService {
   async unregisterWebhook(_webhookId: string) {
     try {
       // Delete webhook endpoint from database
-      // await prisma.webhookEndpoint.delete({ where: { id: _webhookId } });
+      // await prisma.webhookEndpoint.delete({ where: { id: webhookId } });
 
       return {
         success: true,

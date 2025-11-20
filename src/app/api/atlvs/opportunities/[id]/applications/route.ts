@@ -12,7 +12,7 @@ import { z } from 'zod';
  * GET /api/atlvs/opportunities/[id]/applications
  * Get all applications for an opportunity
  */
-const querySchema = z.object({}).passthrough();
+const _querySchema = z.object({}).passthrough();
 
 export async function GET(
   request: NextRequest,

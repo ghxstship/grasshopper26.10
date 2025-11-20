@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 import { generateTailwindTheme } from "./src/design-system/utils/generate-tailwind-config";
 
 const config: Config = {
@@ -10,9 +11,7 @@ const config: Config = {
     "./src/design-system/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: generateTailwindTheme(),
-  plugins: [
-    require("tailwindcss-animate"),
-  ],
+  plugins: [tailwindcssAnimate],
 };
 
 export default config;

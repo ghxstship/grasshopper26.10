@@ -18,7 +18,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { Badge } from '@/components/atoms/Badge';
 import { BodyText } from "@/components/atoms/Typography";
 
-interface _TeamMember {
+interface TeamMember {
   id: string;
   name: string;
   email: string;
@@ -27,7 +27,7 @@ interface _TeamMember {
   avatar?: string;
 }
 
-interface _Role {
+interface Role {
   id: string;
   name: string;
   color: string;
@@ -101,7 +101,7 @@ export default function RoleAssignmentPage() {
     );
   }
 
-  const members: _TeamMember[] = [
+  const members: TeamMember[] = [
     { id: '1', name: 'Sarah Johnson', email: 'sarah@atlvs.com', currentRole: 'Production Manager', department: 'Production' },
     { id: '2', name: 'Mike Chen', email: 'mike@atlvs.com', currentRole: 'Technical Director', department: 'Technical' },
     { id: '3', name: 'Emily Davis', email: 'emily@atlvs.com', currentRole: 'Team Member', department: 'Production' },

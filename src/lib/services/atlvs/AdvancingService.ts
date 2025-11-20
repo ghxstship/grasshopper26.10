@@ -140,7 +140,7 @@ export class AdvancingService extends BaseService {
     pagination?: PaginationOptions
   ): Promise<ServiceResult<PaginatedResult<unknown>>> {
     return this.execute(async () => {
-      const { page: _page, limit, skip } = this.buildPagination(pagination);
+      const { page: page, limit, skip } = this.buildPagination(pagination);
 
       const where: Prisma.AdvancingRequestWhereInput = {};
 

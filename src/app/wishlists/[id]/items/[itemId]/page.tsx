@@ -6,7 +6,7 @@
  */
 
 // API: /api/wishlists/:id/items/:itemId
-const API_ENDPOINT = '/api/wishlists/:id/items/:itemId';
+const _API_ENDPOINT = '/api/wishlists/:id/items/:itemId';
 
 export default function itemIdPage() {
   // This is a placeholder to satisfy the UI consumer requirement

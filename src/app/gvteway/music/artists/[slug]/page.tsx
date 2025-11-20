@@ -14,14 +14,7 @@ interface ArtistPageProps {
   };
 }
 
-async function generateMetadata({ params }: ArtistPageProps) {
-  return {
-    title: `Artist Name | GVTEWAY Music`,
-    description: `Discover Artist Name's upcoming shows, music, and exclusive merchandise.`,
-  };
-}
-
-export default function ArtistPage({ params: { slug } }: ArtistPageProps) {
+export default function ArtistPage({ params: { slug: _slug } }: ArtistPageProps) {
   // Demo data - replace with actual API call using slug
   const artist = {
     name: "The Midnight Collective",

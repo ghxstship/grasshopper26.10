@@ -29,7 +29,7 @@ interface KanbanBoardProps {
 }
 export function KanbanBoard({
   columns,
-  onTaskMove: _onTaskMove,
+  onTaskMove: onTaskMove,
   onTaskClick,
   onAddTask,
 }: KanbanBoardProps) {

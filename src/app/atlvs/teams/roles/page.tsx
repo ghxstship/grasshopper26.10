@@ -16,7 +16,7 @@ import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 
 export default function TeamRolesPage() {
   const router = useRouter();
-  const [_searchQuery, _setSearchQuery] = useState('');
+  const [_searchQuery, setSearchQuery] = useState('');
   const { data: roles = [], isLoading, error, refetch } = useTeamRoles();
 
   if (isLoading) {

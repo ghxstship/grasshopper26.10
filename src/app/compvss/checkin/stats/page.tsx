@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/checkin/stats
-const API_ENDPOINT = '/api/compvss/checkin/stats';
+const _API_ENDPOINT = '/api/compvss/checkin/stats';
 
 export default function StatsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

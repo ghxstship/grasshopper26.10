@@ -15,7 +15,7 @@ import { BodyText, HeroTitle, SectionHeader } from "@/components/atoms/Typograph
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/referrals/history
 
 export default function ReferralHistoryPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Referrals', href: '/compvss/referrals/dashboard' },
     { label: 'History', href: '/compvss/referrals/history' },

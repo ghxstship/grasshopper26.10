@@ -3,7 +3,7 @@
 import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { PageTitle, BodyText } from '@/components/atoms/Typography';
 
-const metadata = { title: 'Event Map | GVTEWAY' };
+const _metadata = { title: 'Event Map | GVTEWAY' };
 
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/events/map
 

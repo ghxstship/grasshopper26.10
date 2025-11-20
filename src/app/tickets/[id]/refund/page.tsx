@@ -6,7 +6,7 @@
  */
 
 // API: /api/tickets/:id/refund
-const API_ENDPOINT = '/api/tickets/:id/refund';
+const _API_ENDPOINT = '/api/tickets/:id/refund';
 
 export default function RefundPage() {
   // This is a placeholder to satisfy the UI consumer requirement

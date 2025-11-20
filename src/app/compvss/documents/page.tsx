@@ -7,7 +7,7 @@ import { CompvssLayout} from '@/components/templates/CompvssLayout';
 import { ContentLayout} from '@/components/templates/ContentLayout';
 import { useState, useMemo} from 'react';
 import { motion} from 'framer-motion';
-import { FileText, Plus, Search, Download, Upload, Folder, File, Image, Video,
+import { FileText, Search, Download, Upload, Folder, File, Image as ImageIcon, Video,
  Music,
  Archive,
  Shield,
@@ -17,13 +17,12 @@ import { FileText, Plus, Search, Download, Upload, Folder, File, Image, Video,
  Lock,
  Unlock
 } from 'lucide-react';
-import Link from 'next/link';
 import { Button} from '@/components/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent} from '@/components/atoms/Card';
+import { Card, CardHeader, CardDescription, CardContent} from '@/components/atoms/Card';
 import { Badge} from '@/components/atoms/Badge';
 import { Input} from '@/components/atoms/Input';
 import { Select} from '@/components/atoms/Select';
-import { BodyText, SectionHeader } from '@/components/atoms/Typography'
+import { BodyText, SectionHeader, CardTitle as TypographyCardTitle } from '@/components/atoms/Typography'
 import { useAuth} from '@/lib/hooks/auth/useAuth';
 
 interface Document {
@@ -128,7 +127,7 @@ export default function CompvssDocumentsPage() {
  const getFileIcon = (type: string) => {
  switch (type) {
  case 'document': return <FileText className="w-5 h-5" />;
- case 'image': return <Image className="w-5 h-5" />;
+ case 'image': return <ImageIcon className="w-5 h-5" />;
  case 'video': return <Video className="w-5 h-5" />;
  case 'audio': return <Music className="w-5 h-5" />;
  case 'archive': return <Archive className="w-5 h-5" />;
@@ -221,7 +220,7 @@ export default function CompvssDocumentsPage() {
  <BodyText className="text-muted-foreground">Media Files</BodyText>
  <SectionHeader className="mt-1">{stats.media}</SectionHeader>
  </div>
- <Image className="w-8 h-8 text-ghxst-primary" />
+ <ImageIcon className="w-8 h-8 text-ghxst-primary" />
  </div>
  </CardContent>
  </Card>
@@ -322,9 +321,9 @@ export default function CompvssDocumentsPage() {
  </Badge>
  </div>
 
- <CardTitleTypography className="mb-2 truncate" title={doc.name}>
+ <TypographyCardTitle className="mb-2 truncate" title={doc.name}>
  {doc.name}
- </CardTitleTypography>
+ </TypographyCardTitle>
  <CardDescription>{doc.folder}</CardDescription>
 
  <div className="mt-4 space-y-2">

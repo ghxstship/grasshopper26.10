@@ -19,7 +19,7 @@ import { BodyText, HeroTitle, SubsectionHeader } from "@/components/atoms/Typogr
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/settings/account
 
 export default function AccountSettingsPage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Settings', href: '/compvss/settings/account' },
     { label: 'Account', href: '/compvss/settings/account' },

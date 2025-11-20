@@ -6,7 +6,7 @@
  */
 
 // API: /api/n8n/health
-const API_ENDPOINT = '/api/n8n/health';
+const _API_ENDPOINT = '/api/n8n/health';
 
 export default function HealthPage() {
   // This is a placeholder to satisfy the UI consumer requirement

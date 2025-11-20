@@ -6,7 +6,7 @@
  */
 
 // API: /api/search/events
-const API_ENDPOINT = '/api/search/events';
+const _API_ENDPOINT = '/api/search/events';
 
 export default function EventsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

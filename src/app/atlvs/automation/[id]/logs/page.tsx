@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/automation/:id/logs
-const API_ENDPOINT = '/api/atlvs/automation/:id/logs';
+const _API_ENDPOINT = '/api/atlvs/automation/:id/logs';
 
 export default function LogsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -4,33 +4,33 @@ import { cn } from "@/lib/utils";
 import { Spinner } from "./Spinner";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-bebas text-body transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-bebas text-body transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        // GVTEWAY variants
-        gvteway: "bg-gradient-to-r from-gvteway-red-500 via-gvteway-yellow-500 to-gvteway-blue-500 text-black hover:shadow-lg hover:shadow-gvteway-red-500/50",
-        "gvteway-outline": "border-2 border-gvteway-red-500 text-gvteway-red-500 hover:bg-gvteway-red-500 hover:text-black",
-        "gvteway-ghost": "text-gvteway-red-500 hover:bg-gvteway-red-500/10",
+        // GVTEWAY variants (Brutalist solid style)
+        gvteway: "bg-black text-white border-3 border-black hover:shadow-hard-base hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-none active:translate-x-0 active:translate-y-0",
+        "gvteway-outline": "border-3 border-black text-black bg-white hover:bg-black hover:text-white",
+        "gvteway-ghost": "text-black hover:bg-grey-100 border-3 border-transparent hover:border-black",
         
-        // COMPVSS variants
-        compvss: "bg-gradient-to-r from-compvss-cyan-500 via-compvss-teal-500 to-compvss-indigo-500 text-white hover:shadow-lg hover:shadow-compvss-cyan-500/50",
-        "compvss-outline": "border-2 border-compvss-cyan-500 text-compvss-cyan-500 hover:bg-compvss-cyan-500 hover:text-white",
-        "compvss-ghost": "text-compvss-cyan-500 hover:bg-compvss-cyan-500/10",
+        // COMPVSS variants (Brutalist solid style)
+        compvss: "bg-black text-white border-3 border-black hover:shadow-hard-base hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-none active:translate-x-0 active:translate-y-0",
+        "compvss-outline": "border-3 border-black text-black bg-white hover:bg-black hover:text-white",
+        "compvss-ghost": "text-black hover:bg-grey-100 border-3 border-transparent hover:border-black",
         
-        // ATLVS variants
-        atlvs: "bg-gradient-to-r from-atlvs-green-500 via-atlvs-orange-500 to-atlvs-purple-500 text-black hover:shadow-lg hover:shadow-atlvs-green-500/50",
-        "atlvs-outline": "border-2 border-atlvs-green-500 text-atlvs-green-500 hover:bg-atlvs-green-500 hover:text-black",
-        "atlvs-ghost": "text-atlvs-green-500 hover:bg-atlvs-green-500/10",
+        // ATLVS variants (Brutalist solid style)
+        atlvs: "bg-black text-white border-3 border-black hover:shadow-hard-base hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-none active:translate-x-0 active:translate-y-0",
+        "atlvs-outline": "border-3 border-black text-black bg-white hover:bg-black hover:text-white",
+        "atlvs-ghost": "text-black hover:bg-grey-100 border-3 border-transparent hover:border-black",
         
-        // Standard variants (theme-aware)
-        default: "bg-ghxst-white text-ghxst-black border-2 border-ghxst-black hover:bg-ghxst-black hover:text-ghxst-white",
-        primary: "bg-ghxst-black text-ghxst-white border-2 border-ghxst-black hover:bg-ghxst-accent hover:border-ghxst-accent",
-        secondary: "bg-ghxst-surface text-ghxst-black border-2 border-ghxst-border hover:bg-ghxst-black hover:text-ghxst-white hover:border-ghxst-black",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-ghxst-black bg-transparent hover:bg-ghxst-black hover:text-ghxst-white",
-        ghost: "hover:bg-ghxst-surface text-ghxst-black",
-        link: "text-ghxst-black underline-offset-4 hover:underline hover:text-ghxst-accent",
+        // Standard variants (BRUTALIST)
+        default: "bg-white text-black border-3 border-black hover:bg-black hover:text-white",
+        primary: "bg-black text-white border-3 border-black hover:shadow-hard-base hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-none active:translate-x-0 active:translate-y-0",
+        secondary: "bg-grey-100 text-black border-3 border-black hover:bg-black hover:text-white",
+        destructive: "bg-black text-white border-3 border-black hover:bg-grey-900",
+        outline: "border-3 border-black bg-transparent hover:bg-black hover:text-white",
+        ghost: "text-black hover:bg-grey-100 border-3 border-transparent hover:border-black",
+        link: "text-black underline-offset-4 hover:underline border-3 border-transparent",
       },
       size: {
         sm: "h-9 px-4 text-body-sm",
@@ -40,7 +40,8 @@ const buttonVariants = cva(
         icon: "h-10 w-10",
       },
       rounded: {
-        default: "rounded-lg",
+        default: "rounded-none",  // Brutalist: sharp edges
+        sm: "rounded-sm",
         full: "rounded-full",
         none: "rounded-none",
       },

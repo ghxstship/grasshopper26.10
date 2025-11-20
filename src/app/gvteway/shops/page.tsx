@@ -10,7 +10,7 @@ import { Button } from "@/components/atoms/Button";
 import { Store, Sparkles } from "lucide-react";
 import Image from "next/image";
 
-const metadata = {
+const _metadata = {
   title: 'Shops | Artist Merch & Exclusive Drops | GVTEWAY',
   description: 'Shop exclusive merch, vinyl, and apparel from your favorite artists, venues, labels, and local brands.',
   keywords: 'merch, vinyl, apparel, artist merchandise, shopify',

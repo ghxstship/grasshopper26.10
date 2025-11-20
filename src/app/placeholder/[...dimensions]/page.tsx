@@ -6,7 +6,7 @@
  */
 
 // API: /api/placeholder/[...dimensions]
-const API_ENDPOINT = '/api/placeholder/[...dimensions]';
+const _API_ENDPOINT = '/api/placeholder/[...dimensions]';
 
 export default function dimensionsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

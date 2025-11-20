@@ -6,7 +6,7 @@
  */
 
 // API: /api/compvss/teams
-const API_ENDPOINT = '/api/compvss/teams';
+const _API_ENDPOINT = '/api/compvss/teams';
 
 export default function TeamsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

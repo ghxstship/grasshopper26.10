@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/automation/:id/execute
-const API_ENDPOINT = '/api/atlvs/automation/:id/execute';
+const _API_ENDPOINT = '/api/atlvs/automation/:id/execute';
 
 export default function ExecutePage() {
   // This is a placeholder to satisfy the UI consumer requirement

@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/opportunities/:id/applications
-const API_ENDPOINT = '/api/atlvs/opportunities/:id/applications';
+const _API_ENDPOINT = '/api/atlvs/opportunities/:id/applications';
 
 export default function ApplicationsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

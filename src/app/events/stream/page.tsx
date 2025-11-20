@@ -6,7 +6,7 @@
  */
 
 // API: /api/events/stream
-const API_ENDPOINT = '/api/events/stream';
+const _API_ENDPOINT = '/api/events/stream';
 
 export default function StreamPage() {
   // This is a placeholder to satisfy the UI consumer requirement

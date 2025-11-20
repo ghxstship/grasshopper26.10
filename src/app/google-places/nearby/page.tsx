@@ -6,7 +6,7 @@
  */
 
 // API: /api/google-places/nearby
-const API_ENDPOINT = '/api/google-places/nearby';
+const _API_ENDPOINT = '/api/google-places/nearby';
 
 export default function NearbyPage() {
   // This is a placeholder to satisfy the UI consumer requirement

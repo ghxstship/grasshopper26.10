@@ -100,7 +100,7 @@ export function SearchResultsPageTemplate({
   emptyStateTitle = 'No results found',
   emptyStateDescription = 'Try adjusting your search or filters',
 }: SearchResultsPageTemplateProps) {
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [_mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const hasActiveFilters = Object.values(activeFilters).some(v => v.length > 0);
   const isEmpty = totalResults === 0;
 

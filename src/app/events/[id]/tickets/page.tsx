@@ -6,7 +6,7 @@
  */
 
 // API: /api/events/:id/tickets
-const API_ENDPOINT = '/api/events/:id/tickets';
+const _API_ENDPOINT = '/api/events/:id/tickets';
 
 export default function TicketsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

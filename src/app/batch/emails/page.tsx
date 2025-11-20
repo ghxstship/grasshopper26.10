@@ -6,7 +6,7 @@
  */
 
 // API: /api/batch/emails
-const API_ENDPOINT = '/api/batch/emails';
+const _API_ENDPOINT = '/api/batch/emails';
 
 export default function EmailsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

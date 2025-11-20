@@ -9,7 +9,7 @@ import { Heart, Users, Sparkles, Briefcase, Calendar, MapPin } from "lucide-reac
 import Image from "next/image";
 import Link from "next/link";
 
-const metadata = {
+const _metadata = {
   title: 'Opportunities | GVTEWAY',
   description: 'Volunteer, collaborate, and create opportunities in the entertainment scene.',
   keywords: 'volunteer, opportunities, collaborate, freelance, events',

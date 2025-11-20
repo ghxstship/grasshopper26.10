@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/reports/presets
-const API_ENDPOINT = '/api/atlvs/reports/presets';
+const _API_ENDPOINT = '/api/atlvs/reports/presets';
 
 export default function PresetsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

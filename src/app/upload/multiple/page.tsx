@@ -6,7 +6,7 @@
  */
 
 // API: /api/upload/multiple
-const API_ENDPOINT = '/api/upload/multiple';
+const _API_ENDPOINT = '/api/upload/multiple';
 
 export default function MultiplePage() {
   // This is a placeholder to satisfy the UI consumer requirement

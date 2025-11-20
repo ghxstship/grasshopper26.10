@@ -4,7 +4,7 @@ import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { PageTitle, SectionHeader, BodyText } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 
-const metadata = { title: 'Checkout | GVTEWAY' };
+const _metadata = { title: 'Checkout | GVTEWAY' };
 
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/marketplace/checkout
 

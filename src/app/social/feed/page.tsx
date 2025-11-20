@@ -6,7 +6,7 @@
  */
 
 // API: /api/social/feed
-const API_ENDPOINT = '/api/social/feed';
+const _API_ENDPOINT = '/api/social/feed';
 
 export default function FeedPage() {
   // This is a placeholder to satisfy the UI consumer requirement

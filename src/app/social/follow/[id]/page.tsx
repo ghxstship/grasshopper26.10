@@ -6,7 +6,7 @@
  */
 
 // API: /api/social/follow/:id
-const API_ENDPOINT = '/api/social/follow/:id';
+const _API_ENDPOINT = '/api/social/follow/:id';
 
 export default function idPage() {
   // This is a placeholder to satisfy the UI consumer requirement

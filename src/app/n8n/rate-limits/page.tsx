@@ -6,7 +6,7 @@
  */
 
 // API: /api/n8n/rate-limits
-const API_ENDPOINT = '/api/n8n/rate-limits';
+const _API_ENDPOINT = '/api/n8n/rate-limits';
 
 export default function RateLimitsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

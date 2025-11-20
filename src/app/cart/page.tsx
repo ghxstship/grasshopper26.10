@@ -114,7 +114,7 @@ export default function CartPage() {
  );
 };
 
- const removeItem = (itemId: string) => {
+ const _removeItem = (itemId: string) => {
  const item = cartItems.find(i => i.id === itemId);
  setCartItems(prevItems => prevItems.filter(i => i.id !== itemId));
  setAlertMessage(`${item?.name || 'Item'} removed from cart`);

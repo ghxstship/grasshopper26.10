@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/tasks/:id/time-entries
-const API_ENDPOINT = '/api/atlvs/tasks/:id/time-entries';
+const _API_ENDPOINT = '/api/atlvs/tasks/:id/time-entries';
 
 export default function TimeEntriesPage() {
   // This is a placeholder to satisfy the UI consumer requirement

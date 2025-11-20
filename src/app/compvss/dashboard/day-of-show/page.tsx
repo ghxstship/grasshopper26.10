@@ -18,7 +18,7 @@ import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/dashboard/day-of-show
 
 export default function DayOfShowDashboardPage() {
-  const { data: _dayOfShowData, isLoading } = useDayOfShow();
+  const { data: dayOfShowData, isLoading } = useDayOfShow();
   
   if (isLoading) {
     return (
@@ -30,7 +30,7 @@ export default function DayOfShowDashboardPage() {
     );
   }
   
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Day-of-Show', href: '/compvss/dashboard/day-of-show' },
   ];

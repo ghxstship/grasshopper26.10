@@ -5,7 +5,7 @@ import { TrendingUp, Calendar, DollarSign, Users, BarChart3, PieChart } from 'lu
 import Link from 'next/link';
 import { CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
 
-const metadata = {
+const _metadata = {
   title: 'Analytics | GVTEWAY',
   description: 'View your event history, spending insights, and personalized recommendations',
 };

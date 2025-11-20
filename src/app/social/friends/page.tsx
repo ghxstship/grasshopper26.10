@@ -6,7 +6,7 @@
  */
 
 // API: /api/social/friends
-const API_ENDPOINT = '/api/social/friends';
+const _API_ENDPOINT = '/api/social/friends';
 
 export default function FriendsPage() {
   // This is a placeholder to satisfy the UI consumer requirement

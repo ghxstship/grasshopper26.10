@@ -14,14 +14,7 @@ interface ShopPageProps {
   };
 }
 
-async function generateMetadata({ params }: ShopPageProps) {
-  return {
-    title: `Shop Name | GVTEWAY Shops`,
-    description: `Shop exclusive merchandise, vinyl, and apparel from Shop Name.`,
-  };
-}
-
-export default function ShopPage({ params: { slug } }: ShopPageProps) {
+export default function ShopPage({ params: { slug: _slug } }: ShopPageProps) {
   // Demo data - replace with actual API call using slug
   const shop = {
     name: "The Midnight Collective Store",

@@ -6,7 +6,7 @@
  */
 
 // API: /api/atlvs/advancing/:id/reject
-const API_ENDPOINT = '/api/atlvs/advancing/:id/reject';
+const _API_ENDPOINT = '/api/atlvs/advancing/:id/reject';
 
 export default function RejectPage() {
   // This is a placeholder to satisfy the UI consumer requirement

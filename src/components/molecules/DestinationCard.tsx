@@ -28,7 +28,7 @@ export const DestinationCard: React.FC<DestinationCardProps> = ({
   name,
   category,
   image,
-  address,
+  address: address,
   distance,
   priceLevel,
   rating,

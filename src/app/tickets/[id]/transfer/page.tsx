@@ -6,7 +6,7 @@
  */
 
 // API: /api/tickets/:id/transfer
-const API_ENDPOINT = '/api/tickets/:id/transfer';
+const _API_ENDPOINT = '/api/tickets/:id/transfer';
 
 export default function TransferPage() {
   // This is a placeholder to satisfy the UI consumer requirement

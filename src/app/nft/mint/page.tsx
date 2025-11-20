@@ -6,7 +6,7 @@
  */
 
 // API: /api/nft/mint
-const API_ENDPOINT = '/api/nft/mint';
+const _API_ENDPOINT = '/api/nft/mint';
 
 export default function MintPage() {
   // This is a placeholder to satisfy the UI consumer requirement

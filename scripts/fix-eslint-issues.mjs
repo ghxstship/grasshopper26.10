@@ -14,6 +14,7 @@ try {
 } catch (error) {
   console.log('\n⚠️  ESLint found issues that need manual review');
   console.log('Running report of remaining issues...\n');
+  console.error(error);
   
   try {
     execSync('npx eslint src/ --format compact', {
@@ -21,6 +22,7 @@ try {
       encoding: 'utf-8'
     });
   } catch (reportError) {
+    console.error(reportError);
     // Expected to fail if there are still issues
   }
 }
@@ -44,4 +46,5 @@ try {
 } catch (error) {
   // If there are issues, the command will fail
   console.log('   Some issues remain - check output above');
+  console.error(error);
 }

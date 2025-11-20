@@ -87,14 +87,14 @@ const MOCK_TASKS_REMOVED: GanttTask[] = [
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/projects/[id]
 
 // API: /api/atlvs/projects/:id
-const API_ENDPOINT = '/api/atlvs/projects/:id';
+const _API_ENDPOINT = '/api/atlvs/projects/:id';
 
 export default function ProjectDetailPage() {
   const params = useParams();
   const projectId = params.id as string;
   const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'budget' | 'team' | 'files'>('overview');
   
-  const { data: _projectData, isLoading, error, refetch } = useProject(projectId);
+  const { data: projectData, isLoading, error, refetch } = useProject(projectId);
   const { data: timelineData } = useProjectTimeline(projectId);
   
   // Transform timeline data to Gantt tasks

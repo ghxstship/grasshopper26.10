@@ -16,7 +16,7 @@ import { useWorkflow, useExecuteWorkflow } from '@/lib/hooks/atlvs/useAutomation
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/[id]
 
 // API: /api/atlvs/automation/:id
-const API_ENDPOINT = '/api/atlvs/automation/:id';
+const _API_ENDPOINT = '/api/atlvs/automation/:id';
 
 export default function WorkflowDetailPage({ params }: { params: { id: string } }) {
   const { data: workflow, isLoading, error } = useWorkflow(params.id);

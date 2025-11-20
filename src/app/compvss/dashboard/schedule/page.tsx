@@ -15,7 +15,7 @@ import { BodyText, HeroTitle } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/dashboard/schedule
 
 export default function SchedulePage() {
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Schedule', href: '/compvss/dashboard/schedule' },
   ];

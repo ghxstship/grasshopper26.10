@@ -31,7 +31,7 @@ export default function TasksDashboardPage() {
     );
   }
 
-  const breadcrumbs = [
+  const _breadcrumbs = [
     { label: 'Dashboard', href: '/compvss/dashboard' },
     { label: 'Tasks', href: '/compvss/dashboard/tasks' },
   ];

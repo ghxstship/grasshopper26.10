@@ -27,7 +27,7 @@ interface ReportField {
 
 export default function CustomReportsPage() {
   const { addToast } = useToast();
-  const { data: _existingReports, isLoading: _isLoading, error: _error } = useReports();
+  const { data: existingReports, isLoading: isLoading, error: error } = useReports();
   const _generateReportMutation = useGenerateReport();
   
   const [reportName, setReportName] = useState('');
