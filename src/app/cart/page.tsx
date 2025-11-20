@@ -257,16 +257,6 @@ export default function CartPage() {
  Category: {item.category}
  </Metadata>
  </div>
- <Package className="h-12 w-12 text-gvteway-red-500/40" />
- </div>
-
- {/* Item Details */}
- <div className="flex-1 space-y-3">
- <div className="flex items-start justify-between gap-4">
- <div className="flex-1">
- <div className="flex items-center gap-3 mb-1">
- <SubsectionHeader className="cursor-pointer hover:text-gvteway-red-500 transition-colors"
- onClick={() => router.push(`/cart/items/${item.id}`)}
  <div className="flex items-center justify-between gap-4 pt-3 border-t-2">
  <div className="flex items-center gap-2">
  <Button
