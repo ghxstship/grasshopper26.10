@@ -257,20 +257,6 @@ export default function CartPage() {
  Category: {item.category}
  </Metadata>
  </div>
- >
- {alertMessage}
- </Alert>
- )}
-
- <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
- {/* Cart Items */}
- <div className="lg:col-span-2 space-y-4">
- {cartItems.map((item) => (
- <Card key={item.id} variant="gvteway">
- <CardContent className="p-6">
- <div className="flex flex-col md:flex-row gap-6">
- {/* Item Image */}
- <div className="w-full md:w-32 h-32 bg-black/10/10/10 rounded-xl flex items-center justify-center border-2 border-gvteway-red-500/20 flex-shrink-0">
  <Package className="h-12 w-12 text-gvteway-red-500/40" />
  </div>
 
