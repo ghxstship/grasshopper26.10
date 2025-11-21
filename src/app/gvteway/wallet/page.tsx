@@ -3,7 +3,6 @@
 import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { PageTitle, SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
-import { Badge } from '@/components/atoms/Badge';
 import { Wallet, CreditCard, Award, Key, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 

@@ -2,12 +2,11 @@
 
 import { GvtewayLayout } from "@/components/templates/GvtewayLayout";
 import { ContentLayout } from "@/components/templates/ContentLayout";
-import { PageTitle, SectionHeader, CardTitle, BodyText, Metadata } from "@/components/atoms/Typography";
+import { SectionHeader, CardTitle, Metadata } from "@/components/atoms/Typography";
 import { CategoryTab } from "@/components/atoms/CategoryTab";
-import { SearchBar } from "@/components/atoms/SearchBar";
 import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
-import { Calendar, MapPin, Clock, Users, Music, Ticket } from "lucide-react";
+import { Calendar, Clock, Users, Music, Ticket } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 

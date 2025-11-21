@@ -14,7 +14,7 @@ import { Badge } from '@/components/atoms/Badge';
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/monitoring
 
 export default function AutomationMonitoringPage() {
-  const { data: workflowsData, isLoading } = useWorkflows();
+  const { isLoading } = useWorkflows();
   
   if (isLoading) {
     return (

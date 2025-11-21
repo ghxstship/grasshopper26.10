@@ -3,7 +3,6 @@ import Image from "next/image";
 import { User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { BodyTextSmall } from "@/components/atoms/Typography";
 
 const avatarVariants = cva(
   "relative inline-flex items-center justify-center overflow-hidden rounded-full bg-grey-200 dark:bg-grey-800",

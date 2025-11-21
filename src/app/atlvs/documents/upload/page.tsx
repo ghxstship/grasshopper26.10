@@ -27,7 +27,7 @@ interface UploadedFile {
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/upload
 
 export default function DocumentUploadPage() { 
-  const [files, setFiles] = useState<UploadedFile[]>([]);
+  const [files] = useState<UploadedFile[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const {  } = useDocuments();
 

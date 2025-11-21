@@ -1,10 +1,8 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, createdResponse, handleApiError } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { z } from 'zod';
 import { CompvssService } from '@/lib/services/compvss/teams.service';
 import { errors } from '@/lib/api/errors';
 

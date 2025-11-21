@@ -2,13 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { AssetService } from '@/lib/services/atlvs/asset.service';
 import { EquipmentStatus } from '@prisma/client';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
-import { z } from 'zod';
-
-
-const _querySchema = z.object({}).passthrough();
 
 export async function GET(req: NextRequest) {
   try {

@@ -4,7 +4,6 @@ import { rateLimit, validateRequest, requireAuth } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError, errors } from '@/lib/api/response';
 import { z } from 'zod';
-import { prisma } from '@/lib/prisma';
 
 const artistIdSchema = z.object({
   id: z.string().min(1),

@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { createAlertSchema } from '@/lib/validations/alerts';
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { prisma } from '@/lib/prisma';
 
 
 

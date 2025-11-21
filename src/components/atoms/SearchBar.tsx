@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Search, MapPin } from "lucide-react";
-import { BodyTextSmall } from "@/components/atoms/Typography";
 
 interface SearchBarProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   onSearch?: (query: string) => void;
@@ -16,7 +15,7 @@ export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     placeholder = "Search events, artists, brands, destinations...",
     onSearch,
     location,
-    onLocationChange: onLocationChange,
+    onLocationChange: _onLocationChange,
     showLocationSelector = true,
     ...props 
   }, ref) => {

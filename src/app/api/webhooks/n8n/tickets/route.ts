@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { verifyWebhookSignature } from '@/lib/webhook-utils';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { errors } from "@/lib/api/errors";
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { errors } from '@/lib/api/errors';
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/n8n/tickets.service';
 
@@ -81,7 +79,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleTicketPurchased(data: any) {
-  const { ticketId, orderId, userId, eventId } = data;
+  const { ticketId, orderId: _orderId, userId: _userId, eventId: _eventId } = data;
   
   // Trigger confirmation workflows
   await new WebhooksService().createMany({
@@ -112,7 +110,7 @@ async function handleTicketPurchased(data: any) {
 }
 
 async function handleTicketTransferred(data: any) {
-  const { ticketId, fromUserId, toUserId } = data;
+  const { ticketId, fromUserId: _fromUserId, toUserId: _toUserId } = data;
   
   await new WebhooksService().createMany({
     data: [
@@ -135,7 +133,7 @@ async function handleTicketTransferred(data: any) {
 }
 
 async function handleTicketScanned(data: any) {
-  const { ticketId, scannedAt, location } = data;
+  const { ticketId, scannedAt: _scannedAt, location: _location } = data;
   
   // Update ticket status and trigger analytics
   await new WebhooksService().create({
@@ -150,7 +148,7 @@ async function handleTicketScanned(data: any) {
 }
 
 async function handleTicketRefunded(data: any) {
-  const { ticketId, refundAmount, reason } = data;
+  const { ticketId, refundAmount: _refundAmount, reason: _reason } = data;
   
   await new WebhooksService().create({
     data: {

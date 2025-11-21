@@ -8,7 +8,7 @@ console.log('=' .repeat(50));
 console.log('\n📝 Step 1: Adding dynamic exports to client pages...\n');
 try {
   execSync('node scripts/add-dynamic-exports.mjs', { stdio: 'inherit' });
-} catch (error) {
+} catch {
   console.error('❌ Failed to add dynamic exports');
   process.exit(1);
 }
@@ -17,7 +17,7 @@ try {
 console.log('\n\n📝 Step 2: Fixing ESLint issues...\n');
 try {
   execSync('node scripts/fix-eslint-issues.mjs', { stdio: 'inherit' });
-} catch (error) {
+} catch {
   console.log('⚠️  Some ESLint issues may require manual review');
 }
 
@@ -26,7 +26,7 @@ console.log('\n\n📝 Step 3: Verifying TypeScript...\n');
 try {
   execSync('npx tsc --noEmit', { stdio: 'inherit' });
   console.log('✅ TypeScript: ZERO errors');
-} catch (error) {
+} catch {
   console.error('❌ TypeScript errors found');
 }
 
@@ -35,7 +35,7 @@ console.log('\n\n📝 Step 4: Testing production build...\n');
 try {
   execSync('npm run build', { stdio: 'inherit' });
   console.log('\n✅ Build completed successfully!');
-} catch (error) {
+} catch {
   console.error('\n❌ Build failed - check errors above');
 }
 

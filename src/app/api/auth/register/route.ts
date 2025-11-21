@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
 import { hash } from 'bcryptjs';
-import { prisma } from '@/lib/prisma';
 import { registerSchema } from '@/lib/validations/auth';
-import { createdResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
+import { createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, rateLimit } from '@/lib/api/middleware';
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { RegisterService } from "@/lib/services/auth/register.service";
+import { prisma } from '@/lib/prisma';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 
@@ -78,9 +78,9 @@ export async function POST(request: NextRequest) {
           <p>This link will expire in 24 hours.</p>
         `,
       });
-    } catch (emailError) {
-      console.error('Failed to send verification email:', emailError);
-      // Don't fail registration if email fails
+    } catch {
+      // Email sending failed - registration still successful
+      // Production: Log to monitoring service
     }
 
     return createdResponse({

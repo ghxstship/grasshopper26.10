@@ -13,7 +13,7 @@ interface AdventurePageProps {
   };
 }
 
-export default function AdventurePage({ params: { slug: slug } }: AdventurePageProps) {
+export default function AdventurePage({ params: { slug: _slug } }: AdventurePageProps) {
   const adventure = {
     name: "Riverwalk Tour",
     category: "Guided Tour",

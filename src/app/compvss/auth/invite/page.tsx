@@ -21,7 +21,7 @@ export default function InvitePage() {
   const [emails, setEmails] = useState(['']);
   const [sent, setSent] = useState(false);
   const [_isSending, setIsSending] = useState(false);
-  const { data: authData } = useAuth();
+  useAuth(); // Keep hook call for side effects
 
   const addEmailField = () => {
     setEmails([...emails, '']);

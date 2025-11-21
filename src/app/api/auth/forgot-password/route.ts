@@ -4,14 +4,15 @@
  */
 
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { generatePasswordResetToken, hashToken } from '@/lib/auth/tokens';
 import { passwordResetRequestSchema } from '@/lib/validations/auth';
 import { SendGrid } from '@/lib/integrations';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
-import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
+import { parseBody, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { prisma } from '@/lib/prisma';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 

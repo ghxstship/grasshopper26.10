@@ -21,7 +21,7 @@ interface AssetUsage {
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/assets/analytics
 
 export default function AssetAnalyticsPage() {
-  const { data: assetsData, isLoading } = useAssets();
+  const { isLoading } = useAssets();
   
   if (isLoading) {
     return (

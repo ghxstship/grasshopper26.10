@@ -1,12 +1,10 @@
 import { NextRequest } from 'next/server';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { validateRequest, requireAuth } from '@/lib/api/middleware';
 import { deleteFile, deleteMultipleFiles } from '@/lib/storage/service';
 import { STORAGE_BUCKETS, type StorageBucket } from '@/lib/storage/config';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { z } from 'zod';
-import { prisma } from '@/lib/prisma';
 
 
 // DELETE /api/storage/delete - Delete file(s)

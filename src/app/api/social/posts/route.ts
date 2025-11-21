@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
 import { Prisma } from '@prisma/client';
-import { prisma } from '@/lib/prisma';
 import { createPostSchema, postFiltersSchema } from '@/lib/validations/social';
-import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, getPaginationParams, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
+import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, getPaginationParams, validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { SocialService } from '@/lib/services/social/posts.service';
+import { prisma } from '@/lib/prisma';
 
 
 // GET /api/social/posts - List posts

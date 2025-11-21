@@ -39,7 +39,7 @@ export interface BadgeProps
   brutalist?: boolean;  // Enable neobrutalist styling (default true)
 }
 
-function Badge({ className, variant, rounded, brutalist: brutalist = true, ...props }: BadgeProps) {
+function Badge({ className, variant, rounded, brutalist: _brutalist = true, ...props }: BadgeProps) {
   return (
     <div className={cn(badgeVariants({ variant, rounded }), className)} {...props} />
   );

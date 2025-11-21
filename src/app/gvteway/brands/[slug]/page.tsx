@@ -14,7 +14,7 @@ interface BrandPageProps {
   };
 }
 
-export default function BrandPage({ params: { slug: slug } }: BrandPageProps) {
+export default function BrandPage({ params: { slug: _slug } }: BrandPageProps) {
   // Demo data - replace with actual API call using slug
   const brand = {
     name: "The Midnight Collective",

@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSession } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { handleApiError } from '@/lib/api/response';
-import { EventsService } from '@/lib/services/events/id/attendees.service';
 import { z } from 'zod';
+import { getSession } from '@/lib/auth';
+import { handleApiError } from '@/lib/api/response';
+import { prisma } from '@/lib/prisma';
+import { EventsService as _EventsService } from '@/lib/services/events/id/attendees.service';
 
 
 

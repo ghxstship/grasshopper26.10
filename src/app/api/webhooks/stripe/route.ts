@@ -4,14 +4,14 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/integrations/communication/sendgrid';
 import { verifyWebhookSignature } from '@/lib/integrations/stripe';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { handleApiError } from '@/lib/api/response';
 import { errors } from '@/lib/api/errors';
+import { prisma } from '@/lib/prisma';
 
 
 

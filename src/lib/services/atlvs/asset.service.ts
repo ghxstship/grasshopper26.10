@@ -256,13 +256,10 @@ export class AssetService {
   /**
    * Check asset availability
    */
-  static async getAvailability(assetId: string, startDate: Date, endDate: Date): Promise<{
-    available: boolean;
-    conflicts: any[];
-  }> {
+  static async getBookedDates(equipmentId: string, startDate: Date, _endDate: Date): Promise<{ available: boolean; conflicts: any[] }> {
     const conflicts = await prisma.equipmentBooking.findMany({
       where: {
-        equipmentId: assetId,
+        equipmentId: equipmentId,
         status: 'confirmed',
         OR: [
           {
@@ -273,8 +270,8 @@ export class AssetService {
           },
           {
             AND: [
-              { startDate: { lte: endDate } },
-              { endDate: { gte: endDate } },
+              { startDate: { lte: _endDate } },
+              { endDate: { gte: _endDate } },
             ],
           },
         ],
@@ -420,7 +417,7 @@ export class AssetService {
   /**
    * Calculate utilization rate
    */
-  private static async calculateUtilizationRate(_startDate?: Date, endDate?: Date) {
+  private static async calculateUtilizationRate(_startDate?: Date, _endDate?: Date) {
     const totalAssets = await prisma.equipment.count({
       where: { status: { not: EquipmentStatus.RETIRED } },
     });

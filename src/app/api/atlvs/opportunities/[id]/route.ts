@@ -2,10 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { OpportunityService } from '@/lib/services/shared/opportunity.service';
 import { updateOpportunitySchema } from '@/lib/validations/opportunities';
-import { z } from 'zod';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
+import { z } from 'zod';
 
 
 /**
@@ -33,11 +31,7 @@ export async function GET(
       return NextResponse.json({ error: error.message }, { status: 404 });
     }
 
-    console.error('Error fetching opportunity:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch opportunity' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -78,11 +72,7 @@ export async function PATCH(
       return NextResponse.json({ error: error.message }, { status: 404 });
     }
 
-    console.error('Error updating opportunity:', error);
-    return NextResponse.json(
-      { error: 'Failed to update opportunity' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -114,10 +104,6 @@ export async function DELETE(
       }
     }
 
-    console.error('Error deleting opportunity:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete opportunity' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

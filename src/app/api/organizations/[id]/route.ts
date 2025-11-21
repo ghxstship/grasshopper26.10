@@ -1,10 +1,8 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { updateOrganizationSchema } from '@/lib/validations/organizations';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
+import { prisma } from '@/lib/prisma';
 import { OrganizationsService } from '@/lib/services/organizations/id.service';
 
 

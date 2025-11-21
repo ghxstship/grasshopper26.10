@@ -1,10 +1,11 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { createEventSchema, eventFiltersSchema } from '@/lib/validations/events';
-import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, getPaginationParams, getSortParams, validateRequest, requireAuth, rateLimit, getClientIdentifier,  } from '@/lib/api/middleware';
+import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, getPaginationParams, getSortParams, validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { EventsService } from '@/lib/services/events.service';
+import { prisma } from '@/lib/prisma';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 // GET /api/events - List events with filters

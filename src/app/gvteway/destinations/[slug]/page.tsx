@@ -14,7 +14,7 @@ interface DestinationPageProps {
   };
 }
 
-export default function DestinationPage({ params: { slug: slug } }: DestinationPageProps) {
+export default function DestinationPage({ params: { slug: _slug } }: DestinationPageProps) {
   const destination = {
     name: "The Epicurean Hotel",
     category: "Accommodation",

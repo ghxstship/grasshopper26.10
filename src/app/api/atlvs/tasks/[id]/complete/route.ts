@@ -6,11 +6,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { TaskService } from '@/lib/services/atlvs/task.service';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { handleApiError } from '@/lib/api/response';
-import { prisma } from '@/lib/prisma';
 
 
 

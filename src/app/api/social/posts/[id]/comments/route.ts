@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { createCommentSchema } from '@/lib/validations/social';
-import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, getPaginationParams, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, getPaginationParams, validateRequest, requireAuth } from '@/lib/api/middleware';
 import { SocialService } from '@/lib/services/social/posts/id/comments.service';
+import { prisma } from '@/lib/prisma';
 
 
 

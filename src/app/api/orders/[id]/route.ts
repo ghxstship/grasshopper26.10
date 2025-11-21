@@ -1,11 +1,8 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { updateOrderStatusSchema } from '@/lib/validations/orders';
 import type { Prisma as _Prisma } from '@prisma/client';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
 import { OrdersService } from '@/lib/services/orders/id.service';
 
 

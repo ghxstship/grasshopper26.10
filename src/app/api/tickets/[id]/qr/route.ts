@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { QRCodeService } from '@/lib/services/compvss/qr.service';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
-import { z } from 'zod';
 
 
 // Validation: z.object schema.parse validate

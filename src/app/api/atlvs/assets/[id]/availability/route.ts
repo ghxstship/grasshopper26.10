@@ -6,9 +6,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { AssetService } from '@/lib/services/atlvs/asset.service';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { handleApiError } from '@/lib/api/response';
 
 
@@ -35,7 +32,7 @@ export async function GET(
     }
 
     const { id } = await params;
-    const availability = await AssetService.getAvailability(
+    const availability = await AssetService.getBookedDates(
       id,
       new Date(startDate),
       new Date(endDate)

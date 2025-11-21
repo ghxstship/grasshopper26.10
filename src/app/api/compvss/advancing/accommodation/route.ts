@@ -1,9 +1,8 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { createdResponse, handleApiError } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
 import { hospitalityAdvancingSchema } from '@/lib/validations/advancing';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { CompvssService } from '@/lib/services/compvss/advancing/accommodation.service';
 import { errors } from '@/lib/api/errors';

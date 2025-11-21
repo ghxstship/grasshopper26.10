@@ -1,10 +1,11 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
-import { validateRequest, requireAuth, getPaginationParams, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
+import { validateRequest, requireAuth, getPaginationParams, rateLimit } from '@/lib/api/middleware';
 import { createAdventureSchema } from '@/lib/validations/adventures';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { AdventuresService } from '@/lib/services/adventures.service';
+import { prisma } from '@/lib/prisma';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 export async function GET(request: NextRequest) {

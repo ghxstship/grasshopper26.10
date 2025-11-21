@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { verifyWebhookSignature } from '@/lib/webhook-utils';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { errors } from "@/lib/api/errors";
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { errors } from '@/lib/api/errors';
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/n8n/tasks.service';
 
@@ -81,7 +79,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleTaskCreated(data: any) {
-  const { taskId, projectId, createdBy } = data;
+  const { taskId, projectId: _projectId, createdBy: _createdBy } = data;
   
   await new WebhooksService().create({
     data: {
@@ -95,7 +93,7 @@ async function handleTaskCreated(data: any) {
 }
 
 async function handleTaskAssigned(data: any) {
-  const { taskId, assigneeId, assignedBy, dueDate } = data;
+  const { taskId, assigneeId: _assigneeId, assignedBy: _assignedBy, dueDate } = data;
   
   await new WebhooksService().createMany({
     data: [
@@ -119,7 +117,7 @@ async function handleTaskAssigned(data: any) {
 }
 
 async function handleTaskCompleted(data: any) {
-  const { taskId, completedBy, projectId } = data;
+  const { taskId, completedBy: _completedBy, projectId: _projectId } = data;
   
   await new WebhooksService().createMany({
     data: [
@@ -142,7 +140,7 @@ async function handleTaskCompleted(data: any) {
 }
 
 async function handleTaskOverdue(data: any) {
-  const { taskId, assigneeId, daysOverdue } = data;
+  const { taskId, assigneeId: _assigneeId, daysOverdue: _daysOverdue } = data;
   
   await new WebhooksService().create({
     data: {

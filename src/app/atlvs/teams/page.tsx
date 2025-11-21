@@ -127,7 +127,7 @@ interface TeamData {
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/teams
 
 export default function TeamsPage() {
-  const { data: teams = [], isLoading: isLoading, error: error, refetch: refetch } = useTeams();
+  const { data: teams = [] } = useTeams();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('All Departments');
 

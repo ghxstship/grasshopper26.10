@@ -25,7 +25,7 @@ export default function ReferralDashboardPage() {
   ];
 
   const { data: referralsData, isLoading, error, refetch } = useReferrals();
-  const { data: leaderboardData, isLoading: leaderboardLoading } = useReferralLeaderboard();
+  const { data: leaderboardData } = useReferralLeaderboard();
   
   const links = referralsData?.links || [];
   const apiStats = referralsData?.stats;

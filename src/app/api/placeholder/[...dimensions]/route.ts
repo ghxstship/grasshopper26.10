@@ -1,8 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { prisma } from '@/lib/prisma';
 
 
 

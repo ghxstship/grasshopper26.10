@@ -3,8 +3,8 @@ import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { errors } from "@/lib/api/errors";
-import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
+import { z } from 'zod';
 
 /**
  * Slack Integration Middleware

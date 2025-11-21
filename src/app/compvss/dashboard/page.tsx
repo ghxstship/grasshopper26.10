@@ -7,7 +7,7 @@ import { CompvssLayout } from '@/components/templates/CompvssLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
 
 import { motion } from 'framer-motion';
-import { ClipboardCheck, QrCode, AlertCircle, DollarSign, Calendar, CheckCircle2, Clock, Activity, Bell, Loader2 } from 'lucide-react';
+import { ClipboardCheck, QrCode, AlertCircle, DollarSign, Calendar, CheckCircle2, Clock, Activity, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';

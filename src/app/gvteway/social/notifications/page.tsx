@@ -1,6 +1,5 @@
 'use client';
 import { ListPageTemplate } from '@/components/templates/ListPageTemplate';
-import { Bell } from 'lucide-react';
 import { BodyText, Metadata } from '@/components/atoms/Typography';
 
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/social/notifications

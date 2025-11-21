@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Calendar, MapPin, QrCode, Download, Share2, Ticket as TicketIcon } from 'lucide-react';
 import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
-import { PageTitle, SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
+import { SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
 import { CategoryTab } from '@/components/atoms/CategoryTab';

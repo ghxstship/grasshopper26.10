@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
 import { Prisma } from '@prisma/client';
-import { prisma } from '@/lib/prisma';
 import { updatePostSchema } from '@/lib/validations/social';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth, rateLimit, getClientIdentifier,  } from '@/lib/api/middleware';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { SocialService } from '@/lib/services/social/posts/id.service';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 type RouteContext = {

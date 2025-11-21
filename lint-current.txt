@@ -1,0 +1,107 @@
+
+> grasshopper@0.1.0 lint
+> eslint
+
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/analytics/scheduled-reports/page.tsx
+  13:10  warning  'Card' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  13:16  warning  'CardHeader' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  13:28  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  13:39  warning  'CardContent' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  14:10  warning  'Badge' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/analytics/trends/page.tsx
+  15:17  warning  'analyticsData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/assets/analytics/page.tsx
+  24:17  warning  'assetsData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/assets/calendar/page.tsx
+  25:17  warning  'assetsData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/automation/builder/page.tsx
+  16:17  warning  'automationData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/automation/monitoring/page.tsx
+  17:17  warning  'workflowsData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/documents/contracts/page.tsx
+  29:22  warning  'documents' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/documents/upload/page.tsx
+  30:17  warning  'setFiles' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/documents/version-control/page.tsx
+  41:22  warning  'docs' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/projects/[id]/files/page.tsx
+  36:17  warning  'projectData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/projects/[id]/page.tsx
+  97:17  warning  'projectData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/tasks/dependencies/page.tsx
+  32:24  warning  'setSearchQuery' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/tasks/list/page.tsx
+  87:25  warning  'setStatusFilter' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  88:27  warning  'setPriorityFilter' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/tasks/time-tracking/page.tsx
+  27:24  warning  'setActiveTimer' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/teams/assign-roles/page.tsx
+  17:16  warning  'CardHeader' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  17:28  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  18:10  warning  'Badge' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  30:11  warning  'Role' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/teams/availability/page.tsx
+   9:10  warning  'Card' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   9:16  warning  'CardHeader' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   9:28  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   9:39  warning  'CardDescription' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   9:56  warning  'CardContent' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  10:10  warning  'Badge' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/teams/page.tsx
+  130:40  warning  'isLoading' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  130:58  warning  'error' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  130:74  warning  'refetch' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/teams/roles/page.tsx
+  19:24  warning  'setSearchQuery' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/atlvs/teams/schedule/page.tsx
+  15:28  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  16:10  warning  'Badge' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/compvss/auth/invite/page.tsx
+  24:17  warning  'authData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/compvss/dashboard/day-of-show/page.tsx
+  21:17  warning  'dayOfShowData' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/compvss/dashboard/page.tsx
+  10:100  warning  'Bell' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/compvss/issues/dashboard/page.tsx
+  9:23  warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/compvss/referrals/dashboard/page.tsx
+  28:45  warning  'leaderboardLoading' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/app/compvss/team/directory/page.tsx
+  22:23  warning  'setSearchQuery' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/components/atlvs/DataTable.tsx
+  9:10  warning  'BodyTextSmall' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/components/atlvs/KanbanBoard.tsx
+  35:52  warning  'onTaskMove' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Users/julianclarkson/Documents/Grasshopper26.10/src/lib/rbac/utils.ts
+  66:58  warning  'role' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+✖ 44 problems (0 errors, 44 warnings)
+

@@ -30,19 +30,19 @@ filesWithTextViolations.forEach((fileAudit, index) => {
   
   // Fix text-caption violations
   const captionMatches = content.matchAll(/<(div|p|span|th|td|li|label)([^>]*className=["'][^"']*text-caption[^"']*["'][^>]*)>/g);
-  for (const match of Array.from(captionMatches)) {
+  for (const _match of Array.from(captionMatches)) {
     neededComponents.add('Caption');
   }
 
   // Fix text-body violations (not text-body-sm, text-body-lg, etc)
   const bodyMatches = content.matchAll(/<(div|p|span|th|td|li)([^>]*className=["'][^"']*\btext-body\b[^"']*["'][^>]*)>/g);
-  for (const match of Array.from(bodyMatches)) {
+  for (const _match of Array.from(bodyMatches)) {
     neededComponents.add('BodyText');
   }
 
   // Fix text-label violations
   const labelMatches = content.matchAll(/<(div|p|span|label)([^>]*className=["'][^"']*\btext-label\b[^"']*["'][^>]*)>/g);
-  for (const match of Array.from(labelMatches)) {
+  for (const _match of Array.from(labelMatches)) {
     neededComponents.add('Label');
   }
 

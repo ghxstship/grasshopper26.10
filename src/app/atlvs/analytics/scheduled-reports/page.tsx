@@ -10,8 +10,6 @@ import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { Textarea } from '@/components/atoms/Textarea';
 import { Button } from '@/components/atoms/Button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Calendar, Clock, Mail, Users, Plus, Play, Pause, Edit, Trash2,  } from 'lucide-react';

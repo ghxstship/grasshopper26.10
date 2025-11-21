@@ -32,7 +32,7 @@ interface KanbanBoardProps {
   onAddTask?: (columnId: string) => void;
 }
 
-export function KanbanBoard({ columns, onTaskMove: onTaskMove, onTaskClick, onAddTask }: KanbanBoardProps) {
+export function KanbanBoard({ columns, onTaskMove: _onTaskMove, onTaskClick, onAddTask }: KanbanBoardProps) {
   const [boardColumns, setBoardColumns] = useState(columns);
 
   const handleReorder = (columnId: string, newOrder: KanbanTask[]) => {

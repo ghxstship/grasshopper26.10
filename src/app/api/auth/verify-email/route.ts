@@ -4,16 +4,14 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { hashToken, isTokenExpired } from '@/lib/auth/tokens';
 import { emailVerificationSchema } from '@/lib/validations/auth';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
-import { VerifyEmailService } from "@/lib/services/auth/verifyEmail.service";
 import { errors } from '@/lib/api/errors';
+import { prisma } from '@/lib/prisma';
 
 
 

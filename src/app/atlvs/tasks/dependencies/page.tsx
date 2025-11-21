@@ -29,7 +29,7 @@ interface _TaskDependency {
 
 export default function TaskDependenciesPage() {
   const router = useRouter();
-  const [_searchQuery, setSearchQuery] = useState('');
+  const [_searchQuery] = useState('');
   const { data: dependencies = [], isLoading, error, refetch } = useTaskDependencies();
 
   if (isLoading) {

@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { googlePlacesService, PlaceType } from '@/lib/services/googlePlaces';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { handleApiError } from '@/lib/api/response';
-import { prisma } from '@/lib/prisma';
 import { errors } from '@/lib/api/errors';
 
 

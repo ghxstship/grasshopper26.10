@@ -6,7 +6,7 @@ export const runtime = 'edge';
 import { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { AlertCircle, Filter, Search, Clock, CheckCircle2, AlertTriangle, Loader2 } from 'lucide-react';
+import { AlertCircle, Search, Clock, CheckCircle2, AlertTriangle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';

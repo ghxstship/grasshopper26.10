@@ -2,11 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { OpportunityService } from '@/lib/services/shared/opportunity.service';
 import { opportunityFiltersSchema } from '@/lib/validations/opportunities';
-import { z } from 'zod';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
-import { errors } from '@/lib/api/errors';
 
 
 /**
@@ -41,17 +37,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(result);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Validation error', details: error.issues },
-        { status: 400 }
-      );
-    }
-
-    console.error('Error fetching opportunities:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch opportunities' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

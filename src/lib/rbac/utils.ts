@@ -63,7 +63,7 @@ export async function assignRoleToUser(userId: string, role: Role): Promise<void
 /**
  * Remove role from user (sets to default CONSUMER role)
  */
-export async function removeRoleFromUser(userId: string, role: Role): Promise<void> {
+export async function removeRoleFromUser(userId: string, _role: Role): Promise<void> {
   // Reset to default role
   await prisma.user.update({
     where: { id: userId },

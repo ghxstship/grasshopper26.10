@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { verifyWebhookSignature } from '@/lib/webhook-utils';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { errors } from "@/lib/api/errors";
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { errors } from '@/lib/api/errors';
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/n8n/projects.service';
 
@@ -81,7 +79,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleProjectCreated(data: any) {
-  const { projectId, projectName, leadId, teamMembers } = data;
+  const { projectId, projectName: _projectName, leadId: _leadId, teamMembers: _teamMembers } = data;
   
   // Trigger project setup workflows
   await new WebhooksService().createMany({
@@ -134,7 +132,7 @@ async function handleProjectUpdated(data: any) {
 }
 
 async function handleMilestoneReached(data: any) {
-  const { projectId, milestone, completionPercentage } = data;
+  const { projectId, milestone: _milestone, completionPercentage: _completionPercentage } = data;
   
   await new WebhooksService().createMany({
     data: [
@@ -157,7 +155,7 @@ async function handleMilestoneReached(data: any) {
 }
 
 async function handleProjectCompleted(data: any) {
-  const { projectId, completedBy, finalBudget, duration } = data;
+  const { projectId, completedBy: _completedBy, finalBudget: _finalBudget, duration: _duration } = data;
   
   await new WebhooksService().createMany({
     data: [

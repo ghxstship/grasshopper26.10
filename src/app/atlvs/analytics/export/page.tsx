@@ -21,7 +21,7 @@ export default function ExportDataPage() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [isExporting, setIsExporting] = useState(false);
-  const { data: reports } = useReports();
+  useReports(); // Keep hook call for data fetching
   const { addToast } = useToast();
 
   const handleExport = async (format: 'csv' | 'pdf') => {

@@ -4,12 +4,11 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { validateRequest, requireAuth, rateLimit } from "@/lib/api/middleware";
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/twilio.service';
 import { errors } from '@/lib/api/errors';
+import { RateLimitIdentifiers, RATE_LIMITS } from '@/lib/api/rate-limits';
 
 
 
@@ -72,7 +71,6 @@ export async function POST(request: NextRequest) {
 async function handleSMSDelivered(messageSid: string, to: string) {
   console.log('SMS delivered:', messageSid, to);
   
-  const { prisma } = await import('@/lib/prisma');
   await new WebhooksService().create({
     data: {
       action: 'SMS_DELIVERED',
@@ -89,7 +87,6 @@ async function handleSMSDelivered(messageSid: string, to: string) {
 async function handleSMSFailed(messageSid: string, to: string, errorCode: string | null) {
   console.log('SMS failed:', messageSid, to, errorCode);
   
-  const { prisma } = await import('@/lib/prisma');
   await new WebhooksService().create({
     data: {
       action: 'SMS_FAILED',
@@ -112,7 +109,6 @@ async function handleSMSFailed(messageSid: string, to: string, errorCode: string
 async function handleSMSUndelivered(messageSid: string, to: string, errorCode: string | null) {
   console.log('SMS undelivered:', messageSid, to, errorCode);
   
-  const { prisma } = await import('@/lib/prisma');
   await new WebhooksService().create({
     data: {
       action: 'SMS_UNDELIVERED',

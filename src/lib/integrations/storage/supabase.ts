@@ -176,7 +176,7 @@ export async function listFiles(
   try {
     const supabase = getSupabaseClient();
 
-    const { data, error } = await supabase.storage
+    const { data: _data, error } = await supabase.storage
       .from(bucket)
       .list(path, _options);
 
@@ -184,7 +184,7 @@ export async function listFiles(
       throw error;
     }
 
-    return createSuccessResponse( data);
+    return createSuccessResponse( _data);
   } catch (error) {
     return createErrorResponse(
       'SUPABASE_LIST_ERROR',
@@ -205,7 +205,7 @@ export async function moveFile(
   try {
     const supabase = getSupabaseClient();
 
-    const { data: data, error } = await supabase.storage
+    const { data: _data, error } = await supabase.storage
       .from(bucket)
       .move(fromPath, toPath);
 

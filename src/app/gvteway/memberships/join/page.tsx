@@ -20,7 +20,7 @@ import { BodyText, CardTitle, HeroTitle } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/gvteway/memberships/join
 
 export default function JoinMembershipPage() {  
-  const [_selectedTier, setSelectedTier] = useState<string | null>(null);
+  const [_selectedTier, _setSelectedTier] = useState<string | null>(null);
   const { data,  } = useMemberships();
   const tiers = (data as any)?.tiers || [
     {

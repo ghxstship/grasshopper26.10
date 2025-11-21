@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit } from '@/lib/webhook-utils';
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { handleApiError } from '@/lib/api/response';
-import { prisma } from '@/lib/prisma';
 
 
 /**

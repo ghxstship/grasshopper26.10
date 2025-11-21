@@ -1,10 +1,10 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { validateTicketSchema } from '@/lib/validations/orders';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
 import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
+import { prisma } from '@/lib/prisma';
 
 
 

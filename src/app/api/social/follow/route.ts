@@ -1,10 +1,10 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth, rateLimit,  } from '@/lib/api/middleware';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
-import { z } from 'zod';
 import { SocialService } from '@/lib/services/social/follow.service';
+import { z } from 'zod';
+import { prisma } from '@/lib/prisma';
 
 
 const followSchema = z.object({

@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { ApplicationService } from '@/lib/services/shared/application.service';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
-import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 
 /**
@@ -35,15 +31,7 @@ export async function GET(
 
     return NextResponse.json(application);
   } catch (error) {
-    if (error instanceof Error && error.message === 'Application not found') {
-      return NextResponse.json({ error: error.message }, { status: 404 });
-    }
-
-    console.error('Error fetching application:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch application' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -67,18 +55,11 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message === 'Application not found') {
-        return NextResponse.json({ error: error.message }, { status: 404 });
-      }
-      if (error.message === 'Unauthorized' || error.message.includes('Cannot withdraw')) {
-        return NextResponse.json({ error: error.message }, { status: 400 });
-      }
+      return handleApiError(error);
     }
-
-    console.error('Error withdrawing application:', error);
-    return NextResponse.json(
-      { error: 'Failed to withdraw application' },
-      { status: 500 }
-    );
+    if (error.message === 'Unauthorized' || error.message.includes('Cannot withdraw')) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+    return handleApiError(error);
   }
 }

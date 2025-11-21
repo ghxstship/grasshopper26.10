@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { updateArtistSchema } from '@/lib/validations/events';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
+import { prisma } from '@/lib/prisma';
 
 
 

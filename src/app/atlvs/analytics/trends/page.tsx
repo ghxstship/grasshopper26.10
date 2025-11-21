@@ -12,7 +12,7 @@ import { useAnalytics } from '@/lib/hooks/atlvs/useAnalytics';
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/analytics/trends
 
 export default function TrendsPage() {
-  const { data: analyticsData, isLoading } = useAnalytics();
+  const { isLoading } = useAnalytics();
   
   if (isLoading) {
     return (

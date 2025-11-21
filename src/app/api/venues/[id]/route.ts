@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { updateVenueSchema } from '@/lib/validations/events';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
 import { VenuesService } from '@/lib/services/venues/id.service';
+import { prisma } from '@/lib/prisma';
 
 
 

@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { verifyWebhookSignature } from '@/lib/webhook-utils';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { errors } from "@/lib/api/errors";
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { errors } from '@/lib/api/errors';
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/n8n/advancing.service';
 
@@ -81,7 +79,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleAdvancingSubmitted(data: any) {
-  const { requestId, category, priority, submitterId } = data;
+  const { requestId, category: _category, priority: _priority, submitterId: _submitterId } = data;
   
   // Route to appropriate team based on category
   await new WebhooksService().createMany({
@@ -105,7 +103,7 @@ async function handleAdvancingSubmitted(data: any) {
 }
 
 async function handleAdvancingApproved(data: any) {
-  const { requestId, approverId, resources } = data;
+  const { requestId, approverId: _approverId, resources: _resources } = data;
   
   await new WebhooksService().createMany({
     data: [
@@ -128,7 +126,7 @@ async function handleAdvancingApproved(data: any) {
 }
 
 async function handleAdvancingRejected(data: any) {
-  const { requestId, rejectedBy, reason } = data;
+  const { requestId, rejectedBy: _rejectedBy, reason: _reason } = data;
   
   await new WebhooksService().create({
     data: {
@@ -142,7 +140,7 @@ async function handleAdvancingRejected(data: any) {
 }
 
 async function handleAdvancingCompleted(data: any) {
-  const { requestId, completedBy, results } = data;
+  const { requestId, completedBy: _completedBy, results: _results } = data;
   
   await new WebhooksService().createMany({
     data: [

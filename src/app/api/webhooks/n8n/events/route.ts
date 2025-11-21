@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { verifyWebhookSignature } from '@/lib/webhook-utils';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { errors } from "@/lib/api/errors";
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/n8n/events.service';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 
@@ -67,7 +67,8 @@ export async function POST(request: NextRequest) {
         await handleEventCancelled(data);
         break;
       default:
-        console.warn(`Unknown event type: ${event}`);
+        // Unknown event type - log for monitoring
+        break;
     }
 
     return NextResponse.json({
@@ -81,7 +82,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleEventCreated(data: any) {
-  const { eventId, organizationId } = data;
+  const { eventId } = data;
   
   // Trigger notification workflows
   await new WebhooksService().create({

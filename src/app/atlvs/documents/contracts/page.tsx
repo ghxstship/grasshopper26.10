@@ -26,7 +26,7 @@ interface ContractData {
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/documents/contracts
 
 export default function ContractsPage() {
-  const { documents: documents, isLoading, error, refetch } = useDocuments();
+  const { isLoading, error, refetch } = useDocuments();
   // TODO: Replace mock data with actual API data once backend is ready
   // const contracts = documents.filter(doc => doc.type === 'contract');
 

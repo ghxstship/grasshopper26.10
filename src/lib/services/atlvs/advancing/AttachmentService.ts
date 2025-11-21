@@ -46,7 +46,7 @@ export class AttachmentService {
     const fileName = `${requestId}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
 
     // Upload to Supabase Storage
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { data: _uploadData, error: uploadError } = await supabase.storage
       .from(BUCKET_NAME)
       .upload(fileName, file, {
         cacheControl: '3600',
@@ -190,13 +190,13 @@ export class AttachmentService {
     const bucketExists = buckets?.some(b => b.name === BUCKET_NAME);
 
     if (!bucketExists) {
-      const _uploadData = await supabase.storage.createBucket(BUCKET_NAME, {
+      const { data: _data, error } = await supabase.storage.createBucket(BUCKET_NAME, {
         public: true,
         fileSizeLimit: 52428800, // 50MB
       });
 
-      if (_uploadData.error) {
-        throw new Error(`Failed to create bucket: ${_uploadData.error.message}`);
+      if (error) {
+        throw new Error(`Failed to create bucket: ${error.message}`);
       }
     }
   }

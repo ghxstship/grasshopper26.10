@@ -27,8 +27,8 @@ interface ReportField {
 
 export default function CustomReportsPage() {
   const { addToast } = useToast();
-  const { data: existingReports, isLoading: isLoading, error: error } = useReports();
-  const _generateReportMutation = useGenerateReport();
+  useReports(); // Keep hook call for data fetching
+  useGenerateReport(); // Keep hook call for mutations
   
   const [reportName, setReportName] = useState('');
   const [selectedFields, setSelectedFields] = useState<string[]>([]);

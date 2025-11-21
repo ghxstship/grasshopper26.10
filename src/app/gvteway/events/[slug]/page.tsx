@@ -14,7 +14,7 @@ interface EventPageProps {
   };
 }
 
-export default function EventPage({ params: { slug: slug } }: EventPageProps) {
+export default function EventPage({ params: { slug: _slug } }: EventPageProps) {
   const event = {
     title: "Summer Music Festival 2025",
     venue: "Curtis Hixon Waterfront Park",

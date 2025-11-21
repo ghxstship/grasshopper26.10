@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { AssetService } from '@/lib/services/atlvs/asset.service';
-import { rateLimit, getClientIdentifier, validateRequest, requireAuth } from "@/lib/api/middleware";
+import { rateLimit, validateRequest, requireAuth } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError, errors } from '@/lib/api/response';
 

@@ -1,10 +1,10 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { sign } from 'jsonwebtoken';
 import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
+import { prisma } from '@/lib/prisma';
 
 
 
@@ -49,13 +49,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate new JWT access token
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      throw errors.serverError('JWT_SECRET not configured');
+    }
+    
     const accessToken = sign(
       {
         userId: session.user.id,
         email: session.user.email,
         role: session.user.role,
       },
-      process.env.JWT_SECRET || 'fallback-secret',
+      jwtSecret,
       { expiresIn: '15m' }
     );
 

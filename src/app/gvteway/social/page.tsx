@@ -1,9 +1,9 @@
 'use client';
 
 import { DashboardPageTemplate } from '@/components/templates/DashboardPageTemplate';
-import { Users, UserPlus, MessageCircle, Bell, TrendingUp, Heart } from 'lucide-react';
+import { Users, UserPlus, MessageCircle, Bell, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
-import { CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
+import { CardTitle, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
 

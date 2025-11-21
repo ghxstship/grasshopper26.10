@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { AdvancingRequestService } from '@/lib/services/atlvs/advancing/AdvancingRequestService';
 import { Priority } from '@prisma/client';
-import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
+import { z } from 'zod';
+import { prisma } from '@/lib/prisma';
 
 
 const updateRequestSchema = z.object({
@@ -49,16 +47,7 @@ export async function GET(
 
     return NextResponse.json(advancingRequest);
   } catch (error) {
-    console.error('Error fetching advancing request:', error);
-    
-    if (error instanceof Error && error.message === 'Advancing request not found') {
-      return NextResponse.json({ error: 'Request not found' }, { status: 404 });
-    }
-
-    return NextResponse.json(
-      { error: 'Failed to fetch advancing request' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -92,23 +81,7 @@ export async function PATCH(
 
     return NextResponse.json(advancingRequest);
   } catch (error) {
-    console.error('Error updating advancing request:', error);
-    
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid request data', details: error.issues },
-        { status: 400 }
-      );
-    }
-
-    if (error instanceof Error && error.message.includes('Unauthorized')) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
-    }
-
-    return NextResponse.json(
-      { error: 'Failed to update advancing request' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -132,15 +105,6 @@ export async function DELETE(
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error('Error deleting advancing request:', error);
-    
-    if (error instanceof Error && error.message.includes('Unauthorized')) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
-    }
-
-    return NextResponse.json(
-      { error: 'Failed to delete advancing request' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

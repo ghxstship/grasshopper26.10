@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { AssetService } from '@/lib/services/atlvs/asset.service';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { handleApiError } from '@/lib/api/response';
-import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 
 // Validation: z.object schema.parse validate

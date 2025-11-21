@@ -1,12 +1,12 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { successResponse, handleApiError,  } from '@/lib/api/response';
+import { successResponse, handleApiError } from '@/lib/api/response';
 import { getPaginationParams } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { EventsService } from '@/lib/services/events/featured.service';
-import { z } from 'zod';
 import { errors } from '@/lib/api/errors';
+import { prisma } from '@/lib/prisma';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 

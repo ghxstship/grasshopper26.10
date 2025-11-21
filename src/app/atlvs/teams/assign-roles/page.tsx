@@ -14,8 +14,7 @@ import { Select } from '@/components/atoms/Select';
 import { Input } from '@/components/atoms/Input';
 import { Checkbox } from '@/components/atoms/Checkbox';
 import { Button } from '@/components/atoms/Button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
+import { Card, CardContent } from '@/components/atoms/Card';
 import { BodyText } from "@/components/atoms/Typography";
 
 interface TeamMember {
@@ -27,7 +26,7 @@ interface TeamMember {
   avatar?: string;
 }
 
-interface Role {
+interface _Role {
   id: string;
   name: string;
   color: string;

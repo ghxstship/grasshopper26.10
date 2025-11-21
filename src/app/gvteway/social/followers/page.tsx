@@ -1,6 +1,5 @@
 'use client';
 import { ListPageTemplate } from '@/components/templates/ListPageTemplate';
-import { UserPlus } from 'lucide-react';
 import { CardTitle, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';

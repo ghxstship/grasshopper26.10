@@ -1,9 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
 import { MarketplaceIdService } from '@/lib/services/marketplace/id.service';
 

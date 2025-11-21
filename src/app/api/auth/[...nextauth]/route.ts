@@ -2,15 +2,11 @@ import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { prisma } from "@/lib/prisma";
 import { compare } from "bcryptjs";
 import type { NextAuthConfig, Session, User } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import { isLockedOut, recordFailedAttempt, clearFailedAttempts } from "@/lib/security/brute-force";
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { NextAuthService } from "@/lib/services/auth/nextauth.service";
+import { prisma } from '@/lib/prisma';
 
 
 

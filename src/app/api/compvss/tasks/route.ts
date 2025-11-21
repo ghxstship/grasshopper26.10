@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, getPaginationParams, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { createTaskSchema } from '@/lib/validations/tasks';
 import type { Prisma } from '@prisma/client';
 import { CompvssService } from '@/lib/services/compvss/tasks.service';
+import { prisma } from '@/lib/prisma';
 
 
 export async function GET(request: NextRequest) {

@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
-import { compare } from 'bcryptjs';
-import { prisma } from '@/lib/prisma';
 import { loginSchema } from '@/lib/validations/auth';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, rateLimit, getClientIdentifier } from '@/lib/api/middleware';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, rateLimit } from '@/lib/api/middleware';
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { LoginService } from "@/lib/services/auth/login.service";
+import { prisma } from '@/lib/prisma';
+import { getClientIdentifier } from '@/lib/api/middleware';
 
 
 

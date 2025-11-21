@@ -6,7 +6,6 @@ import { ChevronUp, ChevronDown, ChevronsUpDown, Search, Filter, Download, MoreV
 import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
 import { Input } from '@/components/atoms/Input';
-import { BodyTextSmall } from "@/components/atoms/Typography";
 
 export interface DataTableColumn<T> {
   key: keyof T | string;

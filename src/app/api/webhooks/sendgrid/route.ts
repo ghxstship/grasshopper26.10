@@ -4,14 +4,12 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { z } from 'zod';
+import { validateRequest } from '@/lib/api/middleware';
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/sendgrid.service';
 import { errors } from '@/lib/api/errors';
+import { rateLimit, requireAuth } from '@/lib/api/middleware';
+import { RateLimitIdentifiers, RATE_LIMITS } from '@/lib/api/rate-limits';
 
 
 
@@ -82,11 +80,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handleEmailDelivered(event: any) {  
+async function handleEmailDelivered(event: any) { 
   console.log('Email delivered:', event.email);
   
   // Update email status in database
-  const { prisma } = await import('@/lib/prisma');
   await new WebhooksService().create({
     data: {
       action: 'EMAIL_DELIVERED',
@@ -100,11 +97,10 @@ async function handleEmailDelivered(event: any) {
   }).catch((err: unknown) => console.error('Failed to log email delivery:', err));
 }
 
-async function handleEmailOpened(event: any) {  
+async function handleEmailOpened(event: any) { 
   console.log('Email opened:', event.email);
   
   // Track email open in analytics
-  const { prisma } = await import('@/lib/prisma');
   await new WebhooksService().create({
     data: {
       action: 'EMAIL_OPENED',
@@ -119,11 +115,10 @@ async function handleEmailOpened(event: any) {
   }).catch((err: unknown) => console.error('Failed to log email open:', err));
 }
 
-async function handleEmailClicked(event: any) {  
+async function handleEmailClicked(event: any) { 
   console.log('Email link clicked:', event.url);
   
   // Track link click in analytics
-  const { prisma } = await import('@/lib/prisma');
   await new WebhooksService().create({
     data: {
       action: 'EMAIL_CLICKED',
@@ -138,7 +133,7 @@ async function handleEmailClicked(event: any) {
   }).catch((err: unknown) => console.error('Failed to log email click:', err));
 }
 
-async function handleEmailBounced(event: any) {  
+async function handleEmailBounced(event: any) { 
   console.log('Email bounced:', event.email);
   
   // Mark email as invalid in database
@@ -150,7 +145,7 @@ async function handleEmailBounced(event: any) {
   }).catch((err: unknown) => console.error('Failed to mark email as bounced:', err));
 }
 
-async function handleEmailDropped(event: any) {  
+async function handleEmailDropped(event: any) { 
   console.log('Email dropped:', event.email);
   
   // Log dropped email
@@ -167,7 +162,7 @@ async function handleEmailDropped(event: any) {
   }).catch((err: unknown) => console.error('Failed to log dropped email:', err));
 }
 
-async function handleSpamReport(event: any) {  
+async function handleSpamReport(event: any) { 
   console.log('Spam report:', event.email);
   
   // Unsubscribe user from emails
@@ -179,7 +174,7 @@ async function handleSpamReport(event: any) {
   }).catch((err: unknown) => console.error('Failed to unsubscribe user:', err));
 }
 
-async function handleUnsubscribe(event: any) {  
+async function handleUnsubscribe(event: any) { 
   console.log('User unsubscribed:', event.email);
   
   // Update user email preferences

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { OpportunityService } from '@/lib/services/shared/opportunity.service';
-import { createOpportunitySchema, opportunityFiltersSchema,  } from '@/lib/validations/opportunities';
-import { z } from 'zod';
+import { opportunityFiltersSchema, createOpportunitySchema } from '@/lib/validations/opportunities';
+import { handleApiError } from '@/lib/api/response';
 import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { errors } from '@/lib/api/errors';
+import { z } from 'zod';
 
 
 /**
@@ -61,11 +62,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    console.error('Error fetching opportunities:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch opportunities' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
@@ -108,10 +105,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.error('Error creating opportunity:', error);
-    return NextResponse.json(
-      { error: 'Failed to create opportunity' },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }

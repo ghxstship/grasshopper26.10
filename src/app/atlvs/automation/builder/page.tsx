@@ -13,7 +13,7 @@ import { useAutomation } from '@/lib/hooks/atlvs/useAutomation';
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/atlvs/automation/builder
 
 export default function WorkflowBuilderPage() {
-  const { data: automationData, isLoading } = useAutomation();
+  const { isLoading } = useAutomation();
   
   if (isLoading) {
     return (

@@ -1,11 +1,10 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError } from '@/lib/api/response';
-import { validateRequest, requireAuth, getPaginationParams } from '@/lib/api/middleware';
+import { validateRequest, requireAuth, getPaginationParams, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import type { Prisma } from '@prisma/client';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { UsersService } from "@/lib/services/search/users.service";
+import { prisma } from '@/lib/prisma';
+import { UsersService as _UsersService } from "@/lib/services/search/users.service";
 import { errors } from '@/lib/api/errors';
 
 

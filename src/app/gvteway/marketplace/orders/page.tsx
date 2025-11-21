@@ -1,6 +1,5 @@
 'use client';
 import { ListPageTemplate } from '@/components/templates/ListPageTemplate';
-import { Package } from 'lucide-react';
 import { CardTitle, Metadata } from '@/components/atoms/Typography';
 import { Badge } from '@/components/atoms/Badge';
 

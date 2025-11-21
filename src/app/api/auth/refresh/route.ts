@@ -1,13 +1,12 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { successResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody,  } from '@/lib/api/middleware';
-import { z } from 'zod';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody } from '@/lib/api/middleware';
 import jwt from 'jsonwebtoken';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { RefreshService } from "@/lib/services/auth/refresh.service";
+import { z } from 'zod';
+import { prisma } from '@/lib/prisma';
 
 
 
@@ -16,14 +15,24 @@ const refreshTokenSchema = z.object({
   refreshToken: z.string().min(1),
 });
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-key';
 const ACCESS_TOKEN_EXPIRY = '15m'; // 15 minutes
 const REFRESH_TOKEN_EXPIRY = '7d'; // 7 days
+
+function getJWTSecrets() {
+  const JWT_SECRET = process.env.JWT_SECRET;
+  const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
+  
+  if (!JWT_SECRET || !JWT_REFRESH_SECRET) {
+    throw new Error('JWT_SECRET and JWT_REFRESH_SECRET must be configured');
+  }
+  
+  return { JWT_SECRET, JWT_REFRESH_SECRET };
+}
 
 // POST /api/auth/refresh - Refresh access token
 export async function POST(request: NextRequest) {
   try {
+    const { JWT_SECRET, JWT_REFRESH_SECRET } = getJWTSecrets();
     const context = await validateRequest(request);
     requireAuth(context);
 

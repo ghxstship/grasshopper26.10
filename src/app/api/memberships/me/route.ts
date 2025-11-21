@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { subscribeMembershipSchema, cancelMembershipSchema } from '@/lib/validations/memberships';
-import { successResponse, createdResponse, handleApiError, errors,  } from '@/lib/api/response';
-import { parseBody, validateRequest, requireAuth,  } from '@/lib/api/middleware';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { parseBody, validateRequest, requireAuth } from '@/lib/api/middleware';
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { MembershipsService } from '@/lib/services/memberships/me.service';
+import { prisma } from '@/lib/prisma';
 
 
 

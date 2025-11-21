@@ -1,7 +1,7 @@
 'use client';
 
 import { DashboardPageTemplate } from '@/components/templates/DashboardPageTemplate';
-import { User, Bell, Lock, CreditCard, Shield, HelpCircle } from 'lucide-react';
+import { User, Bell, Lock, CreditCard, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { CardTitle, BodyText } from '@/components/atoms/Typography';
 

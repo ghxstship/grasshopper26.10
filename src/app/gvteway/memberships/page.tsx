@@ -3,7 +3,7 @@
 import { ListPageTemplate } from '@/components/templates/ListPageTemplate';
 import { Crown, Star, Zap, Check } from 'lucide-react';
 import Link from 'next/link';
-import { SectionHeader, CardTitle, BodyText, Metadata } from '@/components/atoms/Typography';
+import { SectionHeader, BodyText, Metadata } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';
 

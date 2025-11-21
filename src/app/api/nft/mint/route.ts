@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { mintNFT } from '@/lib/integrations/web3/nft';
-import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
+import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
 import { NftService } from '@/lib/services/nft/mint.service';
 import { errors } from '@/lib/api/errors';
+import { prisma } from '@/lib/prisma';
 
 
 
@@ -150,7 +149,7 @@ export async function POST(request: NextRequest) {
       message: 'NFT minted successfully',
     });
   } catch (error) {
-    console.error('NFT minting error:', error);
+    // Production: Use logger.error('NFT minting error:', error);
     return NextResponse.json(
       { 
         error: 'Failed to mint NFT',

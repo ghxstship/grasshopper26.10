@@ -6,8 +6,7 @@ import { ContentLayout} from '@/components/templates/ContentLayout';
 import { Card, CardContent} from '@/components/atoms/Card';
 import { Button} from '@/components/atoms/Button';
 import { SearchBar} from '@/components/molecules/SearchBar';
-import { BodyText, BodyTextSmall, SubsectionHeader,
- Metadata} from '@/components/atoms/Typography';
+import { BodyTextSmall, SubsectionHeader, Metadata} from '@/components/atoms/Typography';
 import { Grid,
  List,
  Users,

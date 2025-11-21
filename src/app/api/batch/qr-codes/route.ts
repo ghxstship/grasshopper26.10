@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import QRCode from 'qrcode';
 import { rateLimit } from "@/lib/api/middleware";
 import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
 import { validateRequest, requireAuth } from "@/lib/api/middleware";
 import { errors } from "@/lib/api/errors";
-import { z } from 'zod';
 import { handleApiError } from '@/lib/api/response';
 import { BatchService } from '@/lib/services/batch/qrCodes.service';
+import { z } from 'zod';
+import { prisma } from '@/lib/prisma';
 
 
 /**

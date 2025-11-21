@@ -12,8 +12,7 @@ import { Input } from '@/components/atoms/Input';
 import { Select } from '@/components/atoms/Select';
 import { FormField } from '@/components/molecules/FormField';
 import { Button } from '@/components/atoms/Button';
-import { Card, CardHeader, CardTitle } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
+import { Card, CardHeader } from '@/components/atoms/Card';
 import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 import { BodyText, HeroTitle, SectionHeader, SubsectionHeader } from "@/components/atoms/Typography";
 

@@ -84,8 +84,8 @@ export default function TasksListPage() {
   const { data: tasksData, isLoading, error, refetch } = useTasks() as any;
   const tasks = tasksData?.tasks || [];
   const [searchQuery, setSearchQuery] = useState('');
-  const [_statusFilter, setStatusFilter] = useState<string>('all');
-  const [_priorityFilter, setPriorityFilter] = useState<string>('all');
+  const [_statusFilter] = useState<string>('all');
+  const [_priorityFilter] = useState<string>('all');
 
   if (isLoading) {
     return (

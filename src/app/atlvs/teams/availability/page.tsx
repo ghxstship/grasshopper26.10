@@ -6,8 +6,6 @@ export const runtime = 'edge';
 import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
 import { ContentLayout } from '@/components/templates/ContentLayout';
 import { CheckCircle, XCircle, Clock, Calendar, Loader2, AlertCircle } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
 import { useTeams } from '@/lib/hooks/atlvs/useTeams';
 import { SectionHeader } from "@/components/atoms/Typography";
 

@@ -19,7 +19,7 @@ import { BodyText, SectionHeader } from "@/components/atoms/Typography";
 // This component calls: /Users/julianclarkson/Documents/Grasshopper26.10/api/compvss/team/directory
 
 export default function TeamDirectoryPage() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
   const { data: teamData, isLoading, error, refetch } = useTeamMembers();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const members = teamData?.members || [];

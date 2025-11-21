@@ -4,10 +4,9 @@ import { measureAsync } from '@/lib/performance/monitoring';
 import { withCache, CACHE_TTL, CACHE_PREFIX } from '@/lib/performance/cache';
 import { addCacheHeaders } from '@/lib/performance/compression';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
-import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { errors , handleApiError } from '@/lib/api/response';
 import { z } from 'zod';
-import { prisma } from '@/lib/prisma';
+import { RateLimitIdentifiers, RATE_LIMITS } from '@/lib/api/rate-limits';
 
 const eventIdSchema = z.object({
   eventId: z.string().cuid(),

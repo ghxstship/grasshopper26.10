@@ -94,7 +94,7 @@ export default function ProjectDetailPage() {
   const projectId = params.id as string;
   const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'budget' | 'team' | 'files'>('overview');
   
-  const { data: projectData, isLoading, error, refetch } = useProject(projectId);
+  const { isLoading, error, refetch } = useProject(projectId);
   const { data: timelineData } = useProjectTimeline(projectId);
   
   // Transform timeline data to Gantt tasks

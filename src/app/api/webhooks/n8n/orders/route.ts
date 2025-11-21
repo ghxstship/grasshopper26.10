@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { verifyWebhookSignature } from '@/lib/webhook-utils';
-import { rateLimit, getClientIdentifier } from "@/lib/api/middleware";
-import { RATE_LIMITS, RateLimitIdentifiers } from "@/lib/api/rate-limits";
-import { validateRequest, requireAuth } from "@/lib/api/middleware";
-import { errors } from "@/lib/api/errors";
+import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
+import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
+import { errors } from '@/lib/api/errors';
 import { handleApiError } from '@/lib/api/response';
 import { WebhooksService } from '@/lib/services/webhooks/n8n/orders.service';
 
@@ -81,7 +79,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleOrderCreated(data: any) {
-  const { orderId, userId } = data;
+  const { orderId, userId: _userId } = data;
   
   // Start abandoned cart timer
   await new WebhooksService().create({
@@ -97,7 +95,7 @@ async function handleOrderCreated(data: any) {
 }
 
 async function handleOrderCompleted(data: any) {
-  const { orderId, userId, items, total } = data;
+  const { orderId, userId: _userId, items: _items, total: _total } = data;
   
   // Trigger fulfillment workflows
   await new WebhooksService().createMany({
@@ -140,7 +138,7 @@ async function handleOrderCompleted(data: any) {
 }
 
 async function handleOrderFailed(data: any) {
-  const { orderId, userId, errorCode, errorMessage } = data;
+  const { orderId, userId: _userId, errorCode: _errorCode, errorMessage: _errorMessage } = data;
   
   await new WebhooksService().create({
     data: {
@@ -154,7 +152,7 @@ async function handleOrderFailed(data: any) {
 }
 
 async function handleOrderRefunded(data: any) {
-  const { orderId, refundAmount, reason } = data;
+  const { orderId, refundAmount: _refundAmount, reason: _reason } = data;
   
   await new WebhooksService().create({
     data: {

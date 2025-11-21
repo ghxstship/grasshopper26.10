@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth } from '@/lib/api/middleware';
 import { TicketsService } from '@/lib/services/tickets/id/validate.service';
+import { prisma } from '@/lib/prisma';
 
 
 
