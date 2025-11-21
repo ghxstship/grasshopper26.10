@@ -5,7 +5,7 @@
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { auth } from '@/lib/auth';
+import { authEdge as auth } from '@/lib/auth-edge';
 import { hasEventRolePlatformAccess } from '@/lib/rbac/event-roles';
 
 // Define protected route patterns
@@ -182,3 +182,6 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };
+
+// Explicitly mark as edge runtime
+export const runtime = 'edge';

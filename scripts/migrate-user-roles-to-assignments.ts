@@ -11,7 +11,7 @@ import { Role } from '../src/lib/rbac/roles';
 const prisma = new PrismaClient();
 
 // Mapping from UserRole to Role
-const userRoleToRoleMap: Record<UserRole, Role> = {
+const userRoleToRoleMap: Partial<Record<UserRole, Role>> = {
   // Legend Roles
   LEGEND_SUPER_ADMIN: Role.LEGEND_SUPER_ADMIN,
   LEGEND_ADMIN: Role.LEGEND_ADMIN,
