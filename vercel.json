@@ -1,0 +1,10 @@
+{
+  "buildCommand": "next build",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "maxDuration": 60
+    }
+  }
+}
