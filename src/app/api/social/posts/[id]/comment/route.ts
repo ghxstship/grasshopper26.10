@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
@@ -14,6 +14,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -34,7 +35,7 @@ export async function POST(
 
     // Verify post exists
     const post = await prisma.socialPost.findUnique({
-      where: { id: id },
+      where: { id },
     });
 
     if (!post) {

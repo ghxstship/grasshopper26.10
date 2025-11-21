@@ -33,7 +33,7 @@ export async function GET(
         include: {
           venue: { select: { name: true, city: true, state: true } },
           ticketTypes: {
-            select: { price: true, available: true },
+            select: { price: true, quantity: true },
             orderBy: { price: 'asc' },
             take: 1,
           },

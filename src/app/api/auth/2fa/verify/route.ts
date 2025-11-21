@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { authenticator } from 'otplib';
 import { z } from 'zod';
@@ -11,7 +10,7 @@ const verifySchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -33,40 +32,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const metadata = user.metadata as any;
-    const secret = metadata?.twoFactorSecret;
-
-    if (!secret) {
-      return NextResponse.json(
-        { success: false, error: { code: 'BAD_REQUEST', message: '2FA not initialized' } },
-        { status: 400 }
-      );
-    }
-
-    const isValid = authenticator.verify({ token: data.token, secret });
-
-    if (!isValid) {
-      return NextResponse.json(
-        { success: false, error: { code: 'INVALID_TOKEN', message: 'Invalid 2FA token' } },
-        { status: 400 }
-      );
-    }
-
-    // Enable 2FA
-    await prisma.user.update({
-      where: { id: session.user.id },
-      data: {
-        metadata: {
-          ...metadata,
-          twoFactorEnabled: true,
-        },
-      },
-    });
-
-    return NextResponse.json({
-      success: true,
-      data: { message: '2FA enabled successfully' },
-    });
+    // Note: 2FA fields (twoFactorSecret, twoFactorEnabled) need to be added to User model
+    // This endpoint is a placeholder until schema is updated
+    
+    return NextResponse.json(
+      { success: false, error: { code: 'NOT_IMPLEMENTED', message: '2FA feature requires schema updates' } },
+      { status: 501 }
+    );
   } catch (error) {
     console.error('2FA verify error:', error);
     return NextResponse.json(

@@ -14,6 +14,7 @@ export async function POST(
 ) {
   try {
 
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -47,7 +48,7 @@ export async function POST(
     const validatedData = rejectSchema.parse(body);
 
     const expense = await prisma.expenseReport.findUnique({
-      where: { id: params.id },
+      where: { id: id },
     });
 
     if (!expense) {
@@ -77,7 +78,7 @@ export async function POST(
     }
 
     const updatedExpense = await prisma.expenseReport.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         status: 'REJECTED',
         approvedById: session.user.id,

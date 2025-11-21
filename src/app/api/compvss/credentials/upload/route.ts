@@ -45,12 +45,13 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { type, fileUrl, metadata } = body;
+    const { type, name, fileUrl, metadata } = body;
 
     const credential = await prisma.credential.create({
       data: {
         userId: context.userId,
         type,
+        name: metadata?.name || `${type} Credential`,
         fileUrl,
         metadata,
         verified: false,

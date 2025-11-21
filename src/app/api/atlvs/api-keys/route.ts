@@ -1,19 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
-import { randomBytes } from 'crypto';
+import { randomBytes, createHash } from 'crypto';
 
 const createKeySchema = z.object({
   name: z.string(),
-  permissions: z.array(z.string()).default([]),
   expiresAt: z.string().optional(),
 });
 
 export async function GET(_request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -26,8 +24,7 @@ export async function GET(_request: NextRequest) {
       select: {
         id: true,
         name: true,
-        key: true,
-        permissions: true,
+        keyPrefix: true,
         lastUsedAt: true,
         expiresAt: true,
         createdAt: true,
@@ -50,7 +47,7 @@ export async function GET(_request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -62,19 +59,24 @@ export async function POST(request: NextRequest) {
     const data = createKeySchema.parse(body);
 
     const key = `ghxst_${randomBytes(32).toString('hex')}`;
+    const keyPrefix = key.substring(0, 12);
+    const keyHash = createHash('sha256').update(key).digest('hex');
 
     const apiKey = await prisma.apiKey.create({
       data: {
         userId: session.user.id,
         name: data.name,
-        key,
-        permissions: data.permissions,
+        keyPrefix,
+        keyHash,
         expiresAt: data.expiresAt ? new Date(data.expiresAt) : null,
       },
     });
 
+    // Return the full key only once during creation
+    const apiKeyWithKey = { ...apiKey, key };
+
     return NextResponse.json(
-      { success: true, data: { apiKey } },
+      { success: true, data: { apiKey: apiKeyWithKey } },
       { status: 201 }
     );
   } catch (error) {
@@ -88,7 +90,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },

@@ -13,6 +13,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -26,7 +27,7 @@ export async function POST(
     const data = assignSchema.parse(body);
 
     const task = await prisma.task.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         assigneeId: data.assigneeId,
       },

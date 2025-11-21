@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
@@ -14,6 +14,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -24,7 +25,7 @@ export async function GET(
     }
 
     const members = await prisma.teamMember.findMany({
-      where: { teamId: params.id },
+      where: { teamId: id },
       include: {
         user: {
           select: {
@@ -56,6 +57,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -71,7 +73,7 @@ export async function POST(
     const existing = await prisma.teamMember.findUnique({
       where: {
         teamId_userId: {
-          teamId: params.id,
+          teamId: id,
           userId: data.userId,
         },
       },
@@ -86,7 +88,7 @@ export async function POST(
 
     const member = await prisma.teamMember.create({
       data: {
-        teamId: params.id,
+        teamId: id,
         userId: data.userId,
         role: data.role,
       },
@@ -127,6 +129,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -149,7 +152,7 @@ export async function DELETE(
     await prisma.teamMember.delete({
       where: {
         teamId_userId: {
-          teamId: params.id,
+          teamId: id,
           userId,
         },
       },

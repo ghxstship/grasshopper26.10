@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
@@ -11,7 +10,7 @@ const redeemSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -22,7 +21,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const data = redeemSchema.parse(body);
 
-    const loyalty = await prisma.loyaltyAccount.findUnique({
+    const loyalty = await prisma.loyaltyPoints.findUnique({
       where: { userId: session.user.id },
     });
 
@@ -34,19 +33,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Deduct points and create transaction
+    const newBalance = loyalty.points - data.points;
     const [updatedLoyalty, transaction] = await prisma.$transaction([
-      prisma.loyaltyAccount.update({
+      prisma.loyaltyPoints.update({
         where: { userId: session.user.id },
         data: {
-          points: { decrement: data.points },
+          points: newBalance,
         },
       }),
       prisma.loyaltyTransaction.create({
         data: {
-          accountId: loyalty.id,
-          type: 'REDEMPTION',
+          userId: session.user.id,
+          type: 'REDEEMED',
           points: -data.points,
-          description: `Redeemed ${data.points} points for reward`,
+          reason: `Redeemed ${data.points} points for reward`,
+          balanceAfter: newBalance,
           metadata: { rewardId: data.rewardId },
         },
       }),

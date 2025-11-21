@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
@@ -16,7 +15,7 @@ const createVendorSchema = z.object({
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -50,7 +49,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -64,13 +63,15 @@ export async function POST(request: NextRequest) {
     const vendor = await prisma.vendor.create({
       data: {
         name: data.name,
-        email: data.email,
-        phone: data.phone,
-        website: data.website,
-        category: data.category,
+        type: data.category || 'OTHER',
+        contact: {
+          email: data.email,
+          phone: data.phone,
+          website: data.website,
+        },
         address: data.address,
-        notes: data.notes,
-        status: 'ACTIVE',
+        metadata: data.notes ? { notes: data.notes } : undefined,
+        status: 'active',
       },
     });
 

@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json({ success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } }, { status: 401 });
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     const body = await request.json();
 
     const workflow = await prisma.n8NWorkflow.findUnique({
-      where: { id: params.id },
+      where: { id: id },
     });
 
     if (!workflow) {
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
     const execution = await prisma.n8NExecution.create({
       data: {
-        workflowId: params.id,
+        workflowId: id,
         executionId: `exec_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         status: 'running',
         mode: 'manual',

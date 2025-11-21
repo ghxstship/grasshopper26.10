@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function GET(_request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -21,7 +20,7 @@ export async function GET(_request: NextRequest) {
         take: 10,
       }),
       prisma.ticket.count({ where: { userId: session.user.id } }),
-      prisma.loyaltyAccount.findUnique({ where: { userId: session.user.id } }),
+      prisma.loyaltyPoints.findUnique({ where: { userId: session.user.id } }),
       prisma.wishlist.count({ where: { userId: session.user.id } }),
     ]);
 

@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
         ticketTypes: {
           select: {
             price: true,
-            available: true,
+            quantity: true,
           },
           orderBy: { price: 'asc' },
           take: 1,

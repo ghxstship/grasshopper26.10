@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function GET(
@@ -8,7 +7,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -16,38 +15,11 @@ export async function GET(
       );
     }
 
-    const { id } = await params;
-    const message = await prisma.message.findUnique({
-      where: { id },
-      include: {
-        sender: { select: { id: true, name: true, image: true } },
-        recipient: { select: { id: true, name: true, image: true } },
-      },
-    });
-
-    if (!message) {
-      return NextResponse.json(
-        { success: false, error: { code: 'NOT_FOUND', message: 'Message not found' } },
-        { status: 404 }
-      );
-    }
-
-    if (message.senderId !== session.user.id && message.recipientId !== session.user.id) {
-      return NextResponse.json(
-        { success: false, error: { code: 'FORBIDDEN', message: 'Access denied' } },
-        { status: 403 }
-      );
-    }
-
-    // Mark as read if recipient
-    if (message.recipientId === session.user.id && !message.read) {
-      await prisma.message.update({
-        where: { id },
-        data: { read: true, readAt: new Date() },
-      });
-    }
-
-    return NextResponse.json({ success: true, data: { message } });
+    // TODO: Message model not implemented in Prisma schema
+    return NextResponse.json(
+      { success: false, error: { code: 'NOT_IMPLEMENTED', message: 'Messaging not implemented' } },
+      { status: 501 }
+    );
   } catch (error) {
     console.error('Message fetch error:', error);
     return NextResponse.json(

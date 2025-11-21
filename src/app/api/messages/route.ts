@@ -1,18 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
-import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
+import { auth } from '@/lib/auth';
 
-const sendMessageSchema = z.object({
-  recipientId: z.string(),
-  content: z.string().min(1).max(5000),
-  threadId: z.string().optional(),
-});
-
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -20,45 +11,12 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const { searchParams } = new URL(request.url);
-    const threadId = searchParams.get('threadId');
-
-    if (threadId) {
-      const messages = await prisma.message.findMany({
-        where: {
-          threadId,
-          OR: [
-            { senderId: session.user.id },
-            { recipientId: session.user.id },
-          ],
-        },
-        include: {
-          sender: { select: { id: true, name: true, image: true } },
-          recipient: { select: { id: true, name: true, image: true } },
-        },
-        orderBy: { createdAt: 'asc' },
-      });
-
-      return NextResponse.json({ success: true, data: { messages } });
-    }
-
-    // Get all threads
-    const messages = await prisma.message.findMany({
-      where: {
-        OR: [
-          { senderId: session.user.id },
-          { recipientId: session.user.id },
-        ],
-      },
-      include: {
-        sender: { select: { id: true, name: true, image: true } },
-        recipient: { select: { id: true, name: true, image: true } },
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 50,
-    });
-
-    return NextResponse.json({ success: true, data: { messages } });
+    // TODO: Message model not yet implemented in Prisma schema
+    // This endpoint requires the Message model to be added to schema.prisma
+    return NextResponse.json(
+      { success: false, error: { code: 'NOT_IMPLEMENTED', message: 'Messaging feature not yet implemented' } },
+      { status: 501 }
+    );
   } catch (error) {
     console.error('Messages fetch error:', error);
     return NextResponse.json(
@@ -68,9 +26,9 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -78,38 +36,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
-    const data = sendMessageSchema.parse(body);
-
-    const threadId = data.threadId || `thread_${Date.now()}_${Math.random().toString(36).substring(7)}`;
-
-    const message = await prisma.message.create({
-      data: {
-        senderId: session.user.id,
-        recipientId: data.recipientId,
-        content: data.content,
-        threadId,
-        read: false,
-      },
-      include: {
-        sender: { select: { id: true, name: true, image: true } },
-        recipient: { select: { id: true, name: true, image: true } },
-      },
-    });
-
-    // Create notification
-    await prisma.notification.create({
-      data: {
-        userId: data.recipientId,
-        type: 'MESSAGE',
-        title: 'New Message',
-        message: `${session.user.name} sent you a message`,
-        actionUrl: `/messages?threadId=${threadId}`,
-        read: false,
-      },
-    });
-
-    return NextResponse.json({ success: true, data: { message } }, { status: 201 });
+    // TODO: Message model not yet implemented in Prisma schema
+    return NextResponse.json(
+      { success: false, error: { code: 'NOT_IMPLEMENTED', message: 'Messaging feature not yet implemented' } },
+      { status: 501 }
+    );
   } catch (error) {
     console.error('Send message error:', error);
     return NextResponse.json(

@@ -37,7 +37,8 @@ export async function DELETE(_request: NextRequest, { params }: { params: Promis
       return NextResponse.json({ success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } }, { status: 401 });
     }
 
-    await prisma.document.delete({ where: { id: params.id } });
+    const { id } = await params;
+    await prisma.document.delete({ where: { id } });
     return NextResponse.json({ success: true, data: { message: 'Document deleted' } });
   } catch (error) {
     console.error('Document deletion error:', error);

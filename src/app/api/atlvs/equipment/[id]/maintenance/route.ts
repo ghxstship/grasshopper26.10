@@ -17,6 +17,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -27,7 +28,7 @@ export async function GET(
     }
 
     const logs = await prisma.maintenanceLog.findMany({
-      where: { equipmentId: params.id },
+      where: { equipmentId: id },
       orderBy: { performedAt: 'desc' },
     });
 
@@ -49,6 +50,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -63,7 +65,7 @@ export async function POST(
 
     const log = await prisma.maintenanceLog.create({
       data: {
-        equipmentId: params.id,
+        equipmentId: id,
         type: data.type,
         description: data.description,
         performedBy: data.performedBy,

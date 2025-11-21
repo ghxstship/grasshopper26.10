@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
       select: {
         id: true,
         name: true,
-        lastUsed: true,
+        lastUsedAt: true,
         createdAt: true,
       },
     });

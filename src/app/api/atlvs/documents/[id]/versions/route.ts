@@ -5,13 +5,14 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json({ success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } }, { status: 401 });
     }
 
     const versions = await prisma.documentVersion.findMany({
-      where: { documentId: params.id },
+      where: { documentId: id },
       orderBy: { version: 'desc' },
     });
 

@@ -17,6 +17,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -27,7 +28,7 @@ export async function GET(
     }
 
     const phases = await prisma.projectPhase.findMany({
-      where: { projectId: params.id },
+      where: { projectId: id },
       orderBy: { order: 'asc' },
     });
 
@@ -49,6 +50,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -63,7 +65,7 @@ export async function POST(
 
     const phase = await prisma.projectPhase.create({
       data: {
-        projectId: params.id,
+        projectId: id,
         name: data.name,
         description: data.description,
         order: data.order,

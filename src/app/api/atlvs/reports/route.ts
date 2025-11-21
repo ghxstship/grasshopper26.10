@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
-import { authConfig } from '@/app/api/auth/[...nextauth]/route';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 const createReportSchema = z.object({
   name: z.string(),
   type: z.enum(['PROJECT', 'BUDGET', 'TEAM', 'ADVANCING', 'CUSTOM']),
-  filters: z.record(z.any()).optional(),
+  filters: z.record(z.string(), z.any()).optional(),
   schedule: z.string().optional(),
 });
 
 export async function GET(_request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -22,7 +21,6 @@ export async function GET(_request: NextRequest) {
     }
 
     const reports = await prisma.report.findMany({
-      where: { createdById: session.user.id },
       orderBy: { createdAt: 'desc' },
     });
 
@@ -41,7 +39,7 @@ export async function GET(_request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: { code: 'UNAUTHORIZED', message: 'Authentication required' } },
@@ -56,9 +54,9 @@ export async function POST(request: NextRequest) {
       data: {
         name: data.name,
         type: data.type,
-        filters: data.filters || {},
+        query: data.filters || {},
         schedule: data.schedule,
-        createdById: session.user.id,
+        recipients: [],
       },
     });
 

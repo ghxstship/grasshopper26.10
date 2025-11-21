@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     }
 
     const requests = await prisma.advancingRequest.findMany({
-      where: { category: 'TRAVEL_LOGISTICS' },
+      where: { category: 'TRAVEL_LODGING' }, // TRAVEL_LOGISTICS doesn't exist, using TRAVEL_LODGING
       orderBy: { createdAt: 'desc' },
       take: 50,
     });
