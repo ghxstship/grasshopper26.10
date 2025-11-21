@@ -28,9 +28,8 @@ export default function CertificationsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/credentials/certifications');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,29 @@ export default function CertificationsPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {data?.certifications && data.certifications.map((cert: any) => (
+            <Card key={cert.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{cert.name}</CardTitle>
+                <CardDescription>{cert.issuer}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">Issued: {new Date(cert.issuedDate).toLocaleDateString()}</Body>
+                {cert.expiresDate && (
+                  <Body className="text-sm">Expires: {new Date(cert.expiresDate).toLocaleDateString()}</Body>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.certifications || data.certifications.length === 0) && (
+            <Card variant="compvss" className="col-span-full">
+              <CardContent className="p-12 text-center">
+                <Body className="text-gray-500">No certifications on file</Body>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
 
       <Footer />

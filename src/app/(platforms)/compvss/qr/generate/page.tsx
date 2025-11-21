@@ -28,9 +28,8 @@ export default function GenerateQRCodePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/qr/templates');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,16 @@ export default function GenerateQRCodePage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Generate QR Code</CardTitle>
+            <CardDescription>Create new QR codes</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <form className="space-y-4">
+              <div><Body className="font-medium mb-2">QR Type</Body><select className="w-full border rounded p-2">{data?.types && data.types.map((type: string) => <option key={type}>{type}</option>)}</select></div>
+              <div><Body className="font-medium mb-2">Label</Body><input type="text" className="w-full border rounded p-2" placeholder="Enter label" /></div>
+              <div><Body className="font-medium mb-2">Data</Body><textarea className="w-full border rounded p-2" rows={3} placeholder="Enter data to encode" /></div>
+              <Button variant="compvss" className="w-full">Generate QR Code</Button>
+            </form>
           </CardContent>
         </Card>
       </div>

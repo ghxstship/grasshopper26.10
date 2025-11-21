@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
       take: 50,
     });
 
-    return NextResponse.json(items);
+    return NextResponse.json({ products: items });
   } catch (error) {
     return handleApiError(error);
   }

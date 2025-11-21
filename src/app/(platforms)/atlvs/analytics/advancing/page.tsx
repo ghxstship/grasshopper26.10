@@ -5,19 +5,24 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
-import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { H1, Body, Display } from '@/components/ui-rebuild/atoms/Typography';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
+interface AdvancingMetrics {
+  totalRequests: number;
+  approved: number;
+  pending: number;
+  rejected: number;
+  averageProcessingTime: number;
+}
 
 export default function AdvancingAnalyticsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [metrics, setMetrics] = React.useState<AdvancingMetrics | null>(null);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +33,8 @@ export default function AdvancingAnalyticsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<AdvancingMetrics>('/api/atlvs/analytics/advancing');
+        if (response.data) setMetrics(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -61,21 +65,38 @@ export default function AdvancingAnalyticsPage() {
         <div className="mb-12">
           <H1 className="mb-4">Advancing Analytics</H1>
           <Body className="text-gray-600">
-            Advancing Analytics page content
+            Performance metrics and insights for advancing requests
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        {metrics && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Total Requests</Body>
+                <Display as="div" className="text-4xl">{metrics.totalRequests}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Approved</Body>
+                <Display as="div" className="text-4xl text-green-600">{metrics.approved}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Pending</Body>
+                <Display as="div" className="text-4xl text-yellow-600">{metrics.pending}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Avg Processing Time</Body>
+                <Display as="div" className="text-4xl">{metrics.averageProcessingTime}h</Display>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
 
       <Footer />

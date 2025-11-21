@@ -5,18 +5,28 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import Link from 'next/link';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Team {
+  id: string;
+  name: string;
+  members: number;
+  activeProjects: number;
+  completionRate: number;
+  utilization: number;
+}
+
 export default function TeamAnalyticsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [teams, setTeams] = React.useState<Team[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +38,10 @@ export default function TeamAnalyticsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ teams: Team[] }>('/api/atlvs/analytics/teams');
+        if (response.data?.teams) {
+          setTeams(response.data.teams);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +76,36 @@ export default function TeamAnalyticsPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {teams.map((team) => (
+            <Link key={team.id} href={`/atlvs/team/${team.id}`}>
+              <Card variant="atlvs" className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <CardTitle>{team.name}</CardTitle>
+                  <CardDescription>{team.members} members</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Body className="text-sm text-gray-600">Active Projects</Body>
+                      <Display as="div" className="text-2xl">{team.activeProjects}</Display>
+                    </div>
+                    <div>
+                      <Body className="text-sm text-gray-600">Completion Rate</Body>
+                      <Display as="div" className="text-2xl">{team.completionRate}%</Display>
+                    </div>
+                  </div>
+                  <div>
+                    <Body className="text-sm text-gray-600 mb-2">Utilization: {team.utilization}%</Body>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-green-600 h-2 rounded-full" style={{ width: `${team.utilization}%` }} />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <Footer />

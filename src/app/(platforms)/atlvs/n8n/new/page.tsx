@@ -14,44 +14,8 @@ import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
-export default function NewWorkflowPage() {
-  const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
-        if (token) {
-          apiClient.setAuthToken(token);
-        }
-
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar variant="atlvs" />
-        <div className="flex justify-center items-center py-24">
-          <Spinner size="xl" />
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+export default function NewPage() {
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <div className="min-h-screen bg-white">
@@ -67,13 +31,11 @@ export default function NewWorkflowPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Create Workflow</CardTitle>
+            <CardDescription>Build a new automation workflow</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Button variant="atlvs">Start Building</Button>
           </CardContent>
         </Card>
       </div>

@@ -14,9 +14,20 @@ import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface BudgetReport {
+  id: string;
+  name: string;
+  type: 'MONTHLY' | 'QUARTERLY' | 'ANNUAL' | 'CUSTOM';
+  period: string;
+  totalBudget: number;
+  totalSpent: number;
+  variance: number;
+  createdAt: string;
+}
+
 export default function BudgetReportsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [reports, setReports] = React.useState<BudgetReport[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +39,8 @@ export default function BudgetReportsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ reports: BudgetReport[] }>('/api/atlvs/budgets/reports');
+        if (response.data?.reports) setReports(response.data.reports);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -58,24 +68,57 @@ export default function BudgetReportsPage() {
       <Navbar variant="atlvs" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Budget Reports</H1>
-          <Body className="text-gray-600">
-            Budget Reports page content
-          </Body>
+        <div className="mb-12 flex items-center justify-between">
+          <div>
+            <H1 className="mb-4">Budget Reports</H1>
+            <Body className="text-gray-600">
+              Financial reports and budget analysis
+            </Body>
+          </div>
+          <Button variant="atlvs">Generate Report</Button>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {reports.map((report) => (
+            <Card key={report.id} variant="atlvs">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle>{report.name}</CardTitle>
+                    <CardDescription>{report.type} - {report.period}</CardDescription>
+                  </div>
+                  <Body className="text-sm text-gray-600">
+                    {new Date(report.createdAt).toLocaleDateString()}
+                  </Body>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-4 gap-4">
+                  <div>
+                    <Body className="text-sm text-gray-600">Total Budget</Body>
+                    <Body className="font-semibold text-lg">${report.totalBudget.toLocaleString()}</Body>
+                  </div>
+                  <div>
+                    <Body className="text-sm text-gray-600">Total Spent</Body>
+                    <Body className="font-semibold text-lg">${report.totalSpent.toLocaleString()}</Body>
+                  </div>
+                  <div>
+                    <Body className="text-sm text-gray-600">Variance</Body>
+                    <Body className={`font-semibold text-lg ${report.variance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      ${Math.abs(report.variance).toLocaleString()}
+                    </Body>
+                  </div>
+                  <div>
+                    <Body className="text-sm text-gray-600">Utilization</Body>
+                    <Body className="font-semibold text-lg">
+                      {Math.round((report.totalSpent / report.totalBudget) * 100)}%
+                    </Body>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

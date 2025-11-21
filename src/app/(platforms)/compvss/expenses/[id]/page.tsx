@@ -28,9 +28,8 @@ export default function ExpenseDetailsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get(`/api/compvss/expenses/${params.id}`);
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,17 @@ export default function ExpenseDetailsPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Expense Details</CardTitle>
+            <CardDescription>Expense #{params.id}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.amount && <div><Body className="font-medium">Amount:</Body><Body>${data.amount}</Body></div>}
+              {data?.category && <div><Body className="font-medium">Category:</Body><Body>{data.category}</Body></div>}
+              {data?.date && <div><Body className="font-medium">Date:</Body><Body>{new Date(data.date).toLocaleDateString()}</Body></div>}
+              {data?.status && <div><Body className="font-medium">Status:</Body><Body className="capitalize">{data.status}</Body></div>}
+              {data?.description && <div><Body className="font-medium">Description:</Body><Body>{data.description}</Body></div>}
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -88,7 +88,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         type="button"
         className={cn(
           'inline-flex items-center justify-center px-6 py-3',
-          'font-bebas-neue text-lg tracking-wide',
+          'font-bebas text-lg tracking-wide',
           'transition-all duration-150',
           'border-b-4 -mb-[2px]',
           'focus:outline-none focus:ring-4 focus:ring-black focus:ring-offset-2',

@@ -11,12 +11,22 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { apiClient } from '@/lib/api/client';
+import { FileText } from 'lucide-react';
 
+interface Template {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  usageCount: number;
+  lastUsed: string;
+}
 
 export default function TemplatesPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [templates, setTemplates] = React.useState<Template[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +38,8 @@ export default function TemplatesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ templates: Template[] }>('/api/atlvs/documents/templates');
+        if (response.data?.templates) setTemplates(response.data.templates);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -58,24 +67,39 @@ export default function TemplatesPage() {
       <Navbar variant="atlvs" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Templates</H1>
-          <Body className="text-gray-600">
-            Templates page content
-          </Body>
+        <div className="mb-12 flex items-center justify-between">
+          <div>
+            <H1 className="mb-4">Document Templates</H1>
+            <Body className="text-gray-600">
+              Reusable templates for contracts, forms, and documents
+            </Body>
+          </div>
+          <Button variant="atlvs">Create Template</Button>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {templates.map((template) => (
+            <Card key={template.id} variant="atlvs">
+              <CardHeader>
+                <div className="flex items-start gap-3">
+                  <FileText className="w-5 h-5 mt-1" />
+                  <div className="flex-1">
+                    <CardTitle>{template.name}</CardTitle>
+                    <CardDescription>{template.description}</CardDescription>
+                  </div>
+                  <Badge variant="outline">{template.category}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <Body className="text-sm">Used {template.usageCount} times</Body>
+                  <Body className="text-sm">•</Body>
+                  <Body className="text-sm">Last used {new Date(template.lastUsed).toLocaleDateString()}</Body>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

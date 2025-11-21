@@ -28,9 +28,8 @@ export default function AssignedTasksPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/atlvs/tasks/assigned');
+        if (response.data) setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,11 @@ export default function AssignedTasksPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Assigned Tasks</CardTitle>
+            <CardDescription>Tasks assigned to you</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Body>Assigned tasks</Body>
           </CardContent>
         </Card>
       </div>

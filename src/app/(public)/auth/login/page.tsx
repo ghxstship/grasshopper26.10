@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/atoms/Button';
-import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/atoms/Card';
-import { BodyText, SectionHeader } from '@/components/atoms/Typography';
+import { Button } from '@/components/ui-rebuild/atoms/Button';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
+import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Body, H2 } from '@/components/ui-rebuild/atoms/Typography';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -51,7 +51,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
       <Card variant="default" className="w-full max-w-md">
         <CardHeader>
-          <SectionHeader>Welcome Back</SectionHeader>
+          <H2>Welcome Back</H2>
           <CardDescription>
             Sign in to your GVTEWAY account
           </CardDescription>
@@ -89,7 +89,7 @@ export default function LoginPage() {
             <div className="flex items-center justify-between">
               <label className="flex items-center">
                 <input type="checkbox" className="mr-2" />
-                <BodyText className="text-sm">Remember me</BodyText>
+                <Body className="text-sm">Remember me</Body>
               </label>
               <Link href="/auth/forgot-password" className="text-sm text-green-500 hover:text-green-400">
                 Forgot password?
@@ -98,7 +98,7 @@ export default function LoginPage() {
 
             {error && (
               <div className="p-3 bg-red-500/10 border border-red-500 rounded-md">
-                <BodyText className="text-red-500 text-sm">{error}</BodyText>
+                <Body className="text-red-500 text-sm">{error}</Body>
               </div>
             )}
 
@@ -141,12 +141,12 @@ export default function LoginPage() {
           </div>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <BodyText className="text-sm text-gray-400">
+          <Body className="text-sm text-gray-400">
             Don&apos;t have an account?{' '}
             <Link href="/auth/register" className="text-green-500 hover:text-green-400">
               Sign up
             </Link>
-          </BodyText>
+          </Body>
         </CardFooter>
       </Card>
     </div>

@@ -1,10 +1,12 @@
 /**
  * GVTEWAY Platform Layout
  * Main consumer-facing platform for events and tickets
+ * REQUIRES: Authentication, RBAC (CONSUMER, ORGANIZER, ADMIN, SUPER_ADMIN)
  */
 
 import type { Metadata } from 'next';
 import { GvtewayLayout } from '@/components/templates/GvtewayLayout';
+import { PlatformGuard } from '@/components/auth/PlatformGuard';
 
 export const metadata: Metadata = {
   title: {
@@ -19,5 +21,9 @@ export default function GVTEWAYLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <GvtewayLayout>{children}</GvtewayLayout>;
+  return (
+    <PlatformGuard platform="GVTEWAY">
+      <GvtewayLayout>{children}</GvtewayLayout>
+    </PlatformGuard>
+  );
 }

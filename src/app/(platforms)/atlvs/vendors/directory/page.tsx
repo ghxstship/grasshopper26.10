@@ -28,9 +28,8 @@ export default function VendorDirectoryPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/atlvs/vendors/directory');
+        if (response.data) setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,11 @@ export default function VendorDirectoryPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Vendor Directory</CardTitle>
+            <CardDescription>Browse all vendors</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Body>Vendor directory</Body>
           </CardContent>
         </Card>
       </div>

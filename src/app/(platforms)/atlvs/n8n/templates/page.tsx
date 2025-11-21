@@ -28,9 +28,8 @@ export default function TemplatesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/atlvs/n8n/templates');
+        if (response.data) setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,11 @@ export default function TemplatesPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Workflow Templates</CardTitle>
+            <CardDescription>Pre-built workflow templates</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Body>Template library</Body>
           </CardContent>
         </Card>
       </div>

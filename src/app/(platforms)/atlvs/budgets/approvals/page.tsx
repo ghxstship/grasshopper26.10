@@ -7,16 +7,25 @@
 import * as React from 'react';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Approval {
+  id: string;
+  description: string;
+  amount: number;
+  requestedBy: string;
+  date: string;
+}
+
 export default function ApprovalsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [approvals, setApprovals] = React.useState<Approval[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +37,8 @@ export default function ApprovalsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ approvals: Approval[] }>('/api/atlvs/budgets/approvals');
+        if (response.data?.approvals) setApprovals(response.data.approvals);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +73,26 @@ export default function ApprovalsPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {approvals.map((approval) => (
+            <Card key={approval.id} variant="atlvs">
+              <CardHeader>
+                <CardTitle>{approval.description}</CardTitle>
+                <CardDescription>Requested by: {approval.requestedBy}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex justify-between">
+                  <Body className="font-semibold text-2xl">${approval.amount.toLocaleString()}</Body>
+                  <Body className="text-sm text-gray-600">{new Date(approval.date).toLocaleDateString()}</Body>
+                </div>
+              </CardContent>
+              <CardFooter className="flex gap-3">
+                <Button variant="atlvs" size="sm">Approve</Button>
+                <Button variant="ghost" size="sm">Reject</Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

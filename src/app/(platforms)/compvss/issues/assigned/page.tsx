@@ -28,9 +28,8 @@ export default function AssignedIssuesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/issues/assigned');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,22 @@ export default function AssignedIssuesPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.issues && data.issues.map((issue: any) => (
+            <Card key={issue.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{issue.title}</CardTitle>
+                <CardDescription>#{issue.id} • {issue.priority}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm capitalize">Status: {issue.status}</Body>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.issues || data.issues.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No assigned issues</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

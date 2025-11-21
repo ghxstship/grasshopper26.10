@@ -8,15 +8,25 @@ import * as React from 'react';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
+import Link from 'next/link';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Equipment {
+  id: string;
+  name: string;
+  type: string;
+  status: 'AVAILABLE' | 'IN_USE' | 'MAINTENANCE';
+  location: string;
+}
+
 export default function EquipmentPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [equipment, setEquipment] = React.useState<Equipment[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +38,8 @@ export default function EquipmentPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ equipment: Equipment[] }>('/api/atlvs/assets/equipment');
+        if (response.data?.equipment) setEquipment(response.data.equipment);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +74,26 @@ export default function EquipmentPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {equipment.map((item) => (
+            <Link key={item.id} href={`/atlvs/assets/${item.id}`}>
+              <Card variant="atlvs" className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <CardTitle>{item.name}</CardTitle>
+                      <CardDescription>{item.type}</CardDescription>
+                    </div>
+                    <Badge variant={item.status === 'AVAILABLE' ? 'default' : 'outline'}>{item.status}</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <Body className="text-sm text-gray-600">Location: {item.location}</Body>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <Footer />

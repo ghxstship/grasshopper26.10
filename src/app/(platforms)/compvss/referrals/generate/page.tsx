@@ -28,9 +28,8 @@ export default function GenerateReferralPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/referrals/link-data');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,21 @@ export default function GenerateReferralPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Generate Referral Link</CardTitle>
+            <CardDescription>Share and earn rewards</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.referralLink && (
+                <div className="p-4 bg-gray-50 rounded">
+                  <Body className="text-sm font-medium mb-2">Your Referral Link</Body>
+                  <Body className="text-sm break-all">{data.referralLink}</Body>
+                  <Button variant="compvss" className="w-full mt-2">Copy Link</Button>
+                </div>
+              )}
+              <div><Body className="font-medium">Total Referrals:</Body><Body className="text-2xl">{data?.totalReferrals || 0}</Body></div>
+              <div><Body className="font-medium">Rewards Earned:</Body><Body className="text-2xl">${data?.rewardsEarned || 0}</Body></div>
+            </div>
           </CardContent>
         </Card>
       </div>

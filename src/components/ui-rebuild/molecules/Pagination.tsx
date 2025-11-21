@@ -75,7 +75,7 @@ const Pagination: React.FC<PaginationProps> = ({
           return (
             <span
               key={`ellipsis-${index}`}
-              className="px-3 py-2 font-bebas-neue text-lg"
+              className="px-3 py-2 font-bebas text-lg"
             >
               ...
             </span>

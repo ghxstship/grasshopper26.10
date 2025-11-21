@@ -35,16 +35,13 @@ export async function POST(_request: NextRequest) {
     const qrCode = await QRCode.toDataURL(otpauth);
 
     // Store secret temporarily (not enabled until verified)
-    // Note: twoFactorSecret and twoFactorEnabled fields need to be added to User model in schema.prisma
-    // For now, this is a placeholder - 2FA feature requires schema updates
-    
-    // await prisma.user.update({
-    //   where: { id: session.user.id },
-    //   data: {
-    //     twoFactorSecret: secret,
-    //     twoFactorEnabled: false,
-    //   },
-    // });
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: {
+        twoFactorSecret: secret,
+        twoFactorEnabled: false,
+      },
+    });
 
     return NextResponse.json({
       success: true,

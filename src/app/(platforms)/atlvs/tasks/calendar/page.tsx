@@ -28,9 +28,8 @@ export default function TaskCalendarPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/atlvs/tasks/calendar');
+        if (response.data) setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,11 @@ export default function TaskCalendarPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Task Calendar</CardTitle>
+            <CardDescription>Calendar view of tasks</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Body>Task calendar</Body>
           </CardContent>
         </Card>
       </div>

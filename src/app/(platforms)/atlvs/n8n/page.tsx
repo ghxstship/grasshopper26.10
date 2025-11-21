@@ -11,8 +11,42 @@ import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
+import { apiClient } from '@/lib/api/client';
+import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 
 export default function AtlvsN8NPage() {
+  const [data, setData] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (token) {
+          apiClient.setAuthToken(token);
+        }
+        const response = await apiClient.get<any>('/api/atlvs/n8n');
+        if (response.data) {
+          setData(response.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
   const modules = [
     { title: 'Workflows', description: 'Manage automation workflows', href: '/(rebuild)/atlvs/n8n/workflows', icon: '⚙️' },
     { title: 'Executions', description: 'View execution history', href: '/(rebuild)/atlvs/n8n/executions', icon: '📊' },

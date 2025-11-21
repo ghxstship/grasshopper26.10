@@ -68,7 +68,7 @@ export const designTokens = {
   typography: {
     fonts: {
       display: 'var(--font-anton), Anton, sans-serif',
-      heading: 'var(--font-bebas-neue), "Bebas Neue", sans-serif',
+      heading: 'var(--font-bebas), "Bebas Neue", sans-serif',
       body: 'var(--font-share-tech), "Share Tech", monospace',
       mono: 'var(--font-share-tech-mono), "Share Tech Mono", monospace',
     },

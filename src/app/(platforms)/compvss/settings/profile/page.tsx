@@ -28,9 +28,8 @@ export default function ProfileSettingsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/settings/profile');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,17 @@ export default function ProfileSettingsPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Profile Settings</CardTitle>
+            <CardDescription>Update your profile information</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <form className="space-y-4">
+              <div><Body className="font-medium mb-2">Full Name</Body><input type="text" className="w-full border rounded p-2" defaultValue={data?.name} /></div>
+              <div><Body className="font-medium mb-2">Bio</Body><textarea className="w-full border rounded p-2" rows={3} defaultValue={data?.bio} /></div>
+              <div><Body className="font-medium mb-2">Company</Body><input type="text" className="w-full border rounded p-2" defaultValue={data?.company} /></div>
+              <div><Body className="font-medium mb-2">Role</Body><input type="text" className="w-full border rounded p-2" defaultValue={data?.role} /></div>
+              <Button variant="compvss" className="w-full">Update Profile</Button>
+            </form>
           </CardContent>
         </Card>
       </div>

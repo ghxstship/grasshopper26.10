@@ -28,9 +28,8 @@ export default function SecurityPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/settings/security');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,30 @@ export default function SecurityPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-6">
+          <Card variant="compvss">
+            <CardHeader>
+              <CardTitle>Change Password</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form className="space-y-4">
+                <div><Body className="font-medium mb-2">Current Password</Body><input type="password" className="w-full border rounded p-2" /></div>
+                <div><Body className="font-medium mb-2">New Password</Body><input type="password" className="w-full border rounded p-2" /></div>
+                <div><Body className="font-medium mb-2">Confirm Password</Body><input type="password" className="w-full border rounded p-2" /></div>
+                <Button variant="compvss" className="w-full">Update Password</Button>
+              </form>
+            </CardContent>
+          </Card>
+          <Card variant="compvss">
+            <CardHeader>
+              <CardTitle>Two-Factor Authentication</CardTitle>
+              <CardDescription>{data?.twoFactorEnabled ? 'Enabled' : 'Disabled'}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="compvss" className="w-full">{data?.twoFactorEnabled ? 'Disable' : 'Enable'} 2FA</Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       <Footer />

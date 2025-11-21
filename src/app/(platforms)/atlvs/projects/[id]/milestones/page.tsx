@@ -12,11 +12,12 @@ import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
-
+import { useParams } from 'next/navigation';
 
 export default function MilestonesPage() {
   const [loading, setLoading] = React.useState(true);
   const [data, setData] = React.useState<any>(null);
+  const params = useParams();
 
 
   React.useEffect(() => {
@@ -28,9 +29,8 @@ export default function MilestonesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get(`/api/atlvs/projects/${params.id}/milestones`);
+        if (response.data) setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -39,7 +39,7 @@ export default function MilestonesPage() {
     };
 
     fetchData();
-  }, []);
+  }, [params.id]);
 
   if (loading) {
     return (
@@ -67,13 +67,11 @@ export default function MilestonesPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Project Milestones</CardTitle>
+            <CardDescription>Track project milestones</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Body>Project milestones</Body>
           </CardContent>
         </Card>
       </div>

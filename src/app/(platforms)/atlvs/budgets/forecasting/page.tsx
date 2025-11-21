@@ -14,30 +14,30 @@ import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Forecast {
+  month: string;
+  projected: number;
+  actual: number;
+}
+
 export default function ForecastingPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [forecasts, setForecasts] = React.useState<Forecast[]>([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
-        if (token) {
-          apiClient.setAuthToken(token);
-        }
-
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        if (token) apiClient.setAuthToken(token);
+        const response = await apiClient.get<{ forecasts: Forecast[] }>('/api/atlvs/budgets/forecasting');
+        if (response.data?.forecasts) setForecasts(response.data.forecasts);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -56,28 +56,33 @@ export default function ForecastingPage() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar variant="atlvs" />
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12">
-          <H1 className="mb-4">Forecasting</H1>
-          <Body className="text-gray-600">
-            Forecasting page content
-          </Body>
+          <H1 className="mb-4">Budget Forecasting</H1>
+          <Body className="text-gray-600">Financial projections and forecasts</Body>
         </div>
-
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {forecasts.map((forecast, idx) => (
+            <Card key={idx} variant="atlvs">
+              <CardHeader>
+                <CardTitle>{forecast.month}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Body className="text-sm text-gray-600">Projected</Body>
+                    <Body className="font-semibold">${forecast.projected.toLocaleString()}</Body>
+                  </div>
+                  <div>
+                    <Body className="text-sm text-gray-600">Actual</Body>
+                    <Body className="font-semibold">${forecast.actual.toLocaleString()}</Body>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
-
       <Footer />
     </div>
   );

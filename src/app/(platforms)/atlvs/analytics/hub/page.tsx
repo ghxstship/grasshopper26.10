@@ -5,19 +5,28 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
+import { useRouter } from 'next/navigation';
+import { TrendingUp, BarChart3, PieChart, Activity } from 'lucide-react';
 
+interface AnalyticsCategory {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  path: string;
+}
 
 export default function AnalyticsHubPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [categories, setCategories] = React.useState<AnalyticsCategory[]>([]);
+  const router = useRouter();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +37,8 @@ export default function AnalyticsHubPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ categories: AnalyticsCategory[] }>('/api/atlvs/analytics/hub');
+        if (response.data?.categories) setCategories(response.data.categories);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -40,6 +48,15 @@ export default function AnalyticsHubPage() {
 
     fetchData();
   }, []);
+
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'trending': return <TrendingUp className="w-8 h-8" />;
+      case 'bar': return <BarChart3 className="w-8 h-8" />;
+      case 'pie': return <PieChart className="w-8 h-8" />;
+      default: return <Activity className="w-8 h-8" />;
+    }
+  };
 
   if (loading) {
     return (
@@ -61,21 +78,28 @@ export default function AnalyticsHubPage() {
         <div className="mb-12">
           <H1 className="mb-4">Analytics Hub</H1>
           <Body className="text-gray-600">
-            Analytics Hub page content
+            Comprehensive analytics and reporting dashboard
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((category) => (
+            <Card 
+              key={category.id} 
+              variant="atlvs"
+              className="cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => router.push(category.path)}
+            >
+              <CardContent className="pt-6">
+                <div className="text-green-600 mb-4">
+                  {getIcon(category.icon)}
+                </div>
+                <CardTitle className="mb-2">{category.name}</CardTitle>
+                <Body className="text-gray-600">{category.description}</Body>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

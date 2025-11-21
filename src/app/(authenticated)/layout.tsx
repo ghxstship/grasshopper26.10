@@ -3,25 +3,27 @@
  * Wraps all routes requiring authentication
  */
 
-import type { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AuthenticatedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // TODO: Add authentication check
-  // const session = await getServerSession();
-  // if (!session) {
-  //   redirect('/auth/login');
-  // }
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check for authentication token
+    const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+    
+    if (!token) {
+      // No token found, redirect to login
+      router.push('/auth/login');
+    }
+  }, [router]);
 
   return <>{children}</>;
 }

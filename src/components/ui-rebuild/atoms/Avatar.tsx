@@ -42,7 +42,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             onError={() => setImageError(true)}
           />
         ) : (
-          <span className="font-bebas-neue font-normal text-black uppercase">
+          <span className="font-bebas font-normal text-black uppercase">
             {fallback || '?'}
           </span>
         )}

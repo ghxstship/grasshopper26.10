@@ -32,13 +32,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Note: 2FA fields (twoFactorSecret, twoFactorEnabled) need to be added to User model
-    // This endpoint is a placeholder until schema is updated
-    
-    return NextResponse.json(
-      { success: false, error: { code: 'NOT_IMPLEMENTED', message: '2FA feature requires schema updates' } },
-      { status: 501 }
-    );
+    const secret = user.twoFactorSecret;
+
+    if (!secret) {
+      return NextResponse.json(
+        { success: false, error: { code: 'BAD_REQUEST', message: '2FA not initialized' } },
+        { status: 400 }
+      );
+    }
+
+    const isValid = authenticator.verify({ token: data.token, secret });
+
+    if (!isValid) {
+      return NextResponse.json(
+        { success: false, error: { code: 'INVALID_TOKEN', message: 'Invalid 2FA token' } },
+        { status: 400 }
+      );
+    }
+
+    // Enable 2FA
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: {
+        twoFactorEnabled: true,
+      },
+    });
   } catch (error) {
     console.error('2FA verify error:', error);
     return NextResponse.json(

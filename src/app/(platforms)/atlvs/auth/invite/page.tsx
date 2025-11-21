@@ -5,53 +5,39 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
-export default function AcceptInvitePage() {
-  const [loading, setLoading] = React.useState(true);
+export default function InvitePage() {
+  const [email, setEmail] = React.useState('');
+  const [role, setRole] = React.useState('member');
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
   const [data, setData] = React.useState<any>(null);
 
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
-        if (token) {
-          apiClient.setAuthToken(token);
-        }
-
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar variant="atlvs" />
-        <div className="flex justify-center items-center py-24">
-          <Spinner size="xl" />
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  const handleInvite = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+      if (token) apiClient.setAuthToken(token);
+      await apiClient.post('/api/atlvs/auth/invite', { email, role });
+      setSuccess(true);
+      setEmail('');
+    } catch (error) {
+      console.error('Failed to send invite:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -65,16 +51,31 @@ export default function AcceptInvitePage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
+        <Card variant="atlvs" className="max-w-md mx-auto">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Invite Team Member</CardTitle>
+            <CardDescription>Send an invitation to join your team</CardDescription>
           </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
+          <form onSubmit={handleInvite}>
+            <CardContent className="space-y-4">
+              {success && <div className="p-3 bg-green-50 border-2 border-green-600 text-green-600"><Body>Invitation sent!</Body></div>}
+              <div>
+                <Label htmlFor="email">Email Address</Label>
+                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              </div>
+              <div>
+                <Label htmlFor="role">Role</Label>
+                <select id="role" value={role} onChange={(e) => setRole(e.target.value)} className="w-full p-2 border-2 border-black">
+                  <option value="member">Member</option>
+                  <option value="admin">Admin</option>
+                  <option value="viewer">Viewer</option>
+                </select>
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button variant="atlvs" type="submit" disabled={loading} loading={loading} className="w-full">Send Invitation</Button>
+            </CardFooter>
+          </form>
         </Card>
       </div>
 

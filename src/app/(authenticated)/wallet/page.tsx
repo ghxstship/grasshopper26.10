@@ -6,7 +6,7 @@
 'use client';
 
 import * as React from 'react';
-import { H1, H3, Body, Caption } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, H3, Body, Caption, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Badge } from '@/components/ui-rebuild/atoms/Badge';
@@ -185,9 +185,9 @@ export default function WalletPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-center py-12">
-                  <div className="font-anton text-6xl mb-4">
+                  <Display as="div" className="text-6xl mb-4">
                     {loyalty.reduce((sum, item) => sum + (item.value || 0), 0)}
-                  </div>
+                  </Display>
                   <Body className="text-gray-600">Total Points</Body>
                 </div>
               </CardContent>

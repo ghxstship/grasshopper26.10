@@ -1,26 +1,38 @@
 /**
- * Heavy Equipment Page - UI Rebuild
+ * Heavy Equipment Advancing Page - UI Rebuild
+ * Manage heavy equipment requests (cranes, lifts, generators)
  */
 
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import Link from 'next/link';
+import { H1, Body, Caption } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
+interface EquipmentRequest {
+  id: string;
+  requestNumber: string;
+  equipmentType: string;
+  description: string;
+  status: string;
+  operator: boolean;
+  startDate: string;
+  endDate: string;
+}
 
 export default function HeavyEquipmentPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [requests, setRequests] = React.useState<EquipmentRequest[]>([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const fetchRequests = async () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
@@ -28,17 +40,18 @@ export default function HeavyEquipmentPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ requests: EquipmentRequest[] }>('/api/compvss/advancing/heavy-equipment');
+        if (response.data?.requests) {
+          setRequests(response.data.requests);
+        }
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error('Failed to fetch equipment requests:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchRequests();
   }, []);
 
   if (loading) {
@@ -58,24 +71,57 @@ export default function HeavyEquipmentPage() {
       <Navbar variant="compvss" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Heavy Equipment</H1>
-          <Body className="text-gray-600">
-            Heavy Equipment page content
-          </Body>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <H1 className="mb-2">Heavy Equipment</H1>
+            <Body className="text-gray-600">Cranes, lifts, generators, and machinery requests</Body>
+          </div>
+          <Link href="/compvss/advancing/new?type=heavy-equipment">
+            <Button variant="compvss">New Equipment Request</Button>
+          </Link>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {requests.map((request) => (
+            <Link key={request.id} href={`/compvss/advancing/requests/${request.id}`}>
+              <Card className="hover:shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all cursor-pointer">
+                <CardHeader>
+                  <div className="flex items-start justify-between mb-2">
+                    <Badge>{request.status}</Badge>
+                    <Caption className="text-gray-500">{request.requestNumber}</Caption>
+                  </div>
+                  <CardTitle className="capitalize">{request.equipmentType}</CardTitle>
+                  <CardDescription>{request.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <Caption className="text-gray-500">Operator:</Caption>
+                      <Caption className="font-medium">{request.operator ? 'Required' : 'Not Required'}</Caption>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <Caption className="text-gray-500">Duration:</Caption>
+                      <Caption className="font-medium">
+                        {new Date(request.startDate).toLocaleDateString()} - {new Date(request.endDate).toLocaleDateString()}
+                      </Caption>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+
+          {requests.length === 0 && (
+            <Card variant="compvss" className="col-span-full">
+              <CardContent className="p-12 text-center">
+                <Body className="text-gray-500 mb-4">No equipment requests yet</Body>
+                <Link href="/compvss/advancing/new?type=heavy-equipment">
+                  <Button variant="compvss">Create First Request</Button>
+                </Link>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
 
       <Footer />

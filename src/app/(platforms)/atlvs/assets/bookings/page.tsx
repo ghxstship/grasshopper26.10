@@ -8,15 +8,25 @@ import * as React from 'react';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Booking {
+  id: string;
+  assetName: string;
+  bookedBy: string;
+  startDate: string;
+  endDate: string;
+  status: 'ACTIVE' | 'UPCOMING' | 'COMPLETED';
+}
+
 export default function BookingsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [bookings, setBookings] = React.useState<Booking[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +38,8 @@ export default function BookingsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ bookings: Booking[] }>('/api/atlvs/assets/bookings');
+        if (response.data?.bookings) setBookings(response.data.bookings);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +74,24 @@ export default function BookingsPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {bookings.map((booking) => (
+            <Card key={booking.id} variant="atlvs">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle>{booking.assetName}</CardTitle>
+                    <CardDescription>Booked by: {booking.bookedBy}</CardDescription>
+                  </div>
+                  <Badge variant={booking.status === 'ACTIVE' ? 'default' : 'outline'}>{booking.status}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">{new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}</Body>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

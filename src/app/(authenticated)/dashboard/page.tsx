@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { H1, H2, H3, Body, Caption } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, H2, H3, Body, Caption, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
 import { Badge } from '@/components/ui-rebuild/atoms/Badge';
@@ -166,19 +166,19 @@ export default function DashboardPage() {
             <Card>
               <CardContent className="pt-6">
                 <Caption className="text-gray-500 mb-2">Upcoming Events</Caption>
-                <div className="font-anton text-4xl">{upcomingTickets.length}</div>
+                <Display as="div" className="text-4xl">{upcomingTickets.length}</Display>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6">
                 <Caption className="text-gray-500 mb-2">Total Orders</Caption>
-                <div className="font-anton text-4xl">{orders.length}</div>
+                <Display as="div" className="text-4xl">{orders.length}</Display>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6">
                 <Caption className="text-gray-500 mb-2">Total Tickets</Caption>
-                <div className="font-anton text-4xl">{tickets.length}</div>
+                <Display as="div" className="text-4xl">{tickets.length}</Display>
               </CardContent>
             </Card>
           </div>

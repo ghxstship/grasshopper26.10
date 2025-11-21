@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { H1, H3, Body, Caption, Label } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Caption, Label } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
 import { Input } from '@/components/ui-rebuild/atoms/Input';
@@ -322,17 +322,76 @@ export default function ProfilePage() {
 
           {/* Preferences Tab */}
           <TabsContent value="preferences">
-            <Card>
-              <CardHeader>
-                <CardTitle>Notification Preferences</CardTitle>
-                <CardDescription>Manage how you receive notifications</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Body className="text-gray-600">
-                  Notification preferences coming soon...
-                </Body>
-              </CardContent>
-            </Card>
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Notification Preferences</CardTitle>
+                  <CardDescription>Manage how you receive notifications</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Body className="text-sm text-gray-600 mb-4">
+                    Configure your notification settings to stay updated on orders, events, and promotions.
+                  </Body>
+                  <Button onClick={() => router.push('/settings/notifications')}>
+                    Manage Notifications
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Privacy Settings</CardTitle>
+                  <CardDescription>Control your privacy and data sharing preferences</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Body className="text-sm text-gray-600 mb-4">
+                    Manage who can see your profile and activity.
+                  </Body>
+                  <Button onClick={() => router.push('/settings/privacy')}>
+                    Privacy Settings
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Language & Region</CardTitle>
+                  <CardDescription>Set your preferred language and regional settings</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="language">Language</Label>
+                    <select
+                      id="language"
+                      className="flex w-full border-2 border-black bg-white px-4 py-2 font-share-tech text-base text-black transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-black focus:ring-offset-2 shadow-[2px_2px_0_0_rgba(0,0,0,1)] focus:shadow-[4px_4px_0_0_rgba(0,0,0,1)] focus:translate-x-[-2px] focus:translate-y-[-2px]"
+                      defaultValue="en"
+                    >
+                      <option value="en">English</option>
+                      <option value="es">Español</option>
+                      <option value="fr">Français</option>
+                      <option value="de">Deutsch</option>
+                    </select>
+                  </div>
+                  <div>
+                    <Label htmlFor="timezone">Timezone</Label>
+                    <select
+                      id="timezone"
+                      className="flex w-full border-2 border-black bg-white px-4 py-2 font-share-tech text-base text-black transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-black focus:ring-offset-2 shadow-[2px_2px_0_0_rgba(0,0,0,1)] focus:shadow-[4px_4px_0_0_rgba(0,0,0,1)] focus:translate-x-[-2px] focus:translate-y-[-2px]"
+                      defaultValue="America/New_York"
+                    >
+                      <option value="America/New_York">Eastern Time (ET)</option>
+                      <option value="America/Chicago">Central Time (CT)</option>
+                      <option value="America/Denver">Mountain Time (MT)</option>
+                      <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                      <option value="Europe/London">London (GMT)</option>
+                      <option value="Europe/Paris">Paris (CET)</option>
+                      <option value="Asia/Tokyo">Tokyo (JST)</option>
+                    </select>
+                  </div>
+                  <Button variant="secondary">Save Preferences</Button>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>

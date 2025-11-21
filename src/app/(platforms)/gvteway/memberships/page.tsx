@@ -6,7 +6,7 @@
 'use client';
 
 import * as React from 'react';
-import { Hero, H2, H3, Body, Caption } from '@/components/ui-rebuild/atoms/Typography';
+import { Hero, H2, H3, Body, Caption, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
 import { Badge } from '@/components/ui-rebuild/atoms/Badge';
@@ -118,9 +118,9 @@ export default function MembershipsPage() {
                     {tier.featured && <Badge>Popular</Badge>}
                   </div>
                   <div className="mb-4">
-                    <div className="font-anton text-5xl">
+                    <Display as="div">
                       {formatPrice(tier.price, tier.currency, tier.interval)}
-                    </div>
+                    </Display>
                   </div>
                   <CardDescription>{tier.description}</CardDescription>
                 </CardHeader>

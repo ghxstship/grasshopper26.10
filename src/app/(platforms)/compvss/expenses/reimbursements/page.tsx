@@ -28,9 +28,8 @@ export default function ReimbursementsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/expenses/reimbursements');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,23 @@ export default function ReimbursementsPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.reimbursements && data.reimbursements.map((item: any) => (
+            <Card key={item.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>${item.amount}</CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">Status: <span className="capitalize">{item.status}</span></Body>
+                {item.processedDate && <Body className="text-sm">Processed: {new Date(item.processedDate).toLocaleDateString()}</Body>}
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.reimbursements || data.reimbursements.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No reimbursements</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

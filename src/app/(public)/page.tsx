@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Hero, H2, H3, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { Hero, H2, H3, Body, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
@@ -84,9 +84,9 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="font-anton text-5xl md:text-6xl mb-2">
+                <Display as="div" className="text-5xl md:text-6xl mb-2">
                   {stat.value}
-                </div>
+                </Display>
                 <H3 className="text-gray-400">
                   {stat.label}
                 </H3>

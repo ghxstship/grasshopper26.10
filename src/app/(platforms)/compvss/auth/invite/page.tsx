@@ -28,9 +28,8 @@ export default function AcceptInvitePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/auth/invite-status');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,21 @@ export default function AcceptInvitePage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Team Invitation</CardTitle>
+            <CardDescription>{data?.invitedBy ? `Invited by ${data.invitedBy}` : 'Pending invitation'}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            {data?.status === 'pending' ? (
+              <div className="space-y-4">
+                <Body>You have been invited to join the team.</Body>
+                <div className="flex gap-4">
+                  <Button variant="compvss">Accept Invitation</Button>
+                  <Button variant="secondary">Decline</Button>
+                </div>
+              </div>
+            ) : (
+              <Body className="text-green-600">Invitation {data?.status || 'accepted'}</Body>
+            )}
           </CardContent>
         </Card>
       </div>

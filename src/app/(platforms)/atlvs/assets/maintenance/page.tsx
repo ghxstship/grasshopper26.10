@@ -8,15 +8,24 @@ import * as React from 'react';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface MaintenanceRecord {
+  id: string;
+  assetName: string;
+  type: string;
+  scheduledDate: string;
+  status: 'SCHEDULED' | 'IN_PROGRESS' | 'COMPLETED';
+}
+
 export default function MaintenancePage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [records, setRecords] = React.useState<MaintenanceRecord[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +37,8 @@ export default function MaintenancePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ records: MaintenanceRecord[] }>('/api/atlvs/assets/maintenance');
+        if (response.data?.records) setRecords(response.data.records);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +73,24 @@ export default function MaintenancePage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {records.map((record) => (
+            <Card key={record.id} variant="atlvs">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle>{record.assetName}</CardTitle>
+                    <CardDescription>{record.type}</CardDescription>
+                  </div>
+                  <Badge variant={record.status === 'COMPLETED' ? 'default' : 'outline'}>{record.status}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">Scheduled: {new Date(record.scheduledDate).toLocaleDateString()}</Body>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

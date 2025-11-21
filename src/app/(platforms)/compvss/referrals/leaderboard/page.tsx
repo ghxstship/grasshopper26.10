@@ -28,9 +28,8 @@ export default function LeaderboardPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/referrals/leaderboard');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,27 @@ export default function LeaderboardPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.leaders && data.leaders.map((leader: any, index: number) => (
+            <Card key={leader.id} variant="compvss">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <Body className="text-2xl font-bold">#{index + 1}</Body>
+                    <div>
+                      <Body className="font-medium">{leader.name}</Body>
+                      <Body className="text-sm text-gray-500">{leader.referrals} referrals</Body>
+                    </div>
+                  </div>
+                  <Body className="font-bold">${leader.earnings}</Body>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.leaders || data.leaders.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No leaderboard data</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

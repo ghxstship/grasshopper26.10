@@ -28,9 +28,8 @@ export default function SiteMapPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/operations/map-data');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,21 @@ export default function SiteMapPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Site Map</CardTitle>
+            <CardDescription>{data?.siteName || 'Location overview'}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.locations && data.locations.map((loc: any) => (
+                <div key={loc.id} className="p-4 border rounded">
+                  <Body className="font-medium">{loc.name}</Body>
+                  <Body className="text-sm text-gray-500">{loc.coordinates}</Body>
+                </div>
+              ))}
+              {(!data?.locations || data.locations.length === 0) && (
+                <Body className="text-gray-500 text-center py-8">No map data available</Body>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -28,9 +28,8 @@ export default function ReportIssuePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/issues/categories');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,17 @@ export default function ReportIssuePage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Report New Issue</CardTitle>
+            <CardDescription>Describe the problem</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <form className="space-y-4">
+              <div><Body className="font-medium mb-2">Title</Body><input type="text" className="w-full border rounded p-2" /></div>
+              <div><Body className="font-medium mb-2">Category</Body><select className="w-full border rounded p-2">{data?.categories && data.categories.map((cat: string) => <option key={cat}>{cat}</option>)}</select></div>
+              <div><Body className="font-medium mb-2">Priority</Body><select className="w-full border rounded p-2"><option>Low</option><option>Medium</option><option>High</option></select></div>
+              <div><Body className="font-medium mb-2">Description</Body><textarea className="w-full border rounded p-2" rows={4} /></div>
+              <Button variant="compvss" className="w-full">Submit Issue</Button>
+            </form>
           </CardContent>
         </Card>
       </div>

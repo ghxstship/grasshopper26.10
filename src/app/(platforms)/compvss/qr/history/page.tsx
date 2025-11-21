@@ -28,9 +28,8 @@ export default function ScanHistoryPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/qr/history');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,24 @@ export default function ScanHistoryPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.scans && data.scans.map((scan: any) => (
+            <Card key={scan.id} variant="compvss">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Body className="font-medium">{scan.type}</Body>
+                    <Body className="text-sm text-gray-500">{new Date(scan.timestamp).toLocaleString()}</Body>
+                  </div>
+                  <Body className="text-sm">{scan.location}</Body>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.scans || data.scans.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No scan history</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

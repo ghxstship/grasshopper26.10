@@ -28,9 +28,8 @@ export default function TasksPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/operations/tasks');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,24 @@ export default function TasksPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.tasks && data.tasks.map((task: any) => (
+            <Card key={task.id} variant="compvss">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Body className="font-medium">{task.title}</Body>
+                    <Body className="text-sm text-gray-500">Due: {new Date(task.dueDate).toLocaleDateString()}</Body>
+                  </div>
+                  <Body className="text-sm capitalize">{task.status}</Body>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.tasks || data.tasks.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No tasks assigned</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

@@ -28,9 +28,8 @@ export default function SubmitExpensesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/expenses/categories');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,16 @@ export default function SubmitExpensesPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Submit Expense Report</CardTitle>
+            <CardDescription>Upload receipts and details</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              <div><Body className="font-medium mb-2">Select Category</Body><select className="w-full border rounded p-2">{data?.categories && data.categories.map((cat: string) => <option key={cat}>{cat}</option>)}</select></div>
+              <div><Body className="font-medium mb-2">Upload Receipt</Body><input type="file" className="w-full" /></div>
+              <div><Body className="font-medium mb-2">Amount</Body><input type="number" className="w-full border rounded p-2" /></div>
+              <Button variant="compvss" className="w-full">Submit for Approval</Button>
+            </div>
           </CardContent>
         </Card>
       </div>

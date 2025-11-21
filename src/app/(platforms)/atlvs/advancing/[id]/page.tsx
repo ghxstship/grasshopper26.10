@@ -28,9 +28,10 @@ export default function RequestDetailsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get(`/api/atlvs/advancing/${params.id}`);
+        if (response.data) {
+          setData(response.data);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -39,7 +40,7 @@ export default function RequestDetailsPage() {
     };
 
     fetchData();
-  }, []);
+  }, [params.id]);
 
   if (loading) {
     return (
@@ -65,17 +66,41 @@ export default function RequestDetailsPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        {data ? (
+          <>
+            <Card variant="atlvs" className="mb-6">
+              <CardHeader>
+                <CardTitle>Request #{data.requestNumber}</CardTitle>
+                <CardDescription>Status: {data.status}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Body className="font-semibold mb-2">Requester</Body>
+                  <Body>{data.requester}</Body>
+                </div>
+                <div>
+                  <Body className="font-semibold mb-2">Amount</Body>
+                  <Body>${data.amount?.toLocaleString()}</Body>
+                </div>
+                <div>
+                  <Body className="font-semibold mb-2">Description</Body>
+                  <Body>{data.description}</Body>
+                </div>
+              </CardContent>
+            </Card>
+            <div className="flex gap-3">
+              <Button variant="atlvs">Approve</Button>
+              <Button variant="secondary">Reject</Button>
+              <Button variant="ghost">Request Changes</Button>
+            </div>
+          </>
+        ) : (
+          <Card variant="atlvs">
+            <CardContent className="py-12 text-center">
+              <Body>Request not found</Body>
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       <Footer />

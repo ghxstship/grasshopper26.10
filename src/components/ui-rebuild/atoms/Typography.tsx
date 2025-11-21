@@ -1,6 +1,6 @@
 /**
  * Typography Components - Atomic Design System
- * ANTON (Display) / BEBAS NEUE (Headings) / SHARE TECH (Body)
+ * ANTON (Display/Hero) / BEBAS NEUE (H1-H6 Headings) / SHARE TECH (Body)
  * Strict hierarchy, maximum readability
  */
 
@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 // ============================================================================
 
 interface HeroProps extends React.HTMLAttributes<HTMLHeadingElement> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span';
 }
 
 export const Hero = React.forwardRef<HTMLHeadingElement, HeroProps>(
@@ -21,7 +21,7 @@ export const Hero = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-anton text-6xl md:text-8xl lg:text-9xl font-normal leading-none tracking-wider uppercase',
+          'font-anton text-6xl md:text-8xl lg:text-9xl font-normal leading-none tracking-[0.05em] uppercase',
           className
         )}
         {...props}
@@ -39,7 +39,7 @@ export const Display = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-anton text-5xl md:text-6xl lg:text-7xl font-normal leading-none tracking-wider uppercase',
+          'font-anton text-5xl md:text-6xl lg:text-7xl font-normal leading-none tracking-[0.05em] uppercase',
           className
         )}
         {...props}
@@ -61,7 +61,7 @@ export const H1 = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-bebas-neue text-5xl md:text-6xl font-normal leading-tight tracking-wide',
+          'font-bebas text-5xl md:text-6xl font-normal leading-tight tracking-[0.02em]',
           className
         )}
         {...props}
@@ -79,7 +79,7 @@ export const H2 = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-bebas-neue text-4xl md:text-5xl font-normal leading-tight tracking-wide',
+          'font-bebas text-4xl md:text-5xl font-normal leading-tight tracking-[0.02em]',
           className
         )}
         {...props}
@@ -97,7 +97,7 @@ export const H3 = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-bebas-neue text-3xl md:text-4xl font-normal leading-snug tracking-wide',
+          'font-bebas text-3xl md:text-4xl font-normal leading-snug tracking-[0.02em]',
           className
         )}
         {...props}
@@ -115,7 +115,7 @@ export const H4 = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-bebas-neue text-2xl md:text-3xl font-normal leading-snug tracking-wide',
+          'font-bebas text-2xl md:text-3xl font-normal leading-snug tracking-[0.02em]',
           className
         )}
         {...props}
@@ -133,7 +133,7 @@ export const H5 = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-bebas-neue text-xl md:text-2xl font-normal leading-normal tracking-wide',
+          'font-bebas text-xl md:text-2xl font-normal leading-normal tracking-[0.02em]',
           className
         )}
         {...props}
@@ -151,7 +151,7 @@ export const H6 = React.forwardRef<HTMLHeadingElement, HeroProps>(
       <Component
         ref={ref}
         className={cn(
-          'font-bebas-neue text-lg md:text-xl font-normal leading-normal tracking-wide',
+          'font-bebas text-lg md:text-xl font-normal leading-normal tracking-[0.02em]',
           className
         )}
         {...props}
@@ -295,7 +295,7 @@ export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
       <label
         ref={ref}
         className={cn(
-          'block font-bebas-neue text-lg tracking-wide mb-2',
+          'block font-bebas text-lg tracking-[0.02em] mb-2',
           className
         )}
         {...props}

@@ -21,10 +21,20 @@ export default function ConnectWalletPage() {
     setConnecting(true);
     setError(null);
     try {
-      // TODO: Implement MetaMask connection
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (typeof window.ethereum === 'undefined') {
+        throw new Error('MetaMask is not installed. Please install MetaMask to continue.');
+      }
+      
+      const accounts = await window.ethereum.request({ 
+        method: 'eth_requestAccounts' 
+      });
+      
+      if (accounts && accounts.length > 0) {
+        // Successfully connected - redirect to dashboard or show success
+        window.location.href = '/dashboard';
+      }
     } catch (err) {
-      setError('Failed to connect MetaMask');
+      setError(err instanceof Error ? err.message : 'Failed to connect MetaMask');
     } finally {
       setConnecting(false);
     }
@@ -34,10 +44,9 @@ export default function ConnectWalletPage() {
     setConnecting(true);
     setError(null);
     try {
-      // TODO: Implement WalletConnect connection
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    } catch (err) {
-      setError('Failed to connect wallet');
+      // WalletConnect integration requires @walletconnect/web3-provider
+      // For now, show informative message
+      setError('WalletConnect integration coming soon. Please use MetaMask or Coinbase Wallet for now.');
     } finally {
       setConnecting(false);
     }
@@ -47,10 +56,20 @@ export default function ConnectWalletPage() {
     setConnecting(true);
     setError(null);
     try {
-      // TODO: Implement Coinbase Wallet connection
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (typeof window.ethereum === 'undefined' || !window.ethereum.isCoinbaseWallet) {
+        throw new Error('Coinbase Wallet is not installed. Please install Coinbase Wallet to continue.');
+      }
+      
+      const accounts = await window.ethereum.request({ 
+        method: 'eth_requestAccounts' 
+      });
+      
+      if (accounts && accounts.length > 0) {
+        // Successfully connected - redirect to dashboard or show success
+        window.location.href = '/dashboard';
+      }
     } catch (err) {
-      setError('Failed to connect Coinbase Wallet');
+      setError(err instanceof Error ? err.message : 'Failed to connect Coinbase Wallet');
     } finally {
       setConnecting(false);
     }

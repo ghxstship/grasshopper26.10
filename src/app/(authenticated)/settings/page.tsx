@@ -8,7 +8,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui-rebuild/atoms/Card';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 
@@ -17,37 +17,37 @@ export default function SettingsPage() {
     {
       title: 'Account',
       description: 'Manage your account settings',
-      href: '/(rebuild)/profile',
+      href: '/settings/account',
       icon: '👤',
     },
     {
       title: 'Profile',
       description: 'Update your profile information',
-      href: '/(rebuild)/profile',
+      href: '/settings/profile',
       icon: '✏️',
     },
     {
       title: 'Payment Methods',
       description: 'Manage payment methods',
-      href: '/(rebuild)/settings/payment',
+      href: '/settings/payment',
       icon: '💳',
     },
     {
       title: 'Notifications',
       description: 'Configure notification preferences',
-      href: '/(rebuild)/notifications',
+      href: '/settings/notifications',
       icon: '🔔',
     },
     {
       title: 'Privacy',
       description: 'Control your privacy settings',
-      href: '/(rebuild)/settings/privacy',
+      href: '/settings/privacy',
       icon: '🔒',
     },
     {
       title: 'Security',
       description: 'Security and two-factor authentication',
-      href: '/(rebuild)/profile',
+      href: '/settings/security',
       icon: '🛡️',
     },
   ];

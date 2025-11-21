@@ -4,9 +4,6 @@ const nextConfig: NextConfig = {
   /* Performance Optimizations */
   reactCompiler: false,
   
-  // Output configuration - disable static optimization for pages using React Query
-  output: 'standalone',
-  
   // Disable static page generation errors - allow build to continue
   staticPageGenerationTimeout: 120,
   

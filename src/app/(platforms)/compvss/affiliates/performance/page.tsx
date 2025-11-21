@@ -5,22 +5,27 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
-import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { H1, Body, Caption, Display } from '@/components/ui-rebuild/atoms/Typography';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
+interface PerformanceMetrics {
+  totalClicks: number;
+  totalConversions: number;
+  conversionRate: number;
+  totalEarnings: number;
+  topReferral: string;
+}
 
 export default function PerformancePage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [metrics, setMetrics] = React.useState<PerformanceMetrics | null>(null);
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const fetchMetrics = async () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
@@ -28,17 +33,18 @@ export default function PerformancePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ metrics: PerformanceMetrics }>('/api/compvss/affiliates/performance');
+        if (response.data?.metrics) {
+          setMetrics(response.data.metrics);
+        }
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error('Failed to fetch metrics:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchMetrics();
   }, []);
 
   if (loading) {
@@ -58,24 +64,39 @@ export default function PerformancePage() {
       <Navbar variant="compvss" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Performance</H1>
-          <Body className="text-gray-600">
-            Performance page content
-          </Body>
+        <div className="mb-8">
+          <H1 className="mb-2">Performance Metrics</H1>
+          <Body className="text-gray-600">Track your affiliate performance</Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        {metrics && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card variant="compvss">
+              <CardContent className="p-6 text-center">
+                <Caption className="text-gray-500 mb-2">Total Clicks</Caption>
+                <Display as="div">{metrics.totalClicks}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="compvss">
+              <CardContent className="p-6 text-center">
+                <Caption className="text-gray-500 mb-2">Conversions</Caption>
+                <Display as="div">{metrics.totalConversions}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="compvss">
+              <CardContent className="p-6 text-center">
+                <Caption className="text-gray-500 mb-2">Conversion Rate</Caption>
+                <Display as="div">{metrics.conversionRate.toFixed(1)}%</Display>
+              </CardContent>
+            </Card>
+            <Card variant="compvss">
+              <CardContent className="p-6 text-center">
+                <Caption className="text-gray-500 mb-2">Total Earnings</Caption>
+                <Display as="div">${metrics.totalEarnings.toFixed(2)}</Display>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
 
       <Footer />

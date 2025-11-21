@@ -28,9 +28,8 @@ export default function ExpenseHistoryPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/expenses/history');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,24 @@ export default function ExpenseHistoryPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.expenses && data.expenses.map((expense: any) => (
+            <Card key={expense.id} variant="compvss">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Body className="font-medium">${expense.amount} - {expense.category}</Body>
+                    <Body className="text-sm text-gray-500">{new Date(expense.date).toLocaleDateString()}</Body>
+                  </div>
+                  <Body className="text-sm capitalize">{expense.status}</Body>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.expenses || data.expenses.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No expense history</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

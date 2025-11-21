@@ -6,18 +6,24 @@
 
 import * as React from 'react';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
-import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
+interface VarianceItem {
+  id: string;
+  category: string;
+  budgeted: number;
+  actual: number;
+  variance: number;
+  variancePercent: number;
+}
 
 export default function VarianceAnalysisPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [variances, setVariances] = React.useState<VarianceItem[]>([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +34,8 @@ export default function VarianceAnalysisPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ variances: VarianceItem[] }>('/api/atlvs/budgets/variance');
+        if (response.data?.variances) setVariances(response.data.variances);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -61,19 +66,44 @@ export default function VarianceAnalysisPage() {
         <div className="mb-12">
           <H1 className="mb-4">Variance Analysis</H1>
           <Body className="text-gray-600">
-            Variance Analysis page content
+            Budget vs actual spending analysis by category
           </Body>
         </div>
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Budget Variance by Category</CardTitle>
+            <CardDescription>Comparison of budgeted vs actual spending</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {variances.map((item) => (
+                <div key={item.id} className="border-b border-gray-200 pb-4 last:border-0">
+                  <div className="flex items-center justify-between mb-2">
+                    <Body className="font-semibold">{item.category}</Body>
+                    <Body className={`font-semibold ${item.variance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {item.variancePercent > 0 ? '+' : ''}{item.variancePercent}%
+                    </Body>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <Body className="text-gray-600">Budgeted</Body>
+                      <Body className="font-medium">${item.budgeted.toLocaleString()}</Body>
+                    </div>
+                    <div>
+                      <Body className="text-gray-600">Actual</Body>
+                      <Body className="font-medium">${item.actual.toLocaleString()}</Body>
+                    </div>
+                    <div>
+                      <Body className="text-gray-600">Variance</Body>
+                      <Body className={`font-medium ${item.variance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        ${Math.abs(item.variance).toLocaleString()}
+                      </Body>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </CardContent>
         </Card>
       </div>

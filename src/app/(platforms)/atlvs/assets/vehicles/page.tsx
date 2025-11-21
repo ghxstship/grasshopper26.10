@@ -8,15 +8,26 @@ import * as React from 'react';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
+import Link from 'next/link';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Vehicle {
+  id: string;
+  name: string;
+  make: string;
+  model: string;
+  year: number;
+  status: 'AVAILABLE' | 'IN_USE' | 'MAINTENANCE';
+}
+
 export default function VehiclesPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [vehicles, setVehicles] = React.useState<Vehicle[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +39,8 @@ export default function VehiclesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ vehicles: Vehicle[] }>('/api/atlvs/assets/vehicles');
+        if (response.data?.vehicles) setVehicles(response.data.vehicles);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +75,23 @@ export default function VehiclesPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {vehicles.map((vehicle) => (
+            <Link key={vehicle.id} href={`/atlvs/assets/${vehicle.id}`}>
+              <Card variant="atlvs" className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <CardTitle>{vehicle.name}</CardTitle>
+                      <CardDescription>{vehicle.year} {vehicle.make} {vehicle.model}</CardDescription>
+                    </div>
+                    <Badge variant={vehicle.status === 'AVAILABLE' ? 'default' : 'outline'}>{vehicle.status}</Badge>
+                  </div>
+                </CardHeader>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <Footer />

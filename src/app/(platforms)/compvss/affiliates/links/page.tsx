@@ -5,22 +5,31 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Caption } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
+interface AffiliateLink {
+  id: string;
+  url: string;
+  code: string;
+  clicks: number;
+  conversions: number;
+  createdAt: string;
+}
 
 export default function AffiliateLinksPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [links, setLinks] = React.useState<AffiliateLink[]>([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const fetchLinks = async () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
@@ -28,18 +37,23 @@ export default function AffiliateLinksPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ links: AffiliateLink[] }>('/api/compvss/affiliates/links');
+        if (response.data?.links) {
+          setLinks(response.data.links);
+        }
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error('Failed to fetch links:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchLinks();
   }, []);
+
+  const copyToClipboard = (url: string) => {
+    navigator.clipboard.writeText(url);
+  };
 
   if (loading) {
     return (
@@ -58,24 +72,47 @@ export default function AffiliateLinksPage() {
       <Navbar variant="compvss" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Affiliate Links</H1>
-          <Body className="text-gray-600">
-            Affiliate Links page content
-          </Body>
+        <div className="mb-8">
+          <H1 className="mb-2">Affiliate Links</H1>
+          <Body className="text-gray-600">Manage and track your affiliate links</Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {links.map((link) => (
+            <Card key={link.id} variant="compvss">
+              <CardHeader>
+                <div className="flex items-start justify-between mb-2">
+                  <CardTitle>Link #{link.code}</CardTitle>
+                  <Badge>Active</Badge>
+                </div>
+                <CardDescription>Created: {new Date(link.createdAt).toLocaleDateString()}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex gap-2">
+                  <Input value={link.url} readOnly className="flex-1" />
+                  <Button variant="compvss" onClick={() => copyToClipboard(link.url)}>Copy</Button>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Caption className="text-gray-500">Clicks</Caption>
+                    <Body className="font-medium">{link.clicks}</Body>
+                  </div>
+                  <div>
+                    <Caption className="text-gray-500">Conversions</Caption>
+                    <Body className="font-medium">{link.conversions}</Body>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          {links.length === 0 && (
+            <Card variant="compvss">
+              <CardContent className="p-12 text-center">
+                <Body className="text-gray-500">No affiliate links yet</Body>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
 
       <Footer />

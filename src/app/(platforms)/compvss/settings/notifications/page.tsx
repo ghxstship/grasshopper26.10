@@ -28,9 +28,8 @@ export default function NotificationsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/settings/notifications');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,22 @@ export default function NotificationsPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Notification Preferences</CardTitle>
+            <CardDescription>Control how you receive updates</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.preferences && data.preferences.map((pref: any) => (
+                <div key={pref.id} className="flex items-center justify-between p-4 border rounded">
+                  <div>
+                    <Body className="font-medium">{pref.name}</Body>
+                    <Body className="text-sm text-gray-500">{pref.description}</Body>
+                  </div>
+                  <input type="checkbox" defaultChecked={pref.enabled} className="w-5 h-5" />
+                </div>
+              ))}
+              <Button variant="compvss" className="w-full">Save Preferences</Button>
+            </div>
           </CardContent>
         </Card>
       </div>

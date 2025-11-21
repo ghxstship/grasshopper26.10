@@ -5,53 +5,36 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
-export default function QRTrackingPage() {
-  const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+export default function QrTrackingPage() {
+  const [qrCode, setQrCode] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [asset, setAsset] = React.useState<any>(null);
 
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
-        if (token) {
-          apiClient.setAuthToken(token);
-        }
-
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar variant="atlvs" />
-        <div className="flex justify-center items-center py-24">
-          <Spinner size="xl" />
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  const handleScan = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+      if (token) apiClient.setAuthToken(token);
+      const response = await apiClient.get(`/api/atlvs/assets/qr/${qrCode}`);
+      setAsset(response.data);
+    } catch (error) {
+      console.error('Failed to fetch asset:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -65,17 +48,33 @@ export default function QRTrackingPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
+        <Card variant="atlvs" className="max-w-md mx-auto mb-6">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Scan QR Code</CardTitle>
+            <CardDescription>Enter QR code to track asset</CardDescription>
           </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
+          <form onSubmit={handleScan}>
+            <CardContent>
+              <Label htmlFor="qr">QR Code</Label>
+              <Input id="qr" value={qrCode} onChange={(e) => setQrCode(e.target.value)} required />
+            </CardContent>
+            <CardFooter>
+              <Button variant="atlvs" type="submit" disabled={loading} loading={loading}>Track Asset</Button>
+            </CardFooter>
+          </form>
         </Card>
+        {asset && (
+          <Card variant="atlvs" className="max-w-md mx-auto">
+            <CardHeader>
+              <CardTitle>{asset.name}</CardTitle>
+              <CardDescription>{asset.type}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Body>Location: {asset.location}</Body>
+              <Body>Status: {asset.status}</Body>
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       <Footer />

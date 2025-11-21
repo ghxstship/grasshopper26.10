@@ -28,9 +28,8 @@ export default function AccountSettingsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/settings/account');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,17 @@ export default function AccountSettingsPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Account Settings</CardTitle>
+            <CardDescription>Manage your account preferences</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <form className="space-y-4">
+              <div><Body className="font-medium mb-2">Email</Body><input type="email" className="w-full border rounded p-2" defaultValue={data?.email} /></div>
+              <div><Body className="font-medium mb-2">Phone</Body><input type="tel" className="w-full border rounded p-2" defaultValue={data?.phone} /></div>
+              <div><Body className="font-medium mb-2">Language</Body><select className="w-full border rounded p-2"><option>English</option><option>Spanish</option></select></div>
+              <div><Body className="font-medium mb-2">Timezone</Body><select className="w-full border rounded p-2"><option>UTC</option><option>EST</option><option>PST</option></select></div>
+              <Button variant="compvss" className="w-full">Save Changes</Button>
+            </form>
           </CardContent>
         </Card>
       </div>

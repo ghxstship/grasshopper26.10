@@ -27,7 +27,7 @@ export default function PricingPage() {
           <Body className="mb-8 text-gray-600">
             For detailed pricing information, please contact our sales team.
           </Body>
-          <Link href="/(rebuild)/contact">
+          <Link href="/contact">
             <Button size="lg">Contact Sales</Button>
           </Link>
         </div>

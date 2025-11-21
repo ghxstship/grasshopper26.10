@@ -5,9 +5,11 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
+import { useRouter } from 'next/navigation';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
@@ -15,43 +17,29 @@ import { apiClient } from '@/lib/api/client';
 
 
 export default function LoginPage() {
-  const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const router = useRouter();
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
 
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
-        if (token) {
-          apiClient.setAuthToken(token);
-        }
-
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
+    try {
+      const response = await apiClient.post<{ token: string }>('/api/atlvs/auth/login', { email, password });
+      if (response.data?.token) {
+        localStorage.setItem('auth_token', response.data.token);
+        router.push('/atlvs/overview');
       }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar variant="atlvs" />
-        <div className="flex justify-center items-center py-24">
-          <Spinner size="xl" />
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+    } catch {
+      setError('Invalid credentials');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -59,22 +47,51 @@ export default function LoginPage() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12">
-          <H1 className="mb-4">Login</H1>
+          <H1 className="mb-4">ATLVS Login</H1>
           <Body className="text-gray-600">
-            Login page content
+            Sign in to access the ATLVS platform
           </Body>
         </div>
 
-        <Card variant="atlvs">
+        <Card variant="atlvs" className="max-w-md mx-auto">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Sign In</CardTitle>
+            <CardDescription>Enter your credentials to continue</CardDescription>
           </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
+          <form onSubmit={handleLogin}>
+            <CardContent className="space-y-4">
+              {error && (
+                <div className="p-3 bg-red-50 border-2 border-red-600 text-red-600">
+                  <Body>{error}</Body>
+                </div>
+              )}
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button variant="atlvs" type="submit" disabled={loading} loading={loading} className="w-full">
+                Sign In
+              </Button>
+            </CardFooter>
+          </form>
         </Card>
       </div>
 

@@ -28,9 +28,8 @@ export default function RolesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/team/roles');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,23 @@ export default function RolesPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.roles && data.roles.map((role: any) => (
+            <Card key={role.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{role.name}</CardTitle>
+                <CardDescription>{role.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">Members: {role.memberCount}</Body>
+                <Body className="text-sm text-gray-500">Permissions: {role.permissions?.join(', ')}</Body>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.roles || data.roles.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No roles defined</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

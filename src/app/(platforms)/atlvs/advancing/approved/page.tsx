@@ -5,18 +5,29 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, H3, Body } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
+import Link from 'next/link';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Request {
+  id: string;
+  requestNumber: string;
+  requester: string;
+  amount: number;
+  approvedDate: string;
+  approvedBy: string;
+}
+
 export default function ApprovedRequestsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [requests, setRequests] = React.useState<Request[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +39,10 @@ export default function ApprovedRequestsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ requests: Request[] }>('/api/atlvs/advancing/approved');
+        if (response.data?.requests) {
+          setRequests(response.data.requests);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +77,44 @@ export default function ApprovedRequestsPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        {requests.length === 0 ? (
+          <Card variant="atlvs">
+            <CardContent className="py-24 text-center">
+              <H3 className="mb-4">No approved requests</H3>
+              <Body className="text-gray-600">Approved requests will appear here</Body>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-4">
+            {requests.map((request) => (
+              <Link key={request.id} href={`/atlvs/advancing/${request.id}`}>
+                <Card variant="atlvs" className="hover:shadow-lg transition-shadow cursor-pointer">
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <CardTitle>Request #{request.requestNumber}</CardTitle>
+                        <CardDescription>{request.requester}</CardDescription>
+                      </div>
+                      <Badge className="bg-green-600 text-white">Approved</Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Body className="text-sm text-gray-600">Amount</Body>
+                        <Body className="font-semibold">${request.amount.toLocaleString()}</Body>
+                      </div>
+                      <div>
+                        <Body className="text-sm text-gray-600">Approved By</Body>
+                        <Body className="font-semibold">{request.approvedBy}</Body>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
 
       <Footer />

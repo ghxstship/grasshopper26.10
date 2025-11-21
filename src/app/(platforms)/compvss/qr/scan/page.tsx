@@ -28,9 +28,8 @@ export default function ScanQRCodePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/qr/scanner-status');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,23 @@ export default function ScanQRCodePage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Scan QR Code</CardTitle>
+            <CardDescription>{data?.cameraStatus || 'Camera ready'}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              <div className="aspect-square bg-gray-100 rounded flex items-center justify-center">
+                <Body className="text-gray-500">Camera viewfinder</Body>
+              </div>
+              {data?.lastScan && (
+                <div className="p-4 bg-green-50 rounded">
+                  <Body className="font-medium text-green-800">Last Scan</Body>
+                  <Body className="text-sm text-green-600">{data.lastScan.data}</Body>
+                  <Body className="text-xs text-gray-500">{new Date(data.lastScan.timestamp).toLocaleString()}</Body>
+                </div>
+              )}
+              <Button variant="compvss" className="w-full">Start Scanning</Button>
+            </div>
           </CardContent>
         </Card>
       </div>

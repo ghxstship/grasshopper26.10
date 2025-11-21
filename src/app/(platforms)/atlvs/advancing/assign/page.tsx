@@ -5,18 +5,30 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
+import { Select } from '@/components/ui-rebuild/atoms/Select';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Resource {
+  id: string;
+  name: string;
+  type: string;
+  available: boolean;
+}
+
 export default function AssignResourcesPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [resources, setResources] = React.useState<Resource[]>([]);
+  const [selectedRequest, setSelectedRequest] = React.useState('');
+  const [selectedResource, setSelectedResource] = React.useState('');
+  const [assigning, setAssigning] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -28,9 +40,10 @@ export default function AssignResourcesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ resources: Resource[] }>('/api/atlvs/resources');
+        if (response.data?.resources) {
+          setResources(response.data.resources);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,14 +80,44 @@ export default function AssignResourcesPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Assign Resources to Request</CardTitle>
+            <CardDescription>Allocate team members and equipment to advancing requests</CardDescription>
           </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+          <CardContent className="space-y-6">
+            <div>
+              <Label htmlFor="request">Select Request</Label>
+              <Input
+                id="request"
+                placeholder="Enter request number"
+                value={selectedRequest}
+                onChange={(e) => setSelectedRequest(e.target.value)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="resource">Select Resource</Label>
+              <Select
+                id="resource"
+                value={selectedResource}
+                onChange={(e) => setSelectedResource(e.target.value)}
+                options={[
+                  { value: "", label: "Choose a resource..." },
+                  ...resources.filter(r => r.available).map(resource => ({
+                    value: resource.id,
+                    label: `${resource.name} (${resource.type})`
+                  }))
+                ]}
+              />
+            </div>
           </CardContent>
+          <CardFooter>
+            <Button
+              variant="atlvs"
+              disabled={!selectedRequest || !selectedResource || assigning}
+              loading={assigning}
+            >
+              Assign Resource
+            </Button>
+          </CardFooter>
         </Card>
       </div>
 

@@ -11,12 +11,21 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { apiClient } from '@/lib/api/client';
 
+interface Rider {
+  id: string;
+  name: string;
+  talent: string;
+  type: 'TECHNICAL' | 'HOSPITALITY' | 'SECURITY' | 'SPECIAL';
+  status: 'PENDING' | 'APPROVED' | 'FULFILLED';
+  requestDate: string;
+}
 
 export default function RidersPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [riders, setRiders] = React.useState<Rider[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +37,8 @@ export default function RidersPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ riders: Rider[] }>('/api/atlvs/documents/riders');
+        if (response.data?.riders) setRiders(response.data.riders);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -58,24 +66,41 @@ export default function RidersPage() {
       <Navbar variant="atlvs" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Riders</H1>
-          <Body className="text-gray-600">
-            Riders page content
-          </Body>
+        <div className="mb-12 flex items-center justify-between">
+          <div>
+            <H1 className="mb-4">Talent Riders</H1>
+            <Body className="text-gray-600">
+              Manage talent and crew rider requirements
+            </Body>
+          </div>
+          <Button variant="atlvs">New Rider</Button>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {riders.map((rider) => (
+            <Card key={rider.id} variant="atlvs">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle>{rider.name}</CardTitle>
+                    <CardDescription>{rider.talent}</CardDescription>
+                  </div>
+                  <div className="flex gap-2">
+                    <Badge variant={rider.status === 'FULFILLED' ? 'default' : 'outline'}>
+                      {rider.status}
+                    </Badge>
+                    <Badge variant="outline">{rider.type}</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm text-gray-600">
+                  Requested: {new Date(rider.requestDate).toLocaleDateString()}
+                </Body>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

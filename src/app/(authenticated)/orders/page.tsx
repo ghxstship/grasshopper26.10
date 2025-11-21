@@ -108,7 +108,7 @@ export default function OrdersPage() {
               <Body className="mb-8 text-gray-600">
                 You haven&apos;t placed any orders yet.
               </Body>
-              <Link href="/(rebuild)/events">
+              <Link href="/gvteway/events">
                 <Button>Browse Events</Button>
               </Link>
             </CardContent>
@@ -193,7 +193,7 @@ export default function OrdersPage() {
                 </CardContent>
 
                 <CardFooter>
-                  <Link href={`/(rebuild)/orders/${order.id}`} className="w-full">
+                  <Link href={`/orders/${order.id}`} className="w-full">
                     <Button variant="secondary" fullWidth>
                       View Details
                     </Button>

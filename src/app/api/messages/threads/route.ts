@@ -12,11 +12,45 @@ export async function GET(_request: NextRequest) {
       );
     }
 
-    // TODO: Message model not implemented in Prisma schema
-    return NextResponse.json(
-      { success: false, error: { code: 'NOT_IMPLEMENTED', message: 'Messaging not implemented' } },
-      { status: 501 }
+    const messages = await prisma.message.findMany({
+      where: {
+        OR: [
+          { senderId: session.user.id },
+          { recipientId: session.user.id },
+        ],
+      },
+      include: {
+        sender: { select: { id: true, name: true, image: true } },
+        recipient: { select: { id: true, name: true, image: true } },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    // Group by threadId
+    const threads: Record<string, any> = {};
+    messages.forEach((msg) => {
+      if (!threads[msg.threadId]) {
+        threads[msg.threadId] = {
+          threadId: msg.threadId,
+          lastMessage: msg,
+          unreadCount: 0,
+          messages: [],
+        };
+      }
+      threads[msg.threadId].messages.push(msg);
+      if (!msg.read && msg.recipientId === session.user.id) {
+        threads[msg.threadId].unreadCount++;
+      }
+    });
+
+    const threadList = Object.values(threads).sort((a, b) => 
+      new Date(b.lastMessage.createdAt).getTime() - new Date(a.lastMessage.createdAt).getTime()
     );
+
+    return NextResponse.json({
+      success: true,
+      data: { threads: threadList },
+    });
   } catch (error) {
     console.error('Threads fetch error:', error);
     return NextResponse.json(

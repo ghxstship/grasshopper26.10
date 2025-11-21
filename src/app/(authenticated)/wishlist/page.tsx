@@ -77,7 +77,7 @@ export default function WishlistPage() {
             <CardContent className="py-24 text-center">
               <H3 className="mb-4">Your wishlist is empty</H3>
               <Body className="mb-8 text-gray-600">Save events to keep track of them</Body>
-              <Link href="/(rebuild)/events">
+              <Link href="/gvteway/events">
                 <Button>Browse Events</Button>
               </Link>
             </CardContent>
@@ -93,7 +93,7 @@ export default function WishlistPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardFooter className="flex gap-3">
-                  <Link href={`/(rebuild)/events/${item.event.id}`} className="flex-1">
+                  <Link href={`/gvteway/events/${item.event.id}`} className="flex-1">
                     <Button fullWidth>View Event</Button>
                   </Link>
                   <Button variant="ghost">Remove</Button>

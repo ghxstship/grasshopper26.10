@@ -28,9 +28,8 @@ export default function BackgroundChecksPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/credentials/background');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,31 @@ export default function BackgroundChecksPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Background Check Status</CardTitle>
+            <CardDescription>{data?.status || 'Not started'}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              <div>
+                <Body className="font-medium">Status:</Body>
+                <Body className="capitalize">{data?.status || 'pending'}</Body>
+              </div>
+              {data?.submittedDate && (
+                <div>
+                  <Body className="font-medium">Submitted:</Body>
+                  <Body>{new Date(data.submittedDate).toLocaleDateString()}</Body>
+                </div>
+              )}
+              {data?.completedDate && (
+                <div>
+                  <Body className="font-medium">Completed:</Body>
+                  <Body>{new Date(data.completedDate).toLocaleDateString()}</Body>
+                </div>
+              )}
+              {!data?.submittedDate && (
+                <Button variant="compvss">Start Background Check</Button>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>

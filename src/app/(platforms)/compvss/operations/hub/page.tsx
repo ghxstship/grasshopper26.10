@@ -28,9 +28,8 @@ export default function OperationsHubPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/operations/hub');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,22 @@ export default function OperationsHubPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {data?.modules && data.modules.map((module: any) => (
+            <Card key={module.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{module.name}</CardTitle>
+                <CardDescription>{module.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="compvss" className="w-full">Access {module.name}</Button>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.modules || data.modules.length === 0) && (
+            <Card variant="compvss" className="col-span-full"><CardContent className="p-12 text-center"><Body className="text-gray-500">No modules available</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

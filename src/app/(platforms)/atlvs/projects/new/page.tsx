@@ -15,43 +15,7 @@ import { apiClient } from '@/lib/api/client';
 
 
 export default function NewProjectPage() {
-  const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
-        if (token) {
-          apiClient.setAuthToken(token);
-        }
-
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar variant="atlvs" />
-        <div className="flex justify-center items-center py-24">
-          <Spinner size="xl" />
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <div className="min-h-screen bg-white">
@@ -67,13 +31,11 @@ export default function NewProjectPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Create New Project</CardTitle>
+            <CardDescription>Start a new project</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Button variant="atlvs">Create Project</Button>
           </CardContent>
         </Card>
       </div>

@@ -28,9 +28,8 @@ export default function AccessControlPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/qr/access-control');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,26 @@ export default function AccessControlPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Access Control</CardTitle>
+            <CardDescription>QR-based access management</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.accessPoints && data.accessPoints.map((point: any) => (
+                <div key={point.id} className="flex items-center justify-between p-4 border rounded">
+                  <div>
+                    <Body className="font-medium">{point.name}</Body>
+                    <Body className="text-sm text-gray-500">{point.location}</Body>
+                  </div>
+                  <Body className={point.hasAccess ? 'text-green-600' : 'text-red-600'}>
+                    {point.hasAccess ? '✓ Access' : '✗ No Access'}
+                  </Body>
+                </div>
+              ))}
+              {(!data?.accessPoints || data.accessPoints.length === 0) && (
+                <Body className="text-gray-500 text-center py-8">No access points configured</Body>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>

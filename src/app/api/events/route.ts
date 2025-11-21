@@ -116,7 +116,7 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    return successResponse(events, {
+    return successResponse({ events }, {
       page,
       limit,
       total,

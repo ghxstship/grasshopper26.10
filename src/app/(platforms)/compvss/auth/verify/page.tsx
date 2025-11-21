@@ -14,10 +14,17 @@ import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface VerifyStatus {
+  verified: boolean;
+  email: string;
+  verificationSent: boolean;
+  expiresAt?: string;
+}
+
 export default function VerifyAccountPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [status, setStatus] = React.useState<VerifyStatus | null>(null);
+  const [sending, setSending] = React.useState(false);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +35,10 @@ export default function VerifyAccountPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<VerifyStatus>('/api/auth/verify-status');
+        if (response.data) {
+          setStatus(response.data);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -40,6 +48,18 @@ export default function VerifyAccountPage() {
 
     fetchData();
   }, []);
+
+  const handleResendVerification = async () => {
+    setSending(true);
+    try {
+      await apiClient.post('/api/auth/resend-verification');
+      alert('Verification email sent!');
+    } catch (error) {
+      console.error('Failed to resend:', error);
+    } finally {
+      setSending(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -57,23 +77,33 @@ export default function VerifyAccountPage() {
     <div className="min-h-screen bg-white">
       <Navbar variant="compvss" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Verify Account</H1>
-          <Body className="text-gray-600">
-            Verify Account page content
-          </Body>
+      <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-8">
+          <H1 className="mb-2">Verify Account</H1>
+          <Body className="text-gray-600">Verify your email address</Body>
         </div>
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>{status?.verified ? 'Account Verified' : 'Verification Required'}</CardTitle>
+            <CardDescription>{status?.email}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            {status?.verified ? (
+              <Body className="text-green-600">✓ Your account is verified</Body>
+            ) : (
+              <div className="space-y-4">
+                <Body>Please check your email for the verification link.</Body>
+                {status?.expiresAt && (
+                  <Body className="text-sm text-gray-500">
+                    Link expires: {new Date(status.expiresAt).toLocaleString()}
+                  </Body>
+                )}
+                <Button variant="compvss" onClick={handleResendVerification} disabled={sending} className="w-full">
+                  {sending ? 'Sending...' : 'Resend Verification Email'}
+                </Button>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>

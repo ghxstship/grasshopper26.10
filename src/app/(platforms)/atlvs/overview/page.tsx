@@ -5,7 +5,7 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
@@ -14,9 +14,16 @@ import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface OverviewData {
+  activeProjects: number;
+  pendingApprovals: number;
+  totalBudget: number;
+  teamMembers: number;
+}
+
 export default function OverviewPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [data, setData] = React.useState<OverviewData | null>(null);
 
 
   React.useEffect(() => {
@@ -28,9 +35,8 @@ export default function OverviewPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<OverviewData>('/api/atlvs/overview');
+        if (response.data) setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +71,34 @@ export default function OverviewPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        {data && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Active Projects</Body>
+                <Display as="div" className="text-4xl">{data.activeProjects}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Pending Approvals</Body>
+                <Display as="div" className="text-4xl text-yellow-600">{data.pendingApprovals}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Total Budget</Body>
+                <Display as="div" className="text-4xl">${data.totalBudget.toLocaleString()}</Display>
+              </CardContent>
+            </Card>
+            <Card variant="atlvs">
+              <CardContent className="pt-6 text-center">
+                <Body className="text-gray-600 mb-2">Team Members</Body>
+                <Display as="div" className="text-4xl">{data.teamMembers}</Display>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
 
       <Footer />

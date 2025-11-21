@@ -6,12 +6,38 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { H1, H2, Body } from '@/components/ui-rebuild/atoms/Typography';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { H1, H2, Body, H3, Caption, Display } from '@/components/ui-rebuild/atoms/Typography';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui-rebuild/atoms/Card';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
+import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
+import { apiClient } from '@/lib/api/client';
 
 export default function AtlvsAnalyticsPage() {
+  const [stats, setStats] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (token) {
+          apiClient.setAuthToken(token);
+        }
+        const response = await apiClient.get<any>('/api/atlvs/analytics/hub');
+        if (response.data) {
+          setStats(response.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch analytics:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
+  }, []);
+
   const modules = [
     { title: 'Projects', description: 'Project performance metrics', href: '/(rebuild)/atlvs/analytics/projects', icon: '📊' },
     { title: 'Budgets', description: 'Financial reports and forecasts', href: '/(rebuild)/atlvs/analytics/budgets', icon: '💰' },
@@ -51,19 +77,19 @@ export default function AtlvsAnalyticsPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="text-center">
-                <div className="font-anton text-5xl mb-2">24</div>
+                <Display as="div" className="mb-2">24</Display>
                 <Body className="text-gray-600">Active Projects</Body>
               </div>
               <div className="text-center">
-                <div className="font-anton text-5xl mb-2">156</div>
+                <Display as="div" className="mb-2">156</Display>
                 <Body className="text-gray-600">Open Tasks</Body>
               </div>
               <div className="text-center">
-                <div className="font-anton text-5xl mb-2">12</div>
+                <Display as="div" className="mb-2">12</Display>
                 <Body className="text-gray-600">Teams</Body>
               </div>
               <div className="text-center">
-                <div className="font-anton text-5xl mb-2">89%</div>
+                <Display as="div" className="mb-2">89%</Display>
                 <Body className="text-gray-600">On Budget</Body>
               </div>
             </div>

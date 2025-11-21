@@ -14,10 +14,17 @@ import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface VaultItem {
+  id: string;
+  title: string;
+  type: string;
+  lastAccessed: string;
+  encrypted: boolean;
+}
+
 export default function CredentialVaultPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [vaultItems, setVaultItems] = React.useState<VaultItem[]>([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +35,10 @@ export default function CredentialVaultPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ items: VaultItem[] }>('/api/compvss/credentials/vault');
+        if (response.data?.items) {
+          setVaultItems(response.data.items);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -58,24 +66,32 @@ export default function CredentialVaultPage() {
       <Navbar variant="compvss" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Credential Vault</H1>
-          <Body className="text-gray-600">
-            Credential Vault page content
-          </Body>
+        <div className="mb-8">
+          <H1 className="mb-2">Credential Vault</H1>
+          <Body className="text-gray-600">Securely stored credentials and documents</Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {vaultItems.map((item) => (
+            <Card key={item.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription className="capitalize">{item.type}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm text-gray-500">Last accessed: {new Date(item.lastAccessed).toLocaleDateString()}</Body>
+                {item.encrypted && <Body className="text-sm text-green-600 mt-2">🔒 Encrypted</Body>}
+              </CardContent>
+            </Card>
+          ))}
+          {vaultItems.length === 0 && (
+            <Card variant="compvss" className="col-span-full">
+              <CardContent className="p-12 text-center">
+                <Body className="text-gray-500">No items in vault</Body>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
 
       <Footer />

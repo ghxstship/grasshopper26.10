@@ -28,9 +28,8 @@ export default function TeamMemberProfilePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get(`/api/compvss/team/profile/${params.id}`);
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,17 @@ export default function TeamMemberProfilePage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>{data?.name || 'Team Member'}</CardTitle>
+            <CardDescription>{data?.role || 'Role'}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.email && <div><Body className="font-medium">Email:</Body><Body>{data.email}</Body></div>}
+              {data?.phone && <div><Body className="font-medium">Phone:</Body><Body>{data.phone}</Body></div>}
+              {data?.department && <div><Body className="font-medium">Department:</Body><Body>{data.department}</Body></div>}
+              {data?.location && <div><Body className="font-medium">Location:</Body><Body>{data.location}</Body></div>}
+              {data?.joinedDate && <div><Body className="font-medium">Joined:</Body><Body>{new Date(data.joinedDate).toLocaleDateString()}</Body></div>}
+            </div>
           </CardContent>
         </Card>
       </div>

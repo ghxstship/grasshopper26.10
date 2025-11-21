@@ -1,10 +1,12 @@
 /**
  * COMPVSS Platform Layout
  * Compensation and vendor settlement system
+ * REQUIRES: Authentication, RBAC (EXTERNAL_TEAM, ADMIN, SUPER_ADMIN)
  */
 
 import type { Metadata } from 'next';
 import { CompvssLayout } from '@/components/templates/CompvssLayout';
+import { PlatformGuard } from '@/components/auth/PlatformGuard';
 
 export const metadata: Metadata = {
   title: {
@@ -19,5 +21,9 @@ export default function COMPVSSLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <CompvssLayout>{children}</CompvssLayout>;
+  return (
+    <PlatformGuard platform="COMPVSS">
+      <CompvssLayout>{children}</CompvssLayout>
+    </PlatformGuard>
+  );
 }

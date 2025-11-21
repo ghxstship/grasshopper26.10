@@ -1,10 +1,12 @@
 /**
  * ATLVS Platform Layout
  * Project management and advancing platform
+ * REQUIRES: Authentication, RBAC (INTERNAL_TEAM, ADMIN, SUPER_ADMIN)
  */
 
 import type { Metadata } from 'next';
 import { AtlvsLayout } from '@/components/templates/AtlvsLayout';
+import { PlatformGuard } from '@/components/auth/PlatformGuard';
 
 export const metadata: Metadata = {
   title: {
@@ -19,5 +21,9 @@ export default function ATLVSLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <AtlvsLayout>{children}</AtlvsLayout>;
+  return (
+    <PlatformGuard platform="ATLVS">
+      <AtlvsLayout>{children}</AtlvsLayout>
+    </PlatformGuard>
+  );
 }

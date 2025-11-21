@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
   // Base styles - Brutalist, high contrast
-  'inline-flex items-center justify-center font-bebas-neue uppercase tracking-wider transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2',
+  'inline-flex items-center justify-center font-bebas uppercase tracking-wider transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2',
   {
     variants: {
       variant: {

@@ -28,9 +28,8 @@ export default function RewardsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/referrals/rewards');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,23 @@ export default function RewardsPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.rewards && data.rewards.map((reward: any) => (
+            <Card key={reward.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{reward.title}</CardTitle>
+                <CardDescription>{reward.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">Requirement: {reward.requirement} referrals</Body>
+                <Body className="text-sm font-bold text-green-600">Reward: ${reward.amount}</Body>
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.rewards || data.rewards.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No rewards available</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

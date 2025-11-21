@@ -7,6 +7,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
@@ -15,11 +16,37 @@ export async function GET(
       );
     }
 
-    // TODO: Message model not implemented in Prisma schema
-    return NextResponse.json(
-      { success: false, error: { code: 'NOT_IMPLEMENTED', message: 'Messaging not implemented' } },
-      { status: 501 }
-    );
+    const message = await prisma.message.findUnique({
+      where: { id },
+      include: {
+        sender: { select: { id: true, name: true, image: true } },
+        recipient: { select: { id: true, name: true, image: true } },
+      },
+    });
+
+    if (!message) {
+      return NextResponse.json(
+        { success: false, error: { code: 'NOT_FOUND', message: 'Message not found' } },
+        { status: 404 }
+      );
+    }
+
+    if (message.senderId !== session.user.id && message.recipientId !== session.user.id) {
+      return NextResponse.json(
+        { success: false, error: { code: 'FORBIDDEN', message: 'Access denied' } },
+        { status: 403 }
+      );
+    }
+
+    // Mark as read if recipient
+    if (message.recipientId === session.user.id && !message.read) {
+      await prisma.message.update({
+        where: { id },
+        data: { read: true, readAt: new Date() },
+      });
+    }
+
+    return NextResponse.json({ success: true, data: { message } });
   } catch (error) {
     console.error('Message fetch error:', error);
     return NextResponse.json(

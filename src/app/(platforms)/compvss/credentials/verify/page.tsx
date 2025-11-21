@@ -28,9 +28,8 @@ export default function VerifyCredentialsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/credentials/verify-status');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,26 @@ export default function VerifyCredentialsPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Credential Verification</CardTitle>
+            <CardDescription>Verification status for your credentials</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.items && data.items.map((item: any) => (
+                <div key={item.id} className="flex items-center justify-between p-4 border rounded">
+                  <div>
+                    <Body className="font-medium">{item.name}</Body>
+                    <Body className="text-sm text-gray-500">{item.type}</Body>
+                  </div>
+                  <Body className={item.verified ? 'text-green-600' : 'text-yellow-600'}>
+                    {item.verified ? '✓ Verified' : 'Pending'}
+                  </Body>
+                </div>
+              ))}
+              {(!data?.items || data.items.length === 0) && (
+                <Body className="text-gray-500 text-center py-8">No credentials to verify</Body>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>

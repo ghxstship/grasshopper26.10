@@ -8,15 +8,25 @@ import * as React from 'react';
 import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface Expense {
+  id: string;
+  description: string;
+  amount: number;
+  category: string;
+  date: string;
+  status: 'PENDING' | 'APPROVED' | 'REJECTED';
+}
+
 export default function ExpensesPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [expenses, setExpenses] = React.useState<Expense[]>([]);
 
 
   React.useEffect(() => {
@@ -28,9 +38,8 @@ export default function ExpensesPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ expenses: Expense[] }>('/api/atlvs/budgets/expenses');
+        if (response.data?.expenses) setExpenses(response.data.expenses);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +74,27 @@ export default function ExpensesPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {expenses.map((expense) => (
+            <Card key={expense.id} variant="atlvs">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle>{expense.description}</CardTitle>
+                    <CardDescription>{expense.category}</CardDescription>
+                  </div>
+                  <Badge variant={expense.status === 'APPROVED' ? 'default' : 'outline'}>{expense.status}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex justify-between">
+                  <Body className="font-semibold">${expense.amount.toLocaleString()}</Body>
+                  <Body className="text-sm text-gray-600">{new Date(expense.date).toLocaleDateString()}</Body>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

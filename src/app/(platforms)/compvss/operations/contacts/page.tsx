@@ -28,9 +28,8 @@ export default function ContactsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/operations/contacts');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,23 @@ export default function ContactsPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data?.contacts && data.contacts.map((contact: any) => (
+            <Card key={contact.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{contact.name}</CardTitle>
+                <CardDescription>{contact.role}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">{contact.email}</Body>
+                {contact.phone && <Body className="text-sm">{contact.phone}</Body>}
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.contacts || data.contacts.length === 0) && (
+            <Card variant="compvss" className="col-span-full"><CardContent className="p-12 text-center"><Body className="text-gray-500">No contacts available</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

@@ -104,6 +104,14 @@ model User {
   // RBAC
   roleAssignments RoleAssignment[]
 
+  // Messaging
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+
+  // 2FA fields
+  twoFactorSecret  String?
+  twoFactorEnabled Boolean   @default(false)
+
   @@index([role, createdAt])
   @@map("users")
 }
@@ -117,11 +125,50 @@ enum UserRole {
   LEGEND_SUPPORT
   LEGEND_INCOGNITO
   
-  // Standard Roles
+  // Standard Platform Roles
   CONSUMER // GVTEWAY user
   EXTERNAL_TEAM // COMPVSS user
   INTERNAL_TEAM // ATLVS user
   ADMIN // System admin
+  
+  // All Platforms Event Roles
+  EXECUTIVE
+  CORE_AAA
+  AA
+  PRODUCTION
+  MANAGEMENT
+  
+  // COMPVSS Event Roles
+  CREW
+  STAFF
+  VENDOR
+  ENTERTAINER
+  ARTIST
+  AGENT
+  MEDIA
+  SPONSOR
+  PARTNER
+  INDUSTRY
+  INTERN
+  VOLUNTEER
+  
+  // GVTEWAY Event Roles
+  GUEST // Guest List
+  BACKSTAGE_L1 // Backstage Level 1
+  BACKSTAGE_L2 // Backstage Level 2
+  PLATINUM_VIP_L1 // Platinum VIP Level 1
+  PLATINUM_VIP_L2 // Platinum VIP Level 2
+  VIP_L1 // VIP Level 1
+  VIP_L2 // VIP Level 2
+  VIP_L3 // VIP Level 3
+  GA_L1 // GA Level 1
+  GA_L2 // GA Level 2
+  GA_L3 // GA Level 3
+  GA_L4 // GA Level 4
+  GA_L5 // GA Level 5
+  INFLUENCER
+  BRAND_AMBASSADOR
+  AFFILIATE
 }
 
 model Account {
@@ -3159,4 +3206,30 @@ model IPWhitelist {
   @@index([type])
   @@index([ip])
   @@map("ip_whitelist")
+}
+
+// ============================================================================
+// MESSAGING MODELS - Chat/Direct Messaging
+// ============================================================================
+
+model Message {
+  id          String   @id @default(cuid())
+  threadId    String
+  senderId    String
+  recipientId String
+  content     String
+  read        Boolean  @default(false)
+  readAt      DateTime?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sender    User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  recipient User @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([threadId])
+  @@index([senderId])
+  @@index([recipientId])
+  @@index([read])
+  @@map("messages")
 }

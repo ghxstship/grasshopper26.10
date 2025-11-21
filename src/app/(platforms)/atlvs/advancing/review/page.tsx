@@ -5,18 +5,30 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Badge } from '@/components/ui-rebuild/atoms/Badge';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface ReviewRequest {
+  id: string;
+  requestNumber: string;
+  requester: string;
+  amount: number;
+  description: string;
+  status: string;
+  documents: Array<{ name: string; url: string }>;
+}
+
 export default function ReviewRequestPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [requests, setRequests] = React.useState<ReviewRequest[]>([]);
+  const [reviewing, setReviewing] = React.useState<string | null>(null);
 
 
   React.useEffect(() => {
@@ -28,9 +40,10 @@ export default function ReviewRequestPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ requests: ReviewRequest[] }>('/api/atlvs/advancing/review');
+        if (response.data?.requests) {
+          setRequests(response.data.requests);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +78,54 @@ export default function ReviewRequestPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-6">
+          {requests.map((request) => (
+            <Card key={request.id} variant="atlvs">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle>Request #{request.requestNumber}</CardTitle>
+                    <CardDescription>{request.requester}</CardDescription>
+                  </div>
+                  <Badge>{request.status}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Amount</Label>
+                  <Body className="font-semibold">${request.amount.toLocaleString()}</Body>
+                </div>
+                <div>
+                  <Label>Description</Label>
+                  <Body>{request.description}</Body>
+                </div>
+                {request.documents.length > 0 && (
+                  <div>
+                    <Label>Documents</Label>
+                    <div className="space-y-2 mt-2">
+                      {request.documents.map((doc, idx) => (
+                        <a key={idx} href={doc.url} className="block text-sm text-blue-600 hover:underline">
+                          {doc.name}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+              <CardFooter className="flex gap-3">
+                <Button
+                  variant="atlvs"
+                  disabled={reviewing === request.id}
+                  loading={reviewing === request.id}
+                >
+                  Approve
+                </Button>
+                <Button variant="secondary">Request Changes</Button>
+                <Button variant="ghost">Reject</Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Footer />

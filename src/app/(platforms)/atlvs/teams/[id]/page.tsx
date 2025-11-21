@@ -28,9 +28,8 @@ export default function TeamDetailsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get(`/api/atlvs/teams/${params.id}`);
+        if (response.data) setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -39,7 +38,7 @@ export default function TeamDetailsPage() {
     };
 
     fetchData();
-  }, []);
+  }, [params.id]);
 
   if (loading) {
     return (
@@ -67,13 +66,11 @@ export default function TeamDetailsPage() {
 
         <Card variant="atlvs">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Team Details</CardTitle>
+            <CardDescription>Team information</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <Body>Team details</Body>
           </CardContent>
         </Card>
       </div>

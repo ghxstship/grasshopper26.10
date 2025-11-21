@@ -37,7 +37,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         <div className="flex items-start gap-3">
           <div className="flex-1">
             {title && (
-              <div className="font-bebas-neue text-lg tracking-wide mb-2">
+              <div className="font-bebas text-lg tracking-wide mb-2">
                 {title}
               </div>
             )}

@@ -8,7 +8,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Hero } from '../atoms/Typography';
+import { Hero, H5 } from '../atoms/Typography';
 import { Button } from '../atoms/Button';
 import { cn } from '@/lib/utils';
 
@@ -47,14 +47,18 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout, variant = 'default' }) 
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  'font-bebas-neue text-xl tracking-wide transition-colors',
-                  pathname === link.href
-                    ? 'text-black border-b-2 border-black'
-                    : 'text-gray-600 hover:text-black'
-                )}
               >
-                {link.label}
+                <H5
+                  as="span"
+                  className={cn(
+                    'transition-colors',
+                    pathname === link.href
+                      ? 'text-black border-b-2 border-black'
+                      : 'text-gray-600 hover:text-black'
+                  )}
+                >
+                  {link.label}
+                </H5>
               </Link>
             ))}
           </div>
@@ -119,13 +123,17 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout, variant = 'default' }) 
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  'block font-bebas-neue text-2xl tracking-wide',
-                  pathname === link.href ? 'text-black' : 'text-gray-600'
-                )}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {link.label}
+                <H5
+                  as="span"
+                  className={cn(
+                    'block',
+                    pathname === link.href ? 'text-black' : 'text-gray-600'
+                  )}
+                >
+                  {link.label}
+                </H5>
               </Link>
             ))}
             <div className="pt-4 border-t-2 border-gray-200 space-y-3">

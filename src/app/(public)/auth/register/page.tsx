@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { useRegister } from '@/hooks/auth/useRegister';
-import { Button } from '@/components/atoms/Button';
-import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/atoms/Card';
-import { BodyText, SectionHeader } from '@/components/atoms/Typography';
+import { Button } from '@/components/ui-rebuild/atoms/Button';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
+import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Body, H2 } from '@/components/ui-rebuild/atoms/Typography';
 import Link from 'next/link';
 
 export default function RegisterPage() {
@@ -42,7 +42,7 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
       <Card variant="default" className="w-full max-w-md">
         <CardHeader>
-          <SectionHeader>Create Account</SectionHeader>
+          <H2>Create Account</H2>
           <CardDescription>
             Join GVTEWAY to discover amazing events and experiences
           </CardDescription>
@@ -125,7 +125,7 @@ export default function RegisterPage() {
 
             {error && (
               <div className="p-3 bg-red-500/10 border border-red-500 rounded-md">
-                <BodyText className="text-red-500 text-sm">{error}</BodyText>
+                <Body className="text-red-500 text-sm">{error}</Body>
               </div>
             )}
 
@@ -140,12 +140,12 @@ export default function RegisterPage() {
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <BodyText className="text-sm text-gray-400">
+          <Body className="text-sm text-gray-400">
             Already have an account?{' '}
             <Link href="/auth/login" className="text-green-500 hover:text-green-400">
               Sign in
             </Link>
-          </BodyText>
+          </Body>
         </CardFooter>
       </Card>
     </div>

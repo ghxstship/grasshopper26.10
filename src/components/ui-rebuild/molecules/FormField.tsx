@@ -23,7 +23,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
         {label && (
           <label
             htmlFor={fieldId}
-            className="block font-bebas-neue text-lg tracking-wide text-black"
+            className="block font-bebas text-lg tracking-wide text-black"
           >
             {label}
             {required && <span className="ml-1 text-gray-900">*</span>}

@@ -5,7 +5,7 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Caption } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
@@ -13,14 +13,20 @@ import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
+interface MarketingMaterial {
+  id: string;
+  title: string;
+  type: string;
+  url: string;
+  downloadCount: number;
+}
 
 export default function MarketingMaterialsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
-
+  const [materials, setMaterials] = React.useState<MarketingMaterial[]>([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const fetchMaterials = async () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
@@ -28,17 +34,18 @@ export default function MarketingMaterialsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<{ materials: MarketingMaterial[] }>('/api/compvss/affiliates/marketing');
+        if (response.data?.materials) {
+          setMaterials(response.data.materials);
+        }
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error('Failed to fetch materials:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchMaterials();
   }, []);
 
   if (loading) {
@@ -58,24 +65,34 @@ export default function MarketingMaterialsPage() {
       <Navbar variant="compvss" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <H1 className="mb-4">Marketing Materials</H1>
-          <Body className="text-gray-600">
-            Marketing Materials page content
-          </Body>
+        <div className="mb-8">
+          <H1 className="mb-2">Marketing Materials</H1>
+          <Body className="text-gray-600">Download marketing assets for promotion</Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {materials.map((material) => (
+            <Card key={material.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{material.title}</CardTitle>
+                <CardDescription className="capitalize">{material.type}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <Caption className="text-gray-500">{material.downloadCount} downloads</Caption>
+                  <Button variant="compvss" onClick={() => window.open(material.url, '_blank')}>Download</Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          {materials.length === 0 && (
+            <Card variant="compvss" className="col-span-full">
+              <CardContent className="p-12 text-center">
+                <Body className="text-gray-500">No marketing materials available</Body>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
 
       <Footer />

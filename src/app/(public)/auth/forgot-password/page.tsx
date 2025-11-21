@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/atoms/Button';
-import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/atoms/Card';
-import { BodyText, SectionHeader } from '@/components/atoms/Typography';
+import { Button } from '@/components/ui-rebuild/atoms/Button';
+import { Input } from '@/components/ui-rebuild/atoms/Input';
+import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
+import { Body, H2 } from '@/components/ui-rebuild/atoms/Typography';
 import Link from 'next/link';
 
 export default function ForgotPasswordPage() {
@@ -46,16 +46,16 @@ export default function ForgotPasswordPage() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
         <Card variant="default" className="w-full max-w-md">
           <CardHeader>
-            <SectionHeader>Check Your Email</SectionHeader>
+            <H2>Check Your Email</H2>
             <CardDescription>
               We&apos;ve sent a password reset link to {email}
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <BodyText className="text-gray-300">
+            <Body className="text-gray-600">
               Please check your email and click the link to reset your password. 
               The link will expire in 1 hour.
-            </BodyText>
+            </Body>
           </CardContent>
           <CardFooter className="flex justify-center">
             <Link href="/auth/login">
@@ -71,7 +71,7 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
       <Card variant="default" className="w-full max-w-md">
         <CardHeader>
-          <SectionHeader>Reset Password</SectionHeader>
+          <H2>Reset Password</H2>
           <CardDescription>
             Enter your email address and we&apos;ll send you a link to reset your password
           </CardDescription>
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
 
             {error && (
               <div className="p-3 bg-red-500/10 border border-red-500 rounded-md">
-                <BodyText className="text-red-500 text-sm">{error}</BodyText>
+                <Body className="text-red-500 text-sm">{error}</Body>
               </div>
             )}
 
@@ -109,12 +109,12 @@ export default function ForgotPasswordPage() {
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <BodyText className="text-sm text-gray-400">
+          <Body className="text-sm text-gray-400">
             Remember your password?{' '}
             <Link href="/auth/login" className="text-green-500 hover:text-green-400">
               Sign in
             </Link>
-          </BodyText>
+          </Body>
         </CardFooter>
       </Card>
     </div>

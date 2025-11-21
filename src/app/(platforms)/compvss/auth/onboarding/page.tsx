@@ -28,9 +28,8 @@ export default function OnboardingPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/auth/onboarding-steps');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,26 @@ export default function OnboardingPage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        {data?.steps && data.steps.map((step: any, index: number) => (
+          <Card key={index} variant="compvss" className="mb-4">
+            <CardHeader>
+              <CardTitle>Step {index + 1}: {step.title}</CardTitle>
+              <CardDescription>{step.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Body className={step.completed ? 'text-green-600' : 'text-gray-600'}>
+                {step.completed ? '✓ Completed' : 'Pending'}
+              </Body>
+            </CardContent>
+          </Card>
+        ))}
+        {!data?.steps && (
+          <Card variant="compvss">
+            <CardContent className="p-12 text-center">
+              <Body className="text-gray-500">No onboarding steps available</Body>
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       <Footer />

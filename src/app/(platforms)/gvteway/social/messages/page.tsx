@@ -12,8 +12,42 @@ import { Input } from '@/components/ui-rebuild/atoms/Input';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
+import { apiClient } from '@/lib/api/client';
+import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 
 export default function MessagesPage() {
+  const [data, setData] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (token) {
+          apiClient.setAuthToken(token);
+        }
+        const response = await apiClient.get<any>('/api/messages');
+        if (response.data) {
+          setData(response.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
   const [message, setMessage] = React.useState('');
 
   return (

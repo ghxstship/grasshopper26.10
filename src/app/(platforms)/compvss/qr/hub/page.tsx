@@ -28,9 +28,8 @@ export default function QRHubPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/qr/stats');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,15 +64,17 @@ export default function QRHubPage() {
           </Body>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card variant="compvss"><CardContent className="p-6"><Body className="text-sm text-gray-500">Total Scans</Body><Body className="text-2xl font-bold">{data?.totalScans || 0}</Body></CardContent></Card>
+          <Card variant="compvss"><CardContent className="p-6"><Body className="text-sm text-gray-500">Generated</Body><Body className="text-2xl font-bold">{data?.generated || 0}</Body></CardContent></Card>
+          <Card variant="compvss"><CardContent className="p-6"><Body className="text-sm text-gray-500">Active</Body><Body className="text-2xl font-bold">{data?.active || 0}</Body></CardContent></Card>
+          <Card variant="compvss"><CardContent className="p-6"><Body className="text-sm text-gray-500">Access Points</Body><Body className="text-2xl font-bold">{data?.accessPoints || 0}</Body></CardContent></Card>
+        </div>
         <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+          <CardHeader><CardTitle>Quick Actions</CardTitle></CardHeader>
+          <CardContent className="space-y-2">
+            <Button variant="compvss" className="w-full">Scan QR Code</Button>
+            <Button variant="secondary" className="w-full">Generate New Code</Button>
           </CardContent>
         </Card>
       </div>

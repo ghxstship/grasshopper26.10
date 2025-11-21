@@ -28,9 +28,8 @@ export default function SchedulePage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/operations/schedule');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +64,23 @@ export default function SchedulePage() {
           </Body>
         </div>
 
-        <Card variant="compvss">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          {data?.events && data.events.map((event: any) => (
+            <Card key={event.id} variant="compvss">
+              <CardHeader>
+                <CardTitle>{event.title}</CardTitle>
+                <CardDescription>{new Date(event.startTime).toLocaleString()}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Body className="text-sm">{event.location}</Body>
+                {event.description && <Body className="text-sm text-gray-500">{event.description}</Body>}
+              </CardContent>
+            </Card>
+          ))}
+          {(!data?.events || data.events.length === 0) && (
+            <Card variant="compvss"><CardContent className="p-12 text-center"><Body className="text-gray-500">No scheduled events</Body></CardContent></Card>
+          )}
+        </div>
       </div>
 
       <Footer />

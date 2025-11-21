@@ -5,14 +5,48 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body, Caption } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, Body, Caption, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Input } from '@/components/ui-rebuild/atoms/Input';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
+import { apiClient } from '@/lib/api/client';
+import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
 
 export default function CompvssReferralsPage() {
+  const [data, setData] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (token) {
+          apiClient.setAuthToken(token);
+        }
+        const response = await apiClient.get<any>('/api/compvss/referrals');
+        if (response.data) {
+          setData(response.data.referrals || response.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
   const [referralLink] = React.useState('https://compvss.com/ref/ABC123');
 
   const copyLink = () => {
@@ -32,25 +66,25 @@ export default function CompvssReferralsPage() {
           <Card>
             <CardContent className="p-6 text-center">
               <Caption className="text-gray-500 mb-2">Total Referrals</Caption>
-              <div className="font-anton text-5xl">12</div>
+              <Display as="div">12</Display>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="p-6 text-center">
               <Caption className="text-gray-500 mb-2">Active</Caption>
-              <div className="font-anton text-5xl">8</div>
+              <Display as="div">8</Display>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="p-6 text-center">
               <Caption className="text-gray-500 mb-2">Rewards Earned</Caption>
-              <div className="font-anton text-5xl">$240</div>
+              <Display as="div">$240</Display>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="p-6 text-center">
               <Caption className="text-gray-500 mb-2">Rank</Caption>
-              <div className="font-anton text-5xl">#15</div>
+              <Display as="div">#15</Display>
             </CardContent>
           </Card>
         </div>

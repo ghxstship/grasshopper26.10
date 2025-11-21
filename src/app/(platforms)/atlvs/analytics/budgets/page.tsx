@@ -5,7 +5,7 @@
 'use client';
 
 import * as React from 'react';
-import { H1, Body } from '@/components/ui-rebuild/atoms/Typography';
+import { H1, H3, Body, Display } from '@/components/ui-rebuild/atoms/Typography';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui-rebuild/atoms/Card';
 import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
@@ -14,9 +14,21 @@ import { Footer } from '@/components/ui-rebuild/organisms/Footer';
 import { apiClient } from '@/lib/api/client';
 
 
+interface BudgetData {
+  totalBudget: number;
+  spent: number;
+  remaining: number;
+  variance: number;
+  topProjects: Array<{
+    name: string;
+    budget: number;
+    spent: number;
+  }>;
+}
+
 export default function BudgetAnalyticsPage() {
   const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<any>(null);
+  const [data, setData] = React.useState<BudgetData | null>(null);
 
 
   React.useEffect(() => {
@@ -28,9 +40,10 @@ export default function BudgetAnalyticsPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get<BudgetData>('/api/atlvs/analytics/budgets');
+        if (response.data) {
+          setData(response.data);
+        }
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -65,17 +78,56 @@ export default function BudgetAnalyticsPage() {
           </Body>
         </div>
 
-        <Card variant="atlvs">
-          <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
-          </CardContent>
-        </Card>
+        {data && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <Card variant="atlvs">
+                <CardContent className="pt-6 text-center">
+                  <Body className="text-gray-600 mb-2">Total Budget</Body>
+                  <Display as="div" className="text-3xl">${data.totalBudget.toLocaleString()}</Display>
+                </CardContent>
+              </Card>
+              <Card variant="atlvs">
+                <CardContent className="pt-6 text-center">
+                  <Body className="text-gray-600 mb-2">Spent</Body>
+                  <Display as="div" className="text-3xl text-red-600">${data.spent.toLocaleString()}</Display>
+                </CardContent>
+              </Card>
+              <Card variant="atlvs">
+                <CardContent className="pt-6 text-center">
+                  <Body className="text-gray-600 mb-2">Remaining</Body>
+                  <Display as="div" className="text-3xl text-green-600">${data.remaining.toLocaleString()}</Display>
+                </CardContent>
+              </Card>
+              <Card variant="atlvs">
+                <CardContent className="pt-6 text-center">
+                  <Body className="text-gray-600 mb-2">Variance</Body>
+                  <Display as="div" className="text-3xl">{data.variance}%</Display>
+                </CardContent>
+              </Card>
+            </div>
+            <Card variant="atlvs">
+              <CardHeader>
+                <CardTitle>Top Projects by Budget</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {data.topProjects.map((project, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-4 border-2 border-black">
+                      <Body className="font-semibold">{project.name}</Body>
+                      <div className="text-right">
+                        <Body className="font-semibold">${project.spent.toLocaleString()} / ${project.budget.toLocaleString()}</Body>
+                        <Body className="text-sm text-gray-600">
+                          {Math.round((project.spent / project.budget) * 100)}% utilized
+                        </Body>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        )}
       </div>
 
       <Footer />

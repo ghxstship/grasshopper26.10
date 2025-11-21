@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
       prisma.adventure.count({ where }),
     ]);
 
-    return successResponse(adventures, {
+    return successResponse({ adventures }, {
       page,
       limit,
       total,

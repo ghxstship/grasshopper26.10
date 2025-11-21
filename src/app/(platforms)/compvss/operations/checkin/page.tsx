@@ -28,9 +28,8 @@ export default function CheckInPage() {
           apiClient.setAuthToken(token);
         }
 
-        // TODO: Implement API call
-        // const response = await apiClient.get('/api/...');
-        // setData(response.data);
+        const response = await apiClient.get('/api/compvss/operations/checkin-status');
+        setData(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -67,13 +66,15 @@ export default function CheckInPage() {
 
         <Card variant="compvss">
           <CardHeader>
-            <CardTitle>Content</CardTitle>
-            <CardDescription>Page content goes here</CardDescription>
+            <CardTitle>Check-In Status</CardTitle>
+            <CardDescription>{data?.location || 'Location tracking'}</CardDescription>
           </CardHeader>
           <CardContent>
-            <Body>
-              This page is ready for implementation.
-            </Body>
+            <div className="space-y-4">
+              {data?.lastCheckIn && <div><Body className="font-medium">Last Check-In:</Body><Body>{new Date(data.lastCheckIn).toLocaleString()}</Body></div>}
+              {data?.status && <div><Body className="font-medium">Status:</Body><Body className="capitalize">{data.status}</Body></div>}
+              <Button variant="compvss" className="w-full">Check In Now</Button>
+            </div>
           </CardContent>
         </Card>
       </div>

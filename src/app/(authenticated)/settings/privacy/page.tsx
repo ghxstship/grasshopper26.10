@@ -11,14 +11,60 @@ import { Checkbox } from '@/components/ui-rebuild/atoms/Checkbox';
 import { Button } from '@/components/ui-rebuild/atoms/Button';
 import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
 import { Footer } from '@/components/ui-rebuild/organisms/Footer';
+import { Spinner } from '@/components/ui-rebuild/atoms/Spinner';
+import { apiClient } from '@/lib/api/client';
 
 export default function PrivacySettingsPage() {
+  const [loading, setLoading] = React.useState(true);
+  const [saving, setSaving] = React.useState(false);
   const [settings, setSettings] = React.useState({
     profileVisible: true,
     showActivity: true,
     allowMessages: true,
     dataSharing: false,
   });
+
+  React.useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (token) {
+          apiClient.setAuthToken(token);
+        }
+
+        const response = await apiClient.get<typeof settings>('/api/settings/privacy');
+        if (response.data) {
+          setSettings(response.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch privacy settings:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSettings();
+  }, []);
+
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+      await apiClient.put('/api/settings/privacy', settings);
+    } catch (error) {
+      console.error('Failed to save privacy settings:', error);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -61,7 +107,9 @@ export default function PrivacySettingsPage() {
             />
           </CardContent>
           <CardContent>
-            <Button>Save Changes</Button>
+            <Button onClick={handleSave} disabled={saving}>
+              {saving ? 'Saving...' : 'Save Changes'}
+            </Button>
           </CardContent>
         </Card>
       </div>
