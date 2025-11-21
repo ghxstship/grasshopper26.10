@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { GanttChart, GanttTask } from '@/components/atlvs/GanttChart';
+import { GanttChart, GanttTask } from '@/components/ui-rebuild/organisms/GanttChart';
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { EmptyState } from '@/components/molecules/EmptyState';
+import { EmptyState } from '@/components/ui-rebuild/molecules/EmptyState';
 
 describe('EmptyState', () => {
   const mockAction = jest.fn();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Tabs, Tab } from '@/components/molecules/Tabs';
+import { Tabs, Tab } from '@/components/ui-rebuild/molecules/Tabs';
 
 describe('Tabs', () => {
   const mockOnChange = jest.fn();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Toolbar, ToolbarAction } from '@/components/organisms/Toolbar';
+import { Toolbar, ToolbarAction } from '@/components/ui-rebuild/organisms/Toolbar';
 
 describe('Toolbar', () => {
   const mockOnSearch = jest.fn();

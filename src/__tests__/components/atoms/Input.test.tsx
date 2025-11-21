@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@/test-utils/test-utils'
-import { Input } from '@/components/atoms/Input'
+import { Input } from '@/components/ui-rebuild/atoms/Input'
 import userEvent from '@testing-library/user-event'
 
 describe('Input Component', () => {

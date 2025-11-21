@@ -1,23 +1,21 @@
-import { ReactNode } from 'react';
-import { Navigation } from '@/components/organisms/Navigation';
-import { Footer } from '@/components/organisms/Footer';
+/**
+ * COMPVSS Platform Layout Template
+ * Provides consistent layout for COMPVSS platform pages
+ */
 
-export interface CompvssLayoutProps {
-  children: ReactNode;
+import * as React from 'react';
+
+interface CompvssLayoutProps {
+  children: React.ReactNode;
 }
 
-/**
- * COMPVSS Layout - GHXSTSHIP Standardized
- * 
- * Wraps content with Navigation and Footer using the atomic design system.
- * This ensures consistent styling across all COMPVSS pages.
- */
 export function CompvssLayout({ children }: CompvssLayoutProps) {
   return (
-    <div className="min-h-screen bg-ghxst-white">
-      <Navigation />
-      <main>{children}</main>
-      <Footer />
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-indigo-50">
+      {/* TODO: Add COMPVSS-specific sidebar/navigation */}
+      <main className="container mx-auto px-4 py-8">
+        {children}
+      </main>
     </div>
   );
 }

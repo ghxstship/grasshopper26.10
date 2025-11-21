@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Accordion, AccordionItem } from '@/components/molecules/Accordion';
+import { Accordion, AccordionItem } from '@/components/ui-rebuild/molecules/Accordion';
 
 describe('Accordion', () => {
   const mockItems: AccordionItem[] = [

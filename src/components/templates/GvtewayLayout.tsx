@@ -1,23 +1,21 @@
-import { ReactNode } from 'react';
-import { Navigation } from '@/components/organisms/Navigation';
-import { Footer } from '@/components/organisms/Footer';
+/**
+ * GVTEWAY Platform Layout Template
+ * Provides consistent layout for GVTEWAY platform pages
+ */
 
-export interface GvtewayLayoutProps {
-  children: ReactNode;
+import * as React from 'react';
+
+interface GvtewayLayoutProps {
+  children: React.ReactNode;
 }
 
-/**
- * GVTEWAY Layout - GHXSTSHIP Standardized
- * 
- * Wraps content with Navigation and Footer using the atomic design system.
- * This ensures consistent styling across all GVTEWAY pages.
- */
 export function GvtewayLayout({ children }: GvtewayLayoutProps) {
   return (
-    <div className="min-h-screen bg-ghxst-white">
-      <Navigation />
-      <main>{children}</main>
-      <Footer />
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-yellow-50 to-blue-50">
+      {/* TODO: Add GVTEWAY-specific navigation */}
+      <main className="container mx-auto px-4 py-8">
+        {children}
+      </main>
     </div>
   );
 }

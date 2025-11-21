@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { SearchBar } from '@/components/molecules/SearchBar';
+import { SearchBar } from '@/components/ui-rebuild/molecules/SearchBar';
 
 describe('SearchBar', () => {
   describe('Rendering', () => {

@@ -1,5 +1,5 @@
 import { render, screen } from '@/test-utils/test-utils'
-import { Badge } from '@/components/atoms/Badge'
+import { Badge } from '@/components/ui-rebuild/atoms/Badge'
 
 describe('Badge Component', () => {
   describe('Rendering', () => {

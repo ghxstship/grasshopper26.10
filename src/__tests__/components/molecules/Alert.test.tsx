@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Alert } from '@/components/molecules/Alert';
+import { Alert } from '@/components/ui-rebuild/molecules/Alert';
 
 describe('Alert', () => {
   describe('Rendering', () => {

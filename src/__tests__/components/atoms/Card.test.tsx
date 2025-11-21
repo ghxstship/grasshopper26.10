@@ -1,5 +1,5 @@
 import { render, screen } from '@/test-utils/test-utils'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,  } from '@/components/atoms/Card'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,  } from '@/components/ui-rebuild/atoms/Card'
 
 describe('Card Components', () => {
   describe('Card', () => {

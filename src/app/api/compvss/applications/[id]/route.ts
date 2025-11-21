@@ -54,11 +54,11 @@ export async function DELETE(
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    if (error instanceof Error) {
+    if ((error as Error) instanceof Error) {
       return handleApiError(error);
     }
-    if (error.message === 'Unauthorized' || error.message.includes('Cannot withdraw')) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+    if ((error as Error).message === 'Unauthorized' || (error as Error).message.includes('Cannot withdraw')) {
+      return NextResponse.json({ error: (error as Error).message }, { status: 400 });
     }
     return handleApiError(error);
   }

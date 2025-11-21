@@ -32,14 +32,16 @@ export class BatchService {
     return await prisma.qRCode.delete({ where: { id } });
   }
 
-  // Batch job tracking (requires BatchJob model)
-  async createBatchJob(_params: { data: any }) {
-    // TODO: Implement once BatchJob model is added
-    return { id: `batch_${Date.now()}` };
+  // Batch job tracking
+  async createBatchJob(params: { data: any }) {
+    return await prisma.batchJob.create(params);
   }
 
-  async updateBatchJob(_params: { where: { id: string }; data: any }) {
-    // TODO: Implement once BatchJob model is added
-    return null;
+  async updateBatchJob(params: { where: { id: string }; data: any }) {
+    return await prisma.batchJob.update(params);
+  }
+
+  async getBatchJob(id: string) {
+    return await prisma.batchJob.findUnique({ where: { id } });
   }
 }

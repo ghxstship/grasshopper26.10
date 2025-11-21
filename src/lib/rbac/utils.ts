@@ -11,16 +11,22 @@ import { Role, getAllInheritedRoles } from './roles';
  * Get user roles from database
  */
 export async function getUserRoles(userId: string): Promise<Role[]> {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
+  const roleAssignments = await prisma.roleAssignment.findMany({
+    where: { 
+      userId,
+      OR: [
+        { expiresAt: null },
+        { expiresAt: { gt: new Date() } }
+      ]
+    },
   });
 
-  if (!user) {
+  if (roleAssignments.length === 0) {
     return [];
   }
 
-  // User has a single role, not an array of roles
-  return [user.role as Role];
+  // Return all assigned roles as Role enum values
+  return roleAssignments.map(assignment => assignment.role as Role);
 }
 
 /**
@@ -49,26 +55,52 @@ export async function getUserPermissions(userId: string): Promise<Permission[]> 
 /**
  * Assign role to user
  */
-export async function assignRoleToUser(userId: string, role: Role): Promise<void> {
-  // User has a single role field, not a many-to-many relation
-  // Note: Role enum doesn't match UserRole enum - this needs architectural fix
-  await prisma.user.update({
-    where: { id: userId },
-    data: {
-      role: role as any,
+export async function assignRoleToUser(
+  userId: string, 
+  role: Role, 
+  options?: {
+    context?: string;
+    platform?: string;
+    grantedBy?: string;
+    expiresAt?: Date;
+  }
+): Promise<void> {
+  await prisma.roleAssignment.upsert({
+    where: {
+      userId_role_context: {
+        userId,
+        role,
+        context: options?.context || null,
+      },
+    },
+    create: {
+      userId,
+      role,
+      context: options?.context,
+      platform: options?.platform,
+      grantedBy: options?.grantedBy,
+      expiresAt: options?.expiresAt,
+    },
+    update: {
+      expiresAt: options?.expiresAt,
+      updatedAt: new Date(),
     },
   });
 }
 
 /**
- * Remove role from user (sets to default CONSUMER role)
+ * Remove role from user
  */
-export async function removeRoleFromUser(userId: string, _role: Role): Promise<void> {
-  // Reset to default role
-  await prisma.user.update({
-    where: { id: userId },
-    data: {
-      role: 'CONSUMER',
+export async function removeRoleFromUser(
+  userId: string, 
+  role: Role,
+  context?: string
+): Promise<void> {
+  await prisma.roleAssignment.deleteMany({
+    where: {
+      userId,
+      role,
+      context: context || null,
     },
   });
 }

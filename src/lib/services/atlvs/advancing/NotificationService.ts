@@ -39,9 +39,6 @@ export interface AssignmentNotification {
  */
 export class NotificationService {
   private prisma = prisma;
-  // TODO: Integrate EmailService and RealtimeService when available
-  // private emailService: EmailService;
-  // private realtimeService: RealtimeService;
 
   /**
    * Send notification when status changes

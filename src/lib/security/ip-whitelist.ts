@@ -144,7 +144,7 @@ export function requireLegendIp(request: NextRequest): {
 }
 
 /**
- * Add IP to whitelist (requires database storage in production)
+ * Add IP to whitelist with database storage
  */
 export async function addIpToWhitelist(
   ip: string,
@@ -152,23 +152,22 @@ export async function addIpToWhitelist(
   addedBy: string,
   reason?: string
 ): Promise<void> {
-  // In production, store in database
-  // For now, log the action
-  console.log(`IP ${ip} added to ${type} whitelist by ${addedBy}`, { reason });
+  const { prisma } = await import('@/lib/prisma');
   
-  // TODO: Implement database storage
-  // await prisma.ipWhitelist.create({
-  //   data: {
-  //     ip,
-  //     type,
-  //     addedBy,
-  //     reason,
-  //   },
-  // });
+  await prisma.iPWhitelist.create({
+    data: {
+      ip,
+      type,
+      addedBy,
+      reason,
+    },
+  });
+  
+  console.log(`IP ${ip} added to ${type} whitelist by ${addedBy}`, { reason });
 }
 
 /**
- * Remove IP from whitelist
+ * Remove IP from whitelist with database storage
  */
 export async function removeIpFromWhitelist(
   ip: string,
@@ -176,18 +175,18 @@ export async function removeIpFromWhitelist(
   removedBy: string,
   reason?: string
 ): Promise<void> {
-  // In production, update database
-  console.log(`IP ${ip} removed from ${type} whitelist by ${removedBy}`, { reason });
+  const { prisma } = await import('@/lib/prisma');
   
-  // TODO: Implement database storage
-  // await prisma.ipWhitelist.update({
-  //   where: { ip_type: { ip, type } },
-  //   data: {
-  //     revokedAt: new Date(),
-  //     revokedBy: removedBy,
-  //     revokeReason: reason,
-  //   },
-  // });
+  await prisma.iPWhitelist.update({
+    where: { ip_type: { ip, type } },
+    data: {
+      revokedAt: new Date(),
+      revokedBy: removedBy,
+      revokeReason: reason,
+    },
+  });
+  
+  console.log(`IP ${ip} removed from ${type} whitelist by ${removedBy}`, { reason });
 }
 
 /**

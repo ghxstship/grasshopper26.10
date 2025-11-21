@@ -1,23 +1,21 @@
-import { ReactNode } from 'react';
-import { Navigation } from '@/components/organisms/Navigation';
-import { Footer } from '@/components/organisms/Footer';
+/**
+ * ATLVS Platform Layout Template
+ * Provides consistent layout for ATLVS platform pages
+ */
 
-export interface AtlvsLayoutProps {
-  children: ReactNode;
+import * as React from 'react';
+
+interface AtlvsLayoutProps {
+  children: React.ReactNode;
 }
 
-/**
- * ATLVS Layout - GHXSTSHIP Standardized
- * 
- * Wraps content with Navigation and Footer using the atomic design system.
- * This ensures consistent styling across all ATLVS pages.
- */
 export function AtlvsLayout({ children }: AtlvsLayoutProps) {
   return (
-    <div className="min-h-screen bg-ghxst-white">
-      <Navigation />
-      <main>{children}</main>
-      <Footer />
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-orange-50 to-purple-50">
+      {/* TODO: Add ATLVS-specific sidebar/navigation */}
+      <main className="container mx-auto px-4 py-8">
+        {children}
+      </main>
     </div>
   );
 }

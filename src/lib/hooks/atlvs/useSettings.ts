@@ -51,15 +51,17 @@ export function useSettings() {
       queryClient.invalidateQueries({ queryKey: ['settings'] });
       addToast({
         title: 'Settings Updated',
+        message: 'Your settings have been saved successfully',
         description: 'Your settings have been saved successfully',
-        variant: 'success',
+        type: 'success',
       });
     },
     onError: (error: Error) => {
       addToast({
         title: 'Update Failed',
+        message: error.message,
         description: error.message,
-        variant: 'error',
+        type: 'error',
       });
     },
   });

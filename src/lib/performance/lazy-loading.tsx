@@ -53,11 +53,11 @@ export function createLazyComponent<P extends object>(
 // );
 
 export const LazyModal = createLazyComponent(
-  () => import('@/components/organisms/Modal').then(mod => ({ default: mod.Modal }))
+  () => import('@/components/ui-rebuild/organisms/Modal').then(mod => ({ default: mod.Modal }))
 );
 
 export const LazyCommandPalette = createLazyComponent(
-  () => import('@/components/organisms/CommandPalette').then(mod => ({ default: mod.CommandPalette }))
+  () => import('@/components/ui-rebuild/organisms/CommandPalette').then(mod => ({ default: mod.CommandPalette }))
 );
 
 // export const LazyRichTextEditor = createLazyComponent(

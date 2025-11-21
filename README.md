@@ -9,10 +9,10 @@ A comprehensive, enterprise-grade three-platform ecosystem connecting consumers,
 **Agent 1 Progress:** Database schema and foundation ✅  
 **Next Steps:** Supabase setup and authentication implementation
 
-📖 **Quick Start:** See [SETUP_GUIDE.md](./SETUP_GUIDE.md) for deployment instructions  
-📊 **Progress:** See [IMPLEMENTATION_CHECKLIST.md](./IMPLEMENTATION_CHECKLIST.md) for detailed tracking  
-📚 **Documentation:** See [docs/ARCHIVE_INDEX.md](./docs/ARCHIVE_INDEX.md) for all documentation  
-👥 **Coordination:** See [docs/sessions/AGENT_COORDINATION.md](./docs/sessions/AGENT_COORDINATION.md) for multi-agent workflow
+📖 **Quick Start:** See [docs/guides/SETUP_GUIDE.md](./docs/guides/SETUP_GUIDE.md) for deployment instructions  
+📚 **Documentation:** See [docs/](./docs/) for all documentation  
+🏗️ **Architecture:** See [docs/architecture/](./docs/architecture/) for system design  
+📋 **API Reference:** See [docs/api/](./docs/api/) for API documentation
 
 ## 🎯 Project Overview
 
@@ -150,27 +150,44 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-**📖 For detailed setup instructions, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)**
+**📖 For detailed setup instructions, see [docs/guides/SETUP_GUIDE.md](./docs/guides/SETUP_GUIDE.md)**
 
 ## 🏗️ Project Structure
 
 ```
-src/
-├── app/                    # Next.js App Router
-│   ├── (gvteway)/         # GVTEWAY platform routes
-│   ├── (compvss)/         # COMPVSS platform routes
-│   ├── (atlvs)/           # ATLVS platform routes
-│   ├── api/               # API routes
-│   └── layout.tsx         # Root layout
-├── components/            # React components
-│   ├── atoms/            # Basic building blocks
-│   ├── molecules/        # Composite components
-│   ├── organisms/        # Complex components
-│   └── templates/        # Page templates
-├── lib/                  # Utility functions
-├── hooks/                # Custom React hooks
-├── store/                # Zustand stores
-└── types/                # TypeScript types
+├── .archive/              # Historical reports and old documentation
+│   ├── build-logs/       # Build and lint logs
+│   ├── old-docs/         # Archived documentation
+│   ├── old-scripts/      # Deprecated scripts
+│   └── reports/          # Historical validation reports
+├── .github/              # GitHub workflows and CI/CD
+├── contracts/            # Smart contracts (Solidity)
+├── docs/                 # Current documentation
+│   ├── api/             # API documentation and OpenAPI specs
+│   ├── architecture/    # System architecture and design docs
+│   └── guides/          # Setup and user guides
+├── e2e/                  # End-to-end tests (Playwright)
+├── n8n/                  # N8N workflow automation
+├── prisma/               # Database schema and migrations
+├── public/               # Static assets
+├── scripts/              # Build and utility scripts
+├── src/                  # Application source code
+│   ├── app/             # Next.js App Router
+│   │   ├── (gvteway)/  # GVTEWAY platform routes
+│   │   ├── (compvss)/  # COMPVSS platform routes
+│   │   ├── (atlvs)/    # ATLVS platform routes
+│   │   └── api/        # API routes
+│   ├── components/      # React components (Atomic Design)
+│   │   ├── atoms/      # Basic building blocks
+│   │   ├── molecules/  # Composite components
+│   │   ├── organisms/  # Complex components
+│   │   └── templates/  # Page templates
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utility functions
+│   ├── store/           # Zustand stores
+│   └── types/           # TypeScript types
+├── supabase/             # Supabase functions and migrations
+└── tests/                # Unit and integration tests
 ```
 
 ## 🎨 Atomic Design System

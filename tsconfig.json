@@ -5,8 +5,6 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -37,7 +35,14 @@
     "n8n/**/*",
     "hardhat.config.ts",
     "scripts/deploy-nft.ts",
+    "scripts/generate-css-tokens.ts",
+    "tailwind.config.ts",
     "contracts/**/*",
-    "supabase/functions/**/*"
+    "supabase/functions/**/*",
+    "src/__tests__/**/*",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ]
 }

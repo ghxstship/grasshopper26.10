@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Pagination } from '@/components/molecules/Pagination';
+import { Pagination } from '@/components/ui-rebuild/molecules/Pagination';
 
 describe('Pagination', () => {
   const mockOnPageChange = jest.fn();

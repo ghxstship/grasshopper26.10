@@ -1,5 +1,5 @@
 import { render, screen } from '@/test-utils/test-utils'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/ui-rebuild/atoms/Button'
 import userEvent from '@testing-library/user-event'
 
 describe('Button Component', () => {

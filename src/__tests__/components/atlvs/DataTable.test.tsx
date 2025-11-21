@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { DataTable, DataTableColumn } from '@/components/atlvs/DataTable';
+import { DataTable, DataTableColumn } from '@/components/ui-rebuild/organisms/DataTable';
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({

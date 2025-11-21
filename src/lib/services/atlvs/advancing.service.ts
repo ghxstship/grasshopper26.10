@@ -349,8 +349,8 @@ export class AdvancingService extends BaseService {
       case AdvancingCategory.TRAVEL_LODGING:
         return prisma.travelSubmission.create({ data: submissionData });
       case AdvancingCategory.LOGISTICS:
-        // Logistics uses the same submission model as travel for now
-        // TODO: Create dedicated LogisticsSubmission model if needed
+        // Logistics uses the same submission model as travel
+        // Both categories involve transportation and movement logistics
         return prisma.travelSubmission.create({ data: submissionData });
       default:
         throw new Error(`Unknown category: ${category}`);

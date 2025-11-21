@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { KanbanBoard, KanbanColumn, KanbanTask } from '@/components/atlvs/KanbanBoard';
+import { KanbanBoard, KanbanColumn, KanbanTask } from '@/components/ui-rebuild/organisms/KanbanBoard';
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({

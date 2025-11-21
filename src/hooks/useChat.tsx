@@ -109,11 +109,10 @@ export function useChat(options: UseChatOptions): UseChatReturn {
         const newMessage: ChatMessageProps = {
           id: `temp-${Date.now()}`,
           content,
-          senderId: currentUserId,
-          senderName: 'You',
+          message: content,
+          sender: (currentUserId === 'user' ? 'user' : 'assistant') as 'user' | 'assistant',
           timestamp: new Date(),
           status: 'sending',
-          isCurrentUser: true,
         };
 
         // Optimistically add message

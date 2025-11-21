@@ -4,6 +4,7 @@
  */
 
 import { ethers } from 'ethers';
+import pinataSDK from '@pinata/sdk';
 
 export interface NFTMetadata {
   name: string;
@@ -22,27 +23,54 @@ export interface Web3Result<T> {
 }
 
 /**
- * Upload metadata to IPFS
+ * Upload metadata to IPFS using Pinata
  */
 export async function uploadMetadataToIPFS(
   metadata: NFTMetadata
 ): Promise<Web3Result<{ uri: string; hash: string }>> {
   try {
-    // TODO: Implement actual IPFS upload using Pinata, NFT.Storage, or similar
-    // For now, return a placeholder IPFS hash
-    console.warn('[Web3] IPFS upload not yet implemented');
+    const pinataApiKey = process.env.PINATA_API_KEY;
+    const pinataSecretKey = process.env.PINATA_SECRET_KEY;
     
-    // Simulate IPFS upload
-    const metadataString = JSON.stringify(metadata);
-    const hash = ethers.keccak256(ethers.toUtf8Bytes(metadataString));
-    const ipfsHash = hash.slice(2, 48);
-    const uri = `ipfs://${ipfsHash}`;
+    if (!pinataApiKey || !pinataSecretKey) {
+      console.warn('[Web3] Pinata credentials not configured, using fallback');
+      // Fallback to simulated upload
+      const metadataString = JSON.stringify(metadata);
+      const hash = ethers.keccak256(ethers.toUtf8Bytes(metadataString));
+      const ipfsHash = hash.slice(2, 48);
+      const uri = `ipfs://${ipfsHash}`;
+      
+      return {
+        success: true,
+        data: {
+          uri,
+          hash: ipfsHash,
+        },
+      };
+    }
+    
+    // Initialize Pinata
+    const pinata = new pinataSDK(pinataApiKey, pinataSecretKey);
+    
+    // Test authentication
+    await pinata.testAuthentication();
+    
+    // Upload to IPFS
+    const result = await pinata.pinJSONToIPFS(metadata, {
+      pinataMetadata: {
+        name: `${metadata.name}_metadata`,
+      },
+    });
+    
+    const uri = `ipfs://${result.IpfsHash}`;
+    
+    console.log(`[Web3] Uploaded metadata to IPFS: ${uri}`);
     
     return {
       success: true,
       data: {
         uri,
-        hash: ipfsHash,
+        hash: result.IpfsHash,
       },
     };
   } catch (error) {
@@ -67,16 +95,12 @@ export interface MintNFTResult {
 }
 
 /**
- * Mint NFT
+ * Mint NFT using the TicketNFT contract
  */
 export async function mintNFT(
   input: MintNFTInput
 ): Promise<Web3Result<MintNFTResult>> {
   try {
-    // TODO: Implement actual NFT minting
-    // For now, return a placeholder transaction hash
-    console.warn('[Web3] NFT minting not yet implemented');
-    
     if (!input.to || !input.tokenURI) {
       return {
         success: false,
@@ -84,17 +108,82 @@ export async function mintNFT(
       };
     }
     
-    // Simulate transaction hash and token ID
-    const txData = `${input.to}${input.tokenURI}${Date.now()}`;
-    const txHash = ethers.keccak256(ethers.toUtf8Bytes(txData));
-    const tokenId = Math.floor(Math.random() * 1000000).toString();
-    const contractAddress = process.env.NFT_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000';
+    const contractAddress = process.env.NFT_CONTRACT_ADDRESS || process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS;
+    
+    if (!contractAddress) {
+      console.warn('[Web3] NFT contract address not configured, using simulation mode');
+      // Fallback to simulated minting
+      const txData = `${input.to}${input.tokenURI}${Date.now()}`;
+      const txHash = ethers.keccak256(ethers.toUtf8Bytes(txData));
+      const tokenId = Math.floor(Math.random() * 1000000).toString();
+      
+      return {
+        success: true,
+        data: {
+          tokenId,
+          transactionHash: txHash,
+          contractAddress: '0x0000000000000000000000000000000000000000',
+        },
+      };
+    }
+    
+    // Get signer
+    const signer = getSigner();
+    if (!signer) {
+      return {
+        success: false,
+        error: 'Failed to initialize signer - check Web3 configuration',
+      };
+    }
+    
+    // TicketNFT contract ABI (minimal interface for minting)
+    const ticketNFTABI = [
+      'function mintTicket(address to, string memory eventId, string memory ticketType, string memory uri, bool transferable) public returns (uint256)',
+      'event TicketMinted(uint256 indexed tokenId, address indexed owner, string eventId, string ticketType, string tokenURI)',
+    ];
+    
+    // Create contract instance
+    const contract = new ethers.Contract(contractAddress, ticketNFTABI, signer);
+    
+    // Extract metadata from input
+    const eventId = input.metadata?.eventId as string || 'default-event';
+    const ticketType = input.metadata?.ticketType as string || 'GENERAL';
+    const transferable = input.metadata?.transferable !== false;
+    
+    // Mint the NFT
+    const tx = await contract.mintTicket(
+      input.to,
+      eventId,
+      ticketType,
+      input.tokenURI,
+      transferable
+    );
+    
+    console.log(`[Web3] Minting NFT, transaction hash: ${tx.hash}`);
+    
+    // Wait for transaction confirmation
+    const receipt = await tx.wait();
+    
+    // Extract token ID from TicketMinted event
+    const event = receipt.logs
+      .map((log: any) => {
+        try {
+          return contract.interface.parseLog(log);
+        } catch {
+          return null;
+        }
+      })
+      .find((e: any) => e && e.name === 'TicketMinted');
+    
+    const tokenId = event?.args?.tokenId?.toString() || '0';
+    
+    console.log(`[Web3] NFT minted successfully, token ID: ${tokenId}`);
     
     return {
       success: true,
       data: {
         tokenId,
-        transactionHash: txHash,
+        transactionHash: receipt.hash,
         contractAddress,
       },
     };

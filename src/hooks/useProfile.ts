@@ -25,7 +25,11 @@ export interface UserProfile {
 }
 
 export function useProfile() {
-  const { data, error, mutate } = useSWR<UserProfile>('/api/profile', fetcher);
+  const { data, error, mutate } = useSWR<UserProfile>('/api/profile', async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed to fetch profile');
+    return response.json();
+  });
   const [isUpdating, setIsUpdating] = useState(false);
 
   const updateProfile = async (updates: Partial<UserProfile>) => {

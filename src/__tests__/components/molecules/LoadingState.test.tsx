@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { LoadingState } from '@/components/molecules/LoadingState';
+import { LoadingState } from '@/components/ui-rebuild/molecules/LoadingState';
 
 describe('LoadingState', () => {
   describe('Rendering', () => {

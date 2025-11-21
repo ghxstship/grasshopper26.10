@@ -214,7 +214,30 @@ export class ApplicationService {
     });
 
     // Notify organization admins about new application
-    // TODO: Get org admins and send notifications
+    const orgAdmins = await prisma.organizationMember.findMany({
+      where: {
+        organizationId: application.opportunity.organization.id,
+        role: { in: ['ADMIN', 'OWNER'] },
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    // Send notifications to admins
+    const { NotificationService } = await import('./NotificationService');
+    const notificationService = new NotificationService();
+
+    for (const admin of orgAdmins) {
+      await notificationService.create({
+        userId: admin.user.id,
+        title: 'New Opportunity Application',
+        message: `${application.user.name || 'A user'} has applied for ${application.opportunity.title}`,
+        type: 'application',
+        actionUrl: `/opportunities/${data.opportunityId}/applications`,
+        metadata: { applicationId: application.id, opportunityId: data.opportunityId },
+      });
+    }
 
     return application;
   }

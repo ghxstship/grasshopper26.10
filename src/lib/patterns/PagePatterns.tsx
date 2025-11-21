@@ -7,9 +7,9 @@
 
 import { ReactNode } from 'react';
 import { Loader2, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/atoms/Button';
-import { Card, CardHeader } from '@/components/atoms/Card';
-import { BodyText, SubsectionHeader } from "@/components/atoms/Typography";
+import { Button } from '@/components/ui-rebuild/atoms/Button';
+import { Card, CardHeader } from '@/components/ui-rebuild/atoms/Card';
+import { BodyText, SubsectionHeader } from "@/components/ui-rebuild/atoms/Typography";
 
 // ============================================================================
 // PATTERN 1: Data Fetching with Loading/Error States

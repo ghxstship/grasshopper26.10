@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Breadcrumb, BreadcrumbItem } from '@/components/molecules/Breadcrumb';
+import { Breadcrumb, BreadcrumbItem } from '@/components/ui-rebuild/molecules/Breadcrumb';
 
 // Mock Next.js Link
 jest.mock('next/link', () => {

@@ -42,15 +42,17 @@ export function useIntegrations() {
       queryClient.invalidateQueries({ queryKey: ['integrations'] });
       addToast({
         title: 'Integration Connected',
+        message: 'Successfully connected the integration',
         description: 'Successfully connected the integration',
-        variant: 'success',
+        type: 'success',
       });
     },
     onError: (error: Error) => {
       addToast({
         title: 'Connection Failed',
+        message: error.message,
         description: error.message,
-        variant: 'error',
+        type: 'error',
       });
     },
   });
@@ -69,15 +71,17 @@ export function useIntegrations() {
       queryClient.invalidateQueries({ queryKey: ['integrations'] });
       addToast({
         title: 'Integration Disconnected',
+        message: 'Successfully disconnected the integration',
         description: 'Successfully disconnected the integration',
-        variant: 'success',
+        type: 'success',
       });
     },
     onError: (error: Error) => {
       addToast({
         title: 'Disconnection Failed',
+        message: error.message,
         description: error.message,
-        variant: 'error',
+        type: 'error',
       });
     },
   });
