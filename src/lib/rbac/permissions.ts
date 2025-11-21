@@ -241,7 +241,7 @@ export const PermissionGroups = {
   ],
 
   // GVTEWAY Groups
-  GVTEWAY_EVENT_ORGANIZER: [
+  GVTEWAY_EXPERIENCE_CREATOR: [
     Permission.EVENT_READ,
     Permission.EVENT_WRITE,
     Permission.EVENT_PUBLISH,
@@ -262,7 +262,7 @@ export const PermissionGroups = {
     Permission.SOCIAL_WRITE,
   ],
 
-  GVTEWAY_CUSTOMER: [
+  GVTEWAY_MEMBER: [
     Permission.EVENT_READ,
     Permission.TICKET_READ,
     Permission.TICKET_PURCHASE,
@@ -277,7 +277,7 @@ export const PermissionGroups = {
   ],
 
   // System Groups
-  SUPER_ADMIN: Object.values(Permission),
+  ATLVS_SUPER_ADMIN: Object.values(Permission),
 };
 
 /**
@@ -320,23 +320,17 @@ export function hasAllPermissions(
 export function getPermissionsForRole(role: string): Permission[] {
   const rolePermissionMap: Record<string, Permission[]> = {
     // ATLVS Roles
-    'atlvs:project_manager': PermissionGroups.ATLVS_PROJECT_MANAGER,
+    'atlvs:super_admin': PermissionGroups.ATLVS_SUPER_ADMIN,
     'atlvs:team_member': PermissionGroups.ATLVS_TEAM_MEMBER,
-    'atlvs:asset_manager': PermissionGroups.ATLVS_ASSET_MANAGER,
-    'atlvs:budget_approver': PermissionGroups.ATLVS_BUDGET_APPROVER,
-    'atlvs:advancing_approver': PermissionGroups.ATLVS_ADVANCING_APPROVER,
 
     // COMPVSS Roles
     'compvss:admin': PermissionGroups.COMPVSS_ADMIN,
     'compvss:team_member': PermissionGroups.COMPVSS_TEAM_MEMBER,
 
     // GVTEWAY Roles
-    'gvteway:event_organizer': PermissionGroups.GVTEWAY_EVENT_ORGANIZER,
+    'gvteway:experience_creator': PermissionGroups.GVTEWAY_EXPERIENCE_CREATOR,
     'gvteway:artist': PermissionGroups.GVTEWAY_ARTIST,
-    'gvteway:customer': PermissionGroups.GVTEWAY_CUSTOMER,
-
-    // System Roles
-    'super_admin': PermissionGroups.SUPER_ADMIN,
+    'gvteway:member': PermissionGroups.GVTEWAY_MEMBER,
   };
 
   return rolePermissionMap[role] || [];

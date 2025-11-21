@@ -79,13 +79,10 @@ export function useIsAdmin(): boolean {
   const roles = useRoles();
   return useMemo(() => {
     const adminRoles = [
-      Role.SUPER_ADMIN,
-      Role.SYSTEM_ADMIN,
+      Role.ATLVS_SUPER_ADMIN,
       Role.ATLVS_ADMIN,
       Role.COMPVSS_ADMIN,
       Role.GVTEWAY_ADMIN,
-      Role.ORG_OWNER,
-      Role.ORG_ADMIN,
     ];
     return hasAnyRole(roles, adminRoles);
   }, [roles]);
@@ -95,7 +92,7 @@ export function useIsAdmin(): boolean {
  * Hook to check if user is super admin
  */
 export function useIsSuperAdmin(): boolean {
-  return useHasRole(Role.SUPER_ADMIN);
+  return useHasRole(Role.ATLVS_SUPER_ADMIN);
 }
 
 /**

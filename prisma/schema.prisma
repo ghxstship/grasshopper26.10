@@ -142,6 +142,7 @@ enum UserRole {
   CREW
   STAFF
   VENDOR
+  VENUE
   ENTERTAINER
   ARTIST
   AGENT
@@ -154,6 +155,7 @@ enum UserRole {
   
   // GVTEWAY Event Roles
   GUEST // Guest List
+  VERIFIED // Verified Artist
   BACKSTAGE_L1 // Backstage Level 1
   BACKSTAGE_L2 // Backstage Level 2
   PLATINUM_VIP_L1 // Platinum VIP Level 1

@@ -177,8 +177,8 @@ export function requireOwnership(
     if (req.user.id !== ownerId) {
       // Check if user has admin permissions
       const isAdmin = hasAnyRole(req.user.roles, [
-        Role.SUPER_ADMIN,
-        Role.SYSTEM_ADMIN,
+        Role.ATLVS_SUPER_ADMIN,
+        Role.ATLVS_ADMIN,
       ]);
 
       if (!isAdmin) {

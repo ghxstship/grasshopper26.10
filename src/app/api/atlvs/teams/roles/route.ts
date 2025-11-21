@@ -16,7 +16,7 @@ export async function GET(_request: NextRequest) {
     const atlvsRoles = Object.entries(Role)
       .filter(([_, value]) => 
         typeof value === 'string' && 
-        (value.startsWith('atlvs:') || value.startsWith('legend:') || value === 'super_admin')
+        (value.startsWith('atlvs:') || value.startsWith('legend:'))
       )
       .map(([key, value]) => {
         const metadata = RoleMetadataMap[value as Role];

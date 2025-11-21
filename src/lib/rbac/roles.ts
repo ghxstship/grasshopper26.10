@@ -13,42 +13,32 @@ export enum Role {
   LEGEND_INCOGNITO = 'legend:incognito',
 
   // System Roles
-  SUPER_ADMIN = 'super_admin',
-  SYSTEM_ADMIN = 'system_admin',
+  ATLVS_SUPER_ADMIN = 'atlvs:super_admin',
 
   // ATLVS Roles
   ATLVS_ADMIN = 'atlvs:admin',
-  ATLVS_PROJECT_MANAGER = 'atlvs:project_manager',
-  ATLVS_TEAM_LEAD = 'atlvs:team_lead',
   ATLVS_TEAM_MEMBER = 'atlvs:team_member',
-  ATLVS_ASSET_MANAGER = 'atlvs:asset_manager',
-  ATLVS_BUDGET_APPROVER = 'atlvs:budget_approver',
-  ATLVS_ADVANCING_APPROVER = 'atlvs:advancing_approver',
   ATLVS_VIEWER = 'atlvs:viewer',
 
   // COMPVSS Roles
   COMPVSS_ADMIN = 'compvss:admin',
-  COMPVSS_MANAGER = 'compvss:manager',
-  COMPVSS_TEAM_LEAD = 'compvss:team_lead',
   COMPVSS_TEAM_MEMBER = 'compvss:team_member',
-  COMPVSS_AFFILIATE = 'compvss:affiliate',
+  COMPVSS_COLLABORATOR = 'compvss:collaborator',
   COMPVSS_VIEWER = 'compvss:viewer',
 
   // GVTEWAY Roles
   GVTEWAY_ADMIN = 'gvteway:admin',
-  GVTEWAY_EVENT_ORGANIZER = 'gvteway:event_organizer',
+  GVTEWAY_EXPERIENCE_CREATOR = 'gvteway:experience_creator',
   GVTEWAY_VENUE_MANAGER = 'gvteway:venue_manager',
   GVTEWAY_ARTIST = 'gvteway:artist',
-  GVTEWAY_VERIFIED_ARTIST = 'gvteway:verified_artist',
-  GVTEWAY_CUSTOMER = 'gvteway:customer',
-  GVTEWAY_VIP_MEMBER = 'gvteway:vip_member',
+  GVTEWAY_ARTIST_VERIFIED = 'gvteway:artist_verified',
+  GVTEWAY_MEMBER = 'gvteway:member',
+  GVTEWAY_MEMBER_PLUS = 'gvteway:member_plus',
+  GVTEWAY_MEMBER_EXTRA = 'gvteway:member_extra',
+  GVTEWAY_MEMBER_GUEST = 'gvteway:member_guest',
+  GVTEWAY_AFFILIATE = 'gvteway:affiliate',
   GVTEWAY_MODERATOR = 'gvteway:moderator',
 
-  // Organization Roles
-  ORG_OWNER = 'org:owner',
-  ORG_ADMIN = 'org:admin',
-  ORG_MEMBER = 'org:member',
-  ORG_VIEWER = 'org:viewer',
 }
 
 /**
@@ -56,59 +46,43 @@ export enum Role {
  */
 export const RoleHierarchy: Record<Role, Role[]> = {
   // Legend - God Mode (inherit all permissions)
-  [Role.LEGEND_SUPER_ADMIN]: [Role.SUPER_ADMIN],
-  [Role.LEGEND_ADMIN]: [Role.SUPER_ADMIN],
-  [Role.LEGEND_DEVELOPER]: [Role.SUPER_ADMIN],
-  [Role.LEGEND_COLLABORATOR]: [Role.SYSTEM_ADMIN],
-  [Role.LEGEND_SUPPORT]: [Role.SYSTEM_ADMIN],
-  [Role.LEGEND_INCOGNITO]: [Role.SUPER_ADMIN],
+  [Role.LEGEND_SUPER_ADMIN]: [Role.ATLVS_SUPER_ADMIN],
+  [Role.LEGEND_ADMIN]: [Role.ATLVS_SUPER_ADMIN],
+  [Role.LEGEND_DEVELOPER]: [Role.ATLVS_SUPER_ADMIN],
+  [Role.LEGEND_COLLABORATOR]: [Role.ATLVS_ADMIN],
+  [Role.LEGEND_SUPPORT]: [Role.ATLVS_ADMIN],
+  [Role.LEGEND_INCOGNITO]: [Role.ATLVS_SUPER_ADMIN],
 
   // System
-  [Role.SUPER_ADMIN]: [Role.SYSTEM_ADMIN],
-  [Role.SYSTEM_ADMIN]: [],
+  [Role.ATLVS_SUPER_ADMIN]: [Role.ATLVS_ADMIN],
 
   // ATLVS
-  [Role.ATLVS_ADMIN]: [
-    Role.ATLVS_PROJECT_MANAGER,
-    Role.ATLVS_ASSET_MANAGER,
-    Role.ATLVS_BUDGET_APPROVER,
-    Role.ATLVS_ADVANCING_APPROVER,
-  ],
-  [Role.ATLVS_PROJECT_MANAGER]: [Role.ATLVS_TEAM_LEAD],
-  [Role.ATLVS_TEAM_LEAD]: [Role.ATLVS_TEAM_MEMBER],
+  [Role.ATLVS_ADMIN]: [Role.ATLVS_TEAM_MEMBER],
   [Role.ATLVS_TEAM_MEMBER]: [Role.ATLVS_VIEWER],
-  [Role.ATLVS_ASSET_MANAGER]: [Role.ATLVS_VIEWER],
-  [Role.ATLVS_BUDGET_APPROVER]: [Role.ATLVS_VIEWER],
-  [Role.ATLVS_ADVANCING_APPROVER]: [Role.ATLVS_VIEWER],
   [Role.ATLVS_VIEWER]: [],
 
   // COMPVSS
-  [Role.COMPVSS_ADMIN]: [Role.COMPVSS_MANAGER],
-  [Role.COMPVSS_MANAGER]: [Role.COMPVSS_TEAM_LEAD],
-  [Role.COMPVSS_TEAM_LEAD]: [Role.COMPVSS_TEAM_MEMBER],
+  [Role.COMPVSS_ADMIN]: [Role.COMPVSS_TEAM_MEMBER],
   [Role.COMPVSS_TEAM_MEMBER]: [Role.COMPVSS_VIEWER],
-  [Role.COMPVSS_AFFILIATE]: [Role.COMPVSS_VIEWER],
+  [Role.COMPVSS_COLLABORATOR]: [Role.COMPVSS_VIEWER],
   [Role.COMPVSS_VIEWER]: [],
 
   // GVTEWAY
   [Role.GVTEWAY_ADMIN]: [
-    Role.GVTEWAY_EVENT_ORGANIZER,
+    Role.GVTEWAY_EXPERIENCE_CREATOR,
     Role.GVTEWAY_VENUE_MANAGER,
     Role.GVTEWAY_MODERATOR,
   ],
-  [Role.GVTEWAY_EVENT_ORGANIZER]: [Role.GVTEWAY_CUSTOMER],
-  [Role.GVTEWAY_VENUE_MANAGER]: [Role.GVTEWAY_CUSTOMER],
-  [Role.GVTEWAY_VERIFIED_ARTIST]: [Role.GVTEWAY_ARTIST],
-  [Role.GVTEWAY_ARTIST]: [Role.GVTEWAY_CUSTOMER],
-  [Role.GVTEWAY_VIP_MEMBER]: [Role.GVTEWAY_CUSTOMER],
-  [Role.GVTEWAY_CUSTOMER]: [],
+  [Role.GVTEWAY_EXPERIENCE_CREATOR]: [Role.GVTEWAY_MEMBER],
+  [Role.GVTEWAY_VENUE_MANAGER]: [Role.GVTEWAY_MEMBER],
+  [Role.GVTEWAY_ARTIST_VERIFIED]: [Role.GVTEWAY_ARTIST],
+  [Role.GVTEWAY_ARTIST]: [Role.GVTEWAY_MEMBER],
+  [Role.GVTEWAY_MEMBER_EXTRA]: [Role.GVTEWAY_MEMBER_PLUS],
+  [Role.GVTEWAY_MEMBER_PLUS]: [Role.GVTEWAY_MEMBER],
+  [Role.GVTEWAY_MEMBER_GUEST]: [Role.GVTEWAY_MEMBER],
+  [Role.GVTEWAY_MEMBER]: [],
+  [Role.GVTEWAY_AFFILIATE]: [Role.GVTEWAY_MEMBER],
   [Role.GVTEWAY_MODERATOR]: [],
-
-  // Organization
-  [Role.ORG_OWNER]: [Role.ORG_ADMIN],
-  [Role.ORG_ADMIN]: [Role.ORG_MEMBER],
-  [Role.ORG_MEMBER]: [Role.ORG_VIEWER],
-  [Role.ORG_VIEWER]: [],
 };
 
 /**
@@ -181,16 +155,10 @@ export const RoleMetadataMap: Record<Role, RoleMetadata> = {
   },
 
   // System
-  [Role.SUPER_ADMIN]: {
-    name: 'Super Administrator',
-    description: 'Full system access across all platforms',
-    platform: 'system',
-    level: 'admin',
-  },
-  [Role.SYSTEM_ADMIN]: {
-    name: 'System Administrator',
-    description: 'System-level administrative access',
-    platform: 'system',
+  [Role.ATLVS_SUPER_ADMIN]: {
+    name: 'ATLVS Super Administrator',
+    description: 'Highest level ATLVS administrative access',
+    platform: 'atlvs',
     level: 'admin',
   },
 
@@ -201,41 +169,11 @@ export const RoleMetadataMap: Record<Role, RoleMetadata> = {
     platform: 'atlvs',
     level: 'admin',
   },
-  [Role.ATLVS_PROJECT_MANAGER]: {
-    name: 'Project Manager',
-    description: 'Manage projects, tasks, and budgets',
-    platform: 'atlvs',
-    level: 'manager',
-  },
-  [Role.ATLVS_TEAM_LEAD]: {
-    name: 'Team Lead',
-    description: 'Lead a team and manage team tasks',
-    platform: 'atlvs',
-    level: 'manager',
-  },
   [Role.ATLVS_TEAM_MEMBER]: {
     name: 'Team Member',
     description: 'Work on assigned tasks and projects',
     platform: 'atlvs',
     level: 'member',
-  },
-  [Role.ATLVS_ASSET_MANAGER]: {
-    name: 'Asset Manager',
-    description: 'Manage assets and equipment',
-    platform: 'atlvs',
-    level: 'manager',
-  },
-  [Role.ATLVS_BUDGET_APPROVER]: {
-    name: 'Budget Approver',
-    description: 'Approve budgets and expenses',
-    platform: 'atlvs',
-    level: 'manager',
-  },
-  [Role.ATLVS_ADVANCING_APPROVER]: {
-    name: 'Advancing Approver',
-    description: 'Review and approve advancing requests',
-    platform: 'atlvs',
-    level: 'manager',
   },
   [Role.ATLVS_VIEWER]: {
     name: 'Viewer',
@@ -251,27 +189,15 @@ export const RoleMetadataMap: Record<Role, RoleMetadata> = {
     platform: 'compvss',
     level: 'admin',
   },
-  [Role.COMPVSS_MANAGER]: {
-    name: 'COMPVSS Manager',
-    description: 'Manage teams and approve requests',
-    platform: 'compvss',
-    level: 'manager',
-  },
-  [Role.COMPVSS_TEAM_LEAD]: {
-    name: 'Team Lead',
-    description: 'Lead external team operations',
-    platform: 'compvss',
-    level: 'manager',
-  },
   [Role.COMPVSS_TEAM_MEMBER]: {
     name: 'Team Member',
     description: 'External team member access',
     platform: 'compvss',
     level: 'member',
   },
-  [Role.COMPVSS_AFFILIATE]: {
-    name: 'Affiliate',
-    description: 'Affiliate partner access',
+  [Role.COMPVSS_COLLABORATOR]: {
+    name: 'Collaborator',
+    description: 'Collaborator partner access',
     platform: 'compvss',
     level: 'member',
   },
@@ -289,9 +215,9 @@ export const RoleMetadataMap: Record<Role, RoleMetadata> = {
     platform: 'gvteway',
     level: 'admin',
   },
-  [Role.GVTEWAY_EVENT_ORGANIZER]: {
-    name: 'Event Organizer',
-    description: 'Create and manage events',
+  [Role.GVTEWAY_EXPERIENCE_CREATOR]: {
+    name: 'Experience Creator',
+    description: 'Create and manage experiences',
     platform: 'gvteway',
     level: 'manager',
   },
@@ -307,21 +233,39 @@ export const RoleMetadataMap: Record<Role, RoleMetadata> = {
     platform: 'gvteway',
     level: 'member',
   },
-  [Role.GVTEWAY_VERIFIED_ARTIST]: {
+  [Role.GVTEWAY_ARTIST_VERIFIED]: {
     name: 'Verified Artist',
     description: 'Verified artist with enhanced features',
     platform: 'gvteway',
     level: 'member',
   },
-  [Role.GVTEWAY_CUSTOMER]: {
-    name: 'Customer',
-    description: 'Standard customer access',
+  [Role.GVTEWAY_MEMBER]: {
+    name: 'Member',
+    description: 'Standard member access',
     platform: 'gvteway',
     level: 'member',
   },
-  [Role.GVTEWAY_VIP_MEMBER]: {
-    name: 'VIP Member',
-    description: 'VIP membership with exclusive access',
+  [Role.GVTEWAY_MEMBER_PLUS]: {
+    name: 'Member Plus',
+    description: 'Enhanced membership with additional benefits',
+    platform: 'gvteway',
+    level: 'member',
+  },
+  [Role.GVTEWAY_MEMBER_EXTRA]: {
+    name: 'Member Extra',
+    description: 'Premium membership with exclusive access',
+    platform: 'gvteway',
+    level: 'member',
+  },
+  [Role.GVTEWAY_MEMBER_GUEST]: {
+    name: 'Guest Member',
+    description: 'Guest access to events',
+    platform: 'gvteway',
+    level: 'member',
+  },
+  [Role.GVTEWAY_AFFILIATE]: {
+    name: 'Affiliate',
+    description: 'Affiliate partner with promotional access',
     platform: 'gvteway',
     level: 'member',
   },
@@ -330,32 +274,6 @@ export const RoleMetadataMap: Record<Role, RoleMetadata> = {
     description: 'Moderate content and users',
     platform: 'gvteway',
     level: 'manager',
-  },
-
-  // Organization
-  [Role.ORG_OWNER]: {
-    name: 'Organization Owner',
-    description: 'Organization owner with full control',
-    platform: 'organization',
-    level: 'admin',
-  },
-  [Role.ORG_ADMIN]: {
-    name: 'Organization Admin',
-    description: 'Organization administrator',
-    platform: 'organization',
-    level: 'admin',
-  },
-  [Role.ORG_MEMBER]: {
-    name: 'Organization Member',
-    description: 'Organization member',
-    platform: 'organization',
-    level: 'member',
-  },
-  [Role.ORG_VIEWER]: {
-    name: 'Organization Viewer',
-    description: 'Read-only organization access',
-    platform: 'organization',
-    level: 'viewer',
   },
 };
 
