@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Role, RoleMetadataMap } from '@/lib/rbac/roles';
 import { requireAuth } from '@/lib/auth';
 
-export const runtime = 'edge';
+// Note: Cannot use Edge runtime due to NextAuth/Prisma dependencies
 
 /**
  * GET /api/atlvs/teams/roles

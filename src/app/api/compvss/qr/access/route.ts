@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { prisma } from '@/lib/prisma';
@@ -18,10 +18,21 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    // TODO: Implement query logic
-    const data = {};
+    const { searchParams } = new URL(request.url);
+    const qrCode = searchParams.get('qrCode');
 
-    return successResponse(data);
+    if (!qrCode) {
+      throw errors.badRequest('qrCode is required');
+    }
+
+    const ticket = await prisma.ticket.findFirst({
+      where: { qrCode },
+    });
+
+    return successResponse({
+      valid: !!ticket,
+      ticket,
+    });
   } catch (error) {
     return handleApiError(error);
   }

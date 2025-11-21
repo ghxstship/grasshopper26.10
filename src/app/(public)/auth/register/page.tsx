@@ -1,205 +1,153 @@
-/**
- * Register Page - UI Rebuild
- * User registration with API integration
- */
-
 'use client';
 
-import * as React from 'react';
+import { useState } from 'react';
+import { useRegister } from '@/hooks/auth/useRegister';
+import { Button } from '@/components/atoms/Button';
+import { Input } from '@/components/ui/input';
+import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/atoms/Card';
+import { BodyText, SectionHeader } from '@/components/atoms/Typography';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { H1, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
-import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
-import { Input } from '@/components/ui-rebuild/atoms/Input';
-import { Checkbox } from '@/components/ui-rebuild/atoms/Checkbox';
-import { apiClient } from '@/lib/api/client';
 
 export default function RegisterPage() {
-  const router = useRouter();
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
-  const [agreeToTerms, setAgreeToTerms] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const { register, isLoading, error } = useRegister();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    name: '',
+    role: 'CONSUMER' as 'CONSUMER' | 'EXTERNAL_TEAM' | 'INTERNAL_TEAM',
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
 
-    // Validation
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match');
       return;
     }
-
-    if (!agreeToTerms) {
-      setError('You must agree to the terms and conditions');
-      return;
-    }
-
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters');
-      return;
-    }
-
-    setLoading(true);
 
     try {
-      const response = await apiClient.post<{ token: string; user: { id: string; email: string; name: string } }>(
-        '/api/auth/register',
-        { name, email, password }
-      );
-
-      if (response.data) {
-        // Store token
-        localStorage.setItem('auth_token', response.data.token);
-
-        // Set token in API client
-        apiClient.setAuthToken(response.data.token);
-
-        // Redirect to onboarding or dashboard
-        router.push('/dashboard');
-      }
-    } catch (err: unknown) {
-      if (err && typeof err === 'object' && 'message' in err) {
-        setError(err.message as string);
-      } else {
-        setError('Registration failed. Please try again.');
-      }
-    } finally {
-      setLoading(false);
+      await register({
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        role: formData.role,
+      });
+    } catch {
+      // Error is handled by the hook
     }
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <H1 className="mb-4">GVTEWAY</H1>
-          <Body className="text-gray-600">Create your account</Body>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
+      <Card variant="default" className="w-full max-w-md">
+        <CardHeader>
+          <SectionHeader>Create Account</SectionHeader>
+          <CardDescription>
+            Join GVTEWAY to discover amazing events and experiences
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium mb-2">
+                Full Name
+              </label>
+              <Input
+                id="name"
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+                placeholder="John Doe"
+              />
+            </div>
 
-        <Card>
-          <form onSubmit={handleSubmit}>
-            <CardHeader>
-              <CardTitle>Sign Up</CardTitle>
-              <CardDescription>Join thousands of members experiencing the best events</CardDescription>
-            </CardHeader>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email
+              </label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                placeholder="you@example.com"
+              />
+            </div>
 
-            <CardContent className="space-y-6">
-              {error && (
-                <div className="bg-gray-100 border-2 border-black p-4">
-                  <Body className="text-sm text-gray-900">{error}</Body>
-                </div>
-              )}
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium mb-2">
+                Password
+              </label>
+              <Input
+                id="password"
+                type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                required
+                placeholder="••••••••"
+                minLength={8}
+              />
+            </div>
 
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="name">
-                    Full Name
-                  </Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="John Doe"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
+                Confirm Password
+              </label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                required
+                placeholder="••••••••"
+                minLength={8}
+              />
+            </div>
 
-                <div>
-                  <Label htmlFor="email">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
+            <div>
+              <label htmlFor="role" className="block text-sm font-medium mb-2">
+                Account Type
+              </label>
+              <select
+                id="role"
+                value={formData.role}
+                onChange={(e) => setFormData({ ...formData, role: e.target.value as any })}
+                className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option value="CONSUMER">Consumer (Event Attendee)</option>
+                <option value="EXTERNAL_TEAM">External Team (Vendor/Contractor)</option>
+                <option value="INTERNAL_TEAM">Internal Team (Production Staff)</option>
+              </select>
+            </div>
 
-                <div>
-                  <Label htmlFor="password">
-                    Password
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    disabled={loading}
-                    helperText="Minimum 8 characters"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="confirmPassword">
-                    Confirm Password
-                  </Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    placeholder="••••••••"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <Checkbox
-                  id="terms"
-                  label={
-                    <span className="font-share-tech text-sm">
-                      I agree to the{' '}
-                      <Link href="/terms" className="text-black font-bold hover:underline">
-                        Terms of Service
-                      </Link>{' '}
-                      and{' '}
-                      <Link href="/privacy" className="text-black font-bold hover:underline">
-                        Privacy Policy
-                      </Link>
-                    </span>
-                  }
-                  checked={agreeToTerms}
-                  onChange={(e) => setAgreeToTerms(e.target.checked)}
-                  disabled={loading}
-                />
+            {error && (
+              <div className="p-3 bg-red-500/10 border border-red-500 rounded-md">
+                <BodyText className="text-red-500 text-sm">{error}</BodyText>
               </div>
-            </CardContent>
+            )}
 
-            <CardFooter className="flex-col space-y-4">
-              <Button type="submit" fullWidth loading={loading} disabled={loading}>
-                {loading ? 'Creating account...' : 'Create Account'}
-              </Button>
-
-              <Body className="text-sm text-center text-gray-600">
-                Already have an account?{' '}
-                <Link href="/auth/login" className="text-black font-bold hover:underline">
-                  Sign in
-                </Link>
-              </Body>
-            </CardFooter>
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Creating Account...' : 'Create Account'}
+            </Button>
           </form>
-        </Card>
-
-        <div className="mt-8 text-center">
-          <Link href="/" className="font-share-tech text-sm text-gray-600 hover:text-black">
-            ← Back to home
-          </Link>
-        </div>
-      </div>
+        </CardContent>
+        <CardFooter className="flex justify-center">
+          <BodyText className="text-sm text-gray-400">
+            Already have an account?{' '}
+            <Link href="/auth/login" className="text-green-500 hover:text-green-400">
+              Sign in
+            </Link>
+          </BodyText>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

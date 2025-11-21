@@ -3,7 +3,7 @@ import { assignRoleToUser } from '@/lib/rbac/utils';
 import { Role } from '@/lib/rbac/roles';
 import { requireAuth } from '@/lib/auth';
 
-export const runtime = 'edge';
+// Note: Cannot use Edge runtime due to NextAuth/Prisma dependencies
 
 /**
  * POST /api/atlvs/teams/assign-roles

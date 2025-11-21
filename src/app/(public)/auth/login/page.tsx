@@ -1,156 +1,154 @@
-/**
- * Login Page - UI Rebuild
- * Authentication with API integration
- */
-
 'use client';
 
-import * as React from 'react';
-import Link from 'next/link';
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { H1, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
-import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui-rebuild/atoms/Card';
-import { Input } from '@/components/ui-rebuild/atoms/Input';
-import { Checkbox } from '@/components/ui-rebuild/atoms/Checkbox';
-import { apiClient } from '@/lib/api/client';
+import { Button } from '@/components/atoms/Button';
+import { Input } from '@/components/ui/input';
+import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/atoms/Card';
+import { BodyText, SectionHeader } from '@/components/atoms/Typography';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [rememberMe, setRememberMe] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
+    setIsLoading(true);
+    setError(null);
 
     try {
-      const response = await apiClient.post<{ token: string; user: { id: string; email: string; name: string } }>(
-        '/api/auth/login',
-        { email, password }
-      );
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      });
 
-      if (response.data) {
-        // Store token
-        if (rememberMe) {
-          localStorage.setItem('auth_token', response.data.token);
-        } else {
-          sessionStorage.setItem('auth_token', response.data.token);
-        }
-
-        // Set token in API client
-        apiClient.setAuthToken(response.data.token);
-
-        // Redirect to dashboard
+      if (result?.error) {
+        setError(result.error);
+      } else if (result?.ok) {
         router.push('/dashboard');
       }
-    } catch (err: unknown) {
-      if (err && typeof err === 'object' && 'message' in err) {
-        setError(err.message as string);
-      } else {
-        setError('Login failed. Please check your credentials.');
-      }
+    } catch {
+      setError('An unexpected error occurred');
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
+  const handleOAuthSignIn = async (provider: string) => {
+    setIsLoading(true);
+    await signIn(provider, { callbackUrl: '/dashboard' });
+  };
+
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <H1 className="mb-4">GVTEWAY</H1>
-          <Body className="text-gray-600">Sign in to your account</Body>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
+      <Card variant="default" className="w-full max-w-md">
+        <CardHeader>
+          <SectionHeader>Welcome Back</SectionHeader>
+          <CardDescription>
+            Sign in to your GVTEWAY account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email
+              </label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                placeholder="you@example.com"
+              />
+            </div>
 
-        <Card>
-          <form onSubmit={handleSubmit}>
-            <CardHeader>
-              <CardTitle>Login</CardTitle>
-              <CardDescription>Enter your credentials to continue</CardDescription>
-            </CardHeader>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium mb-2">
+                Password
+              </label>
+              <Input
+                id="password"
+                type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                required
+                placeholder="••••••••"
+              />
+            </div>
 
-            <CardContent className="space-y-6">
-              {error && (
-                <div className="bg-gray-100 border-2 border-black p-4">
-                  <Body className="text-sm text-gray-900">{error}</Body>
-                </div>
-              )}
+            <div className="flex items-center justify-between">
+              <label className="flex items-center">
+                <input type="checkbox" className="mr-2" />
+                <BodyText className="text-sm">Remember me</BodyText>
+              </label>
+              <Link href="/auth/forgot-password" className="text-sm text-green-500 hover:text-green-400">
+                Forgot password?
+              </Link>
+            </div>
 
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="email">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="password">
-                    Password
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <Checkbox
-                    id="remember"
-                    label="Remember me"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    disabled={loading}
-                  />
-                  <Link
-                    href="/auth/forgot-password"
-                    className="font-share-tech text-sm text-gray-600 hover:text-black underline"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
+            {error && (
+              <div className="p-3 bg-red-500/10 border border-red-500 rounded-md">
+                <BodyText className="text-red-500 text-sm">{error}</BodyText>
               </div>
-            </CardContent>
+            )}
 
-            <CardFooter className="flex-col space-y-4">
-              <Button type="submit" fullWidth loading={loading} disabled={loading}>
-                {loading ? 'Signing in...' : 'Sign In'}
-              </Button>
-
-              <Body className="text-sm text-center text-gray-600">
-                Don&apos;t have an account?{' '}
-                <Link href="/auth/register" className="text-black font-bold hover:underline">
-                  Sign up
-                </Link>
-              </Body>
-            </CardFooter>
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Signing in...' : 'Sign In'}
+            </Button>
           </form>
-        </Card>
 
-        <div className="mt-8 text-center">
-          <Link href="/" className="font-share-tech text-sm text-gray-600 hover:text-black">
-            ← Back to home
-          </Link>
-        </div>
-      </div>
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-700"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-gray-900 text-gray-400">Or continue with</span>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <Button
+                variant="secondary"
+                onClick={() => handleOAuthSignIn('google')}
+                disabled={isLoading}
+              >
+                Google
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => handleOAuthSignIn('bluesky')}
+                disabled={isLoading}
+              >
+                Bluesky
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+        <CardFooter className="flex justify-center">
+          <BodyText className="text-sm text-gray-400">
+            Don&apos;t have an account?{' '}
+            <Link href="/auth/register" className="text-green-500 hover:text-green-400">
+              Sign up
+            </Link>
+          </BodyText>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

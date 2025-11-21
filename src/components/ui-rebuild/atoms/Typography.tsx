@@ -309,4 +309,7 @@ Label.displayName = 'Label';
 
 // Aliases for backward compatibility
 export const BodyText = Body;
+export const BodyTextSmall = BodySmall;
+export const SectionHeader = H2;
 export const SubsectionHeader = H3;
+export const CardTitle = H4;

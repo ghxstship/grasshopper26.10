@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { prisma } from '@/lib/prisma';
@@ -18,10 +18,28 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    // TODO: Implement query logic
-    const data = {};
+    // Get available membership tiers
+    const tiers = await prisma.membershipTier.findMany({
+      where: { active: true },
+      orderBy: { price: 'asc' },
+    });
 
-    return successResponse(data);
+    // Check if user already has a membership
+    const existingMembership = await prisma.membership.findFirst({
+      where: {
+        userId: context.userId,
+        status: 'ACTIVE',
+      },
+      include: {
+        tier: true,
+      },
+    });
+
+    return successResponse({
+      tiers,
+      currentMembership: existingMembership,
+      canJoin: !existingMembership,
+    });
   } catch (error) {
     return handleApiError(error);
   }

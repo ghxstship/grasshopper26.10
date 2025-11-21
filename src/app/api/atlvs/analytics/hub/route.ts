@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { prisma } from '@/lib/prisma';
@@ -18,10 +18,19 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    // TODO: Implement query logic
-    const data = {};
+    const projectCount = await prisma.project.count();
+    const taskCount = await prisma.task.count();
+    const budgetCount = await prisma.budget.count();
+    const advancingCount = await prisma.advancingRequest.count();
 
-    return successResponse(data);
+    return successResponse({
+      overview: {
+        projects: projectCount,
+        tasks: taskCount,
+        budgets: budgetCount,
+        advancingRequests: advancingCount,
+      },
+    });
   } catch (error) {
     return handleApiError(error);
   }

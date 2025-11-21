@@ -15,7 +15,6 @@ export async function POST(
 
     const body = await request.json();
     const { date, quantity } = body;
-    
     const { id } = await params;
 
     const adventure = await prisma.adventure.findUnique({

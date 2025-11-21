@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { prisma } from '@/lib/prisma';
@@ -18,10 +18,18 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    // TODO: Implement query logic
-    const data = {};
+    const teams = await prisma.team.findMany({
+      include: {
+        _count: {
+          select: {
+            members: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
 
-    return successResponse(data);
+    return successResponse({ teams });
   } catch (error) {
     return handleApiError(error);
   }

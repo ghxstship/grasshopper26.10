@@ -1,94 +1,122 @@
-/**
- * Forgot Password Page - UI Rebuild
- */
-
 'use client';
 
-import * as React from 'react';
+import { useState } from 'react';
+import { Button } from '@/components/atoms/Button';
+import { Input } from '@/components/ui/input';
+import { Card, CardHeader, CardDescription, CardContent, CardFooter } from '@/components/atoms/Card';
+import { BodyText, SectionHeader } from '@/components/atoms/Typography';
 import Link from 'next/link';
-import { Hero, H2, Body, Label } from '@/components/ui-rebuild/atoms/Typography';
-import { Button } from '@/components/ui-rebuild/atoms/Button';
-import { Input } from '@/components/ui-rebuild/atoms/Input';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui-rebuild/atoms/Card';
-import { Alert } from '@/components/ui-rebuild/molecules/Alert';
-import { Navbar } from '@/components/ui-rebuild/organisms/Navbar';
-import { Footer } from '@/components/ui-rebuild/organisms/Footer';
-import { apiClient } from '@/lib/api/client';
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
+    setIsLoading(true);
+    setError(null);
 
     try {
-      await apiClient.post('/api/auth/forgot-password', { email });
-      setSuccess(true);
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error?.message || 'Failed to send reset email');
+      }
+
+      setIsSubmitted(true);
     } catch (err) {
-      setError('Failed to send reset email. Please try again.');
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <Hero className="mb-8 text-center">RESET PASSWORD</Hero>
-
-        {success ? (
-          <Card>
-            <CardContent className="p-8 text-center">
-              <div className="text-6xl mb-4">✓</div>
-              <Body className="mb-6">Check your email for password reset instructions.</Body>
-              <Link href="/(rebuild)/auth/login">
-                <Button fullWidth>Back to Login</Button>
-              </Link>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card>
-            <CardHeader>
-              <CardTitle>Enter your email</CardTitle>
-            </CardHeader>
-            <form onSubmit={handleSubmit}>
-              <CardContent className="space-y-6">
-                {error && <Alert variant="error">{error}</Alert>}
-                <div>
-                  <Label htmlFor="email">
-                    Email Address
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
-                </div>
-              </CardContent>
-              <CardContent>
-                <Button type="submit" fullWidth loading={loading} disabled={loading}>
-                  {loading ? 'Sending...' : 'Send Reset Link'}
-                </Button>
-                <div className="mt-4 text-center">
-                  <Link href="/(rebuild)/auth/login">
-                    <Button variant="ghost" fullWidth>Back to Login</Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </form>
-          </Card>
-        )}
+  if (isSubmitted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
+        <Card variant="default" className="w-full max-w-md">
+          <CardHeader>
+            <SectionHeader>Check Your Email</SectionHeader>
+            <CardDescription>
+              We&apos;ve sent a password reset link to {email}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <BodyText className="text-gray-300">
+              Please check your email and click the link to reset your password. 
+              The link will expire in 1 hour.
+            </BodyText>
+          </CardContent>
+          <CardFooter className="flex justify-center">
+            <Link href="/auth/login">
+              <Button variant="secondary">Back to Login</Button>
+            </Link>
+          </CardFooter>
+        </Card>
       </div>
-      <Footer />
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 p-4">
+      <Card variant="default" className="w-full max-w-md">
+        <CardHeader>
+          <SectionHeader>Reset Password</SectionHeader>
+          <CardDescription>
+            Enter your email address and we&apos;ll send you a link to reset your password
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email Address
+              </label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="you@example.com"
+              />
+            </div>
+
+            {error && (
+              <div className="p-3 bg-red-500/10 border border-red-500 rounded-md">
+                <BodyText className="text-red-500 text-sm">{error}</BodyText>
+              </div>
+            )}
+
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Sending...' : 'Send Reset Link'}
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-center">
+          <BodyText className="text-sm text-gray-400">
+            Remember your password?{' '}
+            <Link href="/auth/login" className="text-green-500 hover:text-green-400">
+              Sign in
+            </Link>
+          </BodyText>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

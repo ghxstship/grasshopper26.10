@@ -195,7 +195,7 @@ export const authConfig: NextAuthConfig = {
   debug: process.env.NODE_ENV === "development",
 };
 
-const { handlers } = NextAuth(authConfig);
+const { handlers, auth } = NextAuth(authConfig);
 const { GET: authGET, POST: authPOST } = handlers;
 
 // Export dynamic route segment config
@@ -204,3 +204,6 @@ export const dynamic = 'force-dynamic';
 // NextAuth handlers
 export const GET = authGET;
 export const POST = authPOST;
+
+// Export auth for use in other routes
+export { auth };

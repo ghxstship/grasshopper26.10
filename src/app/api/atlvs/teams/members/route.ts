@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-export const runtime = 'edge';
+// Note: Cannot use Edge runtime due to NextAuth/Prisma dependencies
 
 /**
  * GET /api/atlvs/teams/members

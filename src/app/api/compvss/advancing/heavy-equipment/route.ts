@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { successResponse, createdResponse, handleApiError, errors } from '@/lib/api/response';
+import { successResponse, handleApiError, errors } from '@/lib/api/response';
 import { validateRequest, requireAuth, rateLimit } from '@/lib/api/middleware';
 import { RATE_LIMITS, RateLimitIdentifiers } from '@/lib/api/rate-limits';
 import { prisma } from '@/lib/prisma';
@@ -18,10 +18,13 @@ export async function GET(request: NextRequest) {
       throw errors.rateLimitExceeded();
     }
 
-    // TODO: Implement query logic
-    const data = {};
+    const requests = await prisma.advancingRequest.findMany({
+      where: { category: 'HEAVY_EQUIPMENT' },
+      orderBy: { createdAt: 'desc' },
+      take: 50,
+    });
 
-    return successResponse(data);
+    return successResponse({ requests });
   } catch (error) {
     return handleApiError(error);
   }

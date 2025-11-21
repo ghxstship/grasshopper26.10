@@ -10,6 +10,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+
     const { id } = await params;
     const context = await validateRequest(request);
     requireAuth(context);

@@ -14,6 +14,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+
     // DB: await prisma.$queryRaw`SELECT 1`;
     // Database operations available via prisma
     const session = await getSession();

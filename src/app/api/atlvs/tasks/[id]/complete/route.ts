@@ -27,7 +27,6 @@ export async function POST(
     return NextResponse.json(task);
   } catch (error) {
     console.error('Error completing task:', error);
-    
     if (error instanceof Error) {
       if (error.message === 'Task not found') {
         return NextResponse.json({ error: 'Task not found' }, { status: 404 });
