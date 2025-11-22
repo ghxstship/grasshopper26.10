@@ -1,6 +1,8 @@
 /**
  * Edge-compatible auth configuration
  * Used in middleware where Prisma cannot be used
+ * 
+ * IMPORTANT: This must be truly edge-compatible with NO database access
  */
 
 import NextAuth from "next-auth";
@@ -31,6 +33,8 @@ export const authEdgeConfig: NextAuthConfig = {
       return session;
     },
   },
+  // Disable all callbacks that might try to access database
+  trustHost: true,
 };
 
-export const { auth: authEdge } = NextAuth(authEdgeConfig);
+export const { auth: authEdge, handlers, signIn, signOut } = NextAuth(authEdgeConfig);

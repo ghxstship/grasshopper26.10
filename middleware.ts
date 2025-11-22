@@ -1,12 +1,13 @@
 /**
  * Next.js Middleware
  * Handles authentication and authorization for protected routes
+ * 
+ * IMPORTANT: This runs on Edge Runtime with NO access to Node.js APIs or Prisma
  */
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { authEdge as auth } from '@/lib/auth-edge';
-import { hasEventRolePlatformAccess } from '@/lib/rbac/event-roles';
+import { getToken } from 'next-auth/jwt';
 
 // Define protected route patterns
 const PROTECTED_ROUTES = {
@@ -107,6 +108,59 @@ const PLATFORM_ROLES = {
   ],
 };
 
+// Event role platform access mapping (edge-compatible, no external dependencies)
+const EVENT_ROLE_PLATFORM_ACCESS: Record<string, string[]> = {
+  // All Platforms roles have access to everything
+  EXECUTIVE: ['ATLVS', 'COMPVSS', 'GVTEWAY'],
+  CORE_AAA: ['ATLVS', 'COMPVSS', 'GVTEWAY'],
+  AA: ['ATLVS', 'COMPVSS', 'GVTEWAY'],
+  PRODUCTION: ['ATLVS', 'COMPVSS', 'GVTEWAY'],
+  MANAGEMENT: ['ATLVS', 'COMPVSS', 'GVTEWAY'],
+  
+  // COMPVSS roles
+  CREW: ['COMPVSS'],
+  STAFF: ['COMPVSS'],
+  VENDOR: ['COMPVSS'],
+  ENTERTAINER: ['COMPVSS', 'GVTEWAY'],
+  ARTIST: ['COMPVSS', 'GVTEWAY'],
+  AGENT: ['COMPVSS'],
+  MEDIA: ['COMPVSS', 'GVTEWAY'],
+  SPONSOR: ['COMPVSS', 'GVTEWAY'],
+  PARTNER: ['COMPVSS', 'GVTEWAY'],
+  INDUSTRY: ['COMPVSS'],
+  INTERN: ['COMPVSS'],
+  VOLUNTEER: ['COMPVSS'],
+  
+  // GVTEWAY roles
+  GUEST: ['GVTEWAY'],
+  BACKSTAGE_L1: ['GVTEWAY'],
+  BACKSTAGE_L2: ['GVTEWAY'],
+  PLATINUM_VIP_L1: ['GVTEWAY'],
+  PLATINUM_VIP_L2: ['GVTEWAY'],
+  VIP_L1: ['GVTEWAY'],
+  VIP_L2: ['GVTEWAY'],
+  VIP_L3: ['GVTEWAY'],
+  GA_L1: ['GVTEWAY'],
+  GA_L2: ['GVTEWAY'],
+  GA_L3: ['GVTEWAY'],
+  GA_L4: ['GVTEWAY'],
+  GA_L5: ['GVTEWAY'],
+  INFLUENCER: ['GVTEWAY'],
+  BRAND_AMBASSADOR: ['GVTEWAY'],
+  AFFILIATE: ['GVTEWAY'],
+};
+
+/**
+ * Check if role has access to platform (edge-compatible)
+ */
+function hasEventRolePlatformAccess(
+  role: string,
+  platform: 'ATLVS' | 'COMPVSS' | 'GVTEWAY'
+): boolean {
+  const platforms = EVENT_ROLE_PLATFORM_ACCESS[role];
+  return platforms ? platforms.includes(platform) : false;
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -129,18 +183,21 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Get session
-  const session = await auth();
+  // Get token from JWT (edge-compatible, no database access)
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
 
   // Redirect to login if not authenticated
-  if (!session?.user) {
+  if (!token) {
     const loginUrl = new URL('/auth/login', request.url);
     loginUrl.searchParams.set('callbackUrl', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
   // Check role-based access
-  const userRole = session.user.role as string;
+  const userRole = token.role as string;
 
   // Check platform access using both static role list and event role system
   if (isAtlvsRoute) {

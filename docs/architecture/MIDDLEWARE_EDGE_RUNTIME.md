@@ -6,20 +6,20 @@ The application middleware runs on Vercel Edge Runtime for optimal performance a
 
 ## Key Changes
 
-### 1. Edge-Compatible Auth (`src/lib/auth-edge.ts`)
+### 1. JWT-Based Authentication (Edge-Compatible)
 
-Created a minimal NextAuth configuration for middleware that:
-- Uses JWT session strategy (no database adapter)
-- Excludes Prisma and database operations
-- Only includes session validation logic
-- Properly configured with NEXTAUTH_SECRET
+The middleware uses `getToken()` from `next-auth/jwt` instead of the full NextAuth `auth()` function:
+- **No database access** - reads JWT token directly from cookies
+- **No Prisma dependencies** - completely edge-compatible
+- **Fast and efficient** - pure JavaScript token validation
+- Requires `NEXTAUTH_SECRET` environment variable
 
 ### 2. Middleware Configuration (`middleware.ts`)
 
-- Imports `authEdge` instead of regular `auth` from main auth config
-- Explicitly marked with `export const runtime = 'edge'`
-- Uses pure JavaScript role checking (no database queries)
-- Event role checking via `hasEventRolePlatformAccess` (edge-compatible)
+- Uses `getToken()` from `next-auth/jwt` for authentication
+- No imports from Prisma or database-dependent code
+- Pure JavaScript role checking (no database queries)
+- Event role platform access mapping inlined to avoid external dependencies
 
 ## Build Output
 
