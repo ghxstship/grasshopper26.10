@@ -12,7 +12,8 @@ import { prisma } from '@/lib/prisma';
 
 
 export const authConfig: NextAuthConfig = {
-  adapter: PrismaAdapter(prisma) as NextAuthConfig['adapter'],
+  // Only use Prisma adapter if DATABASE_URL is available
+  adapter: process.env.DATABASE_URL ? (PrismaAdapter(prisma) as NextAuthConfig['adapter']) : undefined,
   session: { 
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
